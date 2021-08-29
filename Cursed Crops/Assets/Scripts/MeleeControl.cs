@@ -4,34 +4,15 @@ using UnityEngine;
 
 public class MeleeControl : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public int damage = 5;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Enemy")
         {
-            Debug.Log("STAB");
 
-            var renderer = other.GetComponent<Renderer>();
-
-            StartCoroutine(hit(renderer));
+            EnemyControler enemyControler = other.GetComponent<EnemyControler>();
+            enemyControler.takeDamage(damage);
         }
-    }
-
-    IEnumerator hit(Renderer renderer)
-    {
-        renderer.material.SetColor("_Color", Color.red);
-        yield return new WaitForSeconds(0.2f);
-        renderer.material.SetColor("_Color", Color.white);
     }
 }
