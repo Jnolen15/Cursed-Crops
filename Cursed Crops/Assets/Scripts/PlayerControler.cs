@@ -7,7 +7,9 @@ public class PlayerControler : MonoBehaviour
     public float moveSpeed;
 
     private Rigidbody rb;                  // The player's Rigidbody
-    private GameObject meleeAttack;
+    private SpriteRenderer sr;
+    private GameObject meleeAttackLeft;
+    private GameObject meleeAttackRight;
 
     private bool flipped = false;
 
@@ -18,8 +20,23 @@ public class PlayerControler : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        meleeAttack = this.transform.GetChild(0).gameObject;
-        meleeAttack.SetActive(false);
+        sr = GetComponent<SpriteRenderer>();
+
+        // Get the left facing attack hitbox and set it inactive
+        meleeAttackLeft = this.transform.GetChild(0).gameObject;
+        //meleeAttackLeft.SetActive(false);
+        // Get the Right facing attack hitbox and set it inactive
+        meleeAttackRight = this.transform.GetChild(1).gameObject;
+        //meleeAttackRight.SetActive(false);
+        /* Note ^
+         * Previously I just had one hitbox and would flip the
+         * objects X scale when the player flipped directions.
+         * However I got warnings that flipping the object
+         * could cause the collider to behave not as intended.
+         * So instead I just have one attack for each side that
+         * are switched based on duirection faced.
+         * Then I just flip the players sprite on the spriterender.
+         */
     }
 
     // Update is called once per frame
@@ -51,12 +68,12 @@ public class PlayerControler : MonoBehaviour
             if (direction.x > 0 && !flipped)
             {
                 flipped = true;
-                transform.localScale += new Vector3(-2, 0, 0); // Sprite is facing right
+                sr.flipX = true;
             }
             else if (direction.x < 0 && flipped)
             {
                 flipped = false;
-                transform.localScale += new Vector3(2, 0, 0); // Sprite is facing Left
+                sr.flipX = false;
             }
         }
     }
@@ -74,14 +91,57 @@ public class PlayerControler : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            StartCoroutine(doAttack());
+            //StartCoroutine(doAttack());
+            doAttack();
         }
     }
 
-    IEnumerator doAttack()
+    private void doAttack()
     {
-        meleeAttack.SetActive(true);
-        yield return new WaitForSeconds(0.3f);
-        meleeAttack.SetActive(false);
+        if (!flipped)
+        {
+            Collider[] cols = Physics.OverlapBox(meleeAttackLeft.transform.position, meleeAttackLeft.transform.localScale / 2, 
+                                                    meleeAttackLeft.transform.rotation, LayerMask.GetMask("Enemies"));
+            foreach (Collider c in cols)
+            {
+                Debug.Log(c.name);
+                if (c.gameObject.tag == "Enemy")
+                {
+
+                    EnemyControler enemyControler = c.GetComponent<EnemyControler>();
+                    enemyControler.takeDamage(5);
+                }
+            }
+        }
+        else
+        {
+            Collider[] cols = Physics.OverlapBox(meleeAttackRight.transform.position, meleeAttackRight.transform.localScale / 2,
+                                                            meleeAttackRight.transform.rotation, LayerMask.GetMask("Enemies"));
+            foreach (Collider c in cols)
+            {
+                Debug.Log(c.name);
+                if (c.gameObject.tag == "Enemy")
+                {
+
+                    EnemyControler enemyControler = c.GetComponent<EnemyControler>();
+                    enemyControler.takeDamage(5);
+                }
+            }
+        }
+    }
+
+    IEnumerator doAttackCo()
+    {
+        if (!flipped)
+        {
+            meleeAttackLeft.SetActive(true);
+            yield return new WaitForSeconds(0.3f);
+            meleeAttackLeft.SetActive(false);
+        } else
+        {
+            meleeAttackRight.SetActive(true);
+            yield return new WaitForSeconds(0.3f);
+            meleeAttackRight.SetActive(false);
+        }
     }
 }
