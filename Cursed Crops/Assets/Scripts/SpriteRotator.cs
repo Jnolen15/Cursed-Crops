@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class SpriteRotator : MonoBehaviour
 {
     public float xPivot = 43f;
@@ -16,11 +17,14 @@ public class SpriteRotator : MonoBehaviour
         parentTrans = GetComponentInParent<Transform>();
         
         // rotate around the x pivot
-        transform.Rotate(new Vector3(xPivot, 0, 0));
+        // transform.Rotate(new Vector3(xPivot, 0, 0));
     }
 
     void Update()
     {
+        // lean by the xPivot angle
+        transform.SetPositionAndRotation(transform.position, Quaternion.Euler(new Vector3(xPivot, 0, 0)));
+
         // manage sort layer
         if (manageSortLayer)
         {
