@@ -18,8 +18,10 @@ public class EnemyToObjective : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 position = Vector3.MoveTowards(transform.position, Objective.position, enemySpeed * Time.fixedDeltaTime);
-        rb.MovePosition(position);
-        transform.LookAt(Objective);
+        if(Objective != null){
+            Vector3 position = Vector3.MoveTowards(transform.position, Objective.position, enemySpeed * Time.fixedDeltaTime);
+            rb.MovePosition(position);
+            transform.LookAt(Objective);
+        }
     }
 }
