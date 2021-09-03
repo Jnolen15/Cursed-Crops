@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -234,10 +234,9 @@ GameObject:
   m_Component:
   - component: {fileID: 57952135}
   - component: {fileID: 57952136}
-  - component: {fileID: 57952137}
   m_Layer: 0
   m_Name: TestBush (0)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -250,7 +249,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 57952134}
   m_LocalRotation: {x: 0.38268346, y: -0, z: -0, w: 0.9238795}
-  m_LocalPosition: {x: -6.51, y: 0.97, z: -1.13}
+  m_LocalPosition: {x: -6.51, y: 0.58, z: -1.13}
   m_LocalScale: {x: 0.41081098, y: 0.41081098, z: 0.41081098}
   m_Children: []
   m_Father: {fileID: 272807654}
@@ -307,20 +306,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &57952137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 57952134}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!1 &67254066
 GameObject:
   m_ObjectHideFlags: 0
@@ -331,10 +316,9 @@ GameObject:
   m_Component:
   - component: {fileID: 67254067}
   - component: {fileID: 67254069}
-  - component: {fileID: 67254068}
   m_Layer: 0
   m_Name: TestGrass (13)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -353,20 +337,6 @@ Transform:
   m_Father: {fileID: 2042617391}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &67254068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 67254066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!212 &67254069
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -428,10 +398,9 @@ GameObject:
   m_Component:
   - component: {fileID: 90591470}
   - component: {fileID: 90591471}
-  - component: {fileID: 90591472}
   m_Layer: 0
   m_Name: TestGrass (9)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -444,7 +413,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 90591469}
   m_LocalRotation: {x: 0.38268346, y: -0, z: -0, w: 0.9238795}
-  m_LocalPosition: {x: 5.803, y: 1.26, z: 4.53}
+  m_LocalPosition: {x: 5.803, y: 0.68, z: 4.53}
   m_LocalScale: {x: -0.4784154, y: 0.64969206, z: 0.52889293}
   m_Children: []
   m_Father: {fileID: 2042617391}
@@ -501,20 +470,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &90591472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 90591469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!1 &139267738
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,10 +480,9 @@ GameObject:
   m_Component:
   - component: {fileID: 139267739}
   - component: {fileID: 139267741}
-  - component: {fileID: 139267740}
   m_Layer: 0
   m_Name: TestGrass (27)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -547,20 +501,6 @@ Transform:
   m_Father: {fileID: 2042617391}
   m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &139267740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 139267738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!212 &139267741
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -622,10 +562,9 @@ GameObject:
   m_Component:
   - component: {fileID: 197728734}
   - component: {fileID: 197728736}
-  - component: {fileID: 197728735}
   m_Layer: 0
   m_Name: TestGrass (12)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -644,20 +583,6 @@ Transform:
   m_Father: {fileID: 2042617391}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &197728735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 197728733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!212 &197728736
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -719,10 +644,9 @@ GameObject:
   m_Component:
   - component: {fileID: 235937651}
   - component: {fileID: 235937652}
-  - component: {fileID: 235937653}
   m_Layer: 0
   m_Name: TestGrass (8)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -792,20 +716,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &235937653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 235937650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!1 &260574659
 GameObject:
   m_ObjectHideFlags: 0
@@ -918,7 +828,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &260574665
 MonoBehaviour:
@@ -943,10 +853,9 @@ GameObject:
   m_Component:
   - component: {fileID: 262593813}
   - component: {fileID: 262593815}
-  - component: {fileID: 262593814}
   m_Layer: 0
   m_Name: TestTree (1)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -959,26 +868,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 262593812}
   m_LocalRotation: {x: 0.38268346, y: -0, z: -0, w: 0.9238795}
-  m_LocalPosition: {x: 3.98, y: 2.37, z: 11.05}
+  m_LocalPosition: {x: 3.98, y: 1.65, z: 11.05}
   m_LocalScale: {x: -1, y: 0.9405727, z: 0.9405727}
   m_Children: []
   m_Father: {fileID: 2133927447}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &262593814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 262593812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!212 &262593815
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1080,10 +975,9 @@ GameObject:
   m_Component:
   - component: {fileID: 294624682}
   - component: {fileID: 294624684}
-  - component: {fileID: 294624683}
   m_Layer: 0
   m_Name: TestGrass (26)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1102,20 +996,6 @@ Transform:
   m_Father: {fileID: 2042617391}
   m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &294624683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 294624681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!212 &294624684
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1177,10 +1057,9 @@ GameObject:
   m_Component:
   - component: {fileID: 295613199}
   - component: {fileID: 295613200}
-  - component: {fileID: 295613201}
   m_Layer: 0
   m_Name: TestBush (2)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1250,20 +1129,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &295613201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 295613198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!1 &321005067
 GameObject:
   m_ObjectHideFlags: 0
@@ -1488,102 +1353,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!1 &355778169
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 355778173}
-  - component: {fileID: 355778172}
-  - component: {fileID: 355778171}
-  - component: {fileID: 355778170}
-  m_Layer: 3
-  m_Name: Ground (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!64 &355778170
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 355778169}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &355778171
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 355778169}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 4b14e3aacaaca074d997334dee568928, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &355778172
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 355778169}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &355778173
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 355778169}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.4, y: 0, z: -5.98}
-  m_LocalScale: {x: 4, y: 1, z: 4}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &359538957
 GameObject:
   m_ObjectHideFlags: 0
@@ -1678,7 +1447,7 @@ Transform:
   m_LocalScale: {x: 4, y: 1, z: 4}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &364607165
 GameObject:
@@ -1690,10 +1459,9 @@ GameObject:
   m_Component:
   - component: {fileID: 364607166}
   - component: {fileID: 364607168}
-  - component: {fileID: 364607167}
   m_Layer: 0
   m_Name: TestGrass (28)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1712,20 +1480,6 @@ Transform:
   m_Father: {fileID: 2042617391}
   m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &364607167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 364607165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!212 &364607168
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1905,7 +1659,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &422380858
 GameObject:
@@ -1917,10 +1671,9 @@ GameObject:
   m_Component:
   - component: {fileID: 422380859}
   - component: {fileID: 422380861}
-  - component: {fileID: 422380860}
   m_Layer: 0
   m_Name: TestTree (2)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1933,26 +1686,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 422380858}
   m_LocalRotation: {x: 0.38268346, y: -0, z: -0, w: 0.9238795}
-  m_LocalPosition: {x: -30.56, y: 4.06, z: -18.48}
+  m_LocalPosition: {x: -30.56, y: 3.88, z: -18.48}
   m_LocalScale: {x: 1.620285, y: 1.620285, z: 1.620285}
   m_Children: []
   m_Father: {fileID: 2133927447}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &422380860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 422380858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!212 &422380861
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2014,10 +1753,9 @@ GameObject:
   m_Component:
   - component: {fileID: 426721392}
   - component: {fileID: 426721394}
-  - component: {fileID: 426721393}
   m_Layer: 0
   m_Name: TestGrass (30)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2036,20 +1774,6 @@ Transform:
   m_Father: {fileID: 2042617391}
   m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &426721393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 426721391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!212 &426721394
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2111,10 +1835,9 @@ GameObject:
   m_Component:
   - component: {fileID: 466536124}
   - component: {fileID: 466536125}
-  - component: {fileID: 466536126}
   m_Layer: 0
   m_Name: PlayerSprite
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2184,20 +1907,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &466536126
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 466536123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!1 &485642396
 GameObject:
   m_ObjectHideFlags: 0
@@ -2208,10 +1917,9 @@ GameObject:
   m_Component:
   - component: {fileID: 485642397}
   - component: {fileID: 485642399}
-  - component: {fileID: 485642398}
   m_Layer: 0
   m_Name: TestGrass (20)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2230,20 +1938,6 @@ Transform:
   m_Father: {fileID: 2042617391}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &485642398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 485642396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!212 &485642399
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2305,10 +1999,9 @@ GameObject:
   m_Component:
   - component: {fileID: 486517401}
   - component: {fileID: 486517403}
-  - component: {fileID: 486517402}
   m_Layer: 0
   m_Name: TestBush (9)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2327,20 +2020,6 @@ Transform:
   m_Father: {fileID: 272807654}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &486517402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 486517400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!212 &486517403
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2402,10 +2081,9 @@ GameObject:
   m_Component:
   - component: {fileID: 487333925}
   - component: {fileID: 487333926}
-  - component: {fileID: 487333927}
   m_Layer: 0
   m_Name: TestBush (3)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2475,20 +2153,98 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &487333927
+--- !u!1 &508734031
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 508734033}
+  - component: {fileID: 508734032}
+  m_Layer: 0
+  m_Name: SpriteLeanerManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &508734032
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 487333924}
+  m_GameObject: {fileID: 508734031}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xPivot: 45
+  leanAngle: 45
   manageSortLayer: 1
+  taggedSprites:
+  - {fileID: 466536123}
+  - {fileID: 57952134}
+  - {fileID: 1533285945}
+  - {fileID: 295613198}
+  - {fileID: 487333924}
+  - {fileID: 1489597551}
+  - {fileID: 1739202143}
+  - {fileID: 1469300259}
+  - {fileID: 1488478575}
+  - {fileID: 2027196670}
+  - {fileID: 486517400}
+  - {fileID: 2114102877}
+  - {fileID: 1662975794}
+  - {fileID: 959544977}
+  - {fileID: 2014469418}
+  - {fileID: 2040773913}
+  - {fileID: 1553400458}
+  - {fileID: 1574911732}
+  - {fileID: 1716166088}
+  - {fileID: 235937650}
+  - {fileID: 90591469}
+  - {fileID: 2009026709}
+  - {fileID: 2052809536}
+  - {fileID: 197728733}
+  - {fileID: 67254066}
+  - {fileID: 732371151}
+  - {fileID: 1414767646}
+  - {fileID: 599675938}
+  - {fileID: 1804200393}
+  - {fileID: 948753851}
+  - {fileID: 1258109728}
+  - {fileID: 485642396}
+  - {fileID: 1600342677}
+  - {fileID: 1355981962}
+  - {fileID: 1081354066}
+  - {fileID: 1870505529}
+  - {fileID: 631863251}
+  - {fileID: 294624681}
+  - {fileID: 139267738}
+  - {fileID: 364607165}
+  - {fileID: 1954465609}
+  - {fileID: 426721391}
+  - {fileID: 1310968655}
+  - {fileID: 262593812}
+  - {fileID: 422380858}
+  - {fileID: 1402099341}
+--- !u!4 &508734033
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 508734031}
+  m_LocalRotation: {x: 0.3665012, y: 0, z: 0, w: 0.9304176}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &523945493
 GameObject:
   m_ObjectHideFlags: 0
@@ -2622,7 +2378,7 @@ Transform:
   - {fileID: 466536124}
   - {fileID: 1873907130}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &581066670
 GameObject:
@@ -2715,7 +2471,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &599675938
 GameObject:
@@ -2727,10 +2483,9 @@ GameObject:
   m_Component:
   - component: {fileID: 599675939}
   - component: {fileID: 599675941}
-  - component: {fileID: 599675940}
   m_Layer: 0
   m_Name: TestGrass (16)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2749,20 +2504,6 @@ Transform:
   m_Father: {fileID: 2042617391}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &599675940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 599675938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!212 &599675941
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2824,10 +2565,9 @@ GameObject:
   m_Component:
   - component: {fileID: 631863252}
   - component: {fileID: 631863254}
-  - component: {fileID: 631863253}
   m_Layer: 0
   m_Name: TestGrass (25)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2846,20 +2586,6 @@ Transform:
   m_Father: {fileID: 2042617391}
   m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &631863253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 631863251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!212 &631863254
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2921,10 +2647,9 @@ GameObject:
   m_Component:
   - component: {fileID: 732371152}
   - component: {fileID: 732371154}
-  - component: {fileID: 732371153}
   m_Layer: 0
   m_Name: TestGrass (14)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2943,20 +2668,6 @@ Transform:
   m_Father: {fileID: 2042617391}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &732371153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 732371151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!212 &732371154
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3018,10 +2729,9 @@ GameObject:
   m_Component:
   - component: {fileID: 948753852}
   - component: {fileID: 948753854}
-  - component: {fileID: 948753853}
   m_Layer: 0
   m_Name: TestGrass (18)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3040,20 +2750,6 @@ Transform:
   m_Father: {fileID: 2042617391}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &948753853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 948753851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!212 &948753854
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3115,10 +2811,9 @@ GameObject:
   m_Component:
   - component: {fileID: 959544978}
   - component: {fileID: 959544979}
-  - component: {fileID: 959544980}
   m_Layer: 0
   m_Name: TestGrass (2)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3188,20 +2883,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &959544980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 959544977}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!1 &1081354066
 GameObject:
   m_ObjectHideFlags: 0
@@ -3212,10 +2893,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1081354067}
   - component: {fileID: 1081354069}
-  - component: {fileID: 1081354068}
   m_Layer: 0
   m_Name: TestGrass (23)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3234,20 +2914,6 @@ Transform:
   m_Father: {fileID: 2042617391}
   m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1081354068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1081354066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!212 &1081354069
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3309,10 +2975,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1258109729}
   - component: {fileID: 1258109731}
-  - component: {fileID: 1258109730}
   m_Layer: 0
   m_Name: TestGrass (19)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3331,20 +2996,6 @@ Transform:
   m_Father: {fileID: 2042617391}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1258109730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1258109728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!212 &1258109731
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3406,10 +3057,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1310968656}
   - component: {fileID: 1310968658}
-  - component: {fileID: 1310968657}
   m_Layer: 0
   m_Name: TestTree
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3422,26 +3072,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1310968655}
   m_LocalRotation: {x: 0.38268346, y: -0, z: -0, w: 0.9238795}
-  m_LocalPosition: {x: -18.2, y: 2.38, z: 6.05}
+  m_LocalPosition: {x: -18.2, y: 1.951, z: 6.05}
   m_LocalScale: {x: 1.1825172, y: 1.1825172, z: 1.1825172}
   m_Children: []
   m_Father: {fileID: 2133927447}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1310968657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1310968655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!212 &1310968658
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3503,10 +3139,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1355981963}
   - component: {fileID: 1355981965}
-  - component: {fileID: 1355981964}
   m_Layer: 0
   m_Name: TestGrass (22)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3525,20 +3160,6 @@ Transform:
   m_Father: {fileID: 2042617391}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1355981964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1355981962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!212 &1355981965
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3590,6 +3211,88 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1402099341
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1402099342}
+  - component: {fileID: 1402099343}
+  m_Layer: 0
+  m_Name: TestTree (3)
+  m_TagString: LeaningSprite
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1402099342
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1402099341}
+  m_LocalRotation: {x: 0.38268346, y: -0, z: -0, w: 0.9238795}
+  m_LocalPosition: {x: -13.57, y: 1.31, z: -23.74}
+  m_LocalScale: {x: 0.7885489, y: 0.7885489, z: 0.7885489}
+  m_Children: []
+  m_Father: {fileID: 2133927447}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1402099343
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1402099341}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 23
+  m_Sprite: {fileID: 21300000, guid: e5c40e4254088a84db4fcc009946cfff, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 5, y: 5}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &1414767646
 GameObject:
   m_ObjectHideFlags: 0
@@ -3600,10 +3303,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1414767647}
   - component: {fileID: 1414767649}
-  - component: {fileID: 1414767648}
   m_Layer: 0
   m_Name: TestGrass (15)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3616,26 +3318,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1414767646}
   m_LocalRotation: {x: 0.38268346, y: -0, z: -0, w: 0.9238795}
-  m_LocalPosition: {x: -5.3, y: 0.71, z: 3.6}
+  m_LocalPosition: {x: -5.67, y: 0.43, z: 2.61}
   m_LocalScale: {x: -0.5778452, y: 0.34978524, z: 0.34978524}
   m_Children: []
   m_Father: {fileID: 2042617391}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1414767648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1414767646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!212 &1414767649
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3675,7 +3363,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
+  m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: c046213a467c99c4eb2bfbd87c5ee85a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3718,7 +3406,7 @@ Transform:
   - {fileID: 2042617391}
   - {fileID: 2133927447}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1469300259
 GameObject:
@@ -3730,10 +3418,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1469300260}
   - component: {fileID: 1469300261}
-  - component: {fileID: 1469300262}
   m_Layer: 0
   m_Name: TestBush (6)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3803,20 +3490,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1469300262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1469300259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!1 &1488478575
 GameObject:
   m_ObjectHideFlags: 0
@@ -3827,10 +3500,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1488478576}
   - component: {fileID: 1488478578}
-  - component: {fileID: 1488478577}
   m_Layer: 0
   m_Name: TestBush (7)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3849,20 +3521,6 @@ Transform:
   m_Father: {fileID: 272807654}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1488478577
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1488478575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!212 &1488478578
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3924,10 +3582,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1489597552}
   - component: {fileID: 1489597553}
-  - component: {fileID: 1489597554}
   m_Layer: 0
   m_Name: TestBush (4)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3997,20 +3654,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1489597554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1489597551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!1 &1533285945
 GameObject:
   m_ObjectHideFlags: 0
@@ -4021,10 +3664,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1533285946}
   - component: {fileID: 1533285947}
-  - component: {fileID: 1533285948}
   m_Layer: 0
   m_Name: TestBush (1)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4037,7 +3679,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1533285945}
   m_LocalRotation: {x: 0.38268346, y: -0, z: -0, w: 0.9238795}
-  m_LocalPosition: {x: -7.99, y: 0.846, z: -0.767}
+  m_LocalPosition: {x: -7.99, y: 0.5, z: -0.767}
   m_LocalScale: {x: 0.3421903, y: 0.3421903, z: 0.3421903}
   m_Children: []
   m_Father: {fileID: 272807654}
@@ -4094,20 +3736,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1533285948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1533285945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!1 &1553400458
 GameObject:
   m_ObjectHideFlags: 0
@@ -4118,10 +3746,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1553400459}
   - component: {fileID: 1553400460}
-  - component: {fileID: 1553400461}
   m_Layer: 0
   m_Name: TestGrass (5)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4191,20 +3818,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1553400461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1553400458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!1 &1574911732
 GameObject:
   m_ObjectHideFlags: 0
@@ -4215,10 +3828,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1574911733}
   - component: {fileID: 1574911734}
-  - component: {fileID: 1574911735}
   m_Layer: 0
   m_Name: TestGrass (6)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4288,20 +3900,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1574911735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1574911732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!1 &1600342677
 GameObject:
   m_ObjectHideFlags: 0
@@ -4312,10 +3910,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1600342678}
   - component: {fileID: 1600342680}
-  - component: {fileID: 1600342679}
   m_Layer: 0
   m_Name: TestGrass (21)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4334,20 +3931,6 @@ Transform:
   m_Father: {fileID: 2042617391}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1600342679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1600342677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!212 &1600342680
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4409,10 +3992,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1662975795}
   - component: {fileID: 1662975796}
-  - component: {fileID: 1662975797}
   m_Layer: 0
   m_Name: TestGrass (1)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4482,20 +4064,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1662975797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1662975794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!1 &1716166088
 GameObject:
   m_ObjectHideFlags: 0
@@ -4506,10 +4074,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1716166089}
   - component: {fileID: 1716166090}
-  - component: {fileID: 1716166091}
   m_Layer: 0
   m_Name: TestGrass (7)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4579,20 +4146,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1716166091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1716166088}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!1 &1739202143
 GameObject:
   m_ObjectHideFlags: 0
@@ -4603,10 +4156,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1739202144}
   - component: {fileID: 1739202145}
-  - component: {fileID: 1739202146}
   m_Layer: 0
   m_Name: TestBush (5)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4676,20 +4228,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1739202146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1739202143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!1 &1804200393
 GameObject:
   m_ObjectHideFlags: 0
@@ -4700,10 +4238,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1804200394}
   - component: {fileID: 1804200396}
-  - component: {fileID: 1804200395}
   m_Layer: 0
   m_Name: TestGrass (17)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4722,20 +4259,6 @@ Transform:
   m_Father: {fileID: 2042617391}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1804200395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1804200393}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!212 &1804200396
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4797,10 +4320,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1870505530}
   - component: {fileID: 1870505532}
-  - component: {fileID: 1870505531}
   m_Layer: 0
   m_Name: TestGrass (24)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4819,20 +4341,6 @@ Transform:
   m_Father: {fileID: 2042617391}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1870505531
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1870505529}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!212 &1870505532
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4976,10 +4484,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1954465610}
   - component: {fileID: 1954465612}
-  - component: {fileID: 1954465611}
   m_Layer: 0
   m_Name: TestGrass (29)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4998,20 +4505,6 @@ Transform:
   m_Father: {fileID: 2042617391}
   m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1954465611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1954465609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!212 &1954465612
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5191,7 +4684,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2009026709
 GameObject:
@@ -5203,10 +4696,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2009026710}
   - component: {fileID: 2009026711}
-  - component: {fileID: 2009026712}
   m_Layer: 0
   m_Name: TestGrass (10)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5276,20 +4768,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2009026712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2009026709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!1 &2014469418
 GameObject:
   m_ObjectHideFlags: 0
@@ -5300,10 +4778,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2014469419}
   - component: {fileID: 2014469420}
-  - component: {fileID: 2014469421}
   m_Layer: 0
   m_Name: TestGrass (3)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5316,7 +4793,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2014469418}
   m_LocalRotation: {x: 0.38268346, y: -0, z: -0, w: 0.9238795}
-  m_LocalPosition: {x: -2.16, y: 0.81, z: 6.37}
+  m_LocalPosition: {x: -1.98, y: 0.81, z: 6}
   m_LocalScale: {x: 0.46172, y: 0.46172, z: 0.46172}
   m_Children: []
   m_Father: {fileID: 2042617391}
@@ -5373,20 +4850,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2014469421
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2014469418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!1 &2027196670
 GameObject:
   m_ObjectHideFlags: 0
@@ -5397,10 +4860,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2027196671}
   - component: {fileID: 2027196673}
-  - component: {fileID: 2027196672}
   m_Layer: 0
   m_Name: TestBush (8)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5419,20 +4881,6 @@ Transform:
   m_Father: {fileID: 272807654}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2027196672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2027196670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!212 &2027196673
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5494,10 +4942,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2040773914}
   - component: {fileID: 2040773915}
-  - component: {fileID: 2040773916}
   m_Layer: 0
   m_Name: TestGrass (4)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5567,20 +5014,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2040773916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2040773913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!1 &2042617390
 GameObject:
   m_ObjectHideFlags: 0
@@ -5652,10 +5085,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2052809537}
   - component: {fileID: 2052809539}
-  - component: {fileID: 2052809538}
   m_Layer: 0
   m_Name: TestGrass (11)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5674,20 +5106,6 @@ Transform:
   m_Father: {fileID: 2042617391}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2052809538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2052809536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!212 &2052809539
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5749,10 +5167,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2114102878}
   - component: {fileID: 2114102879}
-  - component: {fileID: 2114102880}
   m_Layer: 0
   m_Name: TestGrass (0)
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5822,20 +5239,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2114102880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2114102877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2ec93b2672aa1842a5982081d730738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  xPivot: 45
-  manageSortLayer: 1
 --- !u!1 &2133927446
 GameObject:
   m_ObjectHideFlags: 0
@@ -5866,6 +5269,7 @@ Transform:
   - {fileID: 1310968656}
   - {fileID: 262593813}
   - {fileID: 422380859}
+  - {fileID: 1402099342}
   m_Father: {fileID: 1419826184}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
