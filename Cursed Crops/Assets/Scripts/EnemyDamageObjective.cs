@@ -19,12 +19,15 @@ public class EnemyDamageObjective : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Once the objective's health reaches zero destroy it and change the scene to the game over
         if(houseHealth == 0)
         {
             Destroy(gameObject);
         }
     }
-       
+    
+    //OnCollision Enter doesn't work for some reason but on trigger will do for now to do damage to the house
+    // Need to find a way to make damage stack if multiple enemies are in it
     private void OnTriggerStay(Collider other)
     {
         while (other.gameObject.tag == "Enemy" && !isItHit)
@@ -34,6 +37,7 @@ public class EnemyDamageObjective : MonoBehaviour
 
         }
     }
+    // IEnumarator so doesn't freaking get one 1 shotted in 1 second
     private IEnumerator iframes()
     {
         isItHit = true;
