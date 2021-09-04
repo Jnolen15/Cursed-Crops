@@ -12,13 +12,37 @@ public class PlayerControler : MonoBehaviour
     private GameObject meleeAttackRight;
 
     private bool flipped = false;
+    private bool attackCD = false;
+    private bool lockMove = false;
+
+    private int attackChain = 1;
+
+    public float attackCDTimer = 1;
+    public float attackDuration = 0.2f;
+    public float coolDownTimer;
+    public float rollSpeedMax = 100;
+    private float rollSpeed;
+
+    Vector3 movement;
+    Vector3 rollDir;
 
     [SerializeField] private LayerMask layermask;
+
+    private delegate void Callback();
+
+    private enum State
+    {
+        Normal,
+        Rolling,
+    }
+    private State state;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        state = State.Normal;
+
         rb = GetComponent<Rigidbody>();
         sr = GetComponent<SpriteRenderer>();
 
@@ -44,12 +68,36 @@ public class PlayerControler : MonoBehaviour
     {
         Attack();
         FaceMouse();
+
+        if (coolDownTimer < attackCDTimer) coolDownTimer += Time.deltaTime; // Attack cooldown
+
+        if (Input.GetButtonDown("Fire3"))
+        {
+            state = State.Rolling;
+            rollSpeed = rollSpeedMax;
+        }
     }
 
     // Called every fixed frame-rate frame. Better for physics stuff
     private void FixedUpdate()
     {
-        Move();
+        switch (state)
+        {
+            case State.Normal:
+                //if(coolDownTimer > attackDuration) Move(); //Do it this way if movement should be locked while attacking
+                Move();
+                rollDir = movement;
+                break;
+            case State.Rolling:
+                DodgeRoll();
+
+                float rollSpeedDropMultiplier = 3f;
+                rollSpeed -= rollSpeed * rollSpeedDropMultiplier * Time.deltaTime;
+
+                if (rollSpeed < moveSpeed) state = State.Normal;
+
+                break;
+        }
     }
 
     // Aiming ========================================================
@@ -81,67 +129,104 @@ public class PlayerControler : MonoBehaviour
     // Move =================================
     private void Move() // Movement code, Uses Vector3, input from Horazontal and Vertical Axis, and the RB to move
     {
-        Vector3 movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+        movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
 
         rb.MovePosition(transform.position + movement * moveSpeed * Time.fixedDeltaTime);
+    }
+
+    private void DodgeRoll()
+    {
+        rb.MovePosition(transform.position + rollDir * rollSpeed * Time.fixedDeltaTime);
     }
 
     // Attack =================================
     private void Attack()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && !attackCD)
         {
-            //StartCoroutine(doAttack());
-            doAttack();
+            if (coolDownTimer > attackCDTimer) // If attack isnt on cooldown
+            {
+                //attackCD = true;
+                //StartCoroutine(cooldown(delegate() {attackCD = false;}, 0.2f));
+
+                coolDownTimer = 0;
+                attackChain = 1;
+                DoAttack();
+                Debug.Log("Attack 1");
+
+            } else if (coolDownTimer > attackDuration) // If attack is on cooldown, subsiquent atacks chain
+            {
+                if (attackChain == 1)
+                {
+                    coolDownTimer = 0;
+                    attackChain = 2;
+                    DoAttack();
+                    Debug.Log("Attack 2");
+                }
+                else if (attackChain == 2)
+                {
+                    coolDownTimer = 0;
+                    attackChain = 3;
+                    DoAttack();
+                    Debug.Log("Attack 3");
+                }
+                else if (attackChain == 3)
+                {
+                    Debug.Log("Attack chain over");
+                }
+            }
         }
     }
 
-    private void doAttack()
+    private void DoAttack()
     {
-        if (!flipped)
+        if (!flipped) // Left attack hit detection
         {
             Collider[] cols = Physics.OverlapBox(meleeAttackLeft.transform.position, meleeAttackLeft.transform.localScale / 2, 
                                                     meleeAttackLeft.transform.rotation, LayerMask.GetMask("Enemies"));
-            foreach (Collider c in cols)
-            {
-                Debug.Log(c.name);
-                if (c.gameObject.tag == "Enemy")
-                {
-
-                    EnemyControler enemyControler = c.GetComponent<EnemyControler>();
-                    enemyControler.takeDamage(5);
-                }
-            }
+            DamageEnemies(cols);
         }
-        else
+        else  // Right attack hit detection
         {
             Collider[] cols = Physics.OverlapBox(meleeAttackRight.transform.position, meleeAttackRight.transform.localScale / 2,
                                                             meleeAttackRight.transform.rotation, LayerMask.GetMask("Enemies"));
-            foreach (Collider c in cols)
-            {
-                Debug.Log(c.name);
-                if (c.gameObject.tag == "Enemy")
-                {
+            DamageEnemies(cols);
+        }
+    }
 
-                    EnemyControler enemyControler = c.GetComponent<EnemyControler>();
-                    enemyControler.takeDamage(5);
+    private void DamageEnemies(Collider[] cols)
+    {
+        foreach (Collider c in cols)
+        {
+            //Debug.Log(c.name);
+            EnemyControler enemyControler = c.GetComponent<EnemyControler>();
+
+            if (c.gameObject.tag == "Enemy")
+            {
+                if (attackChain == 1)
+                {
+                    enemyControler.takeDamage(2);
+                }
+                else if (attackChain == 2)
+                {
+                    enemyControler.takeDamage(3);
+                }
+                else if (attackChain == 3)
+                {
+                    enemyControler.takeDamage(6);
                 }
             }
         }
     }
 
-    IEnumerator doAttackCo()
+    // Misc =================================
+
+    IEnumerator cooldown(Callback callback, float time)
     {
-        if (!flipped)
+        yield return new WaitForSeconds(time);
+        if (callback != null)
         {
-            meleeAttackLeft.SetActive(true);
-            yield return new WaitForSeconds(0.3f);
-            meleeAttackLeft.SetActive(false);
-        } else
-        {
-            meleeAttackRight.SetActive(true);
-            yield return new WaitForSeconds(0.3f);
-            meleeAttackRight.SetActive(false);
+            callback();
         }
     }
 }
