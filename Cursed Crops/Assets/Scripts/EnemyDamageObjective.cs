@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyDamageObjective : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class EnemyDamageObjective : MonoBehaviour
         //Once the objective's health reaches zero destroy it and change the scene to the game over
         if(houseHealth == 0)
         {
-            Destroy(gameObject);
+            SceneManager.LoadScene("GameOver");
         }
     }
     
