@@ -33,7 +33,8 @@ public class PlayerControler : MonoBehaviour
 
     // OTHER COMPONENTS ===========
     private Rigidbody rb;                  // The player's Rigidbody
-    private SpriteRenderer sr;
+    //private SpriteRenderer sr;
+    private SpriteRenderer playerSprite;
     private GameObject meleeAttackLeft;
     private GameObject meleeAttackRight;
     private Vector3 movement;
@@ -56,7 +57,7 @@ public class PlayerControler : MonoBehaviour
         state = State.Normal;
 
         rb = GetComponent<Rigidbody>();
-        sr = GetComponent<SpriteRenderer>();
+        //sr = GetComponent<SpriteRenderer>();
 
         // Get the left facing attack hitbox and set it inactive
         meleeAttackLeft = this.transform.GetChild(0).gameObject;
@@ -73,6 +74,7 @@ public class PlayerControler : MonoBehaviour
          * are switched based on duirection faced.
          * Then I just flip the players sprite on the spriterender.
          */
+        playerSprite = this.transform.GetChild(2).gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -133,12 +135,12 @@ public class PlayerControler : MonoBehaviour
             if (direction.x > 0 && !flipped)
             {
                 flipped = true;
-                sr.flipX = true;
+                playerSprite.flipX = true;
             }
             else if (direction.x < 0 && flipped)
             {
                 flipped = false;
-                sr.flipX = false;
+                playerSprite.flipX = false;
             }
         }
     }
@@ -150,12 +152,12 @@ public class PlayerControler : MonoBehaviour
         if (direction.x > 0 && !flipped)
         {
             flipped = true;
-            sr.flipX = true;
+            playerSprite.flipX = true;
         }
         else if (direction.x < 0 && flipped)
         {
             flipped = false;
-            sr.flipX = false;
+            playerSprite.flipX = false;
         }
     }
 
