@@ -371,15 +371,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b89e71ebd2da5d449408dfb10ea12a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 6
-  bullet: {fileID: 6242655706651345086, guid: dd76d198cb4f6304f93a7e3ef466c390, type: 3}
   attackCDTimer: 1
   attackDuration: 0.3
   coolDownTimer: 0
   rollSpeedMax: 24
+  moveSpeed: 6
+  useControler: 1
   layermask:
     serializedVersion: 2
     m_Bits: 8
+  bullet: {fileID: 6242655706651345086, guid: dd76d198cb4f6304f93a7e3ef466c390, type: 3}
 --- !u!54 &187279986
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -556,8 +557,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
+  m_HorizontalAxis: Horizontal_P1
+  m_VerticalAxis: Vertical_P1
   m_SubmitButton: Submit
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10

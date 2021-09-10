@@ -4,39 +4,50 @@ using UnityEngine;
 
 public class PlayerControler : MonoBehaviour
 {
+    // FLOATS / INTS ===========
+    [SerializeField] private float attackCDTimer = 1;
+    [SerializeField] private float attackDuration = 0.2f;
+    [SerializeField] private float coolDownTimer;
+    [SerializeField] private float rollSpeedMax = 100;
+    private float rollSpeed;
+    private int attackChain = 1;
+
     public float moveSpeed;
 
-    private Rigidbody rb;                  // The player's Rigidbody
-    private SpriteRenderer sr;
-    private GameObject meleeAttackLeft;
-    private GameObject meleeAttackRight;
-    public GameObject bullet;
-
+    // BOOLS ===========
     private bool flipped = false;
     private bool attackCD = false;
     private bool rangeCD = false;
 
-    private int attackChain = 1;
+    public bool useControler;               // If using controller changes aiming
 
-    public float attackCDTimer = 1;
-    public float attackDuration = 0.2f;
-    public float coolDownTimer;
-    public float rollSpeedMax = 100;
-    private float rollSpeed;
+    // STRINGS ===========
+    // Strings are used for input mapping. This is done to make the creation of multiple players clean and simple.
+    private string HorizontalMove = "Horizontal_P1";
+    private string VerticalMove = "Vertical_P1";
+    private string HorizontalAimController = "CHorizontal_P1";
+    private string VerticalAimController = "CVertical_P1";
+    private string AttackButton = "Attack_P1";
+    private string RangedButton = "Ranged_P1";
+    private string RollButton = "Roll_P1";
 
-    Vector3 movement;
-    Vector3 rollDir;
-
+    // OTHER COMPONENTS ===========
+    private Rigidbody rb;                  // The player's Rigidbody
+    private SpriteRenderer sr;
+    private GameObject meleeAttackLeft;
+    private GameObject meleeAttackRight;
+    private Vector3 movement;
+    private Vector3 rollDir;
     [SerializeField] private LayerMask layermask;
-
     private delegate void Callback();
-
     private enum State
     {
         Normal,
         Rolling,
     }
     private State state;
+
+    public GameObject bullet;
 
 
     // Start is called before the first frame update
@@ -71,12 +82,13 @@ public class PlayerControler : MonoBehaviour
         {
             Attack();
             RangeAttack();
-            FaceMouse();
+            if (!useControler) FaceMouse();
+            else FaceController();
         }
 
         if (coolDownTimer < attackCDTimer) coolDownTimer += Time.deltaTime; // Attack cooldown
 
-        if (Input.GetButtonDown("Fire3")) //Dodge Roll
+        if (Input.GetButtonDown(RollButton)) //Dodge Roll
         {
             state = State.Rolling;
             rollSpeed = rollSpeedMax;
@@ -131,10 +143,26 @@ public class PlayerControler : MonoBehaviour
         }
     }
 
+    private void FaceController()
+    {
+        Vector3 direction = Vector3.right * Input.GetAxisRaw(HorizontalAimController) + Vector3.up * -Input.GetAxisRaw(VerticalAimController);
+        // Flip sprite to face the mouse position
+        if (direction.x > 0 && !flipped)
+        {
+            flipped = true;
+            sr.flipX = true;
+        }
+        else if (direction.x < 0 && flipped)
+        {
+            flipped = false;
+            sr.flipX = false;
+        }
+    }
+
     // Move =================================
     private void Move() // Movement code, Uses Vector3, input from Horazontal and Vertical Axis, and the RB to move
     {
-        movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+        movement = new Vector3(Input.GetAxisRaw(HorizontalMove), 0, Input.GetAxisRaw(VerticalMove)).normalized;
 
         rb.MovePosition(transform.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
@@ -147,7 +175,7 @@ public class PlayerControler : MonoBehaviour
     // Attack =================================
     private void Attack()
     {
-        if (Input.GetButtonDown("Fire1") && !attackCD)
+        if (Input.GetButtonDown(AttackButton) && !attackCD)
         {
             if (coolDownTimer > attackCDTimer) // If attack isnt on cooldown
             {
@@ -226,14 +254,14 @@ public class PlayerControler : MonoBehaviour
 
     private void RangeAttack()
     {
-        if (Input.GetButtonDown("Fire2") && !rangeCD)
+        if (Input.GetButtonDown(RangedButton) && !rangeCD)
         {
             rangeCD = true;
             GameObject bul = Instantiate(bullet, transform.position, transform.rotation); // Create bullet
             if(flipped) bul.GetComponent<Bullet>().movement = new Vector3(1, 0, 0); // Send bullet in correct direction
             else bul.GetComponent<Bullet>().movement = new Vector3(-1, 0, 0);
             StartCoroutine(cooldown(()=> { rangeCD = false; }, 4f));
-        } else if (Input.GetButtonDown("Fire2") && rangeCD)
+        } else if (Input.GetButtonDown(RangedButton) && rangeCD)
         {
             Debug.Log("Range on Cooldown");
         }
