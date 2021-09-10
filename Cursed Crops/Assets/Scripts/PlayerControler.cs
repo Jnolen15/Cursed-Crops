@@ -10,10 +10,11 @@ public class PlayerControler : MonoBehaviour
     private SpriteRenderer sr;
     private GameObject meleeAttackLeft;
     private GameObject meleeAttackRight;
+    public GameObject bullet;
 
     private bool flipped = false;
     private bool attackCD = false;
-    private bool lockMove = false;
+    private bool rangeCD = false;
 
     private int attackChain = 1;
 
@@ -66,12 +67,16 @@ public class PlayerControler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Attack();
-        FaceMouse();
+        if (state == State.Normal)
+        {
+            Attack();
+            RangeAttack();
+            FaceMouse();
+        }
 
         if (coolDownTimer < attackCDTimer) coolDownTimer += Time.deltaTime; // Attack cooldown
 
-        if (Input.GetButtonDown("Fire3"))
+        if (Input.GetButtonDown("Fire3")) //Dodge Roll
         {
             state = State.Rolling;
             rollSpeed = rollSpeedMax;
@@ -216,6 +221,21 @@ public class PlayerControler : MonoBehaviour
                     enemyControler.takeDamage(6);
                 }
             }
+        }
+    }
+
+    private void RangeAttack()
+    {
+        if (Input.GetButtonDown("Fire2") && !rangeCD)
+        {
+            rangeCD = true;
+            GameObject bul = Instantiate(bullet, transform.position, transform.rotation); // Create bullet
+            if(flipped) bul.GetComponent<Bullet>().movement = new Vector3(1, 0, 0); // Send bullet in correct direction
+            else bul.GetComponent<Bullet>().movement = new Vector3(-1, 0, 0);
+            StartCoroutine(cooldown(()=> { rangeCD = false; }, 4f));
+        } else if (Input.GetButtonDown("Fire2") && rangeCD)
+        {
+            Debug.Log("Range on Cooldown");
         }
     }
 
