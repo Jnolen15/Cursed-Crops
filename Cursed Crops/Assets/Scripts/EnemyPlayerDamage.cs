@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyPlayerDamage : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class EnemyPlayerDamage : MonoBehaviour
             StartCoroutine(stun());
             playerHealth += reviveHealth;
             Debug.Log(playerHealth);
+            gameOver();
         }
     }
 
@@ -86,5 +88,10 @@ public class EnemyPlayerDamage : MonoBehaviour
         Debug.Log("Checking if double wait works");
 
 
+    }
+
+    private void gameOver()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); ;
     }
 }
