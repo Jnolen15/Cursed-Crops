@@ -21,7 +21,7 @@ public class EnemyToObjective : MonoBehaviour
         if(Objective != null){
             Vector3 position = Vector3.MoveTowards(transform.position, Objective.position, enemySpeed * Time.fixedDeltaTime);
             rb.MovePosition(position);
-            transform.LookAt(Objective);
+            //transform.LookAt(Objective);
         }
     }
 }

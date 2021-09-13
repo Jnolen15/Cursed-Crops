@@ -25,7 +25,7 @@ public class EnemyToPlayer : MonoBehaviour
         {
             Vector3 position = Vector3.MoveTowards(transform.position, Player.position, enemySpeed * Time.fixedDeltaTime);
             rb.MovePosition(position);
-            transform.LookAt(Player);
+            //transform.LookAt(Player);
         }
         
         else if (!GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControler>().enabled)
@@ -34,7 +34,7 @@ public class EnemyToPlayer : MonoBehaviour
             {
                 Vector3 objectivePosition = Vector3.MoveTowards(transform.position, mainTarget.position, enemySpeed * Time.fixedDeltaTime);
                 rb.MovePosition(objectivePosition);
-                transform.LookAt(mainTarget);
+                //transform.LookAt(mainTarget);
             }
         }
     }

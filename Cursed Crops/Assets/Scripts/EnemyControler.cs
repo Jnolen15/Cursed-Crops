@@ -6,11 +6,15 @@ public class EnemyControler : MonoBehaviour
 {
     public int health = 10;
     private Renderer rend;
+    private SpriteRenderer sr;
 
     // Start is called before the first frame update
     void Start()
     {
         rend = gameObject.GetComponent<Renderer>();
+        //sr = this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
+        sr = this.transform.GetComponentInChildren<SpriteRenderer>();
+
     }
 
     public void takeDamage(int dmg)
@@ -31,9 +35,11 @@ public class EnemyControler : MonoBehaviour
 
     IEnumerator hit(Renderer renderer)
     {
-        renderer.material.SetColor("_Color", Color.red);
+        //renderer.material.SetColor("_Color", Color.red);
+        sr.color = Color.red;
         yield return new WaitForSeconds(0.2f);
-        renderer.material.SetColor("_Color", Color.white);
+        sr.color = Color.white;
+        //renderer.material.SetColor("_Color", Color.white);
     }
 
     private void death()

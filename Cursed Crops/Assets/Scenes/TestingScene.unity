@@ -1869,7 +1869,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04074a55c54df9f479e8dbdb693d3a2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies: {fileID: 1375237408696457515, guid: 9d79b8139277bf44b8710ed9a86e7027, type: 3}
+  enemies: {fileID: 8543485593458002663, guid: 1b3eb95ccaba3214c93e2bd3da12ca0c, type: 3}
   Spawner: {fileID: 382118971}
   enemyNum: 10
   enemyTimer: 8
@@ -2140,6 +2140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 466536124}
   - component: {fileID: 466536125}
+  - component: {fileID: 466536126}
   m_Layer: 0
   m_Name: PlayerSprite
   m_TagString: LeaningSprite
@@ -2155,8 +2156,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 466536123}
   m_LocalRotation: {x: 0.38268346, y: -0, z: -0, w: 0.9238795}
-  m_LocalPosition: {x: 0, y: 0.36, z: 0}
-  m_LocalScale: {x: 0.5086316, y: 0.5086316, z: 0.5086316}
+  m_LocalPosition: {x: 0, y: 0.120000005, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children: []
   m_Father: {fileID: 523945498}
   m_RootOrder: 2
@@ -2200,8 +2201,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 12
-  m_Sprite: {fileID: 21300000, guid: e3e9c166dd8f81e4abbaf0db548956b0, type: 3}
+  m_SortingOrder: 10
+  m_Sprite: {fileID: 21300000, guid: cb959a4d84f07e849880f9b0c28016c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2212,6 +2213,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &466536126
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466536123}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d6b6e2ecf0ddd01428585cf05a843511, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &485642396
 GameObject:
   m_ObjectHideFlags: 0
@@ -2704,7 +2724,7 @@ MonoBehaviour:
   coolDownTimer: 0
   rollSpeedMax: 24
   moveSpeed: 6
-  useControler: 1
+  useControler: 0
   layermask:
     serializedVersion: 2
     m_Bits: 8
@@ -2798,7 +2818,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 523945493}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.44, y: 1, z: -12.45}
+  m_LocalPosition: {x: -16, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 352684614}
@@ -5716,7 +5736,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1873907129}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.41, y: -0.976, z: -0.38}
+  m_LocalPosition: {x: -0.052, y: -0.976, z: -0.88}
   m_LocalScale: {x: 0.5232964, y: 0.18194745, z: 0.32515}
   m_Children: []
   m_Father: {fileID: 523945498}
@@ -6191,7 +6211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04074a55c54df9f479e8dbdb693d3a2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies: {fileID: 6890607624067499943, guid: 3edc4754aac46f94286378ecda813d75, type: 3}
+  enemies: {fileID: 8994151230203246107, guid: 7459deeed639c064bb247f4408776259, type: 3}
   Spawner: {fileID: 1955289647}
   enemyNum: 10
   enemyTimer: 5

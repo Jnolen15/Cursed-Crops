@@ -35,6 +35,7 @@ public class PlayerControler : MonoBehaviour
     private Rigidbody rb;                  // The player's Rigidbody
     //private SpriteRenderer sr;
     private SpriteRenderer playerSprite;
+    private Animator animator;
     private GameObject meleeAttackLeft;
     private GameObject meleeAttackRight;
     private Vector3 movement;
@@ -74,13 +75,16 @@ public class PlayerControler : MonoBehaviour
          * are switched based on duirection faced.
          * Then I just flip the players sprite on the spriterender.
          */
+
+        // Player Sprite
         playerSprite = this.transform.GetChild(2).gameObject.GetComponent<SpriteRenderer>();
+        animator = this.transform.GetChild(2).gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (state == State.Normal)
+        if (state == State.Normal) // Not in rolling state
         {
             Attack();
             RangeAttack();
@@ -89,6 +93,8 @@ public class PlayerControler : MonoBehaviour
         }
 
         if (coolDownTimer < attackCDTimer) coolDownTimer += Time.deltaTime; // Attack cooldown
+
+        if (coolDownTimer > attackDuration) animator.SetBool("Melee", false); // Reset attack animation
 
         if (Input.GetButtonDown(RollButton)) //Dodge Roll
         {
@@ -148,6 +154,7 @@ public class PlayerControler : MonoBehaviour
     private void FaceController()
     {
         Vector3 direction = Vector3.right * Input.GetAxisRaw(HorizontalAimController) + Vector3.up * -Input.GetAxisRaw(VerticalAimController);
+
         // Flip sprite to face the mouse position
         if (direction.x > 0 && !flipped)
         {
@@ -186,6 +193,7 @@ public class PlayerControler : MonoBehaviour
 
                 coolDownTimer = 0;
                 attackChain = 1;
+                animator.SetBool("Melee", true);
                 DoAttack();
                 Debug.Log("Attack 1");
 
@@ -195,6 +203,7 @@ public class PlayerControler : MonoBehaviour
                 {
                     coolDownTimer = 0;
                     attackChain = 2;
+                    animator.SetBool("Melee", true);
                     DoAttack();
                     Debug.Log("Attack 2");
                 }
@@ -202,6 +211,7 @@ public class PlayerControler : MonoBehaviour
                 {
                     coolDownTimer = 0;
                     attackChain = 3;
+                    animator.SetBool("Melee", true);
                     DoAttack();
                     Debug.Log("Attack 3");
                 }
@@ -258,12 +268,20 @@ public class PlayerControler : MonoBehaviour
     {
         if (Input.GetButtonDown(RangedButton) && !rangeCD)
         {
+            // Set cooldown true
             rangeCD = true;
-            GameObject bul = Instantiate(bullet, transform.position, transform.rotation); // Create bullet
-            if(flipped) bul.GetComponent<Bullet>().movement = new Vector3(1, 0, 0); // Send bullet in correct direction
+            //Play animation
+            animator.SetBool("Ranged", true);
+            StartCoroutine(cooldown(() => { animator.SetBool("Ranged", false); }, 0.2f));
+            // Create bullet
+            GameObject bul = Instantiate(bullet, transform.position, transform.rotation);
+            // Send bullet in correct direction
+            if (flipped) bul.GetComponent<Bullet>().movement = new Vector3(1, 0, 0);
             else bul.GetComponent<Bullet>().movement = new Vector3(-1, 0, 0);
+            // Start ranged attack cooldown
             StartCoroutine(cooldown(()=> { rangeCD = false; }, 4f));
-        } else if (Input.GetButtonDown(RangedButton) && rangeCD)
+
+        } else if (Input.GetButtonDown(RangedButton) && rangeCD) // If on cooldown send dubug msg
         {
             Debug.Log("Range on Cooldown");
         }
