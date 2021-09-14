@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class EnemyDamageObjective : MonoBehaviour
 {
-    private GameObject enemies;
-    private GameObject mainObjective;
+    public GameObject enemies;
+    public GameObject mainObjective;
     public int houseHealth = 50;
     private bool isItHit = false;
     // Start is called before the first frame update
@@ -21,7 +21,7 @@ public class EnemyDamageObjective : MonoBehaviour
     void Update()
     {
         //Once the objective's health reaches zero destroy it and change the scene to the game over
-        if(houseHealth == 0)
+        if(houseHealth <= 0)
         {
             SceneManager.LoadScene("GameOver");
         }
@@ -33,9 +33,21 @@ public class EnemyDamageObjective : MonoBehaviour
     {
         while (other.gameObject.tag == "Enemy" && !isItHit)
         {
+            //houseHealth -= 5;
+            //StartCoroutine(iframes());
+            Collider[] enemies = Physics.OverlapBox(transform.position, transform.localScale / 2,
+                                                            transform.rotation, LayerMask.GetMask("Enemies"));
+            multiDamage(enemies);
+
+        }
+    }
+
+    private void multiDamage (Collider[] enemies)
+    {
+        foreach(Collider c in enemies)
+        {
             houseHealth -= 5;
             StartCoroutine(iframes());
-
         }
     }
     // IEnumarator so doesn't freaking get one 1 shotted in 1 second

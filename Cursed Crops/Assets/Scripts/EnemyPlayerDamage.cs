@@ -27,7 +27,7 @@ public class EnemyPlayerDamage : MonoBehaviour
             StartCoroutine(stun());
             playerHealth += reviveHealth;
             Debug.Log(playerHealth);
-            gameOver();
+            //gameOver();
         }
     }
 
@@ -78,8 +78,6 @@ public class EnemyPlayerDamage : MonoBehaviour
         col.a = 0.5f;
         GameObject.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControler>().enabled = true;
-        //GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyToPlayer>().enabled = true;
-        //GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyToObjective>().enabled = false;
         yield return new WaitForSeconds(3.0f);
         hitAgain = false;
         alphaChekcer = false;
