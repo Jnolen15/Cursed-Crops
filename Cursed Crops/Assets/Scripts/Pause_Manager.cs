@@ -42,8 +42,17 @@ public class Pause_Manager : MonoBehaviour
     {
         Unpause();
         // SceneManager.LoadScene("MenuScene");
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Menu Scene");
     }
+
+    public void ExitToMap()
+    {
+        Unpause();
+        // SceneManager.LoadScene("MenuScene");
+        SceneManager.LoadScene("Level Select");
+    }
+
+
 
     public void Restart()
     {

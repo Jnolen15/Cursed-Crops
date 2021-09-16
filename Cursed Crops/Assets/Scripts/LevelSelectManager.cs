@@ -7,7 +7,7 @@ public class LevelSelectManager : MonoBehaviour
 {
     public void loadLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("TestingScene");
     }
     
 }
