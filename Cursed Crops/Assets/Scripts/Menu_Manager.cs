@@ -15,4 +15,14 @@ public class Menu_Manager : MonoBehaviour
         Debug.Log("quitting game");
         Application.Quit();
     }
+
+    public void ExitToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void restartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
 }
