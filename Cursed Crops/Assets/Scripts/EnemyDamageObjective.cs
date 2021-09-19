@@ -12,9 +12,7 @@ public class EnemyDamageObjective : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //enemies = GameObject.FindGameObjectWithTag("Enemy").GetComponent<GameObject>();
-        //mainObjective = GameObject.FindGameObjectWithTag("MainObjective").GetComponent<GameObject>();
-        //gameObject.tag = "MainObjective";
+        
     }
 
     // Update is called once per frame
