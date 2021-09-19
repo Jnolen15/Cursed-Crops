@@ -23,13 +23,13 @@ public class PlayerControler : MonoBehaviour
 
     // STRINGS ===========
     // Strings are used for input mapping. This is done to make the creation of multiple players clean and simple.
-    private string HorizontalMove = "Horizontal_P1";
-    private string VerticalMove = "Vertical_P1";
-    private string HorizontalAimController = "CHorizontal_P1";
-    private string VerticalAimController = "CVertical_P1";
-    private string AttackButton = "Attack_P1";
-    private string RangedButton = "Ranged_P1";
-    private string RollButton = "Roll_P1";
+    [SerializeField] private string HorizontalMove = "Horizontal_P1";
+    [SerializeField] private string VerticalMove = "Vertical_P1";
+    [SerializeField] private string HorizontalAimController = "CHorizontal_P1";
+    [SerializeField] private string VerticalAimController = "CVertical_P1";
+    [SerializeField] private string AttackButton = "Attack_P1";
+    [SerializeField] private string RangedButton = "Ranged_P1";
+    [SerializeField] private string RollButton = "Roll_P1";
 
     // OTHER COMPONENTS ===========
     private Rigidbody rb;                  // The player's Rigidbody
@@ -98,6 +98,7 @@ public class PlayerControler : MonoBehaviour
 
         if (Input.GetButtonDown(RollButton)) //Dodge Roll
         {
+            Debug.Log(RollButton);
             state = State.Rolling;
             rollSpeed = rollSpeedMax;
         }
@@ -186,6 +187,7 @@ public class PlayerControler : MonoBehaviour
     {
         if (Input.GetButtonDown(AttackButton) && !attackCD)
         {
+            Debug.Log(AttackButton);
             if (coolDownTimer > attackCDTimer) // If attack isnt on cooldown
             {
                 //attackCD = true;
