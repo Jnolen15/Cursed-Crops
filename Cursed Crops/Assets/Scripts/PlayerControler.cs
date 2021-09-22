@@ -77,8 +77,8 @@ public class PlayerControler : MonoBehaviour
          */
 
         // Player Sprite
-        playerSprite = this.transform.GetChild(2).gameObject.GetComponent<SpriteRenderer>();
-        animator = this.transform.GetChild(2).gameObject.GetComponent<Animator>();
+        playerSprite = this.transform.GetChild(2).GetChild(0).gameObject.GetComponent<SpriteRenderer>();
+        animator = this.transform.GetChild(2).GetChild(0).gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
