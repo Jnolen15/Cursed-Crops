@@ -5,6 +5,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class SpriteLeaner : MonoBehaviour
 {
+    public bool runInEditor = true;
     public float leanAngle = 40f;
     public bool manageSortLayer = false;
 
@@ -12,25 +13,17 @@ public class SpriteLeaner : MonoBehaviour
 
     void Start()
     {
-        // store the tagged sprites
+        // store the tagged sprites ('play' has to be pressed whenever a new sprite is given a tag)
         taggedSprites = GameObject.FindGameObjectsWithTag("LeaningSprite");
-
-        /* // set a new pivot point for all of the tagged sprites
-        foreach (GameObject spriteObj in taggedSprites)
-        {
-            RectTransform currRect = spriteObj.GetComponent<RectTransform>();
-            currRect.pivot = new Vector2(0, currRect.rect.y/2);
-        }
-        */
     }
 
     void Update()
     {
-        foreach(GameObject spriteObj in taggedSprites)
+        foreach (GameObject spriteObj in taggedSprites)
         {
             // lean the current sprite by the desired angle
             spriteObj.transform.SetPositionAndRotation(
-                spriteObj.transform.position, 
+                spriteObj.transform.position,
                 Quaternion.Euler(new Vector3(leanAngle, 0, 0))
             );
 
@@ -38,7 +31,7 @@ public class SpriteLeaner : MonoBehaviour
             if (manageSortLayer)
             {
                 // get access to the current sprite renderer & sprite transform
-                SpriteRenderer spRend = spriteObj.GetComponent<SpriteRenderer>();
+                SpriteRenderer spRend = spriteObj.GetComponentInChildren<SpriteRenderer>();
                 Transform spTrans = spriteObj.GetComponent<Transform>();
 
                 // change sprite renderer's sorting order based on z position
