@@ -12,6 +12,7 @@ public class EnemyPlayerDamage : MonoBehaviour
     private bool isItHit = false;
     private bool hitAgain = false;
     private bool alphaChekcer = false;
+    public bool playerIsStun = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,9 +44,9 @@ public class EnemyPlayerDamage : MonoBehaviour
         if (playerHealth > 0)
         {
             var trans = 0.5f;
-            var col = GameObject.Find("PlayerSprite").GetComponent<SpriteRenderer>().color;
+            var col = gameObject.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color;
             col.a = trans;
-            GameObject.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
+            gameObject.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
             isItHit = true;
             playerHealth -= 5;
             // process pre-yield
@@ -55,7 +56,7 @@ public class EnemyPlayerDamage : MonoBehaviour
             if (!alphaChekcer)
             {
                 col.a = 1f;
-                GameObject.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
+                gameObject.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
             }
             isItHit = false;
         }
@@ -63,26 +64,36 @@ public class EnemyPlayerDamage : MonoBehaviour
 
     private IEnumerator stun()
     {
+        playerIsStun = true;
 
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControler>().enabled = false;
+        Debug.Log(gameObject + "is stun");
+
+        //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControler>().enabled = false;
+        gameObject.GetComponent<PlayerControler>().enabled = false;
         hitAgain = true;
         var trans = 0.2f;
-        var col = GameObject.Find("PlayerSprite").GetComponent<SpriteRenderer>().color;
+        //var col = GameObject.Find("PlayerSprite").GetComponent<SpriteRenderer>().color;
+        var col = gameObject.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color;
         col.a = trans;
-        GameObject.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
+        //GameObject.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
+        gameObject.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
         //GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyToPlayer>().enabled = false;
         //GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyToObjective>().enabled = true;
         yield return new WaitForSeconds(15.0f);
         // process post-yield
+        playerIsStun = false;
 
         col.a = 0.5f;
-        GameObject.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControler>().enabled = true;
+        //GameObject.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
+        gameObject.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
+        //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControler>().enabled = true;
+        gameObject.GetComponent<PlayerControler>().enabled = true;
         yield return new WaitForSeconds(3.0f);
         hitAgain = false;
         alphaChekcer = false;
         col.a = 1f;
-        GameObject.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
+        //GameObject.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
+        gameObject.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
         Debug.Log("Checking if double wait works");
 
 
