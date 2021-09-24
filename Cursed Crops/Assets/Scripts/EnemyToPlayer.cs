@@ -15,19 +15,18 @@ public class EnemyToPlayer : MonoBehaviour
     public Transform[] listOfPlayers;
     public bool aPlayerIsStun = true;
 
-    //[SerializeField] private GameObject _EnemyPlayerDamage;
-    private EnemyPlayerDamage script;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        script = FindObjectOfType<EnemyPlayerDamage>();
         //Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         listOfPlayers = new Transform[players.Length];
+        
         for (int i = 0; i < listOfPlayers.Length; ++i)
             listOfPlayers[i] = players[i].transform;
 
+        Debug.Log(players.Length);
         mainTarget = GameObject.FindGameObjectWithTag("MainObjective").GetComponent<Transform>();
     }
 
@@ -35,10 +34,10 @@ public class EnemyToPlayer : MonoBehaviour
     void Update()
     {
         // new multiplayer chase code
-        allPlayersStun();
+        //allPlayersStun();
         Transform closestPlayer = FindClosestPlayer(listOfPlayers);
-        if (!aPlayerIsStun)
-        {
+        //if (!aPlayerIsStun)
+        //{
             
 
             Vector3 position = Vector3.MoveTowards(transform.position, closestPlayer.position, enemySpeed * Time.fixedDeltaTime);
@@ -48,13 +47,13 @@ public class EnemyToPlayer : MonoBehaviour
                 Vector3 objectivePosition = Vector3.MoveTowards(transform.position, mainTarget.position, enemySpeed * Time.fixedDeltaTime);
                 rb.MovePosition(objectivePosition);
             }
-        }
+        //}
             
-        else if (aPlayerIsStun)
-        {
-            Vector3 objectivePosition = Vector3.MoveTowards(transform.position, mainTarget.position, enemySpeed * Time.fixedDeltaTime);
-            rb.MovePosition(objectivePosition);
-        }
+        //else if (aPlayerIsStun)
+        //{
+        //    Vector3 objectivePosition = Vector3.MoveTowards(transform.position, mainTarget.position, enemySpeed * Time.fixedDeltaTime);
+        //    rb.MovePosition(objectivePosition);
+        //}
             
         //old one player chase code
         /*
@@ -92,16 +91,16 @@ public class EnemyToPlayer : MonoBehaviour
         
         foreach (Transform potentialTarget in players)
         {
-            if (potentialTarget.GetComponent<PlayerControler>().enabled)
-            {
+            EnemyPlayerDamage playerStun = potentialTarget.GetComponent<EnemyPlayerDamage>();
+            
                 Vector3 directionToTarget = potentialTarget.position - currentPosition;
                 float dSqrToTarget = directionToTarget.sqrMagnitude;
-                if (dSqrToTarget < closestDistanceSqr)
+                if (dSqrToTarget < closestDistanceSqr && !playerStun.playerIsStun)
                 {
                     closestDistanceSqr = dSqrToTarget;
                     bestTarget = potentialTarget;
                 }
-            }
+            
         }
 
         return bestTarget;
