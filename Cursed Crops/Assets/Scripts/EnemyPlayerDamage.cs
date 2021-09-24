@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class EnemyPlayerDamage : MonoBehaviour
 {
-    private GameObject enemies;
+    private GameObject playerSprite;
     private GameObject mainObjective;
     public int playerHealth = 10;
     public int reviveHealth = 10;
@@ -13,10 +13,11 @@ public class EnemyPlayerDamage : MonoBehaviour
     private bool hitAgain = false;
     private bool alphaChekcer = false;
     public bool playerIsStun = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerSprite = gameObject.transform.Find("PlayerPivot").gameObject;
     }
 
     // Update is called once per frame
@@ -44,9 +45,9 @@ public class EnemyPlayerDamage : MonoBehaviour
         if (playerHealth > 0)
         {
             var trans = 0.5f;
-            var col = gameObject.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color;
+            var col = playerSprite.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color;
             col.a = trans;
-            gameObject.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
+            playerSprite.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
             isItHit = true;
             playerHealth -= 5;
             // process pre-yield
@@ -56,7 +57,7 @@ public class EnemyPlayerDamage : MonoBehaviour
             if (!alphaChekcer)
             {
                 col.a = 1f;
-                gameObject.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
+                playerSprite.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
             }
             isItHit = false;
         }
@@ -73,10 +74,11 @@ public class EnemyPlayerDamage : MonoBehaviour
         hitAgain = true;
         var trans = 0.2f;
         //var col = GameObject.Find("PlayerSprite").GetComponent<SpriteRenderer>().color;
-        var col = gameObject.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color;
+        //GameObject playerSprite = gameObject.transform.Find("PlayerPivot").gameObject;
+        var col = playerSprite.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color;
         col.a = trans;
         //GameObject.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
-        gameObject.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
+        playerSprite.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
         //GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyToPlayer>().enabled = false;
         //GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyToObjective>().enabled = true;
         yield return new WaitForSeconds(15.0f);
@@ -85,7 +87,7 @@ public class EnemyPlayerDamage : MonoBehaviour
 
         col.a = 0.5f;
         //GameObject.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
-        gameObject.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
+        playerSprite.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
         //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControler>().enabled = true;
         gameObject.GetComponent<PlayerControler>().enabled = true;
         yield return new WaitForSeconds(3.0f);
@@ -93,7 +95,7 @@ public class EnemyPlayerDamage : MonoBehaviour
         alphaChekcer = false;
         col.a = 1f;
         //GameObject.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
-        gameObject.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
+        playerSprite.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
         Debug.Log("Checking if double wait works");
 
 
