@@ -13,6 +13,7 @@ public class EnemyToPlayer : MonoBehaviour
     Rigidbody rb;
     private bool targetChange = false;
     public Transform[] listOfPlayers;
+    public bool aPlayerIsStun = true;
 
     //[SerializeField] private GameObject _EnemyPlayerDamage;
     private EnemyPlayerDamage script;
@@ -34,34 +35,27 @@ public class EnemyToPlayer : MonoBehaviour
     void Update()
     {
         // new multiplayer chase code
+        allPlayersStun();
         Transform closestPlayer = FindClosestPlayer(listOfPlayers);
-
-        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControler>().enabled)
+        if (!aPlayerIsStun)
         {
+            
+
             Vector3 position = Vector3.MoveTowards(transform.position, closestPlayer.position, enemySpeed * Time.fixedDeltaTime);
             rb.MovePosition(position);
-            
             if (targetChange)
             {
                 Vector3 objectivePosition = Vector3.MoveTowards(transform.position, mainTarget.position, enemySpeed * Time.fixedDeltaTime);
                 rb.MovePosition(objectivePosition);
             }
+        }
             
-            //transform.LookAt(Player);
-        }
-
-        /*
-        else if (!GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControler>().enabled)
+        else if (aPlayerIsStun)
         {
-            if (mainTarget != null)
-            {
-                //targetChange = true;
-                Vector3 objectivePosition = Vector3.MoveTowards(transform.position, mainTarget.position, enemySpeed * Time.fixedDeltaTime);
-                rb.MovePosition(objectivePosition);
-                //transform.LookAt(mainTarget);
-            }
+            Vector3 objectivePosition = Vector3.MoveTowards(transform.position, mainTarget.position, enemySpeed * Time.fixedDeltaTime);
+            rb.MovePosition(objectivePosition);
         }
-        /*
+            
         //old one player chase code
         /*
         if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControler>().enabled)
@@ -92,23 +86,39 @@ public class EnemyToPlayer : MonoBehaviour
 
     Transform FindClosestPlayer(Transform[] players)
     {
-        Transform bestTarget = null;
+        Transform bestTarget = mainTarget.transform;
         float closestDistanceSqr = Mathf.Infinity;
         Vector3 currentPosition = transform.position;
+        
         foreach (Transform potentialTarget in players)
         {
-            
-
-            Vector3 directionToTarget = potentialTarget.position - currentPosition;
-            float dSqrToTarget = directionToTarget.sqrMagnitude;
-            if (dSqrToTarget < closestDistanceSqr)
+            if (potentialTarget.GetComponent<PlayerControler>().enabled)
             {
-                closestDistanceSqr = dSqrToTarget;
-                bestTarget = potentialTarget;
+                Vector3 directionToTarget = potentialTarget.position - currentPosition;
+                float dSqrToTarget = directionToTarget.sqrMagnitude;
+                if (dSqrToTarget < closestDistanceSqr)
+                {
+                    closestDistanceSqr = dSqrToTarget;
+                    bestTarget = potentialTarget;
+                }
             }
         }
 
         return bestTarget;
+    }
+
+    private bool allPlayersStun()
+    {
+        for (int i = 0; i < listOfPlayers.Length; ++i)
+        {
+            if (listOfPlayers[i].GetComponent<PlayerControler>().enabled == true)
+            {
+                aPlayerIsStun = false;
+                return aPlayerIsStun;
+            }
+        }
+
+        return aPlayerIsStun;
     }
 
     private void OnTriggerStay(Collider other)

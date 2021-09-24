@@ -66,7 +66,7 @@ public class EnemyPlayerDamage : MonoBehaviour
     {
         playerIsStun = true;
 
-        Debug.Log(gameObject + "is stun");
+        //Debug.Log(gameObject + "is stun");
 
         //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControler>().enabled = false;
         gameObject.GetComponent<PlayerControler>().enabled = false;
