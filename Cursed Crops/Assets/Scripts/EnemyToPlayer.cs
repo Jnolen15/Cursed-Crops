@@ -63,6 +63,7 @@ public class EnemyToPlayer : MonoBehaviour
                     closestDistanceSqr = dSqrToTarget;
                     bestTarget = potentialTarget;
                 }
+                
             
         }
 
