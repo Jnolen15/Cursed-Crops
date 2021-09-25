@@ -61,47 +61,17 @@ public class EnemyToPlayer : MonoBehaviour
             //Debug.Log(potentialTarget + " did " + playerDamage.overAllPlayerDamage);
             //damage += playerDamage.overAllPlayerDamage;
             
-            if (playerDamage.overAllPlayerDamage < higherDamage)
-            {
-                Vector3 directionToTarget = potentialTarget.position - currentPosition;
-                float dSqrToTarget = directionToTarget.sqrMagnitude;
-                if (dSqrToTarget < closestDistanceSqr && !playerStun.playerIsStun)
-                {
-                    closestDistanceSqr = dSqrToTarget;
-                    bestTarget = potentialTarget;
-                }
+             higherDamage = playerDamage.overAllPlayerDamage;
+             Vector3 directionToTarget = potentialTarget.position - currentPosition;
+             float dSqrToTarget = directionToTarget.sqrMagnitude;
+             if (dSqrToTarget < closestDistanceSqr && !playerStun.playerIsStun)
+             {
+                 closestDistanceSqr = dSqrToTarget;
+                 bestTarget = potentialTarget;
+             }
                 
             
-        }
-
-                
-                higherDamage = playerDamage.overAllPlayerDamage;
-                Debug.Log("the higher damage is: " + higherDamage);
-                Debug.Log("the over damage is: " + playerDamage.overAllPlayerDamage);
-
-            }
-            Debug.Log("the higher damage is (out of loop): " + higherDamage);
-            Debug.Log("the over damage is(out of loop): " + playerDamage.overAllPlayerDamage);
-            Vector3 directionToTarget = potentialTarget.position - currentPosition;
-            float dSqrToTarget = directionToTarget.sqrMagnitude;
-
-            if ((dSqrToTarget < closestDistanceSqr) && !playerStun.playerIsStun)
-            {
-
-                //if (higherDamage > playerDamage.overAllPlayerDamage)
-                //{
-                    closestDistanceSqr = dSqrToTarget;
-                    
-                //    higherDamage = playerDamage.overAllPlayerDamage;
-                //}
-                    
-                bestTarget = potentialTarget;
-                
-            }
-            
-        }
-        //Debug.Log(bestTarget + "is aggro base on damage: " + higherDamage);
-        //Debug.Log("base on damage: " + bestTarget);
+         }
 
         return bestTarget;
     }
