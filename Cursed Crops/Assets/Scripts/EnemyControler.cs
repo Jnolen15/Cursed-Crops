@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyControler : MonoBehaviour
 {
     public int health = 10;
+    public float overalldamage = 0;
     private Renderer rend;
     private SpriteRenderer sr;
 
@@ -21,7 +22,7 @@ public class EnemyControler : MonoBehaviour
     {
         // Subtract from health
         health -= dmg;
-
+        overalldamage += dmg;
         // If health is below or equal to 0 die
         if (health <= 0)
         {

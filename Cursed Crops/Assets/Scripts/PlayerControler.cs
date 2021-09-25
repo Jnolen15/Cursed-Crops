@@ -11,6 +11,7 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] private float rollSpeedMax = 100;
     private float rollSpeed;
     private int attackChain = 1;
+    public int overAllPlayerDamage = 0;
 
     public float moveSpeed;
 
@@ -253,14 +254,17 @@ public class PlayerControler : MonoBehaviour
                 if (attackChain == 1)
                 {
                     enemyControler.takeDamage(2);
+                    overAllPlayerDamage += 2;
                 }
                 else if (attackChain == 2)
                 {
                     enemyControler.takeDamage(3);
+                    overAllPlayerDamage += 3;
                 }
                 else if (attackChain == 3)
                 {
                     enemyControler.takeDamage(6);
+                    overAllPlayerDamage += 6;
                 }
             }
         }

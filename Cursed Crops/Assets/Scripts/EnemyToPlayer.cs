@@ -51,36 +51,49 @@ public class EnemyToPlayer : MonoBehaviour
         Transform bestTarget = mainTarget.transform;
         float closestDistanceSqr = Mathf.Infinity;
         Vector3 currentPosition = transform.position;
+        float higherDamage = 0;
+        float damage = 0;
         
         foreach (Transform potentialTarget in players)
         {
             EnemyPlayerDamage playerStun = potentialTarget.GetComponent<EnemyPlayerDamage>();
+            PlayerControler playerDamage = potentialTarget.GetComponent<PlayerControler>();
+            //Debug.Log(potentialTarget + " did " + playerDamage.overAllPlayerDamage);
+            //damage += playerDamage.overAllPlayerDamage;
             
-                Vector3 directionToTarget = potentialTarget.position - currentPosition;
-                float dSqrToTarget = directionToTarget.sqrMagnitude;
-                if (dSqrToTarget < closestDistanceSqr && !playerStun.playerIsStun)
-                {
+            if (playerDamage.overAllPlayerDamage < higherDamage)
+            {
+
+                
+                higherDamage = playerDamage.overAllPlayerDamage;
+                Debug.Log("the higher damage is: " + higherDamage);
+                Debug.Log("the over damage is: " + playerDamage.overAllPlayerDamage);
+
+            }
+            Debug.Log("the higher damage is (out of loop): " + higherDamage);
+            Debug.Log("the over damage is(out of loop): " + playerDamage.overAllPlayerDamage);
+            Vector3 directionToTarget = potentialTarget.position - currentPosition;
+            float dSqrToTarget = directionToTarget.sqrMagnitude;
+
+            if ((dSqrToTarget < closestDistanceSqr) && !playerStun.playerIsStun)
+            {
+
+                //if (higherDamage > playerDamage.overAllPlayerDamage)
+                //{
                     closestDistanceSqr = dSqrToTarget;
-                    bestTarget = potentialTarget;
-                }
+                    
+                //    higherDamage = playerDamage.overAllPlayerDamage;
+                //}
+                    
+                bestTarget = potentialTarget;
+                
+            }
             
         }
+        //Debug.Log(bestTarget + "is aggro base on damage: " + higherDamage);
+        //Debug.Log("base on damage: " + bestTarget);
 
         return bestTarget;
-    }
-
-    private bool allPlayersStun()
-    {
-        for (int i = 0; i < listOfPlayers.Length; ++i)
-        {
-            if (listOfPlayers[i].GetComponent<PlayerControler>().enabled == true)
-            {
-                aPlayerIsStun = false;
-                return aPlayerIsStun;
-            }
-        }
-
-        return aPlayerIsStun;
     }
 
     private void OnTriggerStay(Collider other)
