@@ -1143,7 +1143,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &382118966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2867,7 +2867,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1955289642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3136,6 +3136,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4366411474591660984, guid: 852c4e8fcfb35084890e7297d56dd11a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 4366411474888788225, guid: 852c4e8fcfb35084890e7297d56dd11a,
         type: 3}
       propertyPath: m_Name
@@ -3210,6 +3215,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player1
       objectReference: {fileID: 0}
+    - target: {fileID: 7937736029672694562, guid: 69f1f2538ac12e543931462cf1bbc863,
+        type: 3}
+      propertyPath: useControler
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7937736029672694574, guid: 69f1f2538ac12e543931462cf1bbc863,
         type: 3}
       propertyPath: m_RootOrder
@@ -3264,6 +3274,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937736029740589967, guid: 69f1f2538ac12e543931462cf1bbc863,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69f1f2538ac12e543931462cf1bbc863, type: 3}

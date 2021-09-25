@@ -63,6 +63,16 @@ public class EnemyToPlayer : MonoBehaviour
             
             if (playerDamage.overAllPlayerDamage < higherDamage)
             {
+                Vector3 directionToTarget = potentialTarget.position - currentPosition;
+                float dSqrToTarget = directionToTarget.sqrMagnitude;
+                if (dSqrToTarget < closestDistanceSqr && !playerStun.playerIsStun)
+                {
+                    closestDistanceSqr = dSqrToTarget;
+                    bestTarget = potentialTarget;
+                }
+                
+            
+        }
 
                 
                 higherDamage = playerDamage.overAllPlayerDamage;
