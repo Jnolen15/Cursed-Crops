@@ -52,7 +52,7 @@ public class EnemyToPlayer : MonoBehaviour
         float closestDistanceSqr = Mathf.Infinity;
         Vector3 currentPosition = transform.position;
         float higherDamage = 0;
-        float damage = 0;
+        //float damage = 0;
         
         foreach (Transform potentialTarget in players)
         {
@@ -60,15 +60,23 @@ public class EnemyToPlayer : MonoBehaviour
             PlayerControler playerDamage = potentialTarget.GetComponent<PlayerControler>();
             //Debug.Log(potentialTarget + " did " + playerDamage.overAllPlayerDamage);
             //damage += playerDamage.overAllPlayerDamage;
-            
-             higherDamage = playerDamage.overAllPlayerDamage;
-             Vector3 directionToTarget = potentialTarget.position - currentPosition;
-             float dSqrToTarget = directionToTarget.sqrMagnitude;
-             if (dSqrToTarget < closestDistanceSqr && !playerStun.playerIsStun)
-             {
-                 closestDistanceSqr = dSqrToTarget;
-                 bestTarget = potentialTarget;
-             }
+            //higherDamage = playerDamage.overAllPlayerDamage;
+
+
+            if (playerDamage.overAllPlayerDamage > higherDamage && !playerStun.playerIsStun)
+            {
+                higherDamage = playerDamage.overAllPlayerDamage;
+                bestTarget = potentialTarget;
+                Debug.Log(potentialTarget + "Has the highest amount of damage = " + higherDamage);
+            }
+            Vector3 directionToTarget = potentialTarget.position - currentPosition;
+            float dSqrToTarget = directionToTarget.sqrMagnitude;
+            if (dSqrToTarget < closestDistanceSqr && !playerStun.playerIsStun && higherDamage == 0)
+            {
+
+                closestDistanceSqr = dSqrToTarget;
+                bestTarget = potentialTarget;
+            }
                 
             
          }
