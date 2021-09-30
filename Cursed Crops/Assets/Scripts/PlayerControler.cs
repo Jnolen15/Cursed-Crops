@@ -34,7 +34,9 @@ public class PlayerControler : MonoBehaviour
     //[SerializeField] private string RollButton = "Roll_P1";
 
     // OTHER COMPONENTS ===========
-    private PlayerInputActions playerInputActions;
+    //private PlayerInputActions playerInputActions;  // The player input object script
+    private Vector2 aimInputVector = Vector2.zero;
+    private Vector2 moveInputVector = Vector2.zero;
     private Rigidbody rb;                  // The player's Rigidbody
     private SpriteRenderer playerSprite;
     private Animator animator;
@@ -82,7 +84,7 @@ public class PlayerControler : MonoBehaviour
 
     private void Awake()
     {
-        // Get access to the player input actions asset
+        /*// Get access to the player input actions asset
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
 
@@ -90,6 +92,7 @@ public class PlayerControler : MonoBehaviour
         playerInputActions.Player.Attack.performed += Attack_performed;
         playerInputActions.Player.Ranged.performed += Ranged_performed;
         playerInputActions.Player.Roll.performed += Roll_performed;
+        */
     }
 
     // Update is called once per frame
@@ -151,10 +154,24 @@ public class PlayerControler : MonoBehaviour
         }
     }
 
+    public void Aim_performed(InputAction.CallbackContext context)
+    {
+        //Debug.Log(context.action.ToString());
+        if (context.action.ToString() == "Player/Aim[/Mouse/position]")
+        {
+            useControler = false;
+        }
+        else
+        {
+            useControler = true;
+            aimInputVector = context.ReadValue<Vector2>();
+        }
+    }
+
     private void FaceController()
     {
-        Vector2 inputVector = playerInputActions.Player.Aim.ReadValue<Vector2>();
-        Vector3 direction = Vector3.right * inputVector.x + Vector3.up * -inputVector.y;
+        //Vector2 inputVector = playerInputActions.Player.Aim.ReadValue<Vector2>();
+        Vector3 direction = Vector3.right * aimInputVector.x + Vector3.up * -aimInputVector.y;
 
         // Flip sprite to face the mouse position
         if (direction.x > 0 && !flipped)
@@ -170,16 +187,21 @@ public class PlayerControler : MonoBehaviour
     }
 
     // Move =================================
+    public void Move_performed(InputAction.CallbackContext context)
+    {
+        moveInputVector = context.ReadValue<Vector2>();
+    }
+
     private void Move() // Movement code, Uses Vector3, input from Horazontal and Vertical Axis, and the RB to move
     {
-        Vector2 inputVector = playerInputActions.Player.Movement.ReadValue<Vector2>();
-        movement = new Vector3(inputVector.x, 0, inputVector.y).normalized;
+        //Vector2 inputVector = playerInputActions.Player.Movement.ReadValue<Vector2>();
+        movement = new Vector3(moveInputVector.x, 0, moveInputVector.y).normalized;
         rb.MovePosition(transform.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
 
-    private void Roll_performed(InputAction.CallbackContext context)
+    public void Roll_performed(InputAction.CallbackContext context)
     {
-        Debug.Log(context);
+        //Debug.Log(context);
         if (context.performed)
         {
             state = State.Rolling;
@@ -193,9 +215,9 @@ public class PlayerControler : MonoBehaviour
     }
 
     // Attack =================================
-    private void Attack_performed(InputAction.CallbackContext context)
+    public void Attack_performed(InputAction.CallbackContext context)
     {
-        Debug.Log(context);
+        //Debug.Log(context);
         if (context.performed)
         {
             if (!attackCD && state == State.Normal)
@@ -280,9 +302,9 @@ public class PlayerControler : MonoBehaviour
         }
     }
 
-    private void Ranged_performed(InputAction.CallbackContext context)
+    public void Ranged_performed(InputAction.CallbackContext context)
     {
-        Debug.Log(context);
+        //Debug.Log(context);
         if (context.performed)
         {
             if (!rangeCD && state == State.Normal)

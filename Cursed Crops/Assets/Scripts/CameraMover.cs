@@ -17,6 +17,7 @@ public class CameraMover : MonoBehaviour
 
     private void FixedUpdate()
     {
+        /*
         // Store ther Cam's current position
         Vector3 currCamPos = transform.position;
         
@@ -26,5 +27,6 @@ public class CameraMover : MonoBehaviour
 
         // Slerp Cam to the decided location
         transform.position = Vector3.Slerp(currCamPos, currCamTarget, followSpeed * Time.fixedDeltaTime);
+        */
     }
 }
