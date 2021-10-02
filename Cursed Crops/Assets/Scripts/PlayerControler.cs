@@ -44,6 +44,7 @@ public class PlayerControler : MonoBehaviour
     private GameObject meleeAttackRight;
     private Vector3 movement;
     private Vector3 rollDir;
+    private Vector3 direction;
     [SerializeField] private LayerMask layermask;
     private delegate void Callback();
     private enum State
@@ -130,30 +131,6 @@ public class PlayerControler : MonoBehaviour
 
     // Aiming ========================================================
 
-    private void FaceMouse() // Aiming with the mouse
-    {
-        // Cast a ray from the camera to the ground plane where the mouse is.
-        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        if (Physics.Raycast(ray, out RaycastHit raycastHit, float.MaxValue, layermask))
-        {
-            // Get the mouse position relative to the player
-            Vector3 mousePosition = raycastHit.point;
-            Vector3 direction = new Vector3(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
-
-            // Flip sprite to face the mouse position
-            if (direction.x > 0 && !flipped)
-            {
-                flipped = true;
-                playerSprite.flipX = true;
-            }
-            else if (direction.x < 0 && flipped)
-            {
-                flipped = false;
-                playerSprite.flipX = false;
-            }
-        }
-    }
-
     public void Aim_performed(InputAction.CallbackContext context)
     {
         //Debug.Log(context.action.ToString());
@@ -168,10 +145,34 @@ public class PlayerControler : MonoBehaviour
         }
     }
 
+    private void FaceMouse() // Aiming with the mouse
+    {
+        // Cast a ray from the camera to the ground plane where the mouse is.
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        if (Physics.Raycast(ray, out RaycastHit raycastHit, float.MaxValue, layermask))
+        {
+            // Get the mouse position relative to the player
+            Vector3 mousePosition = raycastHit.point;
+            direction = new Vector3(mousePosition.x - transform.position.x, 0, mousePosition.z - transform.position.z);
+            
+            // Flip sprite to face the mouse position
+            if (direction.x > 0 && !flipped)
+            {
+                flipped = true;
+                playerSprite.flipX = true;
+            }
+            else if (direction.x < 0 && flipped)
+            {
+                flipped = false;
+                playerSprite.flipX = false;
+            }
+        }
+    }
+
     private void FaceController()
     {
         //Vector2 inputVector = playerInputActions.Player.Aim.ReadValue<Vector2>();
-        Vector3 direction = Vector3.right * aimInputVector.x + Vector3.up * -aimInputVector.y;
+        direction = Vector3.right * aimInputVector.x + Vector3.forward * aimInputVector.y;
 
         // Flip sprite to face the mouse position
         if (direction.x > 0 && !flipped)
@@ -312,20 +313,23 @@ public class PlayerControler : MonoBehaviour
                 // Set cooldown true
                 rangeCD = true;
                 //Play animation
-                animator.SetBool("Ranged", true);
+                //animator.SetBool("Ranged", true);
                 StartCoroutine(cooldown(() => { animator.SetBool("Ranged", false); }, 0.2f));
-                // Create bullet
-                GameObject bul = Instantiate(bullet, transform.position, transform.rotation);
-                // Send bullet in correct direction
-                if (flipped) bul.GetComponent<Bullet>().movement = new Vector3(1, 0, 0);
-                else bul.GetComponent<Bullet>().movement = new Vector3(-1, 0, 0);
+                if (direction != new Vector3(0,0,0))
+                {
+                    // Create bullet
+                    GameObject bul = Instantiate(bullet, transform.position, transform.rotation);
+                    // Send bullet in correct direction
+                    Debug.Log(direction);
+                    bul.GetComponent<Bullet>().movement = direction.normalized;
+                }
                 // Start ranged attack cooldown
-                StartCoroutine(cooldown(() => { rangeCD = false; }, 4f));
+                StartCoroutine(cooldown(() => { rangeCD = false; }, 0.4f));
 
             }
             else if (rangeCD && state == State.Normal) // If on cooldown send dubug msg
             {
-                Debug.Log("Range on Cooldown");
+                //Debug.Log("Range on Cooldown");
             }
         }
     }

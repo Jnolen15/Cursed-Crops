@@ -17,13 +17,6 @@ public class Bullet : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (movement.x == 1) sr.flipX = true;
-        else sr.flipX = false;
-    }
-
     private void FixedUpdate()
     {
         rb.MovePosition(transform.position + movement * bulletSpeed * Time.fixedDeltaTime);
