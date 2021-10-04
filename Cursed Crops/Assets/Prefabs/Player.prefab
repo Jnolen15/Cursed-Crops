@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 7937736029672694575}
   - component: {fileID: 7937736029672694562}
   - component: {fileID: 7358247313074556918}
+  - component: {fileID: 1924405865491807640}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -300,6 +301,21 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1924405865491807640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7937736029672694561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84f928e3bf4db6344a746c878fb614ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  harveyAnimOC: {fileID: 22100000, guid: bb293d49b7e61a148b8a9d2df7d4e1d8, type: 2}
+  dougAnimOC: {fileID: 22100000, guid: eebc21670b85aa646a62a3b862d41254, type: 2}
+  selectedCharacter: 1
 --- !u!1 &7937736029740589967
 GameObject:
   m_ObjectHideFlags: 0
