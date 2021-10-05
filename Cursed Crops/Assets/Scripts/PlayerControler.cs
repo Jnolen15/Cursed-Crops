@@ -122,9 +122,14 @@ public class PlayerControler : MonoBehaviour
                 break;
             case State.Rolling:
                 DodgeRoll();
+                animator.SetBool("Dodging", true);
                 float rollSpeedDropMultiplier = 3f;
                 rollSpeed -= rollSpeed * rollSpeedDropMultiplier * Time.deltaTime;
-                if (rollSpeed < moveSpeed) state = State.Normal;
+                if (rollSpeed < moveSpeed)
+                {
+                    state = State.Normal;
+                    animator.SetBool("Dodging", false);
+                }
                 break;
         }
     }
@@ -198,6 +203,17 @@ public class PlayerControler : MonoBehaviour
         //Vector2 inputVector = playerInputActions.Player.Movement.ReadValue<Vector2>();
         movement = new Vector3(moveInputVector.x, 0, moveInputVector.y).normalized;
         rb.MovePosition(transform.position + movement * moveSpeed * Time.fixedDeltaTime);
+
+        //run animation management
+        if (movement.magnitude == 1)
+        {
+            animator.SetBool("Running", true);
+        }
+        else
+        {
+            animator.SetBool("Running", false);
+        }
+
     }
 
     public void Roll_performed(InputAction.CallbackContext context)
@@ -313,8 +329,8 @@ public class PlayerControler : MonoBehaviour
                 // Set cooldown true
                 rangeCD = true;
                 //Play animation
-                //animator.SetBool("Ranged", true);
-                StartCoroutine(cooldown(() => { animator.SetBool("Ranged", false); }, 0.2f));
+                animator.SetBool("Ranged", true);
+                StartCoroutine(cooldown(() => { animator.SetBool("Ranged", false); print("just shot"); }, 0.2f));
                 if (direction != new Vector3(0,0,0))
                 {
                     // Create bullet
