@@ -180,12 +180,12 @@ public class PlayerControler : MonoBehaviour
         direction = Vector3.right * aimInputVector.x + Vector3.forward * aimInputVector.y;
 
         // Flip sprite to face the mouse position
-        if (direction.x > 0 && !flipped)
+        if (direction.x < 0 && !flipped)
         {
             flipped = true;
             playerSprite.flipX = true;
         }
-        else if (direction.x < 0 && flipped)
+        else if (direction.x > 0 && flipped)
         {
             flipped = false;
             playerSprite.flipX = false;
