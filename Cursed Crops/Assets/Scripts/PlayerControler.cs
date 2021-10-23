@@ -205,7 +205,7 @@ public class PlayerControler : MonoBehaviour
         rb.MovePosition(transform.position + movement * moveSpeed * Time.fixedDeltaTime);
 
         //run animation management
-        if (movement.magnitude == 1)
+        if (movement.magnitude > 0)
         {
             animator.SetBool("Running", true);
         }
