@@ -56,7 +56,6 @@ public class PlayerControler : MonoBehaviour
 
     public GameObject bullet;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -81,6 +80,9 @@ public class PlayerControler : MonoBehaviour
         // Player Sprite
         playerSprite = this.transform.GetChild(2).GetChild(0).gameObject.GetComponent<SpriteRenderer>();
         animator = this.transform.GetChild(2).GetChild(0).gameObject.GetComponent<Animator>();
+
+        // Camera functionality
+        Camera.main.GetComponent<CameraMover>().playerTransformsList.Add(this.transform);
     }
 
     private void Awake()
