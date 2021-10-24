@@ -10,7 +10,7 @@ public class CameraMover : MonoBehaviour
     public float camAngel = 0f;
     public float followSpeed = 1f;
     public float minDistToCenter = 4f;
-    public float maxCameraDistMultiply = 2f; //min multply will always be 1x
+    public float zoomOutRate = .5f; //min multply will always be 1x
 
     public List<Transform> playerTransformsList;
 
@@ -47,7 +47,7 @@ public class CameraMover : MonoBehaviour
             }
             else
             {
-                float distMultiply = 1 + ( (distPercentage-1)*maxCameraDistMultiply );
+                float distMultiply = 1 + ( (distPercentage-1)*zoomOutRate);
 
                 currCamTarget = sum - new Vector3(0, 0, camOffset * distMultiply);
                 currCamTarget = new Vector3(currCamTarget.x, camHeight * distMultiply, currCamTarget.z);
