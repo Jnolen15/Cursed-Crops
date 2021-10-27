@@ -13,6 +13,10 @@ public class PlayerControler : MonoBehaviour
     private float rollSpeed;
     private int attackChain = 1;
     public int overAllPlayerDamage = 0;
+    // didn't know where else to put these, need variables for UI - keenan
+    public int money = 0;
+    public int Health = 10;
+    public int MaxHealth = 10;
 
     public float moveSpeed;
 
