@@ -13,6 +13,10 @@ public class PlayerControler : MonoBehaviour
     private float rollSpeed;
     private int attackChain = 1;
     public int overAllPlayerDamage = 0;
+    // didn't know where else to put these, need variables for UI - keenan
+    public int money = 0;
+    public int Health = 10;
+    public int MaxHealth = 10;
 
     public float moveSpeed;
 
@@ -56,7 +60,6 @@ public class PlayerControler : MonoBehaviour
 
     public GameObject bullet;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -81,6 +84,9 @@ public class PlayerControler : MonoBehaviour
         // Player Sprite
         playerSprite = this.transform.GetChild(2).GetChild(0).gameObject.GetComponent<SpriteRenderer>();
         animator = this.transform.GetChild(2).GetChild(0).gameObject.GetComponent<Animator>();
+
+        // Camera functionality
+        Camera.main.GetComponent<CameraMover>().playerTransformsList.Add(this.transform);
     }
 
     private void Awake()
@@ -205,7 +211,7 @@ public class PlayerControler : MonoBehaviour
         rb.MovePosition(transform.position + movement * moveSpeed * Time.fixedDeltaTime);
 
         //run animation management
-        if (movement.magnitude == 1)
+        if (movement.magnitude > 0)
         {
             animator.SetBool("Running", true);
         }
