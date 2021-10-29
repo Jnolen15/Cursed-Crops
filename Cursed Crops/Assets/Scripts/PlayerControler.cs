@@ -13,10 +13,14 @@ public class PlayerControler : MonoBehaviour
     private float rollSpeed;
     private int attackChain = 1;
     public int overAllPlayerDamage = 0;
+<<<<<<< HEAD
     // didn't know where else to put these, need variables for UI - keenan
     public int money = 0;
     public int Health = 10;
     public int MaxHealth = 10;
+=======
+
+>>>>>>> parent of 1f990ca (Merge branch 'main' of https://github.com/Jnolen15/Cursed-Crops)
     public float moveSpeed;
 
     // BOOLS ===========
@@ -61,6 +65,7 @@ public class PlayerControler : MonoBehaviour
 
     public PlayerInput PlayerInput => playerInput;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -85,9 +90,6 @@ public class PlayerControler : MonoBehaviour
         // Player Sprite
         playerSprite = this.transform.GetChild(2).GetChild(0).gameObject.GetComponent<SpriteRenderer>();
         animator = this.transform.GetChild(2).GetChild(0).gameObject.GetComponent<Animator>();
-
-        // Camera functionality
-        Camera.main.GetComponent<CameraMover>().playerTransformsList.Add(this.transform);
     }
 
     private void Awake()
@@ -212,7 +214,7 @@ public class PlayerControler : MonoBehaviour
         rb.MovePosition(transform.position + movement * moveSpeed * Time.fixedDeltaTime);
 
         //run animation management
-        if (movement.magnitude > 0)
+        if (movement.magnitude == 1)
         {
             animator.SetBool("Running", true);
         }
