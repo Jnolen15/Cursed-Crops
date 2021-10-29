@@ -184,12 +184,16 @@ MonoBehaviour:
   coolDownTimer: 0
   rollSpeedMax: 24
   overAllPlayerDamage: 0
+  money: 0
+  Health: 10
+  MaxHealth: 10
   moveSpeed: 6
   useControler: 0
-  layermask:
+  ground:
     serializedVersion: 2
     m_Bits: 8
   bullet: {fileID: 6242655706651345086, guid: dd76d198cb4f6304f93a7e3ef466c390, type: 3}
+  playerInput: {fileID: 7358247313074556918}
 --- !u!114 &7358247313074556918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,6 +300,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 063adcea-5308-4a76-9dbf-c0d3ffd4697e
     m_ActionName: Player/Aim[/DualShock4GamepadHID/rightStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b26d2bca-43a7-4e4b-9044-38459a1ce570
+    m_ActionName: Menu/Nothing[/Keyboard/p]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: Player
