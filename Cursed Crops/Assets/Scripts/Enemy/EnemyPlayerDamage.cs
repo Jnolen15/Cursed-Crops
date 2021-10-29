@@ -13,17 +13,18 @@ public class EnemyPlayerDamage : MonoBehaviour
     private bool hitAgain = false;
     private bool alphaChekcer = false;
     public bool playerIsStun = false;
-
+    private PlayerControler playerMaxHealth;
     // Start is called before the first frame update
     void Start()
     {
         playerSprite = gameObject.transform.Find("PlayerPivot").gameObject;
+        playerMaxHealth = gameObject.GetComponent<PlayerControler>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (playerHealth == 0)
+        if (playerMaxHealth.MaxHealth == 0)
         {
             alphaChekcer = true;
             StartCoroutine(stun());
@@ -42,16 +43,16 @@ public class EnemyPlayerDamage : MonoBehaviour
     }
     private IEnumerator iframes()
     {
-        if (playerHealth > 0)
+        if (playerMaxHealth.MaxHealth > 0)
         {
             var trans = 0.5f;
             var col = playerSprite.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color;
             col.a = trans;
             playerSprite.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
             isItHit = true;
-            playerHealth -= 5;
+            playerMaxHealth.MaxHealth -= 5;
             // process pre-yield
-            Debug.Log(playerHealth);
+            Debug.Log(playerMaxHealth.MaxHealth);
             yield return new WaitForSeconds(5.0f);
             // process post-yield
             if (!alphaChekcer)

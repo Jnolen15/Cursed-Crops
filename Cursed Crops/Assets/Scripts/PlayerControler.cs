@@ -17,7 +17,6 @@ public class PlayerControler : MonoBehaviour
     public int money = 0;
     public int Health = 10;
     public int MaxHealth = 10;
-
     public float moveSpeed;
 
     // BOOLS ===========
@@ -49,7 +48,7 @@ public class PlayerControler : MonoBehaviour
     private Vector3 movement;
     private Vector3 rollDir;
     private Vector3 direction;
-    [SerializeField] private LayerMask layermask;
+    [SerializeField] private LayerMask ground;
     private delegate void Callback();
     private enum State
     {
@@ -57,8 +56,10 @@ public class PlayerControler : MonoBehaviour
         Rolling,
     }
     private State state;
-
     public GameObject bullet;
+    [SerializeField] private PlayerInput playerInput = null;
+
+    public PlayerInput PlayerInput => playerInput;
 
     // Start is called before the first frame update
     void Start()
@@ -160,7 +161,7 @@ public class PlayerControler : MonoBehaviour
     {
         // Cast a ray from the camera to the ground plane where the mouse is.
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        if (Physics.Raycast(ray, out RaycastHit raycastHit, float.MaxValue, layermask))
+        if (Physics.Raycast(ray, out RaycastHit raycastHit, float.MaxValue, ground))
         {
             // Get the mouse position relative to the player
             Vector3 mousePosition = raycastHit.point;

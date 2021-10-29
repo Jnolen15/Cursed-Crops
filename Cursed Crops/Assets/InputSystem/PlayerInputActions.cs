@@ -270,6 +270,33 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Menu"",
+            ""id"": ""17182b18-4fcd-4818-9da2-7b0378fb7c79"",
+            ""actions"": [
+                {
+                    ""name"": ""Nothing"",
+                    ""type"": ""Button"",
+                    ""id"": ""b26d2bca-43a7-4e4b-9044-38459a1ce570"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""b72ae699-da59-4892-8e31-4c625dd99dc7"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Nothing"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -309,6 +336,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_Player_Roll = m_Player.FindAction("Roll", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
+        // Menu
+        m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
+        m_Menu_Nothing = m_Menu.FindAction("Nothing", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -419,6 +449,39 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Menu
+    private readonly InputActionMap m_Menu;
+    private IMenuActions m_MenuActionsCallbackInterface;
+    private readonly InputAction m_Menu_Nothing;
+    public struct MenuActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public MenuActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Nothing => m_Wrapper.m_Menu_Nothing;
+        public InputActionMap Get() { return m_Wrapper.m_Menu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MenuActions set) { return set.Get(); }
+        public void SetCallbacks(IMenuActions instance)
+        {
+            if (m_Wrapper.m_MenuActionsCallbackInterface != null)
+            {
+                @Nothing.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnNothing;
+                @Nothing.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnNothing;
+                @Nothing.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnNothing;
+            }
+            m_Wrapper.m_MenuActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Nothing.started += instance.OnNothing;
+                @Nothing.performed += instance.OnNothing;
+                @Nothing.canceled += instance.OnNothing;
+            }
+        }
+    }
+    public MenuActions @Menu => new MenuActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -444,5 +507,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnRoll(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
+    }
+    public interface IMenuActions
+    {
+        void OnNothing(InputAction.CallbackContext context);
     }
 }
