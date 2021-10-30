@@ -23,9 +23,9 @@ public class UI_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PC == null && GameObject.Find("Player(Clone)") != null)
+        if (PC == null && GameObject.Find("Player") != null)
         {
-            PC = GameObject.Find("Player(Clone)").GetComponent<PlayerControler>();
+            PC = GameObject.Find("Player").GetComponent<PlayerControler>();
             // also need to catch the error created by not finding a player initially
             p1UI.SetActive(true);
         }
@@ -36,7 +36,7 @@ public class UI_Manager : MonoBehaviour
             // managing  currency text
             currencyText.text = "Monies: " + PC.money;
             // managing health bar
-            HealthBar.value = PC.Health / PC.MaxHealth;
+            HealthBar.value = PC.health / PC.maxHealth;
         }
     }
 

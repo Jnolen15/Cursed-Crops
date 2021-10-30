@@ -13,8 +13,10 @@ public class PlayerControler : MonoBehaviour
     private float rollSpeed;
     private int attackChain = 1;
     public int overAllPlayerDamage = 0;
-
     public float moveSpeed;
+    public int money = 0;
+    public int health = 10;
+    public int maxHealth = 10;
 
     // BOOLS ===========
     private bool flipped = false;
