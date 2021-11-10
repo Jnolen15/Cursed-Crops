@@ -133,7 +133,7 @@ public class EnemyToPlayer : MonoBehaviour
         Vector3 currentWaypoint = path[0];
         int lengthOfCurrent = path.Length;
         int checker = 0;
-        print(lengthOfCurrent);
+        //print(lengthOfCurrent);
         while (true)
         {
             if (transform.position == currentWaypoint)

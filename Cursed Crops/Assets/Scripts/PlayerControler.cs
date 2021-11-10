@@ -19,10 +19,10 @@ public class PlayerControler : MonoBehaviour
     public int maxHealth = 10;
 
     // BOOLS ===========
-    private bool flipped = false;
     private bool attackCD = false;
     private bool rangeCD = false;
 
+    public bool flipped = false;
     public bool useControler;               // If using controller changes aiming
 
     // STRINGS ===========
@@ -247,7 +247,7 @@ public class PlayerControler : MonoBehaviour
                     attackChain = 1;
                     animator.SetBool("Melee", true);
                     DoAttack();
-                    Debug.Log("Attack 1");
+                    //Debug.Log("Attack 1");
 
                 }
                 else if (coolDownTimer > attackDuration) // If attack is on cooldown, subsiquent atacks chain
@@ -258,7 +258,7 @@ public class PlayerControler : MonoBehaviour
                         attackChain = 2;
                         animator.SetBool("Melee", true);
                         DoAttack();
-                        Debug.Log("Attack 2");
+                        //Debug.Log("Attack 2");
                     }
                     else if (attackChain == 2)
                     {
@@ -266,11 +266,11 @@ public class PlayerControler : MonoBehaviour
                         attackChain = 3;
                         animator.SetBool("Melee", true);
                         DoAttack();
-                        Debug.Log("Attack 3");
+                        //Debug.Log("Attack 3");
                     }
                     else if (attackChain == 3)
                     {
-                        Debug.Log("Attack chain over");
+                        //Debug.Log("Attack chain over");
                     }
                 }
             }
