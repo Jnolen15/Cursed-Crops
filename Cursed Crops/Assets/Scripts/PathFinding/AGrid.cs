@@ -20,6 +20,11 @@ public class AGrid : MonoBehaviour
         CreateGrid();
     }
 
+    private void Update()
+    {
+        CreateGrid();
+    }
+
     public int MaxSize
     {
         get
