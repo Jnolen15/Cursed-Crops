@@ -13,6 +13,8 @@ public class BuildingSystem : MonoBehaviour
 
     // Public variables
     public float gridSize = 2;
+    public float gridOffsetX = 0.5f;
+    public float gridOffsetZ = 0.5f;
 
     private void Awake()
     {
@@ -98,8 +100,12 @@ public class BuildingSystem : MonoBehaviour
         float zPos = Mathf.Round(playerPos.z);
         zPos -= (zPos % gridSize);
 
+        // Add offset
+        xPos += gridOffsetX;
+        zPos += gridOffsetZ;
+
         // Add to the X so its in front of the player
-        if(pc.flipped)
+        if (pc.flipped)
             xPos -= (gridSize * 2);
         if(!pc.flipped)
             xPos += (gridSize);
