@@ -8,6 +8,7 @@ public class EnemyControler : MonoBehaviour
     public float overalldamage = 0;
     private Renderer rend;
     private SpriteRenderer sr;
+    private ItemDropper itemDropper; 
 
     // Start is called before the first frame update
     void Start()
@@ -15,7 +16,7 @@ public class EnemyControler : MonoBehaviour
         rend = gameObject.GetComponent<Renderer>();
         //sr = this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
         sr = this.transform.GetComponentInChildren<SpriteRenderer>();
-
+        itemDropper = GetComponent<ItemDropper>();
     }
 
     public void takeDamage(int dmg)
@@ -45,6 +46,7 @@ public class EnemyControler : MonoBehaviour
 
     private void death()
     {
-        Destroy(gameObject);
+        itemDropper.DropItem(transform.position);
+        Destroy(this.gameObject);
     }
 }

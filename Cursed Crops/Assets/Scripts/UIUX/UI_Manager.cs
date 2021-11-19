@@ -48,8 +48,12 @@ public class UI_Manager : MonoBehaviour
         if (PC != null)
         {
             // managing  currency text
-            currencyText.text = "Monies: " + PC.money;
-            vegetableText.text = "Monies: " + PC.money;
+            float currMoney = PC.gameObject.GetComponent<PlayerResourceManager>().getMoney();
+            float currRedCrops = PC.gameObject.GetComponent<PlayerResourceManager>().getRedCrops();
+            float currPurpleCrops = PC.gameObject.GetComponent<PlayerResourceManager>().getPurpleCrops();
+
+            currencyText.text = "Money: " + currMoney;
+            vegetableText.text = "R: " + currRedCrops + ", P: " + currPurpleCrops;
             // managing health bar
             HealthBar.value = EPD.playerHealth / EPD.reviveHealth;
         }

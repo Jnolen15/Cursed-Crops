@@ -352,6 +352,15 @@ public class PlayerControler : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        // if colliding with the farm house, bank items
+        if (other.gameObject.tag == "MainObjective")
+        {
+            GetComponent<PlayerResourceManager>().BankItems();
+        }
+    }
+
     // Misc =================================
 
     IEnumerator cooldown(Callback callback, float time)
