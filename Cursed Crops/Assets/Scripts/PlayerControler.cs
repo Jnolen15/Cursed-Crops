@@ -332,13 +332,13 @@ public class PlayerControler : MonoBehaviour
                 rangeCD = true;
                 //Play animation
                 animator.SetBool("Ranged", true);
-                StartCoroutine(cooldown(() => { animator.SetBool("Ranged", false); print("just shot"); }, 0.2f));
+                StartCoroutine(cooldown(() => { animator.SetBool("Ranged", false);}, 0.2f));
                 if (direction != new Vector3(0,0,0))
                 {
                     // Create bullet
                     GameObject bul = Instantiate(bullet, transform.position, transform.rotation);
                     // Send bullet in correct direction
-                    Debug.Log(direction);
+                    //Debug.Log(direction);
                     bul.GetComponent<Bullet>().movement = direction.normalized;
                 }
                 // Start ranged attack cooldown
