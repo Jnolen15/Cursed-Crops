@@ -37,7 +37,7 @@ public class EnemyToObjective : MonoBehaviour
         if (pathSuccessful)
         {
             path = newPath;
-            //StopCoroutine("FollowPath");
+            StopCoroutine("FollowPath");
             StartCoroutine("FollowPath");
         }
     }
