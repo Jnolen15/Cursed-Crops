@@ -279,16 +279,18 @@ public class PlayerControler : MonoBehaviour
 
     private void DoAttack()
     {
-        if (!flipped) // Left attack hit detection
+        if (flipped) // Left attack hit detection
         {
             Collider[] cols = Physics.OverlapBox(meleeAttackLeft.transform.position, meleeAttackLeft.transform.localScale / 2, 
                                                     meleeAttackLeft.transform.rotation, LayerMask.GetMask("Enemies"));
+            Debug.Log(cols.Length);
             DamageEnemies(cols);
         }
         else  // Right attack hit detection
         {
             Collider[] cols = Physics.OverlapBox(meleeAttackRight.transform.position, meleeAttackRight.transform.localScale / 2,
                                                             meleeAttackRight.transform.rotation, LayerMask.GetMask("Enemies"));
+            Debug.Log(cols.Length);
             DamageEnemies(cols);
         }
     }
@@ -297,7 +299,7 @@ public class PlayerControler : MonoBehaviour
     {
         foreach (Collider c in cols)
         {
-            //Debug.Log(c.name);
+            Debug.Log(c.name);
             EnemyControler enemyControler = c.GetComponent<EnemyControler>();
 
             if (c.gameObject.tag == "Enemy")

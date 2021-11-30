@@ -29,7 +29,7 @@ public class Bullet : MonoBehaviour
         {
             EnemyControler enemyControler = other.gameObject.GetComponent<EnemyControler>();
             enemyControler.takeDamage(5);
-            Debug.Log("Hit Enemy");
+            //Debug.Log("Hit Enemy");
         }
     }
 }
