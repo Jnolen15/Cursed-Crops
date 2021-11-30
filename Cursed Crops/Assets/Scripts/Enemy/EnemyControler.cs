@@ -38,9 +38,10 @@ public class EnemyControler : MonoBehaviour
     IEnumerator hit(Renderer renderer)
     {
         //renderer.material.SetColor("_Color", Color.red);
+        Color prevColor = sr.color;
         sr.color = Color.red;
         yield return new WaitForSeconds(0.2f);
-        sr.color = Color.white;
+        sr.color = prevColor;
         //renderer.material.SetColor("_Color", Color.white);
     }
 

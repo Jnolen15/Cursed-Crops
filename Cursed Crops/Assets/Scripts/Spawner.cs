@@ -6,6 +6,7 @@ public class Spawner : MonoBehaviour
 {
     // Public variables
     public string plantName;
+    [Header("Either: Morning, Afternoon, Night")]
     public string germinationPeriod; //Either Morning, Afternoon, or Night
     public GameObject enemyPrefab;
     public float numToSpawn = 1; // How many enemies should be made each time this spawner spawns
