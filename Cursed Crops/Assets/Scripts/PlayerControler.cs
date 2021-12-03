@@ -356,8 +356,11 @@ public class PlayerControler : MonoBehaviour
                 // Set cooldown true
                 rangeCD = true;
                 //Play animation
-                animator.SetBool("Ranged", true);
-                StartCoroutine(cooldown(() => { animator.SetBool("Ranged", false);}, 0.2f));
+                if(animator != null)
+                {
+                    animator.SetBool("Ranged", true);
+                    StartCoroutine(cooldown(() => { animator.SetBool("Ranged", false); }, 0.2f));
+                }
                 if (direction != new Vector3(0,0,0))
                 {
                     // Create bullet
