@@ -8,17 +8,21 @@ public class Turret : MonoBehaviour
     public Transform enemies;
     public Transform[] listOfenemies;
     private Vector3 direction;
+    private Vector3 flipDirection;
+    private Transform enemyPosition;
     public bool shooting = false;
+    private bool flipped = false;
+    private SpriteRenderer turretSprite;
     // Start is called before the first frame update
     void Start()
     {
-        
+        turretSprite = this.transform.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
 
-        
+        SpriteFlip();
     }
 
     private void OnTriggerStay(Collider other)
@@ -44,7 +48,27 @@ public class Turret : MonoBehaviour
         foreach (Transform c in enemies)
         {
             direction = new Vector3(c.position.x - transform.position.x, 0, c.position.z - transform.position.z);
+            enemyPosition = c.transform;
             
+        }
+    }
+
+    private void SpriteFlip()
+    {
+        if(enemyPosition != null)
+        {
+            flipDirection = new Vector3(enemyPosition.position.x - transform.position.x, 0, enemyPosition.position.z - transform.position.z);
+            if(flipDirection.x > 0 && flipped)
+            {
+                flipped = false;
+                turretSprite.flipX = false;
+
+            }
+            else if(flipDirection.x <= 0 && !flipped)
+            {
+                flipped = true;
+                turretSprite.flipX = true;
+            }
         }
     }
 
