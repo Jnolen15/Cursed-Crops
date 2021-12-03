@@ -266,8 +266,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackCDTimer: 1
   attackDuration: 0.3
-  coolDownTimer: 0
-  rollSpeedMax: 24
+  rollSpeedMax: 30
+  rollSpeedFallofDelay: 0.05
+  rollCDTime: 1
+  rangeCDTime: 0.4
   overAllPlayerDamage: 0
   moveSpeed: 6
   money: 0
@@ -493,6 +495,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e60d2658b3407424094b50a60cf9fc34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  redCropsValue: 5
+  purpleCropsValue: 10
 --- !u!1 &7937736029740589967
 GameObject:
   m_ObjectHideFlags: 0

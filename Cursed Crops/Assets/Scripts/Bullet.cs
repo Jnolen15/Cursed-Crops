@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
     private int bulletSpeed = 15;
 
     public Vector3 movement;
+    public float range = 1f;
     
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,7 @@ public class Bullet : MonoBehaviour
     private void FixedUpdate()
     {
         rb.MovePosition(transform.position + movement * bulletSpeed * Time.fixedDeltaTime);
+        Destroy(this.gameObject, range);
     }
 
     private void OnTriggerEnter(Collider other)

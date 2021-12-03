@@ -8,10 +8,15 @@ public class PlayerControler : MonoBehaviour
     // FLOATS / INTS ===========
     [SerializeField] private float attackCDTimer = 1;
     [SerializeField] private float attackDuration = 0.2f;
-    [SerializeField] private float coolDownTimer;
-    [SerializeField] private float rollSpeedMax = 100;
-    private float rollSpeed;
+    [SerializeField] private float rollSpeedMax = 24;
+    [SerializeField] private float rollSpeedFallofDelay = 0.3f;
+    [SerializeField] private float rollCDTime = 0.3f;
+    [SerializeField] private float rangeCDTime = 0.4f;
     private int attackChain = 1;
+    private float attackcoolDown;
+    private float rollSpeed;
+    private float rollSpeedDropMultiplier;
+
     public int overAllPlayerDamage = 0;
     public float moveSpeed;
     public int money = 0;
@@ -21,6 +26,8 @@ public class PlayerControler : MonoBehaviour
     // BOOLS ===========
     private bool attackCD = false;
     private bool rangeCD = false;
+    private bool rollCD = false;
+    private bool startRollFallOff = false;
 
     public bool flipped = false;
     public bool useControler;               // If using controller changes aiming
@@ -78,6 +85,8 @@ public class PlayerControler : MonoBehaviour
          * So instead I just have one attack for each side that
          * are switched based on duirection faced.
          * Then I just flip the players sprite on the spriterender.
+         * 
+         * > Could just have it move sides instead of flip.
          */
 
         // Player Sprite
@@ -107,9 +116,9 @@ public class PlayerControler : MonoBehaviour
             else FaceController();
         }
 
-        if (coolDownTimer < attackCDTimer) coolDownTimer += Time.deltaTime; // Attack cooldown
+        if (attackcoolDown < attackCDTimer) attackcoolDown += Time.deltaTime; // Attack cooldown
 
-        if (coolDownTimer > attackDuration) animator.SetBool("Melee", false); // Reset attack animation
+        if (attackcoolDown > attackDuration) animator.SetBool("Melee", false); // Reset attack animation
     }
 
     // Called every fixed frame-rate frame. Better for physics stuff
@@ -125,12 +134,23 @@ public class PlayerControler : MonoBehaviour
             case State.Rolling:
                 DodgeRoll();
                 animator.SetBool("Dodging", true);
-                float rollSpeedDropMultiplier = 3f;
-                rollSpeed -= rollSpeed * rollSpeedDropMultiplier * Time.deltaTime;
-                if (rollSpeed < moveSpeed)
+                // Roll speed is constant at the start, then falls off untill just below move speed
+                if (!startRollFallOff)
                 {
-                    state = State.Normal;
-                    animator.SetBool("Dodging", false);
+                    startRollFallOff = true;
+                    StartCoroutine(cooldown(() => { rollSpeedDropMultiplier = 4f; }, rollSpeedFallofDelay));
+                }
+                
+                if (rollSpeedDropMultiplier > 0)
+                {
+                    rollSpeed -= rollSpeed * rollSpeedDropMultiplier * Time.deltaTime;
+                    if (rollSpeed <= 3.5f)
+                    {
+                        state = State.Normal;
+                        animator.SetBool("Dodging", false);
+                        startRollFallOff = false;
+                        rollSpeedDropMultiplier = 0f;
+                    }
                 }
                 break;
         }
@@ -223,8 +243,13 @@ public class PlayerControler : MonoBehaviour
         //Debug.Log(context);
         if (context.performed)
         {
-            state = State.Rolling;
-            rollSpeed = rollSpeedMax;
+            if (movement.magnitude == 1 && !rollCD) // Only roll if moving and not on CD
+            {
+                state = State.Rolling;
+                rollSpeed = rollSpeedMax;
+                rollCD = true;
+                StartCoroutine(cooldown(() => { rollCD = false; }, rollCDTime));
+            }
         }
     }
 
@@ -241,20 +266,20 @@ public class PlayerControler : MonoBehaviour
         {
             if (!attackCD && state == State.Normal)
             {
-                if (coolDownTimer > attackCDTimer) // If attack isnt on cooldown
+                if (attackcoolDown > attackCDTimer) // If attack isnt on cooldown
                 {
-                    coolDownTimer = 0;
+                    attackcoolDown = 0;
                     attackChain = 1;
                     animator.SetBool("Melee", true);
                     DoAttack();
                     //Debug.Log("Attack 1");
 
                 }
-                else if (coolDownTimer > attackDuration) // If attack is on cooldown, subsiquent atacks chain
+                else if (attackcoolDown > attackDuration) // If attack is on cooldown, subsiquent atacks chain
                 {
                     if (attackChain == 1)
                     {
-                        coolDownTimer = 0;
+                        attackcoolDown = 0;
                         attackChain = 2;
                         animator.SetBool("Melee", true);
                         DoAttack();
@@ -262,7 +287,7 @@ public class PlayerControler : MonoBehaviour
                     }
                     else if (attackChain == 2)
                     {
-                        coolDownTimer = 0;
+                        attackcoolDown = 0;
                         attackChain = 3;
                         animator.SetBool("Melee", true);
                         DoAttack();
@@ -283,14 +308,12 @@ public class PlayerControler : MonoBehaviour
         {
             Collider[] cols = Physics.OverlapBox(meleeAttackLeft.transform.position, meleeAttackLeft.transform.localScale / 2, 
                                                     meleeAttackLeft.transform.rotation, LayerMask.GetMask("Enemies"));
-            Debug.Log(cols.Length);
             DamageEnemies(cols);
         }
         else  // Right attack hit detection
         {
             Collider[] cols = Physics.OverlapBox(meleeAttackRight.transform.position, meleeAttackRight.transform.localScale / 2,
                                                             meleeAttackRight.transform.rotation, LayerMask.GetMask("Enemies"));
-            Debug.Log(cols.Length);
             DamageEnemies(cols);
         }
     }
@@ -344,7 +367,7 @@ public class PlayerControler : MonoBehaviour
                     bul.GetComponent<Bullet>().movement = direction.normalized;
                 }
                 // Start ranged attack cooldown
-                StartCoroutine(cooldown(() => { rangeCD = false; }, 0.4f));
+                StartCoroutine(cooldown(() => { rangeCD = false; }, rangeCDTime));
 
             }
             else if (rangeCD && state == State.Normal) // If on cooldown send dubug msg
@@ -368,9 +391,6 @@ public class PlayerControler : MonoBehaviour
     IEnumerator cooldown(Callback callback, float time)
     {
         yield return new WaitForSeconds(time);
-        if (callback != null)
-        {
-            callback();
-        }
+        callback?.Invoke();
     }
 }
