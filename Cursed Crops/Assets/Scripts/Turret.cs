@@ -77,7 +77,7 @@ public class Turret : MonoBehaviour
         GameObject bul = Instantiate(bullet, transform.position, transform.rotation);
         // Send bullet in correct direction
         //Debug.Log(direction);
-        bul.GetComponent<turretBullet>().movement = direction.normalized;
+        bul.GetComponent<Bullet>().movement = direction.normalized;
         yield return new WaitForSeconds(1.0f);
         shooting = false;
     }

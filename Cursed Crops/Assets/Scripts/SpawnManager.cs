@@ -16,7 +16,7 @@ public class SpawnManager : MonoBehaviour
     // For rn spawner works with an array. But change to a list when planting phase is in
     // Because it will be easier to dynamically add and remove to
     public static List<GameObject> spawners = new List<GameObject>();
-    public GameObject[] testing;
+    public GameObject[] spawnArray;
 
     void Update()
     {
@@ -37,49 +37,70 @@ public class SpawnManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // If morning phase
+        // Morning phase
         if (phase == "Morning")
-            Spawn("Morning", "Pre");
+        {
+            // Initial Burst Spawn
+            if (previousphase == "Pre")
+            {
+                previousphase = phase;
+                BurstSpawn("Morning");
+            }
+            WaveSpawn("Morning", 1f, "Half");
+        }
+        // Afternoon phase
         else if (phase == "Afternoon")
-            Spawn("Afternoon", "Morning");
+        {
+            if (previousphase == "Morning")
+            {
+                previousphase = phase;
+                BurstSpawn("Afternoon");
+            }
+            WaveSpawn("Afternoon", 1f, "Half");
+            WaveSpawn("Morning", 1.5f, "Half");
+        }
+        // Night phase
         else if (phase == "Night")
-            Spawn("Night", "Afternoon");
+        {
+            if (previousphase == "Afternoon")
+            {
+                previousphase = phase;
+                BurstSpawn("Night");
+            }
+            WaveSpawn("Night", 1f, "Half");
+            WaveSpawn("Afternoon", 1.5f, "Half");
+            WaveSpawn("Morning", 1.75f, "Half");
+        }
     }
 
-    private void Spawn(string currnetPhase, string prevPase)
+    // Spawn a burst of enemies from all sources
+    private void BurstSpawn(string currnetPhase)
     {
-        // Loop through spawners, activate ones with morning germination
-        for (int i = 0; i < testing.Length; i++)
+        for (int i = 0; i < spawnArray.Length; i++)
         {
-            if (testing[i].GetComponent<Spawner>().germinationPeriod == phase)
+            Spawner currentSpawner = spawnArray[i].GetComponent<Spawner>();
+            if (currentSpawner.germinationPeriod == currnetPhase)
             {
-                // If previous phase is the phase before phase. AKA Morning just started
-                // Burst spawn at all Morning crops
-                if (previousphase == prevPase)
+                currentSpawner.Spawn("Full");
+                currentSpawner.lastTimeSpawned = harvestTimer;
+            }
+        }
+    }
+
+    // Spawn enemies as the wave progresses. Time between spawns is measured by a spawners potency
+    private void WaveSpawn(string currnetPhase, float addedDelay, string type)
+    {
+        for (int i = 0; i < spawnArray.Length; i++)
+        {
+            Spawner currentSpawner = spawnArray[i].GetComponent<Spawner>();
+            if (currentSpawner.germinationPeriod == currnetPhase)
+            {
+                if ((currentSpawner.lastTimeSpawned + (currentSpawner.potency * addedDelay)) <= harvestTimer)
                 {
-                    testing[i].GetComponent<Spawner>().Spawn("Full");
-                    Debug.Log("Burst Spawn");
-                }
-                // It is currently Morning phase
-                // Slowly spawn more enemies from crops
-                else if (previousphase == phase)
-                {
-                    float randNum = Random.Range(0, 1000);
-                    if (testing[i].GetComponent<Spawner>().potency < randNum)
-                    {
-                        Debug.Log("random Spawn" + randNum);
-                        testing[i].GetComponent<Spawner>().Spawn("Half");
-                    }
-                }
-                else
-                {
-                    Debug.LogError("previousphase did something wack: " + previousphase);
+                    currentSpawner.Spawn(type);
+                    currentSpawner.lastTimeSpawned = harvestTimer;
                 }
             }
         }
-
-        // Update previous phase
-        if (previousphase == prevPase)
-            previousphase = phase;
     }
 }

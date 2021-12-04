@@ -10,7 +10,9 @@ public class Bullet : MonoBehaviour
 
     public Vector3 movement;
     public float range = 1f;
-    
+    public int damage = 5;
+    public bool piercing = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +32,9 @@ public class Bullet : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             EnemyControler enemyControler = other.gameObject.GetComponent<EnemyControler>();
-            enemyControler.takeDamage(5);
+            enemyControler.takeDamage(damage);
+            if(!piercing)
+                Destroy(gameObject);
             //Debug.Log("Hit Enemy");
         }
     }

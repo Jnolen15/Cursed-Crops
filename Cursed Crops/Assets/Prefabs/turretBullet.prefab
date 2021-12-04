@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5506611251872420289}
   - component: {fileID: 6635659750076622743}
   - component: {fileID: 4224075844236355666}
-  - component: {fileID: -6926226374822486496}
+  - component: {fileID: 8035860228453567761}
   m_Layer: 0
   m_Name: turretBullet
   m_TagString: Untagged
@@ -103,18 +103,18 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: e5db65ab7bdb9024ca2cf3c865616163, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4b75bc325e38da84c8199005ff8c7dd9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-6926226374822486496
+--- !u!114 &8035860228453567761
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,7 +123,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6242655706651345086}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bb05f50d5555ee41b1f373f1cab6a97, type: 3}
+  m_Script: {fileID: 11500000, guid: f565cfc9745652147a37a6214e1c72c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {x: 0, y: 0, z: 0}
+  range: 1
+  damage: 5
+  piercing: 0

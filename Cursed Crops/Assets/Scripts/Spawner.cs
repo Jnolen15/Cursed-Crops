@@ -6,12 +6,14 @@ public class Spawner : MonoBehaviour
 {
     // Public variables
     public string plantName;
-    [Header("Either: Morning, Afternoon, Night")]
-    public string germinationPeriod; //Either Morning, Afternoon, or Night
+    [Header("Germination Period: Morning, Afternoon, Night")]
+    public string germinationPeriod;
     public GameObject enemyPrefab;
     public float numToSpawn = 1; // How many enemies should be made each time this spawner spawns
-    public int potency; // Likelyhood of spawning passivly as the wave progresses. Lower = more liekly
+    [Header("Potency: Minimum time between spawns")]
+    public float potency = 10f;
     public int spawnRadius = 2; // X and Z limit to where the enemys spawn
+    public float lastTimeSpawned = 0f; // X and Z limit to where the enemys spawn
 
     public void Spawn(string type)
     {
