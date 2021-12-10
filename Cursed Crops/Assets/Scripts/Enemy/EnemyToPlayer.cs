@@ -21,6 +21,7 @@ public class EnemyToPlayer : MonoBehaviour
     private bool playerinbound = true;
     PathFinding pathFinder;
     Transform closestPlayer;
+    Transform oldTarget;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +38,7 @@ public class EnemyToPlayer : MonoBehaviour
         //Transform closestPlayer = FindClosestPlayer(listOfPlayers);
         //pathFinder.StartFindPath(transform.position, closestPlayer.position);
         //PathRequestManager.RequestPath(transform.position, closestPlayer.position, OnPathFound);
+        oldTarget = mainTarget;
         StartCoroutine("UpdatePath");
 
 
@@ -69,7 +71,13 @@ public class EnemyToPlayer : MonoBehaviour
     {
         // new multiplayer chase code
         
-        //Transform closestPlayer = FindClosestPlayer(listOfPlayers);
+        Transform closestPlayer = FindClosestPlayer(listOfPlayers);
+        if (oldTarget != closestPlayer && oldTarget != null && closestPlayer != null)
+        {
+            
+            oldTarget = closestPlayer;
+            StartCoroutine("UpdatePath");
+        }
         //PathRequestManager.RequestPath(this.transform.position, closestPlayer.position, OnPathFound);
         /*if (targetChange)
         {

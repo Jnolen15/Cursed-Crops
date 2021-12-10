@@ -13,6 +13,9 @@ public class Turret : MonoBehaviour
     public bool shooting = false;
     private bool flipped = false;
     private SpriteRenderer turretSprite;
+    public Sprite innitialSprite;
+    public Sprite shootingSprite;
+    public Sprite reloadingSprite;
     // Start is called before the first frame update
     void Start()
     {
@@ -74,11 +77,15 @@ public class Turret : MonoBehaviour
 
     IEnumerator shoot()
     {
+        turretSprite.sprite = shootingSprite;
         GameObject bul = Instantiate(bullet, transform.position, transform.rotation);
         // Send bullet in correct direction
         //Debug.Log(direction);
         bul.GetComponent<Bullet>().movement = direction.normalized;
         yield return new WaitForSeconds(1.0f);
+        turretSprite.sprite = reloadingSprite;
+        yield return new WaitForSeconds(1.0f);
+        turretSprite.sprite = innitialSprite;
         shooting = false;
     }
 }
