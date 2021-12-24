@@ -81,12 +81,22 @@ public class RangeEnemy : MonoBehaviour
             
             StartCoroutine("UpdatePath");
         }
-        if (Vector3.Distance(closestPlayer.position, transform.position) < rangeDistance && !shooting)
+        if (Vector3.Distance(closestPlayer.position, transform.position) < rangeDistance)
         {
             Debug.Log("hello are you shooting");
-            shooting = true;
-            direction = new Vector3(closestPlayer.position.x - transform.position.x, 0, closestPlayer.position.z - transform.position.z);
-            StartCoroutine(shoot());
+            
+            enemySpeed = 0;
+            
+            if (!shooting)
+            {
+                shooting = true;
+                direction = new Vector3(closestPlayer.position.x - transform.position.x, 0, closestPlayer.position.z - transform.position.z);
+                StartCoroutine(shoot());
+            }
+        }
+        else
+        {
+            enemySpeed = originalSpeed;
         }
 
 
@@ -193,9 +203,9 @@ public class RangeEnemy : MonoBehaviour
         //Debug.Log(direction);
         bul.GetComponent<Bullet>().movement = direction.normalized;
         yield return new WaitForSeconds(1.0f);
-        enemySpeed = 0f;
+        //enemySpeed = 0f;
         yield return new WaitForSeconds(1.0f);
-        enemySpeed = originalSpeed;
+        //enemySpeed = originalSpeed;
         shooting = false;
     }
 }
