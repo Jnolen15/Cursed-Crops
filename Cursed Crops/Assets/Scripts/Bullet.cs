@@ -35,7 +35,7 @@ public class Bullet : MonoBehaviour
             enemyControler.takeDamage(damage);
             if(!piercing)
                 Destroy(gameObject);
-            //Debug.Log("Hit Enemy");
+            Debug.Log("Hit Enemy");
         }
         // adding line for enemy bullets
         else if(gameObject.tag == "enemyBullet" && other.gameObject.tag == "Player")
