@@ -29,13 +29,22 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //Debug.Log("Hit " + other.gameObject.tag);
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy" && gameObject.tag != "enemyBullet")
         {
             EnemyControler enemyControler = other.gameObject.GetComponent<EnemyControler>();
             enemyControler.takeDamage(damage);
             if(!piercing)
                 Destroy(gameObject);
             //Debug.Log("Hit Enemy");
+        }
+        // adding line for enemy bullets
+        else if(gameObject.tag == "enemyBullet" && other.gameObject.tag == "Player")
+        {
+            other.gameObject.GetComponent<EnemyPlayerDamage>().playerHealth -= 5;
+        }
+        else if (gameObject.tag == "enemyBullet" && other.gameObject.tag == "MainObjective")
+        {
+            other.gameObject.GetComponent<EnemyDamageObjective>().houseHealth -= 5;
         }
     }
 }

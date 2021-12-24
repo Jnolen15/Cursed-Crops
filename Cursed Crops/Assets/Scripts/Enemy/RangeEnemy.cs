@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
-using System.Linq;
 
-public class EnemyToPlayer : MonoBehaviour
+public class RangeEnemy : MonoBehaviour
 {
     const float minPathupdateTime = .2f;
     const float pathUpdateMoveThreshhold = .5f;
     //Setting up changable variables for enemies speeds
     public float enemySpeed = 1f;
+    public float originalSpeed = 1f;
+    public float rangeDistance = 10f;
     public Transform Player;
     public Transform mainTarget;
     Rigidbody rb;
@@ -18,10 +18,12 @@ public class EnemyToPlayer : MonoBehaviour
     public bool aPlayerIsStun = true;
     Vector3[] path;
     int targetIndex = 0;
-    private bool playerinbound = true;
-    PathFinding pathFinder;
+    bool shooting = false;
     Transform closestPlayer;
     Transform oldTarget;
+    //all stuff for the range enemies
+    public GameObject bullet;
+    private Vector3 direction;
 
     // Start is called before the first frame update
     void Start()
@@ -29,11 +31,10 @@ public class EnemyToPlayer : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         listOfPlayers = new Transform[players.Length];
-        pathFinder = GetComponent<PathFinding>();
 
         for (int i = 0; i < listOfPlayers.Length; ++i)
             listOfPlayers[i] = players[i].transform;
-        
+
         mainTarget = GameObject.FindGameObjectWithTag("MainObjective").GetComponent<Transform>();
         //Transform closestPlayer = FindClosestPlayer(listOfPlayers);
         //pathFinder.StartFindPath(transform.position, closestPlayer.position);
@@ -47,7 +48,7 @@ public class EnemyToPlayer : MonoBehaviour
     // Update is called once per frame
     IEnumerator UpdatePath()
     {
-        if(Time.timeSinceLevelLoad < .3f)
+        if (Time.timeSinceLevelLoad < .3f)
         {
             yield return new WaitForSeconds(.3f);
         }
@@ -60,7 +61,7 @@ public class EnemyToPlayer : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(minPathupdateTime);
-            if((closestPlayer.position - targetPosOld).sqrMagnitude > sqrMoveThreshhold)
+            if ((closestPlayer.position - targetPosOld).sqrMagnitude > sqrMoveThreshhold)
             {
                 PathRequestManager.RequestPath(transform.position, closestPlayer.position, OnPathFound);
                 targetPosOld = closestPlayer.position;
@@ -70,27 +71,24 @@ public class EnemyToPlayer : MonoBehaviour
     void FixedUpdate()
     {
         // new multiplayer chase code
-        
+
         Transform closestPlayer = FindClosestPlayer(listOfPlayers);
+        
         if (oldTarget != closestPlayer && oldTarget != null && closestPlayer != null)
         {
-            
+
             oldTarget = closestPlayer;
+            
             StartCoroutine("UpdatePath");
         }
-        //PathRequestManager.RequestPath(this.transform.position, closestPlayer.position, OnPathFound);
-        /*if (targetChange)
+        if (Vector3.Distance(closestPlayer.position, transform.position) < rangeDistance && !shooting)
         {
-            //Vector3 objectivePosition = Vector3.MoveTowards(transform.position, mainTarget.position, enemySpeed * Time.fixedDeltaTime);
-            //rb.MovePosition(objectivePosition);
-            PathRequestManager.RequestPath(transform.position, mainTarget.position, OnPathFound);
+            Debug.Log("hello are you shooting");
+            shooting = true;
+            direction = new Vector3(closestPlayer.position.x - transform.position.x, 0, closestPlayer.position.z - transform.position.z);
+            StartCoroutine(shoot());
         }
-        */
-        /*
-        Vector3 position = Vector3.MoveTowards(transform.position, closestPlayer.position, enemySpeed * Time.fixedDeltaTime);
-        rb.MovePosition(position);
-        
-        */
+
 
     }
 
@@ -101,15 +99,11 @@ public class EnemyToPlayer : MonoBehaviour
         Vector3 currentPosition = transform.position;
         float higherDamage = 0;
         //float damage = 0;
-        
+
         foreach (Transform potentialTarget in players)
         {
             EnemyPlayerDamage playerStun = potentialTarget.GetComponent<EnemyPlayerDamage>();
             PlayerControler playerDamage = potentialTarget.GetComponent<PlayerControler>();
-            //Debug.Log(potentialTarget + " did " + playerDamage.overAllPlayerDamage);
-            //damage += playerDamage.overAllPlayerDamage;
-            //higherDamage = playerDamage.overAllPlayerDamage;
-
 
             if (playerDamage.overAllPlayerDamage > higherDamage && !playerStun.playerIsStun)
             {
@@ -125,9 +119,9 @@ public class EnemyToPlayer : MonoBehaviour
                 closestDistanceSqr = dSqrToTarget;
                 bestTarget = potentialTarget;
             }
-                
-            
-         }
+
+
+        }
 
         return bestTarget;
     }
@@ -139,10 +133,6 @@ public class EnemyToPlayer : MonoBehaviour
             targetChange = true;
 
         }
-        if (other.gameObject.name == "Player")
-        {
-            playerinbound = false;
-        }
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
@@ -152,11 +142,8 @@ public class EnemyToPlayer : MonoBehaviour
             path = newPath;
             if (path.Length > 0)
             {
-                if (gameObject != null)
-                {
-                    StopCoroutine("FollowPath");
-                    StartCoroutine("FollowPath");
-                }
+                StopCoroutine("FollowPath");
+                StartCoroutine("FollowPath");
 
             }
 
@@ -168,7 +155,7 @@ public class EnemyToPlayer : MonoBehaviour
     IEnumerator FollowPath()
     {
 
-        Vector3 currentWaypoint = path[0]; 
+        Vector3 currentWaypoint = path[0];
         targetIndex = 0;
         //print(lengthOfCurrent);
         while (true)
@@ -181,7 +168,7 @@ public class EnemyToPlayer : MonoBehaviour
                     yield break;
                 }
                 //path[targetIndex].y = 0;
-                
+
                 currentWaypoint = path[targetIndex];
             }
 
@@ -198,25 +185,17 @@ public class EnemyToPlayer : MonoBehaviour
         }
     }
 
-    public void OnDrawGizmos()
+    IEnumerator shoot()
     {
-        if(path != null)
-        {
-            for(int i = targetIndex; i < path.Length; i++)
-            {
-                Gizmos.color = Color.black;
-                Gizmos.DrawCube(path[i], Vector3.one);
-
-                if(i == targetIndex)
-                {
-                    Gizmos.DrawLine(transform.position, path[i]);
-                }
-                else
-                {
-                    Gizmos.DrawLine(path[i - 1], path[i]);
-                }
-            }
-        }
+        
+        GameObject bul = Instantiate(bullet, transform.position, transform.rotation);
+        // Send bullet in correct direction
+        //Debug.Log(direction);
+        bul.GetComponent<Bullet>().movement = direction.normalized;
+        yield return new WaitForSeconds(1.0f);
+        enemySpeed = 0f;
+        yield return new WaitForSeconds(1.0f);
+        enemySpeed = originalSpeed;
+        shooting = false;
     }
- 
 }
