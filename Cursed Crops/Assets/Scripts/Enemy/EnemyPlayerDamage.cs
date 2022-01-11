@@ -23,7 +23,7 @@ public class EnemyPlayerDamage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerHealth == 0)
+        if (playerHealth <= 0)
         {
             alphaChekcer = true;
             StartCoroutine(stun());

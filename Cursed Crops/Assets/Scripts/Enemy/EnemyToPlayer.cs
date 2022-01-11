@@ -10,6 +10,7 @@ public class EnemyToPlayer : MonoBehaviour
     const float pathUpdateMoveThreshhold = .5f;
     //Setting up changable variables for enemies speeds
     public float enemySpeed = 1f;
+    public float originalSpeed = 1f;
     public Transform Player;
     public Transform mainTarget;
     Rigidbody rb;
@@ -21,7 +22,7 @@ public class EnemyToPlayer : MonoBehaviour
     private bool playerinbound = true;
     PathFinding pathFinder;
     Transform closestPlayer;
-    Transform oldTarget;
+    public Transform oldTarget;
 
     // Start is called before the first frame update
     void Start()
@@ -71,7 +72,7 @@ public class EnemyToPlayer : MonoBehaviour
     {
         // new multiplayer chase code
         
-        Transform closestPlayer = FindClosestPlayer(listOfPlayers);
+        closestPlayer = FindClosestPlayer(listOfPlayers);
         if (oldTarget != closestPlayer && oldTarget != null && closestPlayer != null)
         {
             
@@ -100,6 +101,7 @@ public class EnemyToPlayer : MonoBehaviour
         float closestDistanceSqr = Mathf.Infinity;
         Vector3 currentPosition = transform.position;
         float higherDamage = 0;
+        
         //float damage = 0;
         
         foreach (Transform potentialTarget in players)
@@ -110,13 +112,14 @@ public class EnemyToPlayer : MonoBehaviour
             //damage += playerDamage.overAllPlayerDamage;
             //higherDamage = playerDamage.overAllPlayerDamage;
 
-
+            Debug.Log("first check = " + bestTarget);
             if (playerDamage.overAllPlayerDamage > higherDamage && !playerStun.playerIsStun)
             {
                 higherDamage = playerDamage.overAllPlayerDamage;
                 bestTarget = potentialTarget;
                 Debug.Log(potentialTarget + "Has the highest amount of damage = " + higherDamage);
             }
+            Debug.Log("second check = " + bestTarget);
             Vector3 directionToTarget = potentialTarget.position - currentPosition;
             float dSqrToTarget = directionToTarget.sqrMagnitude;
             if (dSqrToTarget < closestDistanceSqr && !playerStun.playerIsStun && higherDamage == 0)
@@ -125,9 +128,10 @@ public class EnemyToPlayer : MonoBehaviour
                 closestDistanceSqr = dSqrToTarget;
                 bestTarget = potentialTarget;
             }
-                
-            
-         }
+            Debug.Log("third check = " + bestTarget);
+
+        }
+        Debug.Log(bestTarget);
 
         return bestTarget;
     }

@@ -98,6 +98,8 @@ GameObject:
   - component: {fileID: 7071292198090614436}
   - component: {fileID: 4204120459228585861}
   - component: {fileID: 5052121460191150220}
+  - component: {fileID: 500466170925599648}
+  - component: {fileID: -5861757639830208548}
   m_Layer: 8
   m_Name: Night Eggplant
   m_TagString: Enemy
@@ -211,11 +213,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d3b7484e685f1646a5e19619ee09da7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpeed: 4
+  enemySpeed: 3
+  originalSpeed: 3
   Player: {fileID: 0}
   mainTarget: {fileID: 0}
   listOfPlayers: []
   aPlayerIsStun: 1
+  oldTarget: {fileID: 0}
 --- !u!114 &4204120459228585861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,6 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 20
   overalldamage: 0
+  takingDamage: 0
 --- !u!114 &5052121460191150220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,3 +253,29 @@ MonoBehaviour:
   numDrops: 3
   randomOffsetX: 1.4
   randomOffsetZ: 1.4
+--- !u!114 &500466170925599648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7071292198090614434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9475560514510054f9d0b1057806b39e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpaceBetween: 1.5
+--- !u!114 &-5861757639830208548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7071292198090614434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb168840a6d29624ab2585d9cef15238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attacking: 0

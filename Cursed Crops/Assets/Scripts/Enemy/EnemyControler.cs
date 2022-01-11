@@ -6,9 +6,11 @@ public class EnemyControler : MonoBehaviour
 {
     public int health = 10;
     public float overalldamage = 0;
+    public bool takingDamage = false;
     private Renderer rend;
     private SpriteRenderer sr;
-    private ItemDropper itemDropper; 
+    private ItemDropper itemDropper;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +26,7 @@ public class EnemyControler : MonoBehaviour
         // Subtract from health
         health -= dmg;
         overalldamage += dmg;
+        takingDamage = true;
         // If health is below or equal to 0 die
         if (health <= 0)
         {
@@ -42,8 +45,11 @@ public class EnemyControler : MonoBehaviour
         {
             Color prevColor = sr.color;
             sr.color = Color.red;
+            gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
             yield return new WaitForSeconds(0.2f);
+            takingDamage = false;
             sr.color = prevColor;
+            gameObject.GetComponent<EnemyToPlayer>().enemySpeed = gameObject.GetComponent<EnemyToPlayer>().originalSpeed;
         }
         //renderer.material.SetColor("_Color", Color.white);
     }
@@ -53,4 +59,5 @@ public class EnemyControler : MonoBehaviour
         itemDropper.DropItem(transform.position);
         Destroy(this.gameObject);
     }
+
 }
