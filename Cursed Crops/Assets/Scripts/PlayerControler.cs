@@ -119,6 +119,9 @@ public class PlayerControler : MonoBehaviour
         if (attackcoolDown < attackCDTimer) attackcoolDown += Time.deltaTime; // Attack cooldown
 
         if (attackcoolDown > attackDuration) animator.SetBool("Melee", false); // Reset attack animation
+
+        // Move into the SpriteLeaner script! Placeholder for now
+        playerSprite.sortingOrder = -(int)this.transform.position.z;
     }
 
     // Called every fixed frame-rate frame. Better for physics stuff

@@ -7,7 +7,7 @@ public class SpriteLeaner : MonoBehaviour
 {
     public bool runInEditor = true;
     public float leanAngle = 40f;
-    public bool manageSortLayer = false;
+    public bool manageSortLayer = true;
 
     public GameObject[] taggedSprites;
 
