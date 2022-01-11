@@ -227,14 +227,7 @@ public class PlayerControler : MonoBehaviour
         rb.MovePosition(transform.position + movement * moveSpeed * Time.fixedDeltaTime);
 
         //run animation management
-        if (movement.magnitude == 1)
-        {
-            animator.SetBool("Running", true);
-        }
-        else
-        {
-            animator.SetBool("Running", false);
-        }
+        animator.SetFloat("MovementMagnitude", movement.magnitude);
 
     }
 
