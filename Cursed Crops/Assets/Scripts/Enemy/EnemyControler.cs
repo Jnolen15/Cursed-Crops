@@ -7,6 +7,7 @@ public class EnemyControler : MonoBehaviour
     public int health = 10;
     public float overalldamage = 0;
     public bool takingDamage = false;
+    public string lastDamageType;
     private Renderer rend;
     private SpriteRenderer sr;
     private ItemDropper itemDropper;
@@ -21,12 +22,13 @@ public class EnemyControler : MonoBehaviour
         itemDropper = GetComponent<ItemDropper>();
     }
 
-    public void takeDamage(int dmg)
+    public void takeDamageMelee(int dmg)
     {
         // Subtract from health
         health -= dmg;
         overalldamage += dmg;
         takingDamage = true;
+        lastDamageType = "Melee";
         // If health is below or equal to 0 die
         if (health <= 0)
         {
@@ -38,11 +40,31 @@ public class EnemyControler : MonoBehaviour
         }
     }
 
+    public void takeDamageRange(int dmg)
+    {
+        // Subtract from health
+        health -= dmg;
+        overalldamage += dmg;
+        
+        lastDamageType = "Range";
+        // If health is below or equal to 0 die
+        if (health <= 0)
+        {
+            death();
+        }
+        else
+        {
+            // In not dead flash red to show hit
+            StartCoroutine(hit(rend));
+        }
+    }
     IEnumerator hit(Renderer renderer)
     {
+        Debug.Log(lastDamageType);
         //renderer.material.SetColor("_Color", Color.red);
         if (sr != null)
         {
+            
             Color prevColor = sr.color;
             sr.color = Color.red;
             gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
@@ -56,7 +78,7 @@ public class EnemyControler : MonoBehaviour
 
     private void death()
     {
-        itemDropper.DropItem(transform.position);
+        //itemDropper.DropItem(transform.position);
         Destroy(this.gameObject);
     }
 

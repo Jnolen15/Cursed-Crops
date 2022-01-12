@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8097504136897663700}
   m_Layer: 0
   m_Name: RangeEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,7 +111,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpeed: 1
   originalSpeed: 1
-  rangeDistance: 500
+  rangeDistance: 20
+  gotHit: 0
   Player: {fileID: 0}
   mainTarget: {fileID: 0}
   listOfPlayers: []

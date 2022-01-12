@@ -32,7 +32,7 @@ public class Bullet : MonoBehaviour
         if (other.gameObject.tag == "Enemy" && gameObject.tag != "enemyBullet")
         {
             EnemyControler enemyControler = other.gameObject.GetComponent<EnemyControler>();
-            enemyControler.takeDamage(damage);
+            enemyControler.takeDamageRange(damage);
             if(!piercing)
                 Destroy(gameObject);
             Debug.Log("Hit Enemy");

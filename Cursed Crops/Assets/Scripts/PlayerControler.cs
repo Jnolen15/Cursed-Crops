@@ -325,17 +325,17 @@ public class PlayerControler : MonoBehaviour
             {
                 if (attackChain == 1)
                 {
-                    enemyControler.takeDamage(2);
+                    enemyControler.takeDamageMelee(2);
                     overAllPlayerDamage += 2;
                 }
                 else if (attackChain == 2)
                 {
-                    enemyControler.takeDamage(3);
+                    enemyControler.takeDamageMelee(3);
                     overAllPlayerDamage += 3;
                 }
                 else if (attackChain == 3)
                 {
-                    enemyControler.takeDamage(6);
+                    enemyControler.takeDamageMelee(6);
                     overAllPlayerDamage += 6;
                 }
             }

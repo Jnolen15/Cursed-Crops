@@ -10,6 +10,7 @@ public class RangeEnemy : MonoBehaviour
     public float enemySpeed = 1f;
     public float originalSpeed = 1f;
     public float rangeDistance = 10f;
+    public bool gotHit = false;
     public Transform Player;
     public Transform mainTarget;
     Rigidbody rb;
@@ -73,6 +74,7 @@ public class RangeEnemy : MonoBehaviour
         // new multiplayer chase code
 
         Transform closestPlayer = FindClosestPlayer(listOfPlayers);
+
         
         if (oldTarget != closestPlayer && oldTarget != null && closestPlayer != null)
         {
@@ -83,15 +85,24 @@ public class RangeEnemy : MonoBehaviour
         }
         if (Vector3.Distance(closestPlayer.position, transform.position) < rangeDistance)
         {
-            Debug.Log("hello are you shooting");
+            
             
             enemySpeed = 0;
             
-            if (!shooting)
+            
+            if (!shooting && gameObject.GetComponent<EnemyControler>().takingDamage)
+            {
+                shooting = true;
+                StopCoroutine("shoot");
+                //StopAllCoroutines();
+                StartCoroutine("stun");
+            }
+            else if (!shooting && !gameObject.GetComponent<EnemyControler>().takingDamage)
             {
                 shooting = true;
                 direction = new Vector3(closestPlayer.position.x - transform.position.x, 0, closestPlayer.position.z - transform.position.z);
-                StartCoroutine(shoot());
+                StopCoroutine("shoot");
+                StartCoroutine("shoot");
             }
         }
         else
@@ -195,17 +206,37 @@ public class RangeEnemy : MonoBehaviour
         }
     }
 
+   /* private void OnTriggerEnter(Collider melee)
+    {
+        if(melee.gameObject.name == "MeleeAttackLeft" || melee.gameObject.name == "MeleeAttackRight")
+        {
+            Debug.Log("We hit the range enemy");
+            gotHit = true;
+            StopCoroutine("shoot");
+            StartCoroutine("stun");
+        }
+    }
+   */
+
     IEnumerator shoot()
     {
+               
+            GameObject bul = Instantiate(bullet, transform.position, transform.rotation);
+            // Send bullet in correct direction
+            //Debug.Log(direction);
+            bul.GetComponent<Bullet>().movement = direction.normalized;
+            //enemySpeed = 0f;
+            yield return new WaitForSeconds(1.5f);
+            //enemySpeed = originalSpeed;
+            shooting = false;
         
-        GameObject bul = Instantiate(bullet, transform.position, transform.rotation);
-        // Send bullet in correct direction
-        //Debug.Log(direction);
-        bul.GetComponent<Bullet>().movement = direction.normalized;
-        yield return new WaitForSeconds(1.0f);
-        //enemySpeed = 0f;
-        yield return new WaitForSeconds(1.0f);
-        //enemySpeed = originalSpeed;
+    }
+
+    IEnumerator stun()
+    {
+        Debug.Log("getting stun");
+        yield return new WaitForSeconds(2f);
+        gameObject.GetComponent<EnemyControler>().takingDamage = false;
         shooting = false;
     }
 }
