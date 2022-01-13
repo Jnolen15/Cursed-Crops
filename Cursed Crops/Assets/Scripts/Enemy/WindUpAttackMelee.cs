@@ -25,7 +25,6 @@ public class WindUpAttackMelee : MonoBehaviour
     void Update()
     {
         targetToAttack = gameObject.GetComponent<EnemyToPlayer>().oldTarget;
-
         if (!attacking)
         {
 
@@ -41,42 +40,51 @@ public class WindUpAttackMelee : MonoBehaviour
 
             
             
-            gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
-            StartCoroutine("attack");
+            if (!attacking)
+            {
+                gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
+                StartCoroutine("attack");
+            }
 
 
             //transform.position = Vector3.MoveTowards(transform.position, targetToAttack.position, 10f * Time.deltaTime);
         }
-        else if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) >= 6f && !attacking)
+        else if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) > 6f && !attacking)
         {
-            StopCoroutine("attack");
+            //StopCoroutine("attack");
+            
+                
+            
             if (!gameObject.GetComponent<EnemyControler>().takingDamage) { 
                 sr.color = prev;
             }
-            gameObject.GetComponent<EnemyToPlayer>().enemySpeed = gameObject.GetComponent<EnemyToPlayer>().originalSpeed;
+            
         }
+ 
 
     }
 
     IEnumerator attack()
     {
         
-            sr.color = Color.yellow;
-            yield return new WaitForSeconds(1.5f);
-            Debug.Log("first wait");
-            attacking = true;
-            
-            transform.position = Vector3.MoveTowards(transform.position, attackPosition, (gameObject.GetComponent<EnemyToPlayer>().originalSpeed * 4) * Time.deltaTime);
-            //gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
-            yield return new WaitForSeconds(1.8f);
-            if (transform.position == attackPosition)
-            {
-                sr.color = prev;
-                attacking = false;
-            }
-        
+        sr.color = Color.yellow;
+        yield return new WaitForSeconds(0.45f);
+        Debug.Log("first wait");
 
-        
-        
+        attacking = true;
+        sr.color = Color.green;
+        //1 0.92 0.016 1
+        transform.position = Vector3.MoveTowards(transform.position, attackPosition, (gameObject.GetComponent<EnemyToPlayer>().originalSpeed * 4) * Time.deltaTime);
+        //gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
+        yield return new WaitForSeconds(1f);
+            
+                
+        attacking = false;
+        gameObject.GetComponent<EnemyToPlayer>().enemySpeed = gameObject.GetComponent<EnemyToPlayer>().originalSpeed;
+
+
+
+
+
     }
 }
