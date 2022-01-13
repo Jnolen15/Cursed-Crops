@@ -12,10 +12,12 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] private float rollSpeedFallofDelay = 0.3f;
     [SerializeField] private float rollCDTime = 0.3f;
     [SerializeField] private float rangeCDTime = 0.4f;
+    [SerializeField] private float faceAimTimer = 3f;
     private int attackChain = 1;
     private float attackcoolDown;
     private float rollSpeed;
     private float rollSpeedDropMultiplier;
+    private float faceAimTime = 0;
 
     public int overAllPlayerDamage = 0;
     public float moveSpeed;
@@ -27,6 +29,7 @@ public class PlayerControler : MonoBehaviour
     private bool attackCD = false;
     private bool rangeCD = false;
     private bool rollCD = false;
+    public bool faceaim = false;
     private bool startRollFallOff = false;
 
     public bool flipped = false;
@@ -116,6 +119,9 @@ public class PlayerControler : MonoBehaviour
             else FaceController();
         }
 
+        if (faceAimTime < faceAimTimer) faceAimTime += Time.deltaTime; // Face aim period
+        else faceaim = false;
+
         if (attackcoolDown < attackCDTimer) attackcoolDown += Time.deltaTime; // Attack cooldown
 
         if (attackcoolDown > attackDuration) animator.SetBool("Melee", false); // Reset attack animation
@@ -184,17 +190,23 @@ public class PlayerControler : MonoBehaviour
             // Get the mouse position relative to the player
             Vector3 mousePosition = raycastHit.point;
             direction = new Vector3(mousePosition.x - transform.position.x, 0, mousePosition.z - transform.position.z);
-            
+
             // Flip sprite to face the mouse position
-            if (direction.x > 0 && flipped)
+            if (faceaim)
             {
-                flipped = false;
-                playerSprite.flipX = false;
-            }
-            else if (direction.x < 0 && !flipped)
+                if (direction.x > 0 && flipped)
+                {
+                    flipped = false;
+                    playerSprite.flipX = false;
+                }
+                else if (direction.x < 0 && !flipped)
+                {
+                    flipped = true;
+                    playerSprite.flipX = true;
+                }
+            } else
             {
-                flipped = true;
-                playerSprite.flipX = true;
+                FaceMove();
             }
         }
     }
@@ -204,13 +216,28 @@ public class PlayerControler : MonoBehaviour
         //Vector2 inputVector = playerInputActions.Player.Aim.ReadValue<Vector2>();
         direction = Vector3.right * aimInputVector.x + Vector3.forward * aimInputVector.y;
 
-        // Flip sprite to face the mouse position
+        // Flip sprite to face the joystick position
         if (direction.x < 0 && !flipped)
         {
             flipped = true;
             playerSprite.flipX = true;
         }
         else if (direction.x > 0 && flipped)
+        {
+            flipped = false;
+            playerSprite.flipX = false;
+        }
+    }
+
+    private void FaceMove()
+    {
+        // Flip sprite to face the direction the player is moving
+        if (moveInputVector.x < 0 && !flipped)
+        {
+            flipped = true;
+            playerSprite.flipX = true;
+        }
+        else if (moveInputVector.x > 0 && flipped)
         {
             flipped = false;
             playerSprite.flipX = false;
@@ -231,6 +258,22 @@ public class PlayerControler : MonoBehaviour
 
         //run animation management
         animator.SetFloat("MovementMagnitude", movement.magnitude);
+
+        if (flipped)
+        {
+            if(moveInputVector.x < 0)
+                animator.SetFloat("Direction", 1);
+            if (moveInputVector.x > 0)
+                animator.SetFloat("Direction", -1);
+        } else if (!flipped)
+        {
+            if (moveInputVector.x < 0)
+                animator.SetFloat("Direction", -1);
+            if (moveInputVector.x > 0)
+                animator.SetFloat("Direction", 1);
+        }
+
+        Debug.Log(animator.GetFloat("Direction"));
 
     }
 
@@ -300,6 +343,10 @@ public class PlayerControler : MonoBehaviour
 
     private void DoAttack()
     {
+        // Set face aim period
+        faceAimTime = 0;
+        faceaim = true;
+
         if (flipped) // Left attack hit detection
         {
             Collider[] cols = Physics.OverlapBox(meleeAttackLeft.transform.position, meleeAttackLeft.transform.localScale / 2, 
@@ -367,7 +414,9 @@ public class PlayerControler : MonoBehaviour
                 }
                 // Start ranged attack cooldown
                 StartCoroutine(cooldown(() => { rangeCD = false; }, rangeCDTime));
-
+                // Set face aim period
+                faceAimTime = 0;
+                faceaim = true;
             }
             else if (rangeCD && state == State.Normal) // If on cooldown send dubug msg
             {
