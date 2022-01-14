@@ -24,6 +24,7 @@ public class RangeEnemy : MonoBehaviour
     Transform oldTarget;
     //all stuff for the range enemies
     public GameObject bullet;
+    Color prev;
     private Vector3 direction;
 
     // Start is called before the first frame update
@@ -35,6 +36,8 @@ public class RangeEnemy : MonoBehaviour
 
         for (int i = 0; i < listOfPlayers.Length; ++i)
             listOfPlayers[i] = players[i].transform;
+
+        prev = gameObject.GetComponent<Renderer>().material.color;
 
         mainTarget = GameObject.FindGameObjectWithTag("MainObjective").GetComponent<Transform>();
         //Transform closestPlayer = FindClosestPlayer(listOfPlayers);
@@ -107,6 +110,7 @@ public class RangeEnemy : MonoBehaviour
         }
         else
         {
+            gameObject.GetComponent<Renderer>().material.color = prev;
             enemySpeed = originalSpeed;
         }
 
@@ -220,22 +224,27 @@ public class RangeEnemy : MonoBehaviour
 
     IEnumerator shoot()
     {
-               
-            GameObject bul = Instantiate(bullet, transform.position, transform.rotation);
-            // Send bullet in correct direction
-            //Debug.Log(direction);
-            bul.GetComponent<Bullet>().movement = direction.normalized;
-            //enemySpeed = 0f;
-            yield return new WaitForSeconds(1.5f);
-            //enemySpeed = originalSpeed;
-            shooting = false;
+        gameObject.GetComponent<Renderer>().material.color = Color.yellow;
+        yield return new WaitForSeconds(0.65f);
+        gameObject.GetComponent<Renderer>().material.color = Color.green;
+        GameObject bul = Instantiate(bullet, transform.position, transform.rotation);
+        // Send bullet in correct direction
+        //Debug.Log(direction);
+        bul.GetComponent<Bullet>().movement = direction.normalized;
+        //enemySpeed = 0f;
+        yield return new WaitForSeconds(1.5f);
+        //enemySpeed = originalSpeed;
+        gameObject.GetComponent<Renderer>().material.color = prev;
+        shooting = false;
         
     }
 
     IEnumerator stun()
     {
         Debug.Log("getting stun");
+        gameObject.GetComponent<Renderer>().material.color = Color.red;
         yield return new WaitForSeconds(2f);
+        gameObject.GetComponent<Renderer>().material.color = prev;
         gameObject.GetComponent<EnemyControler>().takingDamage = false;
         shooting = false;
     }

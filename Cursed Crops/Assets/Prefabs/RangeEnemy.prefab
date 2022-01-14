@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 8097504136897663690}
   - component: {fileID: 8097504136897663691}
   - component: {fileID: 8097504136897663700}
-  m_Layer: 0
+  - component: {fileID: -6568014592939928762}
+  m_Layer: 8
   m_Name: RangeEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -118,3 +119,19 @@ MonoBehaviour:
   listOfPlayers: []
   aPlayerIsStun: 1
   bullet: {fileID: 6242655706651345086, guid: 70a3a66aca4c3a2458f178a6130a3f72, type: 3}
+--- !u!114 &-6568014592939928762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8097504136897663701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53e39136d6a346043a74eab9e17b7dfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 10
+  overalldamage: 0
+  takingDamage: 0
+  lastDamageType: 
