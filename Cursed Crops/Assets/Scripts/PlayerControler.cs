@@ -50,6 +50,7 @@ public class PlayerControler : MonoBehaviour
     private Vector2 aimInputVector = Vector2.zero;
     private Vector2 moveInputVector = Vector2.zero;
     private Rigidbody rb;                  // The player's Rigidbody
+    private CapsuleCollider cc;
     private SpriteRenderer playerSprite;
     private Animator animator;
     private GameObject meleeAttackLeft;
@@ -75,6 +76,7 @@ public class PlayerControler : MonoBehaviour
         state = State.Normal;
 
         rb = GetComponent<Rigidbody>();
+        cc = GetComponent<CapsuleCollider>();
 
         // Get the left facing attack hitbox and set it inactive
         meleeAttackLeft = this.transform.GetChild(0).gameObject;
@@ -137,10 +139,15 @@ public class PlayerControler : MonoBehaviour
         {
             case State.Normal:
                 //if(coolDownTimer > attackDuration) Move(); //Do it this way if movement should be locked while attacking
-                Move();
+                if (!animator.GetBool("Ranged"))
+                {
+                    if (attackcoolDown > attackDuration)
+                        Move();
+                }
                 rollDir = movement;
                 break;
             case State.Rolling:
+                cc.enabled = false;
                 DodgeRoll();
                 animator.SetBool("Dodging", true);
                 // Roll speed is constant at the start, then falls off untill just below move speed
@@ -155,6 +162,7 @@ public class PlayerControler : MonoBehaviour
                     rollSpeed -= rollSpeed * rollSpeedDropMultiplier * Time.deltaTime;
                     if (rollSpeed <= 3.5f)
                     {
+                        cc.enabled = true;
                         state = State.Normal;
                         animator.SetBool("Dodging", false);
                         startRollFallOff = false;
@@ -402,15 +410,17 @@ public class PlayerControler : MonoBehaviour
                 if(animator != null)
                 {
                     animator.SetBool("Ranged", true);
-                    StartCoroutine(cooldown(() => { animator.SetBool("Ranged", false); }, 0.2f));
+                    StartCoroutine(cooldown(() => { animator.SetBool("Ranged", false); }, 0.4f));
                 }
                 if (direction != new Vector3(0,0,0))
                 {
                     // Create bullet
-                    GameObject bul = Instantiate(bullet, transform.position, transform.rotation);
+                    GameObject bul = null;
+                    StartCoroutine(cooldown(() => { bul = Instantiate(bullet, transform.position, transform.rotation);
+                        bul.GetComponent<Bullet>().movement = direction.normalized; }, 0.15f));
                     // Send bullet in correct direction
                     //Debug.Log(direction);
-                    bul.GetComponent<Bullet>().movement = direction.normalized;
+                    //bul.GetComponent<Bullet>().movement = direction.normalized;
                 }
                 // Start ranged attack cooldown
                 StartCoroutine(cooldown(() => { rangeCD = false; }, rangeCDTime));
