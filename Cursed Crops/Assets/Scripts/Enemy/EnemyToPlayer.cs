@@ -79,6 +79,12 @@ public class EnemyToPlayer : MonoBehaviour
             oldTarget = closestPlayer;
             StartCoroutine("UpdatePath");
         }
+        if(!gameObject.activeInHierarchy)
+        {
+            
+            StopAllCoroutines();
+            Destroy(gameObject);
+        }
         //PathRequestManager.RequestPath(this.transform.position, closestPlayer.position, OnPathFound);
         /*if (targetChange)
         {
@@ -112,14 +118,14 @@ public class EnemyToPlayer : MonoBehaviour
             //damage += playerDamage.overAllPlayerDamage;
             //higherDamage = playerDamage.overAllPlayerDamage;
 
-            Debug.Log("first check = " + bestTarget);
+            
             if (playerDamage.overAllPlayerDamage > higherDamage && !playerStun.playerIsStun)
             {
                 higherDamage = playerDamage.overAllPlayerDamage;
                 bestTarget = potentialTarget;
                 Debug.Log(potentialTarget + "Has the highest amount of damage = " + higherDamage);
             }
-            Debug.Log("second check = " + bestTarget);
+           
             Vector3 directionToTarget = potentialTarget.position - currentPosition;
             float dSqrToTarget = directionToTarget.sqrMagnitude;
             if (dSqrToTarget < closestDistanceSqr && !playerStun.playerIsStun && higherDamage == 0)
@@ -128,10 +134,10 @@ public class EnemyToPlayer : MonoBehaviour
                 closestDistanceSqr = dSqrToTarget;
                 bestTarget = potentialTarget;
             }
-            Debug.Log("third check = " + bestTarget);
+           
 
         }
-        Debug.Log(bestTarget);
+        
 
         return bestTarget;
     }
@@ -159,7 +165,14 @@ public class EnemyToPlayer : MonoBehaviour
                 if (gameObject != null)
                 {
                     StopCoroutine("FollowPath");
-                    StartCoroutine("FollowPath");
+                    if (gameObject.activeInHierarchy)
+                    {
+                        StartCoroutine("FollowPath");
+                    }
+                    else
+                    {
+                        StopCoroutine("FollowPath");
+                    }
                 }
 
             }

@@ -79,7 +79,8 @@ public class EnemyControler : MonoBehaviour
     private void death()
     {
         itemDropper.DropItem(transform.position);
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
+        gameObject.SetActive(false);
     }
 
 }
