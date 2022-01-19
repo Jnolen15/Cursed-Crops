@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -17,24 +18,23 @@ public class SpawnManager : MonoBehaviour
 
     public GameObject harvestStartFlag;     // Some object that, when each player interacts with it, begins the harvest.
     private GameObject harvestFlag;
+    public GameObject placementChecker;     // A prefab used to check if a location is suitable for a crop spawn
     public GameObject morningBasicEnemy;    // The basic enemy to spawn in Morning phase
     public GameObject afternoonBasicEnemy;  // The basic enemy to spawn in Afternoon phase
     public GameObject nightBasicEnemy;      // The basic enemy to spawn in Night phase
 
-    public float minX = 9f;
-    public float maxX = 18f;
-    public float minZ = 9f;
-    public float maxZ = 18f;
+    public float bounds = 18f;
 
-    public float gridSize = 2;
+    public float gridSize = 1;
     public float gridOffsetX = 0.5f;
     public float gridOffsetZ = 0.5f;
 
     // Private Variables
-    public float currentPhaseEndTime = 0f;  // The time the current phase should end
-    public float currentWaveEndTime = 0f;   // The time the current wave should end
-    public float currentPauseEndTime = 0f;  // The time the current pause should end
+    private float currentPhaseEndTime = 0f;  // The time the current phase should end
+    private float currentWaveEndTime = 0f;   // The time the current wave should end
+    private float currentPauseEndTime = 0f;  // The time the current pause should end
     private bool timerStarted = false;
+    private bool gridUpdated = false;
     private delegate void Callback();
     public enum State
     {
@@ -49,11 +49,18 @@ public class SpawnManager : MonoBehaviour
     public static List<GameObject> spawners = new List<GameObject>();
     //public GameObject[] spawnArray;
 
+    private GameObject gridChild;
+    private static Dictionary<Vector3, string> spawnerGridPositions = new Dictionary<Vector3, string>();
+
     private void Start()
     {
         // Spawn harvest start flag
         harvestFlag = this.transform.GetChild(0).gameObject;
         harvestFlag.SetActive(false);
+
+        gridChild = this.transform.GetChild(1).gameObject;
+
+        CreateSpawnerGrid();
     }
 
     void Update()
@@ -61,9 +68,15 @@ public class SpawnManager : MonoBehaviour
         if(state != State.Break)
             elapsedTime += Time.deltaTime;
 
+        if (!gridUpdated)
+        {
+            UpdateSpawnerPositions();
+            gridUpdated = true;
+        }
+
         // Phase timer
         // INSERT: Starting wave only when players ready
-        if(currentPhaseEndTime < elapsedTime)
+        if (currentPhaseEndTime < elapsedTime)
         {
             currentPhaseEndTime = elapsedTime + phaseDuration;
 
@@ -72,7 +85,7 @@ public class SpawnManager : MonoBehaviour
                 currentPhase = "Morning";
                 state = State.Break;
                 harvestFlag.SetActive(true);
-                CreateSpawners(4, "Morning");
+                CreateSpawnersonGrid(4, "Morning");
             }
             else if (currentPhase == "Morning")
             {
@@ -81,7 +94,7 @@ public class SpawnManager : MonoBehaviour
                 state = State.Break;
                 harvestFlag.SetActive(true);
                 DestroySpawners();
-                CreateSpawners(4, "Afternoon");
+                CreateSpawnersonGrid(4, "Afternoon");
             }
             else if (currentPhase == "Afternoon")
             {
@@ -90,7 +103,7 @@ public class SpawnManager : MonoBehaviour
                 state = State.Break;
                 harvestFlag.SetActive(true);
                 DestroySpawners();
-                CreateSpawners(4, "Night");
+                CreateSpawnersonGrid(4, "Night");
             }
             else if (currentPhase == "Night")
             {
@@ -181,38 +194,83 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    // Spawns an ammount of basic enemy spawners in a radious around the barn
-    private void CreateSpawners(int num, string phaseWeIn)
+    private void CreateSpawnerGrid()
     {
+        for(float i = -bounds; i <= bounds-1; i++)
+        {
+            for (float j = -bounds; j <= bounds-1; j++)
+            {
+                Vector3 testPos = new Vector3(i, 1f, j);
+                GameObject newChecker = Instantiate(placementChecker, testPos, transform.rotation, gridChild.transform);
+                alignToGrid(newChecker.transform);
+            }
+        }
+    }
+
+    private void UpdateSpawnerPositions()
+    {
+        for (int i = 0; i < gridChild.transform.childCount; i++)
+        {
+            if (gridChild.transform.GetChild(i).GetComponent<GridPlacementChecker>().acceptablePos)
+            {
+                spawnerGridPositions.Add(gridChild.transform.GetChild(i).transform.position, "Empty");
+                gridChild.transform.GetChild(i).gameObject.SetActive(false);
+            }
+            else if (!gridChild.transform.GetChild(i).GetComponent<GridPlacementChecker>().acceptablePos)
+            {
+                Destroy(gridChild.transform.GetChild(i).gameObject);
+            }
+        }
+
+        /*foreach (KeyValuePair<Vector3, string> pos in spawnerGridPositions)
+        {
+            Debug.Log("Position: " + pos.Key.ToString() + " is " + pos.Value);
+        }*/
+    }
+
+    private void CreateSpawnersonGrid(int num, string phaseWeIn)
+    {
+        Vector3[] positions = spawnerGridPositions.Keys.ToArray();
+        bool validPos = false;
+
         for (int i = 0; i < num; i++)
         {
-            bool validPos = false;
-            float xPos = 0f;
-            float zPos = 0f;
-            while (!validPos)
+            // PICK RANDOM SPOT IN DICTIONARY
+            Vector3 pos = positions[Random.Range(0, positions.Length-1)];
+
+            string availablePos;
+            // TEST IF POSITION IS FILLED, UPDATE DICTIONARY
+            if (spawnerGridPositions.TryGetValue(pos, out availablePos))
             {
-                xPos = Random.Range(-maxX, maxX);
-                zPos = Random.Range(-maxZ, maxZ);
-                if (Mathf.Abs(xPos) < 9 && Mathf.Abs(zPos) < 9)
-                    validPos = false;
-                else
+                // Success
+                if (availablePos == "Empty")
+                {
+                    spawnerGridPositions[pos] = "Full";
                     validPos = true;
+                } else
+                {
+                    Debug.Log("Position Taken");
+                    validPos = false;
+                    i--;
+                }
             }
+            else
+                Debug.Log("Dictionary error");
 
-            Vector3 pos = new Vector3(xPos, 1.3f, zPos);
-            //pos = alignToGrid(pos);
+            if (validPos)
+            {
+                GameObject selectedEnemy = null;
+                if (phaseWeIn == "Morning")
+                    selectedEnemy = morningBasicEnemy;
+                else if (phaseWeIn == "Afternoon")
+                    selectedEnemy = afternoonBasicEnemy;
+                else if (phaseWeIn == "Night")
+                    selectedEnemy = nightBasicEnemy;
 
-            GameObject selectedEnemy = null;
-            if (phaseWeIn == "Morning")
-                selectedEnemy = morningBasicEnemy;
-            else if (phaseWeIn == "Afternoon")
-                selectedEnemy = afternoonBasicEnemy;
-            else if (phaseWeIn == "Night")
-                selectedEnemy = nightBasicEnemy;
-
-            GameObject newSpawner = Instantiate(selectedEnemy, pos, transform.rotation);
-            alignToGrid(newSpawner.transform);
-            spawners.Add(newSpawner);
+                GameObject newSpawner = Instantiate(selectedEnemy, pos, transform.rotation);
+                //alignToGrid(newSpawner.transform);
+                spawners.Add(newSpawner);
+            }
         }
     }
 

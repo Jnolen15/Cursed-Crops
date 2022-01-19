@@ -58,7 +58,7 @@ public class PlayerControler : MonoBehaviour
     private Vector3 movement;
     private Vector3 rollDir;
     private Vector3 direction;
-    [SerializeField] private LayerMask layermask;
+    [SerializeField] private LayerMask groundLayermask;
     private delegate void Callback();
     private enum State
     {
@@ -193,7 +193,7 @@ public class PlayerControler : MonoBehaviour
     {
         // Cast a ray from the camera to the ground plane where the mouse is.
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        if (Physics.Raycast(ray, out RaycastHit raycastHit, float.MaxValue, layermask))
+        if (Physics.Raycast(ray, out RaycastHit raycastHit, float.MaxValue, groundLayermask))
         {
             // Get the mouse position relative to the player
             Vector3 mousePosition = raycastHit.point;
@@ -280,8 +280,6 @@ public class PlayerControler : MonoBehaviour
             if (moveInputVector.x > 0)
                 animator.SetFloat("Direction", 1);
         }
-
-        Debug.Log(animator.GetFloat("Direction"));
 
     }
 

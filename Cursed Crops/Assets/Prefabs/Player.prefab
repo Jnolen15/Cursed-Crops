@@ -269,7 +269,7 @@ MonoBehaviour:
   rollSpeedMax: 30
   rollSpeedFallofDelay: 0.05
   rollCDTime: 1
-  rangeCDTime: 0.4
+  rangeCDTime: 4
   faceAimTimer: 3
   overAllPlayerDamage: 0
   moveSpeed: 6
@@ -279,7 +279,7 @@ MonoBehaviour:
   faceaim: 1
   flipped: 0
   useControler: 0
-  layermask:
+  groundLayermask:
     serializedVersion: 2
     m_Bits: 8
   bullet: {fileID: 6242655706651345086, guid: dd76d198cb4f6304f93a7e3ef466c390, type: 3}
@@ -470,9 +470,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activePlaceable: {fileID: 11400000, guid: 52b73b9c1b795f24fabe68e153e17f03, type: 2}
-  gridSize: 2
+  gridSize: 1
   gridOffsetX: 0.5
-  gridOffsetZ: 0
+  gridOffsetZ: 0.5
 --- !u!114 &-6313865123729909988
 MonoBehaviour:
   m_ObjectHideFlags: 0

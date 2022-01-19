@@ -6,4 +6,6 @@ using UnityEngine;
 public class PlaceableSO : ScriptableObject
 {
     public Transform prefab;
+    public string placeableName;
+    public string desc;
 }
