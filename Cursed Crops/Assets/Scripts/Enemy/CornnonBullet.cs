@@ -36,6 +36,15 @@ public class CornnonBullet : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "MainObjective")
+        {
+            StopAllCoroutines();
+            Destroy(gameObject);
+        }
+    }
+
     IEnumerator shoot()
     {
         //gameObject.GetComponent<Renderer>().material.color = Color.yellow;
