@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangeEnemy : MonoBehaviour
+public class CornnonAI : MonoBehaviour
 {
     const float minPathupdateTime = .2f;
     const float pathUpdateMoveThreshhold = .5f;
@@ -43,7 +43,8 @@ public class RangeEnemy : MonoBehaviour
         //Transform closestPlayer = FindClosestPlayer(listOfPlayers);
         //pathFinder.StartFindPath(transform.position, closestPlayer.position);
         //PathRequestManager.RequestPath(transform.position, closestPlayer.position, OnPathFound);
-        oldTarget = mainTarget;
+        //oldTarget = mainTarget;
+        closestPlayer = mainTarget;
         StartCoroutine("UpdatePath");
 
 
@@ -56,7 +57,7 @@ public class RangeEnemy : MonoBehaviour
         {
             yield return new WaitForSeconds(.3f);
         }
-        closestPlayer = FindClosestPlayer(listOfPlayers);
+        closestPlayer = mainTarget;
         PathRequestManager.RequestPath(transform.position, closestPlayer.position, OnPathFound);
 
         float sqrMoveThreshhold = pathUpdateMoveThreshhold * pathUpdateMoveThreshhold;
@@ -76,16 +77,7 @@ public class RangeEnemy : MonoBehaviour
     {
         // new multiplayer chase code
 
-        Transform closestPlayer = FindClosestPlayer(listOfPlayers);
-
-
-        closestPlayer = FindClosestPlayer(listOfPlayers);
-        if (oldTarget != closestPlayer && oldTarget != null && closestPlayer != null)
-        {
-
-            oldTarget = closestPlayer;
-            StartCoroutine("UpdatePath");
-        }
+        
         if (!gameObject.activeInHierarchy)
         {
 
@@ -94,11 +86,11 @@ public class RangeEnemy : MonoBehaviour
         }
         if (Vector3.Distance(closestPlayer.position, transform.position) < rangeDistance)
         {
-            
-            
+
+
             enemySpeed = 0;
-            
-            
+
+
             if (!shooting && gameObject.GetComponent<EnemyControler>().takingDamage)
             {
                 shooting = true;
@@ -226,17 +218,17 @@ public class RangeEnemy : MonoBehaviour
         }
     }
 
-   /* private void OnTriggerEnter(Collider melee)
-    {
-        if(melee.gameObject.name == "MeleeAttackLeft" || melee.gameObject.name == "MeleeAttackRight")
-        {
-            Debug.Log("We hit the range enemy");
-            gotHit = true;
-            StopCoroutine("shoot");
-            StartCoroutine("stun");
-        }
-    }
-   */
+    /* private void OnTriggerEnter(Collider melee)
+     {
+         if(melee.gameObject.name == "MeleeAttackLeft" || melee.gameObject.name == "MeleeAttackRight")
+         {
+             Debug.Log("We hit the range enemy");
+             gotHit = true;
+             StopCoroutine("shoot");
+             StartCoroutine("stun");
+         }
+     }
+    */
 
     IEnumerator shoot()
     {
@@ -248,11 +240,11 @@ public class RangeEnemy : MonoBehaviour
         //Debug.Log(direction);
         bul.GetComponent<Bullet>().movement = direction.normalized;
         //enemySpeed = 0f;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(7.5f);
         //enemySpeed = originalSpeed;
         gameObject.GetComponent<Renderer>().material.color = prev;
         shooting = false;
-        
+
     }
 
     IEnumerator stun()

@@ -6,11 +6,12 @@ public class Bullet : MonoBehaviour
 {
     private Rigidbody rb;
     private SpriteRenderer sr;
-    private int bulletSpeed = 15;
+    
 
     public Vector3 movement;
     public float range = 1f;
     public int damage = 5;
+    public int bulletSpeed = 15;
     public bool piercing = false;
 
     // Start is called before the first frame update

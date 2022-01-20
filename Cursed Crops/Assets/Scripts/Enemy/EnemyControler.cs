@@ -67,18 +67,18 @@ public class EnemyControler : MonoBehaviour
             
             Color prevColor = sr.color;
             sr.color = Color.red;
-            gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
+            //gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
             yield return new WaitForSeconds(0.2f);
             takingDamage = false;
             sr.color = prevColor;
-            gameObject.GetComponent<EnemyToPlayer>().enemySpeed = gameObject.GetComponent<EnemyToPlayer>().originalSpeed;
+            //gameObject.GetComponent<EnemyToPlayer>().enemySpeed = gameObject.GetComponent<EnemyToPlayer>().originalSpeed;
         }
         //renderer.material.SetColor("_Color", Color.white);
     }
 
     private void death()
     {
-        itemDropper.DropItem(transform.position);
+        //itemDropper.DropItem(transform.position);
         //Destroy(this.gameObject);
         gameObject.SetActive(false);
     }

@@ -374,7 +374,7 @@ public class PlayerControler : MonoBehaviour
             Debug.Log(c.name);
             EnemyControler enemyControler = c.GetComponent<EnemyControler>();
 
-            if (c.gameObject.tag == "Enemy")
+            if (c.gameObject.tag == "Enemy" || c.gameObject.name == "cornnonBullet")
             {
                 if (attackChain == 1)
                 {

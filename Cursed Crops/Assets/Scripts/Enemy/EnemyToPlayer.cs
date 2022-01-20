@@ -83,8 +83,19 @@ public class EnemyToPlayer : MonoBehaviour
         {
             
             StopAllCoroutines();
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
+        if (gameObject.GetComponent<EnemyControler>().takingDamage)
+        {
+            enemySpeed = 0;
+            StopCoroutine("stun");
+            StartCoroutine("stun");
+        }
+        else
+        {
+            enemySpeed = originalSpeed;
+        }
+
         //PathRequestManager.RequestPath(this.transform.position, closestPlayer.position, OnPathFound);
         /*if (targetChange)
         {
@@ -213,6 +224,15 @@ public class EnemyToPlayer : MonoBehaviour
             //rb.MovePosition(positioning);
 
         }
+    }
+
+    IEnumerator stun()
+    {
+        Debug.Log("getting stun");
+        //gameObject.GetComponent<Renderer>().material.color = Color.red;
+        yield return new WaitForSeconds(0.5f);
+        //gameObject.GetComponent<Renderer>().material.color = prev;
+        gameObject.GetComponent<EnemyControler>().takingDamage = false;
     }
 
     public void OnDrawGizmos()
