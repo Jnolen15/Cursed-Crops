@@ -27,7 +27,11 @@ public class PlantingUIManager : MonoBehaviour
 
     public Camera mainCamera;
 
-
+    // private text strings
+    private string[] A = new string[4];
+    private string[] B = new string[4];
+    private string[] C = new string[4];
+    private string[] D = new string[4];
 
 
 
@@ -35,69 +39,99 @@ public class PlantingUIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        topNum.text = "100";
-        botNum.text = "100";
-        rightNum.text = "100";
-        leftNum.text = "100";
-
         mainCamera = GameObject.FindObjectOfType<Camera>();
+        setUp("a", "a", "a", "a", "b", "b", "b", "b", "c", "c", "c", "c", "d", "d", "d", "d");
     }
 
     // Update is called once per frame
     void Update()
     {
         // testing internal functions
-        string a;
         closeDisplay();
         if (Input.GetKey(KeyCode.W))
         {
-            a = "top";
-            selectTop(a, a, a);
+            selectTop();
         } 
         if (Input.GetKey(KeyCode.S))
         {
-            a = "bot";
-            selectBot(a, a, a);
+            selectBot();
         } 
         if (Input.GetKey(KeyCode.D))
         {
-            a = "right";
-            selectRight(a, a, a);
+            selectRight();
+            Debug.Log("displayRight");
         } 
         if (Input.GetKey(KeyCode.A))
         {
-            a = "left";
-            selectLeft(a, a, a);
+            selectLeft();
         }
 
-        // pointing towards camera
-            
+        // pointing towards camera (but only x-axis rotation)
+        this.transform.LookAt(mainCamera.transform, Vector3.up);
+        this.transform.rotation *= Quaternion.Euler(0, 180, 0);
+        this.transform.rotation = Quaternion.Euler(this.transform.rotation.eulerAngles.x, 0, 0);
+        // why is this two statements instead of one? I tried it, it broke. tldr: I have no clue how quarternions work
     }
 
+    // method for setting up the box, takes the title, description, stats, and price strings for each textbox and stores them in their
+    // respective arrays. Also sets the price boxes from the start because they are always displayed.
+    // A is rightButton, B is bottom, C is top, and D is left, sort of like a switch controller
+    public void setUp(string tA, string dA, string sA, string pA, string tB, string dB, string sB, string pB,
+        string tC, string dC, string sC, string pC, string tD, string dD, string sD, string pD)
+    {
+        A[0] = tA;
+        A[1] = dA;
+        A[2] = sA;
+        A[3] = pA;
 
-    public void selectTop(string a, string b, string c)
-    {
-        display(a, b, c);
-        TopSelect.SetActive(true);
+        B[0] = tB;
+        B[1] = dB;
+        B[2] = sB;
+        B[3] = pB;
+
+        C[0] = tC;
+        C[1] = dC;
+        C[2] = sC;
+        C[3] = pD;
+
+        D[0] = tD;
+        D[1] = dD;
+        D[2] = sD;
+        D[3] = pD;
+
+
+        rightNum.text = A[3];
+        botNum.text = B[3];
+        topNum.text = C[3];
+        leftNum.text = D[3];
+
+        Debug.Log("setUp");
     }
-    public void selectBot(string a, string b, string c)
+
+    // methods for displaying the textbox according to which window is selected
+    public void selectRight()
     {
-        display(a, b, c);
-        BotSelect.SetActive(true);
-    }
-    public void selectRight(string a, string b, string c)
-    {
-        display(a, b, c);
+        display(A[0], A[1], A[2]);
         RightSelect.SetActive(true);
     }
-    public void selectLeft(string a, string b, string c)
+    public void selectBot()
     {
-        display(a, b, c);
+        display(B[0], B[1], B[2]);
+        BotSelect.SetActive(true);
+    }
+    public void selectTop()
+    {
+        display(C[0], C[1], C[2]);
+        TopSelect.SetActive(true);
+    }
+    public void selectLeft()
+    {
+        display(D[0], D[1], D[2]);
         LeftSelect.SetActive(true);
     }
 
 
-    public void display(string a, string b, string c)
+    private void display(string a, string b, string c)
     {
         Window.SetActive(true);
         title.text = a;
@@ -105,6 +139,7 @@ public class PlantingUIManager : MonoBehaviour
         stats.text = c;
     }
 
+    // closes the window display (which is right of the buttons)
     public void closeDisplay()
     {
         Window.SetActive(false);
@@ -114,6 +149,7 @@ public class PlantingUIManager : MonoBehaviour
         LeftSelect.SetActive(false);
     }
 
+    // deletes the display entirely
     public void exit()
     {
         Destroy(this.gameObject);
