@@ -47,25 +47,27 @@ public class PlayerControler : MonoBehaviour
 
     // OTHER COMPONENTS ===========
     //private PlayerInputActions playerInputActions;  // The player input object script
-    private Vector2 aimInputVector = Vector2.zero;
-    private Vector2 moveInputVector = Vector2.zero;
+    private BuildingSystem bs;
     private Rigidbody rb;                  // The player's Rigidbody
     private CapsuleCollider cc;
     private SpriteRenderer playerSprite;
     private Animator animator;
     private GameObject meleeAttackLeft;
     private GameObject meleeAttackRight;
+    private Vector2 aimInputVector = Vector2.zero;
+    private Vector2 moveInputVector = Vector2.zero;
     private Vector3 movement;
     private Vector3 rollDir;
     private Vector3 direction;
     [SerializeField] private LayerMask groundLayermask;
     private delegate void Callback();
-    private enum State
+    public enum State
     {
         Normal,
+        Building,
         Rolling,
     }
-    private State state;
+    public State state;
 
     public GameObject bullet;
 
@@ -75,6 +77,7 @@ public class PlayerControler : MonoBehaviour
     {
         state = State.Normal;
 
+        bs = GetComponent<BuildingSystem>();
         rb = GetComponent<Rigidbody>();
         cc = GetComponent<CapsuleCollider>();
 
@@ -115,12 +118,16 @@ public class PlayerControler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (state == State.Normal) // Not in rolling state
+        if (state != State.Rolling)
         {
             if (!useControler) FaceMouse();
             else FaceController();
         }
 
+        if (bs.buildmodeActive)
+            state = State.Building;
+
+        // Cooldown stuffs
         if (faceAimTime < faceAimTimer) faceAimTime += Time.deltaTime; // Face aim period
         else faceaim = false;
 
@@ -138,7 +145,18 @@ public class PlayerControler : MonoBehaviour
         switch (state)
         {
             case State.Normal:
-                //if(coolDownTimer > attackDuration) Move(); //Do it this way if movement should be locked while attacking
+                // Can't move while attacking
+                if (!animator.GetBool("Ranged") && attackcoolDown > attackDuration)
+                {
+                    Move();
+                }
+                rollDir = movement;
+                break;
+            case State.Building:
+                // Exit building state if out of build mode
+                if (!bs.buildmodeActive)
+                    state = State.Normal;
+                // Can't move while attacking
                 if (!animator.GetBool("Ranged"))
                 {
                     if (attackcoolDown > attackDuration)
@@ -288,7 +306,7 @@ public class PlayerControler : MonoBehaviour
         //Debug.Log(context);
         if (context.performed)
         {
-            if (movement.magnitude == 1 && !rollCD) // Only roll if moving and not on CD
+            if (movement.magnitude == 1 && !rollCD && state == State.Normal) // Only roll if moving, not on CD, and in Normal state
             {
                 state = State.Rolling;
                 rollSpeed = rollSpeedMax;

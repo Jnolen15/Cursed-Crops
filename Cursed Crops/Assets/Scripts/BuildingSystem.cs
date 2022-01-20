@@ -7,19 +7,31 @@ public class BuildingSystem : MonoBehaviour
 {
     // Private variables
     [SerializeField] private PlaceableSO activePlaceable;
+    [SerializeField] private CropSO activeCrop;
     private PlayerControler pc;
-    private GameObject PlaceableHighlight;
-    private bool buildmodeActive = false;
+    private BuildChecker bc;
+    private SpawnManager sm;
+    private GameObject placeableHighlight;
+    private GameObject phSprite;
+    private SpriteRenderer pHSpriteRenderer;
+    public bool acceptablePos;
 
     // Public variables
+    public bool buildmodeActive = false;
+    public string mode = "Build";
     public float gridSize = 2;
     public float gridOffsetX = 0.5f;
     public float gridOffsetZ = 0.5f;
 
     private void Awake()
     {
-        PlaceableHighlight = this.transform.Find("PlaceableHighlight").gameObject;
+        placeableHighlight = this.transform.GetChild(4).gameObject;
+        phSprite = placeableHighlight.transform.GetChild(0).gameObject;
+        pHSpriteRenderer = phSprite.GetComponent<SpriteRenderer>();
         pc = this.GetComponent<PlayerControler>();
+        bc = placeableHighlight.GetComponent<BuildChecker>();
+
+        sm = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
     }
 
 
@@ -27,7 +39,8 @@ public class BuildingSystem : MonoBehaviour
     {
         if (buildmodeActive)
         {
-            alignToGrid(PlaceableHighlight.transform);
+            alignToGrid(placeableHighlight.transform);
+            testPlacementAvailable();
         }
     }
 
@@ -39,20 +52,36 @@ public class BuildingSystem : MonoBehaviour
             if (buildmodeActive)
             {
                 buildmodeActive = false;
-                if (PlaceableHighlight != null)
+                if (placeableHighlight != null)
                 {
-                    PlaceableHighlight.SetActive(false);
+                    placeableHighlight.SetActive(false);
                 }
             }
             else
             {
                 buildmodeActive = true;
-                if (PlaceableHighlight != null)
+                if (placeableHighlight != null)
                 {
-                    PlaceableHighlight.SetActive(true);
+                    placeableHighlight.SetActive(true);
 
-                    // Set the higlight to match the prefab
-                    PlaceableHighlight.transform.localScale = activePlaceable.prefab.transform.localScale;
+                    if (mode == "Build")
+                    {
+                        // Set the higlight to match the prefab
+                        pHSpriteRenderer.sprite = activePlaceable.preview;
+                        phSprite.transform.localScale = activePlaceable.prefab.GetChild(0).GetChild(0).transform.localScale;
+                        bc.mode = mode;
+                        // Set hitbox to match the prefab
+                        //bc.boxCol.size = activePlaceable.prefab.GetComponent<BoxCollider>().size;
+                    }
+                    else if (mode == "Plant")
+                    {
+                        // Set the higlight to match the prefab
+                        pHSpriteRenderer.sprite = activeCrop.preview;
+                        phSprite.transform.localScale = activeCrop.prefab.GetChild(0).GetChild(0).transform.localScale;
+                        bc.mode = mode;
+                        // Set hitbox to match the prefab
+                        //bc.boxCol.size = activePlaceable.prefab.GetComponent<BoxCollider>().size;
+                    }
                 }
             }
         }
@@ -63,14 +92,15 @@ public class BuildingSystem : MonoBehaviour
     {
         if (context.performed)
         {
-            if (buildmodeActive)
+            Debug.Log("Rotate currently disabled. As it is not needed");
+            /*if (buildmodeActive)
             {
-                if (PlaceableHighlight != null)
+                if (placeableHighlight != null)
                 {
                     Quaternion rotationAmmount = Quaternion.Euler(0, 90, 0);
-                    PlaceableHighlight.transform.rotation *= rotationAmmount;
+                    placeableHighlight.transform.rotation *= rotationAmmount;
                 }
-            }
+            }*/
         }
     }
 
@@ -81,9 +111,15 @@ public class BuildingSystem : MonoBehaviour
         {
             if (buildmodeActive)
             {
-                if (PlaceableHighlight != null)
+                if (placeableHighlight != null && acceptablePos)
                 {
-                    Instantiate(activePlaceable.prefab, PlaceableHighlight.transform.position, PlaceableHighlight.transform.rotation);
+                    if (mode == "Build")
+                        Instantiate(activePlaceable.prefab, placeableHighlight.transform.position, placeableHighlight.transform.rotation);
+                    else if (mode == "Plant" && sm.state == SpawnManager.State.Break)
+                    {
+                        GameObject newSpawner = Instantiate(activeCrop.prefab.gameObject, placeableHighlight.transform.position, placeableHighlight.transform.rotation);
+                        sm.AddSpawner(newSpawner);
+                    }
                 }
             }
         }
@@ -92,7 +128,7 @@ public class BuildingSystem : MonoBehaviour
     private void alignToGrid(Transform trans)
     {
         // Get player position
-        Vector3 playerPos = new Vector3(transform.position.x, 0, transform.position.z);
+        Vector3 playerPos = new Vector3(transform.position.x, 1, transform.position.z);
 
         // align it to grid
         float xPos = Mathf.Round(playerPos.x);
@@ -111,38 +147,32 @@ public class BuildingSystem : MonoBehaviour
             xPos += (gridSize);
 
         // Create and return position
-        Vector3 placePos = new Vector3(xPos, 0, zPos);
+        Vector3 placePos = new Vector3(xPos, 1, zPos);
 
         trans.position = placePos;
     }
 
-    /*public void Build_performed(InputAction.CallbackContext context)
+    private void testPlacementAvailable()
     {
-        if (context.performed)
+        acceptablePos = false;
+
+        if (bc.acceptablePos && !bc.intersectingBuildable)
         {
-            // Instantiate
-            Instantiate(activePlaceable.prefab, alignToGrid(), transform.rotation);
+            if (mode == "Plant" && sm.state == SpawnManager.State.Break)
+            {
+                acceptablePos = true;
+            } else if (mode == "Build")
+            {
+                acceptablePos = true;
+            }
         }
-    }*/
 
-    /*private Vector3 alignToGrid()
-    {
-        // Get player position
-        Vector3 playerPos = new Vector3(transform.position.x, 0, transform.position.z);
-
-        //Debug.Log("Player pos: " + transform.position.x + " " + transform.position.z);
-
-        // align it to grid
-        float xPos = Mathf.Round(transform.position.x);
-        xPos -= (xPos % gridSize);
-        float zPos = Mathf.Round(transform.position.z);
-        zPos -= (zPos % gridSize);
-
-        //Debug.Log("Rounded pos: " + xPos + " " + zPos);
-
-        // Create and return position
-        Vector3 placePos = new Vector3(xPos, 0, zPos);
-        return placePos;
-
-    }*/
+        if (acceptablePos)
+        {
+            pHSpriteRenderer.color = Color.green;
+        } else
+        {
+            pHSpriteRenderer.color = Color.red;
+        }
+    }
 }

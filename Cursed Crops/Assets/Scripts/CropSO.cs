@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu()]
-public class PlaceableSO : ScriptableObject
+public class CropSO : ScriptableObject
 {
     public Transform prefab;
     public Sprite preview;
-    public string placeableName;
+    public string cropName;
     public string desc;
 }

@@ -159,6 +159,11 @@ public class SpawnManager : MonoBehaviour
         callback?.Invoke();
     }
 
+    public void AddSpawner(GameObject spawner)
+    {
+        spawners.Add(spawner);
+    }
+
     // Spawn a burst of enemies from all sources
     /*private void BurstSpawn(string currnetPhase)
     {
