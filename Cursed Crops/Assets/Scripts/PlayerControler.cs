@@ -371,11 +371,11 @@ public class PlayerControler : MonoBehaviour
     {
         foreach (Collider c in cols)
         {
-            Debug.Log(c.name);
             EnemyControler enemyControler = c.GetComponent<EnemyControler>();
 
-            if (c.gameObject.tag == "Enemy" || c.gameObject.name == "cornnonBullet")
+            if (c.gameObject.tag == "Enemy" || c.gameObject.name == "cornnonBullet(Clone)")
             {
+                
                 if (attackChain == 1)
                 {
                     enemyControler.takeDamageMelee(2);

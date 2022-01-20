@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //Debug.Log("Hit " + other.gameObject.tag);
-        if (other.gameObject.tag == "Enemy" && gameObject.tag != "enemyBullet")
+        if ((other.gameObject.tag == "Enemy" || other.gameObject.name == "cornnonBullet(Clone)") && gameObject.tag != "enemyBullet")
         {
             EnemyControler enemyControler = other.gameObject.GetComponent<EnemyControler>();
             enemyControler.takeDamageRange(damage);

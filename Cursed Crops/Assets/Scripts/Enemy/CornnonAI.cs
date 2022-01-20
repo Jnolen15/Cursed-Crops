@@ -91,14 +91,8 @@ public class CornnonAI : MonoBehaviour
             enemySpeed = 0;
 
 
-            if (!shooting && gameObject.GetComponent<EnemyControler>().takingDamage)
-            {
-                shooting = true;
-                StopCoroutine("shoot");
-                //StopAllCoroutines();
-                StartCoroutine("stun");
-            }
-            else if (!shooting && !gameObject.GetComponent<EnemyControler>().takingDamage)
+            
+            if (!shooting)
             {
                 shooting = true;
                 direction = new Vector3(closestPlayer.position.x - transform.position.x, 0, closestPlayer.position.z - transform.position.z);
