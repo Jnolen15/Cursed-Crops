@@ -35,9 +35,12 @@ public class EnemyPlayerDamage : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Enemy" && !isItHit && !hitAgain && other.gameObject.GetComponent<WindUpAttackMelee>().attacking)
+        if (other.gameObject.GetComponent<WindUpAttackMelee>() != null)
         {
-            StartCoroutine(iframes());
+            if (other.gameObject.tag == "Enemy" && !isItHit && !hitAgain && other.gameObject.GetComponent<WindUpAttackMelee>().attacking)
+            {
+                StartCoroutine(iframes());
+            }
         }
     }
     private IEnumerator iframes()

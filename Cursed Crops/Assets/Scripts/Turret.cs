@@ -30,7 +30,7 @@ public class Turret : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Enemy" && !shooting)
+        if (other.gameObject.tag == "Enemy" && !shooting && other.gameObject.name != "cornnonBullet")
         {
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
             listOfenemies = new Transform[enemies.Length];
