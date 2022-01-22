@@ -55,7 +55,7 @@ public class CornnonBullet : MonoBehaviour
         //Debug.Log(direction);
         bul.GetComponent<Bullet>().movement = direction.normalized;
         //enemySpeed = 0f;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.00000001f);
         //enemySpeed = originalSpeed;
         //gameObject.GetComponent<Renderer>().material.color = prev;
         shooting = false;
