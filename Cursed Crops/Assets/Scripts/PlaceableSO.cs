@@ -9,4 +9,5 @@ public class PlaceableSO : ScriptableObject
     public Sprite preview;
     public string placeableName;
     public string desc;
+
 }

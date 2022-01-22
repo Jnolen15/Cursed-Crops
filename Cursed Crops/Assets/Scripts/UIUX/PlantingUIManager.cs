@@ -25,7 +25,9 @@ public class PlantingUIManager : MonoBehaviour
     public GameObject RightSelect;
     public GameObject LeftSelect;
 
+    // external objects
     public Camera mainCamera;
+    public popUpUISO SO;
 
     // private text strings
     private string[] A = new string[4];
@@ -40,12 +42,15 @@ public class PlantingUIManager : MonoBehaviour
     void Start()
     {
         mainCamera = GameObject.FindObjectOfType<Camera>();
-        setUp("a", "a", "a", "a", "b", "b", "b", "b", "c", "c", "c", "c", "d", "d", "d", "d");
+
+        setUp(SO.textA, SO.textB, SO.textC, SO.textD);
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        /*
         // testing internal functions
         closeDisplay();
         if (Input.GetKey(KeyCode.W))
@@ -65,6 +70,7 @@ public class PlantingUIManager : MonoBehaviour
         {
             selectLeft();
         }
+        */
 
         // pointing towards camera (but only x-axis rotation)
         this.transform.LookAt(mainCamera.transform, Vector3.up);
@@ -76,28 +82,12 @@ public class PlantingUIManager : MonoBehaviour
     // method for setting up the box, takes the title, description, stats, and price strings for each textbox and stores them in their
     // respective arrays. Also sets the price boxes from the start because they are always displayed.
     // A is rightButton, B is bottom, C is top, and D is left, sort of like a switch controller
-    public void setUp(string tA, string dA, string sA, string pA, string tB, string dB, string sB, string pB,
-        string tC, string dC, string sC, string pC, string tD, string dD, string sD, string pD)
+    public void setUp(string[] newA, string[] newB, string[] newC, string[] newD)
     {
-        A[0] = tA;
-        A[1] = dA;
-        A[2] = sA;
-        A[3] = pA;
-
-        B[0] = tB;
-        B[1] = dB;
-        B[2] = sB;
-        B[3] = pB;
-
-        C[0] = tC;
-        C[1] = dC;
-        C[2] = sC;
-        C[3] = pD;
-
-        D[0] = tD;
-        D[1] = dD;
-        D[2] = sD;
-        D[3] = pD;
+        A = newA;
+        B = newB;
+        C = newC;
+        D = newD;
 
 
         rightNum.text = A[3];
