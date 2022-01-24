@@ -13,6 +13,11 @@ public class BuildChecker : MonoBehaviour
         boxCol = GetComponent<BoxCollider>();
     }
 
+    private void OnDisable()
+    {
+        intersectingBuildable = false;
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (mode == "Build")

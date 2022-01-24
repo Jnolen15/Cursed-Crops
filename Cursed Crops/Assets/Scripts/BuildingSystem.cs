@@ -6,32 +6,51 @@ using UnityEngine.InputSystem;
 public class BuildingSystem : MonoBehaviour
 {
     // Private variables
-    [SerializeField] private PlaceableSO activePlaceable;
-    [SerializeField] private CropSO activeCrop;
+    [SerializeField] private popUpUISO popupUI;
+    public GameObject popUp;
+    private PlantingUIManager popUpMan;
+    public PlaceableSO activePlaceable;
+    public CropSO activeCrop;
     private PlayerControler pc;
     private BuildChecker bc;
     private SpawnManager sm;
-    private GameObject placeableHighlight;
-    private GameObject phSprite;
-    private SpriteRenderer pHSpriteRenderer;
+    public GameObject placeableHighlight;
+    public GameObject phSprite;
+    public SpriteRenderer pHSpriteRenderer;
     public bool acceptablePos;
+    private int count = 0;
 
     // Public variables
     public bool buildmodeActive = false;
     public string mode = "Build";
-    public float gridSize = 2;
+    public float gridSize = 1;
     public float gridOffsetX = 0.5f;
     public float gridOffsetZ = 0.5f;
 
-    private void Awake()
+    private void Start()
     {
-        placeableHighlight = this.transform.GetChild(4).gameObject;
-        phSprite = placeableHighlight.transform.GetChild(0).gameObject;
-        pHSpriteRenderer = phSprite.GetComponent<SpriteRenderer>();
+        //placeableHighlight = this.transform.GetChild(4).gameObject;
+        //phSprite = placeableHighlight.transform.GetChild(0).gameObject;
+        //pHSpriteRenderer = phSprite.GetComponent<SpriteRenderer>();
         pc = this.GetComponent<PlayerControler>();
         bc = placeableHighlight.GetComponent<BuildChecker>();
-
         sm = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        popUp = Instantiate(popupUI.Prefab.gameObject, transform.position, transform.rotation, transform);
+        popUp.SetActive(false);
+        popUpMan = popUp.GetComponent<PlantingUIManager>();
+        // Set default selected placeable
+        if (popupUI.buildables.Length > 0 && popupUI.buildables.Length > 0)
+        {
+            activePlaceable = popupUI.buildables[0];
+            activeCrop = popupUI.plantables[0];
+        } else
+        {
+            Debug.Log("Placeable and/or Plantable array has a size of 0");
+        }
+        buildmodeActive = false;
+        mode = "Build";
+        placeableHighlight.SetActive(false);
+        Debug.Log(this.gameObject.name);
     }
 
 
@@ -39,8 +58,19 @@ public class BuildingSystem : MonoBehaviour
     {
         if (buildmodeActive)
         {
-            alignToGrid(placeableHighlight.transform);
-            testPlacementAvailable();
+            AlignToGrid(placeableHighlight.transform);
+            AlignToGrid(popUp.transform);
+            TestPlacementAvailable();
+
+            if (mode == "Build" && pHSpriteRenderer.sprite != activePlaceable.preview)
+            {
+                pHSpriteRenderer.sprite = activePlaceable.preview;
+                phSprite.transform.localScale = activePlaceable.prefab.GetChild(0).GetChild(0).transform.localScale;
+            } else if (mode == "Plant" && pHSpriteRenderer.sprite != activePlaceable.preview)
+            {
+                pHSpriteRenderer.sprite = activeCrop.preview;
+                phSprite.transform.localScale = activeCrop.prefab.GetChild(0).GetChild(0).transform.localScale;
+            }
         }
     }
 
@@ -51,18 +81,24 @@ public class BuildingSystem : MonoBehaviour
         {
             if (buildmodeActive)
             {
+                Debug.Log("CLOSING BUILD MODE FROM: " + this.gameObject.name);
                 buildmodeActive = false;
                 if (placeableHighlight != null)
                 {
                     placeableHighlight.SetActive(false);
+                    if(popUp != null)
+                        popUp.SetActive(false);
                 }
             }
-            else
+            else if (!buildmodeActive)
             {
+                Debug.Log("OPENING BUILD MODE FROM: " + this.gameObject.name);
                 buildmodeActive = true;
                 if (placeableHighlight != null)
                 {
                     placeableHighlight.SetActive(true);
+                    if (popUp != null)
+                        popUp.SetActive(true);
 
                     if (mode == "Build")
                     {
@@ -70,6 +106,7 @@ public class BuildingSystem : MonoBehaviour
                         pHSpriteRenderer.sprite = activePlaceable.preview;
                         phSprite.transform.localScale = activePlaceable.prefab.GetChild(0).GetChild(0).transform.localScale;
                         bc.mode = mode;
+                        popUpMan.selectTop();
                         // Set hitbox to match the prefab
                         //bc.boxCol.size = activePlaceable.prefab.GetComponent<BoxCollider>().size;
                     }
@@ -79,6 +116,7 @@ public class BuildingSystem : MonoBehaviour
                         pHSpriteRenderer.sprite = activeCrop.preview;
                         phSprite.transform.localScale = activeCrop.prefab.GetChild(0).GetChild(0).transform.localScale;
                         bc.mode = mode;
+                        popUpMan.selectTop();
                         // Set hitbox to match the prefab
                         //bc.boxCol.size = activePlaceable.prefab.GetComponent<BoxCollider>().size;
                     }
@@ -125,7 +163,168 @@ public class BuildingSystem : MonoBehaviour
         }
     }
 
-    private void alignToGrid(Transform trans)
+    // Cycle Left to next buildable
+    public void SwitchLeft_performed(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (buildmodeActive)
+            {
+                if (count <= 0)
+                    count = 3;
+                else
+                    count--;
+
+                activePlaceable = popupUI.buildables[count];
+                activeCrop = popupUI.plantables[count];
+
+                switch (count)
+                {
+                    case 0:
+                        popUpMan.selectTop();
+                        break;
+                    case 1:
+                        popUpMan.selectRight();
+                        break;
+                    case 2:
+                        popUpMan.selectBot();
+                        break;
+                    case 3:
+                        popUpMan.selectLeft();
+                        break;
+                }
+            }
+        }
+    }
+
+    // Cycle Right to next buildable
+    public void SwitchRight_performed(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (buildmodeActive)
+            {
+                if (count >= 3)
+                    count = 0;
+                else
+                    count++;
+
+                activePlaceable = popupUI.buildables[count];
+                activeCrop = popupUI.plantables[count];
+
+                switch (count)
+                {
+                    case 0:
+                        popUpMan.selectTop();
+                        break;
+                    case 1:
+                        popUpMan.selectRight();
+                        break;
+                    case 2:
+                        popUpMan.selectBot();
+                        break;
+                    case 3:
+                        popUpMan.selectLeft();
+                        break;
+                }
+
+            }
+        }
+    }
+
+    // The following 4 functions are for directly selecting a placeable. This selects the north placeable
+    public void SelectNorth_performed(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (buildmodeActive)
+            {
+                popUpMan.selectTop();
+                activePlaceable = popupUI.buildables[2];
+                activeCrop = popupUI.plantables[2];
+            }
+        }
+    }
+    // This selects the South placeable
+    public void SelectSouth_performed(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (buildmodeActive)
+            {
+                popUpMan.selectBot();
+                activePlaceable = popupUI.buildables[1];
+                activeCrop = popupUI.plantables[1];
+            }
+        }
+    }
+    // This selects the East placeable
+    public void SelectEast_performed(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (buildmodeActive)
+            {
+                popUpMan.selectRight();
+                activePlaceable = popupUI.buildables[0];
+                activeCrop = popupUI.plantables[0];
+            }
+        }
+    }
+    // This selects the West placeable
+    public void SelectWest_performed(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (buildmodeActive)
+            {
+                popUpMan.selectLeft();
+                activePlaceable = popupUI.buildables[3];
+                activeCrop = popupUI.plantables[3];
+            }
+        }
+    }
+
+    // Swap from plants to buildables or vice versa
+    public void Swap_performed(InputAction.CallbackContext context)
+{
+    if (context.performed)
+    {
+        if (buildmodeActive)
+        {
+            /*if(pHSpriteRenderer == null)
+            {
+                phSprite = placeableHighlight.transform.GetChild(0).gameObject;
+                pHSpriteRenderer = phSprite.GetComponent<SpriteRenderer>();
+            }*/
+
+            if (mode == "Build")
+            {
+                mode = "Plant";
+                // Set the higlight to match the prefab
+                pHSpriteRenderer.sprite = activeCrop.preview;
+                phSprite.transform.localScale = activeCrop.prefab.GetChild(0).GetChild(0).transform.localScale;
+                bc.mode = mode;
+                if (popUp != null)
+                    popUpMan.switchMode(mode);
+            }
+            else if (mode == "Plant")
+            {
+                mode = "Build";
+                // Set the higlight to match the prefab
+                pHSpriteRenderer.sprite = activePlaceable.preview;
+                phSprite.transform.localScale = activePlaceable.prefab.GetChild(0).GetChild(0).transform.localScale;
+                bc.mode = mode;
+                if (popUp != null)
+                    popUpMan.switchMode(mode);
+            }
+            else
+                Debug.LogError("Mode isn't Build or Plant");
+        }
+    }
+}
+
+    private void AlignToGrid(Transform trans)
     {
         // Get player position
         Vector3 playerPos = new Vector3(transform.position.x, 1, transform.position.z);
@@ -152,7 +351,7 @@ public class BuildingSystem : MonoBehaviour
         trans.position = placePos;
     }
 
-    private void testPlacementAvailable()
+    private void TestPlacementAvailable()
     {
         acceptablePos = false;
 

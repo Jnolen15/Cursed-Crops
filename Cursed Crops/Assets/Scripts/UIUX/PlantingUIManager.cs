@@ -41,36 +41,45 @@ public class PlantingUIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mainCamera = GameObject.FindObjectOfType<Camera>();
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 
-        setUp(SO.textA, SO.textB, SO.textC, SO.textD);
+        if (SO != null)
+        {
+            string[] textA = new string[] { SO.buildables[0].placeableName, SO.buildables[0].desc, SO.buildables[0].stats, SO.buildables[0].price };
+            string[] textB = new string[] { SO.buildables[1].placeableName, SO.buildables[1].desc, SO.buildables[1].stats, SO.buildables[1].price };
+            string[] textC = new string[] { SO.buildables[2].placeableName, SO.buildables[2].desc, SO.buildables[2].stats, SO.buildables[2].price };
+            string[] textD = new string[] { SO.buildables[3].placeableName, SO.buildables[3].desc, SO.buildables[3].stats, SO.buildables[3].price };
+            setUp(textA, textB, textC, textD);
+        } else
+        {
+            Debug.LogError("UI scriptable object ref is null");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        /*
-        // testing internal functions
+        
+        /*// testing internal functions
         closeDisplay();
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.I))
         {
             selectTop();
         } 
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.K))
         {
             selectBot();
         } 
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.L))
         {
             selectRight();
-            Debug.Log("displayRight");
         } 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.J))
         {
             selectLeft();
-        }
-        */
+        }*/
+        
 
         // pointing towards camera (but only x-axis rotation)
         this.transform.LookAt(mainCamera.transform, Vector3.up);
@@ -98,24 +107,52 @@ public class PlantingUIManager : MonoBehaviour
         Debug.Log("setUp");
     }
 
+    public void switchMode(string mode)
+    {
+        if (mode == "Build")
+        {
+            string[] textA = new string[] { SO.buildables[0].placeableName, SO.buildables[0].desc, SO.buildables[0].stats, SO.buildables[0].price };
+            string[] textB = new string[] { SO.buildables[1].placeableName, SO.buildables[1].desc, SO.buildables[1].stats, SO.buildables[1].price };
+            string[] textC = new string[] { SO.buildables[2].placeableName, SO.buildables[2].desc, SO.buildables[2].stats, SO.buildables[2].price };
+            string[] textD = new string[] { SO.buildables[3].placeableName, SO.buildables[3].desc, SO.buildables[3].stats, SO.buildables[3].price };
+            setUp(textA, textB, textC, textD);
+            selectTop();
+        } else if (mode == "Plant")
+        {
+            string[] textA = new string[] { SO.plantables[0].cropName, SO.plantables[0].desc, SO.plantables[0].stats, SO.plantables[0].price };
+            string[] textB = new string[] { SO.plantables[1].cropName, SO.plantables[1].desc, SO.plantables[1].stats, SO.plantables[1].price };
+            string[] textC = new string[] { SO.plantables[2].cropName, SO.plantables[2].desc, SO.plantables[2].stats, SO.plantables[2].price };
+            string[] textD = new string[] { SO.plantables[3].cropName, SO.plantables[3].desc, SO.plantables[3].stats, SO.plantables[3].price };
+            setUp(textA, textB, textC, textD);
+            selectTop();
+        } else
+        {
+            Debug.LogError("switchMode was not given a propper mode");
+        }
+    }
+
     // methods for displaying the textbox according to which window is selected
     public void selectRight()
     {
-        display(A[0], A[1], A[2]);
+        closeDisplay();
+        display(B[0], B[1], B[2]);
         RightSelect.SetActive(true);
     }
     public void selectBot()
     {
-        display(B[0], B[1], B[2]);
+        closeDisplay();
+        display(C[0], C[1], C[2]);
         BotSelect.SetActive(true);
     }
     public void selectTop()
     {
-        display(C[0], C[1], C[2]);
+        closeDisplay();
+        display(A[0], A[1], A[2]);
         TopSelect.SetActive(true);
     }
     public void selectLeft()
     {
+        closeDisplay();
         display(D[0], D[1], D[2]);
         LeftSelect.SetActive(true);
     }

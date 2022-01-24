@@ -11,18 +11,18 @@ public class GridPlacementChecker : MonoBehaviour
         if (other.gameObject.tag == "TilePlantable")
         {
             acceptablePos = true;
-            Debug.Log("Spawned on TilePlantable");
+            //Debug.Log("Spawned on TilePlantable");
         }
         else if (other.gameObject.tag == "TileBuildable")
         {
             acceptablePos = false;
-            Debug.Log("Spawned on TileBuildable");
+            //Debug.Log("Spawned on TileBuildable");
             //Destroy(this.gameObject);
         }
         else if (other.gameObject.tag == "TileUnplaceable")
         {
             acceptablePos = false;
-            Debug.Log("Spawned on TileUnplaceable");
+            //Debug.Log("Spawned on TileUnplaceable");
             //Destroy(this.gameObject);
         }
     }

@@ -81,6 +81,62 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""SwitchLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""b4d67f51-4e9c-47ee-b63e-c8a86bb6826a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Switchright"",
+                    ""type"": ""Button"",
+                    ""id"": ""f23ff558-5b6d-4126-9b47-a5854c8b1e53"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SelectNorth"",
+                    ""type"": ""Button"",
+                    ""id"": ""e4df2b50-bf09-4d37-98e4-c209761d7268"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SelectSouth"",
+                    ""type"": ""Button"",
+                    ""id"": ""b4ccd6e9-ca2c-4888-8520-973aec198f54"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SelectEast"",
+                    ""type"": ""Button"",
+                    ""id"": ""87081256-78cd-47e0-83e8-2d113025fc27"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SelectWest"",
+                    ""type"": ""Button"",
+                    ""id"": ""58bad2c5-7786-441f-97ac-97d90ff44d7c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Swap"",
+                    ""type"": ""Button"",
+                    ""id"": ""f7d28228-f4c5-46f8-b819-fe898b157e29"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -295,45 +351,199 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""d4467243-ff5d-4107-a6b3-b7be2afc7913"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Build"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""cf66e8f2-e367-4d2f-806d-8511ef00e050"",
+                    ""id"": ""6fb27d8e-7c27-4673-be52-7883afb77e45"",
                     ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Build"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ba624c52-d632-43a3-994f-918da36fcf1c"",
+                    ""id"": ""2ce173b8-ac61-4f2d-848a-a8b9b533fde3"",
                     ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Rotate"",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Build"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""3e7807f6-b3c0-49ea-9eb6-5a83c64dc090"",
+                    ""id"": ""fec02a40-f4c2-4151-8923-5a92fb4a8dbc"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Place"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9d302226-63bd-4e61-9e39-f4c303dcfe3c"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Place"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""707d5924-04a5-4fc1-80aa-401d0ec98a02"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SwitchLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e073b6a5-92c7-4cd2-9840-6f13eebd573e"",
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Place"",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SwitchLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9495236f-f906-4158-ad0a-02156d50d569"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Switchright"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe27cba7-8b00-468e-94b1-c5db7d4967a8"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Switchright"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""059b0c81-f58f-49af-81f2-86fec4ae4d3f"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SelectNorth"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c39a8918-fc2c-4c3d-afd9-6323b5eeeef4"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SelectNorth"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dbe7df29-417c-40ce-85bd-7f523ca9e624"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SelectSouth"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cfaaefdf-f859-4afb-8608-bacd7db16a1a"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SelectSouth"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0d6b3f12-c5d7-4937-a8e4-8f8c45cae174"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SelectEast"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d74ba80d-494c-47c6-84dc-7e4720007943"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SelectEast"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3badffb8-e6a9-4e25-a92d-c576bd524aca"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SelectWest"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""751e8e9d-89d1-490a-8443-c066fad21cff"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""SelectWest"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d27c5be3-1588-4de2-b051-2c5820571720"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Swap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""36520a7e-0991-4333-a242-ae3f55e06d36"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Swap"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -380,6 +590,13 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_Player_Build = m_Player.FindAction("Build", throwIfNotFound: true);
         m_Player_Rotate = m_Player.FindAction("Rotate", throwIfNotFound: true);
         m_Player_Place = m_Player.FindAction("Place", throwIfNotFound: true);
+        m_Player_SwitchLeft = m_Player.FindAction("SwitchLeft", throwIfNotFound: true);
+        m_Player_Switchright = m_Player.FindAction("Switchright", throwIfNotFound: true);
+        m_Player_SelectNorth = m_Player.FindAction("SelectNorth", throwIfNotFound: true);
+        m_Player_SelectSouth = m_Player.FindAction("SelectSouth", throwIfNotFound: true);
+        m_Player_SelectEast = m_Player.FindAction("SelectEast", throwIfNotFound: true);
+        m_Player_SelectWest = m_Player.FindAction("SelectWest", throwIfNotFound: true);
+        m_Player_Swap = m_Player.FindAction("Swap", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -437,6 +654,13 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Build;
     private readonly InputAction m_Player_Rotate;
     private readonly InputAction m_Player_Place;
+    private readonly InputAction m_Player_SwitchLeft;
+    private readonly InputAction m_Player_Switchright;
+    private readonly InputAction m_Player_SelectNorth;
+    private readonly InputAction m_Player_SelectSouth;
+    private readonly InputAction m_Player_SelectEast;
+    private readonly InputAction m_Player_SelectWest;
+    private readonly InputAction m_Player_Swap;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -449,6 +673,13 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         public InputAction @Build => m_Wrapper.m_Player_Build;
         public InputAction @Rotate => m_Wrapper.m_Player_Rotate;
         public InputAction @Place => m_Wrapper.m_Player_Place;
+        public InputAction @SwitchLeft => m_Wrapper.m_Player_SwitchLeft;
+        public InputAction @Switchright => m_Wrapper.m_Player_Switchright;
+        public InputAction @SelectNorth => m_Wrapper.m_Player_SelectNorth;
+        public InputAction @SelectSouth => m_Wrapper.m_Player_SelectSouth;
+        public InputAction @SelectEast => m_Wrapper.m_Player_SelectEast;
+        public InputAction @SelectWest => m_Wrapper.m_Player_SelectWest;
+        public InputAction @Swap => m_Wrapper.m_Player_Swap;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -482,6 +713,27 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Place.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPlace;
                 @Place.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPlace;
                 @Place.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPlace;
+                @SwitchLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchLeft;
+                @SwitchLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchLeft;
+                @SwitchLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchLeft;
+                @Switchright.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchright;
+                @Switchright.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchright;
+                @Switchright.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchright;
+                @SelectNorth.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectNorth;
+                @SelectNorth.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectNorth;
+                @SelectNorth.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectNorth;
+                @SelectSouth.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectSouth;
+                @SelectSouth.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectSouth;
+                @SelectSouth.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectSouth;
+                @SelectEast.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectEast;
+                @SelectEast.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectEast;
+                @SelectEast.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectEast;
+                @SelectWest.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectWest;
+                @SelectWest.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectWest;
+                @SelectWest.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSelectWest;
+                @Swap.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwap;
+                @Swap.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwap;
+                @Swap.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwap;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -510,6 +762,27 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Place.started += instance.OnPlace;
                 @Place.performed += instance.OnPlace;
                 @Place.canceled += instance.OnPlace;
+                @SwitchLeft.started += instance.OnSwitchLeft;
+                @SwitchLeft.performed += instance.OnSwitchLeft;
+                @SwitchLeft.canceled += instance.OnSwitchLeft;
+                @Switchright.started += instance.OnSwitchright;
+                @Switchright.performed += instance.OnSwitchright;
+                @Switchright.canceled += instance.OnSwitchright;
+                @SelectNorth.started += instance.OnSelectNorth;
+                @SelectNorth.performed += instance.OnSelectNorth;
+                @SelectNorth.canceled += instance.OnSelectNorth;
+                @SelectSouth.started += instance.OnSelectSouth;
+                @SelectSouth.performed += instance.OnSelectSouth;
+                @SelectSouth.canceled += instance.OnSelectSouth;
+                @SelectEast.started += instance.OnSelectEast;
+                @SelectEast.performed += instance.OnSelectEast;
+                @SelectEast.canceled += instance.OnSelectEast;
+                @SelectWest.started += instance.OnSelectWest;
+                @SelectWest.performed += instance.OnSelectWest;
+                @SelectWest.canceled += instance.OnSelectWest;
+                @Swap.started += instance.OnSwap;
+                @Swap.performed += instance.OnSwap;
+                @Swap.canceled += instance.OnSwap;
             }
         }
     }
@@ -542,5 +815,12 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnBuild(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
         void OnPlace(InputAction.CallbackContext context);
+        void OnSwitchLeft(InputAction.CallbackContext context);
+        void OnSwitchright(InputAction.CallbackContext context);
+        void OnSelectNorth(InputAction.CallbackContext context);
+        void OnSelectSouth(InputAction.CallbackContext context);
+        void OnSelectEast(InputAction.CallbackContext context);
+        void OnSelectWest(InputAction.CallbackContext context);
+        void OnSwap(InputAction.CallbackContext context);
     }
 }

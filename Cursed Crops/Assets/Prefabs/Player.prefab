@@ -71,15 +71,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 1212d0db361c494439bf52011551db8a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.44, y: 2.37}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &3579062659483603254
@@ -99,7 +99,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &64243564763032820
 Transform:
   m_ObjectHideFlags: 0
@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 7937736029672694563}
   - component: {fileID: 7358247313074556918}
   - component: {fileID: 7937736029672694562}
-  - component: {fileID: 1321918005435532659}
+  - component: {fileID: -5891569623318608545}
   - component: {fileID: 7937736029672694575}
   - component: {fileID: 1924405865491807640}
   - component: {fileID: -6313865123729909988}
@@ -250,7 +250,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7937736029672694574
 Transform:
   m_ObjectHideFlags: 0
@@ -408,7 +408,7 @@ MonoBehaviour:
     m_ActionName: Player/Aim[/DualShock4GamepadHID/rightStick]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1321918005435532659}
+      - m_Target: {fileID: -5891569623318608545}
         m_TargetAssemblyTypeName: BuildingSystem, Assembly-CSharp
         m_MethodName: BuildMode_performed
         m_Mode: 0
@@ -424,7 +424,7 @@ MonoBehaviour:
     m_ActionName: Player/Build[/Keyboard/e]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1321918005435532659}
+      - m_Target: {fileID: -5891569623318608545}
         m_TargetAssemblyTypeName: BuildingSystem, Assembly-CSharp
         m_MethodName: Rotate_performed
         m_Mode: 0
@@ -440,7 +440,7 @@ MonoBehaviour:
     m_ActionName: Player/Rotate[/Keyboard/r]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1321918005435532659}
+      - m_Target: {fileID: -5891569623318608545}
         m_TargetAssemblyTypeName: BuildingSystem, Assembly-CSharp
         m_MethodName: Place_performed
         m_Mode: 0
@@ -454,6 +454,118 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: db451421-19df-40d6-bb0d-29edad8b0be3
     m_ActionName: Player/Place[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -5891569623318608545}
+        m_TargetAssemblyTypeName: BuildingSystem, Assembly-CSharp
+        m_MethodName: SwitchLeft_performed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b4d67f51-4e9c-47ee-b63e-c8a86bb6826a
+    m_ActionName: Player/SwitchLeft[/Keyboard/u]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -5891569623318608545}
+        m_TargetAssemblyTypeName: BuildingSystem, Assembly-CSharp
+        m_MethodName: SwitchRight_performed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f23ff558-5b6d-4126-9b47-a5854c8b1e53
+    m_ActionName: Player/Switchright[/Keyboard/o]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -5891569623318608545}
+        m_TargetAssemblyTypeName: BuildingSystem, Assembly-CSharp
+        m_MethodName: SelectNorth_performed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e4df2b50-bf09-4d37-98e4-c209761d7268
+    m_ActionName: Player/SelectNorth[/Keyboard/i]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -5891569623318608545}
+        m_TargetAssemblyTypeName: BuildingSystem, Assembly-CSharp
+        m_MethodName: SelectSouth_performed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b4ccd6e9-ca2c-4888-8520-973aec198f54
+    m_ActionName: Player/SelectSouth[/Keyboard/k]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -5891569623318608545}
+        m_TargetAssemblyTypeName: BuildingSystem, Assembly-CSharp
+        m_MethodName: SelectEast_performed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 87081256-78cd-47e0-83e8-2d113025fc27
+    m_ActionName: Player/SelectEast[/Keyboard/l]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -5891569623318608545}
+        m_TargetAssemblyTypeName: BuildingSystem, Assembly-CSharp
+        m_MethodName: SelectWest_performed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 58bad2c5-7786-441f-97ac-97d90ff44d7c
+    m_ActionName: Player/SelectWest[/Keyboard/j]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -5891569623318608545}
+        m_TargetAssemblyTypeName: BuildingSystem, Assembly-CSharp
+        m_MethodName: Swap_performed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f7d28228-f4c5-46f8-b819-fe898b157e29
+    m_ActionName: Player/Swap[/Keyboard/m]
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: Player
@@ -491,7 +603,7 @@ MonoBehaviour:
     m_Bits: 8
   state: 0
   bullet: {fileID: 6242655706651345086, guid: dd76d198cb4f6304f93a7e3ef466c390, type: 3}
---- !u!114 &1321918005435532659
+--- !u!114 &-5891569623318608545
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -503,8 +615,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a5616066a6444148aed45f93d3ae3d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  popupUI: {fileID: 11400000, guid: 4d75e18a1c45f9743bdd70006cc8f3c5, type: 2}
+  popUp: {fileID: 0}
   activePlaceable: {fileID: 11400000, guid: 98585d46ce9140b419f481660a6a2314, type: 2}
-  activeCrop: {fileID: 11400000, guid: a5f8f8a907c6b92489be386cc2c227c5, type: 2}
+  activeCrop: {fileID: 11400000, guid: a9eb14fb481f3ce4a879acd392f2979e, type: 2}
+  placeableHighlight: {fileID: 3579062659483603254}
+  phSprite: {fileID: 130268335308826650}
+  pHSpriteRenderer: {fileID: 3223592091748275944}
   acceptablePos: 0
   buildmodeActive: 0
   mode: Plant
