@@ -114,7 +114,9 @@ public class EnemyToPlayer : MonoBehaviour
 
     Transform FindClosestPlayer(Transform[] players)
     {
+        Vector3 randomPosition = Vector3.zero;
         Transform bestTarget = mainTarget.transform;
+        
         float closestDistanceSqr = Mathf.Infinity;
         Vector3 currentPosition = transform.position;
         float higherDamage = 0;

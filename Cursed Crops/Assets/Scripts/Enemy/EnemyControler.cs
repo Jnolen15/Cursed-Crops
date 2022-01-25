@@ -80,7 +80,7 @@ public class EnemyControler : MonoBehaviour
     {
         //itemDropper.DropItem(transform.position);
         //Destroy(this.gameObject);
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
 }

@@ -21,6 +21,7 @@ public class PlayerControler : MonoBehaviour
 
     public int overAllPlayerDamage = 0;
     public float moveSpeed;
+    public float originalSpeed;
     public int money = 0;
     public int health = 10;
     public int maxHealth = 10;
@@ -30,6 +31,7 @@ public class PlayerControler : MonoBehaviour
     private bool rangeCD = false;
     private bool rollCD = false;
     public bool faceaim = false;
+    public bool trapped = false;
     private bool startRollFallOff = false;
 
     public bool flipped = false;
@@ -80,7 +82,7 @@ public class PlayerControler : MonoBehaviour
         bs = GetComponent<BuildingSystem>();
         rb = GetComponent<Rigidbody>();
         cc = GetComponent<CapsuleCollider>();
-
+        originalSpeed = moveSpeed;
         // Get the left facing attack hitbox and set it inactive
         meleeAttackLeft = this.transform.GetChild(0).gameObject;
         // Get the Right facing attack hitbox and set it inactive
@@ -126,6 +128,16 @@ public class PlayerControler : MonoBehaviour
 
         if (bs.buildmodeActive)
             state = State.Building;
+
+        // movement is stopped if player is trapped
+        if (trapped)
+        {
+            moveSpeed = 0;
+        }
+        else
+        {
+;            moveSpeed = originalSpeed;
+        }
 
         // Cooldown stuffs
         if (faceAimTime < faceAimTimer) faceAimTime += Time.deltaTime; // Face aim period
@@ -304,7 +316,7 @@ public class PlayerControler : MonoBehaviour
     public void Roll_performed(InputAction.CallbackContext context)
     {
         //Debug.Log(context);
-        if (context.performed)
+        if (context.performed && !trapped)
         {
             if (movement.magnitude == 1 && !rollCD && state == State.Normal) // Only roll if moving, not on CD, and in Normal state
             {
@@ -393,21 +405,28 @@ public class PlayerControler : MonoBehaviour
 
             if (c.gameObject.tag == "Enemy" || c.gameObject.name == "cornnonBullet(Clone)")
             {
-                
-                if (attackChain == 1)
+                if (!trapped)
                 {
-                    enemyControler.takeDamageMelee(2);
-                    overAllPlayerDamage += 2;
+                    if (attackChain == 1)
+                    {
+                        enemyControler.takeDamageMelee(2);
+                        overAllPlayerDamage += 2;
+                    }
+                    else if (attackChain == 2)
+                    {
+                        enemyControler.takeDamageMelee(3);
+                        overAllPlayerDamage += 3;
+                    }
+                    else if (attackChain == 3)
+                    {
+                        enemyControler.takeDamageMelee(6);
+                        overAllPlayerDamage += 6;
+                    }
                 }
-                else if (attackChain == 2)
+                else
                 {
-                    enemyControler.takeDamageMelee(3);
-                    overAllPlayerDamage += 3;
-                }
-                else if (attackChain == 3)
-                {
-                    enemyControler.takeDamageMelee(6);
-                    overAllPlayerDamage += 6;
+                    enemyControler.takeDamageMelee(1);
+                    overAllPlayerDamage += 1;
                 }
             }
         }
