@@ -55,11 +55,11 @@ public class UI_Manager : MonoBehaviour
             currencyText.text = "Money: " + currMoney;
             vegetableText.text = "R: " + currRedCrops + ", P: " + currPurpleCrops;
             // managing health bar
-            HealthBar.value = EPD.playerHealth / EPD.reviveHealth;
+            HealthBar.value = (float)EPD.playerHealth / (float)EPD.reviveHealth;
         }
 
         // updating general UI
-        HouseHealthBar.value = EDO.houseHealth / 50;
+        HouseHealthBar.value = (float)EDO.houseHealth / (float)EDO.startingHouseHealth;
     }
 
     

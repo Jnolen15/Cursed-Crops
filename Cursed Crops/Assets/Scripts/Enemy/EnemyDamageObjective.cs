@@ -7,12 +7,14 @@ public class EnemyDamageObjective : MonoBehaviour
 {
     public GameObject enemies;
     public GameObject mainObjective;
-    public int houseHealth = 50;
+    public int houseHealth = 5000;
+    public int startingHouseHealth = 5000;
+
     private bool isItHit = false;
     // Start is called before the first frame update
     void Start()
     {
-        
+        houseHealth = startingHouseHealth;
     }
 
     // Update is called once per frame
