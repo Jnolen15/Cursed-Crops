@@ -50,6 +50,7 @@ public class PlayerControler : MonoBehaviour
     // OTHER COMPONENTS ===========
     //private PlayerInputActions playerInputActions;  // The player input object script
     private BuildingSystem bs;
+    private EnemyPlayerDamage epd;
     private Rigidbody rb;                  // The player's Rigidbody
     private CapsuleCollider cc;
     private SpriteRenderer playerSprite;
@@ -68,6 +69,7 @@ public class PlayerControler : MonoBehaviour
         Normal,
         Building,
         Rolling,
+        Downed,
     }
     public State state;
 
@@ -80,6 +82,7 @@ public class PlayerControler : MonoBehaviour
         state = State.Normal;
 
         bs = GetComponent<BuildingSystem>();
+        epd = GetComponent<EnemyPlayerDamage>();
         rb = GetComponent<Rigidbody>();
         cc = GetComponent<CapsuleCollider>();
         originalSpeed = moveSpeed;
@@ -128,6 +131,14 @@ public class PlayerControler : MonoBehaviour
 
         if (bs.buildmodeActive)
             state = State.Building;
+
+        if(epd.playerIsStun)
+            state = State.Downed;
+        else if (!epd.playerIsStun && state == State.Downed)
+        {
+            animator.SetBool("Downed", false);
+            state = State.Normal;
+        }
 
         // movement is stopped if player is trapped
         if (trapped)
@@ -200,6 +211,9 @@ public class PlayerControler : MonoBehaviour
                     }
                 }
                 break;
+            case State.Downed:
+                animator.SetBool("Downed", true);
+                break;
         }
     }
 
@@ -269,16 +283,19 @@ public class PlayerControler : MonoBehaviour
 
     private void FaceMove()
     {
-        // Flip sprite to face the direction the player is moving
-        if (moveInputVector.x < 0 && !flipped)
+        if (state != State.Downed)
         {
-            flipped = true;
-            playerSprite.flipX = true;
-        }
-        else if (moveInputVector.x > 0 && flipped)
-        {
-            flipped = false;
-            playerSprite.flipX = false;
+            // Flip sprite to face the direction the player is moving
+            if (moveInputVector.x < 0 && !flipped)
+            {
+                flipped = true;
+                playerSprite.flipX = true;
+            }
+            else if (moveInputVector.x > 0 && flipped)
+            {
+                flipped = false;
+                playerSprite.flipX = false;
+            }
         }
     }
 

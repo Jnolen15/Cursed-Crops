@@ -13,11 +13,13 @@ public class EnemyPlayerDamage : MonoBehaviour
     private bool hitAgain = false;
     private bool alphaChekcer = false;
     public bool playerIsStun = false;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         playerSprite = gameObject.transform.Find("PlayerPivot").gameObject;
+        animator = this.transform.GetChild(2).GetChild(0).gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -25,8 +27,8 @@ public class EnemyPlayerDamage : MonoBehaviour
     {
         if (playerHealth <= 0)
         {
-            alphaChekcer = true;
-            StartCoroutine(stun());
+            //alphaChekcer = true;
+            StartCoroutine(downed());
             playerHealth += reviveHealth;
             Debug.Log(playerHealth);
             //gameOver();
@@ -47,25 +49,38 @@ public class EnemyPlayerDamage : MonoBehaviour
     {
         if (playerHealth > 0)
         {
-            var trans = 0.5f;
+            /*var trans = 0.5f;
             var col = playerSprite.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color;
             col.a = trans;
-            playerSprite.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
+            playerSprite.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;*/
+
+            animator.SetTrigger("Hurt");
+
             isItHit = true;
-            playerHealth -= 5;
+            playerHealth -= 1;
             // process pre-yield
             Debug.Log(playerHealth);
-            yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(1.0f);
             // process post-yield
-            if (!alphaChekcer)
+
+            /*if (!alphaChekcer)
             {
                 col.a = 1f;
                 playerSprite.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
-            }
+            }*/
+
             isItHit = false;
         }
     }
 
+    private IEnumerator downed()
+    {
+        playerIsStun = true;
+        yield return new WaitForSeconds(10.0f);
+        playerIsStun = false;
+    }
+
+    // Now unused
     private IEnumerator stun()
     {
         playerIsStun = true;

@@ -99,7 +99,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &64243564763032820
 Transform:
   m_ObjectHideFlags: 0
@@ -592,10 +592,12 @@ MonoBehaviour:
   faceAimTimer: 3
   overAllPlayerDamage: 0
   moveSpeed: 6
+  originalSpeed: 0
   money: 0
   health: 10
   maxHealth: 10
   faceaim: 1
+  trapped: 0
   flipped: 0
   useControler: 0
   groundLayermask:
@@ -623,7 +625,7 @@ MonoBehaviour:
   phSprite: {fileID: 130268335308826650}
   pHSpriteRenderer: {fileID: 3223592091748275944}
   acceptablePos: 0
-  buildmodeActive: 0
+  buildmodeActive: 1
   mode: Plant
   gridSize: 1
   gridOffsetX: 0.5
@@ -655,8 +657,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f928e3bf4db6344a746c878fb614ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  harveyAnimOC: {fileID: 22100000, guid: d773d78162d4eec47bf0fe6a301221bd, type: 2}
+  harveyAnimOC: {fileID: 22100000, guid: 2668cb7d30bd3e64495ba2b15cc620ff, type: 2}
   dougAnimOC: {fileID: 22100000, guid: d773d78162d4eec47bf0fe6a301221bd, type: 2}
+  cecilAnimOC: {fileID: 22100000, guid: ad8773edacbdbf84aa8fbeb25d0ca83f, type: 2}
   selectedCharacter: 0
 --- !u!114 &-6313865123729909988
 MonoBehaviour:
@@ -710,7 +713,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7937736029740589967}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.23, z: 0}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7937736029858094617}
@@ -922,7 +925,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7937736029858094616}
   m_LocalRotation: {x: 0.38268346, y: -0, z: -0, w: 0.9238795}
-  m_LocalPosition: {x: 0, y: -0.991, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children:
   - {fileID: 7937736029740589960}

@@ -7,6 +7,7 @@ public class PlayerAnimOCManager : MonoBehaviour
     // --- Variables
     public AnimatorOverrideController harveyAnimOC;
     public AnimatorOverrideController dougAnimOC;
+    public AnimatorOverrideController cecilAnimOC;
     public character selectedCharacter;
     private Animator animator;
 
@@ -14,7 +15,8 @@ public class PlayerAnimOCManager : MonoBehaviour
     public enum character // your custom enumeration
     {
         harvey,
-        doug
+        doug,
+        cecil
     };
 
     // --- Variables
@@ -28,6 +30,10 @@ public class PlayerAnimOCManager : MonoBehaviour
         else if (selectedCharacter == character.doug)
         {
             animator.runtimeAnimatorController = dougAnimOC;
+        }
+        else if (selectedCharacter == character.cecil)
+        {
+            animator.runtimeAnimatorController = cecilAnimOC;
         }
     }
 }
