@@ -269,15 +269,22 @@ public class PlayerControler : MonoBehaviour
         direction = Vector3.right * aimInputVector.x + Vector3.forward * aimInputVector.y;
 
         // Flip sprite to face the joystick position
-        if (direction.x < 0 && !flipped)
+        if (faceaim)
         {
-            flipped = true;
-            playerSprite.flipX = true;
+            if (direction.x < 0 && !flipped)
+            {
+                flipped = true;
+                playerSprite.flipX = true;
+            }
+            else if (direction.x > 0 && flipped)
+            {
+                flipped = false;
+                playerSprite.flipX = false;
+            }
         }
-        else if (direction.x > 0 && flipped)
+        else
         {
-            flipped = false;
-            playerSprite.flipX = false;
+            FaceMove();
         }
     }
 
@@ -473,6 +480,19 @@ public class PlayerControler : MonoBehaviour
                     // Send bullet in correct direction
                     //Debug.Log(direction);
                     //bul.GetComponent<Bullet>().movement = direction.normalized;
+                }
+                else
+                {
+                    Vector3 movDir = new Vector3(1, 0, 0);
+                    // Flip sprite to face the direction the player is moving
+                    if (!flipped)
+                        movDir = new Vector3(1, 0, 0);
+                    else if (flipped)
+                        movDir = new Vector3(-1, 0, 0);
+
+                    GameObject bul = null;
+                    StartCoroutine(cooldown(() => { bul = Instantiate(bullet, transform.position, transform.rotation);
+                        bul.GetComponent<Bullet>().movement = movDir.normalized; }, 0.15f));
                 }
                 // Start ranged attack cooldown
                 StartCoroutine(cooldown(() => { rangeCD = false; }, rangeCDTime));

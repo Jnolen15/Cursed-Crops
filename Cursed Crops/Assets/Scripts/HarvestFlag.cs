@@ -10,20 +10,20 @@ public class HarvestFlag : MonoBehaviour
 
     // Private Variables
     private GameObject spawnManager;
-    //private PlayerManager playerManager;
+    private PlayerManager playerManager;
 
     void Start()
     {
-        //playerManager = GameObject.FindGameObjectWithTag("playerManager").GetComponent<PlayerManager>();
+        playerManager = GameObject.FindGameObjectWithTag("playerManager").GetComponent<PlayerManager>();
         spawnManager = this.transform.parent.gameObject;
     }
 
     void Update()
     {
-        if(PlayerManager.players.Count < 1)
+        if(playerManager.players.Count < 1)
             totalPlayers = 1;
         else
-            totalPlayers = PlayerManager.players.Count;
+            totalPlayers = playerManager.players.Count;
 
         if(totalPlayers == playersReady)
         {

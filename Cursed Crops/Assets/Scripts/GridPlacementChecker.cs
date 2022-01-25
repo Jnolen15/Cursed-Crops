@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class GridPlacementChecker : MonoBehaviour
 {
-    public bool acceptablePos = false;
+    public bool acceptablePos;
+    public bool colChecked;
 
     private void OnTriggerEnter(Collider other)
     {
+        colChecked = true;
         if (other.gameObject.tag == "TilePlantable")
         {
             acceptablePos = true;
@@ -25,5 +27,26 @@ public class GridPlacementChecker : MonoBehaviour
             //Debug.Log("Spawned on TileUnplaceable");
             //Destroy(this.gameObject);
         }
+    }
+
+    public void AddSelf(Dictionary<Vector3, string> dict)
+    {
+        if (colChecked)
+        {
+            if (acceptablePos)
+            {
+                dict.Add(transform.position, "Empty");
+                gameObject.SetActive(false);
+            }
+            else if (!acceptablePos)
+            {
+                Debug.Log("Unacceptable position, deleting");
+                Destroy(gameObject);
+            }
+        } else
+        {
+            Debug.LogError("AddSelf called before colisions were checked.");
+        }
+
     }
 }

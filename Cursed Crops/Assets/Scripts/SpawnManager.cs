@@ -46,11 +46,11 @@ public class SpawnManager : MonoBehaviour
 
     // For rn spawner works with an array. But change to a list when planting phase is in
     // Because it will be easier to dynamically add and remove to
-    public static List<GameObject> spawners = new List<GameObject>();
+    public List<GameObject> spawners = new List<GameObject>();
     //public GameObject[] spawnArray;
 
-    private GameObject gridChild;
-    private static Dictionary<Vector3, string> spawnerGridPositions = new Dictionary<Vector3, string>();
+    public GameObject gridChild;
+    private Dictionary<Vector3, string> spawnerGridPositions = new Dictionary<Vector3, string>();
 
     private void Start()
     {
@@ -68,12 +68,20 @@ public class SpawnManager : MonoBehaviour
         if(state != State.Break)
             elapsedTime += Time.deltaTime;
 
-        if (!gridUpdated)
+        if (!gridUpdated && gridChild.transform.GetChild(0).GetComponent<GridPlacementChecker>().colChecked)
         {
             UpdateSpawnerPositions();
             gridUpdated = true;
         }
 
+        Debug.Log("There are " + gridChild.transform.childCount + " grid children");
+
+        if (gridUpdated)
+            RunSpawnSystem();
+    }
+
+    private void RunSpawnSystem()
+    {
         // Phase timer
         // INSERT: Starting wave only when players ready
         if (currentPhaseEndTime < elapsedTime)
@@ -138,7 +146,6 @@ public class SpawnManager : MonoBehaviour
                 }
             }
         }
-        
     }
 
     private void FixedUpdate()
@@ -208,25 +215,29 @@ public class SpawnManager : MonoBehaviour
                 Vector3 testPos = new Vector3(i, 1f, j);
                 GameObject newChecker = Instantiate(placementChecker, testPos, transform.rotation, gridChild.transform);
                 alignToGrid(newChecker.transform);
+                //Debug.Log("Created a spawner at: " + newChecker.transform.position);
             }
         }
     }
 
     private void UpdateSpawnerPositions()
     {
+        //Debug.Log("There are " + gridChild.transform.childCount + " Grid children.");
         for (int i = 0; i < gridChild.transform.childCount; i++)
         {
-            if (gridChild.transform.GetChild(i).GetComponent<GridPlacementChecker>().acceptablePos)
+            gridChild.transform.GetChild(i).GetComponent<GridPlacementChecker>().AddSelf(spawnerGridPositions);
+            /*if (gridChild.transform.GetChild(i).GetComponent<GridPlacementChecker>().acceptablePos)
             {
                 spawnerGridPositions.Add(gridChild.transform.GetChild(i).transform.position, "Empty");
                 gridChild.transform.GetChild(i).gameObject.SetActive(false);
             }
             else if (!gridChild.transform.GetChild(i).GetComponent<GridPlacementChecker>().acceptablePos)
             {
+                Debug.Log("Unacceptable position, deleting");
                 Destroy(gridChild.transform.GetChild(i).gameObject);
-            }
+            }*/
         }
-
+        //Debug.Log("The dictionary has " + spawnerGridPositions.Count + " entires.");
         /*foreach (KeyValuePair<Vector3, string> pos in spawnerGridPositions)
         {
             Debug.Log("Position: " + pos.Key.ToString() + " is " + pos.Value);
@@ -241,7 +252,11 @@ public class SpawnManager : MonoBehaviour
         for (int i = 0; i < num; i++)
         {
             // PICK RANDOM SPOT IN DICTIONARY
-            Vector3 pos = positions[Random.Range(0, positions.Length-1)];
+            Vector3 pos = new Vector3(0,0,0);
+            if (positions.Length > 0)
+                pos = positions[Random.Range(0, positions.Length - 1)];
+            else
+                Debug.Log("Dictionary has a length of: " + positions.Length);
 
             string availablePos;
             // TEST IF POSITION IS FILLED, UPDATE DICTIONARY
@@ -260,7 +275,7 @@ public class SpawnManager : MonoBehaviour
                 }
             }
             else
-                Debug.Log("Dictionary error");
+                Debug.LogError("Dictionary error");
 
             if (validPos)
             {
@@ -308,5 +323,11 @@ public class SpawnManager : MonoBehaviour
         Vector3 placePos = new Vector3(xPos, selectedPos.y, zPos);
 
         trans.position = placePos;
+    }
+
+    private void OnDisable()
+    {
+        //Debug.Log("Called disable from spawnmanager");
+        //spawnerGridPositions.Clear();
     }
 }
