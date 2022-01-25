@@ -17,6 +17,7 @@ public class BuildingSystem : MonoBehaviour
     public GameObject placeableHighlight;
     public GameObject phSprite;
     public SpriteRenderer pHSpriteRenderer;
+    private Animator animator;
     public bool acceptablePos;
     private int count = 0;
 
@@ -35,6 +36,7 @@ public class BuildingSystem : MonoBehaviour
         pc = this.GetComponent<PlayerControler>();
         bc = placeableHighlight.GetComponent<BuildChecker>();
         sm = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        animator = this.transform.GetChild(2).GetChild(0).gameObject.GetComponent<Animator>();
         popUp = Instantiate(popupUI.Prefab.gameObject, transform.position, transform.rotation, transform);
         popUp.SetActive(false);
         popUpMan = popUp.GetComponent<PlantingUIManager>();
@@ -152,9 +154,13 @@ public class BuildingSystem : MonoBehaviour
                 if (placeableHighlight != null && acceptablePos)
                 {
                     if (mode == "Build")
+                    {
+                        animator.SetTrigger("Plant");
                         Instantiate(activePlaceable.prefab, placeableHighlight.transform.position, placeableHighlight.transform.rotation);
+                    }
                     else if (mode == "Plant" && sm.state == SpawnManager.State.Break)
                     {
+                        animator.SetTrigger("Plant");
                         GameObject newSpawner = Instantiate(activeCrop.prefab.gameObject, placeableHighlight.transform.position, placeableHighlight.transform.rotation);
                         sm.AddSpawner(newSpawner);
                     }

@@ -5,27 +5,17 @@ using UnityEngine.InputSystem;
 
 public class PlayerManager : MonoBehaviour
 {
-    public static List<GameObject> players = new List<GameObject>();
+    // This used to be static but I changed it because it caused errors when re-setting the scene
+    // IDK why it was static but if it needs to be static again it must be put into an object that isn't destroyed when a scene is changed.
+    public List<GameObject> players = new List<GameObject>();
     public PlayerAnimOCManager animManager;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void OnPlayerJoined(PlayerInput playerInput)
     {
         players.Add(playerInput.gameObject);
         animManager = playerInput.gameObject.GetComponent<PlayerAnimOCManager>();
         if (players.IndexOf(playerInput.gameObject) == 0) animManager.selectedCharacter = PlayerAnimOCManager.character.doug;
-        else if (players.IndexOf(playerInput.gameObject) == 1) animManager.selectedCharacter = PlayerAnimOCManager.character.harvey;
+        else if (players.IndexOf(playerInput.gameObject) == 1) animManager.selectedCharacter = PlayerAnimOCManager.character.cecil;
 
         foreach (var item in players)
         {
@@ -40,5 +30,15 @@ public class PlayerManager : MonoBehaviour
         {
             Debug.Log(item.ToString());
         }
+    }
+
+    private void OnDisable()
+    {
+        // Make it rember what player is what
+        //Debug.Log("OnDisable called from PlayerManager!");
+        /*foreach (var item in players)
+        {
+            players.Remove(item);
+        }*/
     }
 }

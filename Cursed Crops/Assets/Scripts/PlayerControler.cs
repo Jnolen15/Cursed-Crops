@@ -50,6 +50,7 @@ public class PlayerControler : MonoBehaviour
     // OTHER COMPONENTS ===========
     //private PlayerInputActions playerInputActions;  // The player input object script
     private BuildingSystem bs;
+    private EnemyPlayerDamage epd;
     private Rigidbody rb;                  // The player's Rigidbody
     private CapsuleCollider cc;
     private SpriteRenderer playerSprite;
@@ -68,6 +69,7 @@ public class PlayerControler : MonoBehaviour
         Normal,
         Building,
         Rolling,
+        Downed,
     }
     public State state;
 
@@ -80,6 +82,7 @@ public class PlayerControler : MonoBehaviour
         state = State.Normal;
 
         bs = GetComponent<BuildingSystem>();
+        epd = GetComponent<EnemyPlayerDamage>();
         rb = GetComponent<Rigidbody>();
         cc = GetComponent<CapsuleCollider>();
         originalSpeed = moveSpeed;
@@ -128,6 +131,14 @@ public class PlayerControler : MonoBehaviour
 
         if (bs.buildmodeActive)
             state = State.Building;
+
+        if(epd.playerIsStun)
+            state = State.Downed;
+        else if (!epd.playerIsStun && state == State.Downed)
+        {
+            animator.SetBool("Downed", false);
+            state = State.Normal;
+        }
 
         // movement is stopped if player is trapped
         if (trapped)
@@ -200,6 +211,9 @@ public class PlayerControler : MonoBehaviour
                     }
                 }
                 break;
+            case State.Downed:
+                animator.SetBool("Downed", true);
+                break;
         }
     }
 
@@ -255,30 +269,40 @@ public class PlayerControler : MonoBehaviour
         direction = Vector3.right * aimInputVector.x + Vector3.forward * aimInputVector.y;
 
         // Flip sprite to face the joystick position
-        if (direction.x < 0 && !flipped)
+        if (faceaim)
         {
-            flipped = true;
-            playerSprite.flipX = true;
+            if (direction.x < 0 && !flipped)
+            {
+                flipped = true;
+                playerSprite.flipX = true;
+            }
+            else if (direction.x > 0 && flipped)
+            {
+                flipped = false;
+                playerSprite.flipX = false;
+            }
         }
-        else if (direction.x > 0 && flipped)
+        else
         {
-            flipped = false;
-            playerSprite.flipX = false;
+            FaceMove();
         }
     }
 
     private void FaceMove()
     {
-        // Flip sprite to face the direction the player is moving
-        if (moveInputVector.x < 0 && !flipped)
+        if (state != State.Downed)
         {
-            flipped = true;
-            playerSprite.flipX = true;
-        }
-        else if (moveInputVector.x > 0 && flipped)
-        {
-            flipped = false;
-            playerSprite.flipX = false;
+            // Flip sprite to face the direction the player is moving
+            if (moveInputVector.x < 0 && !flipped)
+            {
+                flipped = true;
+                playerSprite.flipX = true;
+            }
+            else if (moveInputVector.x > 0 && flipped)
+            {
+                flipped = false;
+                playerSprite.flipX = false;
+            }
         }
     }
 
@@ -456,6 +480,19 @@ public class PlayerControler : MonoBehaviour
                     // Send bullet in correct direction
                     //Debug.Log(direction);
                     //bul.GetComponent<Bullet>().movement = direction.normalized;
+                }
+                else
+                {
+                    Vector3 movDir = new Vector3(1, 0, 0);
+                    // Flip sprite to face the direction the player is moving
+                    if (!flipped)
+                        movDir = new Vector3(1, 0, 0);
+                    else if (flipped)
+                        movDir = new Vector3(-1, 0, 0);
+
+                    GameObject bul = null;
+                    StartCoroutine(cooldown(() => { bul = Instantiate(bullet, transform.position, transform.rotation);
+                        bul.GetComponent<Bullet>().movement = movDir.normalized; }, 0.15f));
                 }
                 // Start ranged attack cooldown
                 StartCoroutine(cooldown(() => { rangeCD = false; }, rangeCDTime));
