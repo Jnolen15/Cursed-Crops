@@ -25,11 +25,15 @@ public class EnemyPlayerDamage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // This is a temp fix. Player should not be able to take damage when downed
+        if(playerIsStun)
+            playerHealth = reviveHealth;
+
         if (playerHealth <= 0)
         {
             //alphaChekcer = true;
             StartCoroutine(downed());
-            playerHealth += reviveHealth;
+            playerHealth = reviveHealth;
             Debug.Log(playerHealth);
             //gameOver();
         }
