@@ -9,6 +9,7 @@ public class WindUpAttackMelee : MonoBehaviour
     Vector3 attackPosition;
     public bool attacking = false;
     bool getPosition = false;
+    bool windupStarting = false;
     private SpriteRenderer sr;
     Transform targetToAttack;
     GameObject theTarget;
@@ -25,24 +26,24 @@ public class WindUpAttackMelee : MonoBehaviour
     void Update()
     {
         targetToAttack = gameObject.GetComponent<EnemyToPlayer>().oldTarget;
-        if (!attacking)
+        
+        if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) <= 6f)
         {
 
-            //preAttackPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
-            attackPosition = new Vector3(targetToAttack.transform.position.x, targetToAttack.transform.position.y, targetToAttack.transform.position.z);
+            if (!windupStarting)
+            {
+                windupStarting = true;
+                //preAttackPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
+                attackPosition = new Vector3(targetToAttack.transform.position.x, targetToAttack.transform.position.y, targetToAttack.transform.position.z);
 
-        }
-        if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) <= 6f && !attacking)
-        {
-
-
+            }
             //attacking = true;
 
-            
-            
+            gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
+
             if (!attacking)
             {
-                gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
+                
                 StartCoroutine("attack");
             }
 
@@ -52,9 +53,9 @@ public class WindUpAttackMelee : MonoBehaviour
         else if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) > 6f && !attacking)
         {
             //StopCoroutine("attack");
-            
-                
-            
+
+
+            gameObject.GetComponent<EnemyToPlayer>().enemySpeed = gameObject.GetComponent<EnemyToPlayer>().originalSpeed;
             if (!gameObject.GetComponent<EnemyControler>().takingDamage) { 
                 sr.color = prev;
             }
@@ -71,16 +72,17 @@ public class WindUpAttackMelee : MonoBehaviour
         yield return new WaitForSeconds(0.45f);
         Debug.Log("first wait");
 
-        attacking = true;
+        
         sr.color = Color.green;
         //1 0.92 0.016 1
         transform.position = Vector3.MoveTowards(transform.position, attackPosition, (gameObject.GetComponent<EnemyToPlayer>().originalSpeed * 4) * Time.deltaTime);
+        attacking = true;
         //gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
         yield return new WaitForSeconds(1f);
-            
-                
+
+        windupStarting = false;        
         attacking = false;
-        gameObject.GetComponent<EnemyToPlayer>().enemySpeed = gameObject.GetComponent<EnemyToPlayer>().originalSpeed;
+        
 
 
 
