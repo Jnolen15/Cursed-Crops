@@ -57,7 +57,7 @@ public class RangeEnemy : MonoBehaviour
             yield return new WaitForSeconds(.3f);
         }
         closestPlayer = FindClosestPlayer(listOfPlayers);
-        PathRequestManager.RequestPath(transform.position, closestPlayer.position, OnPathFound);
+        PathRequestManager.RequestPath(new PathRequest(transform.position, closestPlayer.position, OnPathFound));
 
         float sqrMoveThreshhold = pathUpdateMoveThreshhold * pathUpdateMoveThreshhold;
         Vector3 targetPosOld = closestPlayer.position;
@@ -67,7 +67,7 @@ public class RangeEnemy : MonoBehaviour
             yield return new WaitForSeconds(minPathupdateTime);
             if ((closestPlayer.position - targetPosOld).sqrMagnitude > sqrMoveThreshhold)
             {
-                PathRequestManager.RequestPath(transform.position, closestPlayer.position, OnPathFound);
+                PathRequestManager.RequestPath(new PathRequest(transform.position, closestPlayer.position, OnPathFound));
                 targetPosOld = closestPlayer.position;
             }
         }

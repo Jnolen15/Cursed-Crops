@@ -15,7 +15,7 @@ public class EnemyToObjective : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         Objective = GameObject.FindGameObjectWithTag("MainObjective").GetComponent<Transform>();
-        PathRequestManager.RequestPath(transform.position, Objective.position, OnPathFound);
+        //PathRequestManager.RequestPath(transform.position, Objective.position, OnPathFound);
 
 
     }
