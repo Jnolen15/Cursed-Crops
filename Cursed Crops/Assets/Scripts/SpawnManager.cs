@@ -74,7 +74,7 @@ public class SpawnManager : MonoBehaviour
             gridUpdated = true;
         }
 
-        Debug.Log("There are " + gridChild.transform.childCount + " grid children");
+        //Debug.Log("There are " + gridChild.transform.childCount + " grid children");
 
         if (gridUpdated)
             RunSpawnSystem();

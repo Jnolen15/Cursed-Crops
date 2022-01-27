@@ -40,7 +40,7 @@ public class GridPlacementChecker : MonoBehaviour
             }
             else if (!acceptablePos)
             {
-                Debug.Log("Unacceptable position, deleting");
+                //Debug.Log("Unacceptable position, deleting");
                 Destroy(gameObject);
             }
         } else

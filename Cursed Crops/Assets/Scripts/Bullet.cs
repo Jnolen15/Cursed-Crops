@@ -38,6 +38,7 @@ public class Bullet : MonoBehaviour
                 Destroy(gameObject);
             Debug.Log("Hit Enemy");
         }
+
         // adding line for enemy bullets
         else if(gameObject.tag == "enemyBullet" && other.gameObject.tag == "Player")
         {
