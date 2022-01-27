@@ -81,48 +81,65 @@ public class BuildingSystem : MonoBehaviour
     {
         if (context.performed)
         {
-            if (buildmodeActive)
+            if (pc.state != PlayerControler.State.Downed && pc.state != PlayerControler.State.Rolling)
             {
-                Debug.Log("CLOSING BUILD MODE FROM: " + this.gameObject.name);
-                buildmodeActive = false;
-                if (placeableHighlight != null)
+                if (buildmodeActive)
                 {
-                    placeableHighlight.SetActive(false);
-                    if(popUp != null)
-                        popUp.SetActive(false);
+                    Debug.Log("CLOSING BUILD MODE FROM: " + this.gameObject.name);
+                    buildmodeActive = false;
+                    if (placeableHighlight != null)
+                    {
+                        placeableHighlight.SetActive(false);
+                        if (popUp != null)
+                            popUp.SetActive(false);
+                    }
+                }
+                else if (!buildmodeActive)
+                {
+                    Debug.Log("OPENING BUILD MODE FROM: " + this.gameObject.name);
+                    buildmodeActive = true;
+                    if (placeableHighlight != null)
+                    {
+                        placeableHighlight.SetActive(true);
+                        if (popUp != null)
+                            popUp.SetActive(true);
+
+                        if (mode == "Build")
+                        {
+                            // Set the higlight to match the prefab
+                            pHSpriteRenderer.sprite = activePlaceable.preview;
+                            phSprite.transform.localScale = activePlaceable.prefab.GetChild(0).GetChild(0).transform.localScale;
+                            bc.mode = mode;
+                            popUpMan.selectTop();
+                            // Set hitbox to match the prefab
+                            //bc.boxCol.size = activePlaceable.prefab.GetComponent<BoxCollider>().size;
+                        }
+                        else if (mode == "Plant")
+                        {
+                            // Set the higlight to match the prefab
+                            pHSpriteRenderer.sprite = activeCrop.preview;
+                            phSprite.transform.localScale = activeCrop.prefab.GetChild(0).GetChild(0).transform.localScale;
+                            bc.mode = mode;
+                            popUpMan.selectTop();
+                            // Set hitbox to match the prefab
+                            //bc.boxCol.size = activePlaceable.prefab.GetComponent<BoxCollider>().size;
+                        }
+                    }
                 }
             }
-            else if (!buildmodeActive)
-            {
-                Debug.Log("OPENING BUILD MODE FROM: " + this.gameObject.name);
-                buildmodeActive = true;
-                if (placeableHighlight != null)
-                {
-                    placeableHighlight.SetActive(true);
-                    if (popUp != null)
-                        popUp.SetActive(true);
+        }
+    }
 
-                    if (mode == "Build")
-                    {
-                        // Set the higlight to match the prefab
-                        pHSpriteRenderer.sprite = activePlaceable.preview;
-                        phSprite.transform.localScale = activePlaceable.prefab.GetChild(0).GetChild(0).transform.localScale;
-                        bc.mode = mode;
-                        popUpMan.selectTop();
-                        // Set hitbox to match the prefab
-                        //bc.boxCol.size = activePlaceable.prefab.GetComponent<BoxCollider>().size;
-                    }
-                    else if (mode == "Plant")
-                    {
-                        // Set the higlight to match the prefab
-                        pHSpriteRenderer.sprite = activeCrop.preview;
-                        phSprite.transform.localScale = activeCrop.prefab.GetChild(0).GetChild(0).transform.localScale;
-                        bc.mode = mode;
-                        popUpMan.selectTop();
-                        // Set hitbox to match the prefab
-                        //bc.boxCol.size = activePlaceable.prefab.GetComponent<BoxCollider>().size;
-                    }
-                }
+    public void CloseBuildMode()
+    {
+        if (buildmodeActive)
+        {
+            buildmodeActive = false;
+            if (placeableHighlight != null)
+            {
+                placeableHighlight.SetActive(false);
+                if (popUp != null)
+                    popUp.SetActive(false);
             }
         }
     }

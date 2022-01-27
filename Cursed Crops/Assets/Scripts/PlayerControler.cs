@@ -213,6 +213,7 @@ public class PlayerControler : MonoBehaviour
                 break;
             case State.Downed:
                 animator.SetBool("Downed", true);
+                bs.CloseBuildMode();
                 break;
         }
     }
