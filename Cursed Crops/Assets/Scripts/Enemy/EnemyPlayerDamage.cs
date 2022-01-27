@@ -19,7 +19,7 @@ public class EnemyPlayerDamage : MonoBehaviour
     void Start()
     {
         playerSprite = gameObject.transform.Find("PlayerPivot").gameObject;
-        animator = this.transform.GetChild(2).GetChild(0).gameObject.GetComponent<Animator>();
+        animator = this.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -53,26 +53,17 @@ public class EnemyPlayerDamage : MonoBehaviour
     {
         if (playerHealth > 0)
         {
-            /*var trans = 0.5f;
-            var col = playerSprite.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color;
-            col.a = trans;
-            playerSprite.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;*/
-
-            animator.SetTrigger("Hurt");
-
             isItHit = true;
             playerHealth -= 1;
-            // process pre-yield
-            Debug.Log(playerHealth);
-            yield return new WaitForSeconds(1.0f);
-            // process post-yield
 
-            /*if (!alphaChekcer)
-            {
-                col.a = 1f;
-                playerSprite.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
-            }*/
-
+            // Flash red and play hurt anim
+            playerSprite.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = Color.red;
+            animator.SetTrigger("Hurt");
+            yield return new WaitForSeconds(0.1f);
+            playerSprite.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = Color.white;
+            
+            // Finish Iframes
+            yield return new WaitForSeconds(0.9f);
             isItHit = false;
         }
     }

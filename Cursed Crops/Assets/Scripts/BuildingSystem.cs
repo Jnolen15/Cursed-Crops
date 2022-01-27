@@ -36,7 +36,7 @@ public class BuildingSystem : MonoBehaviour
         pc = this.GetComponent<PlayerControler>();
         bc = placeableHighlight.GetComponent<BuildChecker>();
         sm = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
-        animator = this.transform.GetChild(2).GetChild(0).gameObject.GetComponent<Animator>();
+        animator = this.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Animator>();
         popUp = Instantiate(popupUI.Prefab.gameObject, transform.position, transform.rotation, transform);
         popUp.SetActive(false);
         popUpMan = popUp.GetComponent<PlantingUIManager>();

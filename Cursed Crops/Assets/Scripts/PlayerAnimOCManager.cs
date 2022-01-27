@@ -22,7 +22,7 @@ public class PlayerAnimOCManager : MonoBehaviour
     // --- Variables
     void Start()
     {
-        animator = this.transform.GetChild(2).GetChild(0).gameObject.GetComponent<Animator>();
+        animator = this.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Animator>();
         if (selectedCharacter == character.harvey)
         {
             animator.runtimeAnimatorController = harveyAnimOC;

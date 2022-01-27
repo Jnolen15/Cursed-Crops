@@ -55,8 +55,7 @@ public class PlayerControler : MonoBehaviour
     private CapsuleCollider cc;
     private SpriteRenderer playerSprite;
     private Animator animator;
-    private GameObject meleeAttackLeft;
-    private GameObject meleeAttackRight;
+    private GameObject meleeAttack;
     private Vector2 aimInputVector = Vector2.zero;
     private Vector2 moveInputVector = Vector2.zero;
     private Vector3 movement;
@@ -86,25 +85,11 @@ public class PlayerControler : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         cc = GetComponent<CapsuleCollider>();
         originalSpeed = moveSpeed;
-        // Get the left facing attack hitbox and set it inactive
-        meleeAttackLeft = this.transform.GetChild(0).gameObject;
-        // Get the Right facing attack hitbox and set it inactive
-        meleeAttackRight = this.transform.GetChild(1).gameObject;
-        /* Note ^
-         * Previously I just had one hitbox and would flip the
-         * objects X scale when the player flipped directions.
-         * However I got warnings that flipping the object
-         * could cause the collider to behave not as intended.
-         * So instead I just have one attack for each side that
-         * are switched based on duirection faced.
-         * Then I just flip the players sprite on the spriterender.
-         * 
-         * > Could just have it move sides instead of flip.
-         */
+        meleeAttack = this.transform.GetChild(0).gameObject;
 
         // Player Sprite
-        playerSprite = this.transform.GetChild(2).GetChild(0).gameObject.GetComponent<SpriteRenderer>();
-        animator = this.transform.GetChild(2).GetChild(0).gameObject.GetComponent<Animator>();
+        playerSprite = this.transform.GetChild(1).GetChild(0).gameObject.GetComponent<SpriteRenderer>();
+        animator = this.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Animator>();
     }
 
     private void Awake()
@@ -251,11 +236,13 @@ public class PlayerControler : MonoBehaviour
                 {
                     flipped = false;
                     playerSprite.flipX = false;
+                    meleeAttack.transform.localPosition = new Vector3(-(meleeAttack.transform.localPosition.x), 0f, 0f);
                 }
                 else if (direction.x < 0 && !flipped)
                 {
                     flipped = true;
                     playerSprite.flipX = true;
+                    meleeAttack.transform.localPosition = new Vector3(-(meleeAttack.transform.localPosition.x), 0f, 0f);
                 }
             } else
             {
@@ -276,11 +263,13 @@ public class PlayerControler : MonoBehaviour
             {
                 flipped = true;
                 playerSprite.flipX = true;
+                meleeAttack.transform.localPosition = new Vector3(-(meleeAttack.transform.localPosition.x), 0f, 0f);
             }
             else if (direction.x > 0 && flipped)
             {
                 flipped = false;
                 playerSprite.flipX = false;
+                meleeAttack.transform.localPosition = new Vector3(-(meleeAttack.transform.localPosition.x), 0f, 0f);
             }
         }
         else
@@ -298,11 +287,13 @@ public class PlayerControler : MonoBehaviour
             {
                 flipped = true;
                 playerSprite.flipX = true;
+                meleeAttack.transform.localPosition = new Vector3(-(meleeAttack.transform.localPosition.x), 0f, 0f);
             }
             else if (moveInputVector.x > 0 && flipped)
             {
                 flipped = false;
                 playerSprite.flipX = false;
+                meleeAttack.transform.localPosition = new Vector3(-(meleeAttack.transform.localPosition.x), 0f, 0f);
             }
         }
     }
@@ -408,7 +399,11 @@ public class PlayerControler : MonoBehaviour
         faceAimTime = 0;
         faceaim = true;
 
-        if (flipped) // Left attack hit detection
+        Collider[] cols = Physics.OverlapBox(meleeAttack.transform.position, meleeAttack.transform.localScale / 2,
+                                                    meleeAttack.transform.rotation, LayerMask.GetMask("Enemies"));
+        DamageEnemies(cols);
+
+        /*if (flipped) // Left attack hit detection
         {
             Collider[] cols = Physics.OverlapBox(meleeAttackLeft.transform.position, meleeAttackLeft.transform.localScale / 2, 
                                                     meleeAttackLeft.transform.rotation, LayerMask.GetMask("Enemies"));
@@ -419,7 +414,7 @@ public class PlayerControler : MonoBehaviour
             Collider[] cols = Physics.OverlapBox(meleeAttackRight.transform.position, meleeAttackRight.transform.localScale / 2,
                                                             meleeAttackRight.transform.rotation, LayerMask.GetMask("Enemies"));
             DamageEnemies(cols);
-        }
+        }*/
     }
 
     private void DamageEnemies(Collider[] cols)
