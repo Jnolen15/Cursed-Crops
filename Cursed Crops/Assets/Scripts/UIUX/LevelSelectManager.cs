@@ -5,9 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class LevelSelectManager : MonoBehaviour
 {
+    public GameObject Shop;
     public void loadLevel()
     {
         SceneManager.LoadScene("TestingScene");
     }
-    
+
+    public void exitToMenu()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
+    public void toggleShop()
+    {
+        Shop.SetActive(!Shop.activeSelf);
+    }    
 }

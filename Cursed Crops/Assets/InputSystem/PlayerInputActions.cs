@@ -137,6 +137,14 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""79170d67-a8d9-4ec4-8614-d35f8c4b0621"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -546,6 +554,28 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""action"": ""Swap"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""872c4919-74f2-41c7-ac01-d6ebabd3188e"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e593b96c-a267-4b59-b44d-a37c0e77a730"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -597,6 +627,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_Player_SelectEast = m_Player.FindAction("SelectEast", throwIfNotFound: true);
         m_Player_SelectWest = m_Player.FindAction("SelectWest", throwIfNotFound: true);
         m_Player_Swap = m_Player.FindAction("Swap", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -661,6 +692,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_SelectEast;
     private readonly InputAction m_Player_SelectWest;
     private readonly InputAction m_Player_Swap;
+    private readonly InputAction m_Player_Pause;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -680,6 +712,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         public InputAction @SelectEast => m_Wrapper.m_Player_SelectEast;
         public InputAction @SelectWest => m_Wrapper.m_Player_SelectWest;
         public InputAction @Swap => m_Wrapper.m_Player_Swap;
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -734,6 +767,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Swap.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwap;
                 @Swap.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwap;
                 @Swap.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwap;
+                @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -783,6 +819,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Swap.started += instance.OnSwap;
                 @Swap.performed += instance.OnSwap;
                 @Swap.canceled += instance.OnSwap;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -822,5 +861,6 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnSelectEast(InputAction.CallbackContext context);
         void OnSelectWest(InputAction.CallbackContext context);
         void OnSwap(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }
