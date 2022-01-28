@@ -60,7 +60,7 @@ public class EnemyControler : MonoBehaviour
     }
     IEnumerator hit(Renderer renderer)
     {
-        Debug.Log(lastDamageType);
+        //Debug.Log(lastDamageType);
         //renderer.material.SetColor("_Color", Color.red);
         if (sr != null)
         {

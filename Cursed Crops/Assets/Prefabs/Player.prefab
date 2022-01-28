@@ -598,8 +598,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b89e71ebd2da5d449408dfb10ea12a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCDTimer: 1
-  attackDuration: 0.3
+  attackCDTimer: 1.5
+  attackDuration: 0.4
   rollSpeedMax: 30
   rollSpeedFallofDelay: 0.05
   rollCDTime: 1
@@ -615,11 +615,11 @@ MonoBehaviour:
   trapped: 0
   flipped: 0
   useControler: 0
+  bullet: {fileID: 6242655706651345086, guid: dd76d198cb4f6304f93a7e3ef466c390, type: 3}
   groundLayermask:
     serializedVersion: 2
     m_Bits: 8
   state: 0
-  bullet: {fileID: 6242655706651345086, guid: dd76d198cb4f6304f93a7e3ef466c390, type: 3}
 --- !u!114 &-5891569623318608545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -832,8 +832,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7937736029837635441}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 2, z: 4}
+  m_LocalPosition: {x: 1.5, y: 0, z: 0}
+  m_LocalScale: {x: 3, y: 2, z: 4}
   m_Children: []
   m_Father: {fileID: 7937736029672694574}
   m_RootOrder: 0

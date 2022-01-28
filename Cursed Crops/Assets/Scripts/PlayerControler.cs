@@ -6,8 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerControler : MonoBehaviour
 {
     // FLOATS / INTS ===========
-    [SerializeField] private float attackCDTimer = 1;
-    [SerializeField] private float attackDuration = 0.2f;
+    [SerializeField] private float attackCDTimer = 1.5f;
     [SerializeField] private float rollSpeedMax = 24;
     [SerializeField] private float rollSpeedFallofDelay = 0.3f;
     [SerializeField] private float rollCDTime = 0.3f;
@@ -15,9 +14,11 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] private float faceAimTimer = 3f;
     private int attackChain = 1;
     private float attackcoolDown;
+    private float attackDuration;
     private float rollSpeed;
     private float rollSpeedDropMultiplier;
     private float faceAimTime = 0;
+    private float lungeSpeed = 8;
 
     public int overAllPlayerDamage = 0;
     public float moveSpeed;
@@ -27,12 +28,13 @@ public class PlayerControler : MonoBehaviour
     public int maxHealth = 10;
 
     // BOOLS ===========
-    private bool attackCD = false;
     private bool rangeCD = false;
     private bool rollCD = false;
     public bool faceaim = false;
     public bool trapped = false;
     private bool startRollFallOff = false;
+    private bool attackMove = false;
+    private bool attackCancleable = false;
 
     public bool flipped = false;
     public bool useControler;               // If using controller changes aiming
@@ -56,6 +58,8 @@ public class PlayerControler : MonoBehaviour
     private SpriteRenderer playerSprite;
     private Animator animator;
     private GameObject meleeAttack;
+    public GameObject bullet;
+    private Coroutine ap;               // Used to store and stop attack Coroutine
     private Vector2 aimInputVector = Vector2.zero;
     private Vector2 moveInputVector = Vector2.zero;
     private Vector3 movement;
@@ -66,13 +70,13 @@ public class PlayerControler : MonoBehaviour
     public enum State
     {
         Normal,
+        Attacking,
         Building,
         Rolling,
         Downed,
     }
     public State state;
 
-    public GameObject bullet;
 
     // reference to pause menu
     private Pause_Manager pauseMenu;
@@ -114,15 +118,18 @@ public class PlayerControler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Face mouse / conroller when not rolling
         if (state != State.Rolling)
         {
             if (!useControler) FaceMouse();
             else FaceController();
         }
 
+        // Enter build state
         if (bs.buildmodeActive)
             state = State.Building;
 
+        // Enter downed state if stunned
         if(epd.playerIsStun)
             state = State.Downed;
         else if (!epd.playerIsStun && state == State.Downed)
@@ -133,13 +140,13 @@ public class PlayerControler : MonoBehaviour
 
         // movement is stopped if player is trapped
         if (trapped)
-        {
             moveSpeed = 0;
-        }
         else
-        {
 ;            moveSpeed = originalSpeed;
-        }
+
+        // Slight move forward during attack
+        if (attackMove)
+            AutoMove(lungeSpeed);
 
         // Cooldown stuffs
         if (faceAimTime < faceAimTimer) faceAimTime += Time.deltaTime; // Face aim period
@@ -147,7 +154,7 @@ public class PlayerControler : MonoBehaviour
 
         if (attackcoolDown < attackCDTimer) attackcoolDown += Time.deltaTime; // Attack cooldown
 
-        if (attackcoolDown > attackDuration) animator.SetBool("Melee", false); // Reset attack animation
+        //if (attackcoolDown > attackDuration) animator.SetInteger("MeleeStage", 0); // Reset attack animation
 
         // Move into the SpriteLeaner script! Placeholder for now
         playerSprite.sortingOrder = -(int)this.transform.position.z;
@@ -178,6 +185,10 @@ public class PlayerControler : MonoBehaviour
                 }
                 rollDir = movement;
                 break;
+            /*case State.Attacking:
+                movement = new Vector3(moveInputVector.x, 0, moveInputVector.y).normalized;
+                rollDir = movement;
+                break;*/
             case State.Rolling:
                 cc.enabled = false;
                 DodgeRoll();
@@ -335,6 +346,17 @@ public class PlayerControler : MonoBehaviour
 
     }
 
+    private void AutoMove(float speed) // Automatically move forward
+    {
+        /*if (flipped)
+            movement = new Vector3(-1, 0, 0).normalized;
+        else if (!flipped)
+            movement = new Vector3(1, 0, 0).normalized;*/
+        movement = new Vector3(moveInputVector.x, 0, moveInputVector.y).normalized;
+
+        rb.MovePosition(transform.position + movement * speed * Time.fixedDeltaTime);
+    }
+
     public void Roll_performed(InputAction.CallbackContext context)
     {
         //Debug.Log(context);
@@ -361,34 +383,41 @@ public class PlayerControler : MonoBehaviour
         //Debug.Log(context);
         if (context.performed)
         {
-            if (!attackCD && state == State.Normal)
+            if (state == State.Normal || state == State.Attacking)
             {
                 if (attackcoolDown > attackCDTimer) // If attack isnt on cooldown
                 {
+                    //Debug.Log("Attack 1");
                     attackcoolDown = 0;
                     attackChain = 1;
-                    animator.SetBool("Melee", true);
-                    DoAttack();
-                    //Debug.Log("Attack 1");
+                    attackDuration = 0.4f;
+                    animator.SetTrigger("Melee1");
+                    ap = StartCoroutine(attackPhase(0f, 0.2f, 0.2f));
 
                 }
-                else if (attackcoolDown > attackDuration) // If attack is on cooldown, subsiquent atacks chain
+                else if (attackcoolDown > attackDuration /*|| attackCancleable*/) // If attack is on cooldown, subsiquent atacks chain
                 {
                     if (attackChain == 1)
                     {
+                        //Debug.Log("Attack 2")
                         attackcoolDown = 0;
                         attackChain = 2;
-                        animator.SetBool("Melee", true);
-                        DoAttack();
-                        //Debug.Log("Attack 2");
+                        attackDuration = 0.4f;
+                        animator.SetTrigger("Melee2");
+                        if(ap != null)
+                            StopCoroutine(ap);
+                        ap = StartCoroutine(attackPhase(0f, 0.2f, 0.2f));
                     }
                     else if (attackChain == 2)
                     {
+                        //Debug.Log("Attack 3");
                         attackcoolDown = 0;
                         attackChain = 3;
-                        animator.SetBool("Melee", true);
-                        DoAttack();
-                        //Debug.Log("Attack 3");
+                        attackDuration = 0.7f;
+                        animator.SetTrigger("Melee3");
+                        if (ap != null)
+                            StopCoroutine(ap);
+                        ap = StartCoroutine(attackPhase(0.3f, 0.1f, 0.3f)); // add to 0.7
                     }
                     else if (attackChain == 3)
                     {
@@ -397,6 +426,27 @@ public class PlayerControler : MonoBehaviour
                 }
             }
         }
+    }
+
+    IEnumerator attackPhase(float windup, float strike, float recovery)
+    {
+        // Time the following to sync up with animation frames
+        // IN FUTURE, WORK WITH ATTACK ANIMATORS: Make sure attacks across charecters are synced (Frame timing wise)
+        // Windup:
+        state = State.Attacking;
+        attackCancleable = false;
+        yield return new WaitForSeconds(windup);
+        // Strike: Move if holding a direction
+        attackMove = true;
+        StartCoroutine(cooldown(() => { attackMove = false; }, strike));
+        yield return new WaitForSeconds(strike);
+        // Contact: activate hitbox check
+        DoAttack();
+        // Recovery: Cancleable only by another melee or ranged attack, a roll, or damage / downed
+        attackCancleable = true;
+        yield return new WaitForSeconds(recovery);
+        state = State.Normal;
+        attackCancleable = false;
     }
 
     private void DoAttack()
@@ -408,19 +458,6 @@ public class PlayerControler : MonoBehaviour
         Collider[] cols = Physics.OverlapBox(meleeAttack.transform.position, meleeAttack.transform.localScale / 2,
                                                     meleeAttack.transform.rotation, LayerMask.GetMask("Enemies"));
         DamageEnemies(cols);
-
-        /*if (flipped) // Left attack hit detection
-        {
-            Collider[] cols = Physics.OverlapBox(meleeAttackLeft.transform.position, meleeAttackLeft.transform.localScale / 2, 
-                                                    meleeAttackLeft.transform.rotation, LayerMask.GetMask("Enemies"));
-            DamageEnemies(cols);
-        }
-        else  // Right attack hit detection
-        {
-            Collider[] cols = Physics.OverlapBox(meleeAttackRight.transform.position, meleeAttackRight.transform.localScale / 2,
-                                                            meleeAttackRight.transform.rotation, LayerMask.GetMask("Enemies"));
-            DamageEnemies(cols);
-        }*/
     }
 
     private void DamageEnemies(Collider[] cols)
@@ -435,18 +472,18 @@ public class PlayerControler : MonoBehaviour
                 {
                     if (attackChain == 1)
                     {
-                        enemyControler.takeDamageMelee(2);
-                        overAllPlayerDamage += 2;
+                        enemyControler.takeDamageMelee(4);
+                        overAllPlayerDamage += 4;
                     }
                     else if (attackChain == 2)
                     {
-                        enemyControler.takeDamageMelee(3);
-                        overAllPlayerDamage += 3;
+                        enemyControler.takeDamageMelee(6);
+                        overAllPlayerDamage += 6;
                     }
                     else if (attackChain == 3)
                     {
-                        enemyControler.takeDamageMelee(6);
-                        overAllPlayerDamage += 6;
+                        enemyControler.takeDamageMelee(10);
+                        overAllPlayerDamage += 10;
                     }
                 }
                 else
