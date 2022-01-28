@@ -74,6 +74,8 @@ public class PlayerControler : MonoBehaviour
 
     public GameObject bullet;
 
+    // reference to pause menu
+    private Pause_Manager pauseMenu;
 
     // Start is called before the first frame update
     void Start()
@@ -90,6 +92,10 @@ public class PlayerControler : MonoBehaviour
         // Player Sprite
         playerSprite = this.transform.GetChild(1).GetChild(0).gameObject.GetComponent<SpriteRenderer>();
         animator = this.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Animator>();
+
+        // UI stuff for pausing 
+        // hello - keenan
+        pauseMenu = GameObject.Find("UI Canvas").GetComponentInChildren<Pause_Manager>();
     }
 
     private void Awake()
@@ -519,4 +525,11 @@ public class PlayerControler : MonoBehaviour
         yield return new WaitForSeconds(time);
         callback?.Invoke();
     }
+
+    // method for UI pausing
+    public void togglePause()
+    {
+        pauseMenu.TogglePause();
+    }
+
 }

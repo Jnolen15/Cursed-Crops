@@ -6,25 +6,12 @@ using UnityEngine.InputSystem;
 
 public class Pause_Manager : MonoBehaviour
 {
-
+    // does this need to be static?
     public static bool gamePaused = false;
     public GameObject PauseMenu;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (gamePaused)
-            {
-                Unpause();
-            }
-            else
-            {
-                Pause();
-            }
-        }
-    }
+
+    /* obselete manual pause functions
     public void Pause()
     {
         gamePaused = true;
@@ -38,17 +25,32 @@ public class Pause_Manager : MonoBehaviour
         Time.timeScale = 1f;
         PauseMenu.SetActive(false);
     }
+    */
+
+    // pauses/unpauses the game
+    public void TogglePause()
+    {
+        gamePaused = !gamePaused;
+        if (gamePaused)
+        {
+            Time.timeScale = 0;
+        } else
+        {
+            Time.timeScale = 1;
+        }
+        PauseMenu.SetActive(!PauseMenu.activeSelf);
+    }
 
     public void ExitToMenu()
     {
-        Unpause();
+        TogglePause();
         // SceneManager.LoadScene("MenuScene");
         SceneManager.LoadScene("Menu Scene");
     }
 
     public void ExitToMap()
     {
-        Unpause();
+        TogglePause();
         // SceneManager.LoadScene("MenuScene");
         SceneManager.LoadScene("Level Select");
     }
@@ -57,7 +59,7 @@ public class Pause_Manager : MonoBehaviour
 
     public void Restart()
     {
-        Unpause();
+        TogglePause();
         // check to see if this properly reloads the scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
