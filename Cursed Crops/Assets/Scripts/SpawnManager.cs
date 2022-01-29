@@ -7,7 +7,7 @@ public class SpawnManager : MonoBehaviour
 {
     // Public Variables
     [Header("Each phase has X waves and X-1 puases. (There is no pause after the last wave)")]
-    public float phaseDuration = 150f;      // Duration of each phase in seconds
+    public float phaseDuration;             // Duration of each phase in seconds
     public float waveDuration = 30f;        // Duration of each wave in seconds
     public float pauseDuration = 10f;       // Duration of each short pause between waves in seconds
     public int wavesPerPhase = 4;           // The # of waves in each phase. Make sure the time values add up correctly
@@ -30,7 +30,7 @@ public class SpawnManager : MonoBehaviour
     public float gridOffsetZ = 0.5f;
 
     // Private Variables
-    private float currentPhaseEndTime = 0f;  // The time the current phase should end
+    public float currentPhaseEndTime = 0f;   // The time the current phase should end
     private float currentWaveEndTime = 0f;   // The time the current wave should end
     private float currentPauseEndTime = 0f;  // The time the current pause should end
     private bool timerStarted = false;
@@ -54,6 +54,9 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
+        // calculate phase duration
+        phaseDuration = waveDuration * wavesPerPhase + pauseDuration * wavesPerPhase;
+
         // Spawn harvest start flag
         harvestFlag = this.transform.GetChild(0).gameObject;
         harvestFlag.SetActive(false);

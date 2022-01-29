@@ -7,7 +7,11 @@ using TMPro;
 public class UI_Manager : MonoBehaviour
 {
     
+    // external scripts/Objects
     private PlayerManager PM;
+    private SpawnManager SM;
+
+
     private PlayerControler PC1;
     private PlayerControler PC2;
     private EnemyPlayerDamage EPD1;
@@ -36,6 +40,12 @@ public class UI_Manager : MonoBehaviour
     private GameObject house;
     private EnemyDamageObjective EDO;
 
+    public Slider PhaseTimer;
+    public TextMeshProUGUI PhaseCounter;
+
+
+    public GameObject[] WaveBars = new GameObject[8];
+
 
 
     // Start is called before the first frame update
@@ -46,6 +56,9 @@ public class UI_Manager : MonoBehaviour
         house = GameObject.Find("Objective");
         EDO = house.GetComponent<EnemyDamageObjective>();
         PM = GameObject.Find("Player Manager").GetComponent<PlayerManager>();
+        SM = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+
+        setUpTimer();
     } 
 
     // Update is called once per frame
@@ -53,6 +66,7 @@ public class UI_Manager : MonoBehaviour
     {
         // updating general UI
         HouseHealthBar.value = (float)EDO.houseHealth / (float)EDO.startingHouseHealth;
+        UpdateTimer();
 
         // updating p1 UI
         if (PC1 == null && PM.players.Count >= 1)
@@ -104,6 +118,41 @@ public class UI_Manager : MonoBehaviour
             vegetableText2.text = "R: " + PR2.getRedCrops() + ", P: " + PR2.getPurpleCrops();
             // managing health bar
             HealthBar2.value = (float)EPD2.playerHealth / (float)EPD2.reviveHealth;
+        }
+    }
+
+    private void UpdateTimer()
+    {
+        // phase counter
+        PhaseCounter.text = SM.currentPhase;
+
+        if (SM.state != SpawnManager.State.Break)
+        {
+            PhaseTimer.value = (SM.elapsedTime - (SM.currentPhaseEndTime - SM.phaseDuration)) / SM.phaseDuration;
+        } else
+        {
+            PhaseTimer.value = 0;
+        }
+    }
+
+    // places Wavebars dynamically according to # of waves
+    // warning: bars have to already exist in the slider and be put into the WaveBars Array, otherwise this will break (currently 8)
+    private void setUpTimer()
+    {
+        for (int i = 0; i < SM.wavesPerPhase; i++)
+        {
+            // the -10 is adjusting for the space inbetween the slider's rect and the fill's rect
+            float width = PhaseTimer.GetComponent<RectTransform>().rect.width - 10;
+            Transform trans = WaveBars[i].GetComponent<Transform>();
+            Vector3 newTrans = trans.localPosition;
+            newTrans.x = -width / 2 + (width / SM.wavesPerPhase * i);
+            trans.localPosition = newTrans;
+        }
+
+        // hides surplus wave bars
+        for (int i = SM.wavesPerPhase; i < WaveBars.Length; i++)
+        {
+            WaveBars[i].SetActive(false);
         }
     }
 }
