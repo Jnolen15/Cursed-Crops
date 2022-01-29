@@ -51,7 +51,7 @@ public class EnemyDamageObjective : MonoBehaviour
         }
     }
     // IEnumarator so doesn't freaking get one 1 shotted in 1 second
-    private IEnumerator iframes()
+    public IEnumerator iframes()
     {
         isItHit = true;
         // process pre-yield

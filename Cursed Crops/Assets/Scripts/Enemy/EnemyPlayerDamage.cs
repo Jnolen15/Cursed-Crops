@@ -9,7 +9,8 @@ public class EnemyPlayerDamage : MonoBehaviour
     private GameObject mainObjective;
     public int playerHealth = 10;
     public int reviveHealth = 10;
-    private bool isItHit = false;
+    public int damage = 1;
+    public bool isItHit = false;
     private bool hitAgain = false;
     private bool alphaChekcer = false;
     public bool playerIsStun = false;
@@ -45,16 +46,16 @@ public class EnemyPlayerDamage : MonoBehaviour
         {
             if (other.gameObject.tag == "Enemy" && !isItHit && !hitAgain && other.gameObject.GetComponent<WindUpAttackMelee>().attacking)
             {
-                StartCoroutine(iframes());
+                StartCoroutine(iframes(damage));
             }
         }
     }
-    private IEnumerator iframes()
+    public IEnumerator iframes(int damages)
     {
         if (playerHealth > 0)
         {
             isItHit = true;
-            playerHealth -= 1;
+            playerHealth -= damages;
 
             // Flash red and play hurt anim
             playerSprite.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = Color.red;
