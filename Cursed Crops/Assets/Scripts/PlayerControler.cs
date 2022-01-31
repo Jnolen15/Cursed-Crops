@@ -11,8 +11,8 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] private float rollSpeedFallofDelay = 0.3f;
     [SerializeField] private float rollCDTime = 0.3f;
     [SerializeField] private float rangeCDTime = 0.4f;
-    [SerializeField] private float faceAimTimer = 3f;
-    private int attackChain = 1;
+    [SerializeField] private float faceAimTimer = 2f;
+    public int attackChain = 1;
     private float attackcoolDown;
     private float attackDuration;
     private float rollSpeed;
@@ -142,7 +142,7 @@ public class PlayerControler : MonoBehaviour
         if (trapped)
             moveSpeed = 0;
         else
-;            moveSpeed = originalSpeed;
+            moveSpeed = originalSpeed;
 
         // Slight move forward during attack
         if (attackMove)
@@ -153,10 +153,11 @@ public class PlayerControler : MonoBehaviour
         else faceaim = false;
 
         if (attackcoolDown < attackCDTimer) attackcoolDown += Time.deltaTime; // Attack cooldown
+        else attackChain = 0;
 
         //if (attackcoolDown > attackDuration) animator.SetInteger("MeleeStage", 0); // Reset attack animation
 
-        // Move into the SpriteLeaner script! Placeholder for now
+            // Move into the SpriteLeaner script! Placeholder for now
         playerSprite.sortingOrder = -(int)this.transform.position.z;
     }
 
@@ -300,13 +301,13 @@ public class PlayerControler : MonoBehaviour
         if (state != State.Downed)
         {
             // Flip sprite to face the direction the player is moving
-            if (moveInputVector.x < 0 && !flipped)
+            if (moveInputVector.x < -0.2 && !flipped)
             {
                 flipped = true;
                 playerSprite.flipX = true;
                 meleeAttack.transform.localPosition = new Vector3(-(meleeAttack.transform.localPosition.x), 0f, 0f);
             }
-            else if (moveInputVector.x > 0 && flipped)
+            else if (moveInputVector.x > 0.2 && flipped)
             {
                 flipped = false;
                 playerSprite.flipX = false;
@@ -385,50 +386,48 @@ public class PlayerControler : MonoBehaviour
         {
             if (state == State.Normal || state == State.Attacking)
             {
-                if (attackcoolDown > attackCDTimer) // If attack isnt on cooldown
+                if (attackcoolDown > attackDuration || attackCancleable)
                 {
-                    //Debug.Log("Attack 1");
-                    attackcoolDown = 0;
-                    attackChain = 1;
-                    attackDuration = 0.4f;
-                    animator.SetTrigger("Melee1");
-                    ap = StartCoroutine(attackPhase(0f, 0.2f, 0.2f));
-
-                }
-                else if (attackcoolDown > attackDuration /*|| attackCancleable*/) // If attack is on cooldown, subsiquent atacks chain
-                {
-                    if (attackChain == 1)
+                    switch (attackChain)
                     {
-                        //Debug.Log("Attack 2")
-                        attackcoolDown = 0;
-                        attackChain = 2;
-                        attackDuration = 0.4f;
-                        animator.SetTrigger("Melee2");
-                        if(ap != null)
-                            StopCoroutine(ap);
-                        ap = StartCoroutine(attackPhase(0f, 0.2f, 0.2f));
-                    }
-                    else if (attackChain == 2)
-                    {
-                        //Debug.Log("Attack 3");
-                        attackcoolDown = 0;
-                        attackChain = 3;
-                        attackDuration = 0.7f;
-                        animator.SetTrigger("Melee3");
-                        if (ap != null)
-                            StopCoroutine(ap);
-                        ap = StartCoroutine(attackPhase(0.3f, 0.1f, 0.3f)); // add to 0.7
-                    }
-                    else if (attackChain == 3)
-                    {
-                        //Debug.Log("Attack chain over");
+                        case 0:
+                            //Debug.Log("Attack 1");
+                            attackcoolDown = 0;
+                            //attackChain = 1;
+                            attackDuration = 0.4f;
+                            animator.SetTrigger("Melee1");
+                            ap = StartCoroutine(attackPhase(0f, 0.2f, 0.2f, false));
+                            break;
+                        case 1:
+                            //Debug.Log("Attack 2")
+                            attackcoolDown = 0;
+                            //attackChain = 2;
+                            attackDuration = 0.4f;
+                            animator.SetTrigger("Melee2");
+                            if (ap != null)
+                                StopCoroutine(ap);
+                            ap = StartCoroutine(attackPhase(0f, 0.2f, 0.2f, false));
+                            break;
+                        case 2:
+                            //Debug.Log("Attack 3");
+                            attackcoolDown = 0;
+                            //attackChain = 3;
+                            attackDuration = 0.7f;
+                            animator.SetTrigger("Melee3");
+                            if (ap != null)
+                                StopCoroutine(ap);
+                            ap = StartCoroutine(attackPhase(0.3f, 0.1f, 0.3f, true)); // add to 0.7
+                            break;
+                        case 3:
+                            attackChain = 0;
+                            break;
                     }
                 }
             }
         }
     }
 
-    IEnumerator attackPhase(float windup, float strike, float recovery)
+    IEnumerator attackPhase(float windup, float strike, float recovery, bool lunge)
     {
         // Time the following to sync up with animation frames
         // IN FUTURE, WORK WITH ATTACK ANIMATORS: Make sure attacks across charecters are synced (Frame timing wise)
@@ -437,8 +436,11 @@ public class PlayerControler : MonoBehaviour
         attackCancleable = false;
         yield return new WaitForSeconds(windup);
         // Strike: Move if holding a direction
-        attackMove = true;
-        StartCoroutine(cooldown(() => { attackMove = false; }, strike));
+        if (lunge)
+        {
+            attackMove = true;
+            StartCoroutine(cooldown(() => { attackMove = false; }, strike));
+        }
         yield return new WaitForSeconds(strike);
         // Contact: activate hitbox check
         DoAttack();
@@ -451,12 +453,10 @@ public class PlayerControler : MonoBehaviour
 
     private void DoAttack()
     {
-        // Set face aim period
-        faceAimTime = 0;
-        faceaim = true;
-
         Collider[] cols = Physics.OverlapBox(meleeAttack.transform.position, meleeAttack.transform.localScale / 2,
                                                     meleeAttack.transform.rotation, LayerMask.GetMask("Enemies"));
+        if (cols.Length > 0) attackChain++;
+        else attackChain = 0;
         DamageEnemies(cols);
     }
 

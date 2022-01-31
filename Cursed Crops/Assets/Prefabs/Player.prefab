@@ -599,12 +599,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackCDTimer: 1.5
-  attackDuration: 0.4
   rollSpeedMax: 30
   rollSpeedFallofDelay: 0.05
   rollCDTime: 1
   rangeCDTime: 2
-  faceAimTimer: 3
+  faceAimTimer: 2
+  attackChain: 1
   overAllPlayerDamage: 0
   moveSpeed: 6
   originalSpeed: 0
@@ -659,6 +659,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealth: 10
   reviveHealth: 10
+  damage: 1
+  isItHit: 0
   playerIsStun: 0
 --- !u!114 &1924405865491807640
 MonoBehaviour:
@@ -832,7 +834,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7937736029837635441}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5, y: 0, z: 0}
+  m_LocalPosition: {x: 1, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 2, z: 4}
   m_Children: []
   m_Father: {fileID: 7937736029672694574}
@@ -865,7 +867,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.333, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &7937736029837635452
 MeshFilter:
