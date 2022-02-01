@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class EnemyPlayerDamage : MonoBehaviour
 {
-    private GameObject playerSprite;
+    private SpriteRenderer playerSprite;
     private GameObject mainObjective;
     public int playerHealth = 10;
     public int reviveHealth = 10;
@@ -19,7 +19,7 @@ public class EnemyPlayerDamage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerSprite = gameObject.transform.Find("PlayerPivot").gameObject;
+        playerSprite = this.transform.GetChild(1).GetChild(0).GetComponent<SpriteRenderer>();
         animator = this.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Animator>();
     }
 
@@ -58,13 +58,26 @@ public class EnemyPlayerDamage : MonoBehaviour
             playerHealth -= damages;
 
             // Flash red and play hurt anim
-            playerSprite.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = Color.red;
+            playerSprite.color = Color.red;
             animator.SetTrigger("Hurt");
             yield return new WaitForSeconds(0.1f);
-            playerSprite.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = Color.white;
-            
+            playerSprite.color = Color.white;
+
+            Color alpha = playerSprite.color;
+            // Player flash
+            for (int i = 0; i < 4; i++)
+            {
+                alpha.a = 0.4f;
+                playerSprite.color = alpha;
+                yield return new WaitForSeconds(0.2f);
+                alpha.a = 1f;
+                playerSprite.color = alpha;
+                yield return new WaitForSeconds(0.2f);
+            }
+
             // Finish Iframes
-            yield return new WaitForSeconds(0.9f);
+            //yield return new WaitForSeconds(0.9f);
+
             isItHit = false;
         }
     }
@@ -89,10 +102,10 @@ public class EnemyPlayerDamage : MonoBehaviour
         var trans = 0.2f;
         //var col = GameObject.Find("PlayerSprite").GetComponent<SpriteRenderer>().color;
         //GameObject playerSprite = gameObject.transform.Find("PlayerPivot").gameObject;
-        var col = playerSprite.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color;
+        var col = playerSprite.color;
         col.a = trans;
         //GameObject.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
-        playerSprite.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
+        playerSprite.color = col;
         //GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyToPlayer>().enabled = false;
         //GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyToObjective>().enabled = true;
         yield return new WaitForSeconds(15.0f);
@@ -101,7 +114,7 @@ public class EnemyPlayerDamage : MonoBehaviour
 
         col.a = 0.5f;
         //GameObject.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
-        playerSprite.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
+        playerSprite.color = col;
         //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControler>().enabled = true;
         gameObject.GetComponent<PlayerControler>().enabled = true;
         yield return new WaitForSeconds(3.0f);
@@ -109,7 +122,7 @@ public class EnemyPlayerDamage : MonoBehaviour
         alphaChekcer = false;
         col.a = 1f;
         //GameObject.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
-        playerSprite.transform.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
+        playerSprite.color = col;
         Debug.Log("Checking if double wait works");
 
 
