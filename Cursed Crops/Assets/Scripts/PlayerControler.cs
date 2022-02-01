@@ -193,7 +193,7 @@ public class PlayerControler : MonoBehaviour
             case State.Rolling:
                 cc.enabled = false;
                 DodgeRoll();
-                animator.SetBool("Dodging", true);
+                //animator.SetBool("Dodging", true);
                 // Roll speed is constant at the start, then falls off untill just below move speed
                 if (!startRollFallOff)
                 {
@@ -208,7 +208,7 @@ public class PlayerControler : MonoBehaviour
                     {
                         cc.enabled = true;
                         state = State.Normal;
-                        animator.SetBool("Dodging", false);
+                        //animator.SetBool("Dodging", false);
                         startRollFallOff = false;
                         rollSpeedDropMultiplier = 0f;
                     }
@@ -368,6 +368,7 @@ public class PlayerControler : MonoBehaviour
                 state = State.Rolling;
                 rollSpeed = rollSpeedMax;
                 rollCD = true;
+                animator.SetTrigger("Dodge");
                 StartCoroutine(cooldown(() => { rollCD = false; }, rollCDTime));
             }
         }
