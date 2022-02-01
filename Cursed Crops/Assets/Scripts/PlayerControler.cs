@@ -35,6 +35,7 @@ public class PlayerControler : MonoBehaviour
     private bool startRollFallOff = false;
     private bool attackMove = false;
     private bool attackCancleable = false;
+    public bool attackQueued = false;
 
     public bool flipped = false;
     public bool useControler;               // If using controller changes aiming
@@ -385,45 +386,55 @@ public class PlayerControler : MonoBehaviour
         //Debug.Log(context);
         if (context.performed)
         {
-            if (state == State.Normal || state == State.Attacking)
+            AttackChain();
+        }
+    }
+
+    private void AttackChain()
+    {
+        if (state == State.Normal || state == State.Attacking)
+        {
+            if (attackcoolDown > attackDuration /* || attackCancleable */)
             {
-                if (attackcoolDown > attackDuration || attackCancleable)
+                switch (attackChain)
                 {
-                    switch (attackChain)
-                    {
-                        case 0:
-                            //Debug.Log("Attack 1");
-                            attackcoolDown = 0;
-                            //attackChain = 1;
-                            attackDuration = 0.4f;
-                            animator.SetTrigger("Melee1");
-                            ap = StartCoroutine(attackPhase(0f, 0.2f, 0.2f, false));
-                            break;
-                        case 1:
-                            //Debug.Log("Attack 2")
-                            attackcoolDown = 0;
-                            //attackChain = 2;
-                            attackDuration = 0.4f;
-                            animator.SetTrigger("Melee2");
-                            if (ap != null)
-                                StopCoroutine(ap);
-                            ap = StartCoroutine(attackPhase(0f, 0.2f, 0.2f, false));
-                            break;
-                        case 2:
-                            //Debug.Log("Attack 3");
-                            attackcoolDown = 0;
-                            //attackChain = 3;
-                            attackDuration = 0.7f;
-                            animator.SetTrigger("Melee3");
-                            if (ap != null)
-                                StopCoroutine(ap);
-                            ap = StartCoroutine(attackPhase(0.3f, 0.1f, 0.3f, true)); // add to 0.7
-                            break;
-                        case 3:
-                            attackChain = 0;
-                            break;
-                    }
+                    case 0:
+                        //Debug.Log("Attack 1");
+                        attackcoolDown = 0;
+                        //attackChain = 1;
+                        attackDuration = 0.4f;
+                        animator.SetTrigger("Melee1");
+                        ap = StartCoroutine(attackPhase(0f, 0.2f, 0.2f, false));
+                        break;
+                    case 1:
+                        //Debug.Log("Attack 2")
+                        attackcoolDown = 0;
+                        //attackChain = 2;
+                        attackDuration = 0.4f;
+                        animator.SetTrigger("Melee2");
+                        if (ap != null)
+                            StopCoroutine(ap);
+                        ap = StartCoroutine(attackPhase(0f, 0.2f, 0.2f, false));
+                        break;
+                    case 2:
+                        //Debug.Log("Attack 3");
+                        attackcoolDown = 0;
+                        //attackChain = 3;
+                        attackDuration = 0.7f;
+                        animator.SetTrigger("Melee3");
+                        if (ap != null)
+                            StopCoroutine(ap);
+                        ap = StartCoroutine(attackPhase(0.3f, 0.1f, 0.3f, true)); // add to 0.7
+                        break;
+                    case 3:
+                        attackChain = 0;
+                        state = State.Normal;
+                        break;
                 }
+            }
+            else /*if (attackChain < 3)*/
+            {
+                attackQueued = true;
             }
         }
     }
@@ -448,8 +459,15 @@ public class PlayerControler : MonoBehaviour
         // Recovery: Cancleable only by another melee or ranged attack, a roll, or damage / downed
         attackCancleable = true;
         yield return new WaitForSeconds(recovery);
-        state = State.Normal;
         attackCancleable = false;
+        if (attackQueued)
+        {
+            attackQueued = false;
+            AttackChain();
+        } else
+        {
+            state = State.Normal;
+        }
     }
 
     private void DoAttack()
@@ -547,6 +565,8 @@ public class PlayerControler : MonoBehaviour
         }
     }
 
+    // Misc =================================
+
     private void OnTriggerEnter(Collider other)
     {
         // if colliding with the farm house, bank items
@@ -555,8 +575,6 @@ public class PlayerControler : MonoBehaviour
             GetComponent<PlayerResourceManager>().BankItems();
         }
     }
-
-    // Misc =================================
 
     IEnumerator cooldown(Callback callback, float time)
     {
