@@ -201,7 +201,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 20313275}
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 13.39, z: -22}
+  m_LocalPosition: {x: 0, y: 13, z: -22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -220,9 +220,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTrans: {fileID: 0}
-  camHeight: 8
-  camOffset: 6
-  camAngel: 45
+  camHeight: 13
+  camOffsetX: 0
+  camOffsetZ: -8
+  camAngle: 45
   followSpeed: 1
 --- !u!1 &20961333
 GameObject:
@@ -7266,8 +7267,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTrans: {fileID: 0}
   camHeight: 8
-  camOffset: 6
-  camAngel: 45
+  camOffsetX: 0
+  camOffsetZ: 0
+  camAngle: 0
   followSpeed: 1
 --- !u!81 &1753502530
 AudioListener:
