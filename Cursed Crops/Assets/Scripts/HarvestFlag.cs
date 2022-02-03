@@ -43,13 +43,28 @@ public class HarvestFlag : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
-            playersReady++;
+        //if(other.gameObject.tag == "Player")
+        //    playersReady++;
+        if (other.gameObject.name == "MeleeAttack")
+        {
+            Debug.Log("PLAYER HIT HARVEST FLAG");
+            bool playerReady = other.gameObject.GetComponentInParent<PlayerControler>().ready;
+            if (playerReady)
+            {
+                playerReady = false;
+                playersReady--;
+            } else
+            {
+                playerReady = true;
+                playersReady++;
+            }
+            other.gameObject.GetComponentInParent<PlayerControler>().ready = playerReady;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player")
-            playersReady--;
+        //if (other.gameObject.tag == "Player")
+        //    playersReady--;
     }
 }

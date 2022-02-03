@@ -38,8 +38,9 @@ public class PlayerControler : MonoBehaviour
     private bool startRollFallOff = false;
     private bool attackMove = false;
     private bool attackCancleable = false;
-    public bool attackQueued = false;
-
+    private bool attackQueued = false;
+    
+    public bool ready = false;
     public bool flipped = false;
     public bool useControler;               // If using controller changes aiming
 
@@ -98,6 +99,7 @@ public class PlayerControler : MonoBehaviour
         cc = GetComponent<CapsuleCollider>();
         originalSpeed = moveSpeed;
         meleeAttack = this.transform.GetChild(0).gameObject;
+        meleeAttack.SetActive(false);
 
         // Player Sprite
         playerSprite = this.transform.GetChild(1).GetChild(0).gameObject.GetComponent<SpriteRenderer>();
@@ -488,11 +490,14 @@ public class PlayerControler : MonoBehaviour
 
     private void DoAttack()
     {
+        meleeAttack.SetActive(true);
+
         Collider[] cols = Physics.OverlapBox(meleeAttack.transform.position, meleeAttack.transform.localScale / 2,
                                                     meleeAttack.transform.rotation, LayerMask.GetMask("Enemies"));
         if (cols.Length > 0) attackChain++;
         else attackChain = 0;
         DamageEnemies(cols);
+        StartCoroutine(cooldown(() => { meleeAttack.SetActive(false); }, 0.1f));
     }
 
     private void DamageEnemies(Collider[] cols)
