@@ -10,16 +10,19 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] private float rollSpeedMax = 24;
     [SerializeField] private float rollSpeedFallofDelay = 0.3f;
     [SerializeField] private float rollCDTime = 0.3f;
-    [SerializeField] private float rangeCDTime = 0.4f;
+    [SerializeField] private float rangeCDTime = 5f;
     [SerializeField] private float faceAimTimer = 2f;
     public int attackChain = 1;
     private float attackcoolDown;
     private float attackDuration;
+    private float rangeCoolDown;
     private float rollSpeed;
     private float rollSpeedDropMultiplier;
     private float faceAimTime = 0;
     private float lungeSpeed = 8;
+    private int curBullets = 3;
 
+    public int maxBullets = 3;
     public int overAllPlayerDamage = 0;
     public float moveSpeed;
     public float originalSpeed;
@@ -60,6 +63,8 @@ public class PlayerControler : MonoBehaviour
     private Animator animator;
     private GameObject meleeAttack;
     public GameObject bullet;
+    public GameObject ammoManager;
+    private AmmoManager am;
     private Coroutine ap;               // Used to store and stop attack Coroutine
     private Vector2 aimInputVector = Vector2.zero;
     private Vector2 moveInputVector = Vector2.zero;
@@ -97,6 +102,14 @@ public class PlayerControler : MonoBehaviour
         // Player Sprite
         playerSprite = this.transform.GetChild(1).GetChild(0).gameObject.GetComponent<SpriteRenderer>();
         animator = this.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Animator>();
+
+        // Ammo Manager
+        Vector3 ammoOffset = new Vector3(this.transform.position.x, this.transform.position.y + playerSprite.bounds.size.y, 
+                                            this.transform.position.z + playerSprite.bounds.size.y);
+        am = Instantiate(ammoManager, this.transform.position + ammoOffset, this.transform.rotation, this.transform).GetComponent<AmmoManager>();
+        am.maxBullets = maxBullets;
+        curBullets = maxBullets;
+        am.curBullets = curBullets;
 
         // UI stuff for pausing 
         // hello - keenan
@@ -156,9 +169,17 @@ public class PlayerControler : MonoBehaviour
         if (attackcoolDown < attackCDTimer) attackcoolDown += Time.deltaTime; // Attack cooldown
         else attackChain = 0;
 
-        //if (attackcoolDown > attackDuration) animator.SetInteger("MeleeStage", 0); // Reset attack animation
+        // Ranged Cooldown
+        if (rangeCoolDown < rangeCDTime) rangeCoolDown += Time.deltaTime; // Attack cooldown
+        else if (curBullets < maxBullets)
+        {
+            rangeCoolDown = 0;
+            curBullets++;
+            am.curBullets = curBullets;
+        }
 
-            // Move into the SpriteLeaner script! Placeholder for now
+
+        // Move into the SpriteLeaner script! Placeholder for now
         playerSprite.sortingOrder = -(int)this.transform.position.z;
     }
 
@@ -179,12 +200,7 @@ public class PlayerControler : MonoBehaviour
                 // Exit building state if out of build mode
                 if (!bs.buildmodeActive)
                     state = State.Normal;
-                // Can't move while attacking
-                if (!animator.GetBool("Ranged"))
-                {
-                    if (attackcoolDown > attackDuration)
-                        Move();
-                }
+                Move();
                 rollDir = movement;
                 break;
             /*case State.Attacking:
@@ -519,15 +535,20 @@ public class PlayerControler : MonoBehaviour
         //Debug.Log(context);
         if (context.performed)
         {
-            if (!rangeCD && state == State.Normal)
+            if (state == State.Normal && curBullets > 0 && !animator.GetBool("Ranged"))
             {
-                // Set cooldown true
-                rangeCD = true;
+                curBullets--;
+                rangeCoolDown = 0;
+
+                // Update ammo manager
+                am.curBullets = curBullets;
+
                 //Play animation
-                if(animator != null)
+                if (animator != null)
                 {
+                    //animator.SetTrigger("Ranged");
                     animator.SetBool("Ranged", true);
-                    StartCoroutine(cooldown(() => { animator.SetBool("Ranged", false); }, 0.4f));
+                    StartCoroutine(cooldown(() => { animator.SetBool("Ranged", false); }, 0.5f));
                 }
                 if (direction != new Vector3(0,0,0))
                 {
@@ -535,9 +556,6 @@ public class PlayerControler : MonoBehaviour
                     GameObject bul = null;
                     StartCoroutine(cooldown(() => { bul = Instantiate(bullet, transform.position, transform.rotation);
                         bul.GetComponent<Bullet>().movement = direction.normalized; }, 0.15f));
-                    // Send bullet in correct direction
-                    //Debug.Log(direction);
-                    //bul.GetComponent<Bullet>().movement = direction.normalized;
                 }
                 else
                 {
@@ -552,15 +570,9 @@ public class PlayerControler : MonoBehaviour
                     StartCoroutine(cooldown(() => { bul = Instantiate(bullet, transform.position, transform.rotation);
                         bul.GetComponent<Bullet>().movement = movDir.normalized; }, 0.15f));
                 }
-                // Start ranged attack cooldown
-                StartCoroutine(cooldown(() => { rangeCD = false; }, rangeCDTime));
                 // Set face aim period
                 faceAimTime = 0;
                 faceaim = true;
-            }
-            else if (rangeCD && state == State.Normal) // If on cooldown send dubug msg
-            {
-                //Debug.Log("Range on Cooldown");
             }
         }
     }

@@ -107,7 +107,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3579062659483603254}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -602,9 +602,10 @@ MonoBehaviour:
   rollSpeedMax: 30
   rollSpeedFallofDelay: 0.05
   rollCDTime: 1
-  rangeCDTime: 2
+  rangeCDTime: 1
   faceAimTimer: 2
   attackChain: 1
+  maxBullets: 3
   overAllPlayerDamage: 0
   moveSpeed: 6
   originalSpeed: 0
@@ -613,9 +614,12 @@ MonoBehaviour:
   maxHealth: 10
   faceaim: 1
   trapped: 0
+  attackQueued: 0
   flipped: 0
   useControler: 0
   bullet: {fileID: 6242655706651345086, guid: dd76d198cb4f6304f93a7e3ef466c390, type: 3}
+  ammoManager: {fileID: 3550555863387099239, guid: c45b274deb480454ab44824b41333d5a,
+    type: 3}
   groundLayermask:
     serializedVersion: 2
     m_Bits: 8
