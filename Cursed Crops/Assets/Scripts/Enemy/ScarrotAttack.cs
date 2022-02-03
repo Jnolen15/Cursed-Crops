@@ -31,7 +31,12 @@ public class ScarrotAttack : MonoBehaviour
     void Update()
     {
         
+        if(gameObject.GetComponent<EnemyControler>().health <= 0)
+        {
+            StopAllCoroutines();
+            gameObject.GetComponent<EnemyControler>().death();
 
+        }
         targetToAttack = gameObject.GetComponent<EnemyToPlayer>().oldTarget;
 
         if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) <= 6f)
@@ -42,19 +47,25 @@ public class ScarrotAttack : MonoBehaviour
                 StopCoroutine("attack");
                 windupStarting = true;
                 //preAttackPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
-                chooseAttack = Random.Range(1, 2);
+                chooseAttack = Random.Range(1, 3);
                 if(chooseAttack == 1)
                 {
                     sr.color = Color.yellow;
+                    attackPosition = new Vector3(targetToAttack.transform.position.x, targetToAttack.transform.position.y, targetToAttack.transform.position.z);
+                    enemyPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                    newPosition = (attackPosition - enemyPosition) + (attackPosition - enemyPosition).normalized * 4;
+
+                    newPosition += enemyPosition;
                 }
                 else if(chooseAttack == 2)
                 {
                     sr.color = Color.magenta;
+                    attackPosition = new Vector3(targetToAttack.transform.position.x, targetToAttack.transform.position.y, targetToAttack.transform.position.z);
+                    enemyPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                    newPosition = (attackPosition - enemyPosition) - (attackPosition - enemyPosition).normalized * 2;
+
+                    newPosition += enemyPosition;
                 }
-                attackPosition = new Vector3(targetToAttack.transform.position.x, targetToAttack.transform.position.y, targetToAttack.transform.position.z);
-                enemyPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-                newPosition = enemyPosition + (((attackPosition - enemyPosition) ).normalized) * 100;
-                
 
             }
             //attacking = true;
@@ -94,16 +105,19 @@ public class ScarrotAttack : MonoBehaviour
     {
         if (chooseAttack == 1)
         {
-            
-            yield return new WaitForSeconds(0.45f);
-            Debug.Log("first wait");
+            while (transform.position != newPosition)
+            {
+                yield return new WaitForSeconds(0.45f);
+                Debug.Log("first wait");
 
 
-            sr.color = Color.green;
-            //1 0.92 0.016 1
-            transform.position = Vector3.MoveTowards(transform.position, newPosition, (gameObject.GetComponent<EnemyToPlayer>().originalSpeed * 4) * Time.deltaTime);
-            attacking = true;
-            //gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
+                sr.color = Color.green;
+                //1 0.92 0.016 1
+                transform.position = Vector3.MoveTowards(transform.position, newPosition, (gameObject.GetComponent<EnemyToPlayer>().originalSpeed * 4) * Time.deltaTime);
+                Debug.Log("hello");
+                attacking = true;
+                //gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
+            }
             yield return new WaitForSeconds(1f);
 
             windupStarting = false;
@@ -112,13 +126,15 @@ public class ScarrotAttack : MonoBehaviour
         }
         if(chooseAttack == 2)
         {
-            
-            yield return new WaitForSeconds(0.45f);
-            Debug.Log("first wait");
+            while (transform.position != newPosition)
+            {
+                yield return new WaitForSeconds(0.45f);
+                Debug.Log("first wait");
 
 
-            sr.color = Color.green;
-            //1 0.92 0.016 1
+                sr.color = Color.green;
+                transform.position = Vector3.MoveTowards(transform.position, newPosition, (gameObject.GetComponent<EnemyToPlayer>().originalSpeed * 4) * Time.deltaTime);
+            }
             AOE.SetActive(true);
             attacking = true;
             //gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
@@ -137,6 +153,7 @@ public class ScarrotAttack : MonoBehaviour
 
     }
 
+    
     private void OnTriggerEnter(Collider other)
     {
 
