@@ -74,8 +74,14 @@ public class ScarrotAttack : MonoBehaviour
 
             if (!attacking)
             {
-                
-                StartCoroutine("attack");
+                if (!gameObject.activeInHierarchy)
+                {
+                    StopCoroutine("attack");
+                }
+                else
+                {
+                    StartCoroutine("attack");
+                }
             }
 
 
