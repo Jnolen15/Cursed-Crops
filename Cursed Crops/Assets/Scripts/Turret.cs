@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
+    // ================= Public variables =================
     public GameObject bullet;
-    public Transform enemies;
-    public Transform[] listOfenemies;
-    private Vector3 direction;
-    private Vector3 flipDirection;
-    private Transform enemyPosition;
     public bool shooting = false;
-    private bool flipped = false;
-    private SpriteRenderer turretSprite;
+
     public Sprite innitialSprite;
     public Sprite shootingSprite;
     public Sprite reloadingSprite;
-    // Start is called before the first frame update
+
+    // ================= Private variables =================
+    private Vector3 direction;
+    private Vector3 flipDirection;
+    private Transform enemyPosition;
+    public GameObject targetedEnemy;
+    private SpriteRenderer turretSprite;
+    private bool flipped = false;
+
+
     void Start()
     {
         turretSprite = this.transform.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>();
@@ -24,36 +28,48 @@ public class Turret : MonoBehaviour
 
     void Update()
     {
-
         SpriteFlip();
-    }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.tag == "Enemy" && !shooting && other.gameObject.name != "cornnonBullet")
+        if (targetedEnemy != null && !shooting)
         {
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            listOfenemies = new Transform[enemies.Length];
-            for (int i = 0; i < listOfenemies.Length; ++i)
+            if (!targetedEnemy.activeSelf)
             {
-                listOfenemies[i] = enemies[i].transform;
+                targetedEnemy = null;
+            } else
+            {
+                enemyInRange(targetedEnemy.transform);
+                StartCoroutine(shoot());
             }
-            Debug.Log("enemies entering radius");
-            enemiesInRange(listOfenemies);
-            shooting = true;
-            StartCoroutine(shoot());
-
         }
     }
 
-    private void enemiesInRange(Transform[] enemies)
+    private void OnTriggerEnter(Collider other)
     {
-        foreach (Transform c in enemies)
+        if (other.gameObject.tag == "Enemy" && other.gameObject.name != "cornnonBullet")
         {
-            direction = new Vector3(c.position.x - transform.position.x, 0, c.position.z - transform.position.z);
-            enemyPosition = c.transform;
-            
+            if (targetedEnemy == null)
+            {
+                targetedEnemy = other.gameObject;
+            }
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Enemy" && other.gameObject.name != "cornnonBullet")
+        {
+            // Targeted enemy leaves range
+            if (targetedEnemy == other.gameObject)
+            {
+                targetedEnemy = null;
+            }
+        }
+    }
+
+    private void enemyInRange(Transform enemy)
+    {
+        direction = new Vector3(enemy.position.x - transform.position.x, 0, enemy.position.z - transform.position.z);
+        enemyPosition = enemy.transform;
     }
 
     private void SpriteFlip()
@@ -77,11 +93,13 @@ public class Turret : MonoBehaviour
 
     IEnumerator shoot()
     {
+        shooting = true;
         turretSprite.sprite = shootingSprite;
         GameObject bul = Instantiate(bullet, transform.position, transform.rotation);
         // Send bullet in correct direction
-        //Debug.Log(direction);
         bul.GetComponent<Bullet>().movement = direction.normalized;
+
+        // Change when animations are in (Use keyframes to signal shooting event)
         yield return new WaitForSeconds(1.0f);
         turretSprite.sprite = reloadingSprite;
         yield return new WaitForSeconds(1.0f);

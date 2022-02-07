@@ -11,6 +11,7 @@ public class SpawnManager : MonoBehaviour
     public float waveDuration = 30f;        // Duration of each wave in seconds
     public float pauseDuration = 10f;       // Duration of each short pause between waves in seconds
     public int wavesPerPhase = 4;           // The # of waves in each phase. Make sure the time values add up correctly
+    public int spawnersPerPhase = 4;        // Number of spawners created before each phase
 
     public float elapsedTime;               // Time since level started
     public string currentPhase = "Pre";     // Stars in Pre then goes to Morning, Afternoon and Night
@@ -96,7 +97,7 @@ public class SpawnManager : MonoBehaviour
                 currentPhase = "Morning";
                 state = State.Break;
                 harvestFlag.SetActive(true);
-                CreateSpawnersonGrid(4, "Morning");
+                CreateSpawnersonGrid(spawnersPerPhase, "Morning");
             }
             else if (currentPhase == "Morning")
             {
@@ -105,7 +106,7 @@ public class SpawnManager : MonoBehaviour
                 state = State.Break;
                 harvestFlag.SetActive(true);
                 DestroySpawners();
-                CreateSpawnersonGrid(4, "Afternoon");
+                CreateSpawnersonGrid(spawnersPerPhase, "Afternoon");
             }
             else if (currentPhase == "Afternoon")
             {
@@ -114,7 +115,7 @@ public class SpawnManager : MonoBehaviour
                 state = State.Break;
                 harvestFlag.SetActive(true);
                 DestroySpawners();
-                CreateSpawnersonGrid(4, "Night");
+                CreateSpawnersonGrid(spawnersPerPhase, "Night");
             }
             else if (currentPhase == "Night")
             {
