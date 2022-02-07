@@ -58,6 +58,11 @@ public class BuildingSystem : MonoBehaviour
 
     private void Update()
     {
+        // Un-ready the player once a round starts (I added this here becuase it already had a SM refrence)
+        if(sm.state == SpawnManager.State.Wave && pc.ready)
+            pc.ready = false;
+        
+        // Update buld preview
         if (buildmodeActive)
         {
             AlignToGrid(placeableHighlight.transform);

@@ -12,6 +12,7 @@ public class HarvestFlag : MonoBehaviour
     private GameObject spawnManager;
     private PlayerManager playerManager;
 
+
     void Start()
     {
         playerManager = GameObject.FindGameObjectWithTag("playerManager").GetComponent<PlayerManager>();

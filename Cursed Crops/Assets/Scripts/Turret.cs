@@ -7,6 +7,7 @@ public class Turret : MonoBehaviour
     // ================= Public variables =================
     public GameObject bullet;
     public bool shooting = false;
+    public float cooldown = 2f;
 
     public Sprite innitialSprite;
     public Sprite shootingSprite;
@@ -16,7 +17,7 @@ public class Turret : MonoBehaviour
     private Vector3 direction;
     private Vector3 flipDirection;
     private Transform enemyPosition;
-    public GameObject targetedEnemy;
+    private GameObject targetedEnemy;
     private SpriteRenderer turretSprite;
     private bool flipped = false;
 
@@ -100,9 +101,9 @@ public class Turret : MonoBehaviour
         bul.GetComponent<Bullet>().movement = direction.normalized;
 
         // Change when animations are in (Use keyframes to signal shooting event)
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(cooldown/2f);
         turretSprite.sprite = reloadingSprite;
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(cooldown/2f);
         turretSprite.sprite = innitialSprite;
         shooting = false;
     }
