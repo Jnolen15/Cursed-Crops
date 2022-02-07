@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WindUpAttackMelee : MonoBehaviour
+public class GrabbageWindup : MonoBehaviour
 {
     // Start is called before the first frame update
     Vector3 preAttackPosition;
@@ -23,9 +23,8 @@ public class WindUpAttackMelee : MonoBehaviour
     IEnumerator inst = null;
     void Start()
     {
-        childRB = this.gameObject.transform.GetChild(1).GetComponent<Rigidbody>();
-        hurtBox = this.gameObject.transform.GetChild(1).GetComponent<BoxCollider>();
-        daAttack = this.gameObject.transform.GetChild(1).GetComponent<MeshRenderer>();
+        //hurtBox = this.gameObject.transform.GetChild(1).GetComponent<BoxCollider>();
+        //daAttack = this.gameObject.transform.GetChild(1).GetComponent<MeshRenderer>();
         sr = this.transform.GetComponentInChildren<SpriteRenderer>();
         prev = sr.color;
         inst = attack();
@@ -35,7 +34,7 @@ public class WindUpAttackMelee : MonoBehaviour
     void FixedUpdate()
     {
         targetToAttack = gameObject.GetComponent<EnemyToPlayer>().oldTarget;
-        direction = new Vector3(targetToAttack.position.x - transform.position.x, 0, targetToAttack.position.z - transform.position.z);
+        //direction = new Vector3(targetToAttack.position.x - transform.position.x, 0, targetToAttack.position.z - transform.position.z);
         if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) <= 6f)
         {
 
@@ -43,24 +42,24 @@ public class WindUpAttackMelee : MonoBehaviour
             {
                 StopCoroutine("attack");
                 windupStarting = true;
-                
+
                 //preAttackPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
                 attackPosition = new Vector3(targetToAttack.transform.position.x, targetToAttack.transform.position.y, targetToAttack.transform.position.z);
                 enemyPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-                newPosition = (attackPosition - enemyPosition) - (attackPosition - enemyPosition).normalized * 1.5f;
+                newPosition = (attackPosition - enemyPosition) - (attackPosition - enemyPosition).normalized * 0;
 
                 newPosition += enemyPosition;
-                
 
-                
+
+
 
             }
             //attacking = true;
-            
+
             gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
             if (!attacking)
             {
-                
+
                 if (!gameObject.activeInHierarchy)
                 {
                     StopCoroutine("attack");
@@ -80,10 +79,11 @@ public class WindUpAttackMelee : MonoBehaviour
 
 
             gameObject.GetComponent<EnemyToPlayer>().enemySpeed = gameObject.GetComponent<EnemyToPlayer>().originalSpeed;
-            if (!gameObject.GetComponent<EnemyControler>().takingDamage) { 
+            if (!gameObject.GetComponent<EnemyControler>().takingDamage)
+            {
                 sr.color = prev;
             }
-            
+
         }
         else if (attacking)
         {
@@ -96,9 +96,9 @@ public class WindUpAttackMelee : MonoBehaviour
 
     IEnumerator attack()
     {
-        
+
         sr.color = Color.yellow;
-        childRB.MovePosition(transform.position + direction.normalized);
+        //childRB.MovePosition(transform.position + direction.normalized);
         if (transform.position != newPosition)
         {
             yield return new WaitForSeconds(0.45f);
@@ -107,17 +107,20 @@ public class WindUpAttackMelee : MonoBehaviour
             sr.color = Color.green;
             //1 0.92 0.016 1
             transform.position = Vector3.MoveTowards(transform.position, newPosition, (gameObject.GetComponent<EnemyToPlayer>().originalSpeed * 20) * Time.deltaTime);
-            
+
             attacking = true;
             //gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
         }
-        if(transform.position == newPosition) {
+        /*
+        if (transform.position == newPosition)
+        {
             hurtBox.enabled = true;
             //daAttack.enabled = true;
         }
-        
+        */
+
         yield return new WaitForSeconds(1f);
-        hurtBox.enabled = false;
+        //hurtBox.enabled = false;
         //daAttack.enabled = false;
         windupStarting = false;
         attacking = false;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WindUpAttackMelee : MonoBehaviour
+public class WindupWithStun : MonoBehaviour
 {
     // Start is called before the first frame update
     Vector3 preAttackPosition;
@@ -20,6 +20,7 @@ public class WindUpAttackMelee : MonoBehaviour
     private BoxCollider hurtBox;
     private MeshRenderer daAttack;
     Color prev;
+    bool stunned = false;
     IEnumerator inst = null;
     void Start()
     {
@@ -34,56 +35,65 @@ public class WindUpAttackMelee : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (stunned)
+        {
+            sr.color = Color.blue;
+        }
         targetToAttack = gameObject.GetComponent<EnemyToPlayer>().oldTarget;
         direction = new Vector3(targetToAttack.position.x - transform.position.x, 0, targetToAttack.position.z - transform.position.z);
         if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) <= 6f)
         {
-
-            if (!windupStarting)
-            {
-                StopCoroutine("attack");
-                windupStarting = true;
-                
-                //preAttackPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
-                attackPosition = new Vector3(targetToAttack.transform.position.x, targetToAttack.transform.position.y, targetToAttack.transform.position.z);
-                enemyPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-                newPosition = (attackPosition - enemyPosition) - (attackPosition - enemyPosition).normalized * 1.5f;
-
-                newPosition += enemyPosition;
-                
-
-                
-
-            }
-            //attacking = true;
-            
+            //StopCoroutine("stun");
             gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
-            if (!attacking)
+            if (!gameObject.GetComponent<EnemyControler>().takingDamage)
             {
-                
-                if (!gameObject.activeInHierarchy)
+                if (!windupStarting)
                 {
                     StopCoroutine("attack");
+                    windupStarting = true;
+
+                    attackPosition = new Vector3(targetToAttack.transform.position.x, targetToAttack.transform.position.y, targetToAttack.transform.position.z);
+                    enemyPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                    newPosition = (attackPosition - enemyPosition) - (attackPosition - enemyPosition).normalized * 1.5f;
+
+                    newPosition += enemyPosition;
                 }
-                else
+                
+                if (!attacking)
                 {
-                    StartCoroutine("attack");
+
+                    if (!gameObject.activeInHierarchy)
+                    {
+                        StopCoroutine("attack");
+                    }
+                    else
+                    {
+                        StartCoroutine("attack");
+                    }
                 }
+            }
+            if (gameObject.GetComponent<EnemyControler>().takingDamage)
+            {
+                attacking = true;
+                
+                StopCoroutine("attack");
+                StartCoroutine("stun");
             }
 
 
-            //transform.position = Vector3.MoveTowards(transform.position, targetToAttack.position, 10f * Time.deltaTime);
-        }
+                //transform.position = Vector3.MoveTowards(transform.position, targetToAttack.position, 10f * Time.deltaTime);
+            }
         else if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) > 6f && !attacking)
         {
             //StopCoroutine("attack");
 
 
             gameObject.GetComponent<EnemyToPlayer>().enemySpeed = gameObject.GetComponent<EnemyToPlayer>().originalSpeed;
-            if (!gameObject.GetComponent<EnemyControler>().takingDamage) { 
+            if (!gameObject.GetComponent<EnemyControler>().takingDamage)
+            {
                 sr.color = prev;
             }
-            
+
         }
         else if (attacking)
         {
@@ -96,36 +106,45 @@ public class WindUpAttackMelee : MonoBehaviour
 
     IEnumerator attack()
     {
-        
+
         sr.color = Color.yellow;
         childRB.MovePosition(transform.position + direction.normalized);
         if (transform.position != newPosition)
         {
-            yield return new WaitForSeconds(0.45f);
+            yield return new WaitForSeconds(0.75f);
 
 
-            sr.color = Color.green;
+            
             //1 0.92 0.016 1
             transform.position = Vector3.MoveTowards(transform.position, newPosition, (gameObject.GetComponent<EnemyToPlayer>().originalSpeed * 20) * Time.deltaTime);
-            
+
             attacking = true;
             //gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
         }
-        if(transform.position == newPosition) {
+        if (transform.position == newPosition)
+        {
             hurtBox.enabled = true;
+            sr.color = Color.green;
             //daAttack.enabled = true;
         }
-        
+
         yield return new WaitForSeconds(1f);
         hurtBox.enabled = false;
         //daAttack.enabled = false;
         windupStarting = false;
         attacking = false;
+    }
 
-
-
-
-
-
+    IEnumerator stun()
+    {
+        stunned = true;
+        Debug.Log("getting stun");
+        sr.color = Color.blue;
+        hurtBox.enabled = false;
+        yield return new WaitForSeconds(2f);
+        sr.color = prev;
+        gameObject.GetComponent<EnemyControler>().takingDamage = false;
+        stunned = false;
+        attacking = false;
     }
 }

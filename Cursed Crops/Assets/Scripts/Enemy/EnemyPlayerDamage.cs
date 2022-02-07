@@ -40,14 +40,20 @@ public class EnemyPlayerDamage : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
+        /*
         if (other.gameObject.GetComponent<WindUpAttackMelee>() != null && other.gameObject.GetComponent<GrabbageAI>() == null)
         {
             if (other.gameObject.tag == "Enemy" && !isItHit && !hitAgain && other.gameObject.GetComponent<WindUpAttackMelee>().attacking)
             {
                 StartCoroutine(iframes(damage));
             }
+        }
+        */
+        if (other.gameObject.tag == "attackBox" && !isItHit && !hitAgain)
+        {
+            StartCoroutine(iframes(damage));
         }
     }
     public IEnumerator iframes(int damages)

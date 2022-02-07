@@ -111,16 +111,13 @@ public class ScarrotAttack : MonoBehaviour
     {
         if (chooseAttack == 1)
         {
-            while (transform.position != newPosition)
+            if (transform.position != newPosition)
             {
                 yield return new WaitForSeconds(0.45f);
-                Debug.Log("first wait");
-
 
                 sr.color = Color.green;
                 //1 0.92 0.016 1
                 transform.position = Vector3.MoveTowards(transform.position, newPosition, (gameObject.GetComponent<EnemyToPlayer>().originalSpeed * 4) * Time.deltaTime);
-                Debug.Log("hello");
                 attacking = true;
                 //gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
             }
@@ -132,7 +129,7 @@ public class ScarrotAttack : MonoBehaviour
         }
         if(chooseAttack == 2)
         {
-            while (transform.position != newPosition)
+            if (transform.position != newPosition)
             {
                 yield return new WaitForSeconds(0.45f);
                 Debug.Log("first wait");

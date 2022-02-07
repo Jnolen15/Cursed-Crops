@@ -29,7 +29,7 @@ public class EnemyDamageObjective : MonoBehaviour
     
     //OnCollision Enter doesn't work for some reason but on trigger will do for now to do damage to the house
     // Need to find a way to make damage stack if multiple enemies are in it
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         while (other.gameObject.tag == "Enemy" && !isItHit)
         {

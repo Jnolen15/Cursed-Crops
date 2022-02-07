@@ -24,22 +24,17 @@ public class GrabbageAI : MonoBehaviour
             trappedPlayer.GetComponent<PlayerControler>().trapped = false;
             gameObject.SetActive(false);
         }
-        else if(gameObject.GetComponent<EnemyControler>().health <= 0)
-        {
-            boostedHealthActivate = false;
-            gameObject.SetActive(false);
-        }
         
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player" && gameObject.GetComponent<EnemyControler>().health > 0)
         {
             gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
             if (!alreadyGrabbing)
             {
-                gameObject.GetComponent<WindUpAttackMelee>().enabled = false;
+                gameObject.GetComponent<GrabbageWindup>().enabled = false;
                 alreadyGrabbing = true;
                 trappedPlayer = other.gameObject;
 

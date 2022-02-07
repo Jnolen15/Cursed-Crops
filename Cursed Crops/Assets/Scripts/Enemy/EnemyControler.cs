@@ -41,7 +41,7 @@ public class EnemyControler : MonoBehaviour
         if (ps != null)
             ps.Emit(4);
         // If health is below or equal to 0 die
-        if (health <= 0)
+        if (health <= 0 && gameObject.GetComponent<GrabbageAI>() == null && gameObject.GetComponent<ScarrotAttack>() == null)
         {
             death();
         } else
