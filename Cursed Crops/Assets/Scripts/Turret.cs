@@ -43,7 +43,7 @@ public class Turret : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Enemy" && other.gameObject.name != "cornnonBullet")
         {
