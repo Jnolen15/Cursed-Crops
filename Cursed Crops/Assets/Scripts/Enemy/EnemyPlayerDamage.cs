@@ -56,6 +56,13 @@ public class EnemyPlayerDamage : MonoBehaviour
             StartCoroutine(iframes(damage));
         }
     }
+
+    public void Heal(int ammount)
+    {
+        if (playerHealth < reviveHealth)
+            playerHealth += ammount;
+    }
+
     public IEnumerator iframes(int damages)
     {
         if (playerHealth > 0)
@@ -96,7 +103,7 @@ public class EnemyPlayerDamage : MonoBehaviour
     }
 
     // Now unused
-    private IEnumerator stun()
+    /*private IEnumerator stun()
     {
         playerIsStun = true;
 
@@ -132,7 +139,7 @@ public class EnemyPlayerDamage : MonoBehaviour
         Debug.Log("Checking if double wait works");
 
 
-    }
+    }*/
 
     private void gameOver()
     {
