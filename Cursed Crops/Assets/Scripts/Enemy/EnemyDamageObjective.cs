@@ -55,7 +55,7 @@ public class EnemyDamageObjective : MonoBehaviour
     {
         isItHit = true;
         // process pre-yield
-        Debug.Log(houseHealth);
+        //Debug.Log(houseHealth);
         yield return new WaitForSeconds(5.0f);
         // process post-yield
         isItHit = false;

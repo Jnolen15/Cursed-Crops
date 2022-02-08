@@ -33,7 +33,7 @@ public class Bullet : MonoBehaviour
         if ((other.gameObject.tag == "Enemy" || other.gameObject.name == "cornnonBullet(Clone)") && gameObject.tag != "enemyBullet")
         {
             EnemyControler enemyControler = other.gameObject.GetComponent<EnemyControler>();
-            enemyControler.takeDamageRange(damage);
+            enemyControler.takeDamage(damage, "Range");
             if(!piercing)
                 Destroy(gameObject);
             Debug.Log("Hit Enemy");

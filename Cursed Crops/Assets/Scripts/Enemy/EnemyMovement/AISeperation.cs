@@ -16,7 +16,7 @@ public class AISeperation : MonoBehaviour
     void FixedUpdate()
     {
         AI = GameObject.FindGameObjectsWithTag("Enemy");
-        Debug.Log(AI.Length);
+       // Debug.Log(AI.Length);
         foreach(GameObject go in AI)
         {
             if(go != gameObject)

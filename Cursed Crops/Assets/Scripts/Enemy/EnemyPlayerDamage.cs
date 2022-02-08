@@ -5,20 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class EnemyPlayerDamage : MonoBehaviour
 {
-    private SpriteRenderer playerSprite;
-    private GameObject mainObjective;
+    // ================= Public variables =================
     public int playerHealth = 10;
     public int reviveHealth = 10;
     public int damage = 1;
-    public bool isItHit = false;
-    private bool hitAgain = false;
-    private bool alphaChekcer = false;
+    public bool inIFrames = false;
     public bool playerIsStun = false;
+
+    // ================= Private variables =================
+    private delegate void Callback();
+    private PlayerControler pc;
+    private SpriteRenderer playerSprite;
+    private GameObject mainObjective;
     private Animator animator;
+    private Coroutine damageBuffCo;
 
     // Start is called before the first frame update
     void Start()
     {
+        pc = this.GetComponent<PlayerControler>();
         playerSprite = this.transform.GetChild(1).GetChild(0).GetComponent<SpriteRenderer>();
         animator = this.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Animator>();
     }
@@ -51,7 +56,7 @@ public class EnemyPlayerDamage : MonoBehaviour
             }
         }
         */
-        if (other.gameObject.tag == "attackBox" && !isItHit && !hitAgain)
+        if (other.gameObject.tag == "attackBox" && !inIFrames)
         {
             StartCoroutine(iframes(damage));
         }
@@ -63,11 +68,17 @@ public class EnemyPlayerDamage : MonoBehaviour
             playerHealth += ammount;
     }
 
+    public void Damage(int ammount)
+    {
+        if(!inIFrames)
+            StartCoroutine(iframes(ammount));
+    }
+
     public IEnumerator iframes(int damages)
     {
         if (playerHealth > 0)
         {
-            isItHit = true;
+            inIFrames = true;
             playerHealth -= damages;
 
             // Flash red and play hurt anim
@@ -90,8 +101,7 @@ public class EnemyPlayerDamage : MonoBehaviour
 
             // Finish Iframes
             //yield return new WaitForSeconds(0.9f);
-
-            isItHit = false;
+            inIFrames = false;
         }
     }
 
@@ -102,47 +112,33 @@ public class EnemyPlayerDamage : MonoBehaviour
         playerIsStun = false;
     }
 
-    // Now unused
-    /*private IEnumerator stun()
+    // Type of effects can be seen in the comment below. Length is an optional variable default to 0
+    public void ApplyEffect(string type, float length = 0)
     {
-        playerIsStun = true;
+        // Types of effects:
+        // Buff: DamageBoost
+        // Debuff: Restrained?
 
-        //Debug.Log(gameObject + "is stun");
-
-        //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControler>().enabled = false;
-        gameObject.GetComponent<PlayerControler>().enabled = false;
-        hitAgain = true;
-        var trans = 0.2f;
-        //var col = GameObject.Find("PlayerSprite").GetComponent<SpriteRenderer>().color;
-        //GameObject playerSprite = gameObject.transform.Find("PlayerPivot").gameObject;
-        var col = playerSprite.color;
-        col.a = trans;
-        //GameObject.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
-        playerSprite.color = col;
-        //GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyToPlayer>().enabled = false;
-        //GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyToObjective>().enabled = true;
-        yield return new WaitForSeconds(15.0f);
-        // process post-yield
-        playerIsStun = false;
-
-        col.a = 0.5f;
-        //GameObject.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
-        playerSprite.color = col;
-        //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControler>().enabled = true;
-        gameObject.GetComponent<PlayerControler>().enabled = true;
-        yield return new WaitForSeconds(3.0f);
-        hitAgain = false;
-        alphaChekcer = false;
-        col.a = 1f;
-        //GameObject.Find("PlayerSprite").GetComponent<SpriteRenderer>().color = col;
-        playerSprite.color = col;
-        Debug.Log("Checking if double wait works");
-
-
-    }*/
+        switch (type)
+        {
+            case "DamageBoost":
+                Debug.Log("Applying DamageBoost");
+                pc.damageBoost = 1.5f;
+                if (damageBuffCo != null)
+                    StopCoroutine(damageBuffCo);
+                damageBuffCo = StartCoroutine(cooldown(() => { Debug.Log("DamageBoost Over"); pc.damageBoost = 1f; }, length));
+                break;
+        }
+    }
 
     private void gameOver()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); ;
+    }
+
+    IEnumerator cooldown(Callback callback, float time)
+    {
+        yield return new WaitForSeconds(time);
+        callback?.Invoke();
     }
 }

@@ -136,7 +136,7 @@ public class EnemyToPlayer : MonoBehaviour
             {
                 higherDamage = playerDamage.overAllPlayerDamage;
                 bestTarget = potentialTarget;
-                Debug.Log(potentialTarget + "Has the highest amount of damage = " + higherDamage);
+                //Debug.Log(potentialTarget + "Has the highest amount of damage = " + higherDamage);
             }
            
             Vector3 directionToTarget = potentialTarget.position - currentPosition;
