@@ -72,7 +72,7 @@ public class WindupWithStun : MonoBehaviour
                     }
                 }
             }
-            if (gameObject.GetComponent<EnemyControler>().takingDamage)
+            if (gameObject.GetComponent<EnemyControler>().takingDamage && gameObject.GetComponent<EnemyControler>().lastDamageType == "Melee")
             {
                 attacking = true;
                 

@@ -4,21 +4,41 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private Rigidbody rb;
-    private SpriteRenderer sr;
-    
-
+    // ================= Public variables =================
     public Vector3 movement;
     public float range = 1f;
     public int damage = 5;
     public int bulletSpeed = 15;
     public bool piercing = false;
 
+    [Header("Payloads: damage when reach destination")]
+    public bool isPayload = false;
+    public Vector3 destination;
+
+    // ================= Private variables =================
+    private Rigidbody rb;
+    private SpriteRenderer sr;
+    private bool exploded = false; // Used for Payload type bullets
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         sr = GetComponent<SpriteRenderer>();
+    }
+
+    private void Update()
+    {
+        // If payload is in range of destination, explode
+        if (isPayload)
+        {
+            if (((this.transform.position.x <= destination.x + 1) && (this.transform.position.x >= destination.x - 1)) 
+                && ((this.transform.position.z <= destination.z + 1) && (this.transform.position.z >= destination.z - 1)))
+            {
+                Debug.Log("BOOM BITCH");
+                exploded = true;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -29,24 +49,46 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("Hit " + other.gameObject.tag);
-        if ((other.gameObject.tag == "Enemy" || other.gameObject.name == "cornnonBullet(Clone)") && gameObject.tag != "enemyBullet")
+        // Enemy bullets
+        if (gameObject.tag == "enemyBullet")
         {
-            EnemyControler enemyControler = other.gameObject.GetComponent<EnemyControler>();
-            enemyControler.takeDamage(damage, "Range");
-            if(!piercing)
-                Destroy(gameObject);
-            Debug.Log("Hit Enemy");
+            if (other.gameObject.tag == "Player")
+            {
+                other.gameObject.GetComponent<EnemyPlayerDamage>().playerHealth -= 5;
+            }
+            else if (other.gameObject.tag == "MainObjective")
+            {
+                other.gameObject.GetComponent<EnemyDamageObjective>().houseHealth -= 5;
+            }
         }
 
-        // adding line for enemy bullets
-        else if(gameObject.tag == "enemyBullet" && other.gameObject.tag == "Player")
+        // Player or Turret Bullets
+        else
         {
-            other.gameObject.GetComponent<EnemyPlayerDamage>().playerHealth -= 5;
+            // Normal Bullets
+            if (!isPayload && (other.gameObject.tag == "Enemy" || other.gameObject.name == "cornnonBullet(Clone)"))
+            {
+                EnemyControler enemyControler = other.gameObject.GetComponent<EnemyControler>();
+                enemyControler.takeDamage(damage, "Range");
+                if (!piercing)
+                    Destroy(gameObject);
+                //Debug.Log("Hit " + other.gameObject.tag);
+            }
         }
-        else if (gameObject.tag == "enemyBullet" && other.gameObject.tag == "MainObjective")
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        // Payload Bullets
+        if (isPayload && exploded)
         {
-            other.gameObject.GetComponent<EnemyDamageObjective>().houseHealth -= 5;
+            if (other.gameObject.tag == "Enemy" || other.gameObject.name == "cornnonBullet(Clone)")
+            {
+                EnemyControler enemyControler = other.gameObject.GetComponent<EnemyControler>();
+                enemyControler.ApplyEffect("Burning", 4f);
+                enemyControler.takeDamage(damage, "Range");
+            }
+            Destroy(this.gameObject);
         }
     }
 }
