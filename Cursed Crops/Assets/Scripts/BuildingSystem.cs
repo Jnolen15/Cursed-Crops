@@ -5,23 +5,24 @@ using UnityEngine.InputSystem;
 
 public class BuildingSystem : MonoBehaviour
 {
-    // Private variables
+    // ================= Private variables =================
     [SerializeField] private popUpUISO popupUI;
-    public GameObject popUp;
+    private GameObject popUp;
     private PlantingUIManager popUpMan;
-    public PlaceableSO activePlaceable;
-    public CropSO activeCrop;
     private PlayerControler pc;
     private BuildChecker bc;
     private SpawnManager sm;
+    private Animator animator;
+    private ParticleSystem ps;
+    private bool acceptablePos;
+    private int count = 0;
+
+    // ================= Public variables =================
+    public PlaceableSO activePlaceable;
+    public CropSO activeCrop;
     public GameObject placeableHighlight;
     public GameObject phSprite;
     public SpriteRenderer pHSpriteRenderer;
-    private Animator animator;
-    public bool acceptablePos;
-    private int count = 0;
-
-    // Public variables
     public bool buildmodeActive = false;
     public string mode = "Build";
     public float gridSize = 1;
@@ -37,6 +38,8 @@ public class BuildingSystem : MonoBehaviour
         bc = placeableHighlight.GetComponent<BuildChecker>();
         sm = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         animator = this.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Animator>();
+        ps = placeableHighlight.transform.GetChild(1).gameObject.GetComponent<ParticleSystem>();
+        ps.Pause();
         popUp = Instantiate(popupUI.Prefab.gameObject, transform.position, transform.rotation, transform);
         popUp.SetActive(false);
         popUpMan = popUp.GetComponent<PlantingUIManager>();
@@ -73,10 +76,12 @@ public class BuildingSystem : MonoBehaviour
             {
                 pHSpriteRenderer.sprite = activePlaceable.preview;
                 phSprite.transform.localScale = activePlaceable.prefab.GetChild(0).GetChild(0).transform.localScale;
+                ps.Play();
             } else if (mode == "Plant" && pHSpriteRenderer.sprite != activePlaceable.preview)
             {
                 pHSpriteRenderer.sprite = activeCrop.preview;
                 phSprite.transform.localScale = activeCrop.prefab.GetChild(0).GetChild(0).transform.localScale;
+                ps.Stop();
             }
         }
     }
@@ -205,6 +210,7 @@ public class BuildingSystem : MonoBehaviour
 
                 activePlaceable = popupUI.buildables[count];
                 activeCrop = popupUI.plantables[count];
+                AdjustRadius();
 
                 switch (count)
                 {
@@ -239,6 +245,7 @@ public class BuildingSystem : MonoBehaviour
 
                 activePlaceable = popupUI.buildables[count];
                 activeCrop = popupUI.plantables[count];
+                AdjustRadius();
 
                 switch (count)
                 {
@@ -270,6 +277,7 @@ public class BuildingSystem : MonoBehaviour
                 popUpMan.selectTop();
                 activePlaceable = popupUI.buildables[2];
                 activeCrop = popupUI.plantables[2];
+                AdjustRadius();
             }
         }
     }
@@ -283,6 +291,7 @@ public class BuildingSystem : MonoBehaviour
                 popUpMan.selectBot();
                 activePlaceable = popupUI.buildables[1];
                 activeCrop = popupUI.plantables[1];
+                AdjustRadius();
             }
         }
     }
@@ -296,6 +305,7 @@ public class BuildingSystem : MonoBehaviour
                 popUpMan.selectRight();
                 activePlaceable = popupUI.buildables[0];
                 activeCrop = popupUI.plantables[0];
+                AdjustRadius();
             }
         }
     }
@@ -309,6 +319,7 @@ public class BuildingSystem : MonoBehaviour
                 popUpMan.selectLeft();
                 activePlaceable = popupUI.buildables[3];
                 activeCrop = popupUI.plantables[3];
+                AdjustRadius();
             }
         }
     }
@@ -332,6 +343,7 @@ public class BuildingSystem : MonoBehaviour
                 // Set the higlight to match the prefab
                 pHSpriteRenderer.sprite = activeCrop.preview;
                 phSprite.transform.localScale = activeCrop.prefab.GetChild(0).GetChild(0).transform.localScale;
+                ps.Stop();
                 bc.mode = mode;
                 if (popUp != null)
                     popUpMan.switchMode(mode);
@@ -342,6 +354,7 @@ public class BuildingSystem : MonoBehaviour
                 // Set the higlight to match the prefab
                 pHSpriteRenderer.sprite = activePlaceable.preview;
                 phSprite.transform.localScale = activePlaceable.prefab.GetChild(0).GetChild(0).transform.localScale;
+                ps.Play();
                 bc.mode = mode;
                 if (popUp != null)
                     popUpMan.switchMode(mode);
@@ -377,6 +390,13 @@ public class BuildingSystem : MonoBehaviour
         Vector3 placePos = new Vector3(xPos, 1, zPos);
 
         trans.position = placePos;
+    }
+
+    // Adjust the radius of the particle system to match the turret's range
+    private void AdjustRadius()
+    {
+        var shape = ps.shape;
+        shape.radius = activePlaceable.prefab.GetComponent<SphereCollider>().radius;
     }
 
     private void TestPlacementAvailable()

@@ -45,7 +45,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 4
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &6818026205495422109
 Rigidbody:
@@ -129,7 +129,7 @@ MonoBehaviour:
   movement: {x: 0, y: 0, z: 0}
   range: 20
   damage: 2
-  bulletSpeed: 5
+  bulletSpeed: 10
   piercing: 0
   isPayload: 1
   destination: {x: 0, y: 0, z: 0}
