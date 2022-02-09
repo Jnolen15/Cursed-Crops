@@ -97,9 +97,12 @@ public class Turret : MonoBehaviour
         shooting = true;
         turretSprite.sprite = shootingSprite;
         GameObject bul = Instantiate(bullet, transform.position, transform.rotation);
+        if (bul.GetComponent<Bullet>().isPayload)
+        {
+            bul.GetComponent<Bullet>().destination = enemyPosition.position;
+        }
         // Send bullet in correct direction
         bul.GetComponent<Bullet>().movement = direction.normalized;
-
         // Change when animations are in (Use keyframes to signal shooting event)
         yield return new WaitForSeconds(cooldown/2f);
         turretSprite.sprite = reloadingSprite;

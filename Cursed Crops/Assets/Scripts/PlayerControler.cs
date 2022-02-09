@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerControler : MonoBehaviour
 {
-    // FLOATS / INTS ===========
+    // ====================== FLOATS / INTS ======================
     [SerializeField] private float attackCDTimer = 1.5f;
     [SerializeField] private float rollSpeedMax = 24;
     [SerializeField] private float rollSpeedFallofDelay = 0.3f;
@@ -29,8 +29,9 @@ public class PlayerControler : MonoBehaviour
     public int money = 0;
     public int health = 10;
     public int maxHealth = 10;
+    public float damageBoost = 1f;
 
-    // BOOLS ===========
+    // ====================== BOOLS ======================
     private bool rangeCD = false;
     private bool rollCD = false;
     public bool faceaim = false;
@@ -44,18 +45,7 @@ public class PlayerControler : MonoBehaviour
     public bool flipped = false;
     public bool useControler;               // If using controller changes aiming
 
-    // STRINGS ===========
-    // Strings are used for input mapping. This is done to make the creation of multiple players clean and simple.
-    //[SerializeField] private string HorizontalMove = "Horizontal_P1";
-    //[SerializeField] private string VerticalMove = "Vertical_P1";
-    //[SerializeField] private string HorizontalAimController = "CHorizontal_P1";
-    //[SerializeField] private string VerticalAimController = "CVertical_P1";
-    //[SerializeField] private string AttackButton = "Attack_P1";
-    //[SerializeField] private string RangedButton = "Ranged_P1";
-    //[SerializeField] private string RollButton = "Roll_P1";
-
-    // OTHER COMPONENTS ===========
-    //private PlayerInputActions playerInputActions;  // The player input object script
+    // ====================== OTHER COMPONENTS ======================
     private BuildingSystem bs;
     private EnemyPlayerDamage epd;
     private Rigidbody rb;                  // The player's Rigidbody
@@ -512,23 +502,26 @@ public class PlayerControler : MonoBehaviour
                 {
                     if (attackChain == 1)
                     {
-                        enemyControler.takeDamageMelee(4);
-                        overAllPlayerDamage += 4;
+                        int damageAmmount = (int)(3 * damageBoost);
+                        enemyControler.takeDamage(damageAmmount, "Melee");
+                        overAllPlayerDamage += damageAmmount;
                     }
                     else if (attackChain == 2)
                     {
-                        enemyControler.takeDamageMelee(6);
-                        overAllPlayerDamage += 6;
+                        int damageAmmount = (int)(5 * damageBoost);
+                        enemyControler.takeDamage(damageAmmount, "Melee");
+                        overAllPlayerDamage += damageAmmount;
                     }
                     else if (attackChain == 3)
                     {
-                        enemyControler.takeDamageMelee(10);
-                        overAllPlayerDamage += 10;
+                        int damageAmmount = (int)(8 * damageBoost);
+                        enemyControler.takeDamage(damageAmmount, "Melee");
+                        overAllPlayerDamage += damageAmmount;
                     }
                 }
                 else
                 {
-                    enemyControler.takeDamageMelee(1);
+                    enemyControler.takeDamage(1, "Melee");
                     overAllPlayerDamage += 1;
                 }
             }
