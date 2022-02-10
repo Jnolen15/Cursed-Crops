@@ -49,18 +49,13 @@ public class BuildChecker : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (mode == "Build")
+        if (other.gameObject.tag == "Spawner")
         {
-            if (other.gameObject.tag == "Buildable")
-            {
-                intersectingBuildable = false;
-            }
-        } else if (mode == "Plant")
+            intersectingBuildable = false;
+        }
+        if (other.gameObject.tag == "Buildable")
         {
-            if (other.gameObject.tag == "Spawner")
-            {
-                intersectingBuildable = false;
-            }
+            intersectingBuildable = false;
         }
     }
 }

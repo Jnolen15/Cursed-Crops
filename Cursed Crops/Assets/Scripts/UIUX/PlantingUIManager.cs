@@ -50,6 +50,7 @@ public class PlantingUIManager : MonoBehaviour
             string[] textC = new string[] { SO.buildables[2].placeableName, SO.buildables[2].desc, SO.buildables[2].stats, SO.buildables[2].price };
             string[] textD = new string[] { SO.buildables[3].placeableName, SO.buildables[3].desc, SO.buildables[3].stats, SO.buildables[3].price };
             setUp(textA, textB, textC, textD);
+            this.gameObject.SetActive(false);
         } else
         {
             Debug.LogError("UI scriptable object ref is null");
