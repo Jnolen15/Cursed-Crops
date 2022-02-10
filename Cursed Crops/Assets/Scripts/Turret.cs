@@ -9,22 +9,20 @@ public class Turret : MonoBehaviour
     public bool shooting = false;
     public float cooldown = 2f;
 
-    public Sprite innitialSprite;
-    public Sprite shootingSprite;
-    public Sprite reloadingSprite;
-
     // ================= Private variables =================
     private Vector3 direction;
     private Vector3 flipDirection;
     private Transform enemyPosition;
     private GameObject targetedEnemy;
     private SpriteRenderer turretSprite;
+    private Animator animator;
     private bool flipped = false;
 
 
     void Start()
     {
         turretSprite = this.transform.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>();
+        animator = this.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Animator>();
     }
 
     void Update()
@@ -95,7 +93,14 @@ public class Turret : MonoBehaviour
     IEnumerator shoot()
     {
         shooting = true;
-        turretSprite.sprite = shootingSprite;
+        animator.SetTrigger("Shoot");
+        MakeBullet();
+        yield return new WaitForSeconds(cooldown);
+        shooting = false;
+    }
+
+    private void MakeBullet()
+    {
         GameObject bul = Instantiate(bullet, transform.position, transform.rotation);
         if (bul.GetComponent<Bullet>().isPayload)
         {
@@ -103,11 +108,5 @@ public class Turret : MonoBehaviour
         }
         // Send bullet in correct direction
         bul.GetComponent<Bullet>().movement = direction.normalized;
-        // Change when animations are in (Use keyframes to signal shooting event)
-        yield return new WaitForSeconds(cooldown/2f);
-        turretSprite.sprite = reloadingSprite;
-        yield return new WaitForSeconds(cooldown/2f);
-        turretSprite.sprite = innitialSprite;
-        shooting = false;
     }
 }
