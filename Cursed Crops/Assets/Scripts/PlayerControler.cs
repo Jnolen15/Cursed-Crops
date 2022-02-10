@@ -30,6 +30,7 @@ public class PlayerControler : MonoBehaviour
     public int health = 10;
     public int maxHealth = 10;
     public float damageBoost = 1f;
+    public bool finalHit = false;
 
     // ====================== BOOLS ======================
     private bool rangeCD = false;
@@ -430,6 +431,7 @@ public class PlayerControler : MonoBehaviour
                         //attackChain = 3;
                         attackDuration = 0.7f;
                         animator.SetTrigger("Melee3");
+                        finalHit = true;
                         if (ap != null)
                             StopCoroutine(ap);
                         ap = StartCoroutine(attackPhase(0.3f, 0.1f, 0.3f, true)); // add to 0.7
