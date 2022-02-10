@@ -43,7 +43,7 @@ public class WindupWithStun : MonoBehaviour
         }
         
         targetToAttack = gameObject.GetComponent<EnemyToPlayer>().oldTarget;
-        if (targetToAttack != null && targetToAttack.GetComponent<PlayerControler>().finalHit)
+        /*if (targetToAttack != null && targetToAttack.GetComponent<PlayerControler>().finalHit)
         {
             targetToAttack.GetComponent<PlayerControler>().finalHit = false;
             Vector3 knockattackPosition = new Vector3(targetToAttack.transform.position.x, targetToAttack.transform.position.y, targetToAttack.transform.position.z);
@@ -55,6 +55,7 @@ public class WindupWithStun : MonoBehaviour
             //transform.position = Vector3.MoveTowards(transform.position, knocknewPosition, (gameObject.GetComponent<EnemyToPlayer>().originalSpeed * 20) * Time.deltaTime);
             transform.position = Vector3.MoveTowards(transform.position, knocknewPosition, (gameObject.GetComponent<EnemyToPlayer>().originalSpeed * 2) * Time.deltaTime);
         }
+        */
         direction = new Vector3(targetToAttack.position.x - transform.position.x, 0, targetToAttack.position.z - transform.position.z);
         if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) <= 6f)
         {
@@ -104,7 +105,7 @@ public class WindupWithStun : MonoBehaviour
             StopCoroutine("stun");
             StartCoroutine("stun");
         }
-        else if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) > 6f && !attacking)
+        if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) > 6f && !attacking)
         {
             //StopCoroutine("attack");
 

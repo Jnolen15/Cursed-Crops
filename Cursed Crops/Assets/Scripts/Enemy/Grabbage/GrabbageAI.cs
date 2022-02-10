@@ -27,11 +27,12 @@ public class GrabbageAI : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player" && gameObject.GetComponent<EnemyControler>().health > 0)
         {
             gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
+            gameObject.transform.position = other.gameObject.transform.position;
             if (!alreadyGrabbing)
             {
                 gameObject.GetComponent<GrabbageWindup>().enabled = false;
@@ -39,7 +40,7 @@ public class GrabbageAI : MonoBehaviour
                 trappedPlayer = other.gameObject;
 
                 
-                gameObject.transform.position = other.gameObject.transform.position;
+                
 
                 other.gameObject.GetComponent<PlayerControler>().trapped = true;
                 if (!isItHit)
@@ -52,6 +53,7 @@ public class GrabbageAI : MonoBehaviour
                     }
                     else
                     {
+                        isItHit = false;
                         StopCoroutine("cheapDamage");
                     }
                 }
@@ -61,10 +63,16 @@ public class GrabbageAI : MonoBehaviour
         }
     }
 
+    
+
     IEnumerator cheapDamage()
     {
-        trappedPlayer.GetComponent<EnemyPlayerDamage>().playerHealth -= 1;
-        yield return new WaitForSeconds(1f);
+        if (trappedPlayer.GetComponent<EnemyPlayerDamage>().playerHealth > 0)
+        {
+            trappedPlayer.GetComponent<EnemyPlayerDamage>().playerHealth -= 1;
+            yield return new WaitForSeconds(1f);
+            
+        }
         isItHit = false;
 
     }

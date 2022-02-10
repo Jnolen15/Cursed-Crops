@@ -413,6 +413,7 @@ public class PlayerControler : MonoBehaviour
                         //attackChain = 1;
                         attackDuration = 0.4f;
                         animator.SetTrigger("Melee1");
+
                         ap = StartCoroutine(attackPhase(0f, 0.2f, 0.2f, false));
                         break;
                     case 1:
@@ -434,7 +435,14 @@ public class PlayerControler : MonoBehaviour
                         finalHit = true;
                         if (ap != null)
                             StopCoroutine(ap);
-                        ap = StartCoroutine(attackPhase(0.3f, 0.1f, 0.3f, true)); // add to 0.7
+                        if (!trapped)
+                        {
+                            ap = StartCoroutine(attackPhase(0.3f, 0.1f, 0.3f, true)); // add to 0.7
+                        }
+                        else
+                        {
+                            ap = StartCoroutine(attackPhase(0.3f, 0.1f, 0.3f, false)); // add to 0.7
+                        }
                         break;
                     case 3:
                         attackChain = 0;
@@ -585,6 +593,14 @@ public class PlayerControler : MonoBehaviour
         if (other.gameObject.tag == "MainObjective")
         {
             GetComponent<PlayerResourceManager>().BankItems();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.GetComponent<GrabbageAI>() != null)
+        {
+            trapped = false;
         }
     }
 
