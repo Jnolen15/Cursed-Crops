@@ -14,6 +14,7 @@ public class WindupWithStun : MonoBehaviour
     bool getPosition = false;
     bool windupStarting = false;
     Rigidbody childRB;
+    Rigidbody rb;
     private SpriteRenderer sr;
     Transform targetToAttack;
     GameObject theTarget;
@@ -25,6 +26,7 @@ public class WindupWithStun : MonoBehaviour
     void Start()
     {
         childRB = this.gameObject.transform.GetChild(1).GetComponent<Rigidbody>();
+        rb = gameObject.GetComponent<Rigidbody>();
         hurtBox = this.gameObject.transform.GetChild(1).GetComponent<BoxCollider>();
         daAttack = this.gameObject.transform.GetChild(1).GetComponent<MeshRenderer>();
         sr = this.transform.GetComponentInChildren<SpriteRenderer>();
@@ -39,7 +41,20 @@ public class WindupWithStun : MonoBehaviour
         {
             sr.color = Color.blue;
         }
+        
         targetToAttack = gameObject.GetComponent<EnemyToPlayer>().oldTarget;
+        if (targetToAttack != null && targetToAttack.GetComponent<PlayerControler>().finalHit)
+        {
+            targetToAttack.GetComponent<PlayerControler>().finalHit = false;
+            Vector3 knockattackPosition = new Vector3(targetToAttack.transform.position.x, targetToAttack.transform.position.y, targetToAttack.transform.position.z);
+            Vector3 knockenemyPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            Vector3 knocknewPosition = (knockenemyPosition - knockattackPosition) + (knockenemyPosition - knockattackPosition).normalized;
+
+            knocknewPosition += knockenemyPosition;
+
+            //transform.position = Vector3.MoveTowards(transform.position, knocknewPosition, (gameObject.GetComponent<EnemyToPlayer>().originalSpeed * 20) * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, knocknewPosition, (gameObject.GetComponent<EnemyToPlayer>().originalSpeed * 2) * Time.deltaTime);
+        }
         direction = new Vector3(targetToAttack.position.x - transform.position.x, 0, targetToAttack.position.z - transform.position.z);
         if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) <= 6f)
         {
@@ -58,8 +73,8 @@ public class WindupWithStun : MonoBehaviour
 
                     newPosition += enemyPosition;
                 }
-                
-                if (!attacking)
+
+                if (!attacking && !stunned)
                 {
 
                     if (!gameObject.activeInHierarchy)
@@ -70,19 +85,25 @@ public class WindupWithStun : MonoBehaviour
                     {
                         StartCoroutine("attack");
                     }
+                    if (gameObject.GetComponent<EnemyControler>().takingDamage && gameObject.GetComponent<EnemyControler>().lastDamageType == "Melee")
+                    {
+                        StopCoroutine("attack");
+                    }
                 }
             }
-            if (gameObject.GetComponent<EnemyControler>().takingDamage && gameObject.GetComponent<EnemyControler>().lastDamageType == "Melee")
-            {
-                attacking = true;
-                
-                StopCoroutine("attack");
-                StartCoroutine("stun");
-            }
+            
 
 
                 //transform.position = Vector3.MoveTowards(transform.position, targetToAttack.position, 10f * Time.deltaTime);
-            }
+        }
+        if (gameObject.GetComponent<EnemyControler>().takingDamage && gameObject.GetComponent<EnemyControler>().lastDamageType == "Melee")
+        {
+            attacking = true;
+            windupStarting = false;
+            StopCoroutine("attack");
+            StopCoroutine("stun");
+            StartCoroutine("stun");
+        }
         else if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) > 6f && !attacking)
         {
             //StopCoroutine("attack");
