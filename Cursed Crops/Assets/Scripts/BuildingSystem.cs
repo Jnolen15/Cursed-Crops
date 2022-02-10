@@ -41,8 +41,8 @@ public class BuildingSystem : MonoBehaviour
         ps = placeableHighlight.transform.GetChild(1).gameObject.GetComponent<ParticleSystem>();
         ps.Pause();
         popUp = Instantiate(popupUI.Prefab.gameObject, transform.position, transform.rotation, transform);
-        popUp.SetActive(false);
         popUpMan = popUp.GetComponent<PlantingUIManager>();
+        //popUp.SetActive(false); MOVED TO IN POPUP
         // Set default selected placeable
         if (popupUI.buildables.Length > 0 && popupUI.buildables.Length > 0)
         {
@@ -121,6 +121,9 @@ public class BuildingSystem : MonoBehaviour
                             phSprite.transform.localScale = activePlaceable.prefab.GetChild(0).GetChild(0).transform.localScale;
                             bc.mode = mode;
                             popUpMan.selectTop();
+                            activePlaceable = popupUI.buildables[0];
+                            activeCrop = popupUI.plantables[0];
+                            count = 0;
                             // Set hitbox to match the prefab
                             //bc.boxCol.size = activePlaceable.prefab.GetComponent<BoxCollider>().size;
                         }
@@ -131,6 +134,9 @@ public class BuildingSystem : MonoBehaviour
                             phSprite.transform.localScale = activeCrop.prefab.GetChild(0).GetChild(0).transform.localScale;
                             bc.mode = mode;
                             popUpMan.selectTop();
+                            activePlaceable = popupUI.buildables[0];
+                            activeCrop = popupUI.plantables[0];
+                            count = 0;
                             // Set hitbox to match the prefab
                             //bc.boxCol.size = activePlaceable.prefab.GetComponent<BoxCollider>().size;
                         }
@@ -274,9 +280,10 @@ public class BuildingSystem : MonoBehaviour
         {
             if (buildmodeActive)
             {
+                count = 0;
                 popUpMan.selectTop();
-                activePlaceable = popupUI.buildables[2];
-                activeCrop = popupUI.plantables[2];
+                activePlaceable = popupUI.buildables[0];
+                activeCrop = popupUI.plantables[0];
                 AdjustRadius();
             }
         }
@@ -288,9 +295,10 @@ public class BuildingSystem : MonoBehaviour
         {
             if (buildmodeActive)
             {
+                count = 2;
                 popUpMan.selectBot();
-                activePlaceable = popupUI.buildables[1];
-                activeCrop = popupUI.plantables[1];
+                activePlaceable = popupUI.buildables[2];
+                activeCrop = popupUI.plantables[2];
                 AdjustRadius();
             }
         }
@@ -302,9 +310,10 @@ public class BuildingSystem : MonoBehaviour
         {
             if (buildmodeActive)
             {
+                count = 1;
                 popUpMan.selectRight();
-                activePlaceable = popupUI.buildables[0];
-                activeCrop = popupUI.plantables[0];
+                activePlaceable = popupUI.buildables[1];
+                activeCrop = popupUI.plantables[1];
                 AdjustRadius();
             }
         }
@@ -316,6 +325,7 @@ public class BuildingSystem : MonoBehaviour
         {
             if (buildmodeActive)
             {
+                count = 3;
                 popUpMan.selectLeft();
                 activePlaceable = popupUI.buildables[3];
                 activeCrop = popupUI.plantables[3];
@@ -345,6 +355,9 @@ public class BuildingSystem : MonoBehaviour
                 phSprite.transform.localScale = activeCrop.prefab.GetChild(0).GetChild(0).transform.localScale;
                 ps.Stop();
                 bc.mode = mode;
+                activePlaceable = popupUI.buildables[0];
+                activeCrop = popupUI.plantables[0];
+                count = 0;
                 if (popUp != null)
                     popUpMan.switchMode(mode);
             }
@@ -356,6 +369,9 @@ public class BuildingSystem : MonoBehaviour
                 phSprite.transform.localScale = activePlaceable.prefab.GetChild(0).GetChild(0).transform.localScale;
                 ps.Play();
                 bc.mode = mode;
+                activePlaceable = popupUI.buildables[0];
+                activeCrop = popupUI.plantables[0];
+                count = 0;
                 if (popUp != null)
                     popUpMan.switchMode(mode);
             }
