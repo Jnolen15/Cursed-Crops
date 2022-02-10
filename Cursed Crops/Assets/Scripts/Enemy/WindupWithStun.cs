@@ -21,7 +21,7 @@ public class WindupWithStun : MonoBehaviour
     private BoxCollider hurtBox;
     private MeshRenderer daAttack;
     Color prev;
-    bool stunned = false;
+    public bool stunned = false;
     IEnumerator inst = null;
     void Start()
     {
