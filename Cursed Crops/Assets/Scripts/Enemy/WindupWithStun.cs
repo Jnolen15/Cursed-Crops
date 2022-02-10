@@ -10,6 +10,7 @@ public class WindupWithStun : MonoBehaviour
     Vector3 enemyPosition;
     Vector3 newPosition;
     Vector3 direction;
+    Vector3 knocknewPosition;
     public bool attacking = false;
     bool getPosition = false;
     bool windupStarting = false;
@@ -43,19 +44,21 @@ public class WindupWithStun : MonoBehaviour
         }
         
         targetToAttack = gameObject.GetComponent<EnemyToPlayer>().oldTarget;
-        /*if (targetToAttack != null && targetToAttack.GetComponent<PlayerControler>().finalHit)
+        if (targetToAttack != null && targetToAttack.GetComponent<PlayerControler>().finalHit && targetToAttack.GetComponent<EnemyDamageObjective>() == null)
         {
-            targetToAttack.GetComponent<PlayerControler>().finalHit = false;
+            //targetToAttack.GetComponent<PlayerControler>().finalHit = false;
             Vector3 knockattackPosition = new Vector3(targetToAttack.transform.position.x, targetToAttack.transform.position.y, targetToAttack.transform.position.z);
             Vector3 knockenemyPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-            Vector3 knocknewPosition = (knockenemyPosition - knockattackPosition) + (knockenemyPosition - knockattackPosition).normalized;
+            knocknewPosition = (knockenemyPosition - knockattackPosition) + (knockenemyPosition - knockattackPosition).normalized;
 
             knocknewPosition += knockenemyPosition;
 
             //transform.position = Vector3.MoveTowards(transform.position, knocknewPosition, (gameObject.GetComponent<EnemyToPlayer>().originalSpeed * 20) * Time.deltaTime);
-            transform.position = Vector3.MoveTowards(transform.position, knocknewPosition, (gameObject.GetComponent<EnemyToPlayer>().originalSpeed * 2) * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, knocknewPosition, (gameObject.GetComponent<EnemyToPlayer>().originalSpeed * 10) * Time.deltaTime);
+            //StopCoroutine("knockbackCoolDown");
+            StartCoroutine("knockbackCoolDown");
+
         }
-        */
         direction = new Vector3(targetToAttack.position.x - transform.position.x, 0, targetToAttack.position.z - transform.position.z);
         if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) <= 6f)
         {
@@ -168,5 +171,11 @@ public class WindupWithStun : MonoBehaviour
         gameObject.GetComponent<EnemyControler>().takingDamage = false;
         stunned = false;
         attacking = false;
+    }
+    IEnumerator knockbackCoolDown()
+    {
+        
+        yield return new WaitForSeconds(0.05f);
+        targetToAttack.GetComponent<PlayerControler>().finalHit = false;
     }
 }
