@@ -30,7 +30,6 @@ public class PlayerControler : MonoBehaviour
     public int health = 10;
     public int maxHealth = 10;
     public float damageBoost = 1f;
-    public bool finalHit = false;
 
     // ====================== BOOLS ======================
     private bool rangeCD = false;
@@ -432,7 +431,6 @@ public class PlayerControler : MonoBehaviour
                         //attackChain = 3;
                         attackDuration = 0.7f;
                         animator.SetTrigger("Melee3");
-                        finalHit = true;
                         if (ap != null)
                             StopCoroutine(ap);
                         if (!trapped)
@@ -524,6 +522,7 @@ public class PlayerControler : MonoBehaviour
                     }
                     else if (attackChain == 3)
                     {
+                        c.GetComponent<EnemyControler>().finalHit = true;
                         int damageAmmount = (int)(8 * damageBoost);
                         enemyControler.takeDamage(damageAmmount, "Melee");
                         overAllPlayerDamage += damageAmmount;

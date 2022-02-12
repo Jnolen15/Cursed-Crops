@@ -8,6 +8,7 @@ public class EnemyControler : MonoBehaviour
     public int health = 10;
     public float overalldamage = 0;
     public bool takingDamage = false;
+    public bool finalHit = false;
     public string lastDamageType;
 
     // ================= Private variables =================

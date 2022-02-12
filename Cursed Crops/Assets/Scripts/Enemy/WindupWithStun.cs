@@ -44,17 +44,17 @@ public class WindupWithStun : MonoBehaviour
         }
         
         targetToAttack = gameObject.GetComponent<EnemyToPlayer>().oldTarget;
-        if (targetToAttack != null && targetToAttack.GetComponent<PlayerControler>().finalHit && targetToAttack.GetComponent<EnemyDamageObjective>() == null)
+        if (targetToAttack != null && gameObject.GetComponent<EnemyControler>().finalHit && targetToAttack.GetComponent<EnemyDamageObjective>() == null)
         {
             //targetToAttack.GetComponent<PlayerControler>().finalHit = false;
             Vector3 knockattackPosition = new Vector3(targetToAttack.transform.position.x, targetToAttack.transform.position.y, targetToAttack.transform.position.z);
-            Vector3 knockenemyPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-            knocknewPosition = (knockenemyPosition - knockattackPosition) + (knockenemyPosition - knockattackPosition).normalized;
+            Vector3 knockenemyPosition = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
+            this.knocknewPosition = (knockenemyPosition - knockattackPosition) + (knockenemyPosition - knockattackPosition).normalized;
 
-            knocknewPosition += knockenemyPosition;
+            this.knocknewPosition += knockenemyPosition;
 
             //transform.position = Vector3.MoveTowards(transform.position, knocknewPosition, (gameObject.GetComponent<EnemyToPlayer>().originalSpeed * 20) * Time.deltaTime);
-            transform.position = Vector3.MoveTowards(transform.position, knocknewPosition, (gameObject.GetComponent<EnemyToPlayer>().originalSpeed * 10) * Time.deltaTime);
+            this.transform.position = Vector3.MoveTowards(this.transform.position, knocknewPosition, (this.gameObject.GetComponent<EnemyToPlayer>().originalSpeed * 10) * Time.deltaTime);
             //StopCoroutine("knockbackCoolDown");
             StartCoroutine("knockbackCoolDown");
 
@@ -176,6 +176,6 @@ public class WindupWithStun : MonoBehaviour
     {
         
         yield return new WaitForSeconds(0.05f);
-        targetToAttack.GetComponent<PlayerControler>().finalHit = false;
+        gameObject.GetComponent<EnemyControler>().finalHit = false;
     }
 }
