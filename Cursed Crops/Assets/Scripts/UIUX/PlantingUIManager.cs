@@ -83,9 +83,9 @@ public class PlantingUIManager : MonoBehaviour
         
 
         // pointing towards camera (but only x-axis rotation)
-        this.transform.LookAt(mainCamera.transform, Vector3.up);
+        /*this.transform.LookAt(mainCamera.transform, Vector3.up);
         this.transform.rotation *= Quaternion.Euler(0, 180, 0);
-        this.transform.rotation = Quaternion.Euler(this.transform.rotation.eulerAngles.x, 0, 0);
+        this.transform.rotation = Quaternion.Euler(this.transform.rotation.eulerAngles.x, 0, 0);*/
         // why is this two statements instead of one? I tried it, it broke. tldr: I have no clue how quarternions work
     }
 

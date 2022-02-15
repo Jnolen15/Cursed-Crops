@@ -9,17 +9,21 @@ public class SpriteLeaner : MonoBehaviour
     public float leanAngle = 40f;
     public bool manageSortLayer = true;
 
-    public GameObject[] taggedSprites;
-
+    public List<GameObject> leanedSprites = new List<GameObject>();
     void Start()
     {
         // store the tagged sprites ('play' has to be pressed whenever a new sprite is given a tag)
-        taggedSprites = GameObject.FindGameObjectsWithTag("LeaningSprite");
+        GameObject[] taggedSprites = GameObject.FindGameObjectsWithTag("LeaningSprite");
+        foreach (GameObject sprite in taggedSprites)
+        {
+            leanedSprites.Add(sprite);
+        }
+
     }
 
     void Update()
     {
-        foreach (GameObject spriteObj in taggedSprites)
+        foreach (GameObject spriteObj in leanedSprites)
         {
             // lean the current sprite by the desired angle
             spriteObj.transform.SetPositionAndRotation(

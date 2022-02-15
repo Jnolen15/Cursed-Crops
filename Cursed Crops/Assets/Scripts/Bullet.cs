@@ -25,6 +25,7 @@ public class Bullet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         sr = GetComponent<SpriteRenderer>();
+        // GameObject.FindObjectsOfType<SpriteLeaner>();
     }
 
     private void Update()
