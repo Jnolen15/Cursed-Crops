@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ItemDrop : MonoBehaviour
 {
+    public int value = 1;
+    public float timeAlive = 0.0f;
+    
     public enum DropType
     {
         none,
@@ -19,6 +22,11 @@ public class ItemDrop : MonoBehaviour
 
     public DropType GetItemDropType() { return itemDropType; }
 
+    private void Update()
+    {
+        timeAlive += Time.deltaTime;
+    }
+    
     public void SetDropType(DropType type)
     {
         itemDropType = type;

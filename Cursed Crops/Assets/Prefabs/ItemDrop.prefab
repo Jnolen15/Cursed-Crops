@@ -91,7 +91,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8648289773700573378}
-  - component: {fileID: 5871727737482235018}
+  - component: {fileID: 3954292042516136572}
   - component: {fileID: 3612863676102098840}
   m_Layer: 0
   m_Name: ItemDrop
@@ -115,8 +115,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &5871727737482235018
-CapsuleCollider:
+--- !u!135 &3954292042516136572
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -125,9 +125,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.7
-  m_Height: 1
-  m_Direction: 1
+  serializedVersion: 2
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3612863676102098840
 MonoBehaviour:
@@ -141,6 +140,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f4159572f0b5ba408aa6f48335c9766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  value: 1
+  timeAlive: 0
   itemSpriteRenderer: {fileID: 766526931611980304}
   redCropSprite: {fileID: 21300000, guid: c7e61ebbc8b9926498841328850721d8, type: 3}
   purpleCropSprite: {fileID: 21300000, guid: 61f39c9f800581d4786efbf4bcafe570, type: 3}

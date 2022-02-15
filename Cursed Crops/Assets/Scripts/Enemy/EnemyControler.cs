@@ -155,8 +155,8 @@ public class EnemyControler : MonoBehaviour
 
     public void death()
     {
-        //itemDropper.DropItem(transform.position);
         //Destroy(this.gameObject);
+        itemDropper.DropItem(transform.position);
         ps.Emit(4);
         StopAllCoroutines();
         gameObject.SetActive(false);
