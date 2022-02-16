@@ -15,6 +15,7 @@ public class EnemyPlayerDamage : MonoBehaviour
     // ================= Private variables =================
     private delegate void Callback();
     private PlayerControler pc;
+    private PlayerResourceManager prm;
     private SpriteRenderer playerSprite;
     private GameObject mainObjective;
     private Animator animator;
@@ -24,6 +25,7 @@ public class EnemyPlayerDamage : MonoBehaviour
     void Start()
     {
         pc = this.GetComponent<PlayerControler>();
+        prm = this.GetComponent<PlayerResourceManager>();
         playerSprite = this.transform.GetChild(1).GetChild(0).GetComponent<SpriteRenderer>();
         animator = this.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Animator>();
     }
@@ -38,6 +40,7 @@ public class EnemyPlayerDamage : MonoBehaviour
         if (playerHealth <= 0)
         {
             //alphaChekcer = true;
+            prm.setCrops(0);
             StartCoroutine(downed());
             playerHealth = reviveHealth;
             Debug.Log(playerHealth);

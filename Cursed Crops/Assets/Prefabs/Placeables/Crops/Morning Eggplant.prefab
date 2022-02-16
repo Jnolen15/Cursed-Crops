@@ -347,9 +347,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
+  maxHealth: 10
   overalldamage: 0
   takingDamage: 0
+  finalHit: 0
   lastDamageType: 
+  healing: 0
 --- !u!114 &7799120759649750502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,10 +367,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropItemPrefab: {fileID: 1351969363908040990, guid: 8e442aae4000e344cbf33d29140ec95e,
     type: 3}
-  dropType: 2
   numDrops: 1
-  randomOffsetX: 1.4
-  randomOffsetZ: 1.4
+  randomOffsetX: 1
+  randomOffsetZ: 1
 --- !u!114 &1086220411153622940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,3 +409,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attacking: 0
+  stunned: 0

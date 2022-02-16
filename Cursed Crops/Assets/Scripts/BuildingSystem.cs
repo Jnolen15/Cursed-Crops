@@ -9,6 +9,7 @@ public class BuildingSystem : MonoBehaviour
     [SerializeField] private popUpUISO popupUI;
     private GameObject popUp;
     private PlantingUIManager popUpMan;
+    private GameRuleManager grm;
     private PlayerControler pc;
     private BuildChecker bc;
     private SpawnManager sm;
@@ -43,6 +44,8 @@ public class BuildingSystem : MonoBehaviour
         popUp = Instantiate(popupUI.Prefab.gameObject, transform.position, transform.rotation, transform);
         popUpMan = popUp.GetComponent<PlantingUIManager>();
         //popUp.SetActive(false); MOVED TO IN POPUP
+        grm = GameObject.Find("GameRuleManager").GetComponent<GameRuleManager>();
+
         // Set default selected placeable
         if (popupUI.buildables.Length > 0 && popupUI.buildables.Length > 0)
         {
@@ -95,7 +98,7 @@ public class BuildingSystem : MonoBehaviour
             {
                 if (buildmodeActive)
                 {
-                    Debug.Log("CLOSING BUILD MODE FROM: " + this.gameObject.name);
+                    //Debug.Log("CLOSING BUILD MODE FROM: " + this.gameObject.name);
                     buildmodeActive = false;
                     if (placeableHighlight != null)
                     {
@@ -106,7 +109,7 @@ public class BuildingSystem : MonoBehaviour
                 }
                 else if (!buildmodeActive)
                 {
-                    Debug.Log("OPENING BUILD MODE FROM: " + this.gameObject.name);
+                    //Debug.Log("OPENING BUILD MODE FROM: " + this.gameObject.name);
                     buildmodeActive = true;
                     if (placeableHighlight != null)
                     {
@@ -188,8 +191,17 @@ public class BuildingSystem : MonoBehaviour
                 {
                     if (mode == "Build")
                     {
-                        animator.SetTrigger("Plant");
-                        Instantiate(activePlaceable.prefab, placeableHighlight.transform.position, placeableHighlight.transform.rotation);
+                        // Make sure the player can afford a turret before placing it. If they can, they pay the cost
+                        var cost = activePlaceable.cost;
+                        if (grm.getMoney() >= cost)
+                        {
+                            grm.addMoney(-cost);
+                            animator.SetTrigger("Plant");
+                            Instantiate(activePlaceable.prefab, placeableHighlight.transform.position, placeableHighlight.transform.rotation);
+                        } else
+                        {
+                            Debug.Log("Nice try broke ass");
+                        }
                     }
                     else if (mode == "Plant" && sm.state == SpawnManager.State.Break)
                     {

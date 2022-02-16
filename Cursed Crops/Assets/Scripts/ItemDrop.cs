@@ -52,7 +52,7 @@ public class ItemDrop : MonoBehaviour
             {
                 hasBeenMerged = true;
                 itemDropOther.value += value;
-                Debug.Log("THIS VEGGIE HAS BEEN ASSIMILATED. NEW VALUE: " + itemDropOther.value);
+                //Debug.Log("THIS VEGGIE HAS BEEN ASSIMILATED. NEW VALUE: " + itemDropOther.value);
                 Destroy(this.gameObject);
             }
         }

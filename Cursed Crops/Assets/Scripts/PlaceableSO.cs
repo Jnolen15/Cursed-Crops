@@ -14,5 +14,6 @@ public class PlaceableSO : ScriptableObject
     [TextArea(2, 5)]
     public string stats;
     public string price;
+    public int cost;
 
 }

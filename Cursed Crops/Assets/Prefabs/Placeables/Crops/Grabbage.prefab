@@ -214,10 +214,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
+  maxHealth: 10
   overalldamage: 0
   takingDamage: 0
   finalHit: 0
   lastDamageType: 
+  healing: 0
 --- !u!114 &6204482254679519654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,6 +251,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84615a54f33e15541bde4f90091e327e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trappedPlayer: {fileID: 0}
+  boostedHealthActivate: 0
 --- !u!114 &1570388941770891586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,5 +281,5 @@ MonoBehaviour:
   dropItemPrefab: {fileID: 1351969363908040990, guid: 8e442aae4000e344cbf33d29140ec95e,
     type: 3}
   numDrops: 8
-  randomOffsetX: 1.4
-  randomOffsetZ: 1.4
+  randomOffsetX: 1
+  randomOffsetZ: 1
