@@ -19,7 +19,7 @@ public class AISeperation : MonoBehaviour
        // Debug.Log(AI.Length);
         foreach(GameObject go in AI)
         {
-            if(go != gameObject)
+            if(go != this.gameObject)
             {
                 float distance = Vector3.Distance(go.transform.position, this.transform.position);
                 if(distance <= SpaceBetween)

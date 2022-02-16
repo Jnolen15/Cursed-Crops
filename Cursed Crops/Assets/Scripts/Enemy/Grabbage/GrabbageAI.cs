@@ -5,8 +5,8 @@ using UnityEngine;
 public class GrabbageAI : MonoBehaviour
 {
     // Start is called before the first frame update
-    GameObject trappedPlayer;
-    private bool boostedHealthActivate = false;
+    public GameObject trappedPlayer;
+    public bool boostedHealthActivate = false;
     private bool isItHit = false;
     private bool alreadyGrabbing = false;
     void Start()
@@ -17,12 +17,24 @@ public class GrabbageAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if(trappedPlayer != null && gameObject.GetComponent<EnemyControler>().health <= 0)
         {
             Debug.Log("do we check if the cabbage dies");
             boostedHealthActivate = false;
+            StopAllCoroutines();
             trappedPlayer.GetComponent<PlayerControler>().trapped = false;
             gameObject.SetActive(false);
+        }
+        if(gameObject.GetComponent<EnemyControler>().health <= 0)
+        {
+            boostedHealthActivate = false;
+            StopAllCoroutines();
+            gameObject.SetActive(false);
+        }*/
+        if (!gameObject.activeInHierarchy)
+        {
+            StopAllCoroutines();
         }
         
     }

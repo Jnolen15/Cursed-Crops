@@ -6,6 +6,7 @@ public class EnemyControler : MonoBehaviour
 {
     // ================= Public variables =================
     public int health = 10;
+    public int maxHealth = 10;
     public float overalldamage = 0;
     public bool takingDamage = false;
     public bool finalHit = false;
@@ -27,7 +28,7 @@ public class EnemyControler : MonoBehaviour
     private float burnTimer = 1f;
     // Healing Buff Stuff
     private Coroutine healingCo;
-    private bool healing = false;
+    public bool healing = false;
     private int healingAmmount = 1;
     private float healingTickSpeed = 1f;
     private float healingTimer = 1f;
@@ -65,7 +66,7 @@ public class EnemyControler : MonoBehaviour
         {
             if (healingTimer <= 0)
             {
-                if(health < 10)
+                if(health < maxHealth)
                     health += healingAmmount;
                 healingTimer = healingTickSpeed;
             }
@@ -123,9 +124,17 @@ public class EnemyControler : MonoBehaviour
         if (ps != null)
             ps.Emit(4);
         // If health is below or equal to 0 die
-        if (health <= 0 && gameObject.GetComponent<GrabbageAI>() == null && gameObject.GetComponent<ScarrotAttack>() == null)
+        if (health <= 0)
         {
-            StartCoroutine(hit(rend));
+            if(gameObject.GetComponent<GrabbageAI>() != null)
+            {
+                gameObject.GetComponent<GrabbageAI>().boostedHealthActivate = false;
+                if (gameObject.GetComponent<GrabbageAI>().trappedPlayer != null)
+                {
+                    gameObject.GetComponent<GrabbageAI>().trappedPlayer.GetComponent<PlayerControler>().trapped = false;
+                }
+                gameObject.SetActive(false);
+            }
             death();
         }
         else
