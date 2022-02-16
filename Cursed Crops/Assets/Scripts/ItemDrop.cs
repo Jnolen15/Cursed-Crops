@@ -6,44 +6,55 @@ public class ItemDrop : MonoBehaviour
 {
     public int value = 1;
     public float timeAlive = 0.0f;
-    
-    public enum DropType
-    {
-        none,
-        red,
-        purple
-    };
+
+    public bool hasBeenMerged = false;
 
     public SpriteRenderer itemSpriteRenderer;
-    public Sprite redCropSprite;
-    public Sprite purpleCropSprite;
-
-    private DropType itemDropType = DropType.none;
-
-    public DropType GetItemDropType() { return itemDropType; }
+    public Sprite stage1CropSprite;
+    public Sprite stage2CropSprite;
+    public Sprite stage3CropSprite;
+    public Sprite stage4CropSprite;
+    public Sprite stage5CropSprite;
 
     private void Update()
     {
         timeAlive += Time.deltaTime;
-    }
-    
-    public void SetDropType(DropType type)
-    {
-        itemDropType = type;
 
-        if (type == DropType.red)
+        if (value == 1)
         {
-            itemSpriteRenderer.sprite = redCropSprite;
-        }
-        else if (type == DropType.purple) 
+            itemSpriteRenderer.sprite = stage1CropSprite;
+        } else if (value > 1 && value < 10)
         {
-            itemSpriteRenderer.sprite = purpleCropSprite;
+            itemSpriteRenderer.sprite = stage2CropSprite;
+        } else if (value > 9 && value < 25)
+        {
+            itemSpriteRenderer.sprite = stage3CropSprite;
+        } else if (value > 24 && value < 50)
+        {
+            itemSpriteRenderer.sprite = stage4CropSprite;
+        } else if (value > 49)
+        {
+            itemSpriteRenderer.sprite = stage5CropSprite;
         }
-        
     }
 
     public void GetPickedUp()
     {
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "MergeRadius")
+        {
+            var itemDropOther = other.gameObject.GetComponentInParent<ItemDrop>();
+            if (!hasBeenMerged && itemDropOther.timeAlive > timeAlive)
+            {
+                hasBeenMerged = true;
+                itemDropOther.value += value;
+                Debug.Log("THIS VEGGIE HAS BEEN ASSIMILATED. NEW VALUE: " + itemDropOther.value);
+                Destroy(this.gameObject);
+            }
+        }
     }
 }

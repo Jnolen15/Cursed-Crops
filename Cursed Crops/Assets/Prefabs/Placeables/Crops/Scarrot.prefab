@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4368505918465106208}
   - component: {fileID: 4368505918465106234}
   - component: {fileID: 4368505918465106235}
+  - component: {fileID: 26968422484778969}
   m_Layer: 8
   m_Name: Scarrot
   m_TagString: Enemy
@@ -130,6 +131,7 @@ MonoBehaviour:
   health: 10
   overalldamage: 0
   takingDamage: 0
+  finalHit: 0
   lastDamageType: 
 --- !u!114 &4368505918465106235
 MonoBehaviour:
@@ -151,6 +153,23 @@ MonoBehaviour:
   - {fileID: 0}
   aPlayerIsStun: 1
   oldTarget: {fileID: 0}
+--- !u!114 &26968422484778969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4368505918465106209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 330c40f98388d5948b75589805642ec3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropItemPrefab: {fileID: 1351969363908040990, guid: 8e442aae4000e344cbf33d29140ec95e,
+    type: 3}
+  numDrops: 12
+  randomOffsetX: 1.4
+  randomOffsetZ: 1.4
 --- !u!1 &4368505918509218019
 GameObject:
   m_ObjectHideFlags: 0

@@ -118,6 +118,7 @@ GameObject:
   - component: {fileID: 5793997569695224420}
   - component: {fileID: 5793997569695224419}
   - component: {fileID: 5941344347843134233}
+  - component: {fileID: 3360188171948922563}
   m_Layer: 8
   m_Name: Cornnon
   m_TagString: Enemy
@@ -239,6 +240,7 @@ MonoBehaviour:
   health: 10
   overalldamage: 0
   takingDamage: 0
+  finalHit: 0
   lastDamageType: 
 --- !u!114 &5941344347843134233
 MonoBehaviour:
@@ -252,3 +254,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e005381c69d1e8a4f9c84ed87f8d31bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3360188171948922563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5793997569695224421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 330c40f98388d5948b75589805642ec3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropItemPrefab: {fileID: 1351969363908040990, guid: 8e442aae4000e344cbf33d29140ec95e,
+    type: 3}
+  numDrops: 6
+  randomOffsetX: 1.4
+  randomOffsetZ: 1.4

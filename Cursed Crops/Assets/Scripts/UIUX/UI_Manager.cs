@@ -89,7 +89,7 @@ public class UI_Manager : MonoBehaviour
         {
             // managing  currency text
             currencyText1.text = "Money: " + PR1.getMoney();
-            vegetableText1.text = "R: " + PR1.getRedCrops() + ", P: " + PR1.getPurpleCrops();
+            vegetableText1.text = "C: " + PR1.getCrops();
             // managing health bar
             HealthBar1.value = (float)EPD1.playerHealth / (float)EPD1.reviveHealth;
          }
@@ -115,7 +115,7 @@ public class UI_Manager : MonoBehaviour
         {
             // managing  currency text
             currencyText2.text = "Money: " + PR2.getMoney();
-            vegetableText2.text = "R: " + PR2.getRedCrops() + ", P: " + PR2.getPurpleCrops();
+            vegetableText2.text = "C: " + PR2.getCrops();
             // managing health bar
             HealthBar2.value = (float)EPD2.playerHealth / (float)EPD2.reviveHealth;
         }

@@ -16,7 +16,7 @@ public class ItemDropDetector : MonoBehaviour
         if (other.gameObject.tag == "DroppedItem")
         {
             ItemDrop itemDrop = other.GetComponent<ItemDrop>();
-            resources.addDroppedItem(1, itemDrop.GetItemDropType());
+            resources.addCrops(itemDrop.value);
             itemDrop.GetPickedUp();
         }
     }
