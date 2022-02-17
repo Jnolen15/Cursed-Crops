@@ -16,6 +16,9 @@ public class SpriteAdder : MonoBehaviour
 
     private void OnDestroy()
     {
-        SL.leanedSprites.Remove(this.gameObject);
+        if (this.gameObject != null)
+        {
+            SL.leanedSprites.Remove(this.gameObject);
+        }
     }
 }
