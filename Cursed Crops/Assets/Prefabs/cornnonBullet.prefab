@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
+  maxHealth: 10
   overalldamage: 0
   takingDamage: 0
+  finalHit: 0
   lastDamageType: 
+  healing: 0
 --- !u!114 &2195171091914415132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30,6 +33,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 6242655706651345086, guid: 70a3a66aca4c3a2458f178a6130a3f72, type: 3}
   mainTarget: {fileID: 0}
+--- !u!114 &-6905614544877071323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8414899321626162211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc7a80e2f6eb782438832b241e87356e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2478637940666217629
 PrefabInstance:
   m_ObjectHideFlags: 0

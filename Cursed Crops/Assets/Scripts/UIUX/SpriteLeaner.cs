@@ -25,12 +25,19 @@ public class SpriteLeaner : MonoBehaviour
     {
         foreach (GameObject spriteObj in leanedSprites)
         {
+            // cleaningng out deleted objects
+            if (spriteObj == null)
+            {
+                Debug.Log("ERROR in leaned sprite list");
+            }
+
             // lean the current sprite by the desired angle
             spriteObj.transform.SetPositionAndRotation(
                 spriteObj.transform.position,
                 Quaternion.Euler(new Vector3(leanAngle, 0, 0))
             );
 
+            // I don't know what this does - Keenan
             // manage sort layer
             if (manageSortLayer)
             {

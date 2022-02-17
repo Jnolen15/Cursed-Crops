@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3784348237052642427}
   - component: {fileID: 6341787568050403843}
   - component: {fileID: 7414186572449404716}
+  - component: {fileID: 1788857260005454285}
   m_Layer: 0
   m_Name: TurretSprite
-  m_TagString: Untagged
+  m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,6 +104,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1788857260005454285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2802201020621703836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc7a80e2f6eb782438832b241e87356e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3967801465901333537
 GameObject:
   m_ObjectHideFlags: 0

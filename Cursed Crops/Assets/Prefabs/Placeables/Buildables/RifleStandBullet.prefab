@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9057968775034110408}
   - component: {fileID: 1962489060317826573}
   - component: {fileID: 5631711425031023438}
+  - component: {fileID: 2905211912716014078}
   m_Layer: 0
   m_Name: RifleStandBullet
   m_TagString: turretBullet
@@ -131,3 +132,17 @@ MonoBehaviour:
   damage: 5
   bulletSpeed: 15
   piercing: 0
+  isPayload: 0
+  destination: {x: 0, y: 0, z: 0}
+--- !u!114 &2905211912716014078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8575022692943881953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc7a80e2f6eb782438832b241e87356e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

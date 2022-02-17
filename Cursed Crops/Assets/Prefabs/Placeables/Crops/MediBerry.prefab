@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4236134320215969377}
   - component: {fileID: 7204196027576082391}
+  - component: {fileID: 851609701065413}
   m_Layer: 8
   m_Name: Square
   m_TagString: Untagged
@@ -82,6 +83,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &851609701065413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2468087104146168727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc7a80e2f6eb782438832b241e87356e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7565537249408550181
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,10 +208,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
+  maxHealth: 10
   overalldamage: 0
   takingDamage: 0
   finalHit: 0
   lastDamageType: 
+  healing: 0
 --- !u!114 &281055285401495230
 MonoBehaviour:
   m_ObjectHideFlags: 0

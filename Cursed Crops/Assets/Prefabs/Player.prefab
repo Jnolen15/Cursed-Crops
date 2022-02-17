@@ -706,8 +706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e60d2658b3407424094b50a60cf9fc34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  redCropsValue: 5
-  purpleCropsValue: 10
+  cropsValue: 5
 --- !u!1 &7937736029740589967
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,6 +718,7 @@ GameObject:
   - component: {fileID: 7937736029740589960}
   - component: {fileID: 7937736029740589961}
   - component: {fileID: 7937736029740589962}
+  - component: {fileID: 4030265867585263875}
   m_Layer: 0
   m_Name: PlayerSprite
   m_TagString: Untagged
@@ -810,6 +810,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4030265867585263875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7937736029740589967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc7a80e2f6eb782438832b241e87356e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7937736029837635441
 GameObject:
   m_ObjectHideFlags: 0
