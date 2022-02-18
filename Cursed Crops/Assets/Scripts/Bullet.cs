@@ -33,10 +33,10 @@ public class Bullet : MonoBehaviour
         // If payload is in range of destination, explode
         if (isPayload)
         {
-            if (((this.transform.position.x <= destination.x + 1) && (this.transform.position.x >= destination.x - 1)) 
-                && ((this.transform.position.z <= destination.z + 1) && (this.transform.position.z >= destination.z - 1)))
+            if (((this.transform.position.x <= destination.x + 2) && (this.transform.position.x >= destination.x - 2)) 
+                && ((this.transform.position.z <= destination.z + 2) && (this.transform.position.z >= destination.z - 2)))
             {
-                Debug.Log("BOOM BITCH");
+                //Debug.Log("BOOM BITCH");
                 exploded = true;
             }
         }

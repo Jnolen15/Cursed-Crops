@@ -6,30 +6,33 @@ public class Turret : MonoBehaviour
 {
     // ================= Public variables =================
     public GameObject bullet;
-    public bool shooting = false;
+    public bool onCooldown = false;
     public float cooldown = 2f;
 
     // ================= Private variables =================
     private Vector3 direction;
     private Vector3 flipDirection;
     private Transform enemyPosition;
+    private Transform firePosition;
     private GameObject targetedEnemy;
     private SpriteRenderer turretSprite;
-    private Animator animator;
+    private TurretAnimator tAnimator;
     private bool flipped = false;
 
 
     void Start()
     {
         turretSprite = this.transform.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>();
-        animator = this.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Animator>();
+        tAnimator = this.GetComponentInChildren<TurretAnimator>();
+        firePosition = this.transform.GetChild(2).transform;
+        //this.transform.GetChild(0).GetChild(0).gameObject.GetComponent<TurretAnimator>();
     }
 
     void Update()
     {
         SpriteFlip();
 
-        if (targetedEnemy != null && !shooting)
+        if (targetedEnemy != null && !onCooldown)
         {
             if (!targetedEnemy.activeSelf)
             {
@@ -67,7 +70,7 @@ public class Turret : MonoBehaviour
 
     private void enemyInRange(Transform enemy)
     {
-        direction = new Vector3(enemy.position.x - transform.position.x, 0, enemy.position.z - transform.position.z);
+        direction = new Vector3(enemy.position.x - firePosition.position.x, 0, enemy.position.z - firePosition.position.z);
         enemyPosition = enemy.transform;
     }
 
@@ -92,16 +95,16 @@ public class Turret : MonoBehaviour
 
     IEnumerator shoot()
     {
-        shooting = true;
-        animator.SetTrigger("Shoot");
-        MakeBullet();
+        onCooldown = true;
+        tAnimator.playShoot();
+        //MakeBullet();
         yield return new WaitForSeconds(cooldown);
-        shooting = false;
+        onCooldown = false;
     }
 
-    private void MakeBullet()
+    public void MakeBullet()
     {
-        GameObject bul = Instantiate(bullet, transform.position, transform.rotation);
+        GameObject bul = Instantiate(bullet, firePosition.position, firePosition.rotation);
         if (bul.GetComponent<Bullet>().isPayload)
         {
             bul.GetComponent<Bullet>().destination = enemyPosition.position;
