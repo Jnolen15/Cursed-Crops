@@ -5,7 +5,7 @@ using System.Linq;
 
 public class SpawnManager : MonoBehaviour
 {
-    // Public Variables
+    // ================ Public ================
     [Header("Each phase has X waves and X-1 puases. (There is no pause after the last wave)")]
     public float phaseDuration;             // Duration of each phase in seconds
     public float waveDuration = 30f;        // Duration of each wave in seconds
@@ -30,7 +30,7 @@ public class SpawnManager : MonoBehaviour
     public float gridOffsetX = 0.5f;
     public float gridOffsetZ = 0.5f;
 
-    // Private Variables
+    // ================ Private ================
     public float currentPhaseEndTime = 0f;   // The time the current phase should end
     private float currentWaveEndTime = 0f;   // The time the current wave should end
     private float currentPauseEndTime = 0f;  // The time the current pause should end

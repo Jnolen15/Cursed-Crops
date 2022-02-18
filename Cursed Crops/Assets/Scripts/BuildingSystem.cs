@@ -208,6 +208,26 @@ public class BuildingSystem : MonoBehaviour
                         animator.SetTrigger("Plant");
                         GameObject newSpawner = Instantiate(activeCrop.prefab.gameObject, placeableHighlight.transform.position, placeableHighlight.transform.rotation);
                         sm.AddSpawner(newSpawner);
+                        // Add bounty points
+                        switch (count)
+                        {
+                            case 0:
+                                grm.numCrop0Planted++;
+                                grm.addBountyPoints(activeCrop, 0);
+                                break;
+                            case 1:
+                                grm.numCrop1Planted++;
+                                grm.addBountyPoints(activeCrop, 1);
+                                break;
+                            case 2:
+                                grm.numCrop2Planted++;
+                                grm.addBountyPoints(activeCrop, 2);
+                                break;
+                            case 3:
+                                grm.numCrop3Planted++;
+                                grm.addBountyPoints(activeCrop, 3);
+                                break;
+                        }
                     }
                 }
             }
