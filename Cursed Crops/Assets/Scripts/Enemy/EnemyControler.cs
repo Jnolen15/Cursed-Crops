@@ -198,6 +198,27 @@ public class EnemyControler : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "HealingAura")
+        {
+
+
+            healing = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "HealingAura")
+        {
+
+
+            healing = false;
+        }
+    }
+
+
     IEnumerator cooldown(Callback callback, float time)
     {
         yield return new WaitForSeconds(time);

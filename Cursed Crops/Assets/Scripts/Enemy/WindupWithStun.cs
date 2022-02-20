@@ -12,6 +12,7 @@ public class WindupWithStun : MonoBehaviour
     Vector3 direction;
     Vector3 knocknewPosition;
     public bool attacking = false;
+    private bool inPosition = false; 
     bool getPosition = false;
     bool windupStarting = false;
     Rigidbody childRB;
@@ -62,15 +63,18 @@ public class WindupWithStun : MonoBehaviour
         direction = new Vector3(targetToAttack.position.x - transform.position.x, 0, targetToAttack.position.z - transform.position.z);
         if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) <= 6f)
         {
+            
             //StopCoroutine("stun");
-            gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
+
             if (!gameObject.GetComponent<EnemyControler>().takingDamage)
             {
                 if (!windupStarting)
                 {
-                    StopCoroutine("attack");
+                    //StopCoroutine("attack");
+                    sr.color = Color.yellow;
                     windupStarting = true;
-
+                    
+                    
                     attackPosition = new Vector3(targetToAttack.transform.position.x, targetToAttack.transform.position.y, targetToAttack.transform.position.z);
                     enemyPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
                     newPosition = (attackPosition - enemyPosition) - (attackPosition - enemyPosition).normalized * 1.5f;
@@ -78,27 +82,33 @@ public class WindupWithStun : MonoBehaviour
                     newPosition += enemyPosition;
                 }
 
-                if (!attacking && !stunned)
-                {
-
-                    if (!gameObject.activeInHierarchy)
-                    {
-                        StopCoroutine("attack");
-                    }
-                    else
-                    {
-                        StartCoroutine("attack");
-                    }
-                    if (gameObject.GetComponent<EnemyControler>().takingDamage && gameObject.GetComponent<EnemyControler>().lastDamageType == "Melee")
-                    {
-                        StopCoroutine("attack");
-                    }
-                }
+                
             }
             
 
 
                 //transform.position = Vector3.MoveTowards(transform.position, targetToAttack.position, 10f * Time.deltaTime);
+        }
+        if (windupStarting)
+        {
+            gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
+            
+            if (!attacking && !stunned)
+            {
+                sr.color = Color.yellow;
+                if (!gameObject.activeInHierarchy)
+                {
+                    StopCoroutine("attack");
+                }
+                else
+                {
+                    StartCoroutine("attack");
+                }
+                if (gameObject.GetComponent<EnemyControler>().takingDamage && gameObject.GetComponent<EnemyControler>().lastDamageType == "Melee")
+                {
+                    StopCoroutine("attack");
+                }
+            }
         }
         if (gameObject.GetComponent<EnemyControler>().takingDamage && gameObject.GetComponent<EnemyControler>().lastDamageType == "Melee")
         {
@@ -108,22 +118,7 @@ public class WindupWithStun : MonoBehaviour
             StopCoroutine("stun");
             StartCoroutine("stun");
         }
-        if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) > 6f && !attacking)
-        {
-            //StopCoroutine("attack");
-
-
-            gameObject.GetComponent<EnemyToPlayer>().enemySpeed = gameObject.GetComponent<EnemyToPlayer>().originalSpeed;
-            if (!gameObject.GetComponent<EnemyControler>().takingDamage)
-            {
-                sr.color = prev;
-            }
-
-        }
-        else if (attacking)
-        {
-            gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
-        }
+        
 
 
 
@@ -132,10 +127,10 @@ public class WindupWithStun : MonoBehaviour
     IEnumerator attack()
     {
 
-        sr.color = Color.yellow;
+        
         childRB.MovePosition(transform.position + direction.normalized);
-        if (transform.position != newPosition)
-        {
+        //if (transform.position != newPosition)
+        //{
             yield return new WaitForSeconds(0.75f);
 
 
@@ -145,7 +140,7 @@ public class WindupWithStun : MonoBehaviour
 
             attacking = true;
             //gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
-        }
+        //}
         if (transform.position == newPosition)
         {
             hurtBox.enabled = true;
@@ -154,6 +149,18 @@ public class WindupWithStun : MonoBehaviour
         }
 
         yield return new WaitForSeconds(1f);
+        if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) > 6f)
+        {
+            //StopCoroutine("attack");
+
+
+            sr.color = prev;
+            gameObject.GetComponent<EnemyToPlayer>().enemySpeed = gameObject.GetComponent<EnemyToPlayer>().originalSpeed;
+
+            
+
+        }
+        
         hurtBox.enabled = false;
         //daAttack.enabled = false;
         windupStarting = false;

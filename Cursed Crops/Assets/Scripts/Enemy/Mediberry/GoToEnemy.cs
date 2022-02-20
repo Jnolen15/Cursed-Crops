@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class GoToEnemy : MonoBehaviour
 {
+    public Transform plane;
+    public Transform randomObject;
+    public bool gettingBack;
+    float minx;
+    float minz;
+    private float TickSpeed = 10f;
+    private float Timer = 10f;
+    private Vector3 randomPosition;
+
     const float minPathupdateTime = .2f;
     const float pathUpdateMoveThreshhold = .5f;
     //Setting up changable variables for enemies speeds
@@ -19,16 +28,21 @@ public class GoToEnemy : MonoBehaviour
     int targetIndex = 0;
     private bool playerinbound = true;
     PathFinding pathFinder;
-    Transform closestPlayer;
+    public Transform closestPlayer;
     public Transform oldTarget;
-
+    
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        
 
-        mainTarget = GameObject.FindGameObjectWithTag("MainObjective").GetComponent<Transform>();
+        //minx = plane..x;
+        //minz = plane.localScale.z;
+        
+        //randomPosition = new Vector3(Random.Range(-plane.position.x, plane.position.x), 0f, Random.Range(-plane.position.z, plane.position.z));
+
+        mainTarget = GameObject.FindGameObjectWithTag("randomLocal").GetComponent<Transform>();
+        mainTarget.position = randomPosition;
         //Transform closestPlayer = FindClosestPlayer(listOfPlayers);
         //pathFinder.StartFindPath(transform.position, closestPlayer.position);
         //PathRequestManager.RequestPath(transform.position, closestPlayer.position, OnPathFound);
@@ -64,32 +78,79 @@ public class GoToEnemy : MonoBehaviour
     }
     void FixedUpdate()
     {
+        Debug.Log(gettingBack);
+        //if (Timer <= 0)
+        //{
+        //randomPosition = new Vector3(Random.Range(-minx, minx), 0f, Random.Range(-minz, minz));
+        //    Timer = TickSpeed;
+        //}
+        //else
+        //{
+        //    Timer -= Time.deltaTime;
+        //}
         // new multiplayer chase code
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         listOfEnemies = new Transform[enemies.Length];
+
         for (int i = 0; i < listOfEnemies.Length; ++i)
+            listOfEnemies[i] = enemies[i].transform;
+
+        if (!gettingBack)
         {
-            if (listOfEnemies[i].GetComponent<EnemyControler>().health < listOfEnemies[i].GetComponent<EnemyControler>().maxHealth)
-            {
-                listOfEnemies[i] = enemies[i].transform;
-            }
+            closestPlayer = FindLowHealthEnemy(listOfEnemies);
         }
 
+        foreach (GameObject c in enemies)
+        {
+            if (c.GetComponent<GoToEnemy>() != null )
+            {
+                if (Vector3.Distance(c.transform.position, this.gameObject.transform.position) <= 5)
+                {
+                    if (c != this.gameObject)
+                    {
+                        this.gameObject.GetComponent<EnemyControler>().healing = true;
+                    }//c.gameObject.GetComponent<EnemyControler>().healing = true;
+                }
+                else
+                {
+                    if (c != this.gameObject)
+                    {
+                        //c.gameObject.GetComponent<EnemyControler>().healing = false;
+                        this.gameObject.GetComponent<EnemyControler>().healing = false;
 
-        closestPlayer = FindLowHealthEnemy(listOfEnemies);
+                    }
+                }
+
+                if (Vector3.Distance(c.transform.position, closestPlayer.transform.position) <= 1)
+                {
+                    enemySpeed = 0;
+                }
+                else
+                {
+                    enemySpeed = originalSpeed;
+                }
+
+                
+            }  
+        }
+        
+
+        
+        //Debug.Log("Number of enemies" + listOfEnemies.Length);
+
         if (oldTarget != closestPlayer && oldTarget != null && closestPlayer != null)
         {
 
             oldTarget = closestPlayer;
             StartCoroutine("UpdatePath");
         }
-        if (!gameObject.activeInHierarchy)
+        if (!this.gameObject.activeInHierarchy)
         {
 
             StopAllCoroutines();
             //Destroy(gameObject);
         }
-        if (gameObject.GetComponent<EnemyControler>().takingDamage)
+        if (this.gameObject.GetComponent<EnemyControler>().takingDamage)
         {
             enemySpeed = 0;
             StopCoroutine("stun");
@@ -118,38 +179,34 @@ public class GoToEnemy : MonoBehaviour
 
     Transform FindLowHealthEnemy(Transform[] enemies)
     {
-        Vector3 randomPosition = Vector3.zero;
         Transform bestTarget = mainTarget.transform;
 
         float closestDistanceSqr = Mathf.Infinity;
         Vector3 currentPosition = transform.position;
-        float higherDamage = 0;
 
         //float damage = 0;
 
         foreach (Transform potentialTarget in enemies)
         {
-            EnemyPlayerDamage playerStun = potentialTarget.GetComponent<EnemyPlayerDamage>();
-            PlayerControler playerDamage = potentialTarget.GetComponent<PlayerControler>();
+
             //Debug.Log(potentialTarget + " did " + playerDamage.overAllPlayerDamage);
             //damage += playerDamage.overAllPlayerDamage;
             //higherDamage = playerDamage.overAllPlayerDamage;
 
 
-            if (playerDamage.overAllPlayerDamage > higherDamage && !playerStun.playerIsStun)
-            {
-                higherDamage = playerDamage.overAllPlayerDamage;
-                bestTarget = potentialTarget;
-                //Debug.Log(potentialTarget + "Has the highest amount of damage = " + higherDamage);
-            }
-
-            Vector3 directionToTarget = potentialTarget.position - currentPosition;
-            float dSqrToTarget = directionToTarget.sqrMagnitude;
-            if (dSqrToTarget < closestDistanceSqr && !playerStun.playerIsStun && higherDamage == 0)
+            if ((potentialTarget.GetComponent<EnemyControler>().health < potentialTarget.GetComponent<EnemyControler>().maxHealth) && potentialTarget.GetComponent<EnemyControler>().health > 0)
             {
 
-                closestDistanceSqr = dSqrToTarget;
-                bestTarget = potentialTarget;
+                Vector3 directionToTarget = potentialTarget.position - currentPosition;
+                float dSqrToTarget = directionToTarget.sqrMagnitude;
+            
+            
+                if (dSqrToTarget < closestDistanceSqr)
+                {
+
+                    closestDistanceSqr = dSqrToTarget;
+                    bestTarget = potentialTarget;
+                }
             }
 
 
@@ -172,7 +229,7 @@ public class GoToEnemy : MonoBehaviour
         }
     }
 
-    public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
+public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
     {
         if (pathSuccessful)
         {
