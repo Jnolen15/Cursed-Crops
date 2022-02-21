@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5067204259757922060}
   - component: {fileID: 2938564851103333296}
   - component: {fileID: 1532912728773285045}
+  - component: {fileID: 6607351468765509476}
   m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
@@ -93,7 +94,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3303839682559459818}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: be466d3642c38a14ba558f8a1cb5be12, type: 2}
   m_CullingMode: 0
@@ -116,6 +117,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc7a80e2f6eb782438832b241e87356e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6607351468765509476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3303839682559459818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e005381c69d1e8a4f9c84ed87f8d31bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5793997569695224421
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,10 +142,9 @@ GameObject:
   - component: {fileID: 5793997569695224422}
   - component: {fileID: 6197305565663006943}
   - component: {fileID: 5793997569695224423}
-  - component: {fileID: 5793997569695224420}
   - component: {fileID: 5793997569695224419}
-  - component: {fileID: 5941344347843134233}
   - component: {fileID: 3360188171948922563}
+  - component: {fileID: 5793997569695224420}
   m_Layer: 8
   m_Name: Cornnon
   m_TagString: Enemy
@@ -234,27 +246,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5793997569695224420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5793997569695224421}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee25c59e8139a814ebc64884adc1d488, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemySpeed: 1
-  originalSpeed: 1
-  rangeDistance: 20
-  gotHit: 0
-  Player: {fileID: 0}
-  mainTarget: {fileID: 0}
-  listOfPlayers: []
-  aPlayerIsStun: 1
-  bullet: {fileID: 8414899321626162211, guid: fddb5db6374c4ff4f81b0a134925494c, type: 3}
 --- !u!114 &5793997569695224419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,18 +265,6 @@ MonoBehaviour:
   finalHit: 0
   lastDamageType: 
   healing: 0
---- !u!114 &5941344347843134233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5793997569695224421}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e005381c69d1e8a4f9c84ed87f8d31bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3360188171948922563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,3 +282,26 @@ MonoBehaviour:
   numDrops: 4
   randomOffsetX: 1
   randomOffsetZ: 1
+--- !u!114 &5793997569695224420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5793997569695224421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee25c59e8139a814ebc64884adc1d488, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemySpeed: 3
+  originalSpeed: 3
+  rangeDistance: 20
+  gotHit: 0
+  Player: {fileID: 0}
+  mainTarget: {fileID: 0}
+  listOfPlayers: []
+  aPlayerIsStun: 1
+  bullet: {fileID: 8414899321626162211, guid: fddb5db6374c4ff4f81b0a134925494c, type: 3}
+  spawning: 1
+  shooting: 0

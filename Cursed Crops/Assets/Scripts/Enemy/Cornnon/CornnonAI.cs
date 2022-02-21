@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class CornnonAI : MonoBehaviour
 {
-    const float minPathupdateTime = .2f;
-    const float pathUpdateMoveThreshhold = .5f;
+    // ================= Public variables =================
     //Setting up changable variables for enemies speeds
     public float enemySpeed = 1f;
     public float originalSpeed = 1f;
@@ -13,21 +12,24 @@ public class CornnonAI : MonoBehaviour
     public bool gotHit = false;
     public Transform Player;
     public Transform mainTarget;
-    Rigidbody rb;
-    private bool targetChange = false;
     public Transform[] listOfPlayers;
     public bool aPlayerIsStun = true;
+    public GameObject bullet;
+    public bool spawning = true;
+    public bool shooting = false;
+
+    // ================= Private variables =================
+    const float minPathupdateTime = .2f;
+    const float pathUpdateMoveThreshhold = .5f;
+    private Rigidbody rb;
+    private bool targetChange = false;
     Vector3[] path;
     int targetIndex = 0;
-    bool shooting = false;
     Transform closestPlayer;
     Transform oldTarget;
-    //all stuff for the range enemies
-    public GameObject bullet;
     Color prev;
     private Vector3 direction;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -50,7 +52,6 @@ public class CornnonAI : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     IEnumerator UpdatePath()
     {
         if (Time.timeSinceLevelLoad < .3f)
@@ -73,31 +74,29 @@ public class CornnonAI : MonoBehaviour
             }
         }
     }
+
     void FixedUpdate()
     {
         // new multiplayer chase code
-
-        
         if (!gameObject.activeInHierarchy)
         {
-
             StopAllCoroutines();
             //Destroy(gameObject);
         }
-        if (Vector3.Distance(closestPlayer.position, transform.position) < rangeDistance)
+
+        if (spawning)
         {
-
-
             enemySpeed = 0;
-
-
+        } 
+        else if (Vector3.Distance(closestPlayer.position, transform.position) < rangeDistance)
+        {
+            enemySpeed = 0;
             
             if (!shooting)
             {
                 shooting = true;
                 direction = new Vector3(closestPlayer.position.x - transform.position.x, 0, closestPlayer.position.z - transform.position.z);
-                StopCoroutine("shoot");
-                StartCoroutine("shoot");
+                //shoot();
             }
         }
         else
@@ -105,9 +104,36 @@ public class CornnonAI : MonoBehaviour
             gameObject.GetComponent<Renderer>().material.color = prev;
             enemySpeed = originalSpeed;
         }
-
-
     }
+
+    public void Shoot()
+    {
+        GameObject bul = Instantiate(bullet, transform.position, transform.rotation);
+        bul.GetComponent<Bullet>().movement = direction.normalized;
+        //shooting = false;
+    }
+
+    public void Die()
+    {
+        this.gameObject.SetActive(false);
+    }
+    
+    /*IEnumerator shoot()
+    {
+        gameObject.GetComponent<Renderer>().material.color = Color.yellow;
+        yield return new WaitForSeconds(0.65f);
+        gameObject.GetComponent<Renderer>().material.color = Color.green;
+        GameObject bul = Instantiate(bullet, transform.position, transform.rotation);
+        // Send bullet in correct direction
+        //Debug.Log(direction);
+        bul.GetComponent<Bullet>().movement = direction.normalized;
+        //enemySpeed = 0f;
+        yield return new WaitForSeconds(7.5f);
+        //enemySpeed = originalSpeed;
+        gameObject.GetComponent<Renderer>().material.color = prev;
+        shooting = false;
+
+    }*/
 
     Transform FindClosestPlayer(Transform[] players)
     {
@@ -148,7 +174,6 @@ public class CornnonAI : MonoBehaviour
         if (other.gameObject.tag == "MainObjective")
         {
             targetChange = true;
-
         }
     }
 
@@ -176,8 +201,6 @@ public class CornnonAI : MonoBehaviour
 
         }
     }
-
-
 
     IEnumerator FollowPath()
     {
@@ -223,23 +246,6 @@ public class CornnonAI : MonoBehaviour
          }
      }
     */
-
-    IEnumerator shoot()
-    {
-        gameObject.GetComponent<Renderer>().material.color = Color.yellow;
-        yield return new WaitForSeconds(0.65f);
-        gameObject.GetComponent<Renderer>().material.color = Color.green;
-        GameObject bul = Instantiate(bullet, transform.position, transform.rotation);
-        // Send bullet in correct direction
-        //Debug.Log(direction);
-        bul.GetComponent<Bullet>().movement = direction.normalized;
-        //enemySpeed = 0f;
-        yield return new WaitForSeconds(7.5f);
-        //enemySpeed = originalSpeed;
-        gameObject.GetComponent<Renderer>().material.color = prev;
-        shooting = false;
-
-    }
 
     IEnumerator stun()
     {

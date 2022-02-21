@@ -14,14 +14,32 @@ public class CornonAnimation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = this.transform.GetChild(0).GetComponent<Animator>();
-        cAI = this.gameObject.GetComponent<CornnonAI>();
+        animator = this.GetComponent<Animator>();
+        cAI = this.GetComponentInParent<CornnonAI>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Update speed
         animator.SetFloat("Speed", cAI.enemySpeed);
-        
+
+        // Shooting
+        animator.SetBool("Shooting", cAI.shooting);
+    }
+
+    void EndSpawning()
+    {
+        cAI.spawning = false;
+    }
+
+    void Shoot()
+    {
+        cAI.Shoot();
+    }
+
+    void Die()
+    {
+        cAI.Die();
     }
 }

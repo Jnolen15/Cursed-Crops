@@ -34,7 +34,7 @@ public class SpriteLeaner : MonoBehaviour
             // lean the current sprite by the desired angle
             spriteObj.transform.SetPositionAndRotation(
                 spriteObj.transform.position,
-                Quaternion.Euler(new Vector3(leanAngle, 0, 0))
+                Quaternion.Euler(new Vector3(leanAngle, 0, spriteObj.transform.rotation.z))
             );
 
             // I don't know what this does - Keenan
