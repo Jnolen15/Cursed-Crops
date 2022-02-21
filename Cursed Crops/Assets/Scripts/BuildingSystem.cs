@@ -75,6 +75,7 @@ public class BuildingSystem : MonoBehaviour
             AlignToGrid(popUp.transform);
             TestPlacementAvailable();
 
+            // update preview
             if (mode == "Build" && pHSpriteRenderer.sprite != activePlaceable.preview)
             {
                 pHSpriteRenderer.sprite = activePlaceable.preview;
@@ -85,6 +86,23 @@ public class BuildingSystem : MonoBehaviour
                 pHSpriteRenderer.sprite = activeCrop.preview;
                 phSprite.transform.localScale = activeCrop.prefab.GetChild(0).GetChild(0).transform.localScale;
                 ps.Stop();
+            }
+
+            // Contextual menu switching
+            if (mode != bc.mode)
+            {
+                if (bc.mode == "Build")
+                {
+                    SwapTo("Build");
+                }
+                else if (bc.mode == "Plant")
+                {
+                    SwapTo("Plant");
+                }
+                else if (bc.mode == "Unplaceable")
+                {
+                    SwapTo("Unplaceable");
+                }
             }
         }
     }
@@ -122,11 +140,7 @@ public class BuildingSystem : MonoBehaviour
                             // Set the higlight to match the prefab
                             pHSpriteRenderer.sprite = activePlaceable.preview;
                             phSprite.transform.localScale = activePlaceable.prefab.GetChild(0).GetChild(0).transform.localScale;
-                            bc.mode = mode;
-                            popUpMan.selectTop();
-                            activePlaceable = popupUI.buildables[0];
-                            activeCrop = popupUI.plantables[0];
-                            count = 0;
+
                             // Set hitbox to match the prefab
                             //bc.boxCol.size = activePlaceable.prefab.GetComponent<BoxCollider>().size;
                         }
@@ -135,14 +149,14 @@ public class BuildingSystem : MonoBehaviour
                             // Set the higlight to match the prefab
                             pHSpriteRenderer.sprite = activeCrop.preview;
                             phSprite.transform.localScale = activeCrop.prefab.GetChild(0).GetChild(0).transform.localScale;
-                            bc.mode = mode;
-                            popUpMan.selectTop();
-                            activePlaceable = popupUI.buildables[0];
-                            activeCrop = popupUI.plantables[0];
-                            count = 0;
+
                             // Set hitbox to match the prefab
                             //bc.boxCol.size = activePlaceable.prefab.GetComponent<BoxCollider>().size;
                         }
+
+                        bc.mode = mode;
+                        activePlaceable = popupUI.buildables[count];
+                        activeCrop = popupUI.plantables[count];
                     }
                 }
             }
@@ -239,7 +253,7 @@ public class BuildingSystem : MonoBehaviour
     {
         if (context.performed)
         {
-            if (buildmodeActive)
+            if (buildmodeActive && mode != "Unplaceable")
             {
                 if (count <= 0)
                     count = 3;
@@ -274,7 +288,7 @@ public class BuildingSystem : MonoBehaviour
     {
         if (context.performed)
         {
-            if (buildmodeActive)
+            if (buildmodeActive && mode != "Unplaceable")
             {
                 if (count >= 3)
                     count = 0;
@@ -305,12 +319,13 @@ public class BuildingSystem : MonoBehaviour
         }
     }
 
-    // The following 4 functions are for directly selecting a placeable. This selects the north placeable
+    // The following 4 functions are for directly selecting a placeable.
+    // This selects the North placeable
     public void SelectNorth_performed(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            if (buildmodeActive)
+            if (buildmodeActive && mode != "Unplaceable")
             {
                 count = 0;
                 popUpMan.selectTop();
@@ -320,12 +335,13 @@ public class BuildingSystem : MonoBehaviour
             }
         }
     }
+
     // This selects the South placeable
     public void SelectSouth_performed(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            if (buildmodeActive)
+            if (buildmodeActive && mode != "Unplaceable")
             {
                 count = 2;
                 popUpMan.selectBot();
@@ -335,12 +351,13 @@ public class BuildingSystem : MonoBehaviour
             }
         }
     }
+
     // This selects the East placeable
     public void SelectEast_performed(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            if (buildmodeActive)
+            if (buildmodeActive && mode != "Unplaceable")
             {
                 count = 1;
                 popUpMan.selectRight();
@@ -350,12 +367,13 @@ public class BuildingSystem : MonoBehaviour
             }
         }
     }
+
     // This selects the West placeable
     public void SelectWest_performed(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            if (buildmodeActive)
+            if (buildmodeActive && mode != "Unplaceable")
             {
                 count = 3;
                 popUpMan.selectLeft();
@@ -366,7 +384,7 @@ public class BuildingSystem : MonoBehaviour
         }
     }
 
-    // Swap from plants to buildables or vice versa
+    // Swap from plants to buildables or vice versa NOW UNUSED DUE TO IMPLEMENTATION OF CONTEXTUAL MENU
     public void Swap_performed(InputAction.CallbackContext context)
 {
     if (context.performed)
@@ -391,7 +409,7 @@ public class BuildingSystem : MonoBehaviour
                 activeCrop = popupUI.plantables[0];
                 count = 0;
                 if (popUp != null)
-                    popUpMan.switchMode(mode);
+                    popUpMan.switchMode(mode, count);
             }
             else if (mode == "Plant")
             {
@@ -405,13 +423,47 @@ public class BuildingSystem : MonoBehaviour
                 activeCrop = popupUI.plantables[0];
                 count = 0;
                 if (popUp != null)
-                    popUpMan.switchMode(mode);
+                    popUpMan.switchMode(mode, count);
             }
             else
                 Debug.LogError("Mode isn't Build or Plant");
         }
     }
 }
+
+    // Switches build menu to desired mode
+    public void SwapTo(string toMode)
+    {
+        if (buildmodeActive)
+        {
+            mode = toMode;
+
+            if (mode == "Build")
+            {
+                pHSpriteRenderer.sprite = activePlaceable.preview;
+                phSprite.transform.localScale = activePlaceable.prefab.GetChild(0).GetChild(0).transform.localScale;
+                AdjustRadius();
+                ps.Play();
+            }
+            else if (mode == "Plant")
+            {
+                pHSpriteRenderer.sprite = activeCrop.preview;
+                phSprite.transform.localScale = activeCrop.prefab.GetChild(0).GetChild(0).transform.localScale;
+                ps.Stop();
+            }
+            else if (mode == "Unplaceable")
+            {
+                ps.Stop();
+            }
+
+            //bc.mode = mode;
+            activePlaceable = popupUI.buildables[count];
+            activeCrop = popupUI.plantables[count];
+            //count = 0;
+            if (popUp != null)
+                popUpMan.switchMode(mode, count);
+        }
+    }
 
     private void AlignToGrid(Transform trans)
     {

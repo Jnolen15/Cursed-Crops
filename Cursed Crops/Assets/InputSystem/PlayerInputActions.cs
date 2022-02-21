@@ -535,17 +535,6 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""d27c5be3-1588-4de2-b051-2c5820571720"",
-                    ""path"": ""<Gamepad>/buttonEast"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Swap"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""36520a7e-0991-4333-a242-ae3f55e06d36"",
                     ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",

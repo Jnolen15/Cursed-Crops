@@ -20,6 +20,15 @@ public class BuildChecker : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        // Swapping mode based on location
+        if (other.gameObject.tag == "TilePlantable")
+            mode = "Plant";
+        else if (other.gameObject.tag == "TileBuildable")
+            mode = "Build";
+        else if (other.gameObject.tag == "TileUnplaceable")
+            mode = "Unplaceable";
+
+        // Determining acceptable position based on mode
         if (mode == "Build")
         {
             if (other.gameObject.tag == "Buildable")
@@ -32,7 +41,8 @@ public class BuildChecker : MonoBehaviour
                 acceptablePos = true;
             else if (other.gameObject.tag == "TileUnplaceable")
                 acceptablePos = false;
-        } else if (mode == "Plant")
+        }
+        else if (mode == "Plant")
         {
             if (other.gameObject.tag == "Spawner")
             {

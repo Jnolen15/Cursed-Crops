@@ -108,7 +108,7 @@ public class PlantingUIManager : MonoBehaviour
         Debug.Log("setUp");
     }
 
-    public void switchMode(string mode)
+    public void switchMode(string mode, int count)
     {
         if (mode == "Build")
         {
@@ -117,7 +117,21 @@ public class PlantingUIManager : MonoBehaviour
             string[] textC = new string[] { SO.buildables[2].placeableName, SO.buildables[2].desc, SO.buildables[2].stats, SO.buildables[2].price };
             string[] textD = new string[] { SO.buildables[3].placeableName, SO.buildables[3].desc, SO.buildables[3].stats, SO.buildables[3].price };
             setUp(textA, textB, textC, textD);
-            selectTop();
+            switch (count)
+            {
+                case 0:
+                    selectTop();
+                    break;
+                case 1:
+                    selectRight();
+                    break;
+                case 2:
+                    selectBot();
+                    break;
+                case 3:
+                    selectLeft();
+                    break;
+            }
         } else if (mode == "Plant")
         {
             string[] textA = new string[] { SO.plantables[0].cropName, SO.plantables[0].desc, SO.plantables[0].stats, SO.plantables[0].price };
@@ -125,10 +139,28 @@ public class PlantingUIManager : MonoBehaviour
             string[] textC = new string[] { SO.plantables[2].cropName, SO.plantables[2].desc, SO.plantables[2].stats, SO.plantables[2].price };
             string[] textD = new string[] { SO.plantables[3].cropName, SO.plantables[3].desc, SO.plantables[3].stats, SO.plantables[3].price };
             setUp(textA, textB, textC, textD);
-            selectTop();
+            switch (count)
+            {
+                case 0:
+                    selectTop();
+                    break;
+                case 1:
+                    selectRight();
+                    break;
+                case 2:
+                    selectBot();
+                    break;
+                case 3:
+                    selectLeft();
+                    break;
+            }
+        }
+        else if (mode == "Unplaceable")
+        {
+            closeDisplay();
         } else
         {
-            Debug.LogError("switchMode was not given a propper mode");
+            Debug.LogError("switchMode was not given a propper mode: " + mode);
         }
     }
 
