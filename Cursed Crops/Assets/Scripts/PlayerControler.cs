@@ -74,9 +74,11 @@ public class PlayerControler : MonoBehaviour
     }
     public State state;
 
-
     // reference to pause menu
     private Pause_Manager pauseMenu;
+
+    // get / set functions
+    public Vector3 getDirection() { return direction; }
 
     // Start is called before the first frame update
     void Start()
@@ -257,7 +259,7 @@ public class PlayerControler : MonoBehaviour
             direction = new Vector3(mousePosition.x - transform.position.x, 0, mousePosition.z - transform.position.z);
 
             // Flip sprite to face the mouse position
-            if (faceaim)
+            if (faceaim || state == State.Building)
             {
                 if (direction.x > 0 && flipped)
                 {
@@ -284,7 +286,7 @@ public class PlayerControler : MonoBehaviour
         direction = Vector3.right * aimInputVector.x + Vector3.forward * aimInputVector.y;
 
         // Flip sprite to face the joystick position
-        if (faceaim)
+        if (faceaim || state == State.Building)
         {
             if (direction.x < 0 && !flipped)
             {

@@ -17,6 +17,9 @@ public class BuildingSystem : MonoBehaviour
     private ParticleSystem ps;
     private bool acceptablePos;
     private int count = 0;
+    private float xPos = 1f;
+    private float zPos = 0f;
+    private Vector3 prevDir;
 
     // ================= Public variables =================
     public PlaceableSO activePlaceable;
@@ -467,13 +470,36 @@ public class BuildingSystem : MonoBehaviour
 
     private void AlignToGrid(Transform trans)
     {
-        // Get player position
+        // Get and round player position
         Vector3 playerPos = new Vector3(transform.position.x, 1, transform.position.z);
+        xPos = Mathf.Round(playerPos.x);
+        zPos = Mathf.Round(playerPos.z);
+        xPos -= (xPos % gridSize);
+        zPos -= (zPos % gridSize);
+
+        // If aiming get aim direction
+        if (pc.useControler)
+        {
+            // If aim is null, remeber last aimed place
+            Debug.Log(pc.getDirection());
+            if (pc.getDirection() != new Vector3(0, 0, 0))
+            {
+                xPos += (pc.getDirection().normalized.x);
+                zPos += (pc.getDirection().normalized.z);
+                prevDir = pc.getDirection();
+            } else
+            {
+                xPos += (prevDir.normalized.x);
+                zPos += (prevDir.normalized.z);
+            }
+        } else
+        {
+            xPos += (pc.getDirection().normalized.x);
+            zPos += (pc.getDirection().normalized.z);
+        }
 
         // align it to grid
-        float xPos = Mathf.Round(playerPos.x);
         xPos -= (xPos % gridSize);
-        float zPos = Mathf.Round(playerPos.z);
         zPos -= (zPos % gridSize);
 
         // Add offset
