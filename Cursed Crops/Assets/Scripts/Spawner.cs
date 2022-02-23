@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    // Public variables
+    // ================= Public variables =================
     public string plantName;
     //[Header("Germination Period: Morning, Afternoon, Night")]
     //public string germinationPeriod;
@@ -16,7 +16,11 @@ public class Spawner : MonoBehaviour
     public float potency = 10f;
     public bool randomizePotency = true;
     public int spawnRadius = 2; // X and Z limit to where the enemys spawn
-    public float lastTimeSpawned = 0f; // X and Z limit to where the enemys spawn
+    public float lastTimeSpawned = 0f;
+
+    // ================= Private variables =================
+    private float spawnChance = 1;  // Used in the spawning of special enemies. Inclreases with each spawn attampt
+    private bool hasSpawned = false;    // Used to tell if a special enemy has been spawned yet
 
     private void Start()
     {
@@ -26,6 +30,17 @@ public class Spawner : MonoBehaviour
     }
 
     public void Spawn(string type)
+    {
+        if (plantType == "Basic")
+        {
+            SpawnBasic(type);
+        } else if (plantType == "Special")
+        {
+            if(!hasSpawned) SpawnSpecial();
+        }
+    }
+
+    private void SpawnBasic(string type)
     {
         float newNumToSpawn = 0;
 
@@ -40,7 +55,25 @@ public class Spawner : MonoBehaviour
             Vector3 newPos = new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius));
             newPos = newPos + transform.position;
             Instantiate(enemyPrefab, newPos, transform.rotation);
-            //Debug.Log("Spawning to: " + newPos);
+        }
+    }
+
+    private void SpawnSpecial()
+    {
+        // % ammount to spawn that gets higher untill it sapwns. with a 100% chance before end of wave
+        float rand = Random.Range(1, 10);
+        if (spawnChance > rand)
+        {
+            hasSpawned = true;
+            Vector3 newPos = new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius));
+            newPos = newPos + transform.position;
+            Instantiate(enemyPrefab, newPos, transform.rotation);
+        } else
+        {
+            spawnChance++;
+            // Doubles each time. Start at 0.25f
+            // Gaurenteed spawn by the 6th time
+            //spawnChance = spawnChance*2;
         }
     }
 }

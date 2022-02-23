@@ -87,7 +87,6 @@ public class SpawnManager : MonoBehaviour
     private void RunSpawnSystem()
     {
         // Phase timer
-        // INSERT: Starting wave only when players ready
         if (currentPhaseEndTime < elapsedTime)
         {
             currentPhaseEndTime = elapsedTime + phaseDuration;
@@ -197,10 +196,17 @@ public class SpawnManager : MonoBehaviour
             Spawner currentSpawner = obj.GetComponent<Spawner>();
             if (currentSpawner.lastTimeSpawned == 0) // Initial spawn
             {
-                currentSpawner.Spawn(type);
-                //currentSpawner.lastTimeSpawned = elapsedTime;
-                // This version makes spawns more diverse
-                currentSpawner.lastTimeSpawned = elapsedTime + Random.Range(0f, 5f);
+                float rand = Random.Range(1, 10);
+                // 60% chance to immediatly spawn, 40% to spawn sometime over the next 5 seconds
+                if (rand < 6)
+                {
+                    currentSpawner.Spawn(type);
+                    currentSpawner.lastTimeSpawned = elapsedTime + Random.Range(0f, 5f);
+                } else
+                {
+                    // subtract by current potency here so it won't wait the bonus ammount + the potency
+                    currentSpawner.lastTimeSpawned = elapsedTime + (Random.Range(0f, currentSpawner.potency) - currentSpawner.potency);
+                }
             }
             else if ((currentSpawner.lastTimeSpawned + currentSpawner.potency) <= elapsedTime)
             {
