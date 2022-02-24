@@ -242,7 +242,6 @@ GameObject:
   - component: {fileID: 7937736029672694562}
   - component: {fileID: -5891569623318608545}
   - component: {fileID: 7937736029672694575}
-  - component: {fileID: 1924405865491807640}
   - component: {fileID: -6313865123729909988}
   - component: {fileID: -1676916115656988922}
   m_Layer: 0
@@ -616,6 +615,8 @@ MonoBehaviour:
   damageBoost: 1
   faceaim: 1
   trapped: 0
+  isAttacking: 0
+  attackQueued: 0
   ready: 0
   flipped: 0
   useControler: 0
@@ -666,22 +667,6 @@ MonoBehaviour:
   damage: 1
   inIFrames: 0
   playerIsStun: 0
---- !u!114 &1924405865491807640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7937736029672694561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84f928e3bf4db6344a746c878fb614ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  harveyAnimOC: {fileID: 22100000, guid: 2668cb7d30bd3e64495ba2b15cc620ff, type: 2}
-  dougAnimOC: {fileID: 22100000, guid: d773d78162d4eec47bf0fe6a301221bd, type: 2}
-  cecilAnimOC: {fileID: 22100000, guid: ad8773edacbdbf84aa8fbeb25d0ca83f, type: 2}
-  selectedCharacter: 0
 --- !u!114 &-6313865123729909988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -718,6 +703,8 @@ GameObject:
   - component: {fileID: 7937736029740589960}
   - component: {fileID: 7937736029740589961}
   - component: {fileID: 7937736029740589962}
+  - component: {fileID: 5564203787489950684}
+  - component: {fileID: 1143820043172960238}
   - component: {fileID: 4030265867585263875}
   m_Layer: 0
   m_Name: PlayerSprite
@@ -810,6 +797,34 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5564203787489950684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7937736029740589967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e800ffb7d60b72041b0a6240c5512260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1143820043172960238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7937736029740589967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84f928e3bf4db6344a746c878fb614ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  harveyAnimOC: {fileID: 22100000, guid: 2668cb7d30bd3e64495ba2b15cc620ff, type: 2}
+  dougAnimOC: {fileID: 22100000, guid: d773d78162d4eec47bf0fe6a301221bd, type: 2}
+  cecilAnimOC: {fileID: 22100000, guid: ad8773edacbdbf84aa8fbeb25d0ca83f, type: 2}
+  selectedCharacter: 0
 --- !u!114 &4030265867585263875
 MonoBehaviour:
   m_ObjectHideFlags: 0

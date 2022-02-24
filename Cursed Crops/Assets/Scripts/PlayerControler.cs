@@ -12,15 +12,16 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] private float rollCDTime = 0.3f;
     [SerializeField] private float rangeCDTime = 5f;
     [SerializeField] private float faceAimTimer = 2f;
-    public int attackChain = 1;
-    private float attackcoolDown;
-    private float attackDuration;
+    public int attackChain = 0;
+    //private float attackcoolDown;
+    //private float attackDuration;
     private float rangeCoolDown;
     private float rollSpeed;
     private float rollSpeedDropMultiplier;
     private float faceAimTime = 0;
     private float lungeSpeed = 8;
     private int curBullets = 3;
+    private float lungedist = 0;
 
     public int maxBullets = 3;
     public int overAllPlayerDamage = 0;
@@ -37,13 +38,17 @@ public class PlayerControler : MonoBehaviour
     public bool faceaim = false;
     public bool trapped = false;
     private bool startRollFallOff = false;
+    public bool isAttacking = false;
     private bool attackMove = false;
     private bool attackCancleable = false;
-    private bool attackQueued = false;
-    
+    public bool attackQueued = false;
+    private bool lunge = false;
+
     public bool ready = false;
     public bool flipped = false;
     public bool useControler;               // If using controller changes aiming
+    public bool stopMovement = false;       // Used to stop movement when shooting, planting, taking damage.
+    public bool shooting = false;
 
     // ====================== OTHER COMPONENTS ======================
     private BuildingSystem bs;
@@ -62,6 +67,7 @@ public class PlayerControler : MonoBehaviour
     private Vector3 movement;
     private Vector3 rollDir;
     private Vector3 direction;
+    private Vector3 aimDir;             // Used to Store the direction the player will shoot
     [SerializeField] private LayerMask groundLayermask;
     private delegate void Callback();
     public enum State
@@ -95,7 +101,7 @@ public class PlayerControler : MonoBehaviour
 
         // Player Sprite
         playerSprite = this.transform.GetChild(1).GetChild(0).gameObject.GetComponent<SpriteRenderer>();
-        animator = this.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Animator>();
+        animator = this.transform.GetComponentInChildren<Animator>();
 
         // Ammo Manager
         Vector3 ammoOffset = new Vector3(this.transform.position.x, this.transform.position.y + playerSprite.bounds.size.y, 
@@ -160,8 +166,9 @@ public class PlayerControler : MonoBehaviour
         if (faceAimTime < faceAimTimer) faceAimTime += Time.deltaTime; // Face aim period
         else faceaim = false;
 
-        if (attackcoolDown < attackCDTimer) attackcoolDown += Time.deltaTime; // Attack cooldown
-        else attackChain = 0;
+        //if (attackcoolDown < attackCDTimer) attackcoolDown += Time.deltaTime; // Attack cooldown
+        //else attackChain = 0;
+        if (!isAttacking && state != State.Attacking) attackChain = 0;
 
         // Ranged Cooldown
         if (rangeCoolDown < rangeCDTime) rangeCoolDown += Time.deltaTime; // Attack cooldown
@@ -184,17 +191,19 @@ public class PlayerControler : MonoBehaviour
         {
             case State.Normal:
                 // Can't move while attacking
-                if (!animator.GetBool("Ranged") && attackcoolDown > attackDuration)
+                if (!stopMovement && !isAttacking)
                 {
                     Move();
                 }
                 rollDir = movement;
+                isAttacking = false;
+                attackQueued = false;
                 break;
             case State.Building:
                 // Exit building state if out of build mode
                 if (!bs.buildmodeActive)
                     state = State.Normal;
-                Move();
+                if(!stopMovement) Move();
                 rollDir = movement;
                 break;
             /*case State.Attacking:
@@ -404,44 +413,47 @@ public class PlayerControler : MonoBehaviour
     {
         if (state == State.Normal || state == State.Attacking)
         {
-            if (attackcoolDown > attackDuration /* || attackCancleable */)
+            if (!isAttacking  /* || attackCancleable */)
             {
                 switch (attackChain)
                 {
                     case 0:
-                        //Debug.Log("Attack 1");
-                        attackcoolDown = 0;
-                        //attackChain = 1;
-                        attackDuration = 0.4f;
+                        //attackcoolDown = 0;
+                        //attackDuration = 0.4f;
+                        isAttacking = true;
                         animator.SetTrigger("Melee1");
-
-                        ap = StartCoroutine(attackPhase(0f, 0.2f, 0.2f, false));
+                        state = State.Attacking;
+                        lunge = false;
+                        //ap = StartCoroutine(attackPhase(0f, 0.2f, 0.2f, false));
                         break;
                     case 1:
-                        //Debug.Log("Attack 2")
-                        attackcoolDown = 0;
-                        //attackChain = 2;
-                        attackDuration = 0.4f;
+                        //attackcoolDown = 0;
+                        //attackDuration = 0.4f;
+                        isAttacking = true;
                         animator.SetTrigger("Melee2");
-                        if (ap != null)
-                            StopCoroutine(ap);
-                        ap = StartCoroutine(attackPhase(0f, 0.2f, 0.2f, false));
+                        state = State.Attacking;
+                        //if (ap != null)
+                        //    StopCoroutine(ap);
+                        //ap = StartCoroutine(attackPhase(0f, 0.2f, 0.2f, false));
                         break;
                     case 2:
-                        //Debug.Log("Attack 3");
-                        attackcoolDown = 0;
-                        //attackChain = 3;
-                        attackDuration = 0.7f;
+                        //attackcoolDown = 0;
+                        //attackDuration = 0.7f;
+                        isAttacking = true;
                         animator.SetTrigger("Melee3");
-                        if (ap != null)
-                            StopCoroutine(ap);
+                        state = State.Attacking;
+                        //if (ap != null)
+                        //    StopCoroutine(ap);
                         if (!trapped)
                         {
-                            ap = StartCoroutine(attackPhase(0.3f, 0.1f, 0.3f, true)); // add to 0.7
+                            lungedist = 0.1f;
+                            lunge = true;
+                            //ap = StartCoroutine(attackPhase(0.3f, 0.1f, 0.3f, true)); // add to 0.7
                         }
                         else
                         {
-                            ap = StartCoroutine(attackPhase(0.3f, 0.1f, 0.3f, false)); // add to 0.7
+                            lunge = false;
+                            //ap = StartCoroutine(attackPhase(0.3f, 0.1f, 0.3f, false)); // add to 0.7
                         }
                         break;
                     case 3:
@@ -457,7 +469,7 @@ public class PlayerControler : MonoBehaviour
         }
     }
 
-    IEnumerator attackPhase(float windup, float strike, float recovery, bool lunge)
+    /*IEnumerator attackPhase(float windup, float strike, float recovery, bool lunge)
     {
         // Time the following to sync up with animation frames
         // IN FUTURE, WORK WITH ATTACK ANIMATORS: Make sure attacks across charecters are synced (Frame timing wise)
@@ -486,10 +498,18 @@ public class PlayerControler : MonoBehaviour
         {
             state = State.Normal;
         }
-    }
+    }*/
 
-    private void DoAttack()
+    public void AttackLunge()
     {
+        attackMove = true;
+        StartCoroutine(cooldown(() => { attackMove = false; }, lungedist));
+    }
+    
+    public void DoAttack()
+    {
+        Debug.Log("Attack Hit");
+
         meleeAttack.SetActive(true);
 
         Collider[] cols = Physics.OverlapBox(meleeAttack.transform.position, meleeAttack.transform.localScale / 2,
@@ -498,6 +518,32 @@ public class PlayerControler : MonoBehaviour
         else attackChain = 0;
         DamageEnemies(cols);
         StartCoroutine(cooldown(() => { meleeAttack.SetActive(false); }, 0.1f));
+
+        attackCancleable = true;
+    }
+
+    public void AttackEnd()
+    {
+        Debug.Log("Attack End");
+        isAttacking = false;
+        attackCancleable = false;
+        if (attackQueued)
+        {
+            attackQueued = false;
+            AttackChain();
+        }
+        else
+        {
+            state = State.Normal;
+        }
+    }
+
+    public void AttackCancled()
+    {
+        Debug.Log("Attack Cancled");
+        isAttacking = false;
+        attackCancleable = false;
+        state = State.Normal;
     }
 
     private void DamageEnemies(Collider[] cols)
@@ -544,10 +590,11 @@ public class PlayerControler : MonoBehaviour
         //Debug.Log(context);
         if (context.performed)
         {
-            if (state == State.Normal && curBullets > 0 && !animator.GetBool("Ranged"))
+            if (state == State.Normal && curBullets > 0 && !shooting)
             {
                 curBullets--;
                 rangeCoolDown = 0;
+                shooting = true;
 
                 // Update ammo manager
                 am.curBullets = curBullets;
@@ -556,15 +603,12 @@ public class PlayerControler : MonoBehaviour
                 if (animator != null)
                 {
                     //animator.SetTrigger("Ranged");
-                    animator.SetBool("Ranged", true);
-                    StartCoroutine(cooldown(() => { animator.SetBool("Ranged", false); }, 0.5f));
+                    animator.SetTrigger("Ranged");
                 }
                 if (direction != new Vector3(0,0,0))
                 {
                     // Create bullet
-                    GameObject bul = null;
-                    StartCoroutine(cooldown(() => { bul = Instantiate(bullet, transform.position, transform.rotation);
-                        bul.GetComponent<Bullet>().movement = direction.normalized; }, 0.15f));
+                    aimDir = direction;
                 }
                 else
                 {
@@ -575,15 +619,23 @@ public class PlayerControler : MonoBehaviour
                     else if (flipped)
                         movDir = new Vector3(-1, 0, 0);
 
-                    GameObject bul = null;
-                    StartCoroutine(cooldown(() => { bul = Instantiate(bullet, transform.position, transform.rotation);
-                        bul.GetComponent<Bullet>().movement = movDir.normalized; }, 0.15f));
+                    // Create Bullet
+                    aimDir = movDir;
                 }
                 // Set face aim period
                 faceAimTime = 0;
                 faceaim = true;
             }
         }
+    }
+
+    public void Shoot()
+    {
+        // Create bullet
+        GameObject bul = null;
+        bul = Instantiate(bullet, transform.position, transform.rotation);
+        bul.GetComponent<Bullet>().movement = aimDir.normalized;
+        shooting = false;
     }
 
     // Misc =================================

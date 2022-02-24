@@ -82,7 +82,7 @@ public class UI_Manager : MonoBehaviour
             p1UI.SetActive(true);
 
             // setting player name
-            nameText1.text = PM.players[0].GetComponent<PlayerAnimOCManager>().selectedCharacter.ToString();
+            nameText1.text = PM.players[0].GetComponentInChildren<PlayerAnimOCManager>().selectedCharacter.ToString();
         }
 
         // checking if PC has been aquired
@@ -108,7 +108,7 @@ public class UI_Manager : MonoBehaviour
             p2UI.SetActive(true);
 
             // setting player name
-            nameText2.text = PM.players[1].GetComponent<PlayerAnimOCManager>().selectedCharacter.ToString();
+            nameText2.text = PM.players[1].GetComponentInChildren<PlayerAnimOCManager>().selectedCharacter.ToString();
         }
 
         // checking if PC has been aquired
