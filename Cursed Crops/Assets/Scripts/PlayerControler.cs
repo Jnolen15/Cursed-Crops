@@ -51,6 +51,7 @@ public class PlayerControler : MonoBehaviour
     public bool shooting = false;
 
     // ====================== OTHER COMPONENTS ======================
+    private PlayerInput input;
     private BuildingSystem bs;
     private EnemyPlayerDamage epd;
     private Rigidbody rb;                  // The player's Rigidbody
@@ -89,6 +90,20 @@ public class PlayerControler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Assign controller if using one
+        input = GetComponent<PlayerInput>();
+        if (input.currentControlScheme == "Gamepad") 
+        {
+            Debug.Log("Player using Controller");
+            useControler = true;
+        }
+        else if (input.currentControlScheme == "Keyboard")
+        {
+            Debug.Log("Player using Keyboard / mouse");
+            useControler = false;
+        }
+
+        // Setting up and assinging values
         state = State.Normal;
 
         bs = GetComponent<BuildingSystem>();
@@ -248,11 +263,11 @@ public class PlayerControler : MonoBehaviour
         //Debug.Log(context.action.ToString());
         if (context.action.ToString() == "Player/Aim[/Mouse/position]")
         {
-            useControler = false;
+            //useControler = false;
         }
         else
         {
-            useControler = true;
+            //useControler = true;
             aimInputVector = context.ReadValue<Vector2>();
         }
     }
@@ -615,20 +630,25 @@ public class PlayerControler : MonoBehaviour
                 if (direction != new Vector3(0,0,0))
                 {
                     // Create bullet
-                    aimDir = direction;
+                    this.aimDir = direction;
                 }
                 //Shoot in direction moving, if not aiming
                 else
                 {
-                    /*Vector3 movDir = new Vector3(1, 0, 0);
-                    // Flip sprite to face the direction the player is moving
-                    if (!flipped)
-                        movDir = new Vector3(1, 0, 0);
-                    else if (flipped)
-                        movDir = new Vector3(-1, 0, 0);*/
-
-                    // Create Bullet
-                    aimDir = movement;
+                    if (movement != new Vector3(0, 0, 0))
+                    {
+                        // Create Bullet
+                        this.aimDir = movement;
+                    } else
+                    {
+                        Vector3 movDir = new Vector3(1, 0, 0);
+                        // Flip sprite to face the direction the player is moving
+                        if (!flipped)
+                            movDir = new Vector3(1, 0, 0);
+                        else if (flipped)
+                            movDir = new Vector3(-1, 0, 0);
+                        this.aimDir = movDir;
+                    }
                 }
                 // Set face aim period
                 faceAimTime = 0;
@@ -642,7 +662,7 @@ public class PlayerControler : MonoBehaviour
         // Create bullet
         GameObject bul = null;
         bul = Instantiate(bullet, transform.position, transform.rotation);
-        bul.GetComponent<Bullet>().movement = aimDir.normalized;
+        bul.GetComponent<Bullet>().movement = this.aimDir.normalized;
         shooting = false;
     }
 

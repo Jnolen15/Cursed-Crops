@@ -144,7 +144,7 @@ public class BuildingSystem : MonoBehaviour
                             // Set the higlight to match the prefab
                             pHSpriteRenderer.sprite = activePlaceable.preview;
                             phSprite.transform.localScale = activePlaceable.prefab.GetChild(0).GetChild(0).transform.localScale;
-
+                            popUpMan.switchMode("Build", count);
                             // Set hitbox to match the prefab
                             //bc.boxCol.size = activePlaceable.prefab.GetComponent<BoxCollider>().size;
                         }
@@ -153,7 +153,7 @@ public class BuildingSystem : MonoBehaviour
                             // Set the higlight to match the prefab
                             pHSpriteRenderer.sprite = activeCrop.preview;
                             phSprite.transform.localScale = activeCrop.prefab.GetChild(0).GetChild(0).transform.localScale;
-
+                            popUpMan.switchMode("Plant", count);
                             // Set hitbox to match the prefab
                             //bc.boxCol.size = activePlaceable.prefab.GetComponent<BoxCollider>().size;
                         }
