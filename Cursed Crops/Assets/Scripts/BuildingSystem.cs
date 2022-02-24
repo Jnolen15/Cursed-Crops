@@ -44,7 +44,8 @@ public class BuildingSystem : MonoBehaviour
         animator = this.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Animator>();
         ps = placeableHighlight.transform.GetChild(1).gameObject.GetComponent<ParticleSystem>();
         ps.Pause();
-        popUp = Instantiate(popupUI.Prefab.gameObject, transform.position, transform.rotation, transform);
+        popUp = Instantiate(popupUI.Prefab.gameObject,new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), 
+                            transform.rotation, transform);
         popUpMan = popUp.GetComponent<PlantingUIManager>();
         //popUp.SetActive(false); MOVED TO IN POPUP
         grm = GameObject.Find("GameRuleManager").GetComponent<GameRuleManager>();
@@ -513,7 +514,7 @@ public class BuildingSystem : MonoBehaviour
             xPos += (gridSize);
 
         // Create and return position
-        Vector3 placePos = new Vector3(xPos, 1, zPos);
+        Vector3 placePos = new Vector3(xPos, trans.position.y, zPos);
 
         trans.position = placePos;
     }
