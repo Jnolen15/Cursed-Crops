@@ -46,6 +46,15 @@ public class EnemyPlayerDamage : MonoBehaviour
             Debug.Log(playerHealth);
             //gameOver();
         }
+
+        // Pulse if below 20% health
+        if (playerHealth <= (reviveHealth * 0.2))
+        {
+            playerSprite.color = Color.Lerp(Color.white, Color.red, Mathf.PingPong(Time.time, 1));
+        } else if (playerSprite.color != Color.white)
+        {
+            playerSprite.color = Color.white;
+        }
     }
 
     private void OnTriggerEnter(Collider other)

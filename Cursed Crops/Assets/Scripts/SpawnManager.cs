@@ -37,6 +37,9 @@ public class SpawnManager : MonoBehaviour
     private bool timerStarted = false;
     private bool gridUpdated = false;
     private delegate void Callback();
+    public GameObject gridChild;
+    public List<GameObject> spawners = new List<GameObject>();
+    private Dictionary<Vector3, string> spawnerGridPositions = new Dictionary<Vector3, string>();
     public enum State
     {
         Wave,
@@ -44,14 +47,6 @@ public class SpawnManager : MonoBehaviour
         Break
     }
     public State state;
-
-    // For rn spawner works with an array. But change to a list when planting phase is in
-    // Because it will be easier to dynamically add and remove to
-    public List<GameObject> spawners = new List<GameObject>();
-    //public GameObject[] spawnArray;
-
-    public GameObject gridChild;
-    private Dictionary<Vector3, string> spawnerGridPositions = new Dictionary<Vector3, string>();
 
     private void Start()
     {

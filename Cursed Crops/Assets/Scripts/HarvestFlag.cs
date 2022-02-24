@@ -12,7 +12,7 @@ public class HarvestFlag : MonoBehaviour
     private SpawnManager spawnManager;
     private PlayerManager playerManager;
     private GameRuleManager grm;
-
+    private GameObject quotaWarning;        // Placeholder text to tell players quota isn't met
 
     void Start()
     {
@@ -21,6 +21,10 @@ public class HarvestFlag : MonoBehaviour
 
         // Game Rule Manager
         grm = GameObject.Find("GameRuleManager").GetComponent<GameRuleManager>();
+
+        // Quota popup notification
+        quotaWarning = this.transform.GetChild(0).gameObject;
+        quotaWarning.SetActive(false);
     }
 
     void Update()
@@ -36,9 +40,15 @@ public class HarvestFlag : MonoBehaviour
             if (spawnManager.currentPhase == "Night")
             {
                 if (grm.bountyMet())
+                {
                     spawnManager.StartHarvest();
+                    quotaWarning.SetActive(false);
+                }
                 else
+                {
                     Debug.Log("You must meet the bounty requirements in order to procede to the next wave");
+                    quotaWarning.SetActive(true);
+                }
             } else
             {
                 spawnManager.StartHarvest();

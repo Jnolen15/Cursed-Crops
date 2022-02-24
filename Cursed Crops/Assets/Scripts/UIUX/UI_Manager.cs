@@ -89,7 +89,7 @@ public class UI_Manager : MonoBehaviour
         if (PC1 != null)
         {
             // managing  currency text
-            currencyText1.text = "Money: " + GRM.getMoney() + " Points: " + GRM.getPoints();
+            currencyText1.text = "Money: " + GRM.getMoney() + " Quota: " + GRM.getPoints() + " / 100";
             vegetableText1.text = "C: " + PR1.getCrops();
             // managing health bar
             HealthBar1.value = (float)EPD1.playerHealth / (float)EPD1.reviveHealth;
@@ -115,7 +115,7 @@ public class UI_Manager : MonoBehaviour
         if (PC2 != null)
         {
             // managing  currency text
-            currencyText2.text = "Money: " + GRM.getMoney() + " Points: " + GRM.getPoints(); ;
+            currencyText2.text = "Money: " + GRM.getMoney() + " Quota: " + GRM.getPoints() + " / 100";
             vegetableText2.text = "C: " + PR2.getCrops();
             // managing health bar
             HealthBar2.value = (float)EPD2.playerHealth / (float)EPD2.reviveHealth;

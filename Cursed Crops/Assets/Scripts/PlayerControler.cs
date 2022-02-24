@@ -12,9 +12,9 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] private float rollCDTime = 0.3f;
     [SerializeField] private float rangeCDTime = 5f;
     [SerializeField] private float faceAimTimer = 2f;
+    [SerializeField] private float attackBufferMax = 2f;
+    private float attackBufferTimer = 2.1f;
     public int attackChain = 0;
-    //private float attackcoolDown;
-    //private float attackDuration;
     private float rangeCoolDown;
     private float rollSpeed;
     private float rollSpeedDropMultiplier;
@@ -166,9 +166,9 @@ public class PlayerControler : MonoBehaviour
         if (faceAimTime < faceAimTimer) faceAimTime += Time.deltaTime; // Face aim period
         else faceaim = false;
 
-        //if (attackcoolDown < attackCDTimer) attackcoolDown += Time.deltaTime; // Attack cooldown
-        //else attackChain = 0;
-        if (!isAttacking && state != State.Attacking) attackChain = 0;
+        if (attackBufferTimer < attackBufferMax) attackBufferTimer += Time.deltaTime; // Attack cooldown
+        else attackChain = 0;
+        //if (!isAttacking && state != State.Attacking) attackChain = 0;
 
         // Ranged Cooldown
         if (rangeCoolDown < rangeCDTime) rangeCoolDown += Time.deltaTime; // Attack cooldown
@@ -514,7 +514,12 @@ public class PlayerControler : MonoBehaviour
 
         Collider[] cols = Physics.OverlapBox(meleeAttack.transform.position, meleeAttack.transform.localScale / 2,
                                                     meleeAttack.transform.rotation, LayerMask.GetMask("Enemies"));
-        if (cols.Length > 0) attackChain++;
+        // If hit
+        if (cols.Length > 0)
+        {
+            attackBufferTimer = 0;
+            attackChain++;
+        }
         else attackChain = 0;
         DamageEnemies(cols);
         StartCoroutine(cooldown(() => { meleeAttack.SetActive(false); }, 0.1f));
@@ -605,22 +610,25 @@ public class PlayerControler : MonoBehaviour
                     //animator.SetTrigger("Ranged");
                     animator.SetTrigger("Ranged");
                 }
+
+                // Shoot in direction aiming
                 if (direction != new Vector3(0,0,0))
                 {
                     // Create bullet
                     aimDir = direction;
                 }
+                //Shoot in direction moving, if not aiming
                 else
                 {
-                    Vector3 movDir = new Vector3(1, 0, 0);
+                    /*Vector3 movDir = new Vector3(1, 0, 0);
                     // Flip sprite to face the direction the player is moving
                     if (!flipped)
                         movDir = new Vector3(1, 0, 0);
                     else if (flipped)
-                        movDir = new Vector3(-1, 0, 0);
+                        movDir = new Vector3(-1, 0, 0);*/
 
                     // Create Bullet
-                    aimDir = movDir;
+                    aimDir = movement;
                 }
                 // Set face aim period
                 faceAimTime = 0;
