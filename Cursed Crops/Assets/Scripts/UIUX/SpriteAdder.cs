@@ -16,9 +16,12 @@ public class SpriteAdder : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (this.gameObject != null)
+        // checking to see if SL has been destroyed on scene end
+        if (SL != null)
         {
+            // Debug.Log(this.gameObject.transform.parent.transform.parent.name);
             SL.leanedSprites.Remove(this.gameObject);
+            
         }
     }
 }
