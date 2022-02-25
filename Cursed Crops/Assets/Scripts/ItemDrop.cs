@@ -38,6 +38,11 @@ public class ItemDrop : MonoBehaviour
         }
     }
 
+    public void ReduceValue(int val)
+    {
+        value -= val;
+    }
+
     public void GetPickedUp()
     {
         Destroy(gameObject);

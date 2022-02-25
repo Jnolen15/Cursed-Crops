@@ -242,7 +242,6 @@ GameObject:
   - component: {fileID: 7937736029672694562}
   - component: {fileID: -5891569623318608545}
   - component: {fileID: 7937736029672694575}
-  - component: {fileID: -6313865123729909988}
   - component: {fileID: -1676916115656988922}
   m_Layer: 0
   m_Name: Player
@@ -604,6 +603,7 @@ MonoBehaviour:
   rollCDTime: 1
   rangeCDTime: 5
   faceAimTimer: 2
+  attackBufferMax: 2
   attackChain: 1
   maxBullets: 3
   overAllPlayerDamage: 0
@@ -620,6 +620,8 @@ MonoBehaviour:
   ready: 0
   flipped: 0
   useControler: 0
+  stopMovement: 0
+  shooting: 0
   bullet: {fileID: 6242655706651345086, guid: dd76d198cb4f6304f93a7e3ef466c390, type: 3}
   ammoManager: {fileID: 3550555863387099239, guid: c45b274deb480454ab44824b41333d5a,
     type: 3}
@@ -667,18 +669,6 @@ MonoBehaviour:
   damage: 1
   inIFrames: 0
   playerIsStun: 0
---- !u!114 &-6313865123729909988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7937736029672694561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f30cca0f22562484c8ef1b5b12833bf5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-1676916115656988922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -692,6 +682,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cropsValue: 5
+  maxCrops: 10
 --- !u!1 &7937736029740589967
 GameObject:
   m_ObjectHideFlags: 0
