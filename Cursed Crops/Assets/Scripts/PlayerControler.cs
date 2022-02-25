@@ -523,8 +523,6 @@ public class PlayerControler : MonoBehaviour
     
     public void DoAttack()
     {
-        Debug.Log("Attack Hit");
-
         meleeAttack.SetActive(true);
 
         Collider[] cols = Physics.OverlapBox(meleeAttack.transform.position, meleeAttack.transform.localScale / 2,
@@ -544,7 +542,6 @@ public class PlayerControler : MonoBehaviour
 
     public void AttackEnd()
     {
-        Debug.Log("Attack End");
         isAttacking = false;
         attackCancleable = false;
         if (attackQueued)
@@ -560,7 +557,6 @@ public class PlayerControler : MonoBehaviour
 
     public void AttackCancled()
     {
-        Debug.Log("Attack Cancled");
         isAttacking = false;
         attackCancleable = false;
         state = State.Normal;
@@ -667,16 +663,6 @@ public class PlayerControler : MonoBehaviour
     }
 
     // Misc =================================
-
-    private void OnTriggerEnter(Collider other)
-    {
-        // if colliding with the farm house, bank items
-        if (other.gameObject.tag == "MainObjective")
-        {
-            GetComponent<PlayerResourceManager>().BankItems();
-        }
-    }
-
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.GetComponent<GrabbageAI>() != null)
