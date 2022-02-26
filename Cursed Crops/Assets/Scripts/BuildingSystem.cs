@@ -160,12 +160,11 @@ public class BuildingSystem : MonoBehaviour
                     buildmodeActive = true;
                     if (placeableHighlight != null)
                     {
-                        placeableHighlight.SetActive(true);
-                        if (popUp != null)
-                            popUp.SetActive(true);
-
                         if (mode == "Build")
                         {
+                            placeableHighlight.SetActive(true);
+                            if (popUp != null)
+                                popUp.SetActive(true);
                             // Set the higlight to match the prefab
                             pHSpriteRenderer.sprite = activePlaceable.preview;
                             phSprite.transform.localScale = activePlaceable.prefab.GetChild(0).GetChild(0).transform.localScale;
@@ -175,12 +174,21 @@ public class BuildingSystem : MonoBehaviour
                         }
                         else if (mode == "Plant")
                         {
+                            placeableHighlight.SetActive(true);
+                            if (popUp != null)
+                                popUp.SetActive(true);
                             // Set the higlight to match the prefab
                             pHSpriteRenderer.sprite = activeCrop.preview;
                             phSprite.transform.localScale = activeCrop.prefab.GetChild(0).GetChild(0).transform.localScale;
                             popUpMan.switchMode("Plant", count);
                             // Set hitbox to match the prefab
                             //bc.boxCol.size = activePlaceable.prefab.GetComponent<BoxCollider>().size;
+                        } else if (mode == "StatShop")
+                        {
+                            placeableHighlight.SetActive(true);
+                            ps.Stop();
+                            if (statShop != null)
+                                statShop.SetActive(true);
                         }
 
                         bc.mode = mode;
@@ -564,7 +572,7 @@ public class BuildingSystem : MonoBehaviour
         zPos -= (zPos % gridSize);
 
         // If aiming get aim direction
-        if (pc.useControler)
+        /*if (pc.useControler)
         {
             // If aim is null, remeber last aimed place
             Debug.Log(pc.getDirection());
@@ -582,7 +590,7 @@ public class BuildingSystem : MonoBehaviour
         {
             xPos += (pc.getDirection().normalized.x);
             zPos += (pc.getDirection().normalized.z);
-        }
+        }*/
 
         // align it to grid
         xPos -= (xPos % gridSize);

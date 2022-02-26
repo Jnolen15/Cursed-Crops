@@ -40,7 +40,7 @@ public class Effect : MonoBehaviour
         } else if (other.gameObject.tag == "Player")
         {
             other.gameObject.GetComponent<EnemyPlayerDamage>().Heal(damageAmmount);
-            other.gameObject.GetComponent<EnemyPlayerDamage>().ApplyEffect("DamageBoost", 6f);
+            other.gameObject.GetComponent<EnemyPlayerDamage>().ApplyEffect("DamageBoost", 3f);
         }
     }
 }

@@ -27,10 +27,18 @@ public class PlayerResourceManager : MonoBehaviour
         ps.Pause();
     }
 
+    // Banks all players items
     public void BankItems()
     {
         grm.addMoney(crops * cropsValue);
         setCrops(0);
+    }
+
+    // Banks one item
+    public void BankOneItem()
+    {
+        grm.addMoney(1 * cropsValue);
+        addCrops(-1);
     }
 
     IEnumerator MoveItems(int numCrops, Transform objective)
@@ -51,6 +59,7 @@ public class PlayerResourceManager : MonoBehaviour
                 time += Time.deltaTime;
                 yield return null;
             }
+            BankOneItem();
             Destroy(item);
         }
     }
@@ -89,7 +98,7 @@ public class PlayerResourceManager : MonoBehaviour
         if (other.gameObject.tag == "TileObjective")
         {
             StartCoroutine(MoveItems(getCrops(), other.transform));
-            BankItems();
+            //BankItems();
         }
     }
 

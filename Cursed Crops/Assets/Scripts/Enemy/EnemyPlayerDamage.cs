@@ -135,10 +135,10 @@ public class EnemyPlayerDamage : MonoBehaviour
         {
             case "DamageBoost":
                 Debug.Log("Applying DamageBoost");
-                pc.damageBoost = 1.5f;
+                pc.damageBoost += 0.5f;
                 if (damageBuffCo != null)
                     StopCoroutine(damageBuffCo);
-                damageBuffCo = StartCoroutine(cooldown(() => { Debug.Log("DamageBoost Over"); pc.damageBoost = 1f; }, length));
+                damageBuffCo = StartCoroutine(cooldown(() => { Debug.Log("DamageBoost Over"); pc.damageBoost -= 0.5f; }, length));
                 break;
         }
     }
