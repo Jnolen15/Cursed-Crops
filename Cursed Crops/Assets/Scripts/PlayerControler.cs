@@ -7,7 +7,6 @@ public class PlayerControler : MonoBehaviour
 {
     // ====================== FLOATS / INTS ======================
     [SerializeField] private float attackCDTimer = 1.5f;
-    [SerializeField] private float rollSpeedMax = 24;
     [SerializeField] private float rollSpeedFallofDelay = 0.3f;
     [SerializeField] private float rollCDTime = 0.3f;
     [SerializeField] private float rangeCDTime = 5f;
@@ -17,6 +16,7 @@ public class PlayerControler : MonoBehaviour
     public int attackChain = 0;
     private float rangeCoolDown;
     private float rollSpeed;
+    public float rollSpeedMax = 24;
     private float rollSpeedDropMultiplier;
     private float faceAimTime = 0;
     private float lungeSpeed = 8;
@@ -128,7 +128,7 @@ public class PlayerControler : MonoBehaviour
 
         // UI stuff for pausing 
         // hello - keenan
-        pauseMenu = GameObject.Find("UI Canvas").GetComponentInChildren<Pause_Manager>();
+        pauseMenu = GameObject.Find("UI Canvas").GetComponent<Pause_Manager>();
     }
 
     private void Awake()

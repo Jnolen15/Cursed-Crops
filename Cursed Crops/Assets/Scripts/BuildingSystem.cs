@@ -36,6 +36,16 @@ public class BuildingSystem : MonoBehaviour
     public float gridOffsetX = 0.5f;
     public float gridOffsetZ = 0.5f;
 
+    public int upgradeCost = 50;
+    public int healthUpgrade = 3;
+    public float damageUpgrade = 0.5f;
+    public float speedUpgrade = 1;
+    public int carryUpgrade = 10;
+    public EnemyPlayerDamage EPD;
+    
+    
+
+
     private void Start()
     {
         //placeableHighlight = this.transform.GetChild(4).gameObject;
@@ -70,6 +80,8 @@ public class BuildingSystem : MonoBehaviour
         mode = "Build";
         placeableHighlight.SetActive(false);
         Debug.Log(this.gameObject.name);
+
+        EPD = GetComponent<EnemyPlayerDamage>();
     }
 
 
@@ -218,6 +230,36 @@ public class BuildingSystem : MonoBehaviour
         {
             if (buildmodeActive)
             {
+                if (mode == "StatShop")
+                {
+                    if (grm.getMoney() >= upgradeCost)
+                    {
+                        Debug.Log("shop purchase");
+                        grm.addMoney(-upgradeCost);
+                        // individual upgrades probably should be migrated elsewhere
+                        switch (count)
+                        {
+                            case 0:
+                                EPD.playerHealth += healthUpgrade;
+                                EPD.reviveHealth += healthUpgrade;
+                                break;
+                            case 1:
+                                pc.damageBoost += damageUpgrade;
+
+                                break;
+                            case 2:
+                                pc.moveSpeed += speedUpgrade;
+                                pc.originalSpeed += speedUpgrade;
+                                pc.rollSpeedMax += speedUpgrade;
+                                break;
+                            case 3:
+                                this.GetComponent<PlayerResourceManager>().maxCrops += carryUpgrade;
+
+                                break;
+                        }
+                    }
+                }
+
                 if (placeableHighlight != null && acceptablePos)
                 {
                     if (mode == "Build")
@@ -259,7 +301,7 @@ public class BuildingSystem : MonoBehaviour
                                 grm.addBountyPoints(activeCrop, 3);
                                 break;
                         }
-                    }
+                    } 
                 }
             }
         }

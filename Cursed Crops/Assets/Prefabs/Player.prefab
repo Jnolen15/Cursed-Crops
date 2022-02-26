@@ -616,13 +616,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackCDTimer: 1.5
-  rollSpeedMax: 23
   rollSpeedFallofDelay: 0.05
   rollCDTime: 1
   rangeCDTime: 5
   faceAimTimer: 2
   attackBufferMax: 2
   attackChain: 1
+  rollSpeedMax: 23
   maxBullets: 3
   overAllPlayerDamage: 0
   moveSpeed: 6
@@ -671,6 +671,12 @@ MonoBehaviour:
   gridSize: 1
   gridOffsetX: 0.5
   gridOffsetZ: 0.5
+  upgradeCost: 50
+  healthUpgrade: 3
+  damageUpgrade: 0.5
+  speedUpgrade: 1
+  carryUpgrade: 10
+  EPD: {fileID: 0}
 --- !u!114 &7937736029672694575
 MonoBehaviour:
   m_ObjectHideFlags: 0

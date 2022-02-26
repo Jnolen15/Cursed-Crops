@@ -160,7 +160,7 @@ public class PlantingUIManager : MonoBehaviour
             closeDisplay();
         } else if (mode == "StatShop")
         {
-            closeDisplay();
+            // closeDisplay();
         } else
         {
             Debug.LogError("switchMode was not given a propper mode: " + mode);
