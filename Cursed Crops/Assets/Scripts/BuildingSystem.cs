@@ -131,12 +131,15 @@ public class BuildingSystem : MonoBehaviour
                 if (buildmodeActive)
                 {
                     //Debug.Log("CLOSING BUILD MODE FROM: " + this.gameObject.name);
+                    bc.inUpgrades = false;
                     buildmodeActive = false;
                     if (placeableHighlight != null)
                     {
                         placeableHighlight.SetActive(false);
                         if (popUp != null)
                             popUp.SetActive(false);
+                        if (statShop != null)
+                            statShop.SetActive(false);
                     }
                 }
                 else if (!buildmodeActive)
@@ -488,7 +491,9 @@ public class BuildingSystem : MonoBehaviour
             }
             else if (mode == "Unplaceable")
             {
-                pHSpriteRenderer.enabled = false;
+                //popUp.SetActive(false);
+                statShop.SetActive(false);
+                //pHSpriteRenderer.enabled = false;
                 ps.Stop();
             } else if (mode == "StatShop")
             {
@@ -585,6 +590,30 @@ public class BuildingSystem : MonoBehaviour
         } else
         {
             pHSpriteRenderer.color = Color.red;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (buildmodeActive)
+        {
+            if (other.gameObject.tag == "TileObjective")
+            {
+                bc.inUpgrades = true;
+                bc.mode = "StatShop";
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (buildmodeActive)
+        {
+            if (other.gameObject.tag == "TileObjective")
+            {
+                bc.inUpgrades = false;
+                bc.mode = "Unplaceable";
+            }
         }
     }
 }

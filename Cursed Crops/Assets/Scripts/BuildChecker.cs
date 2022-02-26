@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BuildChecker : MonoBehaviour
 {
+    public bool inUpgrades;
     public bool acceptablePos;
     public bool intersectingBuildable;
     public string mode;
@@ -20,42 +21,45 @@ public class BuildChecker : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        // Swapping mode based on location, and proximity to objective
-        if (other.gameObject.name == "InteractionDistance")
-            mode = "StatShop";
-        else if (other.gameObject.tag == "TilePlantable")
-            mode = "Plant";
-        else if (other.gameObject.tag == "TileBuildable")
-            mode = "Build";
-        else if (other.gameObject.tag == "TileUnplaceable")
-            mode = "Unplaceable";
+        if (!inUpgrades)
+        {
+            // Swapping mode based on location, and proximity to objective
+            if (other.gameObject.tag == "TileObjective")
+                mode = "Unplaceable";
+            else if (other.gameObject.tag == "TilePlantable")
+                mode = "Plant";
+            else if (other.gameObject.tag == "TileBuildable")
+                mode = "Build";
+            else if (other.gameObject.tag == "TileUnplaceable")
+                mode = "Unplaceable";
 
-        // Determining acceptable position based on mode
-        if (mode == "Build")
-        {
-            if (other.gameObject.tag == "Buildable")
+            // Determining acceptable position based on mode
+            if (mode == "Build")
             {
-                intersectingBuildable = true;
+                if (other.gameObject.tag == "Buildable")
+                {
+                    intersectingBuildable = true;
+                }
+                else if (other.gameObject.tag == "TilePlantable")
+                    acceptablePos = false;
+                else if (other.gameObject.tag == "TileBuildable")
+                    acceptablePos = true;
+                else if (other.gameObject.tag == "TileUnplaceable")
+                    acceptablePos = false;
             }
-            else if (other.gameObject.tag == "TilePlantable")
-                acceptablePos = false;
-            else if (other.gameObject.tag == "TileBuildable")
-                acceptablePos = true;
-            else if (other.gameObject.tag == "TileUnplaceable")
-                acceptablePos = false;
-        }
-        else if (mode == "Plant")
-        {
-            if (other.gameObject.tag == "Spawner")
+            else if (mode == "Plant")
             {
-                intersectingBuildable = true;
+                if (other.gameObject.tag == "Spawner")
+                {
+                    intersectingBuildable = true;
+                }
+                else if (other.gameObject.tag == "TilePlantable")
+                    acceptablePos = true;
+                else if (other.gameObject.tag == "TileBuildable")
+                    acceptablePos = false;
+                else if (other.gameObject.tag == "TileUnplaceable")
+                    acceptablePos = false;
             }
-            else if (other.gameObject.tag == "TilePlantable")
-                acceptablePos = true;
-            else if (other.gameObject.tag == "TileBuildable")
-                acceptablePos = false;
-            else if (other.gameObject.tag == "TileUnplaceable")
-                acceptablePos = false;
         }
     }
 
