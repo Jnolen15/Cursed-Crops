@@ -8,7 +8,7 @@ public class GrabbageAI : MonoBehaviour
     public GameObject trappedPlayer;
     public bool boostedHealthActivate = false;
     private bool isItHit = false;
-    private bool alreadyGrabbing = false;
+    public bool alreadyGrabbing = false;
     void Start()
     {
         
