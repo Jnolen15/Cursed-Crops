@@ -158,6 +158,9 @@ public class PlantingUIManager : MonoBehaviour
         else if (mode == "Unplaceable")
         {
             closeDisplay();
+        } else if (mode == "StatShop")
+        {
+            closeDisplay();
         } else
         {
             Debug.LogError("switchMode was not given a propper mode: " + mode);
