@@ -7,8 +7,11 @@ public class BuildingSystem : MonoBehaviour
 {
     // ================= Private variables =================
     [SerializeField] private popUpUISO popupUI;
+    [SerializeField] private statShopSO statShopUI;
     private GameObject popUp;
+    private GameObject statShop;
     private PlantingUIManager popUpMan;
+    private StatShopUIManager statShopMan;
     private GameRuleManager grm;
     private PlayerControler pc;
     private BuildChecker bc;
@@ -46,6 +49,10 @@ public class BuildingSystem : MonoBehaviour
         ps.Pause();
         popUp = Instantiate(popupUI.Prefab.gameObject,new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), 
                             transform.rotation, transform);
+        statShop = Instantiate(statShopUI.Prefab.gameObject, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z),
+                            transform.rotation, transform);
+
+        statShopMan = statShop.GetComponent<StatShopUIManager>();
         popUpMan = popUp.GetComponent<PlantingUIManager>();
         //popUp.SetActive(false); MOVED TO IN POPUP
         grm = GameObject.Find("GameRuleManager").GetComponent<GameRuleManager>();
@@ -106,6 +113,9 @@ public class BuildingSystem : MonoBehaviour
                 else if (bc.mode == "Unplaceable")
                 {
                     SwapTo("Unplaceable");
+                } else if (bc.mode == "StatShop")
+                {
+                    SwapTo("StatShop");
                 }
             }
         }
@@ -198,7 +208,7 @@ public class BuildingSystem : MonoBehaviour
         }
     }
 
-    // Instantiate Placeeable
+    // Instantiate Placeable
     public void Place_performed(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -272,15 +282,19 @@ public class BuildingSystem : MonoBehaviour
                 {
                     case 0:
                         popUpMan.selectTop();
+                        statShopMan.selectTop();
                         break;
                     case 1:
                         popUpMan.selectRight();
+                        statShopMan.selectRight();
                         break;
                     case 2:
                         popUpMan.selectBot();
+                        statShopMan.selectBot();
                         break;
                     case 3:
                         popUpMan.selectLeft();
+                        statShopMan.selectLeft();
                         break;
                 }
             }
@@ -307,18 +321,21 @@ public class BuildingSystem : MonoBehaviour
                 {
                     case 0:
                         popUpMan.selectTop();
+                        statShopMan.selectTop();
                         break;
                     case 1:
                         popUpMan.selectRight();
+                        statShopMan.selectRight();
                         break;
                     case 2:
                         popUpMan.selectBot();
+                        statShopMan.selectBot();
                         break;
                     case 3:
                         popUpMan.selectLeft();
+                        statShopMan.selectLeft();
                         break;
                 }
-
             }
         }
     }
@@ -336,6 +353,8 @@ public class BuildingSystem : MonoBehaviour
                 activePlaceable = popupUI.buildables[0];
                 activeCrop = popupUI.plantables[0];
                 AdjustRadius();
+
+                statShopMan.selectTop();
             }
         }
     }
@@ -352,6 +371,8 @@ public class BuildingSystem : MonoBehaviour
                 activePlaceable = popupUI.buildables[2];
                 activeCrop = popupUI.plantables[2];
                 AdjustRadius();
+
+                statShopMan.selectBot();
             }
         }
     }
@@ -368,6 +389,8 @@ public class BuildingSystem : MonoBehaviour
                 activePlaceable = popupUI.buildables[1];
                 activeCrop = popupUI.plantables[1];
                 AdjustRadius();
+
+                statShopMan.selectRight();
             }
         }
     }
@@ -384,6 +407,8 @@ public class BuildingSystem : MonoBehaviour
                 activePlaceable = popupUI.buildables[3];
                 activeCrop = popupUI.plantables[3];
                 AdjustRadius();
+
+                statShopMan.selectLeft();
             }
         }
     }
@@ -444,6 +469,9 @@ public class BuildingSystem : MonoBehaviour
 
             if (mode == "Build")
             {
+                statShop.SetActive(false);
+                popUp.SetActive(true);
+                pHSpriteRenderer.enabled = true;
                 pHSpriteRenderer.sprite = activePlaceable.preview;
                 phSprite.transform.localScale = activePlaceable.prefab.GetChild(0).GetChild(0).transform.localScale;
                 AdjustRadius();
@@ -451,13 +479,23 @@ public class BuildingSystem : MonoBehaviour
             }
             else if (mode == "Plant")
             {
+                statShop.SetActive(false);
+                popUp.SetActive(true);
+                pHSpriteRenderer.enabled = true;
                 pHSpriteRenderer.sprite = activeCrop.preview;
                 phSprite.transform.localScale = activeCrop.prefab.GetChild(0).GetChild(0).transform.localScale;
                 ps.Stop();
             }
             else if (mode == "Unplaceable")
             {
+                pHSpriteRenderer.enabled = false;
                 ps.Stop();
+            } else if (mode == "StatShop")
+            {
+                popUp.SetActive(false);
+                statShop.SetActive(true);
+                ps.Stop();
+                pHSpriteRenderer.enabled = false;
             }
 
             //bc.mode = mode;

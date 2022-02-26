@@ -20,8 +20,10 @@ public class BuildChecker : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        // Swapping mode based on location
-        if (other.gameObject.tag == "TilePlantable")
+        // Swapping mode based on location, and proximity to objective
+        if (other.gameObject.name == "InteractionDistance")
+            mode = "StatShop";
+        else if (other.gameObject.tag == "TilePlantable")
             mode = "Plant";
         else if (other.gameObject.tag == "TileBuildable")
             mode = "Build";
