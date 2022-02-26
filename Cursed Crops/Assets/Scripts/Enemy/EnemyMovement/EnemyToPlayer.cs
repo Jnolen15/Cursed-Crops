@@ -21,8 +21,11 @@ public class EnemyToPlayer : MonoBehaviour
     int targetIndex = 0;
     private bool playerinbound = true;
     PathFinding pathFinder;
-    Transform closestPlayer;
+    public Transform closestPlayer;
     public Transform oldTarget;
+    private float healingTickSpeed = 1f;
+    private float healingTimer = 5f;
+    public bool angered = false;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +42,8 @@ public class EnemyToPlayer : MonoBehaviour
         //Transform closestPlayer = FindClosestPlayer(listOfPlayers);
         //pathFinder.StartFindPath(transform.position, closestPlayer.position);
         //PathRequestManager.RequestPath(transform.position, closestPlayer.position, OnPathFound);
-        oldTarget = mainTarget;
+        closestPlayer = FindClosestPlayer(listOfPlayers);
+        oldTarget = closestPlayer;
         StartCoroutine("UpdatePath");
 
 
@@ -52,7 +56,7 @@ public class EnemyToPlayer : MonoBehaviour
         {
             yield return new WaitForSeconds(.3f);
         }
-        closestPlayer = FindClosestPlayer(listOfPlayers);
+        
         PathRequestManager.RequestPath(new PathRequest(transform.position, closestPlayer.position, OnPathFound));
 
         float sqrMoveThreshhold = pathUpdateMoveThreshhold * pathUpdateMoveThreshhold;
@@ -72,13 +76,13 @@ public class EnemyToPlayer : MonoBehaviour
     {
         // new multiplayer chase code
         
-        closestPlayer = FindClosestPlayer(listOfPlayers);
-        if (oldTarget != closestPlayer && oldTarget != null && closestPlayer != null)
-        {
+        //closestPlayer = FindClosestPlayer(listOfPlayers);
+        //if (oldTarget != closestPlayer && oldTarget != null && closestPlayer != null)
+        //{
             
-            oldTarget = closestPlayer;
-            StartCoroutine("UpdatePath");
-        }
+         //   oldTarget = closestPlayer;
+         //   StartCoroutine("UpdatePath");
+        //}
         if(!gameObject.activeInHierarchy)
         {
             
@@ -94,8 +98,28 @@ public class EnemyToPlayer : MonoBehaviour
         else
         {
             enemySpeed = originalSpeed;
+            
         }
-
+        if (closestPlayer != mainTarget)
+        {
+            if (healingTimer <= 0)
+            {
+                if (!angered)
+                {
+                    closestPlayer = mainTarget;
+                }
+                healingTimer = healingTickSpeed;
+            }
+            else
+            {
+                healingTimer -= Time.deltaTime;
+            }
+        }
+        else
+        {
+            healingTimer = healingTickSpeed;
+        }
+        
         //PathRequestManager.RequestPath(this.transform.position, closestPlayer.position, OnPathFound);
         /*if (targetChange)
         {
@@ -131,22 +155,27 @@ public class EnemyToPlayer : MonoBehaviour
             //damage += playerDamage.overAllPlayerDamage;
             //higherDamage = playerDamage.overAllPlayerDamage;
 
-            
-            if (playerDamage.overAllPlayerDamage > higherDamage && !playerStun.playerIsStun)
-            {
-                higherDamage = playerDamage.overAllPlayerDamage;
-                bestTarget = potentialTarget;
-                //Debug.Log(potentialTarget + "Has the highest amount of damage = " + higherDamage);
-            }
-           
             Vector3 directionToTarget = potentialTarget.position - currentPosition;
+            Vector3 directionToMain = mainTarget.position - currentPosition;
+            float distanceToMain = directionToMain.sqrMagnitude;
             float dSqrToTarget = directionToTarget.sqrMagnitude;
-            if (dSqrToTarget < closestDistanceSqr && !playerStun.playerIsStun && higherDamage == 0)
-            {
+            if(distanceToMain > dSqrToTarget) {
+                if (playerDamage.overAllPlayerDamage > higherDamage && !playerStun.playerIsStun)
+                {
+                    higherDamage = playerDamage.overAllPlayerDamage;
+                    bestTarget = potentialTarget;
+                    //Debug.Log(potentialTarget + "Has the highest amount of damage = " + higherDamage);
+                }
 
-                closestDistanceSqr = dSqrToTarget;
-                bestTarget = potentialTarget;
+
+                if (dSqrToTarget < closestDistanceSqr && !playerStun.playerIsStun && higherDamage == 0)
+                {
+
+                    closestDistanceSqr = dSqrToTarget;
+                    bestTarget = potentialTarget;
+                }
             }
+            
            
 
         }

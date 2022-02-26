@@ -9,6 +9,8 @@ public class ScarrotAttack : MonoBehaviour
     Vector3 attackPosition;
     Vector3 enemyPosition;
     Vector3 newPosition;
+    public float aoeCoolDown = 9f;
+    public float straightAttackCoolDown = 1f;
     public bool attacking = false;
     public int damage = 5;
     private bool getPosition = false;
@@ -29,7 +31,7 @@ public class ScarrotAttack : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         
         if(gameObject.GetComponent<EnemyControler>().health <= 0)
@@ -127,7 +129,7 @@ public class ScarrotAttack : MonoBehaviour
                 attacking = true;
                 //gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
             }
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(straightAttackCoolDown);
             getPosition = false;
             windupStarting = false;
             attacking = false;
@@ -147,7 +149,7 @@ public class ScarrotAttack : MonoBehaviour
             AOE.SetActive(true);
             attacking = true;
             //gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(aoeCoolDown);
             AOE.SetActive(false);
             windupStarting = false;
             attacking = false;

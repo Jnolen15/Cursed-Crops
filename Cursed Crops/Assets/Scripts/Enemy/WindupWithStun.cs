@@ -12,6 +12,7 @@ public class WindupWithStun : MonoBehaviour
     Vector3 direction;
     Vector3 knocknewPosition;
     public bool attacking = false;
+    public float stunTimer = 1f;
     private bool inPosition = false; 
     bool getPosition = false;
     bool windupStarting = false;
@@ -44,7 +45,7 @@ public class WindupWithStun : MonoBehaviour
             sr.color = Color.blue;
         }
         
-        targetToAttack = gameObject.GetComponent<EnemyToPlayer>().oldTarget;
+        targetToAttack = gameObject.GetComponent<EnemyToPlayer>().closestPlayer;
         if (targetToAttack != null && gameObject.GetComponent<EnemyControler>().finalHit && targetToAttack.GetComponent<EnemyDamageObjective>() == null)
         {
             //targetToAttack.GetComponent<PlayerControler>().finalHit = false;
@@ -173,7 +174,7 @@ public class WindupWithStun : MonoBehaviour
         Debug.Log("getting stun");
         sr.color = Color.blue;
         hurtBox.enabled = false;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(stunTimer);
         sr.color = prev;
         gameObject.GetComponent<EnemyControler>().takingDamage = false;
         stunned = false;

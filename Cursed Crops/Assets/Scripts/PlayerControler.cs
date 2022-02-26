@@ -574,6 +574,12 @@ public class PlayerControler : MonoBehaviour
 
             if (c.gameObject.tag == "Enemy" || c.gameObject.name == "cornnonBullet(Clone)")
             {
+                if(c.gameObject.tag == "Enemy")
+                {
+                    Debug.Log("are we hitting enemy");
+                    c.GetComponent<EnemyToPlayer>().angered = true;
+                    c.GetComponent<EnemyToPlayer>().closestPlayer = this.gameObject.transform;
+                }
                 if (!trapped)
                 {
                     if (attackChain == 1)
