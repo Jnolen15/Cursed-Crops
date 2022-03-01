@@ -12,7 +12,7 @@ public class SpawnMediBerries : MonoBehaviour
 
     void Start()
     {
-        mainTarget = GameObject.FindGameObjectWithTag("randomLocal").GetComponent<Transform>();
+        mainTarget = GameObject.FindGameObjectWithTag("MainObjective").GetComponent<Transform>();
         for (int i = 0; i < 2; i++)
         {
             Vector3 newPos = new Vector3(Random.Range(-5, 5), 0f, Random.Range(-5, 5));
