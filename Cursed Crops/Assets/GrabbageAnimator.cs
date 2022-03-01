@@ -11,7 +11,7 @@ public class GrabbageAnimator : MonoBehaviour
     private Animator animator;
     private GrabbageAI gAI;
     private GrabbageWindup gW;
-    private EnemyToPlayer eTP;
+    private GrabbageToPlayers gTP;
     public bool spawning = true;
 
     // Start is called before the first frame update
@@ -20,22 +20,22 @@ public class GrabbageAnimator : MonoBehaviour
         animator = this.GetComponent<Animator>();
         gAI = this.GetComponentInParent<GrabbageAI>();
         gW = this.GetComponentInParent<GrabbageWindup>();
-        eTP = this.GetComponentInParent<EnemyToPlayer>();
+        gTP = this.GetComponentInParent<GrabbageToPlayers>();
     }
 
     // Update is called once per frame
     void Update()
     {
         // Don't move if spawnning
-        if (spawning) eTP.enemySpeed = 0;
+        if (spawning) gTP.enemySpeed = 0;
         else
         {
-            eTP.enemySpeed = eTP.originalSpeed;
+            gTP.enemySpeed = gTP.originalSpeed;
             animator.SetBool("Spawning", false);
         }
 
         // Update speed
-        animator.SetFloat("Speed", eTP.enemySpeed);
+        animator.SetFloat("Speed", gTP.enemySpeed);
 
         // Update Grab
         animator.SetBool("Grab", gW.windupStarting);

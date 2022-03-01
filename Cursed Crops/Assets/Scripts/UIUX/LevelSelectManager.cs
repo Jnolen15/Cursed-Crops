@@ -8,7 +8,7 @@ public class LevelSelectManager : MonoBehaviour
     public GameObject Shop;
     public void loadLevel()
     {
-        SceneManager.LoadScene("TestingScene");
+        SceneManager.LoadScene("Level1");
     }
 
     public void exitToMenu()

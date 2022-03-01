@@ -131,6 +131,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 600c80279bc1acb47a158ebde1630320, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aoeCoolDown: 9
+  straightAttackCoolDown: 1
   attacking: 0
   damage: 5
 --- !u!114 &4368505918465106234
@@ -145,8 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53e39136d6a346043a74eab9e17b7dfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 60
-  maxHealth: 10
+  health: 50
+  maxHealth: 50
   overalldamage: 0
   takingDamage: 0
   finalHit: 0
@@ -171,7 +173,9 @@ MonoBehaviour:
   listOfPlayers:
   - {fileID: 0}
   aPlayerIsStun: 1
+  closestPlayer: {fileID: 0}
   oldTarget: {fileID: 0}
+  angered: 0
 --- !u!114 &26968422484778969
 MonoBehaviour:
   m_ObjectHideFlags: 0
