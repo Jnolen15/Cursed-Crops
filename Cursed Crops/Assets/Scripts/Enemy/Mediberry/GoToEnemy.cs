@@ -77,7 +77,7 @@ public class GoToEnemy : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Debug.Log(gettingBack);
+        //Might use this to make mediberries go to random locations if there are no targets
         //if (Timer <= 0)
         //{
         //randomPosition = new Vector3(Random.Range(-minx, minx), 0f, Random.Range(-minz, minz));
