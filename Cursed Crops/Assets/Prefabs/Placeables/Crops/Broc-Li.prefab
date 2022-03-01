@@ -19,7 +19,6 @@ GameObject:
   - component: {fileID: 7112471364830644533}
   - component: {fileID: 7651235649728744379}
   - component: {fileID: 586873464265961450}
-  - component: {fileID: 5756246893584754496}
   m_Layer: 8
   m_Name: Broc-Li
   m_TagString: Enemy
@@ -140,7 +139,9 @@ MonoBehaviour:
   mainTarget: {fileID: 0}
   listOfPlayers: []
   aPlayerIsStun: 1
+  closestPlayer: {fileID: 0}
   oldTarget: {fileID: 0}
+  angered: 0
 --- !u!114 &9070015767811128390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,19 +218,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attacking: 0
+  stunTimer: 1
   stunned: 0
---- !u!114 &5756246893584754496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2712685162276701537}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d174630b208d36845ab6f49fc1e3449c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8792504114044172691
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,6 +232,7 @@ GameObject:
   - component: {fileID: 8792504114044172693}
   - component: {fileID: 1549731887525732592}
   - component: {fileID: 8169928830207483889}
+  - component: {fileID: 148127062543137741}
   m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
@@ -344,6 +335,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc7a80e2f6eb782438832b241e87356e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &148127062543137741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8792504114044172691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d174630b208d36845ab6f49fc1e3449c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8884303704669322249

@@ -15,9 +15,9 @@ public class BrocLiAnimation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = this.transform.GetChild(0).GetComponent<Animator>();
-        etp = this.gameObject.GetComponent<EnemyToPlayer>();
-        wus = this.gameObject.GetComponent<WindupWithStun>();
+        animator = this.gameObject.GetComponent<Animator>();
+        etp = this.gameObject.GetComponentInParent<EnemyToPlayer>();
+        wus = this.gameObject.GetComponentInParent<WindupWithStun>();
     }
 
     // Update is called once per frame
