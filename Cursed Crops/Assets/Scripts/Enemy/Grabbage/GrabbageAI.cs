@@ -43,8 +43,8 @@ public class GrabbageAI : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && gameObject.GetComponent<EnemyControler>().health > 0)
         {
-            gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
-            gameObject.GetComponent<EnemyToPlayer>().originalSpeed = 0;
+            gameObject.GetComponent<GrabbageToPlayers>().enemySpeed = 0;
+            gameObject.GetComponent<GrabbageToPlayers>().originalSpeed = 0;
             gameObject.transform.position = other.gameObject.transform.position + new Vector3(0, 0, -0.1f);
 
             if (!alreadyGrabbing)

@@ -573,8 +573,11 @@ public class PlayerControler : MonoBehaviour
                 if(c.gameObject.tag == "Enemy")
                 {
                     Debug.Log("are we hitting enemy");
-                    c.GetComponent<EnemyToPlayer>().angered = true;
-                    c.GetComponent<EnemyToPlayer>().closestPlayer = this.gameObject.transform;
+                    if (c.gameObject.GetComponent<GrabbageAI>() == null)
+                    {
+                        c.GetComponent<EnemyToPlayer>().angered = true;
+                        c.GetComponent<EnemyToPlayer>().closestPlayer = this.gameObject.transform;
+                    }
                 }
                 if (!trapped)
                 {

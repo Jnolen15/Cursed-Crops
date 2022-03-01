@@ -144,10 +144,10 @@ GameObject:
   - component: {fileID: 3977750953881662884}
   - component: {fileID: 19981459668589556}
   - component: {fileID: 6204482254679519647}
-  - component: {fileID: 6204482254679519654}
   - component: {fileID: 6204482254679519640}
   - component: {fileID: 1570388941770891586}
   - component: {fileID: -4761403952918759239}
+  - component: {fileID: 5083308053018514194}
   m_Layer: 8
   m_Name: Grabbage
   m_TagString: Enemy
@@ -267,27 +267,6 @@ MonoBehaviour:
   finalHit: 0
   lastDamageType: 
   healing: 0
---- !u!114 &6204482254679519654
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6204482254679519646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d3b7484e685f1646a5e19619ee09da7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemySpeed: 3
-  originalSpeed: 3
-  Player: {fileID: 0}
-  mainTarget: {fileID: 0}
-  listOfPlayers: []
-  aPlayerIsStun: 1
-  closestPlayer: {fileID: 0}
-  oldTarget: {fileID: 0}
-  angered: 0
 --- !u!114 &6204482254679519640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,3 +314,24 @@ MonoBehaviour:
   numDrops: 6
   randomOffsetX: 1
   randomOffsetZ: 1
+--- !u!114 &5083308053018514194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6204482254679519646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e11e83e9f93685468ee1aa3c14c88fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemySpeed: 1
+  originalSpeed: 1
+  Player: {fileID: 0}
+  mainTarget: {fileID: 0}
+  listOfPlayers: []
+  aPlayerIsStun: 1
+  closestPlayer: {fileID: 0}
+  oldTarget: {fileID: 0}
+  angered: 0

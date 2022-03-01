@@ -41,8 +41,7 @@ public class GoToEnemy : MonoBehaviour
         
         //randomPosition = new Vector3(Random.Range(-plane.position.x, plane.position.x), 0f, Random.Range(-plane.position.z, plane.position.z));
 
-        mainTarget = GameObject.FindGameObjectWithTag("randomLocal").GetComponent<Transform>();
-        mainTarget.position = randomPosition;
+        mainTarget = GameObject.FindGameObjectWithTag("MainObjective").GetComponent<Transform>();
         //Transform closestPlayer = FindClosestPlayer(listOfPlayers);
         //pathFinder.StartFindPath(transform.position, closestPlayer.position);
         //PathRequestManager.RequestPath(transform.position, closestPlayer.position, OnPathFound);

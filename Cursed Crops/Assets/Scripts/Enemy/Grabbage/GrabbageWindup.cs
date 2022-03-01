@@ -33,7 +33,7 @@ public class GrabbageWindup : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        targetToAttack = gameObject.GetComponent<EnemyToPlayer>().oldTarget;
+        targetToAttack = gameObject.GetComponent<GrabbageToPlayers>().closestPlayer;
         //direction = new Vector3(targetToAttack.position.x - transform.position.x, 0, targetToAttack.position.z - transform.position.z);
         if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) <= 6f)
         {
@@ -56,7 +56,7 @@ public class GrabbageWindup : MonoBehaviour
             }
             //attacking = true;
 
-            gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
+            gameObject.GetComponent<GrabbageToPlayers>().enemySpeed = 0;
             if (!attacking)
             {
 
@@ -78,7 +78,7 @@ public class GrabbageWindup : MonoBehaviour
             //StopCoroutine("attack");
 
 
-            gameObject.GetComponent<EnemyToPlayer>().enemySpeed = gameObject.GetComponent<EnemyToPlayer>().originalSpeed;
+            gameObject.GetComponent<GrabbageToPlayers>().enemySpeed = gameObject.GetComponent<GrabbageToPlayers>().originalSpeed;
             if (!gameObject.GetComponent<EnemyControler>().takingDamage)
             {
                 sr.color = prev;
@@ -87,7 +87,7 @@ public class GrabbageWindup : MonoBehaviour
         }
         else if (attacking)
         {
-            gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
+            gameObject.GetComponent<GrabbageToPlayers>().enemySpeed = 0;
         }
 
 
@@ -106,7 +106,7 @@ public class GrabbageWindup : MonoBehaviour
 
             //sr.color = Color.green;
             //1 0.92 0.016 1
-            transform.position = Vector3.MoveTowards(transform.position, newPosition, (gameObject.GetComponent<EnemyToPlayer>().originalSpeed * 20) * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, newPosition, (gameObject.GetComponent<GrabbageToPlayers>().originalSpeed * 20) * Time.deltaTime);
 
             attacking = true;
             //gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
