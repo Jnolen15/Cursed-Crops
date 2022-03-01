@@ -97,7 +97,7 @@ public class EnemyToPlayer : MonoBehaviour
         }
         else
         {
-            enemySpeed = originalSpeed;
+            //enemySpeed = originalSpeed;
             
         }
         if (closestPlayer != mainTarget)
@@ -268,6 +268,7 @@ public class EnemyToPlayer : MonoBehaviour
         //gameObject.GetComponent<Renderer>().material.color = Color.red;
         yield return new WaitForSeconds(0.5f);
         //gameObject.GetComponent<Renderer>().material.color = prev;
+        enemySpeed = originalSpeed;
         gameObject.GetComponent<EnemyControler>().takingDamage = false;
     }
 

@@ -12,7 +12,7 @@ public class GrabbageWindup : MonoBehaviour
     Vector3 direction;
     public bool attacking = false;
     bool getPosition = false;
-    bool windupStarting = false;
+    public bool windupStarting = false;
     Rigidbody childRB;
     private SpriteRenderer sr;
     Transform targetToAttack;
@@ -97,14 +97,14 @@ public class GrabbageWindup : MonoBehaviour
     IEnumerator attack()
     {
 
-        sr.color = Color.yellow;
+        //sr.color = Color.yellow;
         //childRB.MovePosition(transform.position + direction.normalized);
         if (transform.position != newPosition)
         {
             yield return new WaitForSeconds(0.45f);
 
 
-            sr.color = Color.green;
+            //sr.color = Color.green;
             //1 0.92 0.016 1
             transform.position = Vector3.MoveTowards(transform.position, newPosition, (gameObject.GetComponent<EnemyToPlayer>().originalSpeed * 20) * Time.deltaTime);
 

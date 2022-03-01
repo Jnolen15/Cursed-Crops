@@ -46,7 +46,7 @@ public class SpriteLeaner : MonoBehaviour
                 Transform spTrans = spriteObj.GetComponent<Transform>();
 
                 // change sprite renderer's sorting order based on z position
-                spRend.sortingOrder = -(int)spTrans.position.z;
+                spRend.sortingOrder = -(int)(spTrans.position.z * 10);
             }
         }
     }

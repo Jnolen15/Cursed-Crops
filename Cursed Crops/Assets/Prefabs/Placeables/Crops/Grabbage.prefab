@@ -10,9 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 300978182042483418}
   - component: {fileID: 6710079399861644140}
+  - component: {fileID: 6765123530663312288}
+  - component: {fileID: 2246178921739066707}
   - component: {fileID: 8301205142986332053}
   m_Layer: 8
-  m_Name: Square
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2064029146543189804}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children: []
   m_Father: {fileID: 6204482254679519643}
   m_RootOrder: 0
@@ -72,7 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 70c3393bb4d216f4987f1cf97e8f5291, type: 3}
+  m_Sprite: {fileID: -5308324453560568106, guid: 2413c9f91b33d664a8c560b92ad81fba,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -83,6 +86,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &6765123530663312288
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064029146543189804}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 505be72d7214c9743b6726b42cbc7087, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2246178921739066707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064029146543189804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89f0e3bf4482aca4fa2d092e517c0421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawning: 1
 --- !u!114 &8301205142986332053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,7 +142,7 @@ GameObject:
   - component: {fileID: 6204482254679519642}
   - component: {fileID: 6204482254679519645}
   - component: {fileID: 3977750953881662884}
-  - component: {fileID: 6204482254679519644}
+  - component: {fileID: 19981459668589556}
   - component: {fileID: 6204482254679519647}
   - component: {fileID: 6204482254679519654}
   - component: {fileID: 6204482254679519640}
@@ -128,8 +163,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6204482254679519646}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.646696, y: 1, z: -18.522982}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 300978182042483418}
   m_Father: {fileID: 0}
@@ -200,19 +235,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &6204482254679519644
-CapsuleCollider:
+--- !u!135 &19981459668589556
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6204482254679519646}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
+  serializedVersion: 2
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6204482254679519647
 MonoBehaviour:
@@ -251,7 +285,9 @@ MonoBehaviour:
   mainTarget: {fileID: 0}
   listOfPlayers: []
   aPlayerIsStun: 1
+  closestPlayer: {fileID: 0}
   oldTarget: {fileID: 0}
+  angered: 0
 --- !u!114 &6204482254679519640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,6 +302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trappedPlayer: {fileID: 0}
   boostedHealthActivate: 0
+  alreadyGrabbing: 0
 --- !u!114 &1570388941770891586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,6 +316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attacking: 0
+  windupStarting: 0
 --- !u!114 &-4761403952918759239
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -196,7 +196,7 @@ public class PlayerControler : MonoBehaviour
 
 
         // Move into the SpriteLeaner script! Placeholder for now
-        playerSprite.sortingOrder = -(int)this.transform.position.z;
+        //playerSprite.sortingOrder = -(int)this.transform.position.z;
     }
 
     // Called every fixed frame-rate frame. Better for physics stuff
