@@ -574,7 +574,7 @@ public class PlayerControler : MonoBehaviour
                 {
                     Debug.Log("are we hitting enemy");
                     //Exceptions for the grabbage, mediberry, and cornnon since their aggro is different than the regualr enemies
-                    if (c.gameObject.GetComponent<GrabbageAI>() == null && c.gameObject.GetComponent<GoToEnemy>() == null && c.gameObject.GetComponent<CornnonAI>() == null)
+                    if (c.gameObject.GetComponent<EnemyToPlayer>() != null)
                     {
                         c.GetComponent<EnemyToPlayer>().angered = true;
                         c.GetComponent<EnemyToPlayer>().closestPlayer = this.gameObject.transform;

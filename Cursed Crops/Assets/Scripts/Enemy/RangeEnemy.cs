@@ -4,30 +4,32 @@ using UnityEngine;
 
 public class RangeEnemy : MonoBehaviour
 {
-    const float minPathupdateTime = .2f;
-    const float pathUpdateMoveThreshhold = .5f;
-    //Setting up changable variables for enemies speeds
+    // ================= Public variables =================
+    public Transform Player;
+    public Transform mainTarget;
+    public Transform[] listOfPlayers;
+    public GameObject bullet;
     public float enemySpeed = 1f;
     public float originalSpeed = 1f;
     public float rangeDistance = 10f;
     public bool gotHit = false;
-    public Transform Player;
-    public Transform mainTarget;
-    Rigidbody rb;
-    private bool targetChange = false;
-    public Transform[] listOfPlayers;
     public bool aPlayerIsStun = true;
-    Vector3[] path;
-    int targetIndex = 0;
-    bool shooting = false;
-    Transform closestPlayer;
-    Transform oldTarget;
-    //all stuff for the range enemies
-    public GameObject bullet;
-    Color prev;
-    private Vector3 direction;
+    public bool shooting = false;
+    public bool onCooldown = false;
+    public bool stunned = false;
 
-    // Start is called before the first frame update
+    // ================= Private variables =================
+    private Transform closestPlayer;
+    private Transform oldTarget;
+    private Rigidbody rb;
+    private Vector3[] path;
+    private Vector3 direction;
+    private const float minPathupdateTime = .2f;
+    private const float pathUpdateMoveThreshhold = .5f;
+    private int targetIndex = 0;
+    private bool targetChange = false;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -37,19 +39,14 @@ public class RangeEnemy : MonoBehaviour
         for (int i = 0; i < listOfPlayers.Length; ++i)
             listOfPlayers[i] = players[i].transform;
 
-        prev = gameObject.GetComponent<Renderer>().material.color;
-
         mainTarget = GameObject.FindGameObjectWithTag("MainObjective").GetComponent<Transform>();
         //Transform closestPlayer = FindClosestPlayer(listOfPlayers);
         //pathFinder.StartFindPath(transform.position, closestPlayer.position);
         //PathRequestManager.RequestPath(transform.position, closestPlayer.position, OnPathFound);
         oldTarget = mainTarget;
         StartCoroutine("UpdatePath");
-
-
     }
 
-    // Update is called once per frame
     IEnumerator UpdatePath()
     {
         if (Time.timeSinceLevelLoad < .3f)
@@ -72,55 +69,46 @@ public class RangeEnemy : MonoBehaviour
             }
         }
     }
+
     void FixedUpdate()
     {
         // new multiplayer chase code
-
         Transform closestPlayer = FindClosestPlayer(listOfPlayers);
-
-
-        closestPlayer = FindClosestPlayer(listOfPlayers);
         if (oldTarget != closestPlayer && oldTarget != null && closestPlayer != null)
         {
-
             oldTarget = closestPlayer;
             StartCoroutine("UpdatePath");
         }
         if (!gameObject.activeInHierarchy)
         {
-
             StopAllCoroutines();
             //Destroy(gameObject);
         }
-        if (Vector3.Distance(closestPlayer.position, transform.position) < rangeDistance)
+
+        if (gameObject.GetComponent<EnemyControler>().takingDamage && !stunned)
         {
-            
-            
+            Debug.Log("HERE FOR SOME REASON");
+            stunned = true;
+            shooting = false;
+            StopCoroutine("shoot");
+            StartCoroutine("stun");
+        }
+        else if (Vector3.Distance(closestPlayer.position, transform.position) < rangeDistance)
+        {
             enemySpeed = 0;
             
-            
-            if (!shooting && gameObject.GetComponent<EnemyControler>().takingDamage)
-            {
-                shooting = true;
-                StopCoroutine("shoot");
-                //StopAllCoroutines();
-                StartCoroutine("stun");
-            }
-            else if (!shooting && !gameObject.GetComponent<EnemyControler>().takingDamage)
+            if (!shooting && !onCooldown && !gameObject.GetComponent<EnemyControler>().takingDamage)
             {
                 shooting = true;
                 direction = new Vector3(closestPlayer.position.x - transform.position.x, 0, closestPlayer.position.z - transform.position.z);
-                StopCoroutine("shoot");
-                StartCoroutine("shoot");
+                //StopCoroutine("shoot");
+                //StartCoroutine("shoot");
             }
         }
         else
         {
-            gameObject.GetComponent<Renderer>().material.color = prev;
             enemySpeed = originalSpeed;
         }
-
-
     }
 
     Transform FindClosestPlayer(Transform[] players)
@@ -146,14 +134,10 @@ public class RangeEnemy : MonoBehaviour
             float dSqrToTarget = directionToTarget.sqrMagnitude;
             if (dSqrToTarget < closestDistanceSqr && !playerStun.playerIsStun && higherDamage == 0)
             {
-
                 closestDistanceSqr = dSqrToTarget;
                 bestTarget = potentialTarget;
             }
-
-
         }
-
         return bestTarget;
     }
 
@@ -162,7 +146,6 @@ public class RangeEnemy : MonoBehaviour
         if (other.gameObject.tag == "MainObjective")
         {
             targetChange = true;
-
         }
     }
 
@@ -185,17 +168,12 @@ public class RangeEnemy : MonoBehaviour
                         StopCoroutine("FollowPath");
                     }
                 }
-
             }
-
         }
     }
 
-
-
     IEnumerator FollowPath()
     {
-
         Vector3 currentWaypoint = path[0];
         targetIndex = 0;
         //print(lengthOfCurrent);
@@ -212,9 +190,7 @@ public class RangeEnemy : MonoBehaviour
 
                 currentWaypoint = path[targetIndex];
             }
-
             //print(currentWaypoint);
-
             //transform.position = new Vector3(transform.position.x, 0, transform.position.z);
             //Debug.Log("currentWaypoint y = " + currentWaypoint.y);
             currentWaypoint.y = 1;
@@ -226,42 +202,33 @@ public class RangeEnemy : MonoBehaviour
         }
     }
 
-   /* private void OnTriggerEnter(Collider melee)
+    public IEnumerator shoot()
     {
-        if(melee.gameObject.name == "MeleeAttackLeft" || melee.gameObject.name == "MeleeAttackRight")
-        {
-            Debug.Log("We hit the range enemy");
-            gotHit = true;
-            StopCoroutine("shoot");
-            StartCoroutine("stun");
-        }
-    }
-   */
-
-    IEnumerator shoot()
-    {
-        gameObject.GetComponent<Renderer>().material.color = Color.yellow;
-        yield return new WaitForSeconds(0.65f);
-        gameObject.GetComponent<Renderer>().material.color = Color.green;
+        // Create bullet and send bullet in correct direction
+        Debug.Log("Start of shoot");
         GameObject bul = Instantiate(bullet, transform.position, transform.rotation);
-        // Send bullet in correct direction
-        //Debug.Log(direction);
         bul.GetComponent<Bullet>().movement = direction.normalized;
-        //enemySpeed = 0f;
-        yield return new WaitForSeconds(1.5f);
-        //enemySpeed = originalSpeed;
-        gameObject.GetComponent<Renderer>().material.color = prev;
+        onCooldown = true;
         shooting = false;
-        
+        yield return new WaitForSeconds(3f);
+        onCooldown = false;
+        Debug.Log("End of shoot");
+
     }
+
+    /*public void Shoot()
+    {
+        shooting = false;
+        GameObject bul = Instantiate(bullet, transform.position, transform.rotation);
+        bul.GetComponent<Bullet>().movement = direction.normalized;
+    }*/
 
     IEnumerator stun()
     {
-        Debug.Log("getting stun");
-        gameObject.GetComponent<Renderer>().material.color = Color.red;
+        Debug.Log("getting stunned");
         yield return new WaitForSeconds(2f);
-        gameObject.GetComponent<Renderer>().material.color = prev;
         gameObject.GetComponent<EnemyControler>().takingDamage = false;
-        shooting = false;
+        stunned = false;
+        onCooldown = false;
     }
 }
