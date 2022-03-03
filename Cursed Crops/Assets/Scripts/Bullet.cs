@@ -55,11 +55,11 @@ public class Bullet : MonoBehaviour
         {
             if (other.gameObject.tag == "Player")
             {
-                other.gameObject.GetComponent<EnemyPlayerDamage>().playerHealth -= 5;
+                other.gameObject.GetComponent<EnemyPlayerDamage>().playerHealth -= damage;
             }
             else if (other.gameObject.tag == "MainObjective")
             {
-                other.gameObject.GetComponent<EnemyDamageObjective>().houseHealth -= 5;
+                other.gameObject.GetComponent<EnemyDamageObjective>().houseHealth -= damage;
             }
         }
 

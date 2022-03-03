@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class CornonAnimation : MonoBehaviour
 {
-    // ================= Public variables =================
-
-
     // ================= Private variables =================
     private Animator animator;
     private CornnonAI cAI;

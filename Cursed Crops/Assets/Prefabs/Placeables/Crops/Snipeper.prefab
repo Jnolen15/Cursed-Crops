@@ -143,8 +143,9 @@ GameObject:
   - component: {fileID: 5129678590246215462}
   - component: {fileID: 1407906931296444075}
   - component: {fileID: 5129678590246215481}
+  - component: {fileID: -387172879309044768}
   m_Layer: 8
-  m_Name: Chili
+  m_Name: Snipeper
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -229,7 +230,8 @@ MonoBehaviour:
   Player: {fileID: 0}
   mainTarget: {fileID: 0}
   listOfPlayers: []
-  bullet: {fileID: 6242655706651345086, guid: 70a3a66aca4c3a2458f178a6130a3f72, type: 3}
+  bullet: {fileID: 5846687359131448374, guid: 8620f24297af12542a7b556a7752b70f, type: 3}
+  direction: {x: 0, y: 0, z: 0}
   enemySpeed: 3
   originalSpeed: 3
   rangeDistance: 10
@@ -237,3 +239,21 @@ MonoBehaviour:
   aPlayerIsStun: 1
   shooting: 0
   onCooldown: 0
+  stunned: 0
+--- !u!114 &-387172879309044768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5129678590246215480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 330c40f98388d5948b75589805642ec3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropItemPrefab: {fileID: 0}
+  spawnChance: 4
+  numDrops: 1
+  randomOffsetX: 0
+  randomOffsetZ: 0

@@ -12,6 +12,7 @@ public class SpawnManager : MonoBehaviour
     public float pauseDuration = 10f;       // Duration of each short pause between waves in seconds
     public int wavesPerPhase = 4;           // The # of waves in each phase. Make sure the time values add up correctly
     public int spawnersPerPhase = 4;        // Number of spawners created before each phase
+    public int scaleAmmount = 1;            // How many more spawners are created each wave
 
     public float elapsedTime;               // Time since level started
     public string currentPhase = "Pre";     // Stars in Pre then goes to Morning, Afternoon and Night
@@ -20,9 +21,8 @@ public class SpawnManager : MonoBehaviour
     public GameObject harvestStartFlag;     // Some object that, when each player interacts with it, begins the harvest.
     private GameObject harvestFlag;
     public GameObject placementChecker;     // A prefab used to check if a location is suitable for a crop spawn
-    public GameObject morningBasicEnemy;    // The basic enemy to spawn in Morning phase
-    public GameObject afternoonBasicEnemy;  // The basic enemy to spawn in Afternoon phase
-    public GameObject nightBasicEnemy;      // The basic enemy to spawn in Night phase
+    public GameObject meleeEnemy;           // The basic melee enemy to spawn
+    public GameObject rangeEnemy;           // The basic range enemy to spawn
 
     public float bounds = 18f;
 
@@ -100,7 +100,7 @@ public class SpawnManager : MonoBehaviour
                 state = State.Break;
                 harvestFlag.SetActive(true);
                 DestroySpawners();
-                CreateSpawnersonGrid(spawnersPerPhase, "Afternoon");
+                CreateSpawnersonGrid(spawnersPerPhase + scaleAmmount, "Afternoon");
             }
             else if (currentPhase == "Afternoon")
             {
@@ -109,7 +109,7 @@ public class SpawnManager : MonoBehaviour
                 state = State.Break;
                 harvestFlag.SetActive(true);
                 DestroySpawners();
-                CreateSpawnersonGrid(spawnersPerPhase, "Night");
+                CreateSpawnersonGrid(spawnersPerPhase + scaleAmmount, "Night");
             }
             else if (currentPhase == "Night")
             {
@@ -285,12 +285,10 @@ public class SpawnManager : MonoBehaviour
             if (validPos)
             {
                 GameObject selectedEnemy = null;
-                if (phaseWeIn == "Morning")
-                    selectedEnemy = morningBasicEnemy;
-                else if (phaseWeIn == "Afternoon")
-                    selectedEnemy = afternoonBasicEnemy;
-                else if (phaseWeIn == "Night")
-                    selectedEnemy = nightBasicEnemy;
+                float rand = Random.Range(1, 10);
+                Debug.Log(rand);
+                if (rand < 6) selectedEnemy = meleeEnemy;
+                else selectedEnemy = rangeEnemy;
 
                 GameObject newSpawner = Instantiate(selectedEnemy, pos, transform.rotation);
                 //alignToGrid(newSpawner.transform);

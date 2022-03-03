@@ -9,6 +9,7 @@ public class RangeEnemy : MonoBehaviour
     public Transform mainTarget;
     public Transform[] listOfPlayers;
     public GameObject bullet;
+    public Vector3 direction;
     public float enemySpeed = 1f;
     public float originalSpeed = 1f;
     public float rangeDistance = 10f;
@@ -23,7 +24,6 @@ public class RangeEnemy : MonoBehaviour
     private Transform oldTarget;
     private Rigidbody rb;
     private Vector3[] path;
-    private Vector3 direction;
     private const float minPathupdateTime = .2f;
     private const float pathUpdateMoveThreshhold = .5f;
     private int targetIndex = 0;
