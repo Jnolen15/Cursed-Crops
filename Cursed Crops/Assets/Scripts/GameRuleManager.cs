@@ -69,9 +69,16 @@ public class GameRuleManager : MonoBehaviour
         }
     }
 
-    public bool bountyMet()
+    // Returns true if current bounty score is greater than or equal to given percentage of total bounty
+    // Float given should be (0, 1]
+    public bool bountyMet(float percentage)
     {
-        if(globalPoints >= totalPointBounty) return true;
-        else return false;
+        int temp = (int)(totalPointBounty * percentage);
+        if (globalPoints >= temp) return true;
+        else
+        {
+            Debug.Log(globalPoints + " < " + temp);
+            return false;
+        }
     }
 }

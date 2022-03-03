@@ -22,6 +22,7 @@ public class RangeEnemy : MonoBehaviour
     // ================= Private variables =================
     private Transform closestPlayer;
     private Transform oldTarget;
+    private Transform instantiatePoint;
     private Rigidbody rb;
     private Vector3[] path;
     private const float minPathupdateTime = .2f;
@@ -32,6 +33,7 @@ public class RangeEnemy : MonoBehaviour
 
     void Start()
     {
+        instantiatePoint = this.transform.GetChild(1).GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         listOfPlayers = new Transform[players.Length];
@@ -206,7 +208,7 @@ public class RangeEnemy : MonoBehaviour
     {
         // Create bullet and send bullet in correct direction
         Debug.Log("Start of shoot");
-        GameObject bul = Instantiate(bullet, transform.position, transform.rotation);
+        GameObject bul = Instantiate(bullet, instantiatePoint.position, instantiatePoint.rotation);
         bul.GetComponent<Bullet>().movement = direction.normalized;
         onCooldown = true;
         shooting = false;
@@ -215,13 +217,6 @@ public class RangeEnemy : MonoBehaviour
         Debug.Log("End of shoot");
 
     }
-
-    /*public void Shoot()
-    {
-        shooting = false;
-        GameObject bul = Instantiate(bullet, transform.position, transform.rotation);
-        bul.GetComponent<Bullet>().movement = direction.normalized;
-    }*/
 
     IEnumerator stun()
     {

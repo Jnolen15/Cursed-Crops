@@ -11,6 +11,7 @@ public class EnemyPlayerDamage : MonoBehaviour
     public int damage = 1;
     public bool inIFrames = false;
     public bool playerIsStun = false;
+    public bool invulnerable = false;
 
     // ================= Private variables =================
     private delegate void Callback();
@@ -34,8 +35,8 @@ public class EnemyPlayerDamage : MonoBehaviour
     void Update()
     {
         // This is a temp fix. Player should not be able to take damage when downed
-        if(playerIsStun)
-            playerHealth = reviveHealth;
+        //if(playerIsStun)
+        //    playerHealth = reviveHealth;
 
         if (playerHealth <= 0)
         {
@@ -51,7 +52,8 @@ public class EnemyPlayerDamage : MonoBehaviour
         if (playerHealth <= (reviveHealth * 0.2))
         {
             playerSprite.color = Color.Lerp(Color.white, Color.red, Mathf.PingPong(Time.time, 1));
-        } else if (playerSprite.color != Color.white)
+        }
+        else if (playerSprite.color != Color.white && !inIFrames)
         {
             playerSprite.color = Color.white;
         }
@@ -59,18 +61,22 @@ public class EnemyPlayerDamage : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        /*
-        if (other.gameObject.GetComponent<WindUpAttackMelee>() != null && other.gameObject.GetComponent<GrabbageAI>() == null)
+        if (!invulnerable)
         {
-            if (other.gameObject.tag == "Enemy" && !isItHit && !hitAgain && other.gameObject.GetComponent<WindUpAttackMelee>().attacking)
+            /*
+            if (other.gameObject.GetComponent<WindUpAttackMelee>() != null && other.gameObject.GetComponent<GrabbageAI>() == null)
             {
+                if (other.gameObject.tag == "Enemy" && !isItHit && !hitAgain && other.gameObject.GetComponent<WindUpAttackMelee>().attacking)
+                {
+                    StartCoroutine(iframes(damage));
+                }
+            }
+            */
+            if (other.gameObject.tag == "attackBox" && !inIFrames)
+            {
+                StopCoroutine(iframes(damage));
                 StartCoroutine(iframes(damage));
             }
-        }
-        */
-        if (other.gameObject.tag == "attackBox" && !inIFrames)
-        {
-            StartCoroutine(iframes(damage));
         }
     }
 
@@ -82,8 +88,11 @@ public class EnemyPlayerDamage : MonoBehaviour
 
     public void Damage(int ammount)
     {
-        if(!inIFrames)
+        if(!inIFrames && !invulnerable)
+        {
+            StopCoroutine(iframes(ammount));
             StartCoroutine(iframes(ammount));
+        }
     }
 
     public IEnumerator iframes(int damages)
@@ -120,8 +129,10 @@ public class EnemyPlayerDamage : MonoBehaviour
     private IEnumerator downed()
     {
         playerIsStun = true;
+        invulnerable = true;
         yield return new WaitForSeconds(10.0f);
         playerIsStun = false;
+        invulnerable = false;
     }
 
     // Type of effects can be seen in the comment below. Length is an optional variable default to 0

@@ -226,9 +226,9 @@ public class PlayerControler : MonoBehaviour
                 rollDir = movement;
                 break;*/
             case State.Rolling:
-                cc.enabled = false;
+                //cc.enabled = false;
+                epd.invulnerable = true;
                 DodgeRoll();
-                //animator.SetBool("Dodging", true);
                 // Roll speed is constant at the start, then falls off untill just below move speed
                 if (!startRollFallOff)
                 {
@@ -241,9 +241,9 @@ public class PlayerControler : MonoBehaviour
                     rollSpeed -= rollSpeed * rollSpeedDropMultiplier * Time.deltaTime;
                     if (rollSpeed <= 3.5f)
                     {
-                        cc.enabled = true;
+                        //cc.enabled = true;
+                        epd.invulnerable = false;
                         state = State.Normal;
-                        //animator.SetBool("Dodging", false);
                         startRollFallOff = false;
                         rollSpeedDropMultiplier = 0f;
                     }
