@@ -158,7 +158,9 @@ MonoBehaviour:
   maxHealth: 10
   overalldamage: 0
   takingDamage: 0
-  finalHit: 0
+  knockbackResist: 0
+  stunResist: 0
+  stunned: 0
   lastDamageType: 
   healing: 0
 --- !u!114 &115861805670409039
@@ -218,8 +220,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attacking: 0
-  stunTimer: 1
-  stunned: 0
 --- !u!1 &8792504114044172691
 GameObject:
   m_ObjectHideFlags: 0

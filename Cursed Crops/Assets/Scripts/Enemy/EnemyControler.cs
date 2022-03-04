@@ -10,6 +10,8 @@ public class EnemyControler : MonoBehaviour
     public float overalldamage = 0;
     public bool takingDamage = false;
     public bool knockbackResist = false;
+    public bool stunResist = true;
+    public bool stunned = false;
     public string lastDamageType;
 
     // ================= Private variables =================
@@ -21,6 +23,7 @@ public class EnemyControler : MonoBehaviour
     private GameObject damagePS;
     private ParticleSystem ps;
     private Vector3 knocknewPosition;
+    private float stunTimer = 1f;
     // Burning Debuff Stuff
     private Coroutine burningCo;
     private bool burning = false;
@@ -145,6 +148,26 @@ public class EnemyControler : MonoBehaviour
             time += Time.deltaTime;
             yield return null;
         }
+    }
+
+    public void Stun()
+    {
+        if (!stunResist)
+        {
+            StopCoroutine(DoStun(stunTimer));
+            StartCoroutine(DoStun(stunTimer));
+        }
+    }
+    
+    IEnumerator DoStun(float duration)
+    {
+        stunned = true;
+        //Debug.Log("getting stun");
+        sr.color = Color.blue;
+        yield return new WaitForSeconds(duration);
+        sr.color = Color.white;
+        //takingDamage = false;
+        stunned = false;
     }
 
     public void death()

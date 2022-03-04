@@ -603,6 +603,7 @@ public class PlayerControler : MonoBehaviour
                         if(newAttackSystem) enemyControler.Knockback(transform);
                         int damageAmmount = (int)(3 * damageBoost);
                         enemyControler.takeDamage(damageAmmount, "Melee");
+                        //enemyControler.Stun();
                         overAllPlayerDamage += damageAmmount;
                     }
                     else if (attackChain == 2)
@@ -610,6 +611,7 @@ public class PlayerControler : MonoBehaviour
                         if (newAttackSystem) enemyControler.Knockback(transform);
                         int damageAmmount = (int)(5 * damageBoost);
                         enemyControler.takeDamage(damageAmmount, "Melee");
+                        //enemyControler.Stun();
                         overAllPlayerDamage += damageAmmount;
                     }
                     else if (attackChain == 3)
@@ -617,6 +619,7 @@ public class PlayerControler : MonoBehaviour
                         enemyControler.Knockback(transform);
                         int damageAmmount = (int)(8 * damageBoost);
                         enemyControler.takeDamage(damageAmmount, "Melee");
+                        //enemyControler.Stun();
                         overAllPlayerDamage += damageAmmount;
                     }
                 }
