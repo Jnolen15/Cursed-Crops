@@ -46,6 +46,7 @@ public class WindupWithStun : MonoBehaviour
         }
         
         targetToAttack = gameObject.GetComponent<EnemyToPlayer>().closestPlayer;
+        /*KNOCKBACK STUFF. MOVED TO ENEMUCONTROLLER. DELETE
         if (targetToAttack != null && gameObject.GetComponent<EnemyControler>().finalHit && targetToAttack.GetComponent<EnemyDamageObjective>() == null)
         {
             //targetToAttack.GetComponent<PlayerControler>().finalHit = false;
@@ -60,7 +61,7 @@ public class WindupWithStun : MonoBehaviour
             //StopCoroutine("knockbackCoolDown");
             StartCoroutine("knockbackCoolDown");
 
-        }
+        }*/
         direction = new Vector3(targetToAttack.position.x - transform.position.x, 0, targetToAttack.position.z - transform.position.z);
         if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) <= 6f)
         {
@@ -180,10 +181,12 @@ public class WindupWithStun : MonoBehaviour
         stunned = false;
         attacking = false;
     }
+
+    /*KNOCKBACK STUFF. MOVED TO ENEMUCONTROLLER. DELETE
     IEnumerator knockbackCoolDown()
     {
         
         yield return new WaitForSeconds(0.05f);
         gameObject.GetComponent<EnemyControler>().finalHit = false;
-    }
+    }*/
 }

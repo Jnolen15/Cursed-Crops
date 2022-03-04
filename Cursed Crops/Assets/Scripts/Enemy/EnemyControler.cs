@@ -9,7 +9,7 @@ public class EnemyControler : MonoBehaviour
     public int maxHealth = 10;
     public float overalldamage = 0;
     public bool takingDamage = false;
-    public bool finalHit = false;
+    public bool knockbackResist = false;
     public string lastDamageType;
 
     // ================= Private variables =================
@@ -20,6 +20,7 @@ public class EnemyControler : MonoBehaviour
     private GameObject impact;
     private GameObject damagePS;
     private ParticleSystem ps;
+    private Vector3 knocknewPosition;
     // Burning Debuff Stuff
     private Coroutine burningCo;
     private bool burning = false;
@@ -74,47 +75,6 @@ public class EnemyControler : MonoBehaviour
         }
     }
 
-    // These two are now unused. Use takeDamage instead. Delete this later if unneeded
-    /*public void takeDamageMelee(int dmg)
-    {
-        // Subtract from health
-        health -= dmg;
-        overalldamage += dmg;
-        takingDamage = true;
-        lastDamageType = "Melee";
-        if (ps != null)
-            ps.Emit(4);
-        // If health is below or equal to 0 die
-        if (health <= 0 && gameObject.GetComponent<GrabbageAI>() == null && gameObject.GetComponent<ScarrotAttack>() == null)
-        {
-            death();
-        } else
-        {
-            // In not dead flash red to show hit
-            StartCoroutine(hit(rend));
-        }
-    }*/
-
-    /*public void takeDamageRange(int dmg)
-    {
-        // Subtract from health
-        health -= dmg;
-        overalldamage += dmg;
-        lastDamageType = "Range";
-        if (ps != null)
-            ps.Emit(4);
-        // If health is below or equal to 0 die
-        if (health <= 0 && gameObject.GetComponent<GrabbageAI>() == null && gameObject.GetComponent<ScarrotAttack>() == null)
-        {
-            death();
-        }
-        else
-        {
-            // In not dead flash red to show hit
-            StartCoroutine(hit(rend));
-        }
-    }*/
-
     public void takeDamage(int dmg, string type)
     {
         // Subtract from health
@@ -159,6 +119,31 @@ public class EnemyControler : MonoBehaviour
             sr.color = prevColor;
             impact.SetActive(false);
             //gameObject.GetComponent<EnemyToPlayer>().enemySpeed = gameObject.GetComponent<EnemyToPlayer>().originalSpeed;
+        }
+    }
+
+    public void Knockback(Transform other)
+    {
+        if (!knockbackResist)
+        {
+            Vector3 knockattackPosition = new Vector3(other.transform.position.x, other.transform.position.y, other.transform.position.z);
+            Vector3 knockenemyPosition = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
+            this.knocknewPosition = ((knockenemyPosition - knockattackPosition) + (knockenemyPosition - knockattackPosition).normalized) / 2;
+            this.knocknewPosition += knockenemyPosition;
+            StartCoroutine(DoKnockback());
+        }
+    }
+
+    IEnumerator DoKnockback()
+    {
+        float time = 0;
+        float duration = 0.1f;
+        while (time < duration)
+        {
+            this.transform.position = Vector3.Lerp(this.transform.position, knocknewPosition, time / duration);
+
+            time += Time.deltaTime;
+            yield return null;
         }
     }
 

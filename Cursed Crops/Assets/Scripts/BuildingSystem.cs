@@ -257,7 +257,7 @@ public class BuildingSystem : MonoBehaviour
                                 break;
                             case 2:
                                 pc.moveSpeed += speedUpgrade;
-                                pc.originalSpeed += speedUpgrade;
+                                pc.maxMoveSpeed += speedUpgrade;
                                 pc.rollSpeedMax += speedUpgrade;
                                 break;
                             case 3:

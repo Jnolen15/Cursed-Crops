@@ -621,31 +621,30 @@ MonoBehaviour:
   rangeCDTime: 5
   faceAimTimer: 2
   attackBufferMax: 2
-  attackChain: 1
   rollSpeedMax: 23
   maxBullets: 3
   overAllPlayerDamage: 0
   moveSpeed: 6
-  originalSpeed: 0
+  maxMoveSpeed: 0
   money: 0
   health: 10
   maxHealth: 10
   damageBoost: 1
-  faceaim: 1
-  trapped: 0
-  isAttacking: 1
-  attackQueued: 0
+  newAttackSystem: 1
+  lungeAttacking: 1
+  twoAttack: 1
   ready: 0
   flipped: 0
   useControler: 0
   stopMovement: 0
   shooting: 0
-  bullet: {fileID: 6242655706651345086, guid: dd76d198cb4f6304f93a7e3ef466c390, type: 3}
-  ammoManager: {fileID: 3550555863387099239, guid: c45b274deb480454ab44824b41333d5a,
-    type: 3}
+  trapped: 0
   groundLayermask:
     serializedVersion: 2
     m_Bits: 8
+  bullet: {fileID: 6242655706651345086, guid: dd76d198cb4f6304f93a7e3ef466c390, type: 3}
+  ammoManager: {fileID: 3550555863387099239, guid: c45b274deb480454ab44824b41333d5a,
+    type: 3}
   state: 0
 --- !u!114 &-5891569623318608545
 MonoBehaviour:
@@ -694,6 +693,7 @@ MonoBehaviour:
   damage: 1
   inIFrames: 0
   playerIsStun: 0
+  invulnerable: 0
 --- !u!114 &-1676916115656988922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -915,8 +915,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.333, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2, y: 1, z: 1.5}
+  m_Center: {x: 0, y: 0, z: -0.2}
 --- !u!33 &7937736029837635452
 MeshFilter:
   m_ObjectHideFlags: 0
