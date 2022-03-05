@@ -532,8 +532,11 @@ public class PlayerControler : MonoBehaviour
     {
         if (!newAttackSystem || lungeAttacking)
         {
-            attackMove = true;
-            StartCoroutine(cooldown(() => { attackMove = false; }, lungedist));
+            if (!trapped)
+            {
+                attackMove = true;
+                StartCoroutine(cooldown(() => { attackMove = false; }, lungedist));
+            }
         }
     }
     
