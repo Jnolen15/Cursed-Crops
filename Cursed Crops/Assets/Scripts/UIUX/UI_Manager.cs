@@ -24,14 +24,12 @@ public class UI_Manager : MonoBehaviour
     // p1 UI elements
     public GameObject p1UI;
     public TextMeshProUGUI nameText1;
-    public TextMeshProUGUI currencyText1;
     public TextMeshProUGUI vegetableText1;
     public Slider HealthBar1;
 
     // p2 UI elements
     public GameObject p2UI;
     public TextMeshProUGUI nameText2;
-    public TextMeshProUGUI currencyText2;
     public TextMeshProUGUI vegetableText2;
     public Slider HealthBar2;
 
@@ -42,6 +40,7 @@ public class UI_Manager : MonoBehaviour
 
     public Slider PhaseTimer;
     public TextMeshProUGUI PhaseCounter;
+    public TextMeshProUGUI moneyText;
 
 
     public GameObject[] WaveBars = new GameObject[8];
@@ -67,6 +66,7 @@ public class UI_Manager : MonoBehaviour
     {
         // updating general UI
         HouseHealthBar.value = (float)EDO.houseHealth / (float)EDO.startingHouseHealth;
+        moneyText.text = "Money: " + GRM.getMoney();
         UpdateTimer();
 
         // updating p1 UI
@@ -89,8 +89,7 @@ public class UI_Manager : MonoBehaviour
         if (PC1 != null)
         {
             // managing  currency text
-            currencyText1.text = "Money: " + GRM.getMoney() + " Quota: " + GRM.getPoints() + " / 100";
-            vegetableText1.text = "C: " + PR1.getCrops();
+            vegetableText1.text = "Crops: " + PR1.getCrops();
             // managing health bar
             HealthBar1.value = (float)EPD1.playerHealth / (float)EPD1.reviveHealth;
          }
@@ -115,8 +114,7 @@ public class UI_Manager : MonoBehaviour
         if (PC2 != null)
         {
             // managing  currency text
-            currencyText2.text = "Money: " + GRM.getMoney() + " Quota: " + GRM.getPoints() + " / 100";
-            vegetableText2.text = "C: " + PR2.getCrops();
+            vegetableText2.text = "Crops: " + PR2.getCrops();
             // managing health bar
             HealthBar2.value = (float)EPD2.playerHealth / (float)EPD2.reviveHealth;
         }
