@@ -104,6 +104,10 @@ public class EnemyToPlayer : MonoBehaviour
         }*/
         if (closestPlayer != mainTarget)
         {
+            if (closestPlayer.GetComponent<EnemyPlayerDamage>().playerIsStun)
+            {
+                angered = false;
+            }
             if (healingTimer <= 0)
             {
                 if (!angered)
@@ -120,6 +124,10 @@ public class EnemyToPlayer : MonoBehaviour
         else
         {
             healingTimer = healingTickSpeed;
+        }
+        if(closestPlayer != mainTarget)
+        {
+            
         }
         
         //PathRequestManager.RequestPath(this.transform.position, closestPlayer.position, OnPathFound);
