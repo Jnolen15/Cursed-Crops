@@ -43,7 +43,6 @@ public class WindupWithStun : MonoBehaviour
 
         if (ec.stunned)
         {
-            sr.color = Color.blue;
             hurtBox.enabled = false;
             attacking = false;
         }

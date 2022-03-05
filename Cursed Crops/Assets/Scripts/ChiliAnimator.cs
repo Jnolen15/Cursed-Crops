@@ -8,6 +8,7 @@ public class ChiliAnimator : MonoBehaviour
     private SpriteRenderer sr;
     private Animator animator;
     private RangeEnemy re;
+    private EnemyControler ec;
     public bool shot = false;
     private bool flipped = false;
 
@@ -16,15 +17,21 @@ public class ChiliAnimator : MonoBehaviour
         sr = this.GetComponent<SpriteRenderer>();
         animator = this.GetComponent<Animator>();
         re = this.GetComponentInParent<RangeEnemy>();
+        ec = this.GetComponentInParent<EnemyControler>();
     }
 
     void Update()
     {
-        // Update speed
-        animator.SetFloat("Speed", re.enemySpeed);
-
-        // Shooting
-        animator.SetBool("Shooting", re.shooting);
+        if (ec.stunned)
+        {
+            animator.SetFloat("Speed", 0);
+            animator.SetBool("Shooting", false);
+        }
+        else
+        {
+            animator.SetFloat("Speed", re.enemySpeed);
+            animator.SetBool("Shooting", re.shooting);
+        }
 
         // Face the direction they are shooting
         if (re.direction.x > 0 && flipped)
@@ -41,6 +48,6 @@ public class ChiliAnimator : MonoBehaviour
 
     void Shoot()
     {
-        re.StartCoroutine("shoot");
+        re.Shoot();
     }
 }

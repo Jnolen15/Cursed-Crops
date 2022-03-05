@@ -163,9 +163,9 @@ public class EnemyControler : MonoBehaviour
     {
         stunned = true;
         //Debug.Log("getting stun");
-        sr.color = Color.blue;
+        //sr.color = Color.blue;
         yield return new WaitForSeconds(duration);
-        sr.color = Color.white;
+        //sr.color = Color.white;
         //takingDamage = false;
         stunned = false;
     }
