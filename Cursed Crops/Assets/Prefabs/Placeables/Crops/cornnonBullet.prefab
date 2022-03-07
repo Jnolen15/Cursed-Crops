@@ -198,7 +198,9 @@ MonoBehaviour:
   damage: 1
   bulletSpeed: 2
   piercing: 0
+  pierceAmmount: 0
   isPayload: 0
+  effect: {fileID: 0}
   destination: {x: 0, y: 0, z: 0}
 --- !u!114 &875180390295313469
 MonoBehaviour:
@@ -217,6 +219,8 @@ MonoBehaviour:
   overalldamage: 0
   takingDamage: 0
   knockbackResist: 1
+  stunResist: 1
+  stunned: 0
   lastDamageType: 
   healing: 0
 --- !u!114 &2195171091914415132
