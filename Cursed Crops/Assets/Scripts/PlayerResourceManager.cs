@@ -12,6 +12,7 @@ public class PlayerResourceManager : MonoBehaviour
     public ParticleSystem ps;
     private GameObject pickupPS;
     private GameObject itemSprite;
+    private bool isBanking = false;
 
     public void setCrops(int newAmount) { crops = newAmount; }
     public int getCrops() { return crops; }
@@ -43,6 +44,7 @@ public class PlayerResourceManager : MonoBehaviour
 
     IEnumerator MoveItems(int numCrops, Transform objective)
     {
+        isBanking = true;
         for (int i = 0; i < numCrops; i++)
         {
             float time = 0;
@@ -62,6 +64,7 @@ public class PlayerResourceManager : MonoBehaviour
             BankOneItem();
             Destroy(item);
         }
+        isBanking = false;
     }
 
     public void UpdateUI()
@@ -97,7 +100,7 @@ public class PlayerResourceManager : MonoBehaviour
         // RN this will send items to the middle of the tile. May want to get the objective transform instead
         if (other.gameObject.tag == "TileObjective")
         {
-            StartCoroutine(MoveItems(getCrops(), other.transform));
+            if(!isBanking) StartCoroutine(MoveItems(getCrops(), other.transform));
             //BankItems();
         }
     }
