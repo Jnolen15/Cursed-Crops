@@ -217,7 +217,7 @@ public class RangeEnemy : MonoBehaviour
         if (!ec.stunned)
         {
             // Create bullet and send bullet in correct direction
-            Debug.Log("Start of shoot");
+            //Debug.Log("Start of shoot");
             GameObject bul = Instantiate(bullet, instantiatePoint.position, instantiatePoint.rotation);
             bul.GetComponent<Bullet>().movement = direction.normalized;
             onCooldown = true;

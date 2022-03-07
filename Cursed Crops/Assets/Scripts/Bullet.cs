@@ -10,22 +10,25 @@ public class Bullet : MonoBehaviour
     public int damage = 5;
     public int bulletSpeed = 15;
     public bool piercing = false;
+    public int pierceAmmount = 3;
 
     [Header("Payloads: damage when reach destination")]
     public bool isPayload = false;
+    public GameObject effect;
     public Vector3 destination;
 
     // ================= Private variables =================
     private Rigidbody rb;
     private SpriteRenderer sr;
     private bool exploded = false; // Used for Payload type bullets
+    private int pierceCount;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         sr = GetComponent<SpriteRenderer>();
-        // GameObject.FindObjectsOfType<SpriteLeaner>();
+        pierceCount = pierceAmmount;
     }
 
     private void Update()
@@ -37,7 +40,10 @@ public class Bullet : MonoBehaviour
                 && ((this.transform.position.z <= destination.z + 2) && (this.transform.position.z >= destination.z - 2)))
             {
                 //Debug.Log("BOOM BITCH");
-                exploded = true;
+                //exploded = true;
+                Vector3 pos = new Vector3(this.transform.position.x, 0f, this.transform.position.z);
+                Instantiate(effect, pos, Quaternion.Euler(-90f, 0f, 0f));
+                Destroy(this.gameObject);
             }
         }
     }
@@ -73,14 +79,15 @@ public class Bullet : MonoBehaviour
             {
                 EnemyControler enemyControler = other.gameObject.GetComponent<EnemyControler>();
                 enemyControler.takeDamage(damage, "Range");
-                if (!piercing)
+                if (!piercing || pierceCount <= 0)
                     Destroy(gameObject);
+                else pierceCount--;
                 //Debug.Log("Hit " + other.gameObject.tag);
             }
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    /*private void OnTriggerStay(Collider other)
     {
         // Payload Bullets
         if (isPayload && exploded)
@@ -93,5 +100,5 @@ public class Bullet : MonoBehaviour
             }
             Destroy(this.gameObject);
         }
-    }
+    }*/
 }

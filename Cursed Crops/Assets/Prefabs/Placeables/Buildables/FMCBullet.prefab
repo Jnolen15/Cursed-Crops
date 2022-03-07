@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6959615121425730668}
   - component: {fileID: 8675543423918261961}
   m_Layer: 0
-  m_Name: FlamingManureCatapultBullet
+  m_Name: FMCBullet
   m_TagString: turretBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,7 +134,9 @@ MonoBehaviour:
   damage: 2
   bulletSpeed: 10
   piercing: 0
+  pierceAmmount: 3
   isPayload: 1
+  effect: {fileID: 525859654303726232, guid: 5e265bbd1483c3a4691e44ce1dece6fe, type: 3}
   destination: {x: 0, y: 0, z: 0}
 --- !u!114 &6959615121425730668
 MonoBehaviour:

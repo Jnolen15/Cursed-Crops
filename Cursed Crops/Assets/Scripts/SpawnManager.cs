@@ -286,7 +286,7 @@ public class SpawnManager : MonoBehaviour
             {
                 GameObject selectedEnemy = null;
                 float rand = Random.Range(1, 10);
-                Debug.Log(rand);
+                //Debug.Log(rand);
                 if (rand < 6) selectedEnemy = meleeEnemy;
                 else selectedEnemy = rangeEnemy;
 

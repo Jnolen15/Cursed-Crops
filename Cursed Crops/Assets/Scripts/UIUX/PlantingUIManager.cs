@@ -105,7 +105,7 @@ public class PlantingUIManager : MonoBehaviour
         topNum.text = C[3];
         leftNum.text = D[3];
 
-        Debug.Log("setUp");
+        //Debug.Log("setUp");
     }
 
     public void switchMode(string mode, int count)

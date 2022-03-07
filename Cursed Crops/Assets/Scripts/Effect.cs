@@ -5,8 +5,11 @@ using UnityEngine;
 public class Effect : MonoBehaviour
 {
     // ================= Public variables =================
+    public string appliedEffect;
+    public float effectduration = 3f;
     public float aliveTime = 1f;
     public int damageAmmount = 1;
+    public bool targetPlayer = false;
 
     // ================= Private variables =================
 
@@ -20,13 +23,11 @@ public class Effect : MonoBehaviour
 
     // NOTE 2: RN it just works for the healing radio. But make it more versitile in future when needed
 
-    // Start is called before the first frame update
     void Start()
     {
         Destroy(this.gameObject, aliveTime);
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -34,13 +35,15 @@ public class Effect : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Enemy" && other.gameObject.name != "cornnonBullet")
+        if (other.gameObject.tag == "Enemy" && !targetPlayer)
         {
-
-        } else if (other.gameObject.tag == "Player")
+            // Effects: Burning, Healing
+            Debug.Log("Hit: " + other.gameObject.name);
+            other.GetComponent<EnemyControler>().ApplyEffect(appliedEffect, effectduration);
+        } else if (other.gameObject.tag == "Player" && targetPlayer)
         {
             other.gameObject.GetComponent<EnemyPlayerDamage>().Heal(damageAmmount);
-            other.gameObject.GetComponent<EnemyPlayerDamage>().ApplyEffect("DamageBoost", 3f);
+            other.gameObject.GetComponent<EnemyPlayerDamage>().ApplyEffect(appliedEffect, effectduration);
         }
     }
 }

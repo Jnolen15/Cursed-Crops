@@ -28,8 +28,8 @@ public class EnemyControler : MonoBehaviour
     private Coroutine burningCo;
     private bool burning = false;
     private int burnDamage = 1;
-    private float burnTickSpeed = 1f;
-    private float burnTimer = 1f;
+    private float burnTickSpeed = 0.5f;
+    private float burnTimer = 0f;
     // Healing Buff Stuff
     private Coroutine healingCo;
     public bool healing = false;
