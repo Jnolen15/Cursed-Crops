@@ -114,7 +114,7 @@ public class UI_Manager : MonoBehaviour
         if (PC2 != null)
         {
             // managing  currency text
-            vegetableText2.text = "Crops: " + PR1.getCrops() + "          Quota: " + GRM.getPoints();
+            vegetableText2.text = "Crops: " + PR2.getCrops() + "          Quota: " + GRM.getPoints();
             // managing health bar
             HealthBar2.value = (float)EPD2.playerHealth / (float)EPD2.reviveHealth;
         }
