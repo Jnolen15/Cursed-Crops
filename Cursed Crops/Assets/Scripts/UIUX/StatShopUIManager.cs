@@ -50,6 +50,7 @@ public class StatShopUIManager : MonoBehaviour
             string[] textC = SO.textC;
             string[] textD = SO.textD;
             setUp(textA, textB, textC, textD);
+            this.gameObject.SetActive(false);
         } else
         {
             Debug.LogError("UI scriptable object ref is null");

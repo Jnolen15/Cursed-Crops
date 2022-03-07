@@ -66,7 +66,6 @@ public class BuildingSystem : MonoBehaviour
         popUpMan = popUp.GetComponent<PlantingUIManager>();
         //popUp.SetActive(false); MOVED TO IN POPUP
         grm = GameObject.Find("GameRuleManager").GetComponent<GameRuleManager>();
-
         // Set default selected placeable
         if (popupUI.buildables.Length > 0 && popupUI.buildables.Length > 0)
         {
@@ -76,6 +75,7 @@ public class BuildingSystem : MonoBehaviour
         {
             Debug.Log("Placeable and/or Plantable array has a size of 0");
         }
+
         buildmodeActive = false;
         mode = "Build";
         placeableHighlight.SetActive(false);
