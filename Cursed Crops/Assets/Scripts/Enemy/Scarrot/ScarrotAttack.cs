@@ -50,7 +50,7 @@ public class ScarrotAttack : MonoBehaviour
                 StopCoroutine("attack");
                 windupStarting = true;
                 //preAttackPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
-                chooseAttack = Random.Range(1, 2);
+                chooseAttack = Random.Range(1, 3);
                 randomTimer = Random.Range(0.45f, 1f);
                 if (chooseAttack == 1)
                 {
