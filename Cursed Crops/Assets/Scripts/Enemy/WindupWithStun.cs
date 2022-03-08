@@ -126,12 +126,12 @@ public class WindupWithStun : MonoBehaviour
             attacking = true;
             //gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
         //}
-        //if (transform.position == newPosition)
-        //{
+        if (transform.position == newPosition)
+        {
             hurtBox.enabled = true;
             sr.color = Color.green;
             //daAttack.enabled = true;
-        //}
+        }
 
         yield return new WaitForSeconds(1f);
         if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) > 6f)
