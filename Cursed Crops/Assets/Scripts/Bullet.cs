@@ -31,17 +31,13 @@ public class Bullet : MonoBehaviour
         pierceCount = pierceAmmount;
 
         // Make bullet sprite face correct direction
-        Debug.Log(movement);
         bool wasNeg= false;
         if (movement.z < 0) wasNeg = true;
-        Vector2 temp = new Vector2(movement.x, movement.z);
-        float dot = Vector2.Dot(temp, new Vector2(1, 0));
+        float dot = Vector2.Dot(new Vector2(movement.x, movement.z), new Vector2(1, 0));
         dot = Mathf.Acos(dot);
         if (wasNeg) dot *= -1;
         dot = Mathf.Rad2Deg * dot;
-        Debug.Log(dot);
-        Vector3 rot = new Vector3(this.transform.rotation.x, this.transform.rotation.y, dot);
-        this.transform.eulerAngles = rot;
+        this.transform.eulerAngles = new Vector3(this.transform.rotation.x, this.transform.rotation.y, dot); ;
     }
 
     private void Update()
@@ -90,11 +86,11 @@ public class Bullet : MonoBehaviour
             // Normal Bullets
             if (!isPayload && (other.gameObject.tag == "Enemy" || other.gameObject.name == "cornnonBullet(Clone)"))
             {
+                pierceCount--;
                 EnemyControler enemyControler = other.gameObject.GetComponent<EnemyControler>();
                 enemyControler.takeDamage(damage, "Range");
                 if (!piercing || pierceCount <= 0)
                     Destroy(gameObject);
-                else pierceCount--;
                 //Debug.Log("Hit " + other.gameObject.tag);
             }
         }
