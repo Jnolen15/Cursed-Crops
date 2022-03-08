@@ -240,7 +240,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5793997569695224421}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
@@ -263,6 +263,8 @@ MonoBehaviour:
   overalldamage: 0
   takingDamage: 0
   knockbackResist: 1
+  stunResist: 1
+  stunned: 0
   lastDamageType: 
   healing: 0
 --- !u!114 &3360188171948922563
