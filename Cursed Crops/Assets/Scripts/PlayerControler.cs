@@ -42,6 +42,7 @@ public class PlayerControler : MonoBehaviour
     private bool attackCancleable = false;
     private bool attackQueued = false;
     private bool lunge = false;
+    public bool collidingWithBorder = false;
 
     // Used to toggle to older and newer versions of attack. Once one is picked remove this and commit to one verson
     public bool newAttackSystem = true;
@@ -414,7 +415,8 @@ public class PlayerControler : MonoBehaviour
 
     private void DodgeRoll()
     {
-        rb.MovePosition(transform.position + rollDir * rollSpeed * Time.fixedDeltaTime);
+        //rb.MovePosition(transform.position + rollDir * rollSpeed * Time.fixedDeltaTime);
+        if(!collidingWithBorder)this.transform.Translate(rollDir * rollSpeed * Time.fixedDeltaTime);
     }
 
     // Attack =================================
@@ -704,6 +706,16 @@ public class PlayerControler : MonoBehaviour
         {
             trapped = false;
         }
+    }
+
+    private void OnCollisionStay(Collision col)
+    {
+        if (col.gameObject.tag == "Border") collidingWithBorder = true;
+    }
+
+    private void OnCollisionExit(Collision col)
+    {
+        if (col.gameObject.tag == "Border") collidingWithBorder = false;
     }
 
     IEnumerator cooldown(Callback callback, float time)
