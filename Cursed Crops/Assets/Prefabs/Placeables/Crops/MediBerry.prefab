@@ -263,7 +263,9 @@ MonoBehaviour:
   maxHealth: 15
   overalldamage: 0
   takingDamage: 0
-  finalHit: 0
+  knockbackResist: 0
+  stunResist: 1
+  stunned: 0
   lastDamageType: 
   healing: 0
 --- !u!114 &281055285401495230
@@ -393,7 +395,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8699004956925627523}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5

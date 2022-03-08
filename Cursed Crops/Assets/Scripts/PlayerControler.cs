@@ -149,6 +149,7 @@ public class PlayerControler : MonoBehaviour
 
     void Update()
     {
+        rb.velocity = Vector3.zero;
         // Face mouse / conroller when not rolling
         if (state != State.Rolling)
         {
