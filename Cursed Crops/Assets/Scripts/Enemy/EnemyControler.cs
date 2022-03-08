@@ -24,6 +24,7 @@ public class EnemyControler : MonoBehaviour
     private ParticleSystem ps;
     private Vector3 knocknewPosition;
     private float stunTimer = 1f;
+    private bool dying = false;
     // Burning Debuff Stuff
     private Coroutine burningCo;
     private bool burning = false;
@@ -98,7 +99,7 @@ public class EnemyControler : MonoBehaviour
                 }
                 gameObject.SetActive(false);
             }
-            death();
+            if (!dying) StartCoroutine(DoDeath());
         }
         else
         {
@@ -172,11 +173,20 @@ public class EnemyControler : MonoBehaviour
 
     public void death()
     {
-        //Destroy(this.gameObject);
-        if(itemDropper != null)
-            itemDropper.DropItem(transform.position);
+        if(!dying) StartCoroutine(DoDeath());
+    }
+
+    IEnumerator DoDeath()
+    {
+        stunned = true;
+        dying = true;
         ps.Emit(4);
-        StopAllCoroutines();
+        impact.SetActive(true);
+        sr.color = Color.red;
+        if (itemDropper != null)
+            itemDropper.DropItem(transform.position);
+        //StopAllCoroutines();
+        yield return new WaitForSeconds(0.1f);
         gameObject.SetActive(false);
     }
 
