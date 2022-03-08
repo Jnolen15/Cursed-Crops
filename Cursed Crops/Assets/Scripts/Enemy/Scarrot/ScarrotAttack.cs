@@ -12,7 +12,8 @@ public class ScarrotAttack : MonoBehaviour
     public float aoeCoolDown = 9f;
     public float straightAttackCoolDown = 1f;
     public bool attacking = false;
-    public int damage = 5;
+    public int playerdamage = 5;
+    public int houseDamage = 5;
     private bool getPosition = false;
     private bool windupStarting = false;
     private int chooseAttack;
@@ -172,11 +173,11 @@ public class ScarrotAttack : MonoBehaviour
 
         if (other.gameObject.tag == "Player" && attacking)
         {
-            other.gameObject.GetComponent<EnemyPlayerDamage>().Damage(damage);
+            other.gameObject.GetComponent<EnemyPlayerDamage>().Damage(playerdamage);
         }
         if (other.gameObject.tag == "MainObjective")
         {
-            other.gameObject.GetComponent<EnemyDamageObjective>().houseHealth -= damage;
+            other.gameObject.GetComponent<EnemyDamageObjective>().takeDamage(houseDamage);
         }
     }
 }
