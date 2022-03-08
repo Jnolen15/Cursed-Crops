@@ -9,21 +9,45 @@ public class EnemyDamageObjective : MonoBehaviour
     public GameObject mainObjective;
     public int houseHealth = 5000;
     public int startingHouseHealth = 5000;
+    public GameObject damageNotif;
 
+    private float damageNotifCooldown = 6f;
+    private float damageNotifTimer = 6f;
+    private bool showingNotif = false;
     private bool isItHit = false;
-    // Start is called before the first frame update
+
     void Start()
     {
         houseHealth = startingHouseHealth;
+
+        damageNotif = this.transform.GetChild(0).gameObject;
     }
 
-    // Update is called once per frame
     void Update()
     {
         //Once the objective's health reaches zero destroy it and change the scene to the game over
         if(houseHealth <= 0)
         {
             SceneManager.LoadScene("GameOver");
+        }
+
+        // Notification Cooldown
+        if (damageNotifTimer < damageNotifCooldown)
+        {
+            showingNotif = true;
+            damageNotifTimer += Time.deltaTime;
+        }
+        else showingNotif = false;
+
+        // Show Notification
+        if(showingNotif)
+        {
+            // Display notification
+            damageNotif.SetActive(true);
+        } else
+        {
+            // Close notification
+            damageNotif.SetActive(false);
         }
     }
     
@@ -58,6 +82,7 @@ public class EnemyDamageObjective : MonoBehaviour
         {
             houseHealth -= damage;
             StartCoroutine(iframes());
+            damageNotifTimer = 0f;
         }
     }
     // IEnumarator so doesn't freaking get one 1 shotted in 1 second
