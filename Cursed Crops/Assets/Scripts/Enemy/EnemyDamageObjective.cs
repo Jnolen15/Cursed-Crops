@@ -27,11 +27,10 @@ public class EnemyDamageObjective : MonoBehaviour
         }
     }
     
-    //OnCollision Enter doesn't work for some reason but on trigger will do for now to do damage to the house
-    // Need to find a way to make damage stack if multiple enemies are in it
-    private void OnTriggerEnter(Collider other)
+    //Don't want to erase this code yet 
+    /*private void OnTriggerEnter(Collider other)
     {
-        while (other.gameObject.tag == "Enemy" && !isItHit)
+        while (other.gameObject.tag == "attackBox" && !isItHit)
         {
             //houseHealth -= 5;
             //StartCoroutine(iframes());
@@ -47,6 +46,17 @@ public class EnemyDamageObjective : MonoBehaviour
         foreach(Collider c in enemies)
         {
             houseHealth -= 5;
+            StartCoroutine(iframes());
+        }
+    }
+    */
+
+    //Function for the house to take damage
+    public void takeDamage(int damage)
+    {
+        if (!isItHit)
+        {
+            houseHealth -= damage;
             StartCoroutine(iframes());
         }
     }

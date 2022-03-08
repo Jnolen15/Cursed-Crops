@@ -30,6 +30,7 @@ public class WindupWithStun : MonoBehaviour
         childRB = this.gameObject.transform.GetChild(1).GetComponent<Rigidbody>();
         rb = gameObject.GetComponent<Rigidbody>();
         hurtBox = this.gameObject.transform.GetChild(1).GetComponent<BoxCollider>();
+        Debug.Log(hurtBox);
         daAttack = this.gameObject.transform.GetChild(1).GetComponent<MeshRenderer>();
         sr = this.transform.GetComponentInChildren<SpriteRenderer>();
         ec = this.gameObject.GetComponent<EnemyControler>();
@@ -49,8 +50,6 @@ public class WindupWithStun : MonoBehaviour
         
         targetToAttack = gameObject.GetComponent<EnemyToPlayer>().closestPlayer;
         direction = new Vector3(targetToAttack.position.x - transform.position.x, 0, targetToAttack.position.z - transform.position.z);
-        Debug.Log(direction);
-
         if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) <= 6f)
         {
             
@@ -127,12 +126,12 @@ public class WindupWithStun : MonoBehaviour
             attacking = true;
             //gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
         //}
-        if (transform.position == newPosition)
-        {
+        //if (transform.position == newPosition)
+        //{
             hurtBox.enabled = true;
             sr.color = Color.green;
             //daAttack.enabled = true;
-        }
+        //}
 
         yield return new WaitForSeconds(1f);
         if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) > 6f)
