@@ -14,8 +14,11 @@ public class ScarrotAttack : MonoBehaviour
     public bool attacking = false;
     public int playerdamage = 5;
     public int houseDamage = 5;
+    private float attackTimer = 2;
+    private float attackTickSpeed = 2;
     private bool getPosition = false;
     private bool windupStarting = false;
+    private bool hitFence = false;
     private int chooseAttack;
     private float randomTimer = 0;
     private SpriteRenderer sr;
@@ -43,12 +46,14 @@ public class ScarrotAttack : MonoBehaviour
         }
         targetToAttack = gameObject.GetComponent<EnemyToPlayer>().closestPlayer;
 
-        if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) <= 6f)
+        if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) <= 6f && !hitFence)
         {
 
             if (!windupStarting)
             {
+                
                 StopCoroutine("attack");
+                
                 windupStarting = true;
                 //preAttackPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
                 chooseAttack = Random.Range(1, 3);
@@ -71,10 +76,11 @@ public class ScarrotAttack : MonoBehaviour
             }
             //attacking = true;
 
-            gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
+            
 
             if (!attacking)
             {
+                gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
                 if (!gameObject.activeInHierarchy)
                 {
                     StopCoroutine("attack");
@@ -105,11 +111,32 @@ public class ScarrotAttack : MonoBehaviour
             gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
         }
 
+        //If the scarrot hits the fence stop its attack and give it a bit to gets its cool down again
+        if (hitFence)
+        {
+            StopCoroutine("attack");
+            if (attackTimer <= 0)
+            {
+                attackTimer = attackTickSpeed;
+                    AOE.SetActive(false);
+                    getPosition = false;
+                    windupStarting = false;
+                    attacking = false;
+                    chooseAttack = 0;
+                hitFence = false;
+                
+            }
+            else
+            {
+               attackTimer -= Time.deltaTime;
+            }
+        }
 
     }
 
     IEnumerator attack()
     {
+
         if (chooseAttack == 1)
         {
             //if (transform.position != newPosition)
@@ -170,6 +197,10 @@ public class ScarrotAttack : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        if(other.gameObject.tag == "Border")
+        {
+            hitFence = true;
+        }
 
         if (other.gameObject.tag == "Player" && attacking)
         {
@@ -180,4 +211,5 @@ public class ScarrotAttack : MonoBehaviour
             other.gameObject.GetComponent<EnemyDamageObjective>().takeDamage(houseDamage);
         }
     }
+    
 }

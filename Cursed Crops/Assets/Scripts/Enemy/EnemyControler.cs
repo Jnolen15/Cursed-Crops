@@ -25,6 +25,7 @@ public class EnemyControler : MonoBehaviour
     private Vector3 knocknewPosition;
     private float stunTimer = 1f;
     private bool dying = false;
+    private bool hitFence = false;
     // Burning Debuff Stuff
     private Coroutine burningCo;
     private bool burning = false;
@@ -144,8 +145,10 @@ public class EnemyControler : MonoBehaviour
         float duration = 0.1f;
         while (time < duration)
         {
-            this.transform.position = Vector3.Lerp(this.transform.position, knocknewPosition, time / duration);
-
+            if (!hitFence)
+            {
+                this.transform.position = Vector3.Lerp(this.transform.position, knocknewPosition, time / duration);
+            }
             time += Time.deltaTime;
             yield return null;
         }
@@ -226,6 +229,14 @@ public class EnemyControler : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Border")
+        {
+            hitFence = true;
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "HealingAura")
@@ -233,6 +244,10 @@ public class EnemyControler : MonoBehaviour
 
 
             healing = false;
+        }
+        if (other.gameObject.tag == "Border")
+        {
+            hitFence = false;
         }
     }
 

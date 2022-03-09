@@ -13,6 +13,9 @@ public class GrabbageWindup : MonoBehaviour
     public bool attacking = false;
     bool getPosition = false;
     public bool windupStarting = false;
+    private bool hitFence = false;
+    private float attackTimer = 1;
+    private float attackTickSpeed = 1;
     Rigidbody childRB;
     private SpriteRenderer sr;
     Transform targetToAttack;
@@ -34,13 +37,16 @@ public class GrabbageWindup : MonoBehaviour
     void FixedUpdate()
     {
         targetToAttack = gameObject.GetComponent<GrabbageToPlayers>().closestPlayer;
-        //direction = new Vector3(targetToAttack.position.x - transform.position.x, 0, targetToAttack.position.z - transform.position.z);
-        if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) <= 6f)
+        direction = new Vector3(targetToAttack.position.x - transform.position.x, 0, targetToAttack.position.z - transform.position.z);
+        if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) <= 6f && !hitFence)
         {
 
+            //StopCoroutine("stun");
+
+            
             if (!windupStarting)
             {
-                StopCoroutine("attack");
+                //StopCoroutine("attack");
                 windupStarting = true;
 
                 //preAttackPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
@@ -49,17 +55,22 @@ public class GrabbageWindup : MonoBehaviour
                 newPosition = (attackPosition - enemyPosition) - (attackPosition - enemyPosition).normalized * 0;
 
                 newPosition += enemyPosition;
-
-
-
-
             }
-            //attacking = true;
 
+
+            
+
+
+
+            //transform.position = Vector3.MoveTowards(transform.position, targetToAttack.position, 10f * Time.deltaTime);
+        }
+
+        if (windupStarting)
+        {
             gameObject.GetComponent<GrabbageToPlayers>().enemySpeed = 0;
             if (!attacking)
             {
-
+                sr.color = Color.yellow;
                 if (!gameObject.activeInHierarchy)
                 {
                     StopCoroutine("attack");
@@ -69,28 +80,26 @@ public class GrabbageWindup : MonoBehaviour
                     StartCoroutine("attack");
                 }
             }
-
-
-            //transform.position = Vector3.MoveTowards(transform.position, targetToAttack.position, 10f * Time.deltaTime);
         }
-        else if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) > 6f && !attacking)
+
+
+        if (hitFence)
         {
-            //StopCoroutine("attack");
-
-
-            gameObject.GetComponent<GrabbageToPlayers>().enemySpeed = gameObject.GetComponent<GrabbageToPlayers>().originalSpeed;
-            if (!gameObject.GetComponent<EnemyControler>().takingDamage)
+            StopCoroutine("attack");
+            if (attackTimer <= 0)
             {
-                sr.color = prev;
+                attackTimer = attackTickSpeed;
+                windupStarting = false;
+                attacking = false;
+                hitFence = false;
+
+
             }
-
+            else
+            {
+                attackTimer -= Time.deltaTime;
+            }
         }
-        else if (attacking)
-        {
-            gameObject.GetComponent<GrabbageToPlayers>().enemySpeed = 0;
-        }
-
-
 
     }
 
@@ -111,24 +120,29 @@ public class GrabbageWindup : MonoBehaviour
             attacking = true;
             //gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
         }
-        /*
-        if (transform.position == newPosition)
-        {
-            hurtBox.enabled = true;
-            //daAttack.enabled = true;
-        }
-        */
 
         yield return new WaitForSeconds(1f);
+        if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) > 6f)
+        {
+            //StopCoroutine("attack");
+
+
+            sr.color = prev;
+            gameObject.GetComponent<GrabbageToPlayers>().enemySpeed = gameObject.GetComponent<GrabbageToPlayers>().originalSpeed;
+
+
+
+        }
         //hurtBox.enabled = false;
         //daAttack.enabled = false;
         windupStarting = false;
         attacking = false;
-
-
-
-
-
-
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Border")
+        {
+            hitFence = true;
+        }
     }
 }
