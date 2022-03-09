@@ -5,35 +5,49 @@ using UnityEngine;
 public class ChiliAnimator : MonoBehaviour
 {
     // ================= Private variables =================
+    private SpriteRenderer sr;
     private Animator animator;
-    private RangeEnemy rE;
+    private RangeEnemy re;
+    private EnemyControler ec;
     public bool shot = false;
+    private bool flipped = false;
 
     void Start()
     {
+        sr = this.GetComponent<SpriteRenderer>();
         animator = this.GetComponent<Animator>();
-        rE = this.GetComponentInParent<RangeEnemy>();
+        re = this.GetComponentInParent<RangeEnemy>();
+        ec = this.GetComponentInParent<EnemyControler>();
     }
 
     void Update()
     {
-        // Update speed
-        animator.SetFloat("Speed", rE.enemySpeed);
+        if (ec.stunned)
+        {
+            animator.SetFloat("Speed", 0);
+            animator.SetBool("Shooting", false);
+        }
+        else
+        {
+            animator.SetFloat("Speed", re.enemySpeed);
+            animator.SetBool("Shooting", re.shooting);
+        }
 
-        // Shooting
-        animator.SetBool("Shooting", rE.shooting);
-        /*if (rE.shooting && !shot)
+        // Face the direction they are shooting
+        if (re.direction.x > 0 && flipped)
         {
-            shot = true;
-            animator.SetTrigger("Shoot");
-        } else if (!rE.shooting && shot)
+            flipped = false;
+            sr.flipX = false;
+        }
+        else if (re.direction.x < 0 && !flipped)
         {
-            shot = false;
-        }*/
+            flipped = true;
+            sr.flipX = true;
+        }
     }
 
     void Shoot()
     {
-        rE.StartCoroutine("shoot"); 
+        re.Shoot();
     }
 }

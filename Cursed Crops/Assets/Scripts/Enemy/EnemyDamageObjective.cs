@@ -9,15 +9,20 @@ public class EnemyDamageObjective : MonoBehaviour
     public GameObject mainObjective;
     public int houseHealth = 5000;
     public int startingHouseHealth = 5000;
+    public GameObject damageNotif;
 
+    private float damageNotifCooldown = 6f;
+    private float damageNotifTimer = 6f;
+    private bool showingNotif = false;
     private bool isItHit = false;
-    // Start is called before the first frame update
+
     void Start()
     {
         houseHealth = startingHouseHealth;
+
+        damageNotif = this.transform.GetChild(0).gameObject;
     }
 
-    // Update is called once per frame
     void Update()
     {
         //Once the objective's health reaches zero destroy it and change the scene to the game over
@@ -25,13 +30,31 @@ public class EnemyDamageObjective : MonoBehaviour
         {
             SceneManager.LoadScene("GameOver");
         }
+
+        // Notification Cooldown
+        if (damageNotifTimer < damageNotifCooldown)
+        {
+            showingNotif = true;
+            damageNotifTimer += Time.deltaTime;
+        }
+        else showingNotif = false;
+
+        // Show Notification
+        if(showingNotif)
+        {
+            // Display notification
+            damageNotif.SetActive(true);
+        } else
+        {
+            // Close notification
+            damageNotif.SetActive(false);
+        }
     }
     
-    //OnCollision Enter doesn't work for some reason but on trigger will do for now to do damage to the house
-    // Need to find a way to make damage stack if multiple enemies are in it
-    private void OnTriggerEnter(Collider other)
+    //Don't want to erase this code yet 
+    /*private void OnTriggerEnter(Collider other)
     {
-        while (other.gameObject.tag == "Enemy" && !isItHit)
+        while (other.gameObject.tag == "attackBox" && !isItHit)
         {
             //houseHealth -= 5;
             //StartCoroutine(iframes());
@@ -48,6 +71,18 @@ public class EnemyDamageObjective : MonoBehaviour
         {
             houseHealth -= 5;
             StartCoroutine(iframes());
+        }
+    }
+    */
+
+    //Function for the house to take damage
+    public void takeDamage(int damage)
+    {
+        if (!isItHit)
+        {
+            houseHealth -= damage;
+            StartCoroutine(iframes());
+            damageNotifTimer = 0f;
         }
     }
     // IEnumarator so doesn't freaking get one 1 shotted in 1 second

@@ -13,20 +13,20 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] private float faceAimTimer = 2f;
     [SerializeField] private float attackBufferMax = 2f;
     private float attackBufferTimer = 2.1f;
-    public int attackChain = 0;
+    private int attackChain = 0;
     private float rangeCoolDown;
     private float rollSpeed;
-    public float rollSpeedMax = 24;
     private float rollSpeedDropMultiplier;
     private float faceAimTime = 0;
     private float lungeSpeed = 8;
     private int curBullets = 3;
     private float lungedist = 0;
 
+    public float rollSpeedMax = 24;
     public int maxBullets = 3;
     public int overAllPlayerDamage = 0;
     public float moveSpeed;
-    public float originalSpeed;
+    public float maxMoveSpeed;
     public int money = 0;
     public int health = 10;
     public int maxHealth = 10;
@@ -35,22 +35,29 @@ public class PlayerControler : MonoBehaviour
     // ====================== BOOLS ======================
     private bool rangeCD = false;
     private bool rollCD = false;
-    public bool faceaim = false;
-    public bool trapped = false;
+    private bool faceaim = false;
     private bool startRollFallOff = false;
-    public bool isAttacking = false;
+    private bool isAttacking = false;
     private bool attackMove = false;
     private bool attackCancleable = false;
-    public bool attackQueued = false;
+    private bool attackQueued = false;
     private bool lunge = false;
+    public bool collidingWithBorder = false;
+
+    // Used to toggle to older and newer versions of attack. Once one is picked remove this and commit to one verson
+    public bool newAttackSystem = true;
+    public bool lungeAttacking = true;
+    public bool twoAttack = true;
 
     public bool ready = false;
     public bool flipped = false;
     public bool useControler;               // If using controller changes aiming
     public bool stopMovement = false;       // Used to stop movement when shooting, planting, taking damage.
     public bool shooting = false;
+    public bool trapped = false;
 
     // ====================== OTHER COMPONENTS ======================
+    [SerializeField] private LayerMask groundLayermask;
     private PlayerInput input;
     private BuildingSystem bs;
     private EnemyPlayerDamage epd;
@@ -59,18 +66,19 @@ public class PlayerControler : MonoBehaviour
     private SpriteRenderer playerSprite;
     private Animator animator;
     private GameObject meleeAttack;
-    public GameObject bullet;
-    public GameObject ammoManager;
     private AmmoManager am;
     private Coroutine ap;               // Used to store and stop attack Coroutine
+    private Pause_Manager pauseMenu;     // reference to pause menu
+    private delegate void Callback();
     private Vector2 aimInputVector = Vector2.zero;
     private Vector2 moveInputVector = Vector2.zero;
     private Vector3 movement;
     private Vector3 rollDir;
     private Vector3 direction;
     private Vector3 aimDir;             // Used to Store the direction the player will shoot
-    [SerializeField] private LayerMask groundLayermask;
-    private delegate void Callback();
+
+    public GameObject bullet;
+    public GameObject ammoManager;
     public enum State
     {
         Normal,
@@ -81,13 +89,9 @@ public class PlayerControler : MonoBehaviour
     }
     public State state;
 
-    // reference to pause menu
-    private Pause_Manager pauseMenu;
-
     // get / set functions
     public Vector3 getDirection() { return direction; }
 
-    // Start is called before the first frame update
     void Start()
     {
         // Assign controller if using one
@@ -110,7 +114,7 @@ public class PlayerControler : MonoBehaviour
         epd = GetComponent<EnemyPlayerDamage>();
         rb = GetComponent<Rigidbody>();
         cc = GetComponent<CapsuleCollider>();
-        originalSpeed = moveSpeed;
+        maxMoveSpeed = moveSpeed;
         meleeAttack = this.transform.GetChild(0).gameObject;
         meleeAttack.SetActive(false);
 
@@ -144,9 +148,9 @@ public class PlayerControler : MonoBehaviour
         */
     }
 
-    // Update is called once per frame
     void Update()
     {
+        rb.velocity = Vector3.zero;
         // Face mouse / conroller when not rolling
         if (state != State.Rolling)
         {
@@ -166,12 +170,6 @@ public class PlayerControler : MonoBehaviour
             animator.SetBool("Downed", false);
             state = State.Normal;
         }
-
-        // movement is stopped if player is trapped
-        if (trapped)
-            moveSpeed = 0;
-        else
-            moveSpeed = originalSpeed;
 
         // Slight move forward during attack
         if (attackMove)
@@ -199,36 +197,42 @@ public class PlayerControler : MonoBehaviour
         //playerSprite.sortingOrder = -(int)this.transform.position.z;
     }
 
-    // Called every fixed frame-rate frame. Better for physics stuff
     private void FixedUpdate()
     {
         switch (state)
         {
             case State.Normal:
                 // Can't move while attacking
-                if (!stopMovement && !isAttacking)
+                if (!stopMovement && !trapped)
                 {
                     Move();
                 }
                 rollDir = movement;
                 isAttacking = false;
                 attackQueued = false;
+                moveSpeed = maxMoveSpeed;
                 break;
             case State.Building:
                 // Exit building state if out of build mode
                 if (!bs.buildmodeActive)
                     state = State.Normal;
-                if(!stopMovement) Move();
+                if(!stopMovement && !trapped) Move();
                 rollDir = movement;
                 break;
-            /*case State.Attacking:
-                movement = new Vector3(moveInputVector.x, 0, moveInputVector.y).normalized;
-                rollDir = movement;
-                break;*/
+            case State.Attacking:
+                if (lungeAttacking) lungedist = 0.15f;
+                else if (newAttackSystem)
+                {
+                    moveSpeed = maxMoveSpeed * 0.4f;
+                    if (!stopMovement && !trapped) Move();
+                }
+                //movement = new Vector3(moveInputVector.x, 0, moveInputVector.y).normalized;
+                //rollDir = movement;
+                break;
             case State.Rolling:
-                cc.enabled = false;
+                //cc.enabled = false;
+                epd.invulnerable = true;
                 DodgeRoll();
-                //animator.SetBool("Dodging", true);
                 // Roll speed is constant at the start, then falls off untill just below move speed
                 if (!startRollFallOff)
                 {
@@ -241,9 +245,9 @@ public class PlayerControler : MonoBehaviour
                     rollSpeed -= rollSpeed * rollSpeedDropMultiplier * Time.deltaTime;
                     if (rollSpeed <= 3.5f)
                     {
-                        cc.enabled = true;
+                        //cc.enabled = true;
+                        epd.invulnerable = false;
                         state = State.Normal;
-                        //animator.SetBool("Dodging", false);
                         startRollFallOff = false;
                         rollSpeedDropMultiplier = 0f;
                     }
@@ -411,7 +415,8 @@ public class PlayerControler : MonoBehaviour
 
     private void DodgeRoll()
     {
-        rb.MovePosition(transform.position + rollDir * rollSpeed * Time.fixedDeltaTime);
+        //rb.MovePosition(transform.position + rollDir * rollSpeed * Time.fixedDeltaTime);
+        if(!collidingWithBorder)this.transform.Translate(rollDir * rollSpeed * Time.fixedDeltaTime);
     }
 
     // Attack =================================
@@ -438,6 +443,7 @@ public class PlayerControler : MonoBehaviour
                         isAttacking = true;
                         animator.SetTrigger("Melee1");
                         state = State.Attacking;
+                        if (lungeAttacking) AttackLunge();
                         lunge = false;
                         //ap = StartCoroutine(attackPhase(0f, 0.2f, 0.2f, false));
                         break;
@@ -447,28 +453,38 @@ public class PlayerControler : MonoBehaviour
                         isAttacking = true;
                         animator.SetTrigger("Melee2");
                         state = State.Attacking;
+                        if (lungeAttacking) AttackLunge();
                         //if (ap != null)
                         //    StopCoroutine(ap);
                         //ap = StartCoroutine(attackPhase(0f, 0.2f, 0.2f, false));
                         break;
                     case 2:
-                        //attackcoolDown = 0;
-                        //attackDuration = 0.7f;
-                        isAttacking = true;
-                        animator.SetTrigger("Melee3");
-                        state = State.Attacking;
-                        //if (ap != null)
-                        //    StopCoroutine(ap);
-                        if (!trapped)
+                        if (twoAttack)
                         {
-                            lungedist = 0.1f;
-                            lunge = true;
-                            //ap = StartCoroutine(attackPhase(0.3f, 0.1f, 0.3f, true)); // add to 0.7
-                        }
-                        else
+                            attackChain = 0;
+                            state = State.Normal;
+                        } else
                         {
-                            lunge = false;
-                            //ap = StartCoroutine(attackPhase(0.3f, 0.1f, 0.3f, false)); // add to 0.7
+                            //attackcoolDown = 0;
+                            //attackDuration = 0.7f;
+                            isAttacking = true;
+                            animator.SetTrigger("Melee3");
+                            state = State.Attacking;
+                            if (lungeAttacking) AttackLunge();
+                            //if (ap != null)
+                            //    StopCoroutine(ap);
+                            if (!trapped)
+                            {
+                                lungedist = 0.1f;
+                                lunge = true;
+                                //ap = StartCoroutine(attackPhase(0.3f, 0.1f, 0.3f, true)); // add to 0.7
+                            }
+                            else
+                            {
+                                lungedist = 0.0f;
+                                lunge = false;
+                                //ap = StartCoroutine(attackPhase(0.3f, 0.1f, 0.3f, false)); // add to 0.7
+                            }
                         }
                         break;
                     case 3:
@@ -517,8 +533,14 @@ public class PlayerControler : MonoBehaviour
 
     public void AttackLunge()
     {
-        attackMove = true;
-        StartCoroutine(cooldown(() => { attackMove = false; }, lungedist));
+        if (!newAttackSystem || lungeAttacking)
+        {
+            if (!trapped)
+            {
+                attackMove = true;
+                StartCoroutine(cooldown(() => { attackMove = false; }, lungedist));
+            }
+        }
     }
     
     public void DoAttack()
@@ -570,7 +592,7 @@ public class PlayerControler : MonoBehaviour
 
             if (c.gameObject.tag == "Enemy" || c.gameObject.name == "cornnonBullet(Clone)")
             {
-                if(c.gameObject.tag == "Enemy")
+                if(c.gameObject.tag == "Enemy" && c.GetComponent<EnemyToPlayer>() != null)
                 {
                     Debug.Log("are we hitting enemy");
                     //Exceptions for the grabbage, mediberry, and cornnon since their aggro is different than the regualr enemies
@@ -584,21 +606,26 @@ public class PlayerControler : MonoBehaviour
                 {
                     if (attackChain == 1)
                     {
+                        if(newAttackSystem) enemyControler.Knockback(transform);
                         int damageAmmount = (int)(3 * damageBoost);
                         enemyControler.takeDamage(damageAmmount, "Melee");
+                        //enemyControler.Stun();
                         overAllPlayerDamage += damageAmmount;
                     }
                     else if (attackChain == 2)
                     {
+                        if (newAttackSystem) enemyControler.Knockback(transform);
                         int damageAmmount = (int)(5 * damageBoost);
                         enemyControler.takeDamage(damageAmmount, "Melee");
+                        //enemyControler.Stun();
                         overAllPlayerDamage += damageAmmount;
                     }
                     else if (attackChain == 3)
                     {
-                        c.GetComponent<EnemyControler>().finalHit = true;
+                        enemyControler.Knockback(transform);
                         int damageAmmount = (int)(8 * damageBoost);
                         enemyControler.takeDamage(damageAmmount, "Melee");
+                        //enemyControler.Stun();
                         overAllPlayerDamage += damageAmmount;
                     }
                 }
@@ -679,6 +706,16 @@ public class PlayerControler : MonoBehaviour
         {
             trapped = false;
         }
+    }
+
+    private void OnCollisionStay(Collision col)
+    {
+        if (col.gameObject.tag == "Border") collidingWithBorder = true;
+    }
+
+    private void OnCollisionExit(Collision col)
+    {
+        if (col.gameObject.tag == "Border") collidingWithBorder = false;
     }
 
     IEnumerator cooldown(Callback callback, float time)

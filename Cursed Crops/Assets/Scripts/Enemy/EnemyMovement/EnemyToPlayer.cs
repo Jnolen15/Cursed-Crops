@@ -26,10 +26,12 @@ public class EnemyToPlayer : MonoBehaviour
     private float healingTickSpeed = 1f;
     private float healingTimer = 5f;
     public bool angered = false;
+    private EnemyControler ec;
 
     // Start is called before the first frame update
     void Start()
     {
+        ec = this.gameObject.GetComponent<EnemyControler>();
         rb = GetComponent<Rigidbody>();
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         listOfPlayers = new Transform[players.Length];
@@ -89,7 +91,7 @@ public class EnemyToPlayer : MonoBehaviour
             StopAllCoroutines();
             //Destroy(gameObject);
         }
-        if (gameObject.GetComponent<EnemyControler>().takingDamage)
+        /*if (gameObject.GetComponent<EnemyControler>().takingDamage)
         {
             enemySpeed = 0;
             StopCoroutine("stun");
@@ -99,9 +101,13 @@ public class EnemyToPlayer : MonoBehaviour
         {
             //enemySpeed = originalSpeed;
             
-        }
+        }*/
         if (closestPlayer != mainTarget)
         {
+            if (closestPlayer.GetComponent<EnemyPlayerDamage>().playerIsStun)
+            {
+                angered = false;
+            }
             if (healingTimer <= 0)
             {
                 if (!angered)
@@ -118,6 +124,10 @@ public class EnemyToPlayer : MonoBehaviour
         else
         {
             healingTimer = healingTickSpeed;
+        }
+        if(closestPlayer != mainTarget)
+        {
+            
         }
         
         //PathRequestManager.RequestPath(this.transform.position, closestPlayer.position, OnPathFound);
@@ -254,7 +264,7 @@ public class EnemyToPlayer : MonoBehaviour
             //transform.position = new Vector3(transform.position.x, 0, transform.position.z);
             //Debug.Log("currentWaypoint y = " + currentWaypoint.y);
             currentWaypoint.y = 1;
-            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, enemySpeed * Time.deltaTime);
+            if(!ec.stunned) transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, enemySpeed * Time.deltaTime);
             yield return null;
             //Vector3 positioning = transform.position;
             //rb.MovePosition(positioning);
@@ -262,15 +272,15 @@ public class EnemyToPlayer : MonoBehaviour
         }
     }
 
-    IEnumerator stun()
+    /*IEnumerator stun()
     {
         Debug.Log("getting stun");
         //gameObject.GetComponent<Renderer>().material.color = Color.red;
         yield return new WaitForSeconds(0.5f);
         //gameObject.GetComponent<Renderer>().material.color = prev;
         enemySpeed = originalSpeed;
-        gameObject.GetComponent<EnemyControler>().takingDamage = false;
-    }
+        //gameObject.GetComponent<EnemyControler>().takingDamage = false;
+    }*/
 
     public void OnDrawGizmos()
     {

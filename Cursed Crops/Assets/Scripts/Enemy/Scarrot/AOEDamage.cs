@@ -26,7 +26,7 @@ public class AOEDamage : MonoBehaviour
         }
         else if (other.gameObject.tag == "MainObjective")
         {
-            other.gameObject.GetComponent<EnemyDamageObjective>().houseHealth -= damage;
+            other.gameObject.GetComponent<EnemyDamageObjective>().takeDamage(damage);
         }
     }
 }

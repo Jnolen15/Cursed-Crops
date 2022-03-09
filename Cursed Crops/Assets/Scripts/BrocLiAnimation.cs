@@ -11,6 +11,7 @@ public class BrocLiAnimation : MonoBehaviour
     private Animator animator;
     private EnemyToPlayer etp;
     private WindupWithStun wus;
+    private EnemyControler ec;
 
     // Start is called before the first frame update
     void Start()
@@ -18,17 +19,20 @@ public class BrocLiAnimation : MonoBehaviour
         animator = this.gameObject.GetComponent<Animator>();
         etp = this.gameObject.GetComponentInParent<EnemyToPlayer>();
         wus = this.gameObject.GetComponentInParent<WindupWithStun>();
+        ec = this.gameObject.GetComponentInParent<EnemyControler>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        animator.SetFloat("Speed", etp.enemySpeed);
-        if (wus.stunned)
+        
+        if (ec.stunned)
         {
+            animator.SetFloat("Speed", 0);
             animator.SetBool("Attacking", false);
         } else
         {
+            animator.SetFloat("Speed", etp.enemySpeed);
             animator.SetBool("Attacking", wus.attacking);
         }
         

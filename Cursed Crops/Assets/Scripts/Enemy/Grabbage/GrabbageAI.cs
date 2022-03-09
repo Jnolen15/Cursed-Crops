@@ -80,7 +80,7 @@ public class GrabbageAI : MonoBehaviour
     {
         if (trappedPlayer.GetComponent<EnemyPlayerDamage>().playerHealth > 0)
         {
-            trappedPlayer.GetComponent<EnemyPlayerDamage>().playerHealth -= 1;
+            trappedPlayer.GetComponent<EnemyPlayerDamage>().Damage(1);
             yield return new WaitForSeconds(1f);
             
         }

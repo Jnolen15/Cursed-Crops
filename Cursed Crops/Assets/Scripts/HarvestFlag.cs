@@ -36,23 +36,24 @@ public class HarvestFlag : MonoBehaviour
 
         if(totalPlayers == playersReady)
         {
-            // If last wave, make sure bounty is met before starting
-            if (spawnManager.currentPhase == "Night")
-            {
-                if (grm.bountyMet())
-                {
-                    spawnManager.StartHarvest();
-                    quotaWarning.SetActive(false);
-                }
-                else
-                {
-                    Debug.Log("You must meet the bounty requirements in order to procede to the next wave");
-                    quotaWarning.SetActive(true);
-                }
-            } else
-            {
-                spawnManager.StartHarvest();
-            }
+            // Before each wave, make sure bounty is met before starting
+            if (spawnManager.currentPhase == "Morning") checkStartPhase(0.2f);
+            else if (spawnManager.currentPhase == "Afternoon") checkStartPhase(0.5f);
+            else if (spawnManager.currentPhase == "Night") checkStartPhase(1);
+        }
+    }
+
+    private void checkStartPhase(float percent)
+    {
+        if (grm.bountyMet(percent))
+        {
+            spawnManager.StartHarvest();
+            quotaWarning.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("You must meet the bounty requirements in order to procede to the next wave");
+            quotaWarning.SetActive(true);
         }
     }
 

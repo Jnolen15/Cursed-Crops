@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6635659750076622743}
   - component: {fileID: 4224075844236355666}
   - component: {fileID: 4661623332744592935}
-  - component: {fileID: 6693185569991815575}
+  - component: {fileID: -2320286009929114011}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: playerBullet
@@ -104,7 +104,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: f888af46bc0a909459464ec8f6ffc29d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 63f02c695d2a1f442bbeaee61d034d14, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -132,9 +132,11 @@ MonoBehaviour:
   damage: 10
   bulletSpeed: 15
   piercing: 0
+  pierceAmmount: 0
   isPayload: 0
+  effect: {fileID: 0}
   destination: {x: 0, y: 0, z: 0}
---- !u!114 &6693185569991815575
+--- !u!114 &-2320286009929114011
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -9,29 +9,34 @@ public class RangeEnemy : MonoBehaviour
     public Transform mainTarget;
     public Transform[] listOfPlayers;
     public GameObject bullet;
+    public Vector3 direction;
     public float enemySpeed = 1f;
     public float originalSpeed = 1f;
     public float rangeDistance = 10f;
+    public float cooldown = 3f;
     public bool gotHit = false;
     public bool aPlayerIsStun = true;
     public bool shooting = false;
     public bool onCooldown = false;
-    public bool stunned = false;
 
     // ================= Private variables =================
     private Transform closestPlayer;
     private Transform oldTarget;
+    private Transform instantiatePoint;
     private Rigidbody rb;
+    private EnemyControler ec;
     private Vector3[] path;
-    private Vector3 direction;
     private const float minPathupdateTime = .2f;
     private const float pathUpdateMoveThreshhold = .5f;
     private int targetIndex = 0;
     private bool targetChange = false;
+    private float cooldownTimer = 0f;
 
 
     void Start()
     {
+        instantiatePoint = this.transform.GetChild(1).GetComponent<Transform>();
+        ec = this.GetComponent<EnemyControler>();
         rb = GetComponent<Rigidbody>();
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         listOfPlayers = new Transform[players.Length];
@@ -72,6 +77,10 @@ public class RangeEnemy : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Cooldown stuffs
+        if (cooldownTimer < cooldown) cooldownTimer += Time.deltaTime; // Face aim period
+        else onCooldown = false;
+
         // new multiplayer chase code
         Transform closestPlayer = FindClosestPlayer(listOfPlayers);
         if (oldTarget != closestPlayer && oldTarget != null && closestPlayer != null)
@@ -84,20 +93,12 @@ public class RangeEnemy : MonoBehaviour
             StopAllCoroutines();
             //Destroy(gameObject);
         }
-
-        if (gameObject.GetComponent<EnemyControler>().takingDamage && !stunned)
-        {
-            Debug.Log("HERE FOR SOME REASON");
-            stunned = true;
-            shooting = false;
-            StopCoroutine("shoot");
-            StartCoroutine("stun");
-        }
-        else if (Vector3.Distance(closestPlayer.position, transform.position) < rangeDistance)
+        
+        if (Vector3.Distance(closestPlayer.position, transform.position) < rangeDistance && !ec.stunned)
         {
             enemySpeed = 0;
             
-            if (!shooting && !onCooldown && !gameObject.GetComponent<EnemyControler>().takingDamage)
+            if (!shooting && !onCooldown && !ec.stunned)
             {
                 shooting = true;
                 direction = new Vector3(closestPlayer.position.x - transform.position.x, 0, closestPlayer.position.z - transform.position.z);
@@ -108,6 +109,15 @@ public class RangeEnemy : MonoBehaviour
         else
         {
             enemySpeed = originalSpeed;
+        }
+
+        // Get stunned
+        if (ec.takingDamage && ec.lastDamageType == "Melee" && !ec.stunned)
+        {
+            ec.Stun();
+            cooldownTimer = 0f;
+            shooting = false;
+            onCooldown = true;
         }
     }
 
@@ -194,7 +204,7 @@ public class RangeEnemy : MonoBehaviour
             //transform.position = new Vector3(transform.position.x, 0, transform.position.z);
             //Debug.Log("currentWaypoint y = " + currentWaypoint.y);
             currentWaypoint.y = 1;
-            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, enemySpeed * Time.deltaTime);
+            if(!ec.stunned) transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, enemySpeed * Time.deltaTime);
             yield return null;
             //Vector3 positioning = transform.position;
             //rb.MovePosition(positioning);
@@ -202,33 +212,17 @@ public class RangeEnemy : MonoBehaviour
         }
     }
 
-    public IEnumerator shoot()
+    public void Shoot()
     {
-        // Create bullet and send bullet in correct direction
-        Debug.Log("Start of shoot");
-        GameObject bul = Instantiate(bullet, transform.position, transform.rotation);
-        bul.GetComponent<Bullet>().movement = direction.normalized;
-        onCooldown = true;
-        shooting = false;
-        yield return new WaitForSeconds(3f);
-        onCooldown = false;
-        Debug.Log("End of shoot");
-
-    }
-
-    /*public void Shoot()
-    {
-        shooting = false;
-        GameObject bul = Instantiate(bullet, transform.position, transform.rotation);
-        bul.GetComponent<Bullet>().movement = direction.normalized;
-    }*/
-
-    IEnumerator stun()
-    {
-        Debug.Log("getting stunned");
-        yield return new WaitForSeconds(2f);
-        gameObject.GetComponent<EnemyControler>().takingDamage = false;
-        stunned = false;
-        onCooldown = false;
+        if (!ec.stunned)
+        {
+            // Create bullet and send bullet in correct direction
+            //Debug.Log("Start of shoot");
+            GameObject bul = Instantiate(bullet, instantiatePoint.position, instantiatePoint.rotation);
+            bul.GetComponent<Bullet>().movement = direction.normalized;
+            onCooldown = true;
+            cooldownTimer = 0f;
+            shooting = false;
+        }
     }
 }

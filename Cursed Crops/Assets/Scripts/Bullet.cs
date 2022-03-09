@@ -10,22 +10,34 @@ public class Bullet : MonoBehaviour
     public int damage = 5;
     public int bulletSpeed = 15;
     public bool piercing = false;
+    public int pierceAmmount = 0;
 
     [Header("Payloads: damage when reach destination")]
     public bool isPayload = false;
+    public GameObject effect;
     public Vector3 destination;
 
     // ================= Private variables =================
     private Rigidbody rb;
     private SpriteRenderer sr;
     private bool exploded = false; // Used for Payload type bullets
+    private int pierceCount;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         sr = GetComponent<SpriteRenderer>();
-        // GameObject.FindObjectsOfType<SpriteLeaner>();
+        pierceCount = pierceAmmount;
+
+        // Make bullet sprite face correct direction
+        bool wasNeg= false;
+        if (movement.z < 0) wasNeg = true;
+        float dot = Vector2.Dot(new Vector2(movement.x, movement.z), new Vector2(1, 0));
+        dot = Mathf.Acos(dot);
+        if (wasNeg) dot *= -1;
+        dot = Mathf.Rad2Deg * dot;
+        this.transform.eulerAngles = new Vector3(this.transform.rotation.x, this.transform.rotation.y, dot); ;
     }
 
     private void Update()
@@ -37,7 +49,10 @@ public class Bullet : MonoBehaviour
                 && ((this.transform.position.z <= destination.z + 2) && (this.transform.position.z >= destination.z - 2)))
             {
                 //Debug.Log("BOOM BITCH");
-                exploded = true;
+                //exploded = true;
+                Vector3 pos = new Vector3(this.transform.position.x, 0f, this.transform.position.z);
+                Instantiate(effect, pos, Quaternion.Euler(-90f, 0f, 0f));
+                Destroy(this.gameObject);
             }
         }
     }
@@ -55,11 +70,13 @@ public class Bullet : MonoBehaviour
         {
             if (other.gameObject.tag == "Player")
             {
-                other.gameObject.GetComponent<EnemyPlayerDamage>().playerHealth -= 5;
+                other.gameObject.GetComponent<EnemyPlayerDamage>().Damage(damage);
+                Destroy(this.gameObject);
             }
             else if (other.gameObject.tag == "MainObjective")
             {
-                other.gameObject.GetComponent<EnemyDamageObjective>().houseHealth -= 5;
+                other.gameObject.GetComponent<EnemyDamageObjective>().takeDamage(damage);
+                Destroy(this.gameObject);
             }
         }
 
@@ -69,27 +86,13 @@ public class Bullet : MonoBehaviour
             // Normal Bullets
             if (!isPayload && (other.gameObject.tag == "Enemy" || other.gameObject.name == "cornnonBullet(Clone)"))
             {
+                pierceCount--;
                 EnemyControler enemyControler = other.gameObject.GetComponent<EnemyControler>();
                 enemyControler.takeDamage(damage, "Range");
-                if (!piercing)
+                if (!piercing || pierceCount <= 0)
                     Destroy(gameObject);
                 //Debug.Log("Hit " + other.gameObject.tag);
             }
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        // Payload Bullets
-        if (isPayload && exploded)
-        {
-            if (other.gameObject.tag == "Enemy" || other.gameObject.name == "cornnonBullet(Clone)")
-            {
-                EnemyControler enemyControler = other.gameObject.GetComponent<EnemyControler>();
-                enemyControler.ApplyEffect("Burning", 4f);
-                enemyControler.takeDamage(damage, "Range");
-            }
-            Destroy(this.gameObject);
         }
     }
 }
