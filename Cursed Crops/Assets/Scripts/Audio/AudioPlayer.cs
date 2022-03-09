@@ -13,13 +13,13 @@ public class AudioPlayer : MonoBehaviour
 
     void Awake(){
         //Creates an instance of this class if one hasn't already been created
-        if(Instance == null){
-            Instance = this;
+        //if(Instance == null){
+        //    Instance = this;
             //Tells Unity not to detroy the instance while switching scenes
-            DontDestroyOnLoad(gameObject);
-        } else{
-            Destroy(gameObject);
-        }
+        //    DontDestroyOnLoad(gameObject);
+        //} else{
+        //    Destroy(gameObject);
+        //}
     }
 
     public void PlaySound(AudioClip _clip){
