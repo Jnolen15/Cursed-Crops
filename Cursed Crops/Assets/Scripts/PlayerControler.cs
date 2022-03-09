@@ -579,6 +579,7 @@ public class PlayerControler : MonoBehaviour
 
     public void AttackCancled()
     {
+        shooting = false;
         isAttacking = false;
         attackCancleable = false;
         state = State.Normal;

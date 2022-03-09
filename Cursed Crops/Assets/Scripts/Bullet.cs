@@ -19,15 +19,14 @@ public class Bullet : MonoBehaviour
 
     // ================= Private variables =================
     private Rigidbody rb;
-    private SpriteRenderer sr;
-    private bool exploded = false; // Used for Payload type bullets
+    private GameObject spriteObj;
     private int pierceCount;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        sr = GetComponent<SpriteRenderer>();
+        spriteObj = this.transform.GetChild(0).gameObject;
         pierceCount = pierceAmmount;
 
         // Make bullet sprite face correct direction
@@ -37,7 +36,7 @@ public class Bullet : MonoBehaviour
         dot = Mathf.Acos(dot);
         if (wasNeg) dot *= -1;
         dot = Mathf.Rad2Deg * dot;
-        this.transform.eulerAngles = new Vector3(this.transform.rotation.x, this.transform.rotation.y, dot); ;
+        spriteObj.transform.eulerAngles = transform.eulerAngles = new Vector3(this.transform.rotation.x, this.transform.rotation.y, dot);
     }
 
     private void Update()
