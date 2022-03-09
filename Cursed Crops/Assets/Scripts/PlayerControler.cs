@@ -19,11 +19,11 @@ public class PlayerControler : MonoBehaviour
     private float rollSpeedDropMultiplier;
     private float faceAimTime = 0;
     private float lungeSpeed = 8;
-    private int curBullets = 3;
     private float lungedist = 0;
 
     public float rollSpeedMax = 24;
     public int maxBullets = 3;
+    public int curBullets = 3;
     public int overAllPlayerDamage = 0;
     public float moveSpeed;
     public float maxMoveSpeed;
