@@ -26,7 +26,10 @@ public class AudioPlayer : MonoBehaviour
         _effectsSource.PlayOneShot(_clip);
     }
 
+    //Will work on this next quarter
+    /*
     public void ChangeMasterVolume(float val){
         AudioListener.volume = val;
     }
+    */
 }

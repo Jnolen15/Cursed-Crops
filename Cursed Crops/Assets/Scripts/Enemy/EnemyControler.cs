@@ -13,8 +13,12 @@ public class EnemyControler : MonoBehaviour
     public bool stunResist = true;
     public bool stunned = false;
     public string lastDamageType;
+    // Audio Variables
+    
+    public AudioClip hurtSound;
 
     // ================= Private variables =================
+    private AudioPlayer daAudio;
     private delegate void Callback();
     private Renderer rend;
     private SpriteRenderer sr;
@@ -45,6 +49,9 @@ public class EnemyControler : MonoBehaviour
         rend = gameObject.GetComponent<Renderer>();
         sr = this.transform.GetComponentInChildren<SpriteRenderer>();
         itemDropper = GetComponent<ItemDropper>();
+
+        //Audio set up
+        daAudio = gameObject.GetComponent<AudioPlayer>();
 
         // Get hit effect stuff
         impact = Instantiate(Resources.Load<GameObject>("Effects/Impact"), transform.position, transform.rotation, transform);
@@ -86,6 +93,7 @@ public class EnemyControler : MonoBehaviour
         health -= dmg;
         overalldamage += dmg;
         lastDamageType = type;
+        daAudio.PlaySound(hurtSound);
         if (ps != null)
             ps.Emit(4);
         // If health is below or equal to 0 die
