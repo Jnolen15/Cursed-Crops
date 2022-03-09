@@ -8,6 +8,7 @@ public class VolumeSlider : MonoBehaviour
 
     void Start()
     {
-        _slider.onValueChanged.AddListener(val => AudioPlayer.Instance.ChangeMasterVolume(val));
+        // compiling error
+        // _slider.onValueChanged.AddListener(val => AudioPlayer.Instance.ChangeMasterVolume(val));
     }
 }

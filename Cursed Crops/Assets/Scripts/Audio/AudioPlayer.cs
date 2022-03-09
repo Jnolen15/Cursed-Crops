@@ -23,10 +23,10 @@ public class AudioPlayer : MonoBehaviour
     }
 
     public void PlaySound(AudioClip _clip){
-        _effectsSource.PlayOneShot(clip);
+        _effectsSource.PlayOneShot(_clip);
     }
 
     public void ChangeMasterVolume(float val){
-        AudioListener.volume = value;
+        AudioListener.volume = val;
     }
 }
