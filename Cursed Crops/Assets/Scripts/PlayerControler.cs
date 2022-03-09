@@ -42,7 +42,7 @@ public class PlayerControler : MonoBehaviour
     private bool attackCancleable = false;
     private bool attackQueued = false;
     private bool lunge = false;
-    public bool collidingWithBorder = false;
+    private bool collidingWithBorder = false;
 
     // Used to toggle to older and newer versions of attack. Once one is picked remove this and commit to one verson
     public bool newAttackSystem = true;
@@ -220,7 +220,7 @@ public class PlayerControler : MonoBehaviour
                 rollDir = movement;
                 break;
             case State.Attacking:
-                if (lungeAttacking) lungedist = 0.15f;
+                if (lungeAttacking) lungedist = 0.1f;
                 else if (newAttackSystem)
                 {
                     moveSpeed = maxMoveSpeed * 0.4f;

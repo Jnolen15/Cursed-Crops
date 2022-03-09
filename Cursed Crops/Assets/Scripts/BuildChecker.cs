@@ -36,7 +36,7 @@ public class BuildChecker : MonoBehaviour
             // Determining acceptable position based on mode
             if (mode == "Build")
             {
-                if (other.gameObject.tag == "Buildable")
+                if (other.gameObject.tag == "Buildable" || other.gameObject.tag == "Border")
                 {
                     intersectingBuildable = true;
                 }
@@ -70,6 +70,10 @@ public class BuildChecker : MonoBehaviour
             intersectingBuildable = false;
         }
         if (other.gameObject.tag == "Buildable")
+        {
+            intersectingBuildable = false;
+        }
+        if (other.gameObject.tag == "Border")
         {
             intersectingBuildable = false;
         }
