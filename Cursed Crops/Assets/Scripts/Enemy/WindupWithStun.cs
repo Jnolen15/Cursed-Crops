@@ -15,6 +15,7 @@ public class WindupWithStun : MonoBehaviour
     private bool inPosition = false; 
     bool getPosition = false;
     bool windupStarting = false;
+    private bool hitFence = false;
     Rigidbody childRB;
     Rigidbody rb;
     private SpriteRenderer sr;
@@ -25,6 +26,8 @@ public class WindupWithStun : MonoBehaviour
     private EnemyControler ec;
     Color prev;
     IEnumerator inst = null;
+    private float attackTimer = 1;
+    private float attackTickSpeed = 1;
     void Start()
     {
         childRB = this.gameObject.transform.GetChild(1).GetComponent<Rigidbody>();
@@ -50,7 +53,7 @@ public class WindupWithStun : MonoBehaviour
         
         targetToAttack = gameObject.GetComponent<EnemyToPlayer>().closestPlayer;
         direction = new Vector3(targetToAttack.position.x - transform.position.x, 0, targetToAttack.position.z - transform.position.z);
-        if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) <= 6f)
+        if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) <= 6f && !hitFence)
         {
             
             //StopCoroutine("stun");
@@ -107,6 +110,24 @@ public class WindupWithStun : MonoBehaviour
             ec.Stun();
         }
 
+        if (hitFence)
+        {
+            StopCoroutine("attack");
+            if (attackTimer <= 0)
+            {
+                attackTimer = attackTickSpeed;
+                windupStarting = false;
+                attacking = false;
+                hitFence = false;
+
+
+            }
+            else
+            {
+                attackTimer -= Time.deltaTime;
+            }
+        }
+
     }
 
     IEnumerator attack()
@@ -150,5 +171,13 @@ public class WindupWithStun : MonoBehaviour
         //daAttack.enabled = false;
         windupStarting = false;
         attacking = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Border")
+        {
+            hitFence = true;
+        }
     }
 }
