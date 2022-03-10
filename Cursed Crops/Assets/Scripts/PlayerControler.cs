@@ -86,6 +86,7 @@ public class PlayerControler : MonoBehaviour
     public AudioClip gunSound;
     public AudioClip stepSound;
 
+    // ====================== STATES ======================
     public enum State
     {
         Normal,
@@ -96,9 +97,10 @@ public class PlayerControler : MonoBehaviour
     }
     public State state;
 
-    // get / set functions
+    // ====================== GET/SET FUNCTIONS ======================
     public Vector3 getDirection() { return direction; }
 
+    // Start ========================================================
     void Start()
     {
         // Assign controller if using one
@@ -156,6 +158,7 @@ public class PlayerControler : MonoBehaviour
         */
     }
 
+    // Updates ========================================================
     void Update()
     {
         rb.velocity = Vector3.zero;
@@ -379,7 +382,7 @@ public class PlayerControler : MonoBehaviour
         //Vector2 inputVector = playerInputActions.Player.Movement.ReadValue<Vector2>();
         movement = new Vector3(moveInputVector.x, 0, moveInputVector.y).normalized;
         rb.MovePosition(transform.position + movement * moveSpeed * Time.fixedDeltaTime);
-        daSound.PlayTheSetClip();
+        //daSound.PlayTheSetClip();
         //run animation management
         animator.SetFloat("MovementMagnitude", movement.magnitude);
 

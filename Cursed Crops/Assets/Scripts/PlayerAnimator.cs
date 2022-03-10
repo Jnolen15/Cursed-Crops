@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class PlayerAnimator : MonoBehaviour
 {
-    // ================= Public variables =================
-
     // ================= Private variables =================
     private Animator animator;
     private PlayerControler pc;
+    private AudioPlayer daSound;
 
     /* Most all animations are triggered from the PlayerController script
      * This script is used as a helper to trigger functions to be
@@ -19,6 +18,7 @@ public class PlayerAnimator : MonoBehaviour
     {
         animator = this.GetComponent<Animator>();
         pc = this.GetComponentInParent<PlayerControler>();
+        daSound = this.GetComponentInParent<AudioPlayer>();
     }
 
     void Update()
@@ -40,5 +40,8 @@ public class PlayerAnimator : MonoBehaviour
     public void StopMovement() { pc.stopMovement = true; }
 
     public void StartMovement() { pc.stopMovement = false; }
+
+    // Animation triggered sounds
+    public void PlayWalkSound() { daSound.PlaySound(pc.stepSound); }
 
 }
