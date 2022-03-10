@@ -12,6 +12,8 @@ public class EnemyPlayerDamage : MonoBehaviour
     public bool inIFrames = false;
     public bool playerIsStun = false;
     public bool invulnerable = false;
+    public AudioClip damageSound;
+    public AudioClip downSound;
 
     // ================= Private variables =================
     private delegate void Callback();
@@ -100,6 +102,7 @@ public class EnemyPlayerDamage : MonoBehaviour
         if (playerHealth > 0)
         {
             inIFrames = true;
+            gameObject.GetComponent<AudioPlayer>().PlaySound(damageSound);
             playerHealth -= damages;
 
             // Flash red and play hurt anim
@@ -130,6 +133,7 @@ public class EnemyPlayerDamage : MonoBehaviour
     {
         playerIsStun = true;
         invulnerable = true;
+        gameObject.GetComponent<AudioPlayer>().PlaySound(downSound);
         yield return new WaitForSeconds(10.0f);
         playerIsStun = false;
         invulnerable = false;

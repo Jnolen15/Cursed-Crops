@@ -22,7 +22,7 @@ public class AOEDamage : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
 
-            StartCoroutine(other.gameObject.GetComponent<EnemyPlayerDamage>().iframes(damage));
+            other.gameObject.GetComponent<EnemyPlayerDamage>().Damage(damage);
         }
         else if (other.gameObject.tag == "MainObjective")
         {

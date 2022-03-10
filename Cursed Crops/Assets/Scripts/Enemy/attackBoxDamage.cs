@@ -23,7 +23,7 @@ public class attackBoxDamage : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
 
-            StartCoroutine(other.gameObject.GetComponent<EnemyPlayerDamage>().iframes(playerdamage));
+            other.gameObject.GetComponent<EnemyPlayerDamage>().Damage(playerdamage);
         }
         else if (other.gameObject.tag == "MainObjective")
         {

@@ -83,8 +83,6 @@ public class PlayerControler : MonoBehaviour
     // ====================== AUDIO COMPONENTS ======================
     public AudioPlayer daSound;
     public AudioClip attackSound;
-    public AudioClip plantingSound;
-    public AudioClip downSound;
     public AudioClip gunSound;
     public AudioClip stepSound;
 
@@ -142,6 +140,7 @@ public class PlayerControler : MonoBehaviour
         // UI stuff for pausing 
         // hello - keenan
         pauseMenu = GameObject.Find("UI Canvas").GetComponent<Pause_Manager>();
+        daSound = gameObject.GetComponent<AudioPlayer>();
     }
 
     private void Awake()
@@ -215,7 +214,10 @@ public class PlayerControler : MonoBehaviour
                 if (!stopMovement && !trapped)
                 {
                     Move();
+                    
                 }
+                
+                
                 rollDir = movement;
                 isAttacking = false;
                 attackQueued = false;
@@ -263,6 +265,7 @@ public class PlayerControler : MonoBehaviour
                 }
                 break;
             case State.Downed:
+                daSound.StopSound();
                 animator.SetBool("Downed", true);
                 bs.CloseBuildMode();
                 break;
@@ -367,6 +370,7 @@ public class PlayerControler : MonoBehaviour
     // Move =================================
     public void Move_performed(InputAction.CallbackContext context)
     {
+        
         moveInputVector = context.ReadValue<Vector2>();
     }
 
@@ -375,7 +379,7 @@ public class PlayerControler : MonoBehaviour
         //Vector2 inputVector = playerInputActions.Player.Movement.ReadValue<Vector2>();
         movement = new Vector3(moveInputVector.x, 0, moveInputVector.y).normalized;
         rb.MovePosition(transform.position + movement * moveSpeed * Time.fixedDeltaTime);
-
+        daSound.PlayTheSetClip();
         //run animation management
         animator.SetFloat("MovementMagnitude", movement.magnitude);
 
@@ -401,6 +405,7 @@ public class PlayerControler : MonoBehaviour
             movement = new Vector3(-1, 0, 0).normalized;
         else if (!flipped)
             movement = new Vector3(1, 0, 0).normalized;*/
+        
         movement = new Vector3(moveInputVector.x, 0, moveInputVector.y).normalized;
 
         rb.MovePosition(transform.position + movement * speed * Time.fixedDeltaTime);
@@ -450,6 +455,7 @@ public class PlayerControler : MonoBehaviour
                         //attackcoolDown = 0;
                         //attackDuration = 0.4f;
                         isAttacking = true;
+                        daSound.PlaySound(attackSound);
                         animator.SetTrigger("Melee1");
                         state = State.Attacking;
                         if (lungeAttacking) AttackLunge();
@@ -460,6 +466,7 @@ public class PlayerControler : MonoBehaviour
                         //attackcoolDown = 0;
                         //attackDuration = 0.4f;
                         isAttacking = true;
+                        daSound.PlaySound(attackSound);
                         animator.SetTrigger("Melee2");
                         state = State.Attacking;
                         if (lungeAttacking) AttackLunge();
@@ -477,6 +484,7 @@ public class PlayerControler : MonoBehaviour
                             //attackcoolDown = 0;
                             //attackDuration = 0.7f;
                             isAttacking = true;
+                            daSound.PlaySound(attackSound);
                             animator.SetTrigger("Melee3");
                             state = State.Attacking;
                             if (lungeAttacking) AttackLunge();
@@ -655,6 +663,7 @@ public class PlayerControler : MonoBehaviour
         {
             if (state == State.Normal && curBullets > 0 && !shooting)
             {
+                daSound.PlaySound(gunSound);
                 curBullets--;
                 rangeCoolDown = 0;
                 shooting = true;

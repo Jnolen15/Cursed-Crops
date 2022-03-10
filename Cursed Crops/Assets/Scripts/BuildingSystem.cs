@@ -42,8 +42,10 @@ public class BuildingSystem : MonoBehaviour
     public float speedUpgrade = 1;
     public int carryUpgrade = 10;
     public EnemyPlayerDamage EPD;
-    
-    
+    public AudioClip plantingSound;
+    public AudioClip buildingSound;
+
+
 
 
     private void Start()
@@ -277,6 +279,7 @@ public class BuildingSystem : MonoBehaviour
                         if (grm.getMoney() >= cost)
                         {
                             grm.addMoney(-cost);
+                            gameObject.GetComponent<AudioPlayer>().PlaySound(buildingSound);
                             animator.SetTrigger("Plant");
                             Instantiate(activePlaceable.prefab, placeableHighlight.transform.position, placeableHighlight.transform.rotation);
                         } else
@@ -287,6 +290,7 @@ public class BuildingSystem : MonoBehaviour
                     else if (mode == "Plant" && sm.state == SpawnManager.State.Break)
                     {
                         animator.SetTrigger("Plant");
+                        gameObject.GetComponent<AudioPlayer>().PlaySound(plantingSound);
                         GameObject newSpawner = Instantiate(activeCrop.prefab.gameObject, placeableHighlight.transform.position, placeableHighlight.transform.rotation);
                         sm.AddSpawner(newSpawner);
                         // Add bounty points

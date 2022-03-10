@@ -30,6 +30,11 @@ public class SpawnManager : MonoBehaviour
     public float gridOffsetX = 0.5f;
     public float gridOffsetZ = 0.5f;
 
+    public AudioClip waveStartSound;
+    public AudioClip harvestMusic;
+    public AudioClip plantingMusic;
+    public AudioSource daMusic;             //Will get the music object from the scene (Music makes you lose control)
+
     // ================ Private ================
     public float currentPhaseEndTime = 0f;   // The time the current phase should end
     private float currentWaveEndTime = 0f;   // The time the current wave should end
@@ -85,7 +90,8 @@ public class SpawnManager : MonoBehaviour
         if (currentPhaseEndTime < elapsedTime)
         {
             currentPhaseEndTime = elapsedTime + phaseDuration;
-
+            daMusic.clip = plantingMusic;
+            daMusic.Play();
             if (currentPhase == "Pre")
             {
                 currentPhase = "Morning";
@@ -155,6 +161,9 @@ public class SpawnManager : MonoBehaviour
     public void StartHarvest()
     {
         state = State.Wave;
+        gameObject.GetComponent<AudioPlayer>().PlaySound(waveStartSound);
+        daMusic.clip = harvestMusic;
+        daMusic.Play();
         harvestFlag.SetActive(false);
     }
 

@@ -16,6 +16,8 @@ public class EnemyControler : MonoBehaviour
     // Audio Variables
     
     public AudioClip hurtSound;
+    public AudioClip spawningSound;
+
 
     // ================= Private variables =================
     private AudioPlayer daAudio;
@@ -52,6 +54,10 @@ public class EnemyControler : MonoBehaviour
 
         //Audio set up
         daAudio = gameObject.GetComponent<AudioPlayer>();
+        if (gameObject.tag != "enemyBullet")
+        {
+            daAudio.PlaySound(spawningSound);
+        }
 
         // Get hit effect stuff
         impact = Instantiate(Resources.Load<GameObject>("Effects/Impact"), transform.position, transform.rotation, transform);
