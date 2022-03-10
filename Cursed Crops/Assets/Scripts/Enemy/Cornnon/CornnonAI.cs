@@ -17,6 +17,7 @@ public class CornnonAI : MonoBehaviour
     public GameObject bullet;
     public bool spawning = true;
     public bool shooting = false;
+    public AudioClip spawnSound;
 
     // ================= Private variables =================
     const float minPathupdateTime = .2f;
@@ -40,7 +41,7 @@ public class CornnonAI : MonoBehaviour
             listOfPlayers[i] = players[i].transform;
 
         prev = gameObject.GetComponent<Renderer>().material.color;
-
+        gameObject.GetComponent<AudioPlayer>().PlaySound(spawnSound);
         mainTarget = GameObject.FindGameObjectWithTag("MainObjective").GetComponent<Transform>();
         //Transform closestPlayer = FindClosestPlayer(listOfPlayers);
         //pathFinder.StartFindPath(transform.position, closestPlayer.position);

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 780074312600206454}
   - component: {fileID: 7807859183643636659}
   - component: {fileID: 3146892850262600947}
+  - component: {fileID: 3515381184926815297}
   m_Layer: 0
   m_Name: CountryRadioEffect
   m_TagString: turretBullet
@@ -127,6 +128,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   appliedEffect: DamageBoost
+  effectduration: 3
   aliveTime: 0.2
   damageAmmount: 2
   targetPlayer: 1
+--- !u!114 &3515381184926815297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29174839543159647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4755854998f370540b12bb64a92ba0f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _musicSource: {fileID: 0}
+  _effectsSource: {fileID: 0}

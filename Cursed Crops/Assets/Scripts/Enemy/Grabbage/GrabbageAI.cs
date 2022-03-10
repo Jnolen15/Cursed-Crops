@@ -9,9 +9,10 @@ public class GrabbageAI : MonoBehaviour
     public bool boostedHealthActivate = false;
     private bool isItHit = false;
     public bool alreadyGrabbing = false;
+    public AudioClip spawnSound;
     void Start()
     {
-        
+        gameObject.GetComponent<AudioPlayer>().PlaySound(spawnSound);
     }
 
     // Update is called once per frame

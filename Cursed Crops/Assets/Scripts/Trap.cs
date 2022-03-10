@@ -8,10 +8,12 @@ public class Trap : MonoBehaviour
     public bool singleUse = false;
     public GameObject effect;
     public float cdTime = 2f;
+    public AudioClip soundClip;
 
     // ================= Private variables =================
     private delegate void Callback();
     private SpriteRenderer trapSprite;
+    private bool playonce = false;
     public bool onCooldown = false;
 
     /* NOTE:
@@ -24,6 +26,7 @@ public class Trap : MonoBehaviour
     void Start()
     {
         trapSprite = this.transform.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>();
+        gameObject.GetComponent<AudioPlayer>().SetAudioSource(soundClip);
     }
 
     void Update()
@@ -45,6 +48,12 @@ public class Trap : MonoBehaviour
         {
 
         }
+        if(other.gameObject.tag == "Player" && !playonce)
+        {
+            playonce = true;
+            gameObject.GetComponent<AudioPlayer>().PlayTheSetClip();
+            //gameObject.GetComponent<AudioPlayer>().LoopSound();
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -52,6 +61,11 @@ public class Trap : MonoBehaviour
         if (other.gameObject.tag == "Enemy" && other.gameObject.name != "cornnonBullet")
         {
 
+        }
+        if (other.gameObject.tag == "Player" && playonce)
+        {
+            playonce = false;
+            gameObject.GetComponent<AudioPlayer>().StopSound();
         }
     }
 

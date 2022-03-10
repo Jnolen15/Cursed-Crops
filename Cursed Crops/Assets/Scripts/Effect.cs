@@ -10,6 +10,7 @@ public class Effect : MonoBehaviour
     public float aliveTime = 1f;
     public int damageAmmount = 1;
     public bool targetPlayer = false;
+    
 
     // ================= Private variables =================
 
@@ -44,6 +45,7 @@ public class Effect : MonoBehaviour
         {
             other.gameObject.GetComponent<EnemyPlayerDamage>().Heal(damageAmmount);
             other.gameObject.GetComponent<EnemyPlayerDamage>().ApplyEffect(appliedEffect, effectduration);
+            
         }
     }
 }

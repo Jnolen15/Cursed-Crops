@@ -8,6 +8,7 @@ public class Turret : MonoBehaviour
     public GameObject bullet;
     public bool onCooldown = false;
     public float cooldown = 2f;
+    public AudioClip manureSound;
 
     // ================= Private variables =================
     private Vector3 direction;
@@ -96,6 +97,10 @@ public class Turret : MonoBehaviour
     IEnumerator shoot()
     {
         onCooldown = true;
+        if(bullet != null && bullet.name == "FMCBullet")
+        {
+            gameObject.GetComponent<AudioPlayer>().PlaySound(manureSound);
+        }
         tAnimator.playShoot();
         //MakeBullet();
         yield return new WaitForSeconds(cooldown);

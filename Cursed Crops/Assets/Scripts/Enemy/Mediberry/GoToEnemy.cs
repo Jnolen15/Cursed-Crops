@@ -30,6 +30,7 @@ public class GoToEnemy : MonoBehaviour
     PathFinding pathFinder;
     public Transform closestPlayer;
     public Transform oldTarget;
+    public AudioClip spawnsound;
     
     // Start is called before the first frame update
     void Start()
@@ -42,6 +43,7 @@ public class GoToEnemy : MonoBehaviour
         //randomPosition = new Vector3(Random.Range(-plane.position.x, plane.position.x), 0f, Random.Range(-plane.position.z, plane.position.z));
 
         mainTarget = GameObject.FindGameObjectWithTag("MainObjective").GetComponent<Transform>();
+        gameObject.GetComponent<AudioPlayer>().PlaySound(spawnsound);
         //Transform closestPlayer = FindClosestPlayer(listOfPlayers);
         //pathFinder.StartFindPath(transform.position, closestPlayer.position);
         //PathRequestManager.RequestPath(transform.position, closestPlayer.position, OnPathFound);

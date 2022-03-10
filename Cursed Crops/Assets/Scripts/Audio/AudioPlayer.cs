@@ -11,19 +11,36 @@ public class AudioPlayer : MonoBehaviour
 
     [SerializeField] private AudioSource _musicSource, _effectsSource;
 
-    void Awake(){
+    void Awake() {
         //Creates an instance of this class if one hasn't already been created
         //if(Instance == null){
         //    Instance = this;
-            //Tells Unity not to detroy the instance while switching scenes
+        //Tells Unity not to detroy the instance while switching scenes
         //    DontDestroyOnLoad(gameObject);
         //} else{
         //    Destroy(gameObject);
         //}
     }
 
-    public void PlaySound(AudioClip _clip){
+    public void PlaySound(AudioClip _clip) {
         _effectsSource.PlayOneShot(_clip);
+    }
+    public void StopSound()
+    {
+        _effectsSource.Stop();
+    }
+    public void LoopSound()
+    {
+        _effectsSource.loop = enabled;
+    }
+    public void SetAudioSource(AudioClip _clip)
+    {
+        _effectsSource.clip = _clip;
+    }
+
+    public void PlayTheSetClip()
+    {
+        _effectsSource.Play();
     }
 
     //Will work on this next quarter

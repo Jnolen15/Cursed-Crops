@@ -79,6 +79,15 @@ public class PlayerControler : MonoBehaviour
 
     public GameObject bullet;
     public GameObject ammoManager;
+
+    // ====================== AUDIO COMPONENTS ======================
+    public AudioPlayer daSound;
+    public AudioClip attackSound;
+    public AudioClip plantingSound;
+    public AudioClip downSound;
+    public AudioClip gunSound;
+    public AudioClip stepSound;
+
     public enum State
     {
         Normal,
