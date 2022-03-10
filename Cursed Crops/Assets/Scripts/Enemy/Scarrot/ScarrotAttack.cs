@@ -45,6 +45,7 @@ public class ScarrotAttack : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        
         // Death Check
         if(gameObject.GetComponent<EnemyControler>().health <= 0)
         {
@@ -75,8 +76,8 @@ public class ScarrotAttack : MonoBehaviour
                 else if(chooseAttack == 2)
                 {
                     //sr.color = Color.magenta;
-                    attackPosition = new Vector3(targetToAttack.transform.position.x, targetToAttack.transform.position.y, targetToAttack.transform.position.z);
-                    enemyPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                    attackPosition = new Vector3(targetToAttack.transform.position.x, 1, targetToAttack.transform.position.z);
+                    enemyPosition = new Vector3(transform.position.x, 1, transform.position.z);
                     newPosition = (attackPosition - enemyPosition) - (attackPosition - enemyPosition).normalized * 2;
 
                     newPosition += enemyPosition;
@@ -148,7 +149,7 @@ public class ScarrotAttack : MonoBehaviour
 
     IEnumerator attack()
     {
-        attacking = true;
+        
 
         // DASH Attack
         if (chooseAttack == 1)
@@ -159,8 +160,8 @@ public class ScarrotAttack : MonoBehaviour
             if (!getPosition)
             {
                 getPosition = true;
-                attackPosition = new Vector3(targetToAttack.transform.position.x, targetToAttack.transform.position.y, targetToAttack.transform.position.z);
-                enemyPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                attackPosition = new Vector3(targetToAttack.transform.position.x, 1, targetToAttack.transform.position.z);
+                enemyPosition = new Vector3(transform.position.x, 1, transform.position.z);
                 newPosition = (attackPosition - enemyPosition) + (attackPosition - enemyPosition).normalized * 6;
 
                 newPosition += enemyPosition;
@@ -168,7 +169,7 @@ public class ScarrotAttack : MonoBehaviour
             //sr.color = Color.green;
             attackDash = true;
             //1 0.92 0.016 1
-            //attacking = true;
+            attacking = true;
             //gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
             //}
             //yield return new WaitForSeconds(straightAttackCoolDown);
@@ -194,7 +195,7 @@ public class ScarrotAttack : MonoBehaviour
             }
             attackAOE = true;
             //AOE.SetActive(true);
-            //attacking = true;
+            attacking = true;
             //gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
             //yield return new WaitForSeconds(0.5f);
             //AOE.SetActive(false);
@@ -259,7 +260,7 @@ public class ScarrotAttack : MonoBehaviour
         {
             other.gameObject.GetComponent<EnemyPlayerDamage>().Damage(playerdamage);
         }
-        if (other.gameObject.tag == "MainObjective")
+        if (other.gameObject.tag == "MainObjective" && attacking)
         {
             other.gameObject.GetComponent<EnemyDamageObjective>().takeDamage(houseDamage);
         }
