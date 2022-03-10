@@ -13,6 +13,7 @@ public class ScarrotAttack : MonoBehaviour
     public bool attackAOE = false;
     public bool attackDash = false;
     public bool onCooldown = false;
+    public AudioClip spawnSound;
 
     // ================= Private variables =================
     Vector3 preAttackPosition;
@@ -38,6 +39,7 @@ public class ScarrotAttack : MonoBehaviour
         sr = this.transform.GetComponentInChildren<SpriteRenderer>();
         prev = sr.color;
         AOE = gameObject.transform.Find("AOE").gameObject;
+        gameObject.GetComponent<AudioPlayer>().PlaySound(spawnSound);
     }
 
     // Update is called once per frame

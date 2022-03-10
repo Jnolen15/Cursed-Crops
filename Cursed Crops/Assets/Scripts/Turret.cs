@@ -9,6 +9,8 @@ public class Turret : MonoBehaviour
     public bool onCooldown = false;
     public float cooldown = 2f;
     public AudioClip manureSound;
+    public AudioClip pitchSound;
+    public AudioClip rifleSound;
 
     // ================= Private variables =================
     private Vector3 direction;
@@ -101,6 +103,15 @@ public class Turret : MonoBehaviour
         {
             gameObject.GetComponent<AudioPlayer>().PlaySound(manureSound);
         }
+        if (bullet != null && bullet.name == "PitchforkBallistaBullet")
+        {
+            gameObject.GetComponent<AudioPlayer>().PlaySound(pitchSound);
+        }
+        if (bullet != null && bullet.name == "RifleStandBullet")
+        {
+            gameObject.GetComponent<AudioPlayer>().PlaySound(rifleSound);
+        }
+        
         tAnimator.playShoot();
         //MakeBullet();
         yield return new WaitForSeconds(cooldown);
