@@ -44,6 +44,11 @@ public class UI_Manager : MonoBehaviour
     public TextMeshProUGUI PhaseCounter;
     public TextMeshProUGUI moneyText;
 
+    public GameObject QuotaOverlay;
+    public Slider QuotaBar;
+    public TextMeshProUGUI QuotaText;
+
+
     
 
 
@@ -73,6 +78,17 @@ public class UI_Manager : MonoBehaviour
         moneyText.text = "Money: " + GRM.getMoney();
         UpdateTimer();
 
+        // quota bar is enabled between phases
+        if (SM.state == SpawnManager.State.Break)
+        {
+            QuotaOverlay.SetActive(true);
+            QuotaText.text = "Quota: " + GRM.getPoints() + " / " + SM.getQuota();
+            QuotaBar.value = GRM.getPoints() / SM.getQuota();
+        } else
+        {
+            QuotaOverlay.SetActive(false);
+        }
+
         // updating p1 UI
         if (PC1 == null && PM.players.Count >= 1)
         {
@@ -93,7 +109,7 @@ public class UI_Manager : MonoBehaviour
         if (PC1 != null)
         {
             // managing  currency text
-            vegetableText1.text = "Crops: " + PR1.getCrops() + "          Quota: " + GRM.getPoints();
+            vegetableText1.text = "Crops: " + PR1.getCrops() + " / " + PR1.maxCrops;
             // managing health bar
             HealthBar1.value = (float)EPD1.playerHealth / (float)EPD1.reviveHealth;
             // managing ammo UI
@@ -120,7 +136,7 @@ public class UI_Manager : MonoBehaviour
         if (PC2 != null)
         {
             // managing  currency text
-            vegetableText2.text = "Crops: " + PR2.getCrops() + "          Quota: " + GRM.getPoints();
+            vegetableText2.text = "Crops: " + PR2.getCrops() + " / " + PR2.maxCrops;
             // managing health bar
             HealthBar2.value = (float)EPD2.playerHealth / (float)EPD2.reviveHealth;
             // managing ammo UI

@@ -333,4 +333,19 @@ public class SpawnManager : MonoBehaviour
         //Debug.Log("Called disable from spawnmanager");
         //spawnerGridPositions.Clear();
     }
+
+    // temp solution for getting quota #s, will need to be changed
+    public int getQuota()
+    {
+        if (currentPhase == "Morning")
+        {
+            return 20;
+        } else if (currentPhase == "Afternoon")
+        {
+            return 50;
+        } else if (currentPhase == "Night") {
+            return 100;
+        }
+        return -1;
+    }
 }
