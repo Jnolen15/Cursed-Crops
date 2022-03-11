@@ -82,7 +82,7 @@ public class UI_Manager : MonoBehaviour
         if (SM.state == SpawnManager.State.Break)
         {
             QuotaOverlay.SetActive(true);
-            QuotaText.text = "Quota: " + GRM.getPoints() + " / " + SM.getQuota();
+            QuotaText.text = "Plant Crops to Fill Quota: " + GRM.getPoints() + " / " + SM.getQuota();
             QuotaBar.value = GRM.getPoints() / SM.getQuota();
         } else
         {
