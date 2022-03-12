@@ -109,7 +109,7 @@ public class UI_Manager : MonoBehaviour
         if (PC1 != null)
         {
             // managing  currency text
-            vegetableText1.text = "Crops: " + PR1.getCrops() + " / " + PR1.maxCrops;
+            vegetableText1.text = PR1.getCrops() + " / " + PR1.maxCrops;
             // managing health bar
             HealthBar1.value = (float)EPD1.playerHealth / (float)EPD1.reviveHealth;
             // managing ammo UI
@@ -136,7 +136,7 @@ public class UI_Manager : MonoBehaviour
         if (PC2 != null)
         {
             // managing  currency text
-            vegetableText2.text = "Crops: " + PR2.getCrops() + " / " + PR2.maxCrops;
+            vegetableText2.text = PR2.getCrops() + " / " + PR2.maxCrops;
             // managing health bar
             HealthBar2.value = (float)EPD2.playerHealth / (float)EPD2.reviveHealth;
             // managing ammo UI
