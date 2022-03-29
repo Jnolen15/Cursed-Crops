@@ -26,8 +26,9 @@ public class EnemyControler : MonoBehaviour
     private SpriteRenderer sr;
     private ItemDropper itemDropper;
     private GameObject impact;
-    private GameObject damagePS;
     private ParticleSystem ps;
+    private ParticleSystem psBurn;
+    private ParticleSystem psHeal;
     private Vector3 knocknewPosition;
     private float stunTimer = 1f;
     private bool dying = false;
@@ -62,9 +63,15 @@ public class EnemyControler : MonoBehaviour
         // Get hit effect stuff
         impact = Instantiate(Resources.Load<GameObject>("Effects/Impact"), transform.position, transform.rotation, transform);
         impact.SetActive(false);
-        damagePS = Resources.Load<GameObject>("Effects/EnemyDamageParticle");
-        ps = Instantiate(damagePS, transform.position, transform.rotation, transform).GetComponent<ParticleSystem>();
+
+        // particle effects
+        //damagePS = Resources.Load<GameObject>("Effects/EnemyDamageParticle");
+        ps = Instantiate(Resources.Load<GameObject>("Effects/EnemyDamageParticle"), transform.position, transform.rotation, transform).GetComponent<ParticleSystem>();
+        psBurn = Instantiate(Resources.Load<GameObject>("Effects/BurnParticle"), transform.position, transform.rotation, transform).GetComponent<ParticleSystem>();
+        psHeal = Instantiate(Resources.Load<GameObject>("Effects/HealParticle"), transform.position, transform.rotation, transform).GetComponent<ParticleSystem>();
         ps.Pause();
+        psBurn.Pause();
+        psHeal.Pause();
     }
 
     private void Update()
@@ -72,12 +79,16 @@ public class EnemyControler : MonoBehaviour
         // Burning effect. Does damage every burnTickSpeed seconds
         if (burning)
         {
+            psBurn.Play();
             if (burnTimer <= 0)
             {
                 takeDamage(burnDamage, "Burn");
                 burnTimer = burnTickSpeed;
             }
             else burnTimer -= Time.deltaTime;
+        } else
+        {
+            if(psBurn.isPlaying) psBurn.Stop();
         }
 
         // Healing effect. Heals damage every healingTickSpeed seconds
@@ -85,7 +96,8 @@ public class EnemyControler : MonoBehaviour
         {
             if (healingTimer <= 0)
             {
-                if(health < maxHealth)
+                psHeal.Emit(6);
+                if (health < maxHealth)
                     health += healingAmmount;
                 healingTimer = healingTickSpeed;
             }

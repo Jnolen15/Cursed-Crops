@@ -18,6 +18,7 @@ public class BuildingSystem : MonoBehaviour
     private SpawnManager sm;
     private Animator animator;
     private ParticleSystem ps;
+    private ParticleSystem psDust;
     private bool acceptablePos;
     private int count = 0;
     private float xPos = 1f;
@@ -78,6 +79,9 @@ public class BuildingSystem : MonoBehaviour
             Debug.Log("Placeable and/or Plantable array has a size of 0");
         }
 
+        psDust = Instantiate(Resources.Load<GameObject>("Effects/DustParticle"), placeableHighlight.transform.position, transform.rotation, transform).GetComponent<ParticleSystem>();
+        psDust.Pause();
+
         buildmodeActive = false;
         mode = "Build";
         placeableHighlight.SetActive(false);
@@ -98,6 +102,7 @@ public class BuildingSystem : MonoBehaviour
         {
             AlignToGrid(placeableHighlight.transform);
             AlignToGrid(popUp.transform);
+            AlignToGrid(psDust.transform);
             TestPlacementAvailable();
 
             // update preview
@@ -278,6 +283,7 @@ public class BuildingSystem : MonoBehaviour
                         var cost = activePlaceable.cost;
                         if (grm.getMoney() >= cost)
                         {
+                            psDust.Emit(6);
                             grm.addMoney(-cost);
                             gameObject.GetComponent<AudioPlayer>().PlaySound(buildingSound);
                             animator.SetTrigger("Plant");
@@ -289,6 +295,7 @@ public class BuildingSystem : MonoBehaviour
                     }
                     else if (mode == "Plant" && sm.state == SpawnManager.State.Break)
                     {
+                        psDust.Emit(6);
                         animator.SetTrigger("Plant");
                         gameObject.GetComponent<AudioPlayer>().PlaySound(plantingSound);
                         GameObject newSpawner = Instantiate(activeCrop.prefab.gameObject, placeableHighlight.transform.position, placeableHighlight.transform.rotation);

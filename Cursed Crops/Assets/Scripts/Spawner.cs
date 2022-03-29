@@ -21,16 +21,21 @@ public class Spawner : MonoBehaviour
     // ================= Private variables =================
     private float spawnChance = 1;  // Used in the spawning of special enemies. Inclreases with each spawn attampt
     private bool hasSpawned = false;    // Used to tell if a special enemy has been spawned yet
+    private ParticleSystem psDust;
 
     private void Start()
     {
         // This slightly alters the potency of each plant to make it feel more random
         if (randomizePotency)
             potency += Random.Range(0.6f, 1.6f);
+
+        psDust = Instantiate(Resources.Load<GameObject>("Effects/DustParticle"), transform.position, transform.rotation, transform).GetComponent<ParticleSystem>();
+        psDust.Pause();
     }
 
     public void Spawn(string type)
     {
+        psDust.Emit(6);
         if (plantType == "Basic")
         {
             SpawnBasic(type);
