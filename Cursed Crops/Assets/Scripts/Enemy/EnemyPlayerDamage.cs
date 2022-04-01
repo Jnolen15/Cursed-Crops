@@ -9,6 +9,9 @@ public class EnemyPlayerDamage : MonoBehaviour
     public int playerHealth = 10;
     public int reviveHealth = 10;
     public int damage = 1;
+    public float reviveTime = 10f;
+    public float reviveTimer = 0f;
+    public bool playerDown = false;
     public bool inIFrames = false;
     public bool playerIsStun = false;
     public bool invulnerable = false;
@@ -40,12 +43,12 @@ public class EnemyPlayerDamage : MonoBehaviour
         //if(playerIsStun)
         //    playerHealth = reviveHealth;
 
-        if (playerHealth <= 0)
+        if (playerHealth <= 0 && !playerDown)
         {
             //alphaChekcer = true;
             prm.setCrops(0);
+            playerDown = true;
             StartCoroutine(downed());
-            playerHealth = reviveHealth;
             Debug.Log(playerHealth);
             //gameOver();
         }
@@ -58,6 +61,12 @@ public class EnemyPlayerDamage : MonoBehaviour
         else if (playerSprite.color != Color.white && !inIFrames)
         {
             playerSprite.color = Color.white;
+        }
+
+        // function for tracking reviveTime
+        if (playerDown)
+        {
+            reviveTimer += Time.deltaTime;
         }
     }
 
@@ -134,7 +143,10 @@ public class EnemyPlayerDamage : MonoBehaviour
         playerIsStun = true;
         invulnerable = true;
         gameObject.GetComponent<AudioPlayer>().PlaySound(downSound);
-        yield return new WaitForSeconds(10.0f);
+        yield return new WaitForSeconds(reviveTime);
+        playerDown = false;
+        reviveTimer = 0;
+        playerHealth = reviveHealth;
         playerIsStun = false;
         invulnerable = false;
     }

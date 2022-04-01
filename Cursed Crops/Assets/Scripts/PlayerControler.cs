@@ -668,7 +668,6 @@ public class PlayerControler : MonoBehaviour
             {
                 daSound.PlaySound(gunSound);
                 curBullets--;
-                rangeCoolDown = 0;
                 shooting = true;
 
                 // Update ammo manager
@@ -750,6 +749,12 @@ public class PlayerControler : MonoBehaviour
     public void togglePause()
     {
         pauseMenu.TogglePause();
+    }
+
+    // method for obtaining the %cooldown timer for ranged attacks
+    public float GetRangeCD()
+    {
+        return rangeCoolDown / rangeCDTime;
     }
 
 }

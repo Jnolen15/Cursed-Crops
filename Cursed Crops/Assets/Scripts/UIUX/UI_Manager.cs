@@ -26,6 +26,9 @@ public class UI_Manager : MonoBehaviour
     public TextMeshProUGUI nameText1;
     public TextMeshProUGUI vegetableText1;
     public Slider HealthBar1;
+    public Slider ReviveBar1;
+    public TextMeshProUGUI CurHealth1;
+    public TextMeshProUGUI MaxHealth1;
     public AmmoCounter AmmoCounter1;
 
     // p2 UI elements
@@ -33,6 +36,9 @@ public class UI_Manager : MonoBehaviour
     public TextMeshProUGUI nameText2;
     public TextMeshProUGUI vegetableText2;
     public Slider HealthBar2;
+    public Slider ReviveBar2;
+    public TextMeshProUGUI CurHealth2;
+    public TextMeshProUGUI MaxHealth2;
     public AmmoCounter AmmoCounter2;
 
     // general UI elements
@@ -110,10 +116,15 @@ public class UI_Manager : MonoBehaviour
         {
             // managing  currency text
             vegetableText1.text = PR1.getCrops() + " / " + PR1.maxCrops;
-            // managing health bar
+            // managing health bar/revive 
             HealthBar1.value = (float)EPD1.playerHealth / (float)EPD1.reviveHealth;
+            CurHealth1.text = EPD1.playerHealth.ToString();
+            MaxHealth1.text = EPD1.reviveHealth.ToString();
+
+            ReviveBar1.value = EPD1.reviveTimer / EPD1.reviveTime;
+
             // managing ammo UI
-            AmmoCounter1.SetBullets(PC1.curBullets);
+            AmmoCounter1.SetBullets(PC1.curBullets, PC1.GetRangeCD());
         }
 
         // updating p2 UI
@@ -139,8 +150,13 @@ public class UI_Manager : MonoBehaviour
             vegetableText2.text = PR2.getCrops() + " / " + PR2.maxCrops;
             // managing health bar
             HealthBar2.value = (float)EPD2.playerHealth / (float)EPD2.reviveHealth;
+            CurHealth2.text = EPD2.playerHealth.ToString();
+            MaxHealth2.text = EPD2.reviveHealth.ToString();
+
+            ReviveBar2.value = EPD2.reviveTimer / EPD2.reviveTime;
+
             // managing ammo UI
-            AmmoCounter2.SetBullets(PC2.curBullets);
+            AmmoCounter2.SetBullets(PC2.curBullets, PC2.GetRangeCD());
         }
     }
 

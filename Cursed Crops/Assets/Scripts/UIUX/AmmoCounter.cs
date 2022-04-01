@@ -1,55 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AmmoCounter : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject Bullet1;
-    public GameObject Bullet2;
-    public GameObject Bullet3;
+    public Slider Bullet1;
+    public Slider Bullet2;
+    public Slider Bullet3;
 
-
-
-    void Start()
+    // takes in the number of bullets (x), and the recharge % of the next bullet
+    public void SetBullets(int x, float r)
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // using a switch statement cause I'm too lazy to figure out a better way
+        switch(x)
+        {
+            case 0:
+                Bullet1.value = r;
+                Bullet2.value = 0;
+                Bullet3.value = 0;
+                break;
 
-    }
+            case 1:
+                Bullet1.value = 1;
+                Bullet2.value = r;
+                Bullet3.value = 0;
+                break;
 
-    public void SetBullets(int x)
-    {
-        if (x > 0)
-        {
-            Bullet1.SetActive(true);
-        }
-        else
-        {
-            Bullet1.SetActive(false);
-        }
+            case 2:
+                Bullet1.value = 1;
+                Bullet2.value = 1;
+                Bullet3.value = r;
+                break;
 
-        if (x > 1)
-        {
-            Bullet2.SetActive(true);
-        }
-        else
-        {
-            Bullet2.SetActive(false);
-        }
-
-        if (x > 2)
-        {
-            Bullet3.SetActive(true);
-        }
-        else
-        {
-            Bullet3.SetActive(false);
+            case 3:
+                Bullet1.value = 1;
+                Bullet2.value = 1;
+                Bullet3.value = 1;
+                break;
         }
     }
 }
