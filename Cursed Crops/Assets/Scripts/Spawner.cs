@@ -35,7 +35,6 @@ public class Spawner : MonoBehaviour
 
     public void Spawn(string type)
     {
-        psDust.Emit(6);
         if (plantType == "Basic")
         {
             SpawnBasic(type);
@@ -73,6 +72,7 @@ public class Spawner : MonoBehaviour
             Vector3 newPos = new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius));
             newPos = newPos + transform.position;
             Instantiate(enemyPrefab, newPos, transform.rotation);
+            psDust.Emit(6);
         } else
         {
             spawnChance++;

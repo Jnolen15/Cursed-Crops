@@ -43,6 +43,7 @@ public class SpawnManager : MonoBehaviour
     private bool timerStarted = false;
     private bool gridUpdated = false;
     private delegate void Callback();
+    private ParticleSystem psDust;
     public GameObject gridChild;
     public List<GameObject> spawners = new List<GameObject>();  // List of active enemy spawners
     private Dictionary<Vector3, string> spawnerGridPositions = new Dictionary<Vector3, string>(); // Dictionary of grid positions on plantable tiles
@@ -233,6 +234,8 @@ public class SpawnManager : MonoBehaviour
                         if (rand < 6) selectedEnemy = meleeEnemy;
                         else selectedEnemy = rangeEnemy;
                         Instantiate(selectedEnemy, pos, transform.rotation);
+                        psDust = Instantiate(Resources.Load<GameObject>("Effects/DustParticle"), pos, transform.rotation).GetComponent<ParticleSystem>();
+                        Destroy(psDust, 0.5f);
                     }
                     else
                     {
