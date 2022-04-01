@@ -39,12 +39,14 @@ public class SpawnManager : MonoBehaviour
     public float currentPhaseEndTime = 0f;   // The time the current phase should end
     private float currentWaveEndTime = 0f;   // The time the current wave should end
     private float currentPauseEndTime = 0f;  // The time the current pause should end
+    private float timeForNextSpawn = 0f;     // Used to spawn basic enemies at certain intervals
     private bool timerStarted = false;
     private bool gridUpdated = false;
     private delegate void Callback();
     public GameObject gridChild;
-    public List<GameObject> spawners = new List<GameObject>();
-    private Dictionary<Vector3, string> spawnerGridPositions = new Dictionary<Vector3, string>();
+    public List<GameObject> spawners = new List<GameObject>();  // List of active enemy spawners
+    private Dictionary<Vector3, string> spawnerGridPositions = new Dictionary<Vector3, string>(); // Dictionary of grid positions on plantable tiles
+    private Vector3[] positions;    // array version of Dictionary keys, used to get a random position in the dictionary
     public enum State
     {
         Wave,
@@ -97,7 +99,7 @@ public class SpawnManager : MonoBehaviour
                 currentPhase = "Morning";
                 state = State.Break;
                 harvestFlag.SetActive(true);
-                CreateSpawnersonGrid(spawnersPerPhase, "Morning");
+                //CreateSpawnersonGrid(spawnersPerPhase, "Morning");
             }
             else if (currentPhase == "Morning")
             {
@@ -106,7 +108,7 @@ public class SpawnManager : MonoBehaviour
                 state = State.Break;
                 harvestFlag.SetActive(true);
                 DestroySpawners();
-                CreateSpawnersonGrid(spawnersPerPhase + scaleAmmount, "Afternoon");
+                //CreateSpawnersonGrid(spawnersPerPhase + scaleAmmount, "Afternoon");
             }
             else if (currentPhase == "Afternoon")
             {
@@ -115,7 +117,7 @@ public class SpawnManager : MonoBehaviour
                 state = State.Break;
                 harvestFlag.SetActive(true);
                 DestroySpawners();
-                CreateSpawnersonGrid(spawnersPerPhase + scaleAmmount, "Night");
+                //CreateSpawnersonGrid(spawnersPerPhase + scaleAmmount, "Night");
             }
             else if (currentPhase == "Night")
             {
@@ -155,7 +157,11 @@ public class SpawnManager : MonoBehaviour
     private void FixedUpdate()
     {
         if (state == State.Wave)
+        {
+            BasicSpawn();
             WaveSpawn("Full");
+        }
+            
     }
 
     public void StartHarvest()
@@ -165,61 +171,11 @@ public class SpawnManager : MonoBehaviour
         daMusic.clip = harvestMusic;
         daMusic.Play();
         harvestFlag.SetActive(false);
+        positions = spawnerGridPositions.Keys.ToArray();
     }
 
-    IEnumerator timer(Callback callback, float time)
-    {
-        yield return new WaitForSeconds(time);
-        callback?.Invoke();
-    }
 
-    public void AddSpawner(GameObject spawner)
-    {
-        spawners.Add(spawner);
-    }
-
-    // Spawn a burst of enemies from all sources
-    /*private void BurstSpawn(string currnetPhase)
-    {
-        for (int i = 0; i < spawnArray.Length; i++)
-        {
-            Spawner currentSpawner = spawnArray[i].GetComponent<Spawner>();
-            if (currentSpawner.germinationPeriod == currnetPhase)
-            {
-                currentSpawner.Spawn("Full");
-                currentSpawner.lastTimeSpawned = elapsedTime;
-            }
-        }
-    }*/
-
-    // Spawn enemies as the wave progresses. Time between spawns is measured by a spawners potency
-    private void WaveSpawn(string type)
-    {
-        foreach (GameObject obj in spawners)
-        {
-            Spawner currentSpawner = obj.GetComponent<Spawner>();
-            if (currentSpawner.lastTimeSpawned == 0) // Initial spawn
-            {
-                float rand = Random.Range(1, 10);
-                // 60% chance to immediatly spawn, 40% to spawn sometime over the next 5 seconds
-                if (rand < 6)
-                {
-                    currentSpawner.Spawn(type);
-                    currentSpawner.lastTimeSpawned = elapsedTime + Random.Range(0f, 5f);
-                } else
-                {
-                    // subtract by current potency here so it won't wait the bonus ammount + the potency
-                    currentSpawner.lastTimeSpawned = elapsedTime + (Random.Range(0f, currentSpawner.potency) - currentSpawner.potency);
-                }
-            }
-            else if ((currentSpawner.lastTimeSpawned + currentSpawner.potency) <= elapsedTime)
-            {
-                currentSpawner.Spawn(type);
-                currentSpawner.lastTimeSpawned = elapsedTime;
-            }
-        }
-    }
-
+    // ============ SPAWNER GRID SETUP STUFF ============
     private void CreateSpawnerGrid()
     {
         for(float i = -bounds; i <= bounds-1; i++)
@@ -240,24 +196,172 @@ public class SpawnManager : MonoBehaviour
         for (int i = 0; i < gridChild.transform.childCount; i++)
         {
             gridChild.transform.GetChild(i).GetComponent<GridPlacementChecker>().AddSelf(spawnerGridPositions);
-            /*if (gridChild.transform.GetChild(i).GetComponent<GridPlacementChecker>().acceptablePos)
-            {
-                spawnerGridPositions.Add(gridChild.transform.GetChild(i).transform.position, "Empty");
-                gridChild.transform.GetChild(i).gameObject.SetActive(false);
-            }
-            else if (!gridChild.transform.GetChild(i).GetComponent<GridPlacementChecker>().acceptablePos)
-            {
-                Debug.Log("Unacceptable position, deleting");
-                Destroy(gridChild.transform.GetChild(i).gameObject);
-            }*/
         }
-        //Debug.Log("The dictionary has " + spawnerGridPositions.Count + " entires.");
-        /*foreach (KeyValuePair<Vector3, string> pos in spawnerGridPositions)
-        {
-            Debug.Log("Position: " + pos.Key.ToString() + " is " + pos.Value);
-        }*/
     }
 
+
+    // ============ ENEMY SPAWNING ============
+    // Spawn basic enemies at random positions in available locations.
+    private void BasicSpawn()
+    {
+        // At random intervals, spawn a random ammount
+        if (timeForNextSpawn <= elapsedTime)
+        {
+            // Update timer and spawn values
+            timeForNextSpawn = elapsedTime + 5f;
+            float numToSpawn = Random.Range(1, 4);
+
+            // Spawn the select number of enemies
+            for (int i = 0; i < numToSpawn; i++)
+            {
+                // Pick a location
+                Vector3 pos = new Vector3(0, 0, 0);
+                if (positions.Length > 0)
+                    pos = positions[Random.Range(0, positions.Length - 1)];
+                else
+                    Debug.LogError("Dictionary has a length of: " + positions.Length);
+
+                string availablePos;
+                if (spawnerGridPositions.TryGetValue(pos, out availablePos))
+                {
+                    // Success
+                    if (availablePos == "Empty")
+                    {
+                        // Decide which enemy to spawn and spawn it
+                        GameObject selectedEnemy = null;
+                        float rand = Random.Range(1, 10);
+                        if (rand < 6) selectedEnemy = meleeEnemy;
+                        else selectedEnemy = rangeEnemy;
+                        Instantiate(selectedEnemy, pos, transform.rotation);
+                    }
+                    else
+                    {
+                        Debug.Log("Position Taken");
+                        i--;
+                    }
+                }
+                else
+                    Debug.LogError("Dictionary error");
+            }
+        }
+    }
+
+    //Spawn enemies at plants as the wave progresses. Time between spawns is measured by a spawners potency
+    private void WaveSpawn(string type)
+    {
+        foreach (GameObject obj in spawners)
+        {
+            Spawner currentSpawner = obj.GetComponent<Spawner>();
+            if (currentSpawner.lastTimeSpawned == 0) // Initial spawn
+            {
+                float rand = Random.Range(1, 10);
+                // 60% chance to immediatly spawn, 40% to spawn sometime over the next 5 seconds
+                if (rand < 6)
+                {
+                    currentSpawner.Spawn(type);
+                    currentSpawner.lastTimeSpawned = elapsedTime + Random.Range(0f, 5f);
+                }
+                else
+                {
+                    // subtract by current potency here so it won't wait the bonus ammount + the potency
+                    currentSpawner.lastTimeSpawned = elapsedTime + (Random.Range(0f, currentSpawner.potency) - currentSpawner.potency);
+                }
+            }
+            else if ((currentSpawner.lastTimeSpawned + currentSpawner.potency) <= elapsedTime)
+            {
+                currentSpawner.Spawn(type);
+                currentSpawner.lastTimeSpawned = elapsedTime;
+            }
+        }
+    }
+
+    public void AddSpawner(GameObject spawner)
+    {
+        spawners.Add(spawner);
+    }
+
+    private void DestroySpawners()
+    {
+        foreach (GameObject obj in spawners)
+        {
+            Destroy(obj);
+        }
+
+        spawners.Clear();
+    }
+
+
+    // ============ OTHER ============
+    private void alignToGrid(Transform trans)
+    {
+        // Get player position
+        Vector3 selectedPos = trans.position;
+
+        // align it to grid
+        float xPos = Mathf.Round(selectedPos.x);
+        xPos -= (xPos % gridSize);
+        float zPos = Mathf.Round(selectedPos.z);
+        zPos -= (zPos % gridSize);
+
+        // Add offset
+        xPos += gridOffsetX;
+        zPos += gridOffsetZ;
+
+        // Create and return position
+        Vector3 placePos = new Vector3(xPos, selectedPos.y, zPos);
+
+        trans.position = placePos;
+    }
+
+    IEnumerator timer(Callback callback, float time)
+    {
+        yield return new WaitForSeconds(time);
+        callback?.Invoke();
+    }
+
+    private void OnDisable()
+    {
+        //Debug.Log("Called disable from spawnmanager");
+        //spawnerGridPositions.Clear();
+    }
+
+    // temp solution for getting quota #s, will need to be changed
+    public int getQuota()
+    {
+        if (currentPhase == "Morning")
+        {
+            return 20;
+        } else if (currentPhase == "Afternoon")
+        {
+            return 50;
+        } else if (currentPhase == "Night") {
+            return 100;
+        }
+        return -1;
+    }
+
+
+    // ============================ OLD SPAWNING SYSTEM ============================
+    /* This system spawned plants by first creating spawner objects
+     * at random positions on the spawner grid. Then it would spawn
+     * enemies from each of the spawner objects.
+     */
+
+    // Spawn a burst of enemies from all sources
+    /*private void BurstSpawn(string currnetPhase)
+    {
+        for (int i = 0; i < spawnArray.Length; i++)
+        {
+            Spawner currentSpawner = spawnArray[i].GetComponent<Spawner>();
+            if (currentSpawner.germinationPeriod == currnetPhase)
+            {
+                currentSpawner.Spawn("Full");
+                currentSpawner.lastTimeSpawned = elapsedTime;
+            }
+        }
+    }*/
+
+    // OLD -> Used to create spawner objects on the grid randomly
     private void CreateSpawnersonGrid(int num, string phaseWeIn)
     {
         Vector3[] positions = spawnerGridPositions.Keys.ToArray();
@@ -266,7 +370,7 @@ public class SpawnManager : MonoBehaviour
         for (int i = 0; i < num; i++)
         {
             // PICK RANDOM SPOT IN DICTIONARY
-            Vector3 pos = new Vector3(0,0,0);
+            Vector3 pos = new Vector3(0, 0, 0);
             if (positions.Length > 0)
                 pos = positions[Random.Range(0, positions.Length - 1)];
             else
@@ -281,7 +385,8 @@ public class SpawnManager : MonoBehaviour
                 {
                     spawnerGridPositions[pos] = "Full";
                     validPos = true;
-                } else
+                }
+                else
                 {
                     Debug.Log("Position Taken");
                     validPos = false;
@@ -304,57 +409,5 @@ public class SpawnManager : MonoBehaviour
                 spawners.Add(newSpawner);
             }
         }
-    }
-
-    private void DestroySpawners()
-    {
-        foreach (GameObject obj in spawners)
-        {
-            Destroy(obj);
-        }
-
-        spawners.Clear();
-    }
-
-    private void alignToGrid(Transform trans)
-    {
-        // Get player position
-        Vector3 selectedPos = trans.position;
-
-        // align it to grid
-        float xPos = Mathf.Round(selectedPos.x);
-        xPos -= (xPos % gridSize);
-        float zPos = Mathf.Round(selectedPos.z);
-        zPos -= (zPos % gridSize);
-
-        // Add offset
-        xPos += gridOffsetX;
-        zPos += gridOffsetZ;
-
-        // Create and return position
-        Vector3 placePos = new Vector3(xPos, selectedPos.y, zPos);
-
-        trans.position = placePos;
-    }
-
-    private void OnDisable()
-    {
-        //Debug.Log("Called disable from spawnmanager");
-        //spawnerGridPositions.Clear();
-    }
-
-    // temp solution for getting quota #s, will need to be changed
-    public int getQuota()
-    {
-        if (currentPhase == "Morning")
-        {
-            return 20;
-        } else if (currentPhase == "Afternoon")
-        {
-            return 50;
-        } else if (currentPhase == "Night") {
-            return 100;
-        }
-        return -1;
     }
 }
