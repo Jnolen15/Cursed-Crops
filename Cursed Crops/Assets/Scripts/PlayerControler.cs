@@ -195,7 +195,7 @@ public class PlayerControler : MonoBehaviour
         //if (!isAttacking && state != State.Attacking) attackChain = 0;
 
         // Ranged Cooldown
-        if (rangeCoolDown < rangeCDTime) rangeCoolDown += Time.deltaTime; // Attack cooldown
+        if (rangeCoolDown < rangeCDTime && curBullets < maxBullets) rangeCoolDown += Time.deltaTime; // Attack cooldown
         else if (curBullets < maxBullets)
         {
             rangeCoolDown = 0;
