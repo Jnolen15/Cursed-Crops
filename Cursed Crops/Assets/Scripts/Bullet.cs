@@ -70,7 +70,7 @@ public class Bullet : MonoBehaviour
             if (other.gameObject.tag == "Player")
             {
                 other.gameObject.GetComponent<EnemyPlayerDamage>().Damage(damage);
-                Destroy(this.gameObject);
+                if(!piercing) Destroy(this.gameObject);
             }
             else if (other.gameObject.tag == "MainObjective")
             {
