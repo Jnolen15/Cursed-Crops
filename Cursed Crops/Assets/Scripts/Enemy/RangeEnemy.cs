@@ -93,22 +93,39 @@ public class RangeEnemy : MonoBehaviour
             StopAllCoroutines();
             //Destroy(gameObject);
         }
-        
-        if (Vector3.Distance(closestPlayer.position, transform.position) < rangeDistance && !ec.stunned)
+
+        direction = new Vector3(closestPlayer.position.x - transform.position.x, 0, closestPlayer.position.z - transform.position.z);
+        // Raycast to target to see if it can be hit
+        RaycastHit hit;
+        Debug.DrawRay(transform.position, direction, Color.red);
+        if (Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity))
         {
-            enemySpeed = 0;
-            
-            if (!shooting && !onCooldown && !ec.stunned)
+            if (hit.collider.gameObject.tag == "Player" || hit.collider.gameObject.tag == "MainObjective")
             {
-                shooting = true;
-                direction = new Vector3(closestPlayer.position.x - transform.position.x, 0, closestPlayer.position.z - transform.position.z);
-                //StopCoroutine("shoot");
-                //StartCoroutine("shoot");
+                if (Vector3.Distance(closestPlayer.position, transform.position) < rangeDistance && !ec.stunned)
+                {
+                    enemySpeed = 0;
+
+                    if (!shooting && !onCooldown && !ec.stunned)
+                    {
+                        shooting = true;
+                        //StopCoroutine("shoot");
+                        //StartCoroutine("shoot");
+                    }
+                }
+                else
+                {
+                    enemySpeed = originalSpeed;
+                }
+            }
+            else
+            {
+                //Debug.Log("Raycast blocked by: " + hit.collider.gameObject.name);
             }
         }
         else
         {
-            enemySpeed = originalSpeed;
+            //Debug.Log("Raycast hit nothing");
         }
 
         // Get stunned

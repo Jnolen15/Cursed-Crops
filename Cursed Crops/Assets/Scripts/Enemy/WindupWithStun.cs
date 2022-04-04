@@ -53,33 +53,43 @@ public class WindupWithStun : MonoBehaviour
         
         targetToAttack = gameObject.GetComponent<EnemyToPlayer>().closestPlayer;
         direction = new Vector3(targetToAttack.position.x - transform.position.x, 0, targetToAttack.position.z - transform.position.z);
-        if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) <= 6f && !hitFence)
+        // Raycast to target to see if it can be hit
+        RaycastHit hit;
+        //Debug.DrawRay(transform.position, direction, Color.red);
+        if(Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity))
         {
-            
-            //StopCoroutine("stun");
-
-            if (!ec.takingDamage && !ec.stunned)
+            if (hit.collider.gameObject.tag == "Player" || hit.collider.gameObject.tag == "MainObjective")
             {
-                if (!windupStarting)
+                //Debug.Log("Raycast Hit!");
+                if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) <= 6f && !hitFence)
                 {
-                    //StopCoroutine("attack");
-                    sr.color = Color.yellow;
-                    windupStarting = true;
-                    
-                    
-                    attackPosition = new Vector3(targetToAttack.transform.position.x, targetToAttack.transform.position.y, targetToAttack.transform.position.z);
-                    enemyPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-                    newPosition = (attackPosition - enemyPosition) - (attackPosition - enemyPosition).normalized * 1.5f;
+                    //StopCoroutine("stun");
 
-                    newPosition += enemyPosition;
+                    if (!ec.takingDamage && !ec.stunned)
+                    {
+                        if (!windupStarting)
+                        {
+                            //StopCoroutine("attack");
+                            sr.color = Color.yellow;
+                            windupStarting = true;
+
+                            attackPosition = new Vector3(targetToAttack.transform.position.x, targetToAttack.transform.position.y, targetToAttack.transform.position.z);
+                            enemyPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                            newPosition = (attackPosition - enemyPosition) - (attackPosition - enemyPosition).normalized * 1.5f;
+
+                            newPosition += enemyPosition;
+                        }
+                    }
+                    //transform.position = Vector3.MoveTowards(transform.position, targetToAttack.position, 10f * Time.deltaTime);
                 }
-
-                
             }
-            
-
-
-                //transform.position = Vector3.MoveTowards(transform.position, targetToAttack.position, 10f * Time.deltaTime);
+            else
+            {
+                //Debug.Log("Raycast blocked by: " + hit.collider.gameObject.name);
+            }
+        } else
+        {
+            //Debug.Log("Raycast hit nothing");
         }
 
         if (windupStarting)
