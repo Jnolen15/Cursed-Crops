@@ -64,8 +64,13 @@ public class Spawner : MonoBehaviour
 
     private void SpawnSpecial()
     {
-        // % ammount to spawn that gets higher untill it sapwns. with a 100% chance before end of wave
-        float rand = Random.Range(1, 10);
+        hasSpawned = true;
+        Vector3 newPos = new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius));
+        newPos = newPos + transform.position;
+        Instantiate(enemyPrefab, newPos, transform.rotation);
+
+        // OLD SPAWN METHOD: % ammount to spawn that gets higher untill it sapwns. with a 100% chance before end of wave
+        /*float rand = Random.Range(1, 10);
         if (spawnChance > rand)
         {
             hasSpawned = true;
@@ -79,6 +84,6 @@ public class Spawner : MonoBehaviour
             // Doubles each time. Start at 0.25f
             // Gaurenteed spawn by the 6th time
             //spawnChance = spawnChance*2;
-        }
+        }*/
     }
 }

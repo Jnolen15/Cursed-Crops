@@ -39,7 +39,10 @@ public class SpawnManager : MonoBehaviour
     public float currentPhaseEndTime = 0f;   // The time the current phase should end
     private float currentWaveEndTime = 0f;   // The time the current wave should end
     private float currentPauseEndTime = 0f;  // The time the current pause should end
-    private float timeForNextSpawn = 0f;     // Used to spawn basic enemies at certain intervals
+    private float basicSpawnInterval = 0f;     // Used to spawn basic enemies at certain intervals
+    public float specialSpawnInterval = 0f; // USed to spawn special enemies at specific intervals
+    public float specialSpawnTime = 0f;
+    public int specialToSpawn = 0;
     private bool timerStarted = false;
     private bool gridUpdated = false;
     private delegate void Callback();
@@ -157,7 +160,7 @@ public class SpawnManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (state == State.Wave)
+        if (state == State.Wave && currentPhase != "Pre")
         {
             BasicSpawn();
             WaveSpawn("Full");
@@ -168,11 +171,19 @@ public class SpawnManager : MonoBehaviour
     public void StartHarvest()
     {
         state = State.Wave;
+        // Play sound, start music
         gameObject.GetComponent<AudioPlayer>().PlaySound(waveStartSound);
         daMusic.clip = harvestMusic;
         daMusic.Play();
+        // Deactivate harvest flag
         harvestFlag.SetActive(false);
+        // Calculate the array holding the grid positions.
         positions = spawnerGridPositions.Keys.ToArray();
+        // Calculate special enemy spawn interval
+        specialSpawnInterval = (phaseDuration - pauseDuration) / spawners.Count;
+        specialSpawnTime = specialSpawnInterval + elapsedTime;
+        specialToSpawn = 0;
+        Debug.Log("Will spawn special every " + specialSpawnInterval + " seconds.");
     }
 
 
@@ -206,10 +217,10 @@ public class SpawnManager : MonoBehaviour
     private void BasicSpawn()
     {
         // At random intervals, spawn a random ammount
-        if (timeForNextSpawn <= elapsedTime)
+        if (basicSpawnInterval <= elapsedTime)
         {
             // Update timer and spawn values
-            timeForNextSpawn = elapsedTime + 5f;
+            basicSpawnInterval = elapsedTime + 5f;
             float numToSpawn = Random.Range(1, 4);
 
             // Spawn the select number of enemies
@@ -252,7 +263,20 @@ public class SpawnManager : MonoBehaviour
     //Spawn enemies at plants as the wave progresses. Time between spawns is measured by a spawners potency
     private void WaveSpawn(string type)
     {
-        foreach (GameObject obj in spawners)
+        // New system. Based on how many spawners there are, spawn them evenly throught the wave
+        if (elapsedTime >= specialSpawnTime)
+        {
+            Spawner currentSpawner = spawners[specialToSpawn].GetComponent<Spawner>();
+            currentSpawner.Spawn(type);
+            currentSpawner.lastTimeSpawned = elapsedTime;
+
+            // Update counters
+            specialToSpawn++;
+            specialSpawnTime += specialSpawnInterval;
+        }
+
+        // OLD SPAWNING METHOD: For both basic and special spawners
+        /*foreach (GameObject obj in spawners)
         {
             Spawner currentSpawner = obj.GetComponent<Spawner>();
             if (currentSpawner.lastTimeSpawned == 0) // Initial spawn
@@ -275,7 +299,7 @@ public class SpawnManager : MonoBehaviour
                 currentSpawner.Spawn(type);
                 currentSpawner.lastTimeSpawned = elapsedTime;
             }
-        }
+        }*/
     }
 
     public void AddSpawner(GameObject spawner)
