@@ -7,10 +7,11 @@ public class EnemyDamageObjective : MonoBehaviour
 {
     public GameObject enemies;
     public GameObject mainObjective;
-    public int houseHealth = 5000;
-    public int startingHouseHealth = 5000;
+    public int houseHealth = 500;
+    public int startingHouseHealth = 500;
     public GameObject damageNotif;
 
+    private float iframesTime = 0.5f;
     private float damageNotifCooldown = 6f;
     private float damageNotifTimer = 6f;
     private bool showingNotif = false;
@@ -85,13 +86,20 @@ public class EnemyDamageObjective : MonoBehaviour
             damageNotifTimer = 0f;
         }
     }
+
+    public void takeDamageIgnoreIFrames(int damage)
+    {
+        houseHealth -= damage;
+        damageNotifTimer = 0f;
+    }
+
     // IEnumarator so doesn't freaking get one 1 shotted in 1 second
     public IEnumerator iframes()
     {
         isItHit = true;
         // process pre-yield
         //Debug.Log(houseHealth);
-        yield return new WaitForSeconds(5.0f);
+        yield return new WaitForSeconds(iframesTime);
         // process post-yield
         isItHit = false;
     }

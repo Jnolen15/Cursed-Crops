@@ -1628,8 +1628,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemies: {fileID: 0}
   mainObjective: {fileID: 0}
-  houseHealth: 200
-  startingHouseHealth: 200
+  houseHealth: 500
+  startingHouseHealth: 500
   damageNotif: {fileID: 0}
 --- !u!136 &93732069
 CapsuleCollider:
@@ -16949,6 +16949,9 @@ MonoBehaviour:
   plantingMusic: {fileID: 8300000, guid: 0e4ed5601f0044d46b88f853c1bdd6f1, type: 3}
   daMusic: {fileID: 929867515}
   currentPhaseEndTime: 0
+  specialSpawnInterval: 0
+  specialSpawnTime: 0
+  specialToSpawn: 0
   gridChild: {fileID: 0}
   spawners: []
   state: 0

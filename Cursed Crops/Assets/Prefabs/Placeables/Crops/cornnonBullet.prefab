@@ -258,6 +258,7 @@ GameObject:
   - component: {fileID: 875180390295313469}
   - component: {fileID: 2195171091914415132}
   - component: {fileID: 6870011550499739670}
+  - component: {fileID: -1218160532526989422}
   m_Layer: 8
   m_Name: cornnonBullet
   m_TagString: enemyBullet
@@ -324,7 +325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movement: {x: 0, y: 0, z: 0}
   range: 100
-  damage: 1
+  damage: 50
   bulletSpeed: 2
   piercing: 1
   pierceAmmount: 0
@@ -382,3 +383,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _musicSource: {fileID: 0}
   _effectsSource: {fileID: 2617755098302665919}
+--- !u!114 &-1218160532526989422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8414899321626162211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 330c40f98388d5948b75589805642ec3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropItemPrefab: {fileID: 1351969363908040990, guid: 8e442aae4000e344cbf33d29140ec95e,
+    type: 3}
+  spawnChance: 10
+  numDrops: 4
+  randomOffsetX: 1
+  randomOffsetZ: 1

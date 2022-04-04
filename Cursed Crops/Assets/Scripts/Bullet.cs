@@ -74,7 +74,7 @@ public class Bullet : MonoBehaviour
             }
             else if (other.gameObject.tag == "MainObjective")
             {
-                other.gameObject.GetComponent<EnemyDamageObjective>().takeDamage(damage);
+                other.gameObject.GetComponent<EnemyDamageObjective>().takeDamageIgnoreIFrames(damage);
                 Destroy(this.gameObject);
             }
         }
