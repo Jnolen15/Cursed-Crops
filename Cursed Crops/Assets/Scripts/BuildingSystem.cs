@@ -19,6 +19,7 @@ public class BuildingSystem : MonoBehaviour
     private Animator animator;
     private ParticleSystem ps;
     private ParticleSystem psDust;
+    private ParticleSystem psUpgrade;
     private bool acceptablePos;
     private int count = 0;
     private float xPos = 1f;
@@ -80,7 +81,9 @@ public class BuildingSystem : MonoBehaviour
         }
 
         psDust = Instantiate(Resources.Load<GameObject>("Effects/DustParticle"), placeableHighlight.transform.position, transform.rotation, transform).GetComponent<ParticleSystem>();
+        psUpgrade = Instantiate(Resources.Load<GameObject>("Effects/UpgradeParticle"), transform.position, transform.rotation, transform).GetComponent<ParticleSystem>();
         psDust.Pause();
+        psUpgrade.Pause();
 
         buildmodeActive = false;
         mode = "Build";
@@ -250,6 +253,7 @@ public class BuildingSystem : MonoBehaviour
                     if (grm.getMoney() >= upgradeCost)
                     {
                         Debug.Log("shop purchase");
+                        psUpgrade.Emit(8);
                         grm.addMoney(-upgradeCost);
                         // individual upgrades probably should be migrated elsewhere
                         switch (count)
