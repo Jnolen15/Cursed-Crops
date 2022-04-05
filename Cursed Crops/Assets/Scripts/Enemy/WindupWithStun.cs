@@ -55,7 +55,7 @@ public class WindupWithStun : MonoBehaviour
         direction = new Vector3(targetToAttack.position.x - transform.position.x, 0, targetToAttack.position.z - transform.position.z);
         // Raycast to target to see if it can be hit
         RaycastHit hit;
-        //Debug.DrawRay(transform.position, direction, Color.red);
+        Debug.DrawRay(transform.position, direction, Color.red);
         if(Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity))
         {
             if (hit.collider.gameObject.tag == "Player" || hit.collider.gameObject.tag == "MainObjective")
