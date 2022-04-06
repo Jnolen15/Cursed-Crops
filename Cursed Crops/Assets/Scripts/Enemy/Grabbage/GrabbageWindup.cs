@@ -23,6 +23,9 @@ public class GrabbageWindup : MonoBehaviour
     private BoxCollider hurtBox;
     private MeshRenderer daAttack;
     Color prev;
+
+    public LayerMask maskToIgnore;
+
     IEnumerator inst = null;
     void Start()
     {
@@ -38,31 +41,31 @@ public class GrabbageWindup : MonoBehaviour
     {
         targetToAttack = gameObject.GetComponent<GrabbageToPlayers>().closestPlayer;
         direction = new Vector3(targetToAttack.position.x - transform.position.x, 0, targetToAttack.position.z - transform.position.z);
-        if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) <= 6f && !hitFence)
+        // Raycast to target to see if it can be hit
+        RaycastHit hit;
+        Debug.DrawRay(transform.position, direction, Color.red);
+        if (Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity, ~maskToIgnore))
         {
-
-            //StopCoroutine("stun");
-
-            
-            if (!windupStarting)
+            if (hit.collider.gameObject.tag == "Player" || hit.collider.gameObject.tag == "MainObjective")
             {
-                //StopCoroutine("attack");
-                windupStarting = true;
+                if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) <= 6f && !hitFence)
+                {
+                    //StopCoroutine("stun");
+                    if (!windupStarting)
+                    {
+                        //StopCoroutine("attack");
+                        windupStarting = true;
 
-                //preAttackPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
-                attackPosition = new Vector3(targetToAttack.transform.position.x, targetToAttack.transform.position.y, targetToAttack.transform.position.z);
-                enemyPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-                newPosition = (attackPosition - enemyPosition) - (attackPosition - enemyPosition).normalized * 0;
+                        //preAttackPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
+                        attackPosition = new Vector3(targetToAttack.transform.position.x, targetToAttack.transform.position.y, targetToAttack.transform.position.z);
+                        enemyPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                        newPosition = (attackPosition - enemyPosition) - (attackPosition - enemyPosition).normalized * 0;
 
-                newPosition += enemyPosition;
+                        newPosition += enemyPosition;
+                    }
+                    //transform.position = Vector3.MoveTowards(transform.position, targetToAttack.position, 10f * Time.deltaTime);
+                }
             }
-
-
-            
-
-
-
-            //transform.position = Vector3.MoveTowards(transform.position, targetToAttack.position, 10f * Time.deltaTime);
         }
 
         if (windupStarting)

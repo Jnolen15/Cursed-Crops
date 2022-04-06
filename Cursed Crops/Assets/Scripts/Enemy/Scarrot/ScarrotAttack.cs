@@ -14,6 +14,7 @@ public class ScarrotAttack : MonoBehaviour
     public bool attackDash = false;
     public bool onCooldown = false;
     public AudioClip spawnSound;
+    public LayerMask maskToIgnore;
 
     // ================= Private variables =================
     Vector3 preAttackPosition;
@@ -55,50 +56,56 @@ public class ScarrotAttack : MonoBehaviour
         
         // Get closest Player to attack
         targetToAttack = gameObject.GetComponent<EnemyToPlayer>().closestPlayer;
-
+        Vector3 direction = new Vector3(targetToAttack.position.x - transform.position.x, 0, targetToAttack.position.z - transform.position.z);
+        // Raycast to target to see if it can be hit
+        RaycastHit hit;
+        Debug.DrawRay(transform.position, direction, Color.red);
         // Attack if close to the player
-        if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) <= 6f && !hitFence)
+        if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) <= 6f && !hitFence && Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity, ~maskToIgnore))
         {
-            if (!windupStarting)
+            if (hit.collider.gameObject.tag == "Player" || hit.collider.gameObject.tag == "MainObjective")
             {
-                StopCoroutine("attack");
-                
-                windupStarting = true;
-                //preAttackPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
-                chooseAttack = Random.Range(1, 3);
-                randomTimer = Random.Range(0.45f, 1f);
-                // DASH
-                if (chooseAttack == 1)
-                {
-                    //sr.color = Color.yellow;
-                }
-                // AOE
-                else if(chooseAttack == 2)
-                {
-                    //sr.color = Color.magenta;
-                    attackPosition = new Vector3(targetToAttack.transform.position.x, 1, targetToAttack.transform.position.z);
-                    enemyPosition = new Vector3(transform.position.x, 1, transform.position.z);
-                    newPosition = (attackPosition - enemyPosition) - (attackPosition - enemyPosition).normalized * 2;
+                    if (!windupStarting)
+                    {
+                        StopCoroutine("attack");
 
-                    newPosition += enemyPosition;
-                }
+                        windupStarting = true;
+                        //preAttackPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
+                        chooseAttack = Random.Range(1, 3);
+                        randomTimer = Random.Range(0.45f, 1f);
+                        // DASH
+                        if (chooseAttack == 1)
+                        {
+                            //sr.color = Color.yellow;
+                        }
+                        // AOE
+                        else if (chooseAttack == 2)
+                        {
+                            //sr.color = Color.magenta;
+                            attackPosition = new Vector3(targetToAttack.transform.position.x, 1, targetToAttack.transform.position.z);
+                            enemyPosition = new Vector3(transform.position.x, 1, transform.position.z);
+                            newPosition = (attackPosition - enemyPosition) - (attackPosition - enemyPosition).normalized * 2;
 
+                            newPosition += enemyPosition;
+                        }
+
+                    }
+
+                    if (!attacking)
+                    {
+                        gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
+                        if (!gameObject.activeInHierarchy)
+                        {
+                            StopCoroutine("attack");
+                        }
+                        else
+                        {
+                            StartCoroutine("attack");
+                        }
+                    }
+                    //transform.position = Vector3.MoveTowards(transform.position, targetToAttack.position, 10f * Time.deltaTime);
+                }
             }
-
-            if (!attacking)
-            {
-                gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
-                if (!gameObject.activeInHierarchy)
-                {
-                    StopCoroutine("attack");
-                }
-                else
-                {
-                    StartCoroutine("attack");
-                }
-            }
-            //transform.position = Vector3.MoveTowards(transform.position, targetToAttack.position, 10f * Time.deltaTime);
-        }
         else if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) > 6f && !attacking)
         {
             //StopCoroutine("attack");
