@@ -224,6 +224,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attacking: 0
+  maskToIgnore:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &1494904876038302479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,7 +251,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1331445453277433182}
   - component: {fileID: 5374360801071649016}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemySound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,7 +511,7 @@ GameObject:
   - component: {fileID: 1096722216732063893}
   - component: {fileID: 3026329778980588557}
   - component: {fileID: 6542016287543225277}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: attackBox
   m_Icon: {fileID: 0}

@@ -28,6 +28,9 @@ public class WindupWithStun : MonoBehaviour
     IEnumerator inst = null;
     private float attackTimer = 1;
     private float attackTickSpeed = 1;
+
+    public LayerMask maskToIgnore;
+
     void Start()
     {
         childRB = this.gameObject.transform.GetChild(1).GetComponent<Rigidbody>();
@@ -56,7 +59,7 @@ public class WindupWithStun : MonoBehaviour
         // Raycast to target to see if it can be hit
         RaycastHit hit;
         Debug.DrawRay(transform.position, direction, Color.red);
-        if(Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity))
+        if(Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity, ~maskToIgnore))
         {
             if (hit.collider.gameObject.tag == "Player" || hit.collider.gameObject.tag == "MainObjective")
             {

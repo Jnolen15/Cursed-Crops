@@ -18,6 +18,7 @@ public class RangeEnemy : MonoBehaviour
     public bool aPlayerIsStun = true;
     public bool shooting = false;
     public bool onCooldown = false;
+    public LayerMask maskToIgnore;
 
     // ================= Private variables =================
     private Transform closestPlayer;
@@ -98,7 +99,7 @@ public class RangeEnemy : MonoBehaviour
         // Raycast to target to see if it can be hit
         RaycastHit hit;
         Debug.DrawRay(transform.position, direction, Color.red);
-        if (Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity))
+        if (Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity, ~maskToIgnore))
         {
             if (hit.collider.gameObject.tag == "Player" || hit.collider.gameObject.tag == "MainObjective")
             {

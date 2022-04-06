@@ -140,7 +140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7499771088626555800}
   - component: {fileID: 6641385597093860817}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemySound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -368,12 +368,15 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   enemySpeed: 3
   originalSpeed: 3
-  rangeDistance: 8
+  rangeDistance: 10
   cooldown: 3
   gotHit: 0
   aPlayerIsStun: 1
   shooting: 0
   onCooldown: 0
+  maskToIgnore:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &-387172879309044768
 MonoBehaviour:
   m_ObjectHideFlags: 0
