@@ -99,34 +99,26 @@ public class RangeEnemy : MonoBehaviour
         // Raycast to target to see if it can be hit
         RaycastHit hit;
         Debug.DrawRay(transform.position, direction, Color.red);
-        if (Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity, ~maskToIgnore))
+        if (Vector3.Distance(closestPlayer.position, transform.position) < rangeDistance && !ec.stunned && Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity, ~maskToIgnore))
         {
             if (hit.collider.gameObject.tag == "Player" || hit.collider.gameObject.tag == "MainObjective")
             {
-                if (Vector3.Distance(closestPlayer.position, transform.position) < rangeDistance && !ec.stunned)
-                {
-                    enemySpeed = 0;
+                enemySpeed = 0;
 
-                    if (!shooting && !onCooldown && !ec.stunned)
-                    {
-                        shooting = true;
-                        //StopCoroutine("shoot");
-                        //StartCoroutine("shoot");
-                    }
-                }
-                else
+                if (!shooting && !onCooldown && !ec.stunned)
                 {
-                    enemySpeed = originalSpeed;
+                    shooting = true;
+                    //StopCoroutine("shoot");
+                    //StartCoroutine("shoot");
                 }
-            }
-            else
+            } else
             {
-                //Debug.Log("Raycast blocked by: " + hit.collider.gameObject.name);
+                enemySpeed = originalSpeed;
             }
         }
         else
         {
-            //Debug.Log("Raycast hit nothing");
+            enemySpeed = originalSpeed;
         }
 
         // Get stunned
