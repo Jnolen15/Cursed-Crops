@@ -1555,6 +1555,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3541960219470541373}
+  - component: {fileID: 3615251671349951149}
   m_Layer: 0
   m_Name: Player UI
   m_TagString: Untagged
@@ -1589,6 +1590,26 @@ RectTransform:
   m_AnchoredPosition: {x: 90.3, y: -61.2}
   m_SizeDelta: {x: 160.3029, y: 107.1311}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3615251671349951149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3541960219470541372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83624088ef5f4f9439c8190c3a05ed2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerUI: {fileID: 3541960219470541372}
+  NameText: {fileID: 3541960218698333079}
+  CropText: {fileID: 3541960220192685937}
+  HealthBar: {fileID: 3541960220722163958}
+  ReviveBar: {fileID: 3541960219135870749}
+  CurHealth: {fileID: 3541960218991379295}
+  MaxHealth: {fileID: 3541960219031423305}
+  AmmoCounter: {fileID: 3541960219714231575}
 --- !u!1 &3541960219475943680
 GameObject:
   m_ObjectHideFlags: 0
@@ -2820,12 +2841,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1d04428717e6584d93d4e3d125f8c1b, type: 3}
---- !u!224 &1900204146501561179 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3132662108340308606, guid: c1d04428717e6584d93d4e3d125f8c1b,
-    type: 3}
-  m_PrefabInstance: {fileID: 3541960218764140837}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1900204146501561156 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3132662108340308577, guid: c1d04428717e6584d93d4e3d125f8c1b,
@@ -2838,6 +2853,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &1900204146501561179 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3132662108340308606, guid: c1d04428717e6584d93d4e3d125f8c1b,
+    type: 3}
+  m_PrefabInstance: {fileID: 3541960218764140837}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3541960220343609090
 PrefabInstance:
   m_ObjectHideFlags: 0

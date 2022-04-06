@@ -12,34 +12,10 @@ public class UI_Manager : MonoBehaviour
     private SpawnManager SM;
     private GameRuleManager GRM;
 
-    private PlayerControler PC1;
-    private PlayerControler PC2;
-    private EnemyPlayerDamage EPD1;
-    private EnemyPlayerDamage EPD2;
-    private PlayerResourceManager PR1;
-    private PlayerResourceManager PR2;
 
-
-    // UI elements must be dragged/droppped
-    // p1 UI elements
-    public GameObject p1UI;
-    public TextMeshProUGUI nameText1;
-    public TextMeshProUGUI vegetableText1;
-    public Slider HealthBar1;
-    public Slider ReviveBar1;
-    public TextMeshProUGUI CurHealth1;
-    public TextMeshProUGUI MaxHealth1;
-    public AmmoCounter AmmoCounter1;
-
-    // p2 UI elements
-    public GameObject p2UI;
-    public TextMeshProUGUI nameText2;
-    public TextMeshProUGUI vegetableText2;
-    public Slider HealthBar2;
-    public Slider ReviveBar2;
-    public TextMeshProUGUI CurHealth2;
-    public TextMeshProUGUI MaxHealth2;
-    public AmmoCounter AmmoCounter2;
+    // player UIs, must be dragged/droppped
+    public PlayerUImanager p1UImanager;
+    public PlayerUImanager p2UImanager;
 
     // general UI elements
     public Slider HouseHealthBar;
@@ -53,10 +29,6 @@ public class UI_Manager : MonoBehaviour
     public GameObject QuotaOverlay;
     public Slider QuotaBar;
     public TextMeshProUGUI QuotaText;
-
-
-    
-
 
     public GameObject[] WaveBars = new GameObject[8];
 
@@ -95,68 +67,17 @@ public class UI_Manager : MonoBehaviour
             QuotaOverlay.SetActive(false);
         }
 
-        // updating p1 UI
-        if (PC1 == null && PM.players.Count >= 1)
+
+        // initializing Player 1 UI if necessary, automatically updates itself
+        if (PM.players.Count >= 1 && !p1UImanager.gameObject.activeSelf)
         {
-            // p1 = GameObject.Find("Player(Clone)");
-            PC1 = PM.players[0].GetComponent<PlayerControler>();
-            PR1 = PM.players[0].GetComponent<PlayerResourceManager>();
-
-
-            // also need to catch the error created by not finding a player initially
-            EPD1 = PM.players[0].GetComponent<EnemyPlayerDamage>();
-            p1UI.SetActive(true);
-
-            // setting player name
-            nameText1.text = PM.players[0].GetComponentInChildren<PlayerAnimOCManager>().selectedCharacter.ToString();
+            p1UImanager.Initialize(1);
         }
 
-        // checking if PC has been aquired
-        if (PC1 != null)
+        // initializing Player 2 UI if necessary, automatically updates itself
+        if (PM.players.Count >= 2 && !p2UImanager.gameObject.activeSelf)
         {
-            // managing  currency text
-            vegetableText1.text = PR1.getCrops() + " / " + PR1.maxCrops;
-            // managing health bar/revive 
-            HealthBar1.value = (float)EPD1.playerHealth / (float)EPD1.reviveHealth;
-            CurHealth1.text = EPD1.playerHealth.ToString();
-            MaxHealth1.text = EPD1.reviveHealth.ToString();
-
-            ReviveBar1.value = EPD1.reviveTimer / EPD1.reviveTime;
-
-            // managing ammo UI
-            AmmoCounter1.SetBullets(PC1.curBullets, PC1.GetRangeCD());
-        }
-
-        // updating p2 UI
-        if (PC2 == null && PM.players.Count >= 2)
-        {
-            // p1 = GameObject.Find("Player(Clone)");
-            PC2 = PM.players[1].GetComponent<PlayerControler>();
-            PR2 = PM.players[1].GetComponent<PlayerResourceManager>();
-
-
-            // also need to catch the error created by not finding a player initially
-            EPD2 = PM.players[1].GetComponent<EnemyPlayerDamage>();
-            p2UI.SetActive(true);
-
-            // setting player name
-            nameText2.text = PM.players[1].GetComponentInChildren<PlayerAnimOCManager>().selectedCharacter.ToString();
-        }
-
-        // checking if PC has been aquired
-        if (PC2 != null)
-        {
-            // managing  currency text
-            vegetableText2.text = PR2.getCrops() + " / " + PR2.maxCrops;
-            // managing health bar
-            HealthBar2.value = (float)EPD2.playerHealth / (float)EPD2.reviveHealth;
-            CurHealth2.text = EPD2.playerHealth.ToString();
-            MaxHealth2.text = EPD2.reviveHealth.ToString();
-
-            ReviveBar2.value = EPD2.reviveTimer / EPD2.reviveTime;
-
-            // managing ammo UI
-            AmmoCounter2.SetBullets(PC2.curBullets, PC2.GetRangeCD());
+            p2UImanager.Initialize(2);
         }
     }
 
