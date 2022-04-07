@@ -13,9 +13,17 @@ public class CutsceneScripting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+
+        if (gameObject.GetComponent<DialogueTrigger>().dialogueHappening && Input.GetKeyDown(KeyCode.Space))
         {
-            gameObject.GetComponent<DialogueTrigger>().Resume();
+            if (!gameObject.GetComponent<DialogueTrigger>().stopDialogue)
+            {
+                gameObject.GetComponent<DialogueTrigger>().DisplayNextSentence();
+            }
+            else
+            {
+                gameObject.GetComponent<DialogueTrigger>().Resume();
+            }
         }
     }
 }

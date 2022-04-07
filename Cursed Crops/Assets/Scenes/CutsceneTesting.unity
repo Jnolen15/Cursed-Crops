@@ -2554,7 +2554,7 @@ RectTransform:
   m_LocalScale: {x: 8.6, y: 4.69, z: 1}
   m_Children: []
   m_Father: {fileID: 631846772}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5742,6 +5742,140 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 367887935}
   m_Mesh: {fileID: 2504345457074934838, guid: 77f2f20a6dfd7284c9abb6e92948e240, type: 3}
+--- !u!1 &370933051
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 370933052}
+  - component: {fileID: 370933054}
+  - component: {fileID: 370933053}
+  m_Layer: 5
+  m_Name: Name
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &370933052
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370933051}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1413392657}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -75.7, y: 31.6}
+  m_SizeDelta: {x: 114.5521, y: 22.1915}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &370933053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370933051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Doug
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 12
+  m_fontSizeBase: 12
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &370933054
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370933051}
+  m_CullTransparentMesh: 1
 --- !u!1001 &371292554
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10453,7 +10587,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -10468,8 +10602,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 1413392657}
   - {fileID: 155275608}
+  - {fileID: 1413392657}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20914,6 +21048,8 @@ PlayableDirector:
     value: {fileID: 187532495}
   - key: {fileID: -4788492048806442223, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
     value: {fileID: 2136685085}
+  - key: {fileID: 8741943351386276777, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 1413392656}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1154185996
@@ -20943,7 +21079,195 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   director: {fileID: 1154185995}
+  daName: {fileID: 370933051}
+  image: {fileID: 2051418873}
+  daDialogue: {fileID: 1900532873}
+  Doug: {fileID: 21300000, guid: 660c854ce12604c4ab3eceeadcfefb67, type: 3}
+  Cecil: {fileID: 21300000, guid: 2eba27d99c4e3fd49ae38bd02b59e864, type: 3}
+  Carlisle: {fileID: 5636649823308804494, guid: 76aece0e5042d8e429a2edb1164dd6bd,
+    type: 3}
+  Harvey: {fileID: 21300000, guid: 59b7d25c9b6117f4fbaf9302f26b7fd1, type: 3}
+  Narrator: {fileID: -5308324453560568106, guid: 2413c9f91b33d664a8c560b92ad81fba,
+    type: 3}
+  Cultist: {fileID: 21300000, guid: 6be930b67b0ae8a48a2463bbc2f78410, type: 3}
   sentence: Ayy Lmao
+  character: 
+  stopDialogue: 0
+  dialogueHappening: 0
+  startOfDialogue: 1
+  dialogue:
+  - endOfDialogue: 0
+    name: Narrator
+    sentences: 'The chaos of the day ends, and we find the group finishing off the
+      crop attack. Cecil is finishing off the last of the crops, Harvey is poking
+      the corpses with a stick, '
+  - endOfDialogue: 1
+    name: Narrator
+    sentences: Carlisle is furiously taking notes, and Doug is poking a rock while
+      munching on a dead onion.
+  - endOfDialogue: 0
+    name: Cecil
+    sentences: "That appears to be the last of them\u2026 or so we think\u2026"
+  - endOfDialogue: 0
+    name: Harvey
+    sentences: Them damn aliens will be back soon, mark my SHUCKIN WORDS!
+  - endOfDialogue: 0
+    name: Carlisle
+    sentences: "Incredible!  The system as a whole is less energetic, with respect
+      to crystalline vibrational resonance, interwoven on a molecular level with
+      isotropic transfer functions \n"
+  - endOfDialogue: 0
+    name: Carlisle
+    sentences: 'to produce spatial harmony within the reality matrix.  This creature
+      makes use of cyclic harmonic repetition, combined with isomorphic '
+  - endOfDialogue: 0
+    name: Carlisle
+    sentences: "silicon overlays manifesting continuous interaction with the self.\r"
+  - endOfDialogue: 0
+    name: Harvey
+    sentences: "The hell did you just say?\r"
+  - endOfDialogue: 0
+    name: Carlisle
+    sentences: Words!
+  - endOfDialogue: 0
+    name: Harvey
+    sentences: What did the words MEAN?
+  - endOfDialogue: 0
+    name: Carlisle
+    sentences: Who cares?  It sounds smart, though!
+  - endOfDialogue: 1
+    name: Carlisle
+    sentences: "Anyways, have you seen how the snipepper creates these seed bullets!? 
+      IT\u2019S SO COOL!"
+  - endOfDialogue: 0
+    name: Cecil
+    sentences: ...
+  - endOfDialogue: 0
+    name: Cecil
+    sentences: Brilliant idea, Doug!  We should ask our neighbors, Maybe they know
+      something!
+  - endOfDialogue: 0
+    name: Carlisle
+    sentences: 'OOH!  You think their farm needs purifying too?  Can we find more
+      of these living crops there!?
+
+'
+  - endOfDialogue: 1
+    name: Cecil
+    sentences: "\u2026Prob-"
+  - endOfDialogue: 0
+    name: Narrator
+    sentences: "Before Cecil finishes, Carlisle starts making a mad dash in the direction
+      she\u2019s pretty sure the nearest other farmhouse is in."
+  - endOfDialogue: 0
+    name: Cecil
+    sentences: "-ably\u2026"
+  - endOfDialogue: 0
+    name: Harvey
+    sentences: "Isn\u2019t our nearest neighbor over there?\r\n"
+  - endOfDialogue: 1
+    name: Cecil
+    sentences: "\u2026Yes."
+  - endOfDialogue: 0
+    name: Narrator
+    sentences: "The group, now organized and moving in the correct direction, have
+      reached a clearing, in which a small, rickety farmhouse can be seen.\r"
+  - endOfDialogue: 0
+    name: Harvey
+    sentences: 'I KNOW that person was an alien in disguise, Cecil!  It was obvious!
+
+'
+  - endOfDialogue: 0
+    name: Cecil
+    sentences: "Hmm\u2026  It\u2019s not impossible, but they were just giving Doug
+      his order from McBurger\u2019s\u2026"
+  - endOfDialogue: 0
+    name: Carlisle
+    sentences: I agree!  They said it was a double cheeseburger, but they lied! 
+      I think they were suspicious!
+  - endOfDialogue: 0
+    name: Harvey
+    sentences: See?  Even Carlisle agree- wait, what?
+  - endOfDialogue: 0
+    name: Carlisle
+    sentences: How could it be a double cheeseburger if there was only ONE BURGER
+      IN THERE?
+  - endOfDialogue: 0
+    name: Narrator
+    sentences: "Cecil begins ruminating on this, as he begins to look for the farmhouse\u2019s
+      owner"
+  - endOfDialogue: 0
+    name: Cecil
+    sentences: "They may have a point\u2026  Witches do use dead animals a lot, and
+      if you really think about it\u2026 a burger is just a bunch of dead things
+      put together\u2026  were they... a messenger from the witches\u2026?\r\n"
+  - endOfDialogue: 0
+    name: Cecil
+    sentences: "a burger is just a bunch of dead things put together\u2026  were
+      they... a messenger from the witches\u2026?\r"
+  - endOfDialogue: 0
+    name: Harvey
+    sentences: "\u2026WHAT?  Did you people not see those dead, emotionless eyes? 
+      THOSE ARE THE EYES OF AN ALIEN!"
+  - endOfDialogue: 0
+    name: Cecil
+    sentences: "\u2026They did say they hated their job\u2026"
+  - endOfDialogue: 1
+    name: Narrator
+    sentences: As the group gets closer to the farmhouse a mysterious hooded figure
+      hears their conversation
+  - endOfDialogue: 0
+    name: Cultist
+    sentences: "And who wouldst thou claim hates their job?  Not I, I should hope.\r"
+  - endOfDialogue: 0
+    name: Cecil
+    sentences: "Regardless, No\u2026 No I don\u2019t mean to\u2026 do whatever you
+      just said\u2026 I was just wondering if you had any experiences with\u2026
+      witches\u2026 lately."
+  - endOfDialogue: 0
+    name: Cultist
+    sentences: "Witches?  Forsooth, I am happy to say I have not.  That would intrude
+      on my\u2026 plans I have on the final day\u2026\r"
+  - endOfDialogue: 0
+    name: Cecil
+    sentences: ' ...You mean the end of this week?
+
+'
+  - endOfDialogue: 0
+    name: Cultist
+    sentences: Indeed, the final day.
+  - endOfDialogue: 0
+    name: Cecil
+    sentences: "Well, It\u2019s good to hear you haven\u2019t had dealings with them,
+      then, I\u2019ve heard they\u2019re particularly evil on Saturdays\u2026  \r"
+  - endOfDialogue: 1
+    name: Cultist
+    sentences: "Then full glad am I not to have had\u2026 meetings with them."
+  - endOfDialogue: 1
+    name: Cecil
+    sentences: "But that means\u2026 We\u2019re back to square one.  Damn these witches
+      are good.  Not leaving a single piece of evidence to go on\u2026\r\n"
+  - endOfDialogue: 0
+    name: Cecil
+    sentences: "Regardless, we have a job to do\u2026   Let\u2019s purify this place
+      before we leave!\r"
+  - endOfDialogue: 0
+    name: Cultist
+    sentences: 'Oh- Well I mean I-
+
+'
+  - endOfDialogue: 0
+    name: Harvey
+    sentences: "YOU\u2019RE WELCOME.\r\n"
+  - endOfDialogue: 0
+    name: Carlisle
+    sentences: 'You mean we get to see more of those crimes against nature!?  YES!
+
+'
+  - endOfDialogue: 1
+    name: Narrator
+    sentences: Carlisle begins to jump up and down, as if she was a kid in a candy
+      store.  The rest of the group begin to prepare for the battle to come.
 --- !u!114 &1154185998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20965,18 +21289,6 @@ MonoBehaviour:
         - m_Target: {fileID: 1154185997}
           m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
           m_MethodName: TriggerDialogue
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1154185997}
-          m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
-          m_MethodName: Resume
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -26716,7 +27028,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1413392657
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26728,10 +27040,11 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1479468201}
   - {fileID: 2051418874}
+  - {fileID: 1900532876}
+  - {fileID: 370933052}
   m_Father: {fileID: 631846772}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -27537,85 +27850,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1476778044}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1479468200
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1479468201}
-  - component: {fileID: 1479468203}
-  - component: {fileID: 1479468202}
-  m_Layer: 5
-  m_Name: Text
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1479468201
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1479468200}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1413392657}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -86.1, y: -3.9}
-  m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1479468202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1479468200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 0
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: Ayy Lmao
---- !u!222 &1479468203
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1479468200}
-  m_CullTransparentMesh: 1
 --- !u!1001 &1480488869
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33694,6 +33928,140 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1893175309}
   m_Mesh: {fileID: -1550514412580984892, guid: 77f2f20a6dfd7284c9abb6e92948e240, type: 3}
+--- !u!1 &1900532873
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1900532876}
+  - component: {fileID: 1900532875}
+  - component: {fileID: 1900532874}
+  m_Layer: 5
+  m_Name: TheDialogue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1900532874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900532873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 12
+  m_fontSizeBase: 12
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 3
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1900532875
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900532873}
+  m_CullTransparentMesh: 1
+--- !u!224 &1900532876
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900532873}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1413392657}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -13.9182, y: -6.0719}
+  m_SizeDelta: {x: 319.8291, y: 44.9439}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1902148475
 GameObject:
   m_ObjectHideFlags: 0
@@ -36386,6 +36754,201 @@ MonoBehaviour:
   - {fileID: 2051818542}
   - {fileID: 939476056}
   - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
 --- !u!4 &2028764403
 Transform:
   m_ObjectHideFlags: 0
@@ -36940,7 +37503,7 @@ RectTransform:
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children: []
   m_Father: {fileID: 1413392657}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

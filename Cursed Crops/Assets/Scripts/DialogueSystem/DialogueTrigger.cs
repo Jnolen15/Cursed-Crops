@@ -2,30 +2,133 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
+using TMPro;
+using UnityEngine.UI;
 
 public class DialogueTrigger : MonoBehaviour
 {
-    public PlayableDirector director;
-    public string sentence;
 
+    //Getting the cutscene manager
+    public PlayableDirector director;
+
+    //Variables that will change the character picture, name, etc
+    public GameObject daName;
+    public GameObject image;
+    public GameObject daDialogue;
+
+    public Sprite Doug;
+    public Sprite Cecil;
+    public Sprite Carlisle;
+    public Sprite Harvey;
+    public Sprite Narrator;
+    public Sprite Cultist;
+
+
+
+    //Variables for calling the Dialogue Class
+    public string sentence;
+    public string character;
+    public bool stopDialogue;
+    public bool dialogueHappening;
+    public bool startOfDialogue = true;
+    public DialogueClass[] dialogue;
+
+
+    private Queue<string> sentences;
+    private Queue<string> characters;
+    private Queue<bool> stoppers;
+    
+
+    void Start()
+    {
+        sentences = new Queue<string>();
+        characters = new Queue<string>();
+        stoppers = new Queue<bool>();
+    }
     public void TriggerDialogue()
     {
         Pause();
-       
-        Debug.Log(sentence);
+
+        if (startOfDialogue)
+        {
+            startOfDialogue = false;
+            sentences.Clear();
+            characters.Clear();
+            stoppers.Clear();
+
+            // Goes through all the lines of dialogue with who is speaking
+            // their line and if they end the dialogue sequence
+            foreach (DialogueClass line in dialogue)
+            {
+
+
+                //sentences.Enqueue(sentence);
+
+                stoppers.Enqueue(line.endOfDialogue);
+                characters.Enqueue(line.name);
+                sentences.Enqueue(line.sentences);
+                //line.endOfDialogue = false;
+
+            }
+        }
+            DisplayNextSentence();
+        
+
+    }
+
+    public void DisplayNextSentence()
+    {
+        
+        if (sentences.Count == 0 || characters.Count == 0)
+        {
+            Resume();
+            return;
+        }
+        stopDialogue = stoppers.Dequeue();
+        Debug.Log(stopDialogue);
+
+        daName.GetComponent<TextMeshProUGUI>().text = characters.Dequeue();
+        if (daName.GetComponent<TextMeshProUGUI>().text == "Narrator")
+        {
+            image.GetComponent<Image>().sprite = Narrator;
+        }
+        if (daName.GetComponent<TextMeshProUGUI>().text == "Cecil")
+        {
+            image.GetComponent<Image>().sprite = Cecil;
+        }
+        if (daName.GetComponent<TextMeshProUGUI>().text == "Doug")
+        {
+            image.GetComponent<Image>().sprite = Doug;
+        }
+        if (daName.GetComponent<TextMeshProUGUI>().text == "Carlisle")
+        {
+            image.GetComponent<Image>().sprite = Carlisle;
+        }
+        if (daName.GetComponent<TextMeshProUGUI>().text == "Harvey")
+        {
+            image.GetComponent<Image>().sprite = Harvey;
+        }
+        if (daName.GetComponent<TextMeshProUGUI>().text == "Cultist")
+        {
+            image.GetComponent<Image>().sprite = Cultist;
+        }
+
+
+        daDialogue.GetComponent<TextMeshProUGUI>().text = sentences.Dequeue();
         
     }
 
     void Pause()
     {
+        dialogueHappening = true;
         director.playableGraph.GetRootPlayable(0).SetSpeed(0);
     }
 
     public void Resume()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            director.playableGraph.GetRootPlayable(0).SetSpeed(1);
-        }
+        dialogueHappening = false;
+        
+        director.playableGraph.GetRootPlayable(0).SetSpeed(1);
+        
     }
 }
