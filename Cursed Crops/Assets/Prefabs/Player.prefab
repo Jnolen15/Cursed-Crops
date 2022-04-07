@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1711330494346915979}
   - component: {fileID: 3223592091748275944}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: phSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 3254153069211780722}
   - component: {fileID: 3564049952308042870}
   - component: {fileID: 8227265876297765868}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlaceableHighlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3664774142295836259}
   - component: {fileID: 5333121778617243811}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerAudio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -300,7 +300,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7937736027802609806}
   - component: {fileID: 7937736027802609807}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerShadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -390,7 +390,7 @@ GameObject:
   - component: {fileID: 7937736029672694575}
   - component: {fileID: -1676916115656988922}
   - component: {fileID: 1511986507579704336}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -841,6 +841,9 @@ MonoBehaviour:
   playerHealth: 10
   reviveHealth: 10
   damage: 1
+  reviveTime: 10
+  reviveTimer: 0
+  playerDown: 0
   inIFrames: 0
   playerIsStun: 0
   invulnerable: 0
@@ -889,7 +892,7 @@ GameObject:
   - component: {fileID: 5564203787489950684}
   - component: {fileID: 1143820043172960238}
   - component: {fileID: 4030265867585263875}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1033,7 +1036,7 @@ GameObject:
   - component: {fileID: 7937736029837635453}
   - component: {fileID: 7937736029837635452}
   - component: {fileID: 7937736029837635443}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MeleeAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1141,7 +1144,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7937736029858094617}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerPivot
   m_TagString: LeaningSprite
   m_Icon: {fileID: 0}
@@ -1229,6 +1232,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RangePS
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848066411491045909, guid: f0bb62f399830ad49a30ccd1d9381229,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0bb62f399830ad49a30ccd1d9381229, type: 3}

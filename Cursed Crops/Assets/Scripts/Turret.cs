@@ -11,6 +11,7 @@ public class Turret : MonoBehaviour
     public AudioClip manureSound;
     public AudioClip pitchSound;
     public AudioClip rifleSound;
+    public LayerMask maskToIgnore;
 
     // ================= Private variables =================
     private Vector3 direction;
@@ -21,6 +22,8 @@ public class Turret : MonoBehaviour
     private SpriteRenderer turretSprite;
     private TurretAnimator tAnimator;
     private bool flipped = false;
+    public int count = 0;
+    public List<GameObject> enemies = new List<GameObject>();
 
 
     void Start()
@@ -34,40 +37,94 @@ public class Turret : MonoBehaviour
     void Update()
     {
         SpriteFlip();
-
+        // Enemy targeting and shooting
         if (targetedEnemy != null && !onCooldown)
         {
             if (!targetedEnemy.activeSelf)
             {
-                targetedEnemy = null;
+                Debug.Log("Enemy inactive, next target");
+                count++;
             } else
             {
                 enemyInRange(targetedEnemy.transform);
-                StartCoroutine(shoot());
+
+                // Raycast to target to see if it can be hit
+                RaycastHit hit;
+                Debug.DrawRay(firePosition.transform.position, direction, Color.red);
+                if (Physics.Raycast(firePosition.transform.position, direction, out hit, Mathf.Infinity, ~maskToIgnore))
+                {
+                    if (hit.collider.gameObject.tag == "Enemy")
+                    {
+                        StartCoroutine(shoot());
+                    } else
+                    {
+                        Debug.Log("Blocked by: " + hit.collider.gameObject.name);
+                        count++;
+                    }
+                } else
+                {
+                    Debug.Log("Raycast hit nothing, next target");
+                    count++;
+                }
             }
+        }
+
+        // List cleanup
+        foreach(GameObject enemy in enemies)
+        {
+            if(!enemy.activeSelf)
+                enemies.Remove(enemy);
+            break;
+        }
+
+        // Find target if one isn't assigned
+        if (enemies.Count < count + 1)
+        {
+            if(enemies.Count > 0)
+            {
+                count = 0;
+                targetedEnemy = enemies[count];
+            }
+            else
+            {
+                targetedEnemy = null;
+            }
+        } else
+        {
+            targetedEnemy = enemies[count];
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Enemy" && other.gameObject.name != "cornnonBullet")
+        /*if (other.gameObject.tag == "Enemy" && other.gameObject.name != "cornnonBullet")
         {
             if (targetedEnemy == null)
             {
                 targetedEnemy = other.gameObject;
             }
+        }*/
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            enemies.Add(other.gameObject);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Enemy" && other.gameObject.name != "cornnonBullet")
+        if (other.gameObject.tag == "Enemy")
         {
-            // Targeted enemy leaves range
+            if(enemies.Find(gameObject => other.gameObject) != null)
+                enemies.Remove(other.gameObject);
+            /*// Targeted enemy leaves range
             if (targetedEnemy == other.gameObject)
             {
                 targetedEnemy = null;
-            }
+            }*/
         }
     }
 
