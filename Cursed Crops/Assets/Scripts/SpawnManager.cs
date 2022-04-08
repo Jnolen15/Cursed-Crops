@@ -24,7 +24,8 @@ public class SpawnManager : MonoBehaviour
     public GameObject meleeEnemy;           // The basic melee enemy to spawn
     public GameObject rangeEnemy;           // The basic range enemy to spawn
 
-    public float bounds = 18f;
+    public float xbounds = 18f;
+    public float ybounds = 18f;
 
     public float gridSize = 1;
     public float gridOffsetX = 0.5f;
@@ -190,9 +191,9 @@ public class SpawnManager : MonoBehaviour
     // ============ SPAWNER GRID SETUP STUFF ============
     private void CreateSpawnerGrid()
     {
-        for(float i = -bounds; i <= bounds-1; i++)
+        for(float i = -xbounds/2; i <= (xbounds/2) - 1; i++)
         {
-            for (float j = -bounds; j <= bounds-1; j++)
+            for (float j = -ybounds/2; j <= (ybounds/2) - 1; j++)
             {
                 Vector3 testPos = new Vector3(i, 1f, j);
                 GameObject newChecker = Instantiate(placementChecker, testPos, transform.rotation, gridChild.transform);
@@ -211,6 +212,10 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(transform.position, new Vector3(xbounds, 1, ybounds));
+    }
 
     // ============ ENEMY SPAWNING ============
     // Spawn basic enemies at random positions in available locations.
