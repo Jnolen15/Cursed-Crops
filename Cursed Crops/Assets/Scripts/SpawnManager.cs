@@ -307,6 +307,12 @@ public class SpawnManager : MonoBehaviour
         spawners.Add(spawner);
     }
 
+    public void RemoveSpawner(GameObject spawner)
+    {
+        if(spawners.Find(gameObject => spawner))
+            spawners.Remove(spawner);
+    }
+
     private void DestroySpawners()
     {
         foreach (GameObject obj in spawners)

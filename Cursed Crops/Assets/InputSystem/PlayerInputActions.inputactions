@@ -118,7 +118,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Swap",
+                    "name": "Destroy",
                     "type": "Button",
                     "id": "f7d28228-f4c5-46f8-b819-fe898b157e29",
                     "expectedControlType": "Button",
@@ -527,7 +527,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Swap",
+                    "action": "Destroy",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "13892df4-411a-42fe-9a00-ff96f7d07c01",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Destroy",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -163,6 +163,7 @@ MonoBehaviour:
   intersectingBuildable: 0
   mode: 
   boxCol: {fileID: 0}
+  intersectedBuildable: {fileID: 0}
 --- !u!1 &6133714594927051250
 GameObject:
   m_ObjectHideFlags: 0
@@ -713,7 +714,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: -5891569623318608545}
         m_TargetAssemblyTypeName: BuildingSystem, Assembly-CSharp
-        m_MethodName: Swap_performed
+        m_MethodName: Destroy_performed
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

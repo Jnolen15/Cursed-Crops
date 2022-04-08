@@ -8,6 +8,7 @@ public class Turret : MonoBehaviour
     public GameObject bullet;
     public bool onCooldown = false;
     public float cooldown = 2f;
+    public int cost = 0;
     public AudioClip manureSound;
     public AudioClip pitchSound;
     public AudioClip rifleSound;
@@ -22,8 +23,8 @@ public class Turret : MonoBehaviour
     private SpriteRenderer turretSprite;
     private TurretAnimator tAnimator;
     private bool flipped = false;
-    public int count = 0;
-    public List<GameObject> enemies = new List<GameObject>();
+    private int count = 0;
+    private List<GameObject> enemies = new List<GameObject>();
 
 
     void Start()

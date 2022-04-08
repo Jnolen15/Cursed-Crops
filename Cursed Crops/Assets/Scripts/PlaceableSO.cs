@@ -14,7 +14,7 @@ public class PlaceableSO : ScriptableObject
     [TextArea(2, 5)]
     public string stats;
     public string price;
-    [Header("Cost")]
+    [Header("Cost (Aslo on prefab, so change there too)")]
     public int cost;
 
 }

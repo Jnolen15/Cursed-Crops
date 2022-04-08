@@ -17,6 +17,7 @@ public class Spawner : MonoBehaviour
     public bool randomizePotency = true;
     public int spawnRadius = 2; // X and Z limit to where the enemys spawn
     public float lastTimeSpawned = 0f;
+    public int bountyWorth = 0;
 
     // ================= Private variables =================
     private float spawnChance = 1;  // Used in the spawning of special enemies. Inclreases with each spawn attampt

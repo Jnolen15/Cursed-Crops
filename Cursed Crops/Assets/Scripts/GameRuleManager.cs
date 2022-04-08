@@ -8,10 +8,11 @@ public class GameRuleManager : MonoBehaviour
     public int startingMoney = 100;
     public int totalPointBounty = 100;
 
-    public int numCrop0Planted = 0;
-    public int numCrop1Planted = 0;
-    public int numCrop2Planted = 0;
-    public int numCrop3Planted = 0;
+    public int numCornonPlanted = 0;
+    public int numGrabbagePlanted = 0;
+    public int numMediBerryPlanted = 0;
+    public int numScarrotPlanted = 0;
+    public int numSabatamatoPlanted = 0;
 
     // ================ Private ================
     private int globalMoney = 0;
@@ -34,22 +35,30 @@ public class GameRuleManager : MonoBehaviour
         
     }
 
-    public void addBountyPoints(CropSO activeCrop, int cropNum)
+    public void addBountyPoints(CropSO activeCrop, GameObject crop)
     {
         int timesPlanted = 0;
-        switch (cropNum)
+        switch (crop.GetComponent<Spawner>().plantName)
         {
-            case 0:
-                timesPlanted = numCrop0Planted;
+            case "Cornon":
+                timesPlanted = numCornonPlanted++;
+                Debug.Log("Cornon bounty added");
                 break;
-            case 1:
-                timesPlanted = numCrop1Planted;
+            case "Grabbage":
+                timesPlanted = numGrabbagePlanted++;
+                Debug.Log("Grabbage bounty added");
                 break;
-            case 2:
-                timesPlanted = numCrop2Planted;
+            case "MediBerry":
+                timesPlanted = numMediBerryPlanted++;
+                Debug.Log("MediBerry bounty added");
                 break;
-            case 3:
-                timesPlanted = numCrop3Planted;
+            case "Scarrot":
+                timesPlanted = numScarrotPlanted++;
+                Debug.Log("Scarrot bounty added");
+                break;
+            case "Sabatamato":
+                timesPlanted = numSabatamatoPlanted++;
+                Debug.Log("Sabatamato bounty added");
                 break;
         }
 
@@ -60,12 +69,43 @@ public class GameRuleManager : MonoBehaviour
             int falloff = activeCrop.bountyFallOffAmmount * (timesPlanted - activeCrop.numBeforeFallOff);
             if (falloff >= activeCrop.bountyWorth) falloff = activeCrop.bountyWorth - 2;
             addPoints(activeCrop.bountyWorth - falloff);
+            crop.GetComponent<Spawner>().bountyWorth = activeCrop.bountyWorth - falloff;
         }
         // If fallof isn't reached
         else
         {
-            Debug.Log("Full bounty");
+            //Debug.Log("Full bounty");
             addPoints(activeCrop.bountyWorth);
+            crop.GetComponent<Spawner>().bountyWorth = activeCrop.bountyWorth;
+        }
+    }
+
+    public void subtractBountyPoints(GameObject crop)
+    {
+        addPoints(-crop.GetComponent<Spawner>().bountyWorth);
+
+        switch (crop.GetComponent<Spawner>().plantName)
+        {
+            case "Cornon":
+                numCornonPlanted--;
+                Debug.Log("Cornon bounty added");
+                break;
+            case "Grabbage":
+                numGrabbagePlanted--;
+                Debug.Log("Grabbage bounty added");
+                break;
+            case "MediBerry":
+                numMediBerryPlanted--;
+                Debug.Log("MediBerry bounty added");
+                break;
+            case "Scarrot":
+                numScarrotPlanted--;
+                Debug.Log("Scarrot bounty added");
+                break;
+            case "Sabatamato":
+                numSabatamatoPlanted--;
+                Debug.Log("Sabatamato bounty added");
+                break;
         }
     }
 
