@@ -23,14 +23,13 @@ public class DialogueTrigger : MonoBehaviour
     public Sprite Narrator;
     public Sprite Cultist;
 
-
-
     //Variables for calling the Dialogue Class
     public string sentence;
     public string character;
     public bool stopDialogue;
     public bool dialogueHappening;
     public bool startOfDialogue = true;
+    public bool textOver = false;
     public DialogueClass[] dialogue;
 
 
@@ -45,6 +44,7 @@ public class DialogueTrigger : MonoBehaviour
         characters = new Queue<string>();
         stoppers = new Queue<bool>();
     }
+
     public void TriggerDialogue()
     {
         Pause();
@@ -116,10 +116,41 @@ public class DialogueTrigger : MonoBehaviour
         }
 
 
-        daDialogue.GetComponent<TextMeshProUGUI>().text = sentences.Dequeue();
+        //daDialogue.GetComponent<TextMeshProUGUI>().text = sentences.Dequeue();
+        sentence = sentences.Dequeue();
+        textOver = false;
+        StopAllCoroutines();
+        StartCoroutine(TypeSenctence(sentence));
 
         //Use this space to add the letter animations - Juan
-        
+
+    }
+
+    IEnumerator TypeSenctence(string sentence)
+    {
+        daDialogue.GetComponent<TextMeshProUGUI>().text = "";
+        int count = 0;
+        foreach (char letter in sentence.ToCharArray())
+        {
+            count++;
+            daDialogue.GetComponent<TextMeshProUGUI>().text += letter;
+            yield return new WaitForSeconds(0.03f);
+            /*if (count % 5 == 0)
+            {
+                if (Random.value < 0.5f)
+                    audioManager.source.PlayOneShot(audioManager.Talk1);
+                else
+                    audioManager.source.PlayOneShot(audioManager.Talk2);
+            }*/
+        }
+        textOver = true;
+    }
+
+    public void SkipAnimation()
+    {
+        StopAllCoroutines();
+        daDialogue.GetComponent<TextMeshProUGUI>().text = sentence;
+        textOver = true;
     }
 
     void Pause()

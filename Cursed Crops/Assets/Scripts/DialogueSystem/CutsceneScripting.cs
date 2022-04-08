@@ -5,10 +5,12 @@ using UnityEngine.InputSystem;
 
 public class CutsceneScripting : MonoBehaviour
 {
+    public DialogueTrigger dt;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        dt = this.GetComponent<DialogueTrigger>();
     }
 
     // Update is called once per frame
@@ -34,14 +36,22 @@ public class CutsceneScripting : MonoBehaviour
         {
             if (gameObject.GetComponent<DialogueTrigger>().dialogueHappening)
             {
-                if (!gameObject.GetComponent<DialogueTrigger>().stopDialogue)
+                if (dt.textOver)
                 {
-                    gameObject.GetComponent<DialogueTrigger>().DisplayNextSentence();
-                }
-                else
+                    if (!gameObject.GetComponent<DialogueTrigger>().stopDialogue)
+                    {
+                        gameObject.GetComponent<DialogueTrigger>().DisplayNextSentence();
+                    }
+                    else
+                    {
+                        gameObject.GetComponent<DialogueTrigger>().Resume();
+                    }
+                } else
                 {
-                    gameObject.GetComponent<DialogueTrigger>().Resume();
+                    // Skip text animation
+                    dt.SkipAnimation();
                 }
+
             }
         }
     }
