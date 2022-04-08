@@ -20990,6 +20990,7 @@ GameObject:
   - component: {fileID: 1154185996}
   - component: {fileID: 1154185995}
   - component: {fileID: 1154185998}
+  - component: {fileID: 1154186000}
   - component: {fileID: 1154185997}
   - component: {fileID: 1154185999}
   m_Layer: 0
@@ -21310,6 +21311,113 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efd0b4c93e8357a4b8968d2942c60d8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1154186000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1154185994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 843562213e4f8974a9f777a4503ac6a4,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1154185999}
+        m_TargetAssemblyTypeName: CutsceneScripting, Assembly-CSharp
+        m_MethodName: Progress_performed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8bf8db31-ce2d-45f6-80f8-76cfc98af689
+    m_ActionName: Player/Attack[/DualShock4GamepadHID/rightTrigger,/DualShock4GamepadHID/buttonWest,/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 78ef1b08-176d-4b46-99eb-79f65b82c09c
+    m_ActionName: Player/Ranged[/DualShock4GamepadHID/leftTrigger,/DualShock4GamepadHID/buttonEast,/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 68cb8dc6-0c65-43ac-a1b2-e4767004a08f
+    m_ActionName: Player/Roll[/DualShock4GamepadHID/rightShoulder,/DualShock4GamepadHID/leftShoulder,/DualShock4GamepadHID/buttonSouth,/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5a2a9781-0d80-4845-b311-2137b4ce8ed8
+    m_ActionName: Player/Movement[/DualShock4GamepadHID/leftStick,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 063adcea-5308-4a76-9dbf-c0d3ffd4697e
+    m_ActionName: Player/Aim[/DualShock4GamepadHID/rightStick,/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: aebf6278-7f77-4e36-b212-c40d770a7dab
+    m_ActionName: Player/Build[/DualShock4GamepadHID/buttonNorth,/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 035c1447-4de8-4689-95bf-4240a09d8944
+    m_ActionName: Player/Rotate
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: db451421-19df-40d6-bb0d-29edad8b0be3
+    m_ActionName: Player/Place[/DualShock4GamepadHID/buttonSouth,/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b4d67f51-4e9c-47ee-b63e-c8a86bb6826a
+    m_ActionName: Player/SwitchLeft[/DualShock4GamepadHID/leftShoulder,/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f23ff558-5b6d-4126-9b47-a5854c8b1e53
+    m_ActionName: Player/Switchright[/DualShock4GamepadHID/rightShoulder,/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e4df2b50-bf09-4d37-98e4-c209761d7268
+    m_ActionName: Player/SelectNorth[/DualShock4GamepadHID/dpad/up,/Keyboard/i]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b4ccd6e9-ca2c-4888-8520-973aec198f54
+    m_ActionName: Player/SelectSouth[/DualShock4GamepadHID/dpad/down,/Keyboard/k]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 87081256-78cd-47e0-83e8-2d113025fc27
+    m_ActionName: Player/SelectEast[/DualShock4GamepadHID/dpad/right,/Keyboard/l]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 58bad2c5-7786-441f-97ac-97d90ff44d7c
+    m_ActionName: Player/SelectWest[/DualShock4GamepadHID/dpad/left,/Keyboard/j]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f7d28228-f4c5-46f8-b819-fe898b157e29
+    m_ActionName: Player/Destroy[/Keyboard/f,/DualShock4GamepadHID/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 79170d67-a8d9-4ec4-8614-d35f8c4b0621
+    m_ActionName: Player/Pause[/Keyboard/escape,/DualShock4GamepadHID/start]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Keyboard
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1001 &1158192102
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36622,6 +36730,12 @@ MonoBehaviour:
   - {fileID: 22466241}
   - {fileID: 2051818542}
   - {fileID: 939476056}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
   - {fileID: 2051818542}
   - {fileID: 939476056}
   - {fileID: 22466241}
