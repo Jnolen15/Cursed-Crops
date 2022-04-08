@@ -8,6 +8,7 @@ public class Trap : MonoBehaviour
     public bool singleUse = false;
     public GameObject effect;
     public float cdTime = 2f;
+    public int cost = 0;
     public AudioClip soundClip;
 
     // ================= Private variables =================

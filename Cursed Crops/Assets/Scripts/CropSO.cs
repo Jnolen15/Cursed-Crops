@@ -14,7 +14,7 @@ public class CropSO : ScriptableObject
     [TextArea(2, 5)]
     public string stats;
     public string price; // This isn't needed. But its hooked up to the UI. Delete later
-    [Header("Bounty values")]
+    [Header("Bounty values (Worth also on prefab, change there too)")]
     public int bountyWorth;
     public int numBeforeFallOff; // Number of crops you can plant before they start falling off
     public int bountyFallOffAmmount;

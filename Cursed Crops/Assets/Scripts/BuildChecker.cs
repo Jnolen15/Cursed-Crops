@@ -9,6 +9,7 @@ public class BuildChecker : MonoBehaviour
     public bool intersectingBuildable;
     public string mode;
     public BoxCollider boxCol;
+    public GameObject intersectedBuildable;
     private void Start()
     {
         boxCol = GetComponent<BoxCollider>();
@@ -39,6 +40,8 @@ public class BuildChecker : MonoBehaviour
                 if (other.gameObject.tag == "Buildable" || other.gameObject.tag == "Border")
                 {
                     intersectingBuildable = true;
+                    if(other.gameObject.tag == "Buildable")
+                        intersectedBuildable = other.transform.parent.gameObject;
                 }
                 else if (other.gameObject.tag == "TilePlantable")
                     acceptablePos = false;
@@ -52,6 +55,7 @@ public class BuildChecker : MonoBehaviour
                 if (other.gameObject.tag == "Spawner")
                 {
                     intersectingBuildable = true;
+                    intersectedBuildable = other.gameObject;
                 }
                 else if (other.gameObject.tag == "TilePlantable")
                     acceptablePos = true;

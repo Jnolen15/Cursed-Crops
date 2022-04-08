@@ -81,6 +81,7 @@ public class DialogueTrigger : MonoBehaviour
         
         if (sentences.Count == 0 || characters.Count == 0)
         {
+            startOfDialogue = true;
             Resume();
             return;
         }
@@ -88,33 +89,36 @@ public class DialogueTrigger : MonoBehaviour
         Debug.Log(stopDialogue);
 
         daName.GetComponent<TextMeshProUGUI>().text = characters.Dequeue();
-        if (daName.GetComponent<TextMeshProUGUI>().text == "Narrator")
+        
+        //Deals with the images of the dialogue
+        switch (daName.GetComponent<TextMeshProUGUI>().text)
         {
-            image.GetComponent<Image>().sprite = Narrator;
-        }
-        if (daName.GetComponent<TextMeshProUGUI>().text == "Cecil")
-        {
-            image.GetComponent<Image>().sprite = Cecil;
-        }
-        if (daName.GetComponent<TextMeshProUGUI>().text == "Doug")
-        {
-            image.GetComponent<Image>().sprite = Doug;
-        }
-        if (daName.GetComponent<TextMeshProUGUI>().text == "Carlisle")
-        {
-            image.GetComponent<Image>().sprite = Carlisle;
-        }
-        if (daName.GetComponent<TextMeshProUGUI>().text == "Harvey")
-        {
-            image.GetComponent<Image>().sprite = Harvey;
-        }
-        if (daName.GetComponent<TextMeshProUGUI>().text == "Cultist")
-        {
-            image.GetComponent<Image>().sprite = Cultist;
+
+            case "Narrator":
+                image.GetComponent<Image>().sprite = Narrator;
+                break;
+            case "Cecil":
+                image.GetComponent<Image>().sprite = Cecil;
+                break;
+            case "Doug":
+                image.GetComponent<Image>().sprite = Doug;
+                break;
+            case "Carlisle":
+                image.GetComponent<Image>().sprite = Carlisle;
+                break;
+            case "Harvey":
+                image.GetComponent<Image>().sprite = Harvey;
+                break;
+            case "Cultist":
+                image.GetComponent<Image>().sprite = Cultist;
+                break;
+
         }
 
 
         daDialogue.GetComponent<TextMeshProUGUI>().text = sentences.Dequeue();
+
+        //Use this space to add the letter animations - Juan
         
     }
 

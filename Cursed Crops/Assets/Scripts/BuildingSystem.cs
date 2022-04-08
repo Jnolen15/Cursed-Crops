@@ -304,27 +304,64 @@ public class BuildingSystem : MonoBehaviour
                         gameObject.GetComponent<AudioPlayer>().PlaySound(plantingSound);
                         GameObject newSpawner = Instantiate(activeCrop.prefab.gameObject, placeableHighlight.transform.position, placeableHighlight.transform.rotation);
                         sm.AddSpawner(newSpawner);
-                        // Add bounty points
-                        switch (count)
-                        {
-                            case 0:
-                                grm.numCrop0Planted++;
-                                grm.addBountyPoints(activeCrop, 0);
-                                break;
-                            case 1:
-                                grm.numCrop1Planted++;
-                                grm.addBountyPoints(activeCrop, 1);
-                                break;
-                            case 2:
-                                grm.numCrop2Planted++;
-                                grm.addBountyPoints(activeCrop, 2);
-                                break;
-                            case 3:
-                                grm.numCrop3Planted++;
-                                grm.addBountyPoints(activeCrop, 3);
-                                break;
-                        }
+                        grm.addBountyPoints(activeCrop, newSpawner);
                     } 
+                }
+            }
+        }
+    }
+
+    // Destroy Placeable
+    public void Destroy_performed(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (buildmodeActive)
+            {
+                if (placeableHighlight != null)
+                {
+                    if (mode == "Build")
+                    {
+                        // Make sure player is intersecting a buildable
+                        if (bc.intersectingBuildable)
+                        {
+                            var cost = 0;
+                            psDust.Emit(6);
+                            if (bc.intersectedBuildable.GetComponent<Turret>() != null)
+                                cost = bc.intersectedBuildable.GetComponent<Turret>().cost;
+                            else
+                                cost = bc.intersectedBuildable.GetComponent<Trap>().cost;
+                            grm.addMoney(cost);
+                            gameObject.GetComponent<AudioPlayer>().PlaySound(buildingSound);
+                            animator.SetTrigger("Plant");
+                            Destroy(bc.intersectedBuildable);
+                            bc.intersectedBuildable = null;
+                            bc.intersectingBuildable = false;
+                            Debug.Log("Demolished");
+                        }
+                        else
+                        {
+                            Debug.Log("Nothing to demolish");
+                        }
+                    }
+                    else if (mode == "Plant" && sm.state == SpawnManager.State.Break)
+                    {
+                        if (bc.intersectingBuildable)
+                        {
+                            psDust.Emit(6);
+                            animator.SetTrigger("Plant");
+                            gameObject.GetComponent<AudioPlayer>().PlaySound(plantingSound);
+                            grm.subtractBountyPoints(bc.intersectedBuildable);
+                            sm.RemoveSpawner(bc.intersectedBuildable);
+                            Destroy(bc.intersectedBuildable);
+                            bc.intersectedBuildable = null;
+                            bc.intersectingBuildable = false;
+                        }
+                        else
+                        {
+                            Debug.Log("Nothing to demolish");
+                        }
+                    }
                 }
             }
         }
