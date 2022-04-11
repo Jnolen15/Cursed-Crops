@@ -630,12 +630,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_Mode: 4
+    m_WrapAround: 1
+    m_SelectOnUp: {fileID: 2135541848}
+    m_SelectOnDown: {fileID: 1653762531}
+    m_SelectOnLeft: {fileID: 2135541848}
+    m_SelectOnRight: {fileID: 1653762531}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0, g: 0, b: 0, a: 0}
@@ -2237,16 +2237,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 924902111}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal_P1
-  m_VerticalAxis: Vertical_P1
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_ActionsAsset: {fileID: -944628639613478452, guid: 843562213e4f8974a9f777a4503ac6a4,
+    type: 3}
+  m_PointAction: {fileID: 768501739096027507, guid: 843562213e4f8974a9f777a4503ac6a4,
+    type: 3}
+  m_MoveAction: {fileID: 6211684902799885060, guid: 843562213e4f8974a9f777a4503ac6a4,
+    type: 3}
+  m_SubmitAction: {fileID: 6167490483563127369, guid: 843562213e4f8974a9f777a4503ac6a4,
+    type: 3}
+  m_CancelAction: {fileID: 1841956938981871195, guid: 843562213e4f8974a9f777a4503ac6a4,
+    type: 3}
+  m_LeftClickAction: {fileID: -3919140418684018846, guid: 843562213e4f8974a9f777a4503ac6a4,
+    type: 3}
+  m_MiddleClickAction: {fileID: -1154727489656208080, guid: 843562213e4f8974a9f777a4503ac6a4,
+    type: 3}
+  m_RightClickAction: {fileID: 2135441504810337543, guid: 843562213e4f8974a9f777a4503ac6a4,
+    type: 3}
+  m_ScrollWheelAction: {fileID: 8295175490689700513, guid: 843562213e4f8974a9f777a4503ac6a4,
+    type: 3}
+  m_TrackedDevicePositionAction: {fileID: -2405629028983201827, guid: 843562213e4f8974a9f777a4503ac6a4,
+    type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: -9019714619800284669, guid: 843562213e4f8974a9f777a4503ac6a4,
+    type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
 --- !u!114 &924902113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2259,7 +2278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 2135541846}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &924902114
@@ -3299,12 +3318,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnUp: {fileID: 1653762531}
+    m_SelectOnDown: {fileID: 2135541848}
+    m_SelectOnLeft: {fileID: 1653762531}
+    m_SelectOnRight: {fileID: 2135541848}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0, g: 0, b: 0, a: 0}
@@ -4506,12 +4525,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnUp: {fileID: 259350914}
+    m_SelectOnDown: {fileID: 1354538348}
+    m_SelectOnLeft: {fileID: 259350914}
+    m_SelectOnRight: {fileID: 1354538348}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0, g: 0, b: 0, a: 0}
@@ -5277,7 +5296,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1866854880
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6681,12 +6700,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_Mode: 4
+    m_WrapAround: 1
+    m_SelectOnUp: {fileID: 1354538348}
+    m_SelectOnDown: {fileID: 259350914}
+    m_SelectOnLeft: {fileID: 1354538348}
+    m_SelectOnRight: {fileID: 259350914}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0, g: 0, b: 0, a: 0}
