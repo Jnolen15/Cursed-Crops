@@ -115,6 +115,7 @@ public class Turret : MonoBehaviour
         {
             sabotaged = false;
             onCooldown = false;
+            turretSprite.color = prev;
         }
     }
 
@@ -131,7 +132,7 @@ public class Turret : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Enemy" && other.gameObject.GetComponent<SaboAI>())
+        if (other.gameObject.tag == "Enemy" && other.gameObject.GetComponent<SaboAI>() == null)
         {
             enemies.Add(other.gameObject);
         }
