@@ -7,6 +7,7 @@ public class Turret : MonoBehaviour
     // ================= Public variables =================
     public GameObject bullet;
     public bool onCooldown = false;
+    public bool sabotaged = false;
     public float cooldown = 2f;
     public int cost = 0;
     public AudioClip manureSound;
@@ -20,58 +21,74 @@ public class Turret : MonoBehaviour
     private Transform enemyPosition;
     private Transform firePosition;
     private GameObject targetedEnemy;
+    private GameObject turretChild;
     private SpriteRenderer turretSprite;
     private TurretAnimator tAnimator;
     private bool flipped = false;
     private int count = 0;
     private List<GameObject> enemies = new List<GameObject>();
+    private Color prev;
+
 
 
     void Start()
     {
         turretSprite = this.transform.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>();
+        prev = turretSprite.color;
         tAnimator = this.GetComponentInChildren<TurretAnimator>();
         firePosition = this.transform.GetChild(2).transform;
+        turretChild = this.transform.GetChild(1).gameObject;
         //this.transform.GetChild(0).GetChild(0).gameObject.GetComponent<TurretAnimator>();
     }
 
     void Update()
     {
-        SpriteFlip();
-        // Enemy targeting and shooting
-        if (targetedEnemy != null && !onCooldown)
+        if (!sabotaged)
         {
-            if (!targetedEnemy.activeSelf)
+            SpriteFlip();
+            // Enemy targeting and shooting
+            if (targetedEnemy != null && !onCooldown)
             {
-                Debug.Log("Enemy inactive, next target");
-                count++;
-            } else
-            {
-                enemyInRange(targetedEnemy.transform);
-
-                // Raycast to target to see if it can be hit
-                RaycastHit hit;
-                Debug.DrawRay(firePosition.transform.position, direction, Color.red);
-                if (Physics.Raycast(firePosition.transform.position, direction, out hit, Mathf.Infinity, ~maskToIgnore))
+                if (!targetedEnemy.activeSelf)
                 {
-                    if (hit.collider.gameObject.tag == "Enemy")
+                    Debug.Log("Enemy inactive, next target");
+                    count++;
+                }
+                else
+                {
+                    enemyInRange(targetedEnemy.transform);
+
+                    // Raycast to target to see if it can be hit
+                    RaycastHit hit;
+                    Debug.DrawRay(firePosition.transform.position, direction, Color.red);
+                    if (Physics.Raycast(firePosition.transform.position, direction, out hit, Mathf.Infinity, ~maskToIgnore))
                     {
-                        StartCoroutine(shoot());
-                    } else
+                        if (hit.collider.gameObject.tag == "Enemy")
+                        {
+                            StartCoroutine(shoot());
+                        }
+                        else
+                        {
+                            Debug.Log("Blocked by: " + hit.collider.gameObject.name);
+                            count++;
+                        }
+                    }
+                    else
                     {
-                        Debug.Log("Blocked by: " + hit.collider.gameObject.name);
+                        Debug.Log("Raycast hit nothing, next target");
                         count++;
                     }
-                } else
-                {
-                    Debug.Log("Raycast hit nothing, next target");
-                    count++;
                 }
             }
         }
-
+        else
+        {
+            StopCoroutine(shoot());
+            onCooldown = true;
+            turretSprite.color = Color.red;
+        }
         // List cleanup
-        foreach(GameObject enemy in enemies)
+        foreach (GameObject enemy in enemies)
         {
             if(!enemy.activeSelf)
                 enemies.Remove(enemy);
@@ -94,6 +111,11 @@ public class Turret : MonoBehaviour
         {
             targetedEnemy = enemies[count];
         }
+        if (turretChild.GetComponent<TurretSabotager>().theSabotager != null && !turretChild.GetComponent<TurretSabotager>().theSabotager.activeInHierarchy)
+        {
+            sabotaged = false;
+            onCooldown = false;
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -109,7 +131,7 @@ public class Turret : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy" && other.gameObject.GetComponent<SaboAI>())
         {
             enemies.Add(other.gameObject);
         }

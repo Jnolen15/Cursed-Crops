@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5954211420576253738}
   - component: {fileID: 6100403953532587657}
+  - component: {fileID: 6868925193836154673}
   m_Layer: 0
   m_Name: size
   m_TagString: Buildable
@@ -75,6 +76,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 2, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6868925193836154673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2565752066386242825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67a1ef9bf0d868c46ac70dd2d7bc052a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theSabotager: {fileID: 0}
 --- !u!1 &5293178019224948025
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,7 +460,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   singleUse: 0
+  sabotaged: 0
   effect: {fileID: 29174839543159647, guid: fe5f5813b0229394eb4e1ea8559538cc, type: 3}
+  trapChild: {fileID: 0}
   cdTime: 5
   cost: 150
   soundClip: {fileID: 8300000, guid: e15d0a5b353710f479a9357f31af1af5, type: 3}

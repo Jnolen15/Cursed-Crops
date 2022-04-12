@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7697525004159337105}
   - component: {fileID: 7843718709656783666}
+  - component: {fileID: 8781277598632566503}
   m_Layer: 0
   m_Name: size
   m_TagString: Buildable
@@ -44,6 +45,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 2, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8781277598632566503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011385419323828402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67a1ef9bf0d868c46ac70dd2d7bc052a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theSabotager: {fileID: 0}
 --- !u!1 &3826235795418179336
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,6 +249,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 6064863933115894708, guid: a0f32e47c8b25f5428a07973e7f0b33c, type: 3}
   onCooldown: 0
+  sabotaged: 0
   cooldown: 10
   cost: 100
   manureSound: {fileID: 8300000, guid: 8d904ff77e8376446a1e07841f8d6eb9, type: 3}

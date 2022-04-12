@@ -6,7 +6,9 @@ public class Trap : MonoBehaviour
 {
     // ================= Public variables =================
     public bool singleUse = false;
+    public bool sabotaged = false;
     public GameObject effect;
+    public GameObject trapChild;
     public float cdTime = 2f;
     public int cost = 0;
     public AudioClip soundClip;
@@ -15,6 +17,7 @@ public class Trap : MonoBehaviour
     private delegate void Callback();
     private SpriteRenderer trapSprite;
     private bool playonce = false;
+    private Color prev;
     public bool onCooldown = false;
 
     /* NOTE:
@@ -27,19 +30,39 @@ public class Trap : MonoBehaviour
     void Start()
     {
         trapSprite = this.transform.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>();
+        prev = trapSprite.color;
         gameObject.GetComponent<AudioPlayer>().SetAudioSource(soundClip);
+        trapChild = this.transform.GetChild(1).gameObject;
     }
 
     void Update()
     {
-        if (singleUse)
+        if (!sabotaged)
         {
+            trapSprite.color = prev;
+            if (singleUse)
+            {
 
-        } else if(!onCooldown)
+            }
+            else if (!onCooldown)
+            {
+                spawnEffect();
+                onCooldown = true;
+                StartCoroutine(cooldown(() => { onCooldown = false; }, cdTime));
+            }
+        }
+        else
         {
-            spawnEffect();
-            onCooldown = true;
-            StartCoroutine(cooldown(() => { onCooldown = false; }, cdTime));
+            trapSprite.color = Color.red;
+            StopCoroutine(cooldown(() => { onCooldown = false; }, cdTime));
+            playonce = true;
+            gameObject.GetComponent<AudioPlayer>().StopSound();
+        }
+
+        if (trapChild.GetComponent<TurretSabotager>().theSabotager != null && !trapChild.GetComponent<TurretSabotager>().theSabotager.activeInHierarchy)
+        {
+            sabotaged = false;
+            playonce = false;
         }
     }
 
@@ -49,7 +72,7 @@ public class Trap : MonoBehaviour
         {
 
         }
-        if(other.gameObject.tag == "Player" && !playonce)
+        if(other.gameObject.tag == "Player" && !playonce && !sabotaged)
         {
             playonce = true;
             gameObject.GetComponent<AudioPlayer>().PlayTheSetClip();
@@ -63,7 +86,7 @@ public class Trap : MonoBehaviour
         {
 
         }
-        if (other.gameObject.tag == "Player" && playonce)
+        if (other.gameObject.tag == "Player" && playonce && !sabotaged)
         {
             playonce = false;
             gameObject.GetComponent<AudioPlayer>().StopSound();
