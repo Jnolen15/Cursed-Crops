@@ -14,26 +14,51 @@ public class PlayerAnimOCManager : MonoBehaviour
     // --- Enums
     public enum character // your custom enumeration
     {
-        harvey,
-        doug,
-        cecil
+        Harvey,
+        Doug,
+        Cecil,
+        Carlisle
     };
 
     // --- Variables
     void Start()
     {
         animator = this.GetComponent<Animator>();
-        if (selectedCharacter == character.harvey)
+        if (selectedCharacter == character.Harvey)
         {
             animator.runtimeAnimatorController = harveyAnimOC;
         }
-        else if (selectedCharacter == character.doug)
+        else if (selectedCharacter == character.Doug)
         {
             animator.runtimeAnimatorController = dougAnimOC;
         }
-        else if (selectedCharacter == character.cecil)
+        else if (selectedCharacter == character.Cecil)
         {
             animator.runtimeAnimatorController = cecilAnimOC;
+        }
+        else if (selectedCharacter == character.Carlisle)
+        {
+            animator.runtimeAnimatorController = harveyAnimOC;
+        }
+    }
+
+    public void SetCharacter(string chara)
+    {
+        Debug.Log("Got string: " + chara);
+        switch(chara)
+        {
+            case "Cecil":
+                selectedCharacter = character.Cecil;
+                break;
+            case "Doug":
+                selectedCharacter = character.Doug;
+                break;
+            case "Harvey":
+                selectedCharacter = character.Harvey;
+                break;
+            case "Carlisle":
+                selectedCharacter = character.Carlisle;
+                break;
         }
     }
 }

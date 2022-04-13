@@ -36,6 +36,8 @@ public class PlayerConfigManager : MonoBehaviour
     public void SetPlayer(int index, string choice)
     {
         playerConfigs[index].PlayerCharacter = choice;
+        var playerNum = "Player" + index.ToString();
+        PlayerPrefs.SetString(playerNum, choice);
     }
 
     public void ReadyPlayer(int index)
