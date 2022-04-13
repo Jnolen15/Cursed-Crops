@@ -14,8 +14,8 @@ public class PlayerManager : MonoBehaviour
     {
         players.Add(playerInput.gameObject);
         animManager = playerInput.gameObject.GetComponentInChildren<PlayerAnimOCManager>();
-        if (players.IndexOf(playerInput.gameObject) == 0) animManager.selectedCharacter = PlayerAnimOCManager.character.cecil;
-        else if (players.IndexOf(playerInput.gameObject) == 1) animManager.selectedCharacter = PlayerAnimOCManager.character.doug;
+        if (players.IndexOf(playerInput.gameObject) == 0) animManager.selectedCharacter = PlayerAnimOCManager.character.Cecil;
+        else if (players.IndexOf(playerInput.gameObject) == 1) animManager.selectedCharacter = PlayerAnimOCManager.character.Doug;
 
         foreach (var item in players)
         {
