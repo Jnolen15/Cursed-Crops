@@ -8,6 +8,7 @@ public class ControlScreen : MonoBehaviour
     //Load the level
     public void loadLevel()
     {
-        SceneManager.LoadScene("Level1");
+        //SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
