@@ -17,9 +17,10 @@ public class InitializeLevel : MonoBehaviour
         playerManager = GameObject.Find("Player Manager").GetComponent<PlayerManager>();
         for (int i = 0; i < playerConfigs.Length; i++)
         {
+            playerController = playerConfig.transform.GetChild(i).gameObject;
+
             // Create player
             Vector3 spawnPos = new Vector3(0, 1, 0);
-            GameObject playerController = playerConfig.transform.GetChild(i).gameObject;
             var player = Instantiate(playerPrefab, spawnPos, Quaternion.identity, playerController.transform);
 
             // Initialize the player
@@ -31,6 +32,17 @@ public class InitializeLevel : MonoBehaviour
 
             //player.GetComponent<PlayerInput>().ActivateInput
             //player.GetComponent<PlayerInput>(). = playerConfigs[i].Input;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        // make sure the playerController has no children. If it does, remove them
+        if (playerController.transform.childCount > 0)
+        {
+            //GameObject.Find("SpriteLeanerManager").GetComponent<SpriteLeaner>().leanedSprites.Remove(
+            //    playerController.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().gameObject);
+            Destroy(playerController.transform.GetChild(0).gameObject);
         }
     }
 }

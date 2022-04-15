@@ -22,8 +22,8 @@ public class CharacterSelectManager : MonoBehaviour
         // adding available characters to string
         AvailableChars.Add("Doug");
         AvailableChars.Add("Cecil");
-        AvailableChars.Add("Harvey");
-        AvailableChars.Add("Carlisle");
+        //AvailableChars.Add("Harvey");
+        //AvailableChars.Add("Carlisle");
     }
 
     void Update()

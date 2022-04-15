@@ -123,6 +123,85 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &60982740
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 60982741}
+  - component: {fileID: 60982743}
+  - component: {fileID: 60982742}
+  m_Layer: 5
+  m_Name: Loading
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &60982741
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60982740}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1124797916}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1096.5386, y: 413.3647}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &60982742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60982740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 200
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 200
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Loading...
+--- !u!222 &60982743
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60982740}
+  m_CullTransparentMesh: 1
 --- !u!1 &319682032
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,7 +219,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &319682033
 RectTransform:
   m_ObjectHideFlags: 0
@@ -153,12 +232,12 @@ RectTransform:
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 1124797916}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -110, y: 80}
-  m_SizeDelta: {x: 2536.915, y: 931.7269}
+  m_AnchoredPosition: {x: 0, y: -35}
+  m_SizeDelta: {x: 3725, y: 2000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &319682034
 MonoBehaviour:
@@ -193,30 +272,59 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '+++ Keyboard +++
+  m_Text: '+++ Gamepad +++
 
-    Movement: -------------------- WASD
+    Movement: --------------------- Left stick
 
     Aiming:
-    ----------------------- Mouse
+    ------------------------ Right stick
 
-    Melee attack: ----------------- Left click
+    Melee attack: ------------------ Right
+    trigger / West button
 
-    Ranged
-    attack: ---------------- Right click
+    Ranged attack: ----------------- Left trigger / East
+    button
 
-    Dodge roll: -------------------- Shift
+    Dodge roll: --------------------- Right or Left shoulder / South
+    button
 
-    Build
-    mode: ------------------- R
+    Build mode: -------------------- North button
 
-    Place Buildable: --------------- Left click
+    Place Buildable:
+    ---------------- South button (in build mode)
+
+    Remove Buildable: ----------------
+    East button (in build mode)
+
+    Switch selected Buildable: ------- Right and
+    Left shoulder (in build mode)
+
+
+    +++ Keyboard +++
+
+    Movement: --------------------
+    WASD
+
+    Aiming: ----------------------- Mouse
+
+    Melee attack: -----------------
+    Left click
+
+    Ranged attack: ---------------- Right click
+
+    Dodge roll:
+    -------------------- Shift
+
+    Build mode: ------------------- R
+
+    Place
+    Buildable: --------------- Left click (in build mode)
+
+    Remove Buildable:
+    --------------- F (in build mode)
+
+    Switch selected Buildable: ------ Q E
     (in build mode)
-
-    Remove Buildable: --------------- F (in build mode)
-
-    Switch
-    selected Buildable: ------ Q E (in build mode)
 
 '
 --- !u!222 &319682035
@@ -226,6 +334,95 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 319682032}
+  m_CullTransparentMesh: 1
+--- !u!1 &614459317
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 614459318}
+  - component: {fileID: 614459320}
+  - component: {fileID: 614459319}
+  m_Layer: 5
+  m_Name: Basics
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &614459318
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614459317}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1124797916}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -35}
+  m_SizeDelta: {x: 3725, y: 2000}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &614459319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614459317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 100
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 200
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "BASICS:\r\nIn this game you will be fighting hordes of evil vegtables
+    across 3 phases \r\nTo start a phase, each player must melee attack while standing
+    on the big red button.\r\nBut they may only start once the Quota for that phase
+    is met (more on that below).\r\nBasic enemies will spawn randomly anywhere on
+    the brown terrain.\r\nYou will loose the game if the house on the left of the
+    map is destroyed by enemies. \nPlayers must meet a quota before starting each
+    wave.\r\n20 before morning. 50 before afternoon. and 100 before night.\r\nBefore
+    each wave a quota bar can be seen at the bottem of the screen.\r\nPlayers can
+    increase their quota score by planting special enemies.\r\nNote: the more enemies
+    you plant of the same type, the less score it gives you, so mix it up!\r\nYou
+    win by getting though all 3 phases.\n"
+--- !u!222 &614459320
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 614459317}
   m_CullTransparentMesh: 1
 --- !u!1 &777682143
 GameObject:
@@ -284,7 +481,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Play
+  m_text: Next
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -465,8 +662,10 @@ Transform:
   m_Children:
   - {fileID: 1453525349}
   - {fileID: 1229545232}
+  - {fileID: 614459318}
+  - {fileID: 1912572846}
   - {fileID: 319682033}
-  - {fileID: 1586155430}
+  - {fileID: 60982741}
   m_Father: {fileID: 1487385639}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -636,7 +835,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 185}
+  m_AnchoredPosition: {x: 0, y: 200}
   m_SizeDelta: {x: 604.8164, y: 97.3624}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1229545233
@@ -780,7 +979,7 @@ GameObject:
   - component: {fileID: 1453525350}
   - component: {fileID: 1453525353}
   m_Layer: 0
-  m_Name: Level 1 select
+  m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -804,7 +1003,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 225, y: -21}
+  m_AnchoredPosition: {x: 288, y: -193}
   m_SizeDelta: {x: 170, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1453525350
@@ -853,7 +1052,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1487385635}
         m_TargetAssemblyTypeName: ControlScreen, Assembly-CSharp
-        m_MethodName: loadLevel
+        m_MethodName: Progress
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -997,6 +1196,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbed75e822d9b8c4db50e3832455317f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  basicsSlide: {fileID: 614459317}
+  buildingSlide: {fileID: 1912572845}
+  controllsSlide: {fileID: 319682032}
+  loadingSlide: {fileID: 60982740}
+  next: {fileID: 1453525350}
 --- !u!114 &1487385636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1163,110 +1367,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1586155429
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1586155430}
-  - component: {fileID: 1586155432}
-  - component: {fileID: 1586155431}
-  m_Layer: 5
-  m_Name: Controls (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1586155430
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1586155429}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1124797916}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -110, y: -110}
-  m_SizeDelta: {x: 2536.915, y: 923.945}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1586155431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1586155429}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 80
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 200
-    m_Alignment: 0
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: '+++ Gamepad +++
-
-    Movement: --------------------- Left stick
-
-    Aiming:
-    ------------------------ Right stick
-
-    Melee attack: ------------------ Right
-    trigger / West button
-
-    Ranged attack: ----------------- Left trigger / East
-    button
-
-    Dodge roll: --------------------- Right or Left shoulder / South
-    button
-
-    Build mode: -------------------- North button
-
-    Place Buildable:
-    ---------------- South button (in build mode)
-
-    Remove Buildable: ----------------
-    East button (in build mode)
-
-    Switch selected Buildable: ------- Right and
-    Left shoulder (in build mode)'
---- !u!222 &1586155432
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1586155429}
-  m_CullTransparentMesh: 1
 --- !u!1 &1728488352
 GameObject:
   m_ObjectHideFlags: 0
@@ -1487,3 +1587,105 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1912572845
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1912572846}
+  - component: {fileID: 1912572848}
+  - component: {fileID: 1912572847}
+  m_Layer: 5
+  m_Name: Building / Planting
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1912572846
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912572845}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1124797916}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -35}
+  m_SizeDelta: {x: 3725, y: 2000}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1912572847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912572845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 100
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 200
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'BUILDING / PLANTING:
+
+    With the build menu open the player can do different
+    things based on the terrain they are on
+
+    Tan: Purchase player upgrades
+
+    Green:
+    Place turrets for a price
+
+    Brown: Place special enemy spawners
+
+    There
+    are 4 types of plants and 4 types of turrets you can place.
+
+    Enemies will
+    drop little red veggies. These can be picked up by the player.
+
+    The player
+    can then take these pickups to the objective where they will be banked for money.
+
+    All
+    turrets cost money, the required cost is in their description. All upgrades cost
+    50.'
+--- !u!222 &1912572848
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912572845}
+  m_CullTransparentMesh: 1
