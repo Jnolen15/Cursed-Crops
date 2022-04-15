@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
@@ -9,7 +10,7 @@ public class Pause_Manager : MonoBehaviour
     // does this need to be static?
     public static bool gamePaused = false;
     public GameObject PauseMenu;
-
+    public Button resume;
 
     /* obselete manual pause functions
     public void Pause()
@@ -34,6 +35,7 @@ public class Pause_Manager : MonoBehaviour
         if (gamePaused)
         {
             Time.timeScale = 0;
+            resume.Select();
         } else
         {
             Time.timeScale = 1;

@@ -16,7 +16,7 @@ public class PlayerAnimOCManager : MonoBehaviour
     {
         Harvey,
         Doug,
-        Cecil, 
+        Cecil,
         Carlisle
     };
 
@@ -35,6 +35,30 @@ public class PlayerAnimOCManager : MonoBehaviour
         else if (selectedCharacter == character.Cecil)
         {
             animator.runtimeAnimatorController = cecilAnimOC;
+        }
+        else if (selectedCharacter == character.Carlisle)
+        {
+            animator.runtimeAnimatorController = harveyAnimOC;
+        }
+    }
+
+    public void SetCharacter(string chara)
+    {
+        Debug.Log("Got string: " + chara);
+        switch(chara)
+        {
+            case "Cecil":
+                selectedCharacter = character.Cecil;
+                break;
+            case "Doug":
+                selectedCharacter = character.Doug;
+                break;
+            case "Harvey":
+                selectedCharacter = character.Harvey;
+                break;
+            case "Carlisle":
+                selectedCharacter = character.Carlisle;
+                break;
         }
     }
 }

@@ -58,7 +58,6 @@ public class PlayerControler : MonoBehaviour
 
     // ====================== OTHER COMPONENTS ======================
     [SerializeField] private LayerMask groundLayermask;
-    private PlayerInput input;
     private BuildingSystem bs;
     private EnemyPlayerDamage epd;
     private Rigidbody rb;                  // The player's Rigidbody
@@ -77,6 +76,7 @@ public class PlayerControler : MonoBehaviour
     private Vector3 direction;
     private Vector3 aimDir;             // Used to Store the direction the player will shoot
 
+    public PlayerInput input;
     public GameObject bullet;
     public GameObject ammoManager;
 
@@ -104,7 +104,6 @@ public class PlayerControler : MonoBehaviour
     void Start()
     {
         // Assign controller if using one
-        input = GetComponent<PlayerInput>();
         if (input.currentControlScheme == "Gamepad") 
         {
             Debug.Log("Player using Controller");
@@ -373,7 +372,7 @@ public class PlayerControler : MonoBehaviour
     // Move =================================
     public void Move_performed(InputAction.CallbackContext context)
     {
-        
+        //Debug.Log("PC: In Move_performed");
         moveInputVector = context.ReadValue<Vector2>();
     }
 

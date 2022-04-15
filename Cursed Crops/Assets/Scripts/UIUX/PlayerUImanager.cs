@@ -14,6 +14,7 @@ public class PlayerUImanager : MonoBehaviour
 
     // UI Elements Variables
     public GameObject PlayerUI; // obselete, us this.GameObject
+    public GameObject Icon;
     public TextMeshProUGUI NameText;
     public TextMeshProUGUI CropText;
     public Slider HealthBar;

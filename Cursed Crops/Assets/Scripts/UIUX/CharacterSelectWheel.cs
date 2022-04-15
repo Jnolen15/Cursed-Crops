@@ -6,18 +6,26 @@ using TMPro;
 
 public class CharacterSelectWheel : MonoBehaviour
 {
-    // the visual objects that are being changed
+    // Private Variables
+    private int PlayerIndex;
+    private float ignoreInputTime = 0.5f;
+    private bool inputEnabled = false;
+
+    // Visual objects that are being changed
+    public GameObject menuPannel;
+    public GameObject readyPannel;
     public GameObject DougImage;
     public GameObject CecilImage;
     public GameObject HarveyImage;
     public GameObject CarlisleImage;
+    public GameObject SelectionIndicator;
     public Button ScrollUpButton;
     public Button ScrollDownButton;
-
-    public GameObject SelectionIndicator;
+    public Button readyButton;
     public TextMeshProUGUI NameText;
+    public TextMeshProUGUI titleText;
 
-    // internal variables
+    // Internal variables
     public bool charSelected = false;
     public GameObject previousChar;
 
@@ -44,36 +52,60 @@ public class CharacterSelectWheel : MonoBehaviour
         previousChar = DougImage;
     }
 
-    public void ShowCharacter()
+    public void SetPlayerIndex(int pi)
     {
-        previousChar.SetActive(false);
-        NameText.text = character.ToString();
+        PlayerIndex = pi;
+        titleText.SetText("Player " + (pi + 1).ToString());
+        ignoreInputTime = Time.time + ignoreInputTime;
+    }
 
-        switch (character)
+    public void Update()
+    {
+        if(Time.time > ignoreInputTime)
         {
-            case Character.Doug:
-                previousChar = DougImage;
-                
-                break;
-
-            case Character.Cecil:
-                previousChar = CecilImage;
-                break;
-
-            case Character.Harvey:
-                previousChar = HarveyImage;
-                break;
-
-            case Character.Carlisle:
-                previousChar = CarlisleImage;
-                break;
+            inputEnabled = true;
+        } else
+        {
+            //Debug.Log("Time: " + Time.time + " < " + ignoreInputTime);
         }
-        previousChar.SetActive(true);
+    }
+
+    public void ReadyPlayer()
+    {
+        if (!inputEnabled) { return; }
+
+        PlayerConfigManager.Instance.ReadyPlayer(PlayerIndex);
+        SelectionIndicator.SetActive(true);
+        readyButton.gameObject.SetActive(false);
+    }
+
+    public void SelectCharacter()
+    {
+        if (!inputEnabled) { return; }
+
+        if (charSelected)
+        {
+            // re-add character to availableChars
+            CharacterSelectManager.AvailableChars.Add(character.ToString());
+            ToggleSelect();
+        }
+        else
+        {
+            // check to see if char is available, then remove from list
+            if (CharacterSelectManager.AvailableChars.Contains(character.ToString()))
+            {
+                CharacterSelectManager.AvailableChars.Remove(character.ToString());
+                ToggleSelect();
+                PlayerConfigManager.Instance.SetPlayer(PlayerIndex, character.ToString());
+            }
+        }
     }
 
     // scroll up decreases char#
     public void ScrollUp()
     {
+        if (!inputEnabled) { return; }
+
         if (!charSelected)
         {
             // increment Character, or loop back to start
@@ -91,6 +123,8 @@ public class CharacterSelectWheel : MonoBehaviour
     // scroll down increases char#
     public void ScrollDown()
     {
+        if (!inputEnabled) { return; }
+
         if (!charSelected)
         {
             // increment Character, or loop back to start
@@ -107,33 +141,43 @@ public class CharacterSelectWheel : MonoBehaviour
         ShowCharacter();
     }
 
+    public void ShowCharacter()
+    {
+        previousChar.SetActive(false);
+        NameText.text = character.ToString();
+
+        switch (character)
+        {
+            case Character.Doug:
+                previousChar = DougImage;
+
+                break;
+
+            case Character.Cecil:
+                previousChar = CecilImage;
+                break;
+
+            case Character.Harvey:
+                previousChar = HarveyImage;
+                break;
+
+            case Character.Carlisle:
+                previousChar = CarlisleImage;
+                break;
+        }
+        previousChar.SetActive(true);
+    }
+
     // toggles wether a character is selected or not
     public void ToggleSelect()
     {
         charSelected = !charSelected;
-        SelectionIndicator.SetActive(!SelectionIndicator.activeSelf);
+        menuPannel.SetActive(false);
+        readyPannel.SetActive(true);
+        readyButton.Select();
         // disabling buttons
         ScrollUpButton.interactable = !ScrollUpButton.interactable;
         ScrollDownButton.interactable = !ScrollDownButton.interactable;
-    }
-
-    public void SelectCharacter()
-    {
-        if (charSelected)
-        {
-            // re-add character to availableChars
-            CharacterSelectManager.AvailableChars.Add(character.ToString());
-            ToggleSelect();
-        }
-        else
-        {
-            // check to see if char is available, then remove from list
-            if (CharacterSelectManager.AvailableChars.Contains(character.ToString()))
-            {
-                CharacterSelectManager.AvailableChars.Remove(character.ToString());
-                ToggleSelect();
-            }
-        }
     }
 
     public string CurrentCharacter()

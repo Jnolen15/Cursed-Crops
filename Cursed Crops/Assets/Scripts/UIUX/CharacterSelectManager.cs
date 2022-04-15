@@ -28,7 +28,7 @@ public class CharacterSelectManager : MonoBehaviour
 
     void Update()
     {
-        if (Player1.charSelected && Player2.charSelected && Player3.charSelected && Player4.charSelected)
+        /*if (Player1.charSelected && Player2.charSelected && Player3.charSelected && Player4.charSelected)
         {
             // store player selections
             PlayerPrefs.SetString("Player1", Player1.character.ToString());
@@ -37,7 +37,7 @@ public class CharacterSelectManager : MonoBehaviour
             PlayerPrefs.SetString("Player4", Player4.character.ToString());
 
             StartLevel();
-        }
+        }*/
     }
 
     public void StartLevel()

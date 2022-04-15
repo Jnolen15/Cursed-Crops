@@ -10,12 +10,16 @@ public class PlayerManager : MonoBehaviour
     public List<GameObject> players = new List<GameObject>();
     public PlayerAnimOCManager animManager;
 
-    public void OnPlayerJoined(PlayerInput playerInput)
+    public void OnPlayerJoined(GameObject player,  PlayerConfiguration pConfig)
     {
-        players.Add(playerInput.gameObject);
-        animManager = playerInput.gameObject.GetComponentInChildren<PlayerAnimOCManager>();
-        if (players.IndexOf(playerInput.gameObject) == 0) animManager.selectedCharacter = PlayerAnimOCManager.character.Cecil;
-        else if (players.IndexOf(playerInput.gameObject) == 1) animManager.selectedCharacter = PlayerAnimOCManager.character.Doug;
+        players.Add(player);
+        animManager = player.GetComponentInChildren<PlayerAnimOCManager>();
+        Debug.Log("Player manager character: " + pConfig.PlayerCharacter);
+        animManager.SetCharacter(pConfig.PlayerCharacter);
+
+        //var playerString = "Player" + players.IndexOf(pConfig.Input.gameObject);
+        //if (players.IndexOf(playerInput.gameObject) == 0) animManager.selectedCharacter = PlayerAnimOCManager.character.cecil;
+        //else if (players.IndexOf(playerInput.gameObject) == 1) animManager.selectedCharacter = PlayerAnimOCManager.character.doug;
 
         foreach (var item in players)
         {
