@@ -55,6 +55,8 @@ public class StatShopUIManager : MonoBehaviour
         {
             Debug.LogError("UI scriptable object ref is null");
         }
+
+        // selectRight();
     }
 
     // Update is called once per frame

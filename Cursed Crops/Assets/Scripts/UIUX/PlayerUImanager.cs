@@ -23,6 +23,15 @@ public class PlayerUImanager : MonoBehaviour
     public TextMeshProUGUI MaxHealth;
     public AmmoCounter AmmoCounter;
 
+    // player Icons
+    public GameObject DougIcon;
+    public GameObject CecilIcon;
+    public GameObject HarveyIcon;
+    public GameObject CarlisleIcon;
+
+    // extra variables
+    public int PlayerNumber = 0;
+
     // Update is called once per frame
     void Update()
     {
@@ -35,7 +44,8 @@ public class PlayerUImanager : MonoBehaviour
         // enabling GameObject
         this.gameObject.SetActive(true);
 
-        // adjusting for array index and acquiring key scripts
+        // saving and then adjusting for array index and acquiring key scripts
+        PlayerNumber = playerNum;
         playerNum -= 1;
         PM = GameObject.Find("Player Manager").GetComponent<PlayerManager>();
         PC = PM.players[playerNum].GetComponent<PlayerControler>();
@@ -45,21 +55,8 @@ public class PlayerUImanager : MonoBehaviour
         // setting player name
         NameText.text = PM.players[playerNum].GetComponentInChildren<PlayerAnimOCManager>().selectedCharacter.ToString();
 
-        // Set player icon
-        switch(NameText.text){
-            case "Doug":
-                Icon.GetComponent<Image>().sprite = Resources.Load<Sprite>("Icons/DougIcon");
-                break;
-            case "Cecil":
-                Icon.GetComponent<Image>().sprite = Resources.Load<Sprite>("Icons/CecilIcon");
-                break;
-            case "Harvey":
-                Icon.GetComponent<Image>().sprite = Resources.Load<Sprite>("Icons/HarveyIcon");
-                break;
-            case "Carlisle":
-                Icon.GetComponent<Image>().sprite = Resources.Load<Sprite>("Icons/CarlisleIcon");
-                break;
-        }
+        // setting player Icon
+        SetPlayerIcon();
     }
 
     // updates the UI (can be moved to the update function now)
@@ -78,4 +75,26 @@ public class PlayerUImanager : MonoBehaviour
         AmmoCounter.SetBullets(PC.curBullets, PC.GetRangeCD());
     }
 
+
+    private void SetPlayerIcon()
+    {
+        switch(PM.players[PlayerNumber - 1].GetComponentInChildren<PlayerAnimOCManager>().selectedCharacter.ToString())
+        {
+            case "Doug":
+                DougIcon.SetActive(true);
+                    break;
+
+            case "Cecil":
+                CecilIcon.SetActive(true);
+                break;
+
+            case "Harvey":
+                HarveyIcon.SetActive(true);
+                break;
+
+            case "Carlisle":
+                CarlisleIcon.SetActive(true);
+                break;
+        }
+    }
 }

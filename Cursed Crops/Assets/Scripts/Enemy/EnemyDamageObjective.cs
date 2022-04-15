@@ -11,7 +11,7 @@ public class EnemyDamageObjective : MonoBehaviour
     public int startingHouseHealth = 500;
     public GameObject damageNotif;
 
-    private float iframesTime = 0.5f;
+    private float iframesTime = 0.2f;
     private float damageNotifCooldown = 6f;
     private float damageNotifTimer = 6f;
     private bool showingNotif = false;
