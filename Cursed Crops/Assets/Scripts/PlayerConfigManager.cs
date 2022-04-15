@@ -23,7 +23,7 @@ public class PlayerConfigManager : MonoBehaviour
         } else
         {
             Instance = this;
-            //DontDestroyOnLoad(Instance);
+            DontDestroyOnLoad(Instance);
             playerConfigs = new List<PlayerConfiguration>();
         }
     }
@@ -35,6 +35,7 @@ public class PlayerConfigManager : MonoBehaviour
 
     public void SetPlayer(int index, string choice)
     {
+        Debug.Log("Selected the character: " + choice);
         playerConfigs[index].PlayerCharacter = choice;
         var playerNum = "Player" + index.ToString();
         PlayerPrefs.SetString(playerNum, choice);

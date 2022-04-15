@@ -10,25 +10,31 @@ public class HarvestFlag : MonoBehaviour
 
     // ================ Private ================
     private SpawnManager spawnManager;
-    private PlayerManager playerManager;
+    public PlayerManager playerManager;
     private GameRuleManager grm;
     private GameObject quotaWarning;        // Placeholder text to tell players quota isn't met
 
     void Start()
     {
-        playerManager = GameObject.FindGameObjectWithTag("playerManager").GetComponent<PlayerManager>();
-        spawnManager = this.transform.parent.gameObject.GetComponent<SpawnManager>();
-
         // Game Rule Manager
         grm = GameObject.Find("GameRuleManager").GetComponent<GameRuleManager>();
 
         // Quota popup notification
         quotaWarning = this.transform.GetChild(0).gameObject;
         quotaWarning.SetActive(false);
+
+        playerManager = GameObject.Find("Player Manager").GetComponent<PlayerManager>();
+        spawnManager = this.transform.parent.gameObject.GetComponent<SpawnManager>();
     }
 
     void Update()
     {
+        /*if (playerManager == null)
+        {
+            Debug.Log("playerManager was null");
+            playerManager = GameObject.FindGameObjectWithTag("playerManager").GetComponent<PlayerManager>();
+        }*/
+
         if(playerManager.players.Count < 1)
             totalPlayers = 1;
         else

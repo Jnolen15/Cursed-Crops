@@ -66,7 +66,7 @@ public class CharacterSelectWheel : MonoBehaviour
             inputEnabled = true;
         } else
         {
-            Debug.Log("Time: " + Time.time + " < " + ignoreInputTime);
+            //Debug.Log("Time: " + Time.time + " < " + ignoreInputTime);
         }
     }
 
