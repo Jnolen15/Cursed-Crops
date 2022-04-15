@@ -14,6 +14,7 @@ public class PlayerUImanager : MonoBehaviour
 
     // UI Elements Variables
     public GameObject PlayerUI; // obselete, us this.GameObject
+    public GameObject Icon;
     public TextMeshProUGUI NameText;
     public TextMeshProUGUI CropText;
     public Slider HealthBar;
@@ -43,6 +44,22 @@ public class PlayerUImanager : MonoBehaviour
 
         // setting player name
         NameText.text = PM.players[playerNum].GetComponentInChildren<PlayerAnimOCManager>().selectedCharacter.ToString();
+
+        // Set player icon
+        switch(NameText.text){
+            case "Doug":
+                Icon.GetComponent<Image>().sprite = Resources.Load<Sprite>("Icons/DougIcon");
+                break;
+            case "Cecil":
+                Icon.GetComponent<Image>().sprite = Resources.Load<Sprite>("Icons/CecilIcon");
+                break;
+            case "Harvey":
+                Icon.GetComponent<Image>().sprite = Resources.Load<Sprite>("Icons/HarveyIcon");
+                break;
+            case "Carlisle":
+                Icon.GetComponent<Image>().sprite = Resources.Load<Sprite>("Icons/CarlisleIcon");
+                break;
+        }
     }
 
     // updates the UI (can be moved to the update function now)

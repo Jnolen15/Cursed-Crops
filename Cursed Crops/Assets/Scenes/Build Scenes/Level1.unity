@@ -2588,6 +2588,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3615251671349951149, guid: 38cabfe6eb14bf547bab55e96a6c9878,
+        type: 3}
+      propertyPath: Icon
+      value: 
+      objectReference: {fileID: 172299625}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38cabfe6eb14bf547bab55e96a6c9878, type: 3}
 --- !u!1001 &187125791
@@ -8307,10 +8312,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 1230558494}
+    m_SelectOnDown: {fileID: 1230558494}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -14496,10 +14501,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 610073381}
+    m_SelectOnDown: {fileID: 610073381}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -17787,16 +17792,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 1440739544}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal_P1
-  m_VerticalAxis: Vertical_P1
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_ActionsAsset: {fileID: -944628639613478452, guid: 843562213e4f8974a9f777a4503ac6a4,
+    type: 3}
+  m_PointAction: {fileID: 768501739096027507, guid: 843562213e4f8974a9f777a4503ac6a4,
+    type: 3}
+  m_MoveAction: {fileID: 6211684902799885060, guid: 843562213e4f8974a9f777a4503ac6a4,
+    type: 3}
+  m_SubmitAction: {fileID: 6167490483563127369, guid: 843562213e4f8974a9f777a4503ac6a4,
+    type: 3}
+  m_CancelAction: {fileID: 1841956938981871195, guid: 843562213e4f8974a9f777a4503ac6a4,
+    type: 3}
+  m_LeftClickAction: {fileID: -3919140418684018846, guid: 843562213e4f8974a9f777a4503ac6a4,
+    type: 3}
+  m_MiddleClickAction: {fileID: -1154727489656208080, guid: 843562213e4f8974a9f777a4503ac6a4,
+    type: 3}
+  m_RightClickAction: {fileID: 2135441504810337543, guid: 843562213e4f8974a9f777a4503ac6a4,
+    type: 3}
+  m_ScrollWheelAction: {fileID: 8295175490689700513, guid: 843562213e4f8974a9f777a4503ac6a4,
+    type: 3}
+  m_TrackedDevicePositionAction: {fileID: -2405629028983201827, guid: 843562213e4f8974a9f777a4503ac6a4,
+    type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: -9019714619800284669, guid: 843562213e4f8974a9f777a4503ac6a4,
+    type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
 --- !u!114 &1440739546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17809,7 +17833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 610073379}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1440739547
@@ -17861,6 +17885,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalPlayers: 0
   playersReady: 0
+  playerManager: {fileID: 0}
 --- !u!136 &1450130518
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -19679,8 +19704,19 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3615251671349951149, guid: 38cabfe6eb14bf547bab55e96a6c9878,
+        type: 3}
+      propertyPath: Icon
+      value: 
+      objectReference: {fileID: 1566960323}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38cabfe6eb14bf547bab55e96a6c9878, type: 3}
+--- !u!1 &1566960323 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3541960218999453860, guid: 38cabfe6eb14bf547bab55e96a6c9878,
+    type: 3}
+  m_PrefabInstance: {fileID: 1566960322}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1568256042
 GameObject:
   m_ObjectHideFlags: 0
@@ -27273,6 +27309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PauseMenu: {fileID: 1136777138}
+  resume: {fileID: 610073381}
 --- !u!114 &2080257796
 MonoBehaviour:
   m_ObjectHideFlags: 0
