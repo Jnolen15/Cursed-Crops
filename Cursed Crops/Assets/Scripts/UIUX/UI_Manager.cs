@@ -12,7 +12,6 @@ public class UI_Manager : MonoBehaviour
     private SpawnManager SM;
     private GameRuleManager GRM;
 
-
     // player UIs, must be dragged/droppped
     public PlayerUImanager p1UImanager;
     public PlayerUImanager p2UImanager;
@@ -32,7 +31,8 @@ public class UI_Manager : MonoBehaviour
 
     public GameObject[] WaveBars = new GameObject[8];
 
-
+    private float money;
+    private float quota;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +45,8 @@ public class UI_Manager : MonoBehaviour
         SM = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         GRM = GameObject.Find("GameRuleManager").GetComponent<GameRuleManager>();
 
+        money = GRM.getMoney();
+
         setUpTimer();
     } 
 
@@ -53,6 +55,17 @@ public class UI_Manager : MonoBehaviour
     {
         // updating general UI
         HouseHealthBar.value = (float)EDO.houseHealth / (float)EDO.startingHouseHealth;
+
+        if (money != GRM.getMoney())
+        {
+            StopAllCoroutines();
+            if (money > GRM.getMoney())
+                StartCoroutine(TextColorFlash(moneyText, Color.red, 0.5f));
+            else
+                StartCoroutine(TextColorFlash(moneyText, Color.green, 0.5f));
+            money = GRM.getMoney();
+        }
+
         moneyText.text = "Money: " + GRM.getMoney();
         UpdateTimer();
 
@@ -62,6 +75,17 @@ public class UI_Manager : MonoBehaviour
             QuotaOverlay.SetActive(true);
             QuotaText.text = "Plant Crops to Fill Quota: " + GRM.getPoints() + " / " + SM.getQuota();
             QuotaBar.value = GRM.getPoints() / SM.getQuota();
+
+            if (quota != GRM.getPoints())
+            {
+                StopAllCoroutines();
+                if (quota > GRM.getPoints())
+                    StartCoroutine(TextColorFlash(QuotaText, Color.red, 0.5f));
+                else
+                    StartCoroutine(TextColorFlash(QuotaText, Color.green, 0.5f));
+                quota = GRM.getPoints();
+            }
+
         } else
         {
             QuotaOverlay.SetActive(false);
@@ -114,6 +138,13 @@ public class UI_Manager : MonoBehaviour
         {
             WaveBars[i].SetActive(false);
         }
+    }
+
+    IEnumerator TextColorFlash(TextMeshProUGUI text, Color color, float time)
+    {
+        text.color = color;
+        yield return new WaitForSeconds(time);
+        text.color = Color.black;
     }
 }
 

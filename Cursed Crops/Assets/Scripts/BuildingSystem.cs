@@ -289,6 +289,7 @@ public class BuildingSystem : MonoBehaviour
                         {
                             psDust.Emit(6);
                             grm.addMoney(-cost);
+                            grm.SpawnText(placeableHighlight.transform.position, Color.red, -cost);
                             gameObject.GetComponent<AudioPlayer>().PlaySound(buildingSound);
                             animator.SetTrigger("Plant");
                             Instantiate(activePlaceable.prefab, placeableHighlight.transform.position, placeableHighlight.transform.rotation);
@@ -332,6 +333,7 @@ public class BuildingSystem : MonoBehaviour
                             else
                                 cost = bc.intersectedBuildable.GetComponent<Trap>().cost;
                             grm.addMoney(cost);
+                            grm.SpawnText(placeableHighlight.transform.position, Color.green, cost);
                             gameObject.GetComponent<AudioPlayer>().PlaySound(buildingSound);
                             animator.SetTrigger("Plant");
                             Destroy(bc.intersectedBuildable);

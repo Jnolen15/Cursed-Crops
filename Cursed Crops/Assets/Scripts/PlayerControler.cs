@@ -104,7 +104,7 @@ public class PlayerControler : MonoBehaviour
     void Start()
     {
         // Assign controller if using one
-        if (input.currentControlScheme == "Gamepad") 
+        if (input.currentControlScheme == "Gamepad")
         {
             Debug.Log("Player using Controller");
             useControler = true;

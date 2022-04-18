@@ -15,8 +15,9 @@ public class GameRuleManager : MonoBehaviour
     public int numSabatamatoPlanted = 0;
 
     // ================ Private ================
-    private int globalMoney = 0;
     [SerializeField] private int globalPoints = 0;
+    private int globalMoney = 0;
+    private GameObject textPopUp;
 
     public float getMoney() { return globalMoney; }
     public void addMoney(int amount) { globalMoney += amount; }
@@ -27,6 +28,8 @@ public class GameRuleManager : MonoBehaviour
     void Start()
     {
         globalMoney += startingMoney;
+
+        textPopUp = Resources.Load<GameObject>("Effects/TextPopUp");
     }
 
     // Update is called once per frame
@@ -70,6 +73,7 @@ public class GameRuleManager : MonoBehaviour
             if (falloff >= activeCrop.bountyWorth) falloff = activeCrop.bountyWorth - 2;
             addPoints(activeCrop.bountyWorth - falloff);
             crop.GetComponent<Spawner>().bountyWorth = activeCrop.bountyWorth - falloff;
+            SpawnText(crop.transform.position, Color.green, activeCrop.bountyWorth - falloff);
         }
         // If fallof isn't reached
         else
@@ -77,12 +81,14 @@ public class GameRuleManager : MonoBehaviour
             //Debug.Log("Full bounty");
             addPoints(activeCrop.bountyWorth);
             crop.GetComponent<Spawner>().bountyWorth = activeCrop.bountyWorth;
+            SpawnText(crop.transform.position, Color.green, activeCrop.bountyWorth);
         }
     }
 
     public void subtractBountyPoints(GameObject crop)
     {
         addPoints(-crop.GetComponent<Spawner>().bountyWorth);
+        SpawnText(crop.transform.position, Color.red, -crop.GetComponent<Spawner>().bountyWorth);
 
         switch (crop.GetComponent<Spawner>().plantName)
         {
@@ -120,5 +126,11 @@ public class GameRuleManager : MonoBehaviour
             Debug.Log(globalPoints + " < " + temp);
             return false;
         }
+    }
+
+    public void SpawnText(Vector3 pos, Color color, int num)
+    {
+        var tPopUp = Instantiate(textPopUp, pos, Quaternion.identity).GetComponent<TextPopup>();
+        tPopUp.Setup(num, color);
     }
 }
