@@ -26,6 +26,7 @@ public class Cheater : MonoBehaviour
             epd = pm.players[0].gameObject.GetComponent<EnemyPlayerDamage>();
         }
 
+        //Cheat codes to add money, Increase the plant bounty, and heal the player
         if (Keyboard.current[Key.M].wasPressedThisFrame)
             grm.addMoney(100);
 
