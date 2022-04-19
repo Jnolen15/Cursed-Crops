@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Cheater : MonoBehaviour
 {
@@ -25,13 +26,13 @@ public class Cheater : MonoBehaviour
             epd = pm.players[0].gameObject.GetComponent<EnemyPlayerDamage>();
         }
 
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Keyboard.current[Key.M].wasPressedThisFrame)
             grm.addMoney(100);
 
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Keyboard.current[Key.N].wasPressedThisFrame)
             grm.addPoints(100);
 
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Keyboard.current[Key.H].wasPressedThisFrame)
             epd.Heal(pc.maxHealth);
     }
 }
