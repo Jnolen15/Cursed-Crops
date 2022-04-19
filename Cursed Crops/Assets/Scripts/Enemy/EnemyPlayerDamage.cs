@@ -26,6 +26,13 @@ public class EnemyPlayerDamage : MonoBehaviour
     private GameObject mainObjective;
     private Animator animator;
     private Coroutine damageBuffCo;
+    private float timeSinceLastHit;
+    // Healing Buff Stuff
+    private Coroutine healingCo;
+    public bool healing = false;
+    private int healingAmmount = 1;
+    private float healingTickSpeed = 2f;
+    private float healingTimer = 2f;
 
     // Start is called before the first frame update
     void Start()
@@ -39,10 +46,22 @@ public class EnemyPlayerDamage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // This is a temp fix. Player should not be able to take damage when downed
-        //if(playerIsStun)
-        //    playerHealth = reviveHealth;
+        // Passive health Regen Timer
+        timeSinceLastHit += Time.deltaTime;
+        if (timeSinceLastHit > 5.0f)
+        {
+            // Healing effect. Heals damage every healingTickSpeed seconds
+            if (healingTimer <= 0)
+            {
+                //psHeal.Emit(6);
+                if (playerHealth < reviveHealth)
+                    playerHealth += healingAmmount;
+                healingTimer = healingTickSpeed;
+            }
+            else healingTimer -= Time.deltaTime;
+        }
 
+        // Player Getting Downed
         if (playerHealth <= 0 && !playerDown)
         {
             //alphaChekcer = true;
@@ -113,6 +132,7 @@ public class EnemyPlayerDamage : MonoBehaviour
             inIFrames = true;
             gameObject.GetComponent<AudioPlayer>().PlaySound(damageSound);
             playerHealth -= damages;
+            timeSinceLastHit = 0;
 
             // Flash red and play hurt anim
             playerSprite.color = Color.red;
@@ -166,6 +186,13 @@ public class EnemyPlayerDamage : MonoBehaviour
                 if (damageBuffCo != null)
                     StopCoroutine(damageBuffCo);
                 damageBuffCo = StartCoroutine(cooldown(() => { Debug.Log("DamageBoost Over"); pc.damageBoost -= 0.5f; }, length));
+                break;
+            case "Healing":
+                Debug.Log("Applying Healing");
+                healing = true;
+                if (healingCo != null)
+                    StopCoroutine(healingCo);
+                healingCo = StartCoroutine(cooldown(() => { Debug.Log("Healing Over"); healing = false; }, length));
                 break;
         }
     }
