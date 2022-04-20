@@ -37,11 +37,16 @@ public class InitializeLevel : MonoBehaviour
 
     private void OnDestroy()
     {
-        // make sure the playerController has no children. If it does, remove them
-        if (playerController.transform.childCount > 0)
+        var playerConfigs = PlayerConfigManager.Instance.GetPlayerConfigs().ToArray();
+        playerConfig = GameObject.Find("Player Config Manager");
+        for (int i = 0; i < playerConfigs.Length; i++)
         {
-            //GameObject.Find("SpriteLeanerManager").GetComponent<SpriteLeaner>().leanedSprites.Remove(
-            //    playerController.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>().gameObject);
+            playerController = playerConfig.transform.GetChild(i).gameObject;
+
+            // Uninitialize the player
+            playerConfig.transform.GetChild(i).GetComponent<PlayerInputHandler>().UninitializePlayer();
+
+            // Delete Player
             Destroy(playerController.transform.GetChild(0).gameObject);
         }
     }

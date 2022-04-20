@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
-public class ControlScreen : MonoBehaviour
+public class ControlScreen : MonoBehaviour, ICancelHandler
 {
     public GameObject basicsSlide;
     public GameObject buildingSlide;
@@ -41,4 +43,10 @@ public class ControlScreen : MonoBehaviour
         //SceneManager.LoadScene("Level1");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
+    public void OnCancel(BaseEventData eventData)
+    {
+        Debug.Log("CANCEL CALLED");
+    }
+
 }

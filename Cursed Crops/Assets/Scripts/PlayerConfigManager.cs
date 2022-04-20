@@ -13,18 +13,51 @@ public class PlayerConfigManager : MonoBehaviour
     [SerializeField]
     private int maxPlayers = 2;
 
+    [SerializeField]
     public static PlayerConfigManager Instance { get; private set; }
 
     private void Awake()
     {
-        if(Instance != null)
+        // Delte Player Config manager if it already exists
+        GameObject[] objs = GetDontDestroyOnLoadObjects();
+        if(objs.Length > 0)
+        {
+            foreach(GameObject obj in objs){
+                Destroy(obj);
+            }
+            // Set the instance to null so the singleton can be re-made
+            Instance = null;
+        }
+
+        if (Instance != null)
         {
             Debug.LogError("Singleton trying to create another instance");
         } else
         {
             Instance = this;
             DontDestroyOnLoad(Instance);
+            this.GetComponent<PlayerInputManager>().enabled = true;
             playerConfigs = new List<PlayerConfiguration>();
+        }
+    }
+
+    public static GameObject[] GetDontDestroyOnLoadObjects()
+    {
+        GameObject temp = null;
+        try
+        {
+            temp = new GameObject();
+            Object.DontDestroyOnLoad(temp);
+            UnityEngine.SceneManagement.Scene dontDestroyOnLoad = temp.scene;
+            Object.DestroyImmediate(temp);
+            temp = null;
+
+            return dontDestroyOnLoad.GetRootGameObjects();
+        }
+        finally
+        {
+            if (temp != null)
+                Object.DestroyImmediate(temp);
         }
     }
 
@@ -47,6 +80,9 @@ public class PlayerConfigManager : MonoBehaviour
         if (playerConfigs.All(p => p.IsReady == true))
         {
             Debug.Log("ALL PLAYERS READY. GO TO NEXT SCENE");
+            // Disable player joining so new player managers are not unintentionally created
+            this.GetComponent<PlayerInputManager>().DisableJoining();
+            // Load next scene
             var rootMenu = GameObject.Find("Map Canvas");
             rootMenu.GetComponent<CharacterSelectManager>().StartLevel();
         }

@@ -6,10 +6,10 @@ using UnityEngine.InputSystem;
 public class PlayerInputHandler : MonoBehaviour
 {
     public GameObject player;
-    private PlayerConfiguration pConfig;
+    public PlayerConfiguration pConfig;
     private PlayerInputActions controls;
-    private PlayerControler pc;
-    private BuildingSystem bs;
+    public PlayerControler pc;
+    public BuildingSystem bs;
 
     void Start()
     {
@@ -24,6 +24,15 @@ public class PlayerInputHandler : MonoBehaviour
         bs = player.GetComponent<BuildingSystem>();
         pc.input = pConfig.Input;
         pConfig.Input.onActionTriggered += Input_onActionTriggered;
+    }
+
+    public void UninitializePlayer()
+    {
+        pConfig.Input.onActionTriggered -= Input_onActionTriggered;
+        player = null;
+        pConfig = null;
+        pc = null;
+        bs = null;
     }
 
     private void Input_onActionTriggered(InputAction.CallbackContext context)
