@@ -827,6 +827,7 @@ MonoBehaviour:
   groundLayermask:
     serializedVersion: 2
     m_Bits: 8
+  input: {fileID: 0}
   bullet: {fileID: 6242655706651345086, guid: dd76d198cb4f6304f93a7e3ef466c390, type: 3}
   ammoManager: {fileID: 3550555863387099239, guid: c45b274deb480454ab44824b41333d5a,
     type: 3}
@@ -867,6 +868,7 @@ MonoBehaviour:
   EPD: {fileID: 0}
   plantingSound: {fileID: 8300000, guid: d1cb5f29261baa94fb5ec9b0bb3ded97, type: 3}
   buildingSound: {fileID: 8300000, guid: 174cdb7817abc1046b3f983a7baddc5a, type: 3}
+  DestroyIndicator: {fileID: 0}
 --- !u!114 &7937736029672694575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -890,6 +892,7 @@ MonoBehaviour:
   invulnerable: 0
   damageSound: {fileID: 8300000, guid: 15879b180673ca6418382b95333a89f2, type: 3}
   downSound: {fileID: 8300000, guid: f898557a8a4bb714bbb9119c6405e4c0, type: 3}
+  healing: 0
 --- !u!114 &-1676916115656988922
 MonoBehaviour:
   m_ObjectHideFlags: 0

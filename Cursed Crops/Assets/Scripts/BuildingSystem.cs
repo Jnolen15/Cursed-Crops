@@ -47,6 +47,8 @@ public class BuildingSystem : MonoBehaviour
     public AudioClip plantingSound;
     public AudioClip buildingSound;
 
+    public GameObject DestroyIndicator;
+
 
 
 
@@ -91,6 +93,9 @@ public class BuildingSystem : MonoBehaviour
         Debug.Log(this.gameObject.name);
 
         EPD = GetComponent<EnemyPlayerDamage>();
+
+        // loading and instantiating Destory Indicator
+        DestroyIndicator = Instantiate(Resources.Load<GameObject>("Effects/DestroyIndicator"));
     }
 
 
@@ -141,6 +146,9 @@ public class BuildingSystem : MonoBehaviour
                 }
             }
         }
+
+        UpdateDestroyIndicator();
+
     }
 
     // Enter build Mode
@@ -720,4 +728,43 @@ public class BuildingSystem : MonoBehaviour
             }
         }
     }
+
+    // hovers an indicator over the currently selected tower
+    private void UpdateDestroyIndicator()
+    {
+        if (buildmodeActive)
+        {
+            if (placeableHighlight != null)
+            {
+                if (mode == "Build")
+                {
+                    // Make sure player is intersecting a buildable
+                    if (bc.intersectingBuildable)
+                    {
+                        if (!DestroyIndicator.activeSelf) DestroyIndicator.SetActive(true);
+                        DestroyIndicator.transform.SetPositionAndRotation(bc.intersectedBuildable.transform.position, DestroyIndicator.transform.rotation);
+                    }
+                    else
+                    {
+                        if (DestroyIndicator.activeSelf) DestroyIndicator.SetActive(false);
+                    }
+                }
+                else if (mode == "Plant" && sm.state == SpawnManager.State.Break)
+                {
+                    if (bc.intersectingBuildable)
+                    {
+                        if (!DestroyIndicator.activeSelf) DestroyIndicator.SetActive(true);
+                        DestroyIndicator.transform.SetPositionAndRotation(bc.intersectedBuildable.transform.position, DestroyIndicator.transform.rotation);
+                    }
+                    else
+                    {
+                        if (DestroyIndicator.activeSelf) DestroyIndicator.SetActive(false);
+                    }
+                }
+            }
+        } else
+        {
+            if (DestroyIndicator.activeSelf) DestroyIndicator.SetActive(false);
+        }
+    } 
 }
