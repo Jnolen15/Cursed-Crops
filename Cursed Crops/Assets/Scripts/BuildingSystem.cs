@@ -739,7 +739,7 @@ public class BuildingSystem : MonoBehaviour
                 if (mode == "Build")
                 {
                     // Make sure player is intersecting a buildable
-                    if (bc.intersectingBuildable)
+                    if (bc.intersectedBuildable != null && bc.intersectingBuildable)
                     {
                         if (!DestroyIndicator.activeSelf) DestroyIndicator.SetActive(true);
                         DestroyIndicator.transform.SetPositionAndRotation(bc.intersectedBuildable.transform.position, DestroyIndicator.transform.rotation);
@@ -751,7 +751,7 @@ public class BuildingSystem : MonoBehaviour
                 }
                 else if (mode == "Plant" && sm.state == SpawnManager.State.Break)
                 {
-                    if (bc.intersectingBuildable)
+                    if (bc.intersectedBuildable != null && bc.intersectingBuildable)
                     {
                         if (!DestroyIndicator.activeSelf) DestroyIndicator.SetActive(true);
                         DestroyIndicator.transform.SetPositionAndRotation(bc.intersectedBuildable.transform.position, DestroyIndicator.transform.rotation);

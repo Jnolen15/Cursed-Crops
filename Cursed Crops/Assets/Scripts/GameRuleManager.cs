@@ -130,7 +130,7 @@ public class GameRuleManager : MonoBehaviour
 
     public void SpawnText(Vector3 pos, Color color, int num)
     {
-        var tPopUp = Instantiate(textPopUp, pos, Quaternion.identity).GetComponent<TextPopup>();
+        var tPopUp = Instantiate(textPopUp, pos, textPopUp.transform.rotation).GetComponent<TextPopup>();
         tPopUp.Setup(num, color);
     }
 }
