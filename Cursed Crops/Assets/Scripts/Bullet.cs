@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
     public int bulletSpeed = 15;
     public bool piercing = false;
     public int pierceAmmount = 0;
+    public bool canDamagePlayer = false;
 
     [Header("Payloads: damage when reach destination")]
     public bool isPayload = false;
@@ -67,7 +68,7 @@ public class Bullet : MonoBehaviour
         // Enemy bullets
         if (gameObject.tag == "enemyBullet")
         {
-            if (other.gameObject.tag == "Player")
+            if (other.gameObject.tag == "Player" && canDamagePlayer)
             {
                 other.gameObject.GetComponent<EnemyPlayerDamage>().Damage(damage);
                 if(!piercing) Destroy(this.gameObject);

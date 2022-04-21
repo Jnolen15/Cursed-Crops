@@ -614,7 +614,7 @@ public class PlayerControler : MonoBehaviour
             {
                 if(c.gameObject.tag == "Enemy" && c.GetComponent<EnemyToPlayer>() != null)
                 {
-                    Debug.Log("are we hitting enemy");
+                    //Debug.Log("are we hitting enemy");
                     //Exceptions for the grabbage, mediberry, and cornnon since their aggro is different than the regualr enemies
                     if (c.gameObject.GetComponent<EnemyToPlayer>() != null)
                     {

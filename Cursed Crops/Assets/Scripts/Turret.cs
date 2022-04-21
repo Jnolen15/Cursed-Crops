@@ -51,7 +51,7 @@ public class Turret : MonoBehaviour
             {
                 if (!targetedEnemy.activeSelf)
                 {
-                    Debug.Log("Enemy inactive, next target");
+                    //Debug.Log("Enemy inactive, next target");
                     count++;
                 }
                 else
@@ -69,13 +69,13 @@ public class Turret : MonoBehaviour
                         }
                         else
                         {
-                            Debug.Log("Blocked by: " + hit.collider.gameObject.name);
+                            //Debug.Log("Blocked by: " + hit.collider.gameObject.name);
                             count++;
                         }
                     }
                     else
                     {
-                        Debug.Log("Raycast hit nothing, next target");
+                        //Debug.Log("Raycast hit nothing, next target");
                         count++;
                     }
                 }

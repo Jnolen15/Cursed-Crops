@@ -229,18 +229,18 @@ public class EnemyControler : MonoBehaviour
         switch (type)
         {
             case "Burning":
-                Debug.Log("Applying Burning");
+                //Debug.Log("Applying Burning");
                 burning = true;
                 if (burningCo != null)
                     StopCoroutine(burningCo);
-                burningCo = StartCoroutine(cooldown(() => { Debug.Log("Burning Over"); burning = false; }, length));
+                burningCo = StartCoroutine(cooldown(() => { burning = false; }, length));
                 break;
             case "Healing":
-                Debug.Log("Applying Healing");
+                //Debug.Log("Applying Healing");
                 healing = true;
                 if (healingCo != null)
                     StopCoroutine(healingCo);
-                healingCo = StartCoroutine(cooldown(() => { Debug.Log("Healing Over"); healing = false; }, length));
+                healingCo = StartCoroutine(cooldown(() => { healing = false; }, length));
                 break;
         }
     }

@@ -12,14 +12,12 @@ public class PlayerManager : MonoBehaviour
 
     public void OnPlayerJoined(GameObject player,  PlayerConfiguration pConfig)
     {
+        // Add player to player list
         players.Add(player);
+        // Set player character
         animManager = player.GetComponentInChildren<PlayerAnimOCManager>();
-        Debug.Log("Player manager character: " + pConfig.PlayerCharacter);
         animManager.SetCharacter(pConfig.PlayerCharacter);
-
-        //var playerString = "Player" + players.IndexOf(pConfig.Input.gameObject);
-        //if (players.IndexOf(playerInput.gameObject) == 0) animManager.selectedCharacter = PlayerAnimOCManager.character.cecil;
-        //else if (players.IndexOf(playerInput.gameObject) == 1) animManager.selectedCharacter = PlayerAnimOCManager.character.doug;
+        Debug.Log("Player manager character: " + pConfig.PlayerCharacter);
 
         foreach (var item in players)
         {

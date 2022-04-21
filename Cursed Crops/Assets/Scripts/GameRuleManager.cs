@@ -14,9 +14,18 @@ public class GameRuleManager : MonoBehaviour
     public int numScarrotPlanted = 0;
     public int numSabatamatoPlanted = 0;
 
+    /* Difficulty increases by 1 for each successive phase.
+     * It also increases by 1 for each player beyond the first.
+     * What difficulty effects:
+     * - Adds to the number of basic enemies spawned each burst
+    */
+    public int difficulty = 0;
+
     // ================ Private ================
     [SerializeField] private int globalPoints = 0;
     private int globalMoney = 0;
+    private int players = 0;
+    private PlayerManager pm;
     private GameObject textPopUp;
 
     public float getMoney() { return globalMoney; }
@@ -29,13 +38,21 @@ public class GameRuleManager : MonoBehaviour
     {
         globalMoney += startingMoney;
 
+        pm = GameObject.Find("Player Manager").GetComponent<PlayerManager>();
+
         textPopUp = Resources.Load<GameObject>("Effects/TextPopUp");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // Increase difficulty for each player beyond the first
+        if(players < pm.players.Count)
+        {
+            if (players > 1)
+                difficulty++;
+            players++;
+        }
     }
 
     public void addBountyPoints(CropSO activeCrop, GameObject crop)

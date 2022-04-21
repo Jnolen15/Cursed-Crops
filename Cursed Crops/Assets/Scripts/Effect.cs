@@ -39,7 +39,7 @@ public class Effect : MonoBehaviour
         if (other.gameObject.tag == "Enemy" && !targetPlayer)
         {
             // Effects: Burning, Healing
-            Debug.Log("Hit: " + other.gameObject.name);
+            //Debug.Log("Hit: " + other.gameObject.name);
             other.GetComponent<EnemyControler>().ApplyEffect(appliedEffect, effectduration);
         } else if (other.gameObject.tag == "Player" && targetPlayer)
         {

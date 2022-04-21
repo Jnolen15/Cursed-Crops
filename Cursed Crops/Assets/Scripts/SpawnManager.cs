@@ -12,7 +12,6 @@ public class SpawnManager : MonoBehaviour
     public float pauseDuration = 10f;       // Duration of each short pause between waves in seconds
     public int wavesPerPhase = 4;           // The # of waves in each phase. Make sure the time values add up correctly
     public int spawnersPerPhase = 4;        // Number of spawners created before each phase
-    public int scaleAmmount = 1;            // How many more spawners are created each wave
 
     public float elapsedTime;               // Time since level started
     public string currentPhase = "Pre";     // Stars in Pre then goes to Morning, Afternoon and Night
@@ -41,14 +40,15 @@ public class SpawnManager : MonoBehaviour
     private float currentWaveEndTime = 0f;   // The time the current wave should end
     private float currentPauseEndTime = 0f;  // The time the current pause should end
     private float basicSpawnInterval = 0f;     // Used to spawn basic enemies at certain intervals
-    public float specialSpawnInterval = 0f; // USed to spawn special enemies at specific intervals
-    public float specialSpawnTime = 0f;
-    public int specialToSpawn = 0;
+    private float specialSpawnInterval = 0f; // USed to spawn special enemies at specific intervals
+    private float specialSpawnTime = 0f;
+    private int specialToSpawn = 0;
     private bool timerStarted = false;
     private bool gridUpdated = false;
     private delegate void Callback();
     private ParticleSystem psDust;
-    public GameObject gridChild;
+    private GameObject gridChild;
+    private GameRuleManager grm;
     public List<GameObject> spawners = new List<GameObject>();  // List of active enemy spawners
     private Dictionary<Vector3, string> spawnerGridPositions = new Dictionary<Vector3, string>(); // Dictionary of grid positions on plantable tiles
     private Vector3[] positions;    // array version of Dictionary keys, used to get a random position in the dictionary
@@ -62,6 +62,9 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
+        // Get reffrences
+        grm = GameObject.Find("GameRuleManager").GetComponent<GameRuleManager>();
+
         // calculate phase duration
         phaseDuration = waveDuration * wavesPerPhase + pauseDuration * wavesPerPhase;
 
@@ -101,28 +104,28 @@ public class SpawnManager : MonoBehaviour
             daMusic.Play();
             if (currentPhase == "Pre")
             {
+                grm.difficulty++;
                 currentPhase = "Morning";
                 state = State.Break;
                 harvestFlag.SetActive(true);
-                //CreateSpawnersonGrid(spawnersPerPhase, "Morning");
             }
             else if (currentPhase == "Morning")
             {
                 StopAllCoroutines();
+                grm.difficulty++;
                 currentPhase = "Afternoon";
                 state = State.Break;
                 harvestFlag.SetActive(true);
                 DestroySpawners();
-                //CreateSpawnersonGrid(spawnersPerPhase + scaleAmmount, "Afternoon");
             }
             else if (currentPhase == "Afternoon")
             {
                 StopAllCoroutines();
+                grm.difficulty++;
                 currentPhase = "Night";
                 state = State.Break;
                 harvestFlag.SetActive(true);
                 DestroySpawners();
-                //CreateSpawnersonGrid(spawnersPerPhase + scaleAmmount, "Night");
             }
             else if (currentPhase == "Night")
             {
@@ -225,8 +228,8 @@ public class SpawnManager : MonoBehaviour
         if (basicSpawnInterval <= elapsedTime)
         {
             // Update timer and spawn values
-            basicSpawnInterval = elapsedTime + 5f;
-            float numToSpawn = Random.Range(1, 4);
+            basicSpawnInterval = elapsedTime + 6f;
+            float numToSpawn = Random.Range(grm.difficulty, (4 + grm.difficulty));
 
             // Spawn the select number of enemies
             for (int i = 0; i < numToSpawn; i++)
@@ -247,7 +250,7 @@ public class SpawnManager : MonoBehaviour
                         // Decide which enemy to spawn and spawn it
                         GameObject selectedEnemy = null;
                         float rand = Random.Range(1, 10);
-                        if (rand < 6) selectedEnemy = meleeEnemy;
+                        if (rand < 7) selectedEnemy = meleeEnemy;
                         else selectedEnemy = rangeEnemy;
                         Instantiate(selectedEnemy, pos, transform.rotation);
                         psDust = Instantiate(Resources.Load<GameObject>("Effects/DustParticle"), pos, transform.rotation).GetComponent<ParticleSystem>();
