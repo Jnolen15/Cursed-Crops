@@ -80,6 +80,8 @@ public class PlayerControler : MonoBehaviour
     public GameObject bullet;
     public GameObject ammoManager;
 
+    private GameObject AimIndicator; // reticle for aiming, needs to be initialized and instatiated
+
     // ====================== AUDIO COMPONENTS ======================
     public AudioPlayer daSound;
     public AudioClip attackSound;
@@ -142,6 +144,7 @@ public class PlayerControler : MonoBehaviour
         // hello - keenan
         pauseMenu = GameObject.Find("UI Canvas").GetComponent<Pause_Manager>();
         daSound = gameObject.GetComponent<AudioPlayer>();
+        AimIndicator = Instantiate(Resources.Load<GameObject>("Effects/AimingIndicator"));
     }
 
     private void Awake()
@@ -205,6 +208,8 @@ public class PlayerControler : MonoBehaviour
 
         // Move into the SpriteLeaner script! Placeholder for now
         //playerSprite.sortingOrder = -(int)this.transform.position.z;
+
+        UpdateAimIndicator();
     }
 
     private void FixedUpdate()
@@ -756,4 +761,56 @@ public class PlayerControler : MonoBehaviour
         return rangeCoolDown / rangeCDTime;
     }
 
+
+    private void UpdateAimIndicator()
+    {
+        if (this.state != State.Building && this.state != State.Downed)
+        {
+            if (!AimIndicator.activeSelf) AimIndicator.SetActive(true);
+            Vector3 targetVector;
+
+            // Shoot in direction aiming
+            if (direction != Vector3.zero)
+            {
+                // Create bullet
+                targetVector = direction;
+            }
+            //Shoot in direction moving, if not aiming
+            else
+            {
+                if (movement != Vector3.zero)
+                {
+                    // Create Bullet
+                    targetVector = movement;
+                }
+                else
+                {
+                    Vector3 movDir = Vector3.right;
+                    // Flip sprite to face the direction the player is moving
+                    if (!flipped)
+                        movDir = Vector3.right;
+                    else if (flipped)
+                        movDir = Vector3.left;
+                    targetVector = movDir;
+                }
+            }
+
+
+            
+            Vector3 playerPos = this.transform.position;
+            playerPos.y -= 0.9f;
+            playerPos.z -= 0.01f;
+            
+            AimIndicator.transform.SetPositionAndRotation(playerPos, AimIndicator.transform.rotation);
+            targetVector = playerPos + targetVector;
+
+            // update aimreticle
+            AimIndicator.transform.LookAt(targetVector, Vector3.up);
+            // AimIndicator.transform.SetPositionAndRotation(AimIndicator.transform.position,
+            //    Quaternion.Euler(40, 0, AimIndicator.transform.rotation.eulerAngles.z));
+        } else
+        {
+            if (AimIndicator.activeSelf) AimIndicator.SetActive(false);
+        }
+    }
 }
