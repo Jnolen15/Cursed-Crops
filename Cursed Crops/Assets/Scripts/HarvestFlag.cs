@@ -58,7 +58,7 @@ public class HarvestFlag : MonoBehaviour
         }
         else
         {
-            Debug.Log("You must meet the bounty requirements in order to procede to the next wave");
+            //Debug.Log("You must meet the bounty requirements in order to procede to the next wave");
             quotaWarning.SetActive(true);
         }
     }

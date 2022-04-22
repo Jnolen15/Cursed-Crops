@@ -140,7 +140,7 @@ public class GameRuleManager : MonoBehaviour
         if (globalPoints >= temp) return true;
         else
         {
-            Debug.Log(globalPoints + " < " + temp);
+            //Debug.Log(globalPoints + " < " + temp);
             return false;
         }
     }
