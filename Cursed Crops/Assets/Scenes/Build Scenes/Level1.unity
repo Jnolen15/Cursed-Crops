@@ -12310,7 +12310,6 @@ MonoBehaviour:
   pauseDuration: 10
   wavesPerPhase: 4
   spawnersPerPhase: 4
-  scaleAmmount: 1
   elapsedTime: 0
   currentPhase: Pre
   currentWave: 0
@@ -12331,10 +12330,6 @@ MonoBehaviour:
   plantingMusic: {fileID: 8300000, guid: 0e4ed5601f0044d46b88f853c1bdd6f1, type: 3}
   daMusic: {fileID: 929867515}
   currentPhaseEndTime: 0
-  specialSpawnInterval: 0
-  specialSpawnTime: 0
-  specialToSpawn: 0
-  gridChild: {fileID: 0}
   spawners: []
   state: 0
 --- !u!4 &1220747856
@@ -13673,6 +13668,7 @@ MonoBehaviour:
   numMediBerryPlanted: 0
   numScarrotPlanted: 0
   numSabatamatoPlanted: 0
+  difficulty: 0
   globalPoints: 0
 --- !u!4 &1332570572
 Transform:
@@ -24627,7 +24623,7 @@ PrefabInstance:
     - target: {fileID: 5782135333771699971, guid: 2a047a10b81f438488fec24d65507520,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -168.49258
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5782135333771699971, guid: 2a047a10b81f438488fec24d65507520,
         type: 3}
