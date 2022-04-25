@@ -104,7 +104,7 @@ public class SpawnManager : MonoBehaviour
             daMusic.Play();
             if (currentPhase == "Pre")
             {
-                grm.difficulty++;
+                grm.incrementDifficulty();
                 currentPhase = "Morning";
                 state = State.Break;
                 harvestFlag.SetActive(true);
@@ -112,7 +112,7 @@ public class SpawnManager : MonoBehaviour
             else if (currentPhase == "Morning")
             {
                 StopAllCoroutines();
-                grm.difficulty++;
+                grm.incrementDifficulty();
                 currentPhase = "Afternoon";
                 state = State.Break;
                 harvestFlag.SetActive(true);
@@ -121,7 +121,7 @@ public class SpawnManager : MonoBehaviour
             else if (currentPhase == "Afternoon")
             {
                 StopAllCoroutines();
-                grm.difficulty++;
+                grm.incrementDifficulty();
                 currentPhase = "Night";
                 state = State.Break;
                 harvestFlag.SetActive(true);

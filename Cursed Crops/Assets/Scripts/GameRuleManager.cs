@@ -24,7 +24,7 @@ public class GameRuleManager : MonoBehaviour
     // ================ Private ================
     [SerializeField] private int globalPoints = 0;
     private int globalMoney = 0;
-    private int players = 0;
+    public int players = 0;
     private PlayerManager pm;
     private GameObject textPopUp;
 
@@ -47,12 +47,19 @@ public class GameRuleManager : MonoBehaviour
     void Update()
     {
         // Increase difficulty for each player beyond the first
-        if(players < pm.players.Count)
+        /*if(players < pm.players.Count)
         {
-            if (players > 1)
-                difficulty++;
             players++;
-        }
+            if (players > 1) {
+                difficulty++;
+                Debug.Log("+1 difficulty for extra player");
+            }
+        }*/
+    }
+
+    public void incrementDifficulty()
+    {
+        difficulty += pm.players.Count;
     }
 
     public void addBountyPoints(CropSO activeCrop, GameObject crop)
