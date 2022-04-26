@@ -39,6 +39,10 @@ public class Turret : MonoBehaviour
         firePosition = this.transform.GetChild(2).transform;
         turretChild = this.transform.GetChild(1).gameObject;
         //this.transform.GetChild(0).GetChild(0).gameObject.GetComponent<TurretAnimator>();
+
+        // When turret is placed start a basic cooldown.
+        // This is so player's dont abuse turrets by destroying and replacing them
+        StartCoroutine(StartCooldown());
     }
 
     void Update()
@@ -175,6 +179,13 @@ public class Turret : MonoBehaviour
                 turretSprite.flipX = true;
             }
         }
+    }
+
+    IEnumerator StartCooldown()
+    {
+        onCooldown = true;
+        yield return new WaitForSeconds(cooldown);
+        onCooldown = false;
     }
 
     IEnumerator shoot()

@@ -96,43 +96,50 @@ public class SpawnManager : MonoBehaviour
 
     private void RunSpawnSystem()
     {
-        // Phase timer
+        // Phase timer. If the current phase has ended
         if (currentPhaseEndTime < elapsedTime)
         {
-            currentPhaseEndTime = elapsedTime + phaseDuration;
-            daMusic.clip = plantingMusic;
-            daMusic.Play();
-            if (currentPhase == "Pre")
+            // Set state to Break to prevent more enemy spawning
+            state = State.Break;
+
+            // Phase is over but wait for all enemies to die
+            if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
             {
-                grm.incrementDifficulty();
-                currentPhase = "Morning";
-                state = State.Break;
-                harvestFlag.SetActive(true);
+                currentPhaseEndTime = elapsedTime + phaseDuration;
+                daMusic.clip = plantingMusic;
+                daMusic.Play();
+                if (currentPhase == "Pre")
+                {
+                    grm.incrementDifficulty();
+                    currentPhase = "Morning";
+                    harvestFlag.SetActive(true);
+                }
+                else if (currentPhase == "Morning")
+                {
+                    StopAllCoroutines();
+                    grm.incrementDifficulty();
+                    currentPhase = "Afternoon";
+                    harvestFlag.SetActive(true);
+                    DestroySpawners();
+                }
+                else if (currentPhase == "Afternoon")
+                {
+                    StopAllCoroutines();
+                    grm.incrementDifficulty();
+                    currentPhase = "Night";
+                    harvestFlag.SetActive(true);
+                    DestroySpawners();
+                }
+                else if (currentPhase == "Night")
+                {
+                    StopAllCoroutines();
+                    currentPhase = "Post";
+                    DestroySpawners();
+                }
             }
-            else if (currentPhase == "Morning")
+            else
             {
-                StopAllCoroutines();
-                grm.incrementDifficulty();
-                currentPhase = "Afternoon";
-                state = State.Break;
-                harvestFlag.SetActive(true);
-                DestroySpawners();
-            }
-            else if (currentPhase == "Afternoon")
-            {
-                StopAllCoroutines();
-                grm.incrementDifficulty();
-                currentPhase = "Night";
-                state = State.Break;
-                harvestFlag.SetActive(true);
-                DestroySpawners();
-            }
-            else if (currentPhase == "Night")
-            {
-                StopAllCoroutines();
-                currentPhase = "Post";
-                state = State.Break;
-                DestroySpawners();
+                Debug.Log("Found " + GameObject.FindGameObjectsWithTag("Enemy").Length + " enemies");
             }
         }
 

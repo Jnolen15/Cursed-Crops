@@ -10,11 +10,13 @@ public class Cheater : MonoBehaviour
     PlayerResourceManager prm;
     PlayerControler pc;
     EnemyPlayerDamage epd;
+    SpawnManager sm;
 
     void Start()
     {
         pm = GameObject.Find("Player Manager").GetComponent<PlayerManager>();
         grm = GameObject.Find("GameRuleManager").GetComponent<GameRuleManager>();
+        sm = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
     }
 
     void Update()
@@ -35,5 +37,8 @@ public class Cheater : MonoBehaviour
 
         if (Keyboard.current[Key.H].wasPressedThisFrame)
             epd.Heal(pc.maxHealth);
+
+        if (Keyboard.current[Key.V].wasPressedThisFrame)
+            sm.elapsedTime += 30;
     }
 }

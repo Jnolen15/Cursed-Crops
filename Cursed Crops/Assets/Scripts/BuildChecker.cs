@@ -52,10 +52,10 @@ public class BuildChecker : MonoBehaviour
             }
             else if (mode == "Plant")
             {
-                if (other.gameObject.tag == "Spawner")
+                if (other.gameObject.tag == "Buildable")
                 {
                     intersectingBuildable = true;
-                    intersectedBuildable = other.gameObject;
+                    intersectedBuildable = other.transform.parent.gameObject;
                 }
                 else if (other.gameObject.tag == "TilePlantable")
                     acceptablePos = true;
