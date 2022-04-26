@@ -6,8 +6,11 @@ using UnityEngine;
 public class DialogueClass
 {
     public bool endOfDialogue;
+    public bool enemyAttack;
+    public bool endOfStartingDialogue;
     public string name;
+    public string eventWeWant;
 
-    [TextArea(3, 10)]
+    [TextArea(4, 10)]
     public string sentences;
 }

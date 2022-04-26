@@ -1188,7 +1188,7 @@ Transform:
   - {fileID: 1047459606}
   - {fileID: 1287179674}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &70619969 stripped
 Transform:
@@ -3466,6 +3466,81 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77f2f20a6dfd7284c9abb6e92948e240, type: 3}
+--- !u!1 &163591122
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 163591123}
+  - component: {fileID: 163591125}
+  - component: {fileID: 163591124}
+  m_Layer: 5
+  m_Name: PlayerHealthArrow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &163591123
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163591122}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 284552769}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -207, y: 201.72}
+  m_SizeDelta: {x: 46.5679, y: 46.5679}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &163591124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163591122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 2e582520c5c7f77428df9ca92e7530d6, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &163591125
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163591122}
+  m_CullTransparentMesh: 1
 --- !u!1001 &167553620
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5397,6 +5472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PauseMenu: {fileID: 88795290}
+  resume: {fileID: 0}
 --- !u!114 &284552766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5471,8 +5547,11 @@ RectTransform:
   m_Children:
   - {fileID: 1430494818}
   - {fileID: 88795291}
+  - {fileID: 361299298}
+  - {fileID: 2038223185}
+  - {fileID: 163591123}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5511,7 +5590,7 @@ Transform:
   - {fileID: 1167506901}
   - {fileID: 2051540955}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &296431618 stripped
 Transform:
@@ -6524,6 +6603,84 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 47273422}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &361299297
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 361299298}
+  - component: {fileID: 361299300}
+  - component: {fileID: 361299299}
+  m_Layer: 5
+  m_Name: dialogueBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &361299298
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361299297}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 482784632}
+  - {fileID: 859479749}
+  - {fileID: 458442688}
+  m_Father: {fileID: 284552769}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.00012207031, y: -164.70999}
+  m_SizeDelta: {x: 394.38, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &361299299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361299297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 0a67d16908c970b43b513619d7fd964b, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &361299300
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 361299297}
+  m_CullTransparentMesh: 1
 --- !u!4 &362567072 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: eb9abff49f37c1a499236d064c6969df,
@@ -6863,11 +7020,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 378939997}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -18.4, y: 0, z: 6.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &379894886 stripped
 Transform:
@@ -8186,6 +8343,140 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 457607020}
   m_Mesh: {fileID: 5769486934180388862, guid: 77f2f20a6dfd7284c9abb6e92948e240, type: 3}
+--- !u!1 &458442687
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 458442688}
+  - component: {fileID: 458442690}
+  - component: {fileID: 458442689}
+  m_Layer: 5
+  m_Name: Name
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &458442688
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 458442687}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 361299298}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -75.7, y: 31.6}
+  m_SizeDelta: {x: 114.5521, y: 22.1915}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &458442689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 458442687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Doug
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 12
+  m_fontSizeBase: 12
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &458442690
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 458442687}
+  m_CullTransparentMesh: 1
 --- !u!4 &459483440 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: eb9abff49f37c1a499236d064c6969df,
@@ -8571,6 +8862,82 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 479304342}
   m_Mesh: {fileID: 2504345457074934838, guid: 77f2f20a6dfd7284c9abb6e92948e240, type: 3}
+--- !u!1 &482784631
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 482784632}
+  - component: {fileID: 482784634}
+  - component: {fileID: 482784633}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &482784632
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482784631}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_Children: []
+  m_Father: {fileID: 361299298}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -164, y: 42.72738}
+  m_SizeDelta: {x: 139.9369, y: 139.9369}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &482784633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482784631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 5055194273226982177, guid: 6b0be73939887684080c2bb3c2eafd02,
+    type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &482784634
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 482784631}
+  m_CullTransparentMesh: 1
 --- !u!4 &482961762 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: eb9abff49f37c1a499236d064c6969df,
@@ -9765,7 +10132,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &561171400
 GameObject:
@@ -11153,7 +11520,7 @@ PrefabInstance:
     - target: {fileID: 1266301427715053528, guid: 8943eddbc5b38e0408643bc52d0d3723,
         type: 3}
       propertyPath: m_RootOrder
-      value: 30
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1266301427715053528, guid: 8943eddbc5b38e0408643bc52d0d3723,
         type: 3}
@@ -12721,6 +13088,574 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 159457526}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &748197707
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 115861805670409039, guid: 0f5ce565a971afe449c4820f5732e9de,
+        type: 3}
+      propertyPath: spawnChance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 586873464265961450, guid: 0f5ce565a971afe449c4820f5732e9de,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2712685162276701537, guid: 0f5ce565a971afe449c4820f5732e9de,
+        type: 3}
+      propertyPath: m_Name
+      value: Broc-Bro
+      objectReference: {fileID: 0}
+    - target: {fileID: 2712685162276701537, guid: 0f5ce565a971afe449c4820f5732e9de,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2712685162276701537, guid: 0f5ce565a971afe449c4820f5732e9de,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 2712685162276701538, guid: 0f5ce565a971afe449c4820f5732e9de,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2712685162276701541, guid: 0f5ce565a971afe449c4820f5732e9de,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2712685162276701541, guid: 0f5ce565a971afe449c4820f5732e9de,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -19.746183
+      objectReference: {fileID: 0}
+    - target: {fileID: 2712685162276701541, guid: 0f5ce565a971afe449c4820f5732e9de,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2712685162276701541, guid: 0f5ce565a971afe449c4820f5732e9de,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 12.830365
+      objectReference: {fileID: 0}
+    - target: {fileID: 2712685162276701541, guid: 0f5ce565a971afe449c4820f5732e9de,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2712685162276701541, guid: 0f5ce565a971afe449c4820f5732e9de,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2712685162276701541, guid: 0f5ce565a971afe449c4820f5732e9de,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2712685162276701541, guid: 0f5ce565a971afe449c4820f5732e9de,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2712685162276701541, guid: 0f5ce565a971afe449c4820f5732e9de,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2712685162276701541, guid: 0f5ce565a971afe449c4820f5732e9de,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2712685162276701541, guid: 0f5ce565a971afe449c4820f5732e9de,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2712685162276701543, guid: 0f5ce565a971afe449c4820f5732e9de,
+        type: 3}
+      propertyPath: angered
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2712685162276701543, guid: 0f5ce565a971afe449c4820f5732e9de,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2712685162276701543, guid: 0f5ce565a971afe449c4820f5732e9de,
+        type: 3}
+      propertyPath: enemySpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2712685162276701543, guid: 0f5ce565a971afe449c4820f5732e9de,
+        type: 3}
+      propertyPath: originalSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3026329778980588557, guid: 0f5ce565a971afe449c4820f5732e9de,
+        type: 3}
+      propertyPath: houseDamage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3026329778980588557, guid: 0f5ce565a971afe449c4820f5732e9de,
+        type: 3}
+      propertyPath: playerdamage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7112471364830644533, guid: 0f5ce565a971afe449c4820f5732e9de,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9070015767811128390, guid: 0f5ce565a971afe449c4820f5732e9de,
+        type: 3}
+      propertyPath: health
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 9070015767811128390, guid: 0f5ce565a971afe449c4820f5732e9de,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9070015767811128390, guid: 0f5ce565a971afe449c4820f5732e9de,
+        type: 3}
+      propertyPath: maxHealth
+      value: 10000
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0f5ce565a971afe449c4820f5732e9de, type: 3}
+--- !u!1 &748197708 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2712685162276701537, guid: 0f5ce565a971afe449c4820f5732e9de,
+    type: 3}
+  m_PrefabInstance: {fileID: 748197707}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &748197709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748197708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4a48094c1396f24899e99340439a660, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnerObject: {fileID: 898282211}
+  daName: {fileID: 458442687}
+  image: {fileID: 2712685162276701537, guid: 0f5ce565a971afe449c4820f5732e9de, type: 3}
+  daDialogue: {fileID: 859479748}
+  houseArrow: {fileID: 2038223184}
+  playerHealthArrow: {fileID: 163591122}
+  Broc_Bro: {fileID: 5055194273226982177, guid: 6b0be73939887684080c2bb3c2eafd02,
+    type: 3}
+  sentence: 
+  waitingSentence: 
+  character: 
+  DaEvent: 
+  stopDialogue: 0
+  enemyAction: 0
+  dialogueHappening: 0
+  startingDial: 0
+  taskFinish: 0
+  trySomething: 0
+  interactOnce: 0
+  wakingScene: 1
+  endOfTutorial: 0
+  textOver: 0
+  dialogue:
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: "Howdy howdy!  I\u2019m you helpful Broc-Bro, here to guide you through
+      how to not die in this chaotic hellscape!  Whoopee! Press Left Click/ West
+      Button to Continue"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: " I\u2019ll teach you silly little farmers how to purify farms from
+      these mean ol\u2019 crops, so you better say \u201Cthank you, you wonderful
+      little Broc-Bro!\u201D  at the end!\r"
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: "Howzabout you use WASD/Left Joystic to chumble on over to me and
+      Left Click/West Button to start the teachin\u2019!"
+  - endOfDialogue: 0
+    enemyAttack: 1
+    endOfStartingDialogue: 1
+    name: Broc-Bro
+    eventWeWant: Enemy Attack
+    sentences: Splendiferous!
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: 'Oh shitake!  I don''t know what came over me, I swear I am not like
+      the others because they are lot more hungry!  Better defend yourself from them
+      before you die a horrible death!
+
+'
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: Did you know?  If an evil crop hits you too much, you die!
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: Player Health
+    sentences: "You better make sure that little ol\u2019 number up there never reaches
+      zero, or else your little ol\u2019 butt\u2019s gonna be sent back to your house! 
+      Well, after 15 seconds at least."
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: No Arrow
+    sentences: "Oh, and don\u2019t worry!  You can be knocked down as much as you
+      want, but you won't lose until that little ol\u2019 house over there gets destroyed!"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: House Health
+    sentences: "You can see its health on your screen!  What screen, you ask?  Wouldn\u2019t
+      you like to know, farmer boy?"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: No Arrow
+    sentences: Anyhoo, if anybody else goes straight for your jugular!  Make sure
+      you press Shift/South Button really, really hard to dodge!
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: 'Oh, silly me!  I almost forgot to teach ya how to kill these freaks
+      of nature!  The trick is:  Hit them a lot using (left click/east button)!'
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: Try Attacking
+    sentences: Or shoot them with a gun using (right click/west button), that also
+      works! Why don't you try it on me?
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: That's the spirit! Here, you can have this!
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: Drop Items
+    sentences: My kind drop this when they hit the haystack, You can sell that for
+      some good cash! Try picking it up and taking it to the farm.
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: I do warn ya, these drops will spoil after sometime, so pick them
+      up and take them to your farm house when you get the chance!
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: "Oh, but let\u2019s talk about why you want money in the first place,
+      aside from controlling governments and underpaying workers!  And that is: the
+      planting phase!"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: In this phase, you can do a multitude of things while you prepare
+      for the next wave of enemies.
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: You can buy upgrades, place turrets, and plant seeds to add special
+      enemies to the next wave that are required to progress!
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: "Hey I see you have some seeds! why don't you take them to that dirt
+      mound in front of us, and you\u2019ll literally \u201Creap\u201D your rewards
+      later!  Ha Ha!"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: There are 3 different types of terrain, and each allows you to place
+      different things.
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: 'The white in the center of the house will allow you to purchase upgrades,
+      the green allows you to place turrets, and brown allows you to plant crops. '
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: 'To plant a crop, walk over to the brown area and press (interact
+      button) to open the seed menu. When you have it open, press (whatever buttones)
+      to look thorugh your selection. '
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: 'Once you made up your mind press Left Click/East Button to plant
+      a seed on that spot.  '
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: Plant Seed
+    sentences: 'Then, when the next wave occurs, the enemy you planted will also
+      spawn for that wave. Howzabout you try planting one yourself! '
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: You did it!  Now soon, that crop will spawn and try to destroy your
+      house and also you!
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: "What?  Why do you want to do that, you ask?  Well, so you can purify
+      the farm and beat the game, Gourd-for-brains!\r"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: You might have noticed the bar below us filled up after placing that
+      seed.
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: If you want to start a wave you will need to place enough of those
+      special seeds to complete your quota. You might be purifiying lands but you
+      still need to get paid, am I right?
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: Each of those special crops have different values for the quota so
+      go wild with whatever you want to fight against!
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: "Now, You must be thinkin\u2019  \u201CWell golly gee gosh!  I sure
+      wish I had some help to stop these plants from killing me and more importantly
+      - my property!\u201D"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: And have I got news for you!  YOU DO!
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: "Howzabout we talk a little about the shoppin\u2019 menu, hmmm?"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: "What can you buy with your shoppin\u2019 menu?  Well, only the most
+      awesome stuff!   Powerful upgrades to make you stronger and turrets to help
+      you defend your house!"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: "Why, if this weren\u2019t a tutorial, you\u2019d be like a kid in
+      a candy store, I bet!  Unfortunately it is, so instead I\u2019m gonna force
+      you to buy this turret so I can explain what it does.  Hop to it!"
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: Place Turret
+    sentences: To access the shop press (whatever button), use (whatever buttons)
+      to navigate the menu, and press Left Click/East Button to put down your chosen
+      turret!
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: "Yipee!  Now you must be thinking you can go and buy whatever you
+      want, right?  Nope!  Let\u2019s move on to the next part of this tutorial,
+      buddy!\r"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: "\u2026"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: Okay okay!  You can stop looking at me with those puppy dog eyes! 
+      How about you go buy yourself a nice damage upgrade then!  Go on!  Go back
+      to the house to buy it!
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: Buy An Upgrade
+    sentences: Just open the shop menu close to the farmhouse! You remember how to
+      open it right?
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: "Surprise!  This was part of the tutorial as well, silly-billy!  Now
+      I\u2019m gonna explain to you how upgrades work!"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: "Upgrades can make you more powerful for the rest of the level once
+      you buy them!  Isn\u2019t that great?\r"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: "Awesome!  Now you\u2019re ready for it:  THE HARVEST PHASE!"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: During this phase my kind, alongside special ones you planted in the
+      previous planting phase, will attack you and your house.
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: "The house has its own health.  If the house\u2019s health ever reaches
+      0, you fail the level, and must retry it from the beginning of that level."
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: "Typically, you\u2019ll have to deal with 3 planting and harvest phases
+      in a single level, 1 for each stage of the day, but you\u2019re lucky little
+      butt\u2019s only gotta deal with one harvest phase this time!"
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: So what are you waiting for silly! Start the phase!
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: "Oh! you are wondering how to start it right? See that flag on the
+      ground over there?  Well, if you walk your little ol\u2019 self over there,
+      you and your friends can melee attack it to start the wave!"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: Do remember, if your quota bar it's not full you cannot start the
+      Harvest phase! Planting some more special seeds should get the quota bar full
+      in no time.
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: Waiting to Start Harvest
+    sentences: "Why don\u2019t you go do that now, and stop wasting my time, k\u2019
+      buddy?"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: "And now, you\u2019re ready to play!  And I\u2019m ready to leave
+      before you realize I\u2019m a crop and try to kill me!  G\u2019bye friend!"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: They are not going to get pass this tutorial at all hehehe...
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: 
+    sentences: Oh uh you are still listening farmer buddy! uh uhmm, I meant my kind
+      is not going to get pass you guys! Yeah, yeah... my kind heheh... heh.
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Broc-Bro
+    eventWeWant: End of Tutorial
+    sentences: Better get out of here before they actually do harvest me
+  players: []
+  dialogueBox: {fileID: 361299297}
+  pc: {fileID: 0}
 --- !u!1 &754096840
 GameObject:
   m_ObjectHideFlags: 0
@@ -12946,11 +13881,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 755487246}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -17.8, y: 0, z: 7.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &757744993
 PrefabInstance:
@@ -13156,7 +14091,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &768933066
 GameObject:
@@ -14907,6 +15842,140 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 854082839}
   m_Mesh: {fileID: 2212009239438826721, guid: 77f2f20a6dfd7284c9abb6e92948e240, type: 3}
+--- !u!1 &859479748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 859479749}
+  - component: {fileID: 859479751}
+  - component: {fileID: 859479750}
+  m_Layer: 5
+  m_Name: TheDialogue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &859479749
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859479748}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 361299298}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.27}
+  m_AnchorMax: {x: 0.5, y: 0.27}
+  m_AnchoredPosition: {x: -1.8583002, y: 5.264}
+  m_SizeDelta: {x: 351.3126, y: 64.528}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &859479750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859479748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 10
+  m_fontSizeBase: 10
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 3
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &859479751
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859479748}
+  m_CullTransparentMesh: 1
 --- !u!4 &865790273 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bd406010c8c864f4d96d6b1190ff5bd6,
@@ -15042,7 +16111,9 @@ MonoBehaviour:
   numMediBerryPlanted: 0
   numScarrotPlanted: 0
   numSabatamatoPlanted: 0
+  difficulty: 0
   globalPoints: 0
+  players: 0
 --- !u!4 &876498455
 Transform:
   m_ObjectHideFlags: 0
@@ -15055,7 +16126,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &885219907 stripped
 Transform:
@@ -15515,7 +16586,6 @@ MonoBehaviour:
   pauseDuration: 10
   wavesPerPhase: 4
   spawnersPerPhase: 4
-  scaleAmmount: 1
   elapsedTime: 0
   currentPhase: Pre
   currentWave: 0
@@ -15536,10 +16606,6 @@ MonoBehaviour:
   plantingMusic: {fileID: 8300000, guid: 0e4ed5601f0044d46b88f853c1bdd6f1, type: 3}
   daMusic: {fileID: 552037436}
   currentPhaseEndTime: 0
-  specialSpawnInterval: 0
-  specialSpawnTime: 0
-  specialToSpawn: 0
-  gridChild: {fileID: 0}
   spawners: []
   state: 0
 --- !u!4 &898282214
@@ -15557,7 +16623,7 @@ Transform:
   - {fileID: 1672225905}
   - {fileID: 1057314525}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &902804330 stripped
 Transform:
@@ -16265,7 +17331,7 @@ PrefabInstance:
     - target: {fileID: 1266301427715053528, guid: 8943eddbc5b38e0408643bc52d0d3723,
         type: 3}
       propertyPath: m_RootOrder
-      value: 35
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1266301427715053528, guid: 8943eddbc5b38e0408643bc52d0d3723,
         type: 3}
@@ -17643,6 +18709,54 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 726265831}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1036147260
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1036147262}
+  - component: {fileID: 1036147261}
+  m_Layer: 0
+  m_Name: LevelInitializer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1036147261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036147260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8a83acb0e68cf7489767cc48268ca39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 7937736029672694561, guid: 69f1f2538ac12e543931462cf1bbc863,
+    type: 3}
+  playerConfig: {fileID: 0}
+  playerManager: {fileID: 0}
+  playerController: {fileID: 0}
+--- !u!4 &1036147262
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036147260}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 823.3956, y: 271.34164, z: 2.093529}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1036224477 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b340a207cd88d514bbe4ff94182e4ec4,
@@ -19065,7 +20179,7 @@ Transform:
   - {fileID: 996539122}
   - {fileID: 38163844}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1134933781
 PrefabInstance:
@@ -21491,7 +22605,7 @@ PrefabInstance:
     - target: {fileID: 1266301427715053528, guid: 8943eddbc5b38e0408643bc52d0d3723,
         type: 3}
       propertyPath: m_RootOrder
-      value: 36
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 1266301427715053528, guid: 8943eddbc5b38e0408643bc52d0d3723,
         type: 3}
@@ -22997,7 +24111,7 @@ PrefabInstance:
     - target: {fileID: 1266301427715053528, guid: 8943eddbc5b38e0408643bc52d0d3723,
         type: 3}
       propertyPath: m_RootOrder
-      value: 27
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 1266301427715053528, guid: 8943eddbc5b38e0408643bc52d0d3723,
         type: 3}
@@ -24212,7 +25326,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!4 &1450760362 stripped
 Transform:
@@ -25998,6 +27112,50 @@ Transform:
   m_Father: {fileID: 897609168}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: -144.4, z: 0}
+--- !u!1 &1610599527
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1610599529}
+  - component: {fileID: 1610599528}
+  m_Layer: 0
+  m_Name: PlayerIsHere
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1610599528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610599527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af1d1d7641f29ae49a7074ba0ce3a765, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Broc: {fileID: 748197708}
+--- !u!4 &1610599529
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610599527}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.800449, y: -6.2865133, z: 4.7215405}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1614522906
 GameObject:
   m_ObjectHideFlags: 0
@@ -26515,7 +27673,7 @@ PrefabInstance:
     - target: {fileID: 1266301427715053528, guid: 8943eddbc5b38e0408643bc52d0d3723,
         type: 3}
       propertyPath: m_RootOrder
-      value: 32
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 1266301427715053528, guid: 8943eddbc5b38e0408643bc52d0d3723,
         type: 3}
@@ -26975,7 +28133,7 @@ PrefabInstance:
     - target: {fileID: 1266301427715053528, guid: 8943eddbc5b38e0408643bc52d0d3723,
         type: 3}
       propertyPath: m_RootOrder
-      value: 33
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 1266301427715053528, guid: 8943eddbc5b38e0408643bc52d0d3723,
         type: 3}
@@ -28289,6 +29447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalPlayers: 0
   playersReady: 0
+  playerManager: {fileID: 0}
 --- !u!136 &1734229153
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -29117,7 +30276,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1824190434
 GameObject:
@@ -29958,7 +31117,7 @@ Transform:
   m_Children:
   - {fileID: 2054419834}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1875903975
 GameObject:
@@ -30336,7 +31495,7 @@ Transform:
   - {fileID: 1044427884}
   - {fileID: 895266806}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1894785908
 GameObject:
@@ -32137,7 +33296,7 @@ PrefabInstance:
     - target: {fileID: 1266301427715053528, guid: 8943eddbc5b38e0408643bc52d0d3723,
         type: 3}
       propertyPath: m_RootOrder
-      value: 31
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 1266301427715053528, guid: 8943eddbc5b38e0408643bc52d0d3723,
         type: 3}
@@ -32252,7 +33411,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 43, y: 0, z: 0}
 --- !u!1001 &2009511087
 PrefabInstance:
@@ -32760,6 +33919,81 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 804351856}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2038223184
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2038223185}
+  - component: {fileID: 2038223187}
+  - component: {fileID: 2038223186}
+  m_Layer: 5
+  m_Name: houseArrow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &2038223185
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038223184}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 284552769}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -233, y: 201.72}
+  m_SizeDelta: {x: 46.5679, y: 46.5679}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2038223186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038223184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 2e582520c5c7f77428df9ca92e7530d6, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2038223187
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038223184}
+  m_CullTransparentMesh: 1
 --- !u!4 &2042770150 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c182adcfb270e724da54d0a12fd036dc,
@@ -34569,7 +35803,7 @@ PrefabInstance:
     - target: {fileID: 1266301427715053528, guid: 8943eddbc5b38e0408643bc52d0d3723,
         type: 3}
       propertyPath: m_RootOrder
-      value: 34
+      value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 1266301427715053528, guid: 8943eddbc5b38e0408643bc52d0d3723,
         type: 3}

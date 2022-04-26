@@ -14,6 +14,7 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] private float attackBufferMax = 2f;
     private float attackBufferTimer = 2.1f;
     private int attackChain = 0;
+    
     private float rangeCoolDown;
     private float rollSpeed;
     private float rollSpeedDropMultiplier;
@@ -31,6 +32,7 @@ public class PlayerControler : MonoBehaviour
     public int health = 10;
     public int maxHealth = 10;
     public float damageBoost = 1f;
+    public int count = 0;
 
     // ====================== BOOLS ======================
     private bool rangeCD = false;
@@ -43,6 +45,7 @@ public class PlayerControler : MonoBehaviour
     private bool attackQueued = false;
     private bool lunge = false;
     private bool collidingWithBorder = false;
+    private bool checkOnce = true;
 
     // Used to toggle to older and newer versions of attack. Once one is picked remove this and commit to one verson
     public bool newAttackSystem = true;
@@ -55,6 +58,7 @@ public class PlayerControler : MonoBehaviour
     public bool stopMovement = false;       // Used to stop movement when shooting, planting, taking damage.
     public bool shooting = false;
     public bool trapped = false;
+    public bool forDialogue = false;
 
     // ====================== OTHER COMPONENTS ======================
     [SerializeField] private LayerMask groundLayermask;
@@ -75,6 +79,7 @@ public class PlayerControler : MonoBehaviour
     private Vector3 rollDir;
     private Vector3 direction;
     private Vector3 aimDir;             // Used to Store the direction the player will shoot
+    
 
     public PlayerInput input;
     public GameObject bullet;
@@ -205,10 +210,13 @@ public class PlayerControler : MonoBehaviour
             am.curBullets = curBullets;
         }
 
-
         // Move into the SpriteLeaner script! Placeholder for now
         //playerSprite.sortingOrder = -(int)this.transform.position.z;
-
+        //if (forDialogue)
+        //{
+            //checkOnce = true;
+            forDialogue = false;
+        //}
         UpdateAimIndicator();
     }
 
@@ -277,6 +285,7 @@ public class PlayerControler : MonoBehaviour
                 bs.CloseBuildMode();
                 break;
         }
+
     }
 
     // Aiming ========================================================
@@ -444,10 +453,14 @@ public class PlayerControler : MonoBehaviour
     public void Attack_performed(InputAction.CallbackContext context)
     {
         //Debug.Log(context);
+        
         if (context.performed)
         {
+            
+            forDialogue = true;
             AttackChain();
         }
+       
     }
 
     private void AttackChain()

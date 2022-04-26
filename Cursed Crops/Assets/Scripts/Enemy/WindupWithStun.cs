@@ -12,19 +12,20 @@ public class WindupWithStun : MonoBehaviour
     Vector3 direction;
     Vector3 knocknewPosition;
     public bool attacking = false;
+    public bool windupFinish = false;
     private bool inPosition = false; 
     bool getPosition = false;
     bool windupStarting = false;
     private bool hitFence = false;
     Rigidbody childRB;
     Rigidbody rb;
-    private SpriteRenderer sr;
-    Transform targetToAttack;
+    public SpriteRenderer sr;
+    public Transform targetToAttack;
     GameObject theTarget;
     private BoxCollider hurtBox;
     private MeshRenderer daAttack;
     private EnemyControler ec;
-    Color prev;
+    public Color prev;
     IEnumerator inst = null;
     private float attackTimer = 1;
     private float attackTickSpeed = 1;
@@ -55,89 +56,93 @@ public class WindupWithStun : MonoBehaviour
         }
         
         targetToAttack = gameObject.GetComponent<EnemyToPlayer>().closestPlayer;
-        direction = new Vector3(targetToAttack.position.x - transform.position.x, 0, targetToAttack.position.z - transform.position.z);
-        // Raycast to target to see if it can be hit
-        RaycastHit hit;
-        Debug.DrawRay(transform.position, direction, Color.red);
-        if(Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity, ~maskToIgnore))
+        if (targetToAttack != null)
         {
-            if (hit.collider.gameObject.tag == "Player" || hit.collider.gameObject.tag == "MainObjective")
+            direction = new Vector3(targetToAttack.position.x - transform.position.x, 0, targetToAttack.position.z - transform.position.z);
+            // Raycast to target to see if it can be hit
+            RaycastHit hit;
+            Debug.DrawRay(transform.position, direction, Color.red);
+            if (Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity, ~maskToIgnore))
             {
-                //Debug.Log("Raycast Hit!");
-                if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) <= 6f && !hitFence)
+                if (hit.collider.gameObject.tag == "Player" || hit.collider.gameObject.tag == "MainObjective")
                 {
-                    //StopCoroutine("stun");
-
-                    if (!ec.takingDamage && !ec.stunned)
+                    //Debug.Log("Raycast Hit!");
+                    if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) <= 6f && !hitFence)
                     {
-                        if (!windupStarting)
+                        //StopCoroutine("stun");
+
+                        if (!ec.takingDamage && !ec.stunned)
                         {
-                            //StopCoroutine("attack");
-                            sr.color = Color.yellow;
-                            windupStarting = true;
+                            if (!windupStarting)
+                            {
+                                //StopCoroutine("attack");
+                                sr.color = Color.yellow;
+                                windupStarting = true;
 
-                            attackPosition = new Vector3(targetToAttack.transform.position.x, targetToAttack.transform.position.y, targetToAttack.transform.position.z);
-                            enemyPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-                            newPosition = (attackPosition - enemyPosition) - (attackPosition - enemyPosition).normalized * 1.5f;
+                                attackPosition = new Vector3(targetToAttack.transform.position.x, targetToAttack.transform.position.y, targetToAttack.transform.position.z);
+                                enemyPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                                newPosition = (attackPosition - enemyPosition) - (attackPosition - enemyPosition).normalized * 1.5f;
 
-                            newPosition += enemyPosition;
+                                newPosition += enemyPosition;
+                            }
                         }
+                        //transform.position = Vector3.MoveTowards(transform.position, targetToAttack.position, 10f * Time.deltaTime);
                     }
-                    //transform.position = Vector3.MoveTowards(transform.position, targetToAttack.position, 10f * Time.deltaTime);
-                }
-            }
-            else
-            {
-                //Debug.Log("Raycast blocked by: " + hit.collider.gameObject.name);
-            }
-        } else
-        {
-            //Debug.Log("Raycast hit nothing");
-        }
-
-        if (windupStarting)
-        {
-            gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
-            if (!attacking && !ec.stunned)
-            {
-                sr.color = Color.yellow;
-                if (!gameObject.activeInHierarchy)
-                {
-                    StopCoroutine("attack");
                 }
                 else
                 {
-                    StartCoroutine("attack");
+                    //Debug.Log("Raycast blocked by: " + hit.collider.gameObject.name);
                 }
-                if (ec.takingDamage && ec.lastDamageType == "Melee")
-                {
-                    StopCoroutine("attack");
-                }
-            }
-        }
-        if (ec.takingDamage && ec.lastDamageType == "Melee" && !ec.stunned)
-        {
-            attacking = false;
-            windupStarting = false;
-            StopCoroutine("attack");
-            ec.Stun();
-        }
-
-        if (hitFence)
-        {
-            StopCoroutine("attack");
-            if (attackTimer <= 0)
-            {
-                attackTimer = attackTickSpeed;
-                windupStarting = false;
-                attacking = false;
-                hitFence = false;
-
-
             }
             else
             {
-                attackTimer -= Time.deltaTime;
+                //Debug.Log("Raycast hit nothing");
+            }
+
+            if (windupStarting)
+            {
+                gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
+                if (!attacking && !ec.stunned)
+                {
+                    sr.color = Color.yellow;
+                    if (!gameObject.activeInHierarchy)
+                    {
+                        StopCoroutine("attack");
+                    }
+                    else
+                    {
+                        StartCoroutine("attack");
+                    }
+                    if (ec.takingDamage && ec.lastDamageType == "Melee")
+                    {
+                        StopCoroutine("attack");
+                    }
+                }
+            }
+            if (ec.takingDamage && ec.lastDamageType == "Melee" && !ec.stunned)
+            {
+                attacking = false;
+                windupStarting = false;
+                StopCoroutine("attack");
+                ec.Stun();
+            }
+
+            if (hitFence)
+            {
+                StopCoroutine("attack");
+                if (attackTimer <= 0)
+                {
+                    attackTimer = attackTickSpeed;
+                    windupStarting = false;
+                    attacking = false;
+                    hitFence = false;
+
+
+                }
+                else
+                {
+                    attackTimer -= Time.deltaTime;
+                }
             }
         }
 
@@ -183,6 +188,7 @@ public class WindupWithStun : MonoBehaviour
         hurtBox.enabled = false;
         //daAttack.enabled = false;
         windupStarting = false;
+        windupFinish = true;
         attacking = false;
     }
 
