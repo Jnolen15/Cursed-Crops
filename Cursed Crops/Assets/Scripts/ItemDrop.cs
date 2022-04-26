@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemDrop : MonoBehaviour
 {
     public int value = 1;
+    public float destroyTime = 10f;
     public float timeAlive = 0.0f;
 
     public bool hasBeenMerged = false;
@@ -20,6 +21,11 @@ public class ItemDrop : MonoBehaviour
     {
         timeAlive += Time.deltaTime;
 
+        // Destroy item if its been alive longer than destroy time
+        if(timeAlive > destroyTime)
+            Destroy(this.gameObject);
+
+        // Change sprite depending on value
         if (value == 1)
         {
             itemSpriteRenderer.sprite = stage1CropSprite;
@@ -57,6 +63,7 @@ public class ItemDrop : MonoBehaviour
             {
                 hasBeenMerged = true;
                 itemDropOther.value += value;
+                itemDropOther.destroyTime += destroyTime;
                 //Debug.Log("THIS VEGGIE HAS BEEN ASSIMILATED. NEW VALUE: " + itemDropOther.value);
                 Destroy(this.gameObject);
             }

@@ -46,7 +46,6 @@ public class SpawnManager : MonoBehaviour
     private bool timerStarted = false;
     private bool gridUpdated = false;
     private delegate void Callback();
-    private ParticleSystem psDust;
     private GameObject gridChild;
     private GameRuleManager grm;
     public List<GameObject> spawners = new List<GameObject>();  // List of active enemy spawners
@@ -260,8 +259,7 @@ public class SpawnManager : MonoBehaviour
                         if (rand < 7) selectedEnemy = meleeEnemy;
                         else selectedEnemy = rangeEnemy;
                         Instantiate(selectedEnemy, pos, transform.rotation);
-                        psDust = Instantiate(Resources.Load<GameObject>("Effects/DustParticle"), pos, transform.rotation).GetComponent<ParticleSystem>();
-                        Destroy(psDust, 0.5f);
+                        Instantiate(Resources.Load<GameObject>("Effects/EnemySpawnParticle"), pos, transform.rotation).GetComponent<ParticleSystem>();
                     }
                     else
                     {

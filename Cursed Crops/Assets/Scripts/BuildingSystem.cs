@@ -332,7 +332,7 @@ public class BuildingSystem : MonoBehaviour
                     if (mode == "Build")
                     {
                         // Make sure player is intersecting a buildable
-                        if (bc.intersectingBuildable)
+                        if (bc.intersectingBuildable && bc.intersectedBuildable.tag == "Turret")
                         {
                             var cost = 0;
                             psDust.Emit(6);
@@ -356,7 +356,7 @@ public class BuildingSystem : MonoBehaviour
                     }
                     else if (mode == "Plant" && sm.state == SpawnManager.State.Break)
                     {
-                        if (bc.intersectingBuildable)
+                        if (bc.intersectingBuildable && bc.intersectedBuildable.tag == "Spawner")
                         {
                             psDust.Emit(6);
                             animator.SetTrigger("Plant");
