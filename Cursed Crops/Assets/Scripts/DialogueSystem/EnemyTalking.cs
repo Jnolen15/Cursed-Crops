@@ -274,7 +274,7 @@ public class EnemyTalking : MonoBehaviour
                     }
                     taskFinish = true;
                     placeble = GameObject.FindGameObjectWithTag("Spawner");
-                    waitingSentence = "Remember, you can plant the seed by pressing the (whatever buttons) to open the seed menu and look through the selections using (whatever buttons), once you decide hit the good ol' Left Click/East Button to plant it";
+                    waitingSentence = "Remember, you can plant the seed by pressing R / North Button to open the seed menu and look through the selections using Q and E / Left or Right bumpers, once you decide hit the good ol' Left Click/South Button to plant it";
                     break;
 
                 case "Place Turret":
@@ -284,7 +284,7 @@ public class EnemyTalking : MonoBehaviour
                     }
                     taskFinish = true;
                     placeble = GameObject.FindGameObjectWithTag("Turret");
-                    waitingSentence = "Remember, you can place a turret by pressing the (whatever buttons) to open the shop menu and look through the selections using (whatever buttons), once you decide hit the good ol' Left Click/East Button to place it";
+                    waitingSentence = "Remember, you can place a turret by pressing the R / North Button to open the shop menu and look through the selections using Q and E / Left or Right bumpers, once you decide hit the good ol' Left Click/South Button to place it";
                     break;
 
                 case "Waiting to Start Harvest":
