@@ -23,7 +23,7 @@ public class CharacterSelectManager : MonoBehaviour
         AvailableChars.Add("Doug");
         AvailableChars.Add("Cecil");
         AvailableChars.Add("Harvey");
-        //AvailableChars.Add("Carlisle");
+        AvailableChars.Add("Carlisle");
     }
 
     void Update()

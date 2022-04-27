@@ -8,6 +8,7 @@ public class PlayerAnimOCManager : MonoBehaviour
     public AnimatorOverrideController harveyAnimOC;
     public AnimatorOverrideController dougAnimOC;
     public AnimatorOverrideController cecilAnimOC;
+    public AnimatorOverrideController carlisleAnimOC;
     public character selectedCharacter;
     private Animator animator;
 
@@ -38,7 +39,7 @@ public class PlayerAnimOCManager : MonoBehaviour
         }
         else if (selectedCharacter == character.Carlisle)
         {
-            animator.runtimeAnimatorController = harveyAnimOC;
+            animator.runtimeAnimatorController = carlisleAnimOC;
         }
     }
 

@@ -815,6 +815,7 @@ MonoBehaviour:
   health: 10
   maxHealth: 10
   damageBoost: 1
+  count: 0
   newAttackSystem: 1
   lungeAttacking: 1
   twoAttack: 1
@@ -824,6 +825,7 @@ MonoBehaviour:
   stopMovement: 0
   shooting: 0
   trapped: 0
+  forDialogue: 0
   groundLayermask:
     serializedVersion: 2
     m_Bits: 8
@@ -856,6 +858,7 @@ MonoBehaviour:
   phSprite: {fileID: 130268335308826650}
   pHSpriteRenderer: {fileID: 3223592091748275944}
   buildmodeActive: 1
+  updgradeBought: 0
   mode: Plant
   gridSize: 1
   gridOffsetX: 0.5
@@ -1054,6 +1057,7 @@ MonoBehaviour:
   harveyAnimOC: {fileID: 22100000, guid: e767b7ba4e8bf3e4ca62f76cfd8943e8, type: 2}
   dougAnimOC: {fileID: 22100000, guid: d773d78162d4eec47bf0fe6a301221bd, type: 2}
   cecilAnimOC: {fileID: 22100000, guid: ad8773edacbdbf84aa8fbeb25d0ca83f, type: 2}
+  carlisleAnimOC: {fileID: 22100000, guid: d3f83c15c4d75f047a3cbc0247f28ddc, type: 2}
   selectedCharacter: 0
 --- !u!114 &4030265867585263875
 MonoBehaviour:
