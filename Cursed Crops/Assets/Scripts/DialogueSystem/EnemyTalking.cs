@@ -50,14 +50,17 @@ public class EnemyTalking : MonoBehaviour
     private Transform originalLocal;
     private bool talking = false;
     private bool stopSpawning = false;
-    private bool needToPickUpItem = false;
+    private bool giveMoneyOnce = false;
     private bool placeIsInWorld = false;
     private GameObject drop;
     private GameObject placeble;
     private GameObject childOfSpawner;
 
+    private GameRuleManager grm;
+
     void Awake()
     {
+        grm = GameObject.Find("GameRuleManager").GetComponent<GameRuleManager>();
         sentences = new Queue<string>();
         characters = new Queue<string>();
         DaEvents = new Queue<string>();
@@ -252,7 +255,7 @@ public class EnemyTalking : MonoBehaviour
                     houseArrow.SetActive(false);
                     playerHealthArrow.SetActive(false);
                     childOfSpawner.GetComponent<CapsuleCollider>().enabled = false;
-                    needToPickUpItem = false;
+                    
                     break;
                 case "Try Attacking":
                     if (!dialogueBox.activeSelf)
@@ -296,6 +299,24 @@ public class EnemyTalking : MonoBehaviour
                     spawnerObject.GetComponent<SpawnManager>().enabled = false;
                     childOfSpawner.GetComponent<CapsuleCollider>().enabled = true;
                     waitingSentence = "Hey farmer buddy, I know you like talking to me but you know you gotta start the harvest phase to finish the tutorial right?";
+                    break;
+
+                case "Buy An Upgrade":
+                    if (!dialogueBox.activeSelf)
+                    {
+                        trySomething = true;
+                    }
+                    taskFinish = true;
+                    waitingSentence = "Remember just do the same process to buy a turret on top of the tan ground";
+                    break;
+
+                case "Give Money":
+                    if (!giveMoneyOnce)
+                    {
+                        giveMoneyOnce = true;
+                        grm.addMoney(100);
+                    }
+                    
                     break;
                 case "Drop Items":
                     if (!stopSpawning)
@@ -384,6 +405,17 @@ public class EnemyTalking : MonoBehaviour
                 dialogueBox.SetActive(true);
                 DisplayNextSentence();
 
+            }
+            if(DaEvent == "Buy An Upgrade" && taskFinish)
+            {
+                foreach (GameObject player in players)
+                {
+                    if (player.GetComponent<BuildingSystem>().updgradeBought)
+                    {
+                        trySomething = false;
+                        taskFinish = false;
+                    }
+                }
             }
             if (endOfTutorial)
             {

@@ -33,6 +33,7 @@ public class BuildingSystem : MonoBehaviour
     public GameObject phSprite;
     public SpriteRenderer pHSpriteRenderer;
     public bool buildmodeActive = false;
+    public bool updgradeBought = false;
     public string mode = "Build";
     public float gridSize = 1;
     public float gridOffsetX = 0.5f;
@@ -263,6 +264,7 @@ public class BuildingSystem : MonoBehaviour
                         Debug.Log("shop purchase");
                         psUpgrade.Emit(8);
                         grm.addMoney(-upgradeCost);
+                        updgradeBought = true;
                         // individual upgrades probably should be migrated elsewhere
                         switch (count)
                         {
