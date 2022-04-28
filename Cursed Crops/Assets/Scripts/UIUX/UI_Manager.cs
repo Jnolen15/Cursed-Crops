@@ -15,6 +15,8 @@ public class UI_Manager : MonoBehaviour
     // player UIs, must be dragged/droppped
     public PlayerUImanager p1UImanager;
     public PlayerUImanager p2UImanager;
+    public PlayerUImanager p3UImanager;
+    public PlayerUImanager p4UImanager;
 
     // general UI elements
     public Slider HouseHealthBar;
@@ -102,6 +104,16 @@ public class UI_Manager : MonoBehaviour
         if (PM.players.Count >= 2 && !p2UImanager.gameObject.activeSelf)
         {
             p2UImanager.Initialize(2);
+        }
+
+        if (PM.players.Count >= 3 && !p3UImanager.gameObject.activeSelf)
+        {
+            p3UImanager.Initialize(3);
+        }
+
+        if (PM.players.Count >= 4 && !p4UImanager.gameObject.activeSelf)
+        {
+            p4UImanager.Initialize(4);
         }
     }
 

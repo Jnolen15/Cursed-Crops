@@ -78,6 +78,12 @@ public class PlayerUImanager : MonoBehaviour
 
     private void SetPlayerIcon()
     {
+        // disabling al icons
+        DougIcon.SetActive(false);
+        CecilIcon.SetActive(false);
+        HarveyIcon.SetActive(false);
+        CarlisleIcon.SetActive(false);
+
         switch(PM.players[PlayerNumber - 1].GetComponentInChildren<PlayerAnimOCManager>().selectedCharacter.ToString())
         {
             case "Doug":
