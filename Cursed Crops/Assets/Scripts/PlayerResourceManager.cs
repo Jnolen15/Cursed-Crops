@@ -78,22 +78,27 @@ public class PlayerResourceManager : MonoBehaviour
         if (other.gameObject.tag == "DroppedItem" && crops < maxCrops)
         {
             ItemDrop itemDrop = other.GetComponent<ItemDrop>();
-            var itemDiff = maxCrops - crops;
-            // If pickup contains more than can cary take only some
-            if (itemDrop.value > itemDiff)
+            if (itemDrop.canPickUp)
             {
-                itemDrop.ReduceValue(itemDiff);
-                addCrops(itemDiff);
-            }
-            // Take all
-            else
-            {
-                addCrops(itemDrop.value);
-                itemDrop.GetPickedUp();
-            }
+                var itemDiff = maxCrops - crops;
+                // If pickup contains more than can cary take only some
+                if (itemDrop.value > itemDiff)
+                {
+                    itemDrop.ReduceValue(itemDiff);
+                    addCrops(itemDiff);
+                }
+                // Take all
+                else
+                {
+                    addCrops(itemDrop.value);
+                    itemDrop.GetPickedUp();
+                }
 
-            if (ps != null)
-                ps.Emit(6);
+                if (ps != null)
+                    ps.Emit(6);
+            }
+            else
+                Debug.Log("CANTPICKUPCROPYET");
         }
 
         // if colliding with the farm house, bank items

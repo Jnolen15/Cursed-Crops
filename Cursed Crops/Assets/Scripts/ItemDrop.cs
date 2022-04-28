@@ -6,9 +6,11 @@ public class ItemDrop : MonoBehaviour
 {
     public int value = 1;
     public float destroyTime = 10f;
+    private float unavailableTime = 0.5f;
     public float timeAlive = 0.0f;
 
     public bool hasBeenMerged = false;
+    public bool canPickUp = false;
 
     public SpriteRenderer itemSpriteRenderer;
     public Sprite stage1CropSprite;
@@ -21,8 +23,12 @@ public class ItemDrop : MonoBehaviour
     {
         timeAlive += Time.deltaTime;
 
+        // Can't pick up for the first half second or so
+        if (timeAlive > unavailableTime)
+            canPickUp = true;
+
         // Destroy item if its been alive longer than destroy time
-        if(timeAlive > destroyTime)
+        if (timeAlive > destroyTime)
             Destroy(this.gameObject);
 
         // Change sprite depending on value

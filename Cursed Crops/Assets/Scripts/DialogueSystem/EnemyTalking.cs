@@ -329,6 +329,7 @@ public class EnemyTalking : MonoBehaviour
                         Vector3 position = new Vector3(gameObject.transform.position.x, 1, gameObject.transform.position.z - 2);
                         gameObject.GetComponent<ItemDropper>().DropItem(position);
                         drop = GameObject.FindGameObjectWithTag("DroppedItem");
+                        drop.GetComponent<ItemDrop>().destroyTime = 1000;
                         taskFinish = true;
                         if (drop != null)
                         {
