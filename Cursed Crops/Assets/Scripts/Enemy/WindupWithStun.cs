@@ -145,6 +145,17 @@ public class WindupWithStun : MonoBehaviour
                 }
             }
         }
+        if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) > 6f && !windupStarting)
+        {
+            //StopCoroutine("attack");
+
+
+            sr.color = prev;
+            gameObject.GetComponent<EnemyToPlayer>().enemySpeed = gameObject.GetComponent<EnemyToPlayer>().originalSpeed;
+
+
+
+        }
 
     }
 
@@ -173,17 +184,7 @@ public class WindupWithStun : MonoBehaviour
         }
 
         yield return new WaitForSeconds(1f);
-        if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) > 6f)
-        {
-            //StopCoroutine("attack");
-
-
-            sr.color = prev;
-            gameObject.GetComponent<EnemyToPlayer>().enemySpeed = gameObject.GetComponent<EnemyToPlayer>().originalSpeed;
-
-            
-
-        }
+        
         
         hurtBox.enabled = false;
         //daAttack.enabled = false;
