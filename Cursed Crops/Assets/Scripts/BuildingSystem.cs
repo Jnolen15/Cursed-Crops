@@ -9,17 +9,16 @@ public class BuildingSystem : MonoBehaviour
     [SerializeField] private popUpUISO popupUI;
     [SerializeField] private statShopSO statShopUI;
     private GameObject popUp;
-    private GameObject statShop;
     private PlantingUIManager popUpMan;
     private StatShopUIManager statShopMan;
     private GameRuleManager grm;
+    private UpgradeManager um;
     private PlayerControler pc;
     private BuildChecker bc;
     private SpawnManager sm;
     private Animator animator;
     private ParticleSystem ps;
     private ParticleSystem psDust;
-    private ParticleSystem psUpgrade;
     private bool acceptablePos;
     private int count = 0;
     private float xPos = 1f;
@@ -32,6 +31,7 @@ public class BuildingSystem : MonoBehaviour
     public GameObject placeableHighlight;
     public GameObject phSprite;
     public SpriteRenderer pHSpriteRenderer;
+    public GameObject statShop;
     public bool buildmodeActive = false;
     public bool updgradeBought = false;
     public string mode = "Build";
@@ -39,19 +39,9 @@ public class BuildingSystem : MonoBehaviour
     public float gridOffsetX = 0.5f;
     public float gridOffsetZ = 0.5f;
 
-    public int upgradeCost = 50;
-    public int healthUpgrade = 3;
-    public float damageUpgrade = 0.5f;
-    public float speedUpgrade = 1;
-    public int carryUpgrade = 10;
-    public EnemyPlayerDamage EPD;
     public AudioClip plantingSound;
     public AudioClip buildingSound;
-
     public GameObject DestroyIndicator;
-
-
-
 
     private void Start()
     {
@@ -73,6 +63,8 @@ public class BuildingSystem : MonoBehaviour
         popUpMan = popUp.GetComponent<PlantingUIManager>();
         //popUp.SetActive(false); MOVED TO IN POPUP
         grm = GameObject.Find("GameRuleManager").GetComponent<GameRuleManager>();
+        um = grm.gameObject.GetComponent<UpgradeManager>();
+
         // Set default selected placeable
         if (popupUI.buildables.Length > 0 && popupUI.buildables.Length > 0)
         {
@@ -84,16 +76,12 @@ public class BuildingSystem : MonoBehaviour
         }
 
         psDust = Instantiate(Resources.Load<GameObject>("Effects/DustParticle"), placeableHighlight.transform.position, transform.rotation, transform).GetComponent<ParticleSystem>();
-        psUpgrade = Instantiate(Resources.Load<GameObject>("Effects/UpgradeParticle"), transform.position, transform.rotation, transform).GetComponent<ParticleSystem>();
         psDust.Pause();
-        psUpgrade.Pause();
 
         buildmodeActive = false;
         mode = "Build";
         placeableHighlight.SetActive(false);
         Debug.Log(this.gameObject.name);
-
-        EPD = GetComponent<EnemyPlayerDamage>();
 
         // loading and instantiating Destory Indicator
         DestroyIndicator = Instantiate(Resources.Load<GameObject>("Effects/DestroyIndicator"));
@@ -259,36 +247,25 @@ public class BuildingSystem : MonoBehaviour
             {
                 if (mode == "StatShop")
                 {
-                    if (grm.getMoney() >= upgradeCost)
+                    switch (count)
                     {
-                        Debug.Log("shop purchase");
-                        psUpgrade.Emit(8);
-                        grm.addMoney(-upgradeCost);
-                        updgradeBought = true;
-                        // individual upgrades probably should be migrated elsewhere
-                        switch (count)
-                        {
-                            case 0:
-                                EPD.playerHealth += healthUpgrade;
-                                EPD.reviveHealth += healthUpgrade;
-                                break;
-                            case 1:
-                                pc.damageBoost += damageUpgrade;
-
-                                break;
-                            case 2:
-                                pc.moveSpeed += speedUpgrade;
-                                pc.maxMoveSpeed += speedUpgrade;
-                                pc.rollSpeedMax += speedUpgrade;
-                                break;
-                            case 3:
-                                this.GetComponent<PlayerResourceManager>().maxCrops += carryUpgrade;
-
-                                break;
-                        }
+                        case 0:
+                            um.BuyUpgrade("Health");
+                            break;
+                        case 1:
+                            um.BuyUpgrade("Damage");
+                            break;
+                        case 2:
+                            um.BuyUpgrade("Speed");
+                            break;
+                        case 3:
+                            um.BuyUpgrade("Carry");
+                            break;
                     }
-                }
 
+                    // Used for the tutorial
+                    updgradeBought = true;
+                }
                 if (placeableHighlight != null && acceptablePos)
                 {
                     if (mode == "Build")

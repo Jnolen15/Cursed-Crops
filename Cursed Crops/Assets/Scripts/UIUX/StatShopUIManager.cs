@@ -13,7 +13,6 @@ public class StatShopUIManager : MonoBehaviour
     public TMP_Text rightNum;
     public TMP_Text leftNum;
 
-
     public GameObject Window;
     public TMP_Text title;
     public TMP_Text description;
@@ -30,13 +29,10 @@ public class StatShopUIManager : MonoBehaviour
     public statShopSO SO;
 
     // private text strings
-    private string[] A = new string[4];
-    private string[] B = new string[4];
-    private string[] C = new string[4];
-    private string[] D = new string[4];
-
-
-
+    public string[] A = new string[4];
+    public string[] B = new string[4];
+    public string[] C = new string[4];
+    public string[] D = new string[4];
 
     // Start is called before the first frame update
     void Start()
@@ -96,10 +92,15 @@ public class StatShopUIManager : MonoBehaviour
     // A is rightButton, B is bottom, C is top, and D is left, sort of like a switch controller
     public void setUp(string[] newA, string[] newB, string[] newC, string[] newD)
     {
-        A = newA;
-        B = newB;
-        C = newC;
-        D = newD;
+        // Use CopyTo here so that its not directly refrencing the SO
+        newA.CopyTo(A, 0);
+        newB.CopyTo(B, 0);
+        newC.CopyTo(C, 0);
+        newD.CopyTo(D, 0);
+        //A = newA;
+        //B = newB;
+        //C = newC;
+        //D = newD;
 
 
         rightNum.text = A[3];
@@ -136,6 +137,28 @@ public class StatShopUIManager : MonoBehaviour
         LeftSelect.SetActive(true);
     }
 
+    public void refreshDisplay(char letter)
+    {
+        switch (letter)
+        {
+            case 'A':
+                closeDisplay();
+                display(A[0], A[1], A[2]);
+                break;
+            case 'B':
+                closeDisplay();
+                display(B[0], B[1], B[2]);
+                break;
+            case 'C':
+                closeDisplay();
+                display(C[0], C[1], C[2]);
+                break;
+            case 'D':
+                closeDisplay();
+                display(D[0], D[1], D[2]);
+                break;
+        }
+    }
 
     private void display(string a, string b, string c)
     {
