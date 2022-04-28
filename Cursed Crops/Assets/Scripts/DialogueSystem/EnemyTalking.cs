@@ -285,6 +285,10 @@ public class EnemyTalking : MonoBehaviour
                     {
                         trySomething = true;
                     }
+                    if (grm.getMoney() < 100)
+                    {
+                        grm.addMoney(100);
+                    }
                     taskFinish = true;
                     placeble = GameObject.FindGameObjectWithTag("Turret");
                     waitingSentence = "Remember, you can place a turret by pressing the R / North Button to open the shop menu and look through the selections using Q and E / Left or Right bumpers, once you decide hit the good ol' Left Click/South Button to place it";
