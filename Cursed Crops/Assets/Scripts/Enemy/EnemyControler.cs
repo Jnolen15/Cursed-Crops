@@ -157,7 +157,7 @@ public class EnemyControler : MonoBehaviour
     {
         if (!knockbackResist)
         {
-            Vector3 knockattackPosition = new Vector3(other.transform.position.x, other.transform.position.y, other.transform.position.z);
+            Vector3 knockattackPosition = new Vector3(other.transform.position.x, this.transform.position.y, other.transform.position.z);
             Vector3 knockenemyPosition = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
             this.knocknewPosition = ((knockenemyPosition - knockattackPosition) + (knockenemyPosition - knockattackPosition).normalized) / 2;
             this.knocknewPosition += knockenemyPosition;

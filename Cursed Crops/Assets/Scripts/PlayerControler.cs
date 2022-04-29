@@ -586,13 +586,16 @@ public class PlayerControler : MonoBehaviour
 
         Collider[] cols = Physics.OverlapBox(meleeAttack.transform.position, meleeAttack.transform.localScale / 2,
                                                     meleeAttack.transform.rotation, LayerMask.GetMask("Enemies"));
+
         // If hit
-        if (cols.Length > 0)
+        /*if (cols.Length > 0)
         {
             attackBufferTimer = 0;
             attackChain++;
         }
-        else attackChain = 0;
+        else attackChain = 0;*/
+        attackBufferTimer = 0;
+        attackChain++;
         DamageEnemies(cols);
         StartCoroutine(cooldown(() => { meleeAttack.SetActive(false); }, 0.1f));
 
@@ -644,10 +647,9 @@ public class PlayerControler : MonoBehaviour
                 {
                     if (attackChain == 1)
                     {
-                        if(newAttackSystem) enemyControler.Knockback(transform);
+                        if (newAttackSystem) enemyControler.Knockback(transform);
                         int damageAmmount = (int)(3 * damageBoost);
                         enemyControler.takeDamage(damageAmmount, "Melee");
-                        //enemyControler.Stun();
                         overAllPlayerDamage += damageAmmount;
                     }
                     else if (attackChain == 2)
@@ -655,7 +657,6 @@ public class PlayerControler : MonoBehaviour
                         if (newAttackSystem) enemyControler.Knockback(transform);
                         int damageAmmount = (int)(5 * damageBoost);
                         enemyControler.takeDamage(damageAmmount, "Melee");
-                        //enemyControler.Stun();
                         overAllPlayerDamage += damageAmmount;
                     }
                     else if (attackChain == 3)
@@ -663,7 +664,6 @@ public class PlayerControler : MonoBehaviour
                         enemyControler.Knockback(transform);
                         int damageAmmount = (int)(8 * damageBoost);
                         enemyControler.takeDamage(damageAmmount, "Melee");
-                        //enemyControler.Stun();
                         overAllPlayerDamage += damageAmmount;
                     }
                 }

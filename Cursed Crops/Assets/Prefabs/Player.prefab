@@ -818,7 +818,7 @@ MonoBehaviour:
   count: 0
   newAttackSystem: 1
   lungeAttacking: 1
-  twoAttack: 1
+  twoAttack: 0
   ready: 0
   flipped: 0
   useControler: 0
@@ -857,18 +857,13 @@ MonoBehaviour:
   placeableHighlight: {fileID: 3579062659483603254}
   phSprite: {fileID: 130268335308826650}
   pHSpriteRenderer: {fileID: 3223592091748275944}
+  statShop: {fileID: 0}
   buildmodeActive: 1
   updgradeBought: 0
   mode: Plant
   gridSize: 1
   gridOffsetX: 0.5
   gridOffsetZ: 0.5
-  upgradeCost: 50
-  healthUpgrade: 3
-  damageUpgrade: 0.5
-  speedUpgrade: 1
-  carryUpgrade: 10
-  EPD: {fileID: 0}
   plantingSound: {fileID: 8300000, guid: d1cb5f29261baa94fb5ec9b0bb3ded97, type: 3}
   buildingSound: {fileID: 8300000, guid: 174cdb7817abc1046b3f983a7baddc5a, type: 3}
   DestroyIndicator: {fileID: 0}
