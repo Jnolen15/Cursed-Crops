@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Playables;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class DialogueTrigger : MonoBehaviour
 {
@@ -165,5 +166,14 @@ public class DialogueTrigger : MonoBehaviour
         
         director.playableGraph.GetRootPlayable(0).SetSpeed(1);
         
+    }
+
+    public void CutsceneOver(string level)
+    {
+        if(director.state != PlayState.Playing)
+        {
+            Debug.Log("we finish cutscene");
+            SceneManager.LoadScene(level);
+        }
     }
 }

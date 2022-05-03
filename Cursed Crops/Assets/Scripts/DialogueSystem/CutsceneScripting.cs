@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class CutsceneScripting : MonoBehaviour
 {
     public DialogueTrigger dt;
+    public string goToLevel;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +28,7 @@ public class CutsceneScripting : MonoBehaviour
                 gameObject.GetComponent<DialogueTrigger>().Resume();
             }
         }*/
+        dt.CutsceneOver(goToLevel);
     }
 
     public void Progress_performed(InputAction.CallbackContext context)
