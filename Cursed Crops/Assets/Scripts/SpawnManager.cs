@@ -63,6 +63,7 @@ public class SpawnManager : MonoBehaviour
     {
         // Get reffrences
         grm = GameObject.Find("GameRuleManager").GetComponent<GameRuleManager>();
+        daMusic = GameObject.Find("Music").GetComponent<AudioSource>();
 
         // calculate phase duration
         phaseDuration = waveDuration * wavesPerPhase + pauseDuration * wavesPerPhase;
