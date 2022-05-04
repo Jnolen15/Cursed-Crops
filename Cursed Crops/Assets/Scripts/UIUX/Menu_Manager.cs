@@ -91,10 +91,19 @@ public class Menu_Manager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    public void restartLevel()
+    public void PreviousScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
+
+    public void loadLevel(string level)
+    {
+        SceneManager.LoadScene(level);
+    }
+
+
+    // Options Menu Functions
+
 
     public void SetVolume(float decibles)
     {

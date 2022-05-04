@@ -282,15 +282,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1044504979}
-        m_TargetAssemblyTypeName: Menu_Manager, Assembly-CSharp
-        m_MethodName: ExitToMenu
-        m_Mode: 1
+        m_TargetAssemblyTypeName: GameOverMenu, Assembly-CSharp
+        m_MethodName: loadLevel
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Menu Scene
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &470719865
@@ -622,14 +622,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1044504978}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36b6d942c1f06d84595c98799fb1aaa2, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e52467f16d49b846b91d4838e13f2d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu: {fileID: 0}
-  options: {fileID: 0}
-  credits: {fileID: 0}
-  primaryButton: {fileID: 0}
-  audioMixer: {fileID: 0}
 --- !u!114 &1044504980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -879,15 +874,15 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1044504979}
-        m_TargetAssemblyTypeName: Menu_Manager, Assembly-CSharp
-        m_MethodName: restartLevel
-        m_Mode: 1
+        m_TargetAssemblyTypeName: GameOverMenu, Assembly-CSharp
+        m_MethodName: loadLevel
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Level Select
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1141891287
