@@ -48,7 +48,7 @@ public class UpgradeManager : MonoBehaviour
         psUpgrade = Resources.Load<GameObject>("Effects/UpgradeParticle");
     }
 
-    public void BuyUpgrade(string upgrade)
+    public void BuyUpgrade(string upgrade, Transform pos)
     {
         switch (upgrade)
         {
@@ -56,40 +56,64 @@ public class UpgradeManager : MonoBehaviour
                 if (grm.getMoney() >= healthUpgradeCost)
                 {
                     grm.addMoney(-healthUpgradeCost);
+                    string strNum = "-" + healthUpgradeCost.ToString();
+                    grm.SpawnText(pos.position, Color.red, strNum);
                     healthUpgradeTier++;
                     healthUpgradeCost += upgradeCostIncremet;
                     ApplyUpgrade("Health");
                     UpdateShopUI("Health");
+                }
+                else
+                {
+                    grm.SpawnText(pos.position, Color.red, "Not Enough Funds");
                 }
                 break;
             case "Damage":
                 if (grm.getMoney() >= damageUpgradeCost)
                 {
                     grm.addMoney(-damageUpgradeCost);
+                    string strNum = "-" + damageUpgradeCost.ToString();
+                    grm.SpawnText(pos.position, Color.red, strNum);
                     damageUpgradeTier++;
                     damageUpgradeCost += upgradeCostIncremet;
                     ApplyUpgrade("Damage");
                     UpdateShopUI("Damage");
+                }
+                else
+                {
+                    grm.SpawnText(pos.position, Color.red, "Not Enough Funds");
                 }
                 break;
             case "Speed":
                 if (grm.getMoney() >= speedUpgradeCost)
                 {
                     grm.addMoney(-speedUpgradeCost);
+                    string strNum = "-" + speedUpgradeCost.ToString();
+                    grm.SpawnText(pos.position, Color.red, strNum);
                     speedUpgradeTier++;
                     speedUpgradeCost += upgradeCostIncremet;
                     ApplyUpgrade("Speed");
                     UpdateShopUI("Speed");
+                }
+                else
+                {
+                    grm.SpawnText(pos.position, Color.red, "Not Enough Funds");
                 }
                 break;
             case "Carry":
                 if (grm.getMoney() >= carryUpgradeCost)
                 {
                     grm.addMoney(-carryUpgradeCost);
+                    string strNum = "-" + carryUpgradeCost.ToString();
+                    grm.SpawnText(pos.position, Color.red, strNum);
                     carryUpgradeTier++;
                     carryUpgradeCost += upgradeCostIncremet;
                     ApplyUpgrade("Carry");
                     UpdateShopUI("Carry");
+                }
+                else
+                {
+                    grm.SpawnText(pos.position, Color.red, "Not Enough Funds");
                 }
                 break;
         }

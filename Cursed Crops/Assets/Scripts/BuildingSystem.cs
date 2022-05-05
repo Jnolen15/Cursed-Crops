@@ -250,16 +250,16 @@ public class BuildingSystem : MonoBehaviour
                     switch (count)
                     {
                         case 0:
-                            um.BuyUpgrade("Health");
+                            um.BuyUpgrade("Health", this.transform);
                             break;
                         case 1:
-                            um.BuyUpgrade("Damage");
+                            um.BuyUpgrade("Damage", this.transform);
                             break;
                         case 2:
-                            um.BuyUpgrade("Speed");
+                            um.BuyUpgrade("Speed", this.transform);
                             break;
                         case 3:
-                            um.BuyUpgrade("Carry");
+                            um.BuyUpgrade("Carry", this.transform);
                             break;
                     }
 
@@ -276,13 +276,14 @@ public class BuildingSystem : MonoBehaviour
                         {
                             psDust.Emit(6);
                             grm.addMoney(-cost);
-                            grm.SpawnText(placeableHighlight.transform.position, Color.red, -cost);
+                            string strNum = "-" + cost.ToString();
+                            grm.SpawnText(placeableHighlight.transform.position, Color.red, strNum);
                             gameObject.GetComponent<AudioPlayer>().PlaySound(buildingSound);
                             animator.SetTrigger("Plant");
                             Instantiate(activePlaceable.prefab, placeableHighlight.transform.position, placeableHighlight.transform.rotation);
                         } else
                         {
-                            Debug.Log("Nice try broke ass");
+                            grm.SpawnText(this.transform.position, Color.red, "Not Enough Funds");
                         }
                     }
                     else if (mode == "Plant" && sm.state == SpawnManager.State.Break)
@@ -320,7 +321,8 @@ public class BuildingSystem : MonoBehaviour
                             else
                                 cost = bc.intersectedBuildable.GetComponent<Trap>().cost;
                             grm.addMoney(cost);
-                            grm.SpawnText(placeableHighlight.transform.position, Color.green, cost);
+                            string strNum = "+" + cost.ToString();
+                            grm.SpawnText(placeableHighlight.transform.position, Color.green, strNum);
                             gameObject.GetComponent<AudioPlayer>().PlaySound(buildingSound);
                             animator.SetTrigger("Plant");
                             Destroy(bc.intersectedBuildable);
