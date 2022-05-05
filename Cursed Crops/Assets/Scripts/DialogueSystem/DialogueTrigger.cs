@@ -90,13 +90,13 @@ public class DialogueTrigger : MonoBehaviour
         Debug.Log(stopDialogue);
 
         daName.GetComponent<TextMeshProUGUI>().text = characters.Dequeue();
-        
+        image.GetComponent<Image>().enabled = true;
         //Deals with the images of the dialogue
         switch (daName.GetComponent<TextMeshProUGUI>().text)
         {
-
+            
             case "Narrator":
-                image.GetComponent<Image>().sprite = Narrator;
+                image.GetComponent<Image>().enabled = false;
                 break;
             case "Cecil":
                 image.GetComponent<Image>().sprite = Cecil;
