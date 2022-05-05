@@ -15,6 +15,11 @@ public class UpgradeManager : MonoBehaviour
     private float speedUpgrade = 1;
     private int carryUpgrade = 10;
 
+    public float maxHealthUpgrade = 4;
+    public float maxDamageUpgrade = 4;
+    public float maxSpeedUpgrade = 4;
+    public float maxCarryUpgrade = 4;
+
     // ======== Public variables ========
     public int healthUpgradeCost = 100;
     public int damageUpgradeCost = 100;
@@ -53,7 +58,7 @@ public class UpgradeManager : MonoBehaviour
         switch (upgrade)
         {
             case "Health":
-                if (grm.getMoney() >= healthUpgradeCost)
+                if (grm.getMoney() >= healthUpgradeCost && healthUpgradeTier < maxHealthUpgrade)
                 {
                     grm.addMoney(-healthUpgradeCost);
                     string strNum = "-" + healthUpgradeCost.ToString();
@@ -63,13 +68,13 @@ public class UpgradeManager : MonoBehaviour
                     ApplyUpgrade("Health");
                     UpdateShopUI("Health");
                 }
-                else
-                {
+                else if (healthUpgradeTier < maxHealthUpgrade)
                     grm.SpawnText(pos.position, Color.red, "Not Enough Funds");
-                }
+                else
+                    grm.SpawnText(pos.position, Color.red, "Upgrade At Max");
                 break;
             case "Damage":
-                if (grm.getMoney() >= damageUpgradeCost)
+                if (grm.getMoney() >= damageUpgradeCost && damageUpgradeTier < maxDamageUpgrade)
                 {
                     grm.addMoney(-damageUpgradeCost);
                     string strNum = "-" + damageUpgradeCost.ToString();
@@ -79,13 +84,13 @@ public class UpgradeManager : MonoBehaviour
                     ApplyUpgrade("Damage");
                     UpdateShopUI("Damage");
                 }
-                else
-                {
+                else if (damageUpgradeTier < maxDamageUpgrade)
                     grm.SpawnText(pos.position, Color.red, "Not Enough Funds");
-                }
+                else
+                    grm.SpawnText(pos.position, Color.red, "Upgrade At Max");
                 break;
             case "Speed":
-                if (grm.getMoney() >= speedUpgradeCost)
+                if (grm.getMoney() >= speedUpgradeCost && speedUpgradeTier < maxSpeedUpgrade)
                 {
                     grm.addMoney(-speedUpgradeCost);
                     string strNum = "-" + speedUpgradeCost.ToString();
@@ -95,13 +100,13 @@ public class UpgradeManager : MonoBehaviour
                     ApplyUpgrade("Speed");
                     UpdateShopUI("Speed");
                 }
-                else
-                {
+                else if (speedUpgradeTier < maxSpeedUpgrade)
                     grm.SpawnText(pos.position, Color.red, "Not Enough Funds");
-                }
+                else
+                    grm.SpawnText(pos.position, Color.red, "Upgrade At Max");
                 break;
             case "Carry":
-                if (grm.getMoney() >= carryUpgradeCost)
+                if (grm.getMoney() >= carryUpgradeCost && carryUpgradeTier < maxCarryUpgrade)
                 {
                     grm.addMoney(-carryUpgradeCost);
                     string strNum = "-" + carryUpgradeCost.ToString();
@@ -111,10 +116,10 @@ public class UpgradeManager : MonoBehaviour
                     ApplyUpgrade("Carry");
                     UpdateShopUI("Carry");
                 }
-                else
-                {
+                else if (carryUpgradeTier < maxCarryUpgrade)
                     grm.SpawnText(pos.position, Color.red, "Not Enough Funds");
-                }
+                else
+                    grm.SpawnText(pos.position, Color.red, "Upgrade At Max");
                 break;
         }
     }
@@ -162,22 +167,34 @@ public class UpgradeManager : MonoBehaviour
             {
                 case "Health":
                     shopUI.A[0] = "Health " + healthUpgradeTier;
-                    shopUI.A[2] = "Cost: " + healthUpgradeCost;
+                    if(healthUpgradeTier >= maxHealthUpgrade)
+                        shopUI.A[2] = "Upgrade at Maximum";
+                    else
+                        shopUI.A[2] = "Cost: " + healthUpgradeCost;
                     shopUI.refreshDisplay('A');
                     break;
                 case "Damage":
                     shopUI.B[0] = "Damage " + damageUpgradeTier;
-                    shopUI.B[2] = "Cost: " + damageUpgradeCost;
+                    if (damageUpgradeTier >= maxDamageUpgrade)
+                        shopUI.B[2] = "Upgrade at Maximum";
+                    else
+                        shopUI.B[2] = "Cost: " + damageUpgradeCost;
                     shopUI.refreshDisplay('B');
                     break;
                 case "Speed":
                     shopUI.C[0] = "Speed " + speedUpgradeTier;
-                    shopUI.C[2] = "Cost: " + speedUpgradeCost;
+                    if (speedUpgradeTier >= maxSpeedUpgrade)
+                        shopUI.C[2] = "Upgrade at Maximum";
+                    else
+                        shopUI.C[2] = "Cost: " + speedUpgradeCost;
                     shopUI.refreshDisplay('C');
                     break;
                 case "Carry":
                     shopUI.D[0] = "Carry Capacity " + carryUpgradeTier;
-                    shopUI.D[2] = "Cost: " + carryUpgradeCost;
+                    if (carryUpgradeTier >= maxCarryUpgrade)
+                        shopUI.D[2] = "Upgrade at Maximum";
+                    else
+                        shopUI.D[2] = "Cost: " + carryUpgradeCost;
                     shopUI.refreshDisplay('D');
                     break;
             }

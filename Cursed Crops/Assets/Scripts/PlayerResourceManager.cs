@@ -76,8 +76,11 @@ public class PlayerResourceManager : MonoBehaviour
             BankOneItem();
             Destroy(item);
         }
-        string strNum = "+" + total.ToString();
-        grm.SpawnText(this.transform.position, Color.green, strNum);
+        if(total > 0)
+        {
+            string strNum = "+" + total.ToString();
+            grm.SpawnText(this.transform.position, Color.green, strNum);
+        }
         total = 0;
         isBanking = false;
     }
