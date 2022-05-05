@@ -97,7 +97,8 @@ public class GameRuleManager : MonoBehaviour
             if (falloff >= activeCrop.bountyWorth) falloff = activeCrop.bountyWorth - 2;
             addPoints(activeCrop.bountyWorth - falloff);
             crop.GetComponent<Spawner>().bountyWorth = activeCrop.bountyWorth - falloff;
-            SpawnText(crop.transform.position, Color.green, activeCrop.bountyWorth - falloff);
+            string strNum = "+" + (activeCrop.bountyWorth - falloff).ToString();
+            SpawnText(crop.transform.position, Color.green, strNum);
         }
         // If fallof isn't reached
         else
@@ -105,14 +106,16 @@ public class GameRuleManager : MonoBehaviour
             //Debug.Log("Full bounty");
             addPoints(activeCrop.bountyWorth);
             crop.GetComponent<Spawner>().bountyWorth = activeCrop.bountyWorth;
-            SpawnText(crop.transform.position, Color.green, activeCrop.bountyWorth);
+            string strNum = "+" + activeCrop.bountyWorth.ToString();
+            SpawnText(crop.transform.position, Color.green, strNum);
         }
     }
 
     public void subtractBountyPoints(GameObject crop)
     {
         addPoints(-crop.GetComponent<Spawner>().bountyWorth);
-        SpawnText(crop.transform.position, Color.red, -crop.GetComponent<Spawner>().bountyWorth);
+        string strNum = "-" + crop.GetComponent<Spawner>().bountyWorth.ToString();
+        SpawnText(crop.transform.position, Color.red, strNum);
 
         switch (crop.GetComponent<Spawner>().plantName)
         {
@@ -152,9 +155,9 @@ public class GameRuleManager : MonoBehaviour
         }
     }
 
-    public void SpawnText(Vector3 pos, Color color, int num)
+    public void SpawnText(Vector3 pos, Color color, string text)
     {
         var tPopUp = Instantiate(textPopUp, pos, textPopUp.transform.rotation).GetComponent<TextPopup>();
-        tPopUp.Setup(num, color);
+        tPopUp.Setup(text, color);
     }
 }

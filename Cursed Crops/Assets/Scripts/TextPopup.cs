@@ -20,12 +20,9 @@ public class TextPopup : MonoBehaviour
         textMesh = this.GetComponent<TextMeshPro>();
     }
 
-    public void Setup(int number, Color color)
+    public void Setup(string text, Color color)
     {
-        if(number > 0)
-            textMesh.SetText("+" + number.ToString());
-        else
-            textMesh.SetText(number.ToString());
+        textMesh.SetText(text);
         textMesh.color = textColor = color;
         disappearTimer = DisappearMax;
     }

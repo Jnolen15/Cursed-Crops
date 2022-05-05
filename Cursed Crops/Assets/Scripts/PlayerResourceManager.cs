@@ -7,12 +7,16 @@ public class PlayerResourceManager : MonoBehaviour
     public int cropsValue = 5;
     public int maxCrops = 10;
     private int crops = 0;
+    private int total = 0;
     private GameRuleManager grm;
 
     public ParticleSystem ps;
     private GameObject pickupPS;
     private GameObject itemSprite;
     private bool isBanking = false;
+
+    private float inventoryWarningTimerMax = 10;
+    private float inventoryWarningTimer = 0;
 
     public void setCrops(int newAmount) { crops = newAmount; }
     public int getCrops() { return crops; }
@@ -28,18 +32,26 @@ public class PlayerResourceManager : MonoBehaviour
         ps.Pause();
     }
 
+    private void Update()
+    {
+        if (inventoryWarningTimer < inventoryWarningTimerMax) inventoryWarningTimer += Time.deltaTime;
+    }
+
     // Banks all players items
     public void BankItems()
     {
         grm.addMoney(crops * cropsValue);
         setCrops(0);
+        string strNum = "+" + cropsValue.ToString();
+        grm.SpawnText(this.transform.position, Color.green, strNum);
     }
 
     // Banks one item
     public void BankOneItem()
     {
-        grm.addMoney(1 * cropsValue);
+        grm.addMoney(cropsValue);
         addCrops(-1);
+        total += cropsValue;
     }
 
     IEnumerator MoveItems(int numCrops, Transform objective)
@@ -64,6 +76,9 @@ public class PlayerResourceManager : MonoBehaviour
             BankOneItem();
             Destroy(item);
         }
+        string strNum = "+" + total.ToString();
+        grm.SpawnText(this.transform.position, Color.green, strNum);
+        total = 0;
         isBanking = false;
     }
 
@@ -99,6 +114,13 @@ public class PlayerResourceManager : MonoBehaviour
             }
             else
                 Debug.Log("CANTPICKUPCROPYET");
+        } else if(other.gameObject.tag == "DroppedItem" && crops >= maxCrops)
+        {
+            if (inventoryWarningTimer >= inventoryWarningTimerMax)
+            {
+                grm.SpawnText(this.transform.position, Color.red, "Inventory Full");
+                inventoryWarningTimer = 0;
+            }
         }
 
         // if colliding with the farm house, bank items

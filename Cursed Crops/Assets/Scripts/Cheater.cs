@@ -40,5 +40,8 @@ public class Cheater : MonoBehaviour
 
         if (Keyboard.current[Key.V].wasPressedThisFrame)
             sm.elapsedTime += 30;
+
+        if (Keyboard.current[Key.B].wasPressedThisFrame)
+            prm.addCrops(10);
     }
 }
