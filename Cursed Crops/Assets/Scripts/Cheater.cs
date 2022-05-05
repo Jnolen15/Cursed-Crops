@@ -11,12 +11,14 @@ public class Cheater : MonoBehaviour
     PlayerControler pc;
     EnemyPlayerDamage epd;
     SpawnManager sm;
+    EnemyDamageObjective edo;
 
     void Start()
     {
         pm = GameObject.Find("Player Manager").GetComponent<PlayerManager>();
         grm = GameObject.Find("GameRuleManager").GetComponent<GameRuleManager>();
         sm = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        edo = GameObject.Find("Objective").GetComponent<EnemyDamageObjective>();
     }
 
     void Update()
@@ -43,5 +45,8 @@ public class Cheater : MonoBehaviour
 
         if (Keyboard.current[Key.B].wasPressedThisFrame)
             prm.addCrops(10);
+
+        if (Keyboard.current[Key.L].wasPressedThisFrame)
+            edo.houseHealth -= 50;
     }
 }

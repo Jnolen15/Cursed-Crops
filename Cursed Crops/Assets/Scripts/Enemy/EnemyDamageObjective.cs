@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class EnemyDamageObjective : MonoBehaviour
 {
@@ -9,19 +10,27 @@ public class EnemyDamageObjective : MonoBehaviour
     public GameObject mainObjective;
     public int houseHealth = 500;
     public int startingHouseHealth = 500;
+
+    public GameObject uiCavas;
     public GameObject damageNotif;
+    public GameObject healthNotif;
 
     private float iframesTime = 0.2f;
     private float damageNotifCooldown = 6f;
     private float damageNotifTimer = 6f;
     private bool showingNotif = false;
     private bool isItHit = false;
+    private bool shownHalfWarning = false;
+    private bool shownQuarterWarning = false;
 
     void Start()
     {
         houseHealth = startingHouseHealth;
 
-        damageNotif = this.transform.GetChild(0).gameObject;
+        uiCavas = GameObject.Find("UI Canvas");
+        damageNotif = uiCavas.transform.Find("UI Overlay/General UI/AttackWarning").gameObject;
+        healthNotif = uiCavas.transform.Find("UI Overlay/General UI/HealthWarning").gameObject;
+        healthNotif.SetActive(false);
     }
 
     void Update()
@@ -50,8 +59,36 @@ public class EnemyDamageObjective : MonoBehaviour
             // Close notification
             damageNotif.SetActive(false);
         }
+
+        // Alert players when house health is at half or quarter
+        if (houseHealth <= startingHouseHealth/2 && !shownHalfWarning)
+        {
+            shownHalfWarning = true;
+            StartCoroutine(ShowHalfWarning());
+        }
+
+        if (houseHealth <= startingHouseHealth / 4 && !shownQuarterWarning)
+        {
+            shownQuarterWarning = true;
+            healthNotif.GetComponent<TextMeshProUGUI>().SetText("Barn at One Quarter Health");
+            StartCoroutine(ShowQuarterWarning());
+        }
     }
-    
+
+    public IEnumerator ShowHalfWarning()
+    {
+        healthNotif.SetActive(true);
+        yield return new WaitForSeconds(4f);
+        healthNotif.SetActive(false);
+    }
+
+    public IEnumerator ShowQuarterWarning()
+    {
+        healthNotif.SetActive(true);
+        yield return new WaitForSeconds(4f);
+        healthNotif.SetActive(false);
+    }
+
     //Don't want to erase this code yet 
     /*private void OnTriggerEnter(Collider other)
     {
