@@ -254,7 +254,7 @@ public class EnemyTalking : MonoBehaviour
                 case "No Arrow":
                     houseArrow.SetActive(false);
                     playerHealthArrow.SetActive(false);
-                    childOfSpawner.GetComponent<CapsuleCollider>().enabled = false;
+                    childOfSpawner.GetComponent<SphereCollider>().enabled = false;
                     
                     break;
                 case "Try Attacking":
@@ -301,7 +301,7 @@ public class EnemyTalking : MonoBehaviour
                     }
                     taskFinish = true;
                     spawnerObject.GetComponent<SpawnManager>().enabled = false;
-                    childOfSpawner.GetComponent<CapsuleCollider>().enabled = true;
+                    childOfSpawner.GetComponent<SphereCollider>().enabled = true;
                     waitingSentence = "Hey farmer buddy, I know you like talking to me but you know you gotta start the harvest phase to finish the tutorial right?";
                     break;
 
