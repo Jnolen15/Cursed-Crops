@@ -22,6 +22,7 @@ public class SpawnManager : MonoBehaviour
     public GameObject placementChecker;     // A prefab used to check if a location is suitable for a crop spawn
     public GameObject meleeEnemy;           // The basic melee enemy to spawn
     public GameObject rangeEnemy;           // The basic range enemy to spawn
+    public GameObject spawnAnimator;        // Used to make the enemy look like they are rising from the ground
 
     public float xbounds = 18f;
     public float ybounds = 18f;
@@ -259,8 +260,10 @@ public class SpawnManager : MonoBehaviour
                         float rand = Random.Range(1, 10);
                         if (rand < 7) selectedEnemy = meleeEnemy;
                         else selectedEnemy = rangeEnemy;
-                        Instantiate(selectedEnemy, pos, transform.rotation);
-                        Instantiate(Resources.Load<GameObject>("Effects/EnemySpawnParticle"), pos, transform.rotation).GetComponent<ParticleSystem>();
+                        GameObject sa = Instantiate(spawnAnimator, pos, transform.rotation);
+                        sa.GetComponent<SpawnAnimator>().AnimateSpawn(selectedEnemy, pos);
+                        //Instantiate(selectedEnemy, pos, transform.rotation);
+                        //Instantiate(Resources.Load<GameObject>("Effects/EnemySpawnParticle"), pos, transform.rotation).GetComponent<ParticleSystem>();
                     }
                     else
                     {
