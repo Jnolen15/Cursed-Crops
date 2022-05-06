@@ -116,6 +116,9 @@ public class DialogueTrigger : MonoBehaviour
             case "Cultist":
                 image.GetComponent<Image>().sprite = Cultist;
                 break;
+            case "The Note":
+                image.GetComponent<Image>().enabled = false;
+                break;
 
         }
 
