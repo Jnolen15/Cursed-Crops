@@ -5,7 +5,7 @@ using UnityEngine;
 public class GrabbageAnimator : MonoBehaviour
 {
     // ================= Public variables =================
-    public bool spawning = true;
+    public bool spawning = false;
 
     // ================= Private variables =================
     private Animator animator;

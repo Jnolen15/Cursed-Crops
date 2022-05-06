@@ -11,6 +11,7 @@ public class Spawner : MonoBehaviour
     [Header("Plant Type: Basic, Special")]
     public string plantType;
     public GameObject enemyPrefab;
+    public GameObject spawnAnimator;
     public float numToSpawn = 1; // How many enemies should be made each time this spawner spawns
     [Header("Potency: Minimum time between spawns")]
     public float potency = 10f;
@@ -68,7 +69,9 @@ public class Spawner : MonoBehaviour
         hasSpawned = true;
         Vector3 newPos = new Vector3(Random.Range(-spawnRadius, spawnRadius), 0f, Random.Range(-spawnRadius, spawnRadius));
         newPos = newPos + transform.position;
-        Instantiate(enemyPrefab, newPos, transform.rotation);
+        GameObject sa = Instantiate(spawnAnimator, newPos, transform.rotation);
+        sa.GetComponent<SpawnAnimator>().AnimateSpawn(enemyPrefab, newPos);
+        //Instantiate(enemyPrefab, newPos, transform.rotation);
 
         // OLD SPAWN METHOD: % ammount to spawn that gets higher untill it sapwns. with a 100% chance before end of wave
         /*float rand = Random.Range(1, 10);

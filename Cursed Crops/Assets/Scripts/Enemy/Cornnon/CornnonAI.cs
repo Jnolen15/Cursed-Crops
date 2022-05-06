@@ -15,7 +15,7 @@ public class CornnonAI : MonoBehaviour
     public Transform[] listOfPlayers;
     public bool aPlayerIsStun = true;
     public GameObject bullet;
-    public bool spawning = true;
+    public bool spawning = false;
     public bool shooting = false;
     public AudioClip spawnSound;
 
@@ -85,11 +85,7 @@ public class CornnonAI : MonoBehaviour
             //Destroy(gameObject);
         }
 
-        if (spawning)
-        {
-            enemySpeed = 0;
-        } 
-        else if (Vector3.Distance(closestPlayer.position, transform.position) < rangeDistance)
+        if (Vector3.Distance(closestPlayer.position, transform.position) < rangeDistance)
         {
             enemySpeed = 0;
             
