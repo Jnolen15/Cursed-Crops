@@ -98,6 +98,9 @@ public class DialogueTrigger : MonoBehaviour
             case "Narrator":
                 image.GetComponent<Image>().enabled = false;
                 break;
+            case "???":
+                image.GetComponent<Image>().enabled = false;
+                break;
             case "Cecil":
                 image.GetComponent<Image>().sprite = Cecil;
                 break;

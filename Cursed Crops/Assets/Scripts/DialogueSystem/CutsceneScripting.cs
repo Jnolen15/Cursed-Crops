@@ -36,12 +36,15 @@ public class CutsceneScripting : MonoBehaviour
         //Debug.Log(context);
         if (context.performed)
         {
+            
             if (gameObject.GetComponent<DialogueTrigger>().dialogueHappening)
             {
                 if (dt.textOver)
                 {
                     if (!gameObject.GetComponent<DialogueTrigger>().stopDialogue)
                     {
+           
+
                         gameObject.GetComponent<DialogueTrigger>().DisplayNextSentence();
                     }
                     else
