@@ -13,6 +13,7 @@ public class SpawnMediBerries : MonoBehaviour
     void Start()
     {
         mainTarget = GameObject.FindGameObjectWithTag("MainObjective").GetComponent<Transform>();
+        /*
         for (int i = 0; i < 2; i++)
         {
             Vector3 newPos = new Vector3(Random.Range(-5, 5), 0f, Random.Range(-5, 5));
@@ -21,6 +22,9 @@ public class SpawnMediBerries : MonoBehaviour
             child.transform.parent = gameObject.transform;
             mediberries.Add(child);
         }
+        */
+        mediberries.Add(this.gameObject.transform.GetChild(0).gameObject);
+        mediberries.Add(this.gameObject.transform.GetChild(1).gameObject);
         //Debug.Log(mediberries.Count);
     }
 
