@@ -50,7 +50,7 @@ public class SpawnManager : MonoBehaviour
     private GameObject gridChild;
     private GameRuleManager grm;
     public List<GameObject> spawners = new List<GameObject>();  // List of active enemy spawners
-    private Dictionary<Vector3, string> spawnerGridPositions = new Dictionary<Vector3, string>(); // Dictionary of grid positions on plantable tiles
+    public Dictionary<Vector3, string> spawnerGridPositions = new Dictionary<Vector3, string>(); // Dictionary of grid positions on plantable tiles
     private Vector3[] positions;    // array version of Dictionary keys, used to get a random position in the dictionary
     public enum State
     {
