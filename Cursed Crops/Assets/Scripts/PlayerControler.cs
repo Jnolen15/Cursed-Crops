@@ -68,7 +68,6 @@ public class PlayerControler : MonoBehaviour
     private CapsuleCollider cc;
     private SpriteRenderer playerSprite;
     private Animator animator;
-    private GameObject meleeAttack;
     private AmmoManager am;
     private Coroutine ap;               // Used to store and stop attack Coroutine
     private Pause_Manager pauseMenu;     // reference to pause menu
@@ -79,8 +78,9 @@ public class PlayerControler : MonoBehaviour
     private Vector3 rollDir;
     private Vector3 direction;
     private Vector3 aimDir;             // Used to Store the direction the player will shoot
-    
 
+
+    public GameObject meleeAttack;
     public PlayerInput input;
     public GameObject bullet;
     public GameObject ammoManager;
@@ -130,7 +130,7 @@ public class PlayerControler : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         cc = GetComponent<CapsuleCollider>();
         maxMoveSpeed = moveSpeed;
-        meleeAttack = this.transform.GetChild(0).gameObject;
+        //meleeAttack = this.transform.GetChild(0).gameObject;
         meleeAttack.SetActive(false);
 
         // Player Sprite
@@ -210,13 +210,12 @@ public class PlayerControler : MonoBehaviour
             am.curBullets = curBullets;
         }
 
-        // Move into the SpriteLeaner script! Placeholder for now
-        //playerSprite.sortingOrder = -(int)this.transform.position.z;
         //if (forDialogue)
         //{
-            //checkOnce = true;
-            forDialogue = false;
+        //checkOnce = true;
+        forDialogue = false;
         //}
+
         UpdateAimIndicator();
     }
 
@@ -319,15 +318,11 @@ public class PlayerControler : MonoBehaviour
             {
                 if (direction.x > 0 && flipped)
                 {
-                    flipped = false;
-                    playerSprite.flipX = false;
-                    meleeAttack.transform.localPosition = new Vector3(-(meleeAttack.transform.localPosition.x), 0f, 0f);
+                    Flip(false);
                 }
                 else if (direction.x < 0 && !flipped)
                 {
-                    flipped = true;
-                    playerSprite.flipX = true;
-                    meleeAttack.transform.localPosition = new Vector3(-(meleeAttack.transform.localPosition.x), 0f, 0f);
+                    Flip(true);
                 }
             } else
             {
@@ -346,15 +341,11 @@ public class PlayerControler : MonoBehaviour
         {
             if (direction.x < 0 && !flipped)
             {
-                flipped = true;
-                playerSprite.flipX = true;
-                meleeAttack.transform.localPosition = new Vector3(-(meleeAttack.transform.localPosition.x), 0f, 0f);
+                Flip(true);
             }
             else if (direction.x > 0 && flipped)
             {
-                flipped = false;
-                playerSprite.flipX = false;
-                meleeAttack.transform.localPosition = new Vector3(-(meleeAttack.transform.localPosition.x), 0f, 0f);
+                Flip(false);
             }
         }
         else
@@ -370,17 +361,20 @@ public class PlayerControler : MonoBehaviour
             // Flip sprite to face the direction the player is moving
             if (moveInputVector.x < -0.2 && !flipped)
             {
-                flipped = true;
-                playerSprite.flipX = true;
-                meleeAttack.transform.localPosition = new Vector3(-(meleeAttack.transform.localPosition.x), 0f, 0f);
+                Flip(true);
             }
             else if (moveInputVector.x > 0.2 && flipped)
             {
-                flipped = false;
-                playerSprite.flipX = false;
-                meleeAttack.transform.localPosition = new Vector3(-(meleeAttack.transform.localPosition.x), 0f, 0f);
+                Flip(false);
             }
         }
+    }
+
+    private void Flip(bool flip)
+    {
+        flipped = flip;
+        playerSprite.flipX = flip;
+        meleeAttack.transform.localPosition = new Vector3(-(meleeAttack.transform.localPosition.x), 0f, 0f);
     }
 
     // Move =================================
@@ -469,6 +463,10 @@ public class PlayerControler : MonoBehaviour
         {
             if (!isAttacking  /* || attackCancleable */)
             {
+                // Set face aim period
+                faceAimTime = 0;
+                faceaim = true;
+
                 switch (attackChain)
                 {
                     case 0:
@@ -586,14 +584,13 @@ public class PlayerControler : MonoBehaviour
 
         Collider[] cols = Physics.OverlapBox(meleeAttack.transform.position, meleeAttack.transform.localScale / 2,
                                                     meleeAttack.transform.rotation, LayerMask.GetMask("Enemies"));
+ 
+        var swipe = Instantiate(Resources.Load<GameObject>("Effects/Swipe"), this.transform.position, this.transform.rotation, this.transform).GetComponent<SwipeEffect>();
+        if (direction.x < 0)
+            swipe.AnimateSwipe(true);
+        else if (direction.x > 0)
+            swipe.AnimateSwipe(false);
 
-        // If hit
-        /*if (cols.Length > 0)
-        {
-            attackBufferTimer = 0;
-            attackChain++;
-        }
-        else attackChain = 0;*/
         attackBufferTimer = 0;
         attackChain++;
         DamageEnemies(cols);
@@ -774,7 +771,6 @@ public class PlayerControler : MonoBehaviour
         return rangeCoolDown / rangeCDTime;
     }
 
-
     private void UpdateAimIndicator()
     {
         if (this.state != State.Building && this.state != State.Downed)
@@ -825,5 +821,12 @@ public class PlayerControler : MonoBehaviour
         {
             if (AimIndicator.activeSelf) AimIndicator.SetActive(false);
         }
+    }
+
+    void OnDrawGizmos()
+    {
+        // Draw melee hitbox
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(meleeAttack.transform.position, meleeAttack.transform.localScale);
     }
 }
