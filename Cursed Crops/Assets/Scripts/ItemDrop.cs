@@ -27,6 +27,12 @@ public class ItemDrop : MonoBehaviour
         if (timeAlive > unavailableTime)
             canPickUp = true;
 
+        // Pulse if close to being destroyed
+        if (timeAlive >= (destroyTime * 0.7))
+        {
+            itemSpriteRenderer.color = new Color(1, 1, 1, Mathf.PingPong(Time.time, 0.5f));
+        }
+
         // Destroy item if its been alive longer than destroy time
         if (timeAlive > destroyTime)
             Destroy(this.gameObject);

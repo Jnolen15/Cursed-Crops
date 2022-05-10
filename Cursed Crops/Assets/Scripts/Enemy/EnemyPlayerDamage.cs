@@ -23,6 +23,7 @@ public class EnemyPlayerDamage : MonoBehaviour
     private PlayerControler pc;
     private PlayerResourceManager prm;
     private SpriteRenderer playerSprite;
+    private ParticleSystem psHeal;
     private GameObject mainObjective;
     private Animator animator;
     private Coroutine damageBuffCo;
@@ -41,6 +42,9 @@ public class EnemyPlayerDamage : MonoBehaviour
         prm = this.GetComponent<PlayerResourceManager>();
         playerSprite = this.transform.GetChild(1).GetChild(0).GetComponent<SpriteRenderer>();
         animator = this.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Animator>();
+
+        psHeal = Instantiate(Resources.Load<GameObject>("Effects/HealParticle"), transform.position, transform.rotation, transform).GetComponent<ParticleSystem>();
+        psHeal.Pause();
     }
 
     // Update is called once per frame
@@ -53,9 +57,7 @@ public class EnemyPlayerDamage : MonoBehaviour
             // Healing effect. Heals damage every healingTickSpeed seconds
             if (healingTimer <= 0)
             {
-                //psHeal.Emit(6);
-                if (playerHealth < reviveHealth)
-                    playerHealth += healingAmmount;
+                Heal(healingAmmount);
                 healingTimer = healingTickSpeed;
             }
             else healingTimer -= Time.deltaTime;
@@ -113,7 +115,10 @@ public class EnemyPlayerDamage : MonoBehaviour
     public void Heal(int ammount)
     {
         if (playerHealth < reviveHealth)
+        {
+            psHeal.Emit(6);
             playerHealth += ammount;
+        }
     }
 
     public void Damage(int ammount)

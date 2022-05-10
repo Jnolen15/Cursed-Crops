@@ -30,22 +30,33 @@ public class Cheater : MonoBehaviour
             epd = pm.players[0].gameObject.GetComponent<EnemyPlayerDamage>();
         }
 
-        //Cheat codes to add money, Increase the plant bounty, and heal the player
+        //Cheat codes. All cheat codes that apply to players only apply to player 1
+
+        // Add 100$ to players money total
         if (Keyboard.current[Key.M].wasPressedThisFrame)
             grm.addMoney(100);
 
+        // Add 100 points to the player's quota requirement
         if (Keyboard.current[Key.N].wasPressedThisFrame)
             grm.addPoints(100);
 
+        // Max heal the player
         if (Keyboard.current[Key.H].wasPressedThisFrame)
             epd.Heal(pc.maxHealth);
 
+        // Damage the player by 2
+        if (Keyboard.current[Key.J].wasPressedThisFrame)
+            epd.Damage(2);
+
+        // Progress the phase forward 30 seconds
         if (Keyboard.current[Key.V].wasPressedThisFrame)
             sm.elapsedTime += 30;
 
+        // Add 10 Crops to the players inventory
         if (Keyboard.current[Key.B].wasPressedThisFrame)
             prm.addCrops(10);
 
+        // The objective House health takes 50 damage
         if (Keyboard.current[Key.L].wasPressedThisFrame)
             edo.houseHealth -= 50;
     }
