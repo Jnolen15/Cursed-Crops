@@ -659,7 +659,8 @@ public class BuildingSystem : MonoBehaviour
     private void AdjustRadius()
     {
         var shape = ps.shape;
-        shape.radius = activePlaceable.prefab.GetComponent<SphereCollider>().radius;
+        if(activePlaceable.prefab.GetComponent<SphereCollider>() != null)
+            shape.radius = activePlaceable.prefab.GetComponent<SphereCollider>().radius;
     }
 
     private void TestPlacementAvailable()
