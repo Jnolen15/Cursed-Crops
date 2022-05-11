@@ -23,6 +23,7 @@ public class DialogueTrigger : MonoBehaviour
     public Sprite Harvey;
     public Sprite Narrator;
     public Sprite Cultist;
+    public Sprite TwoPeople;
 
     //Variables for calling the Dialogue Class
     public string sentence;
@@ -115,6 +116,9 @@ public class DialogueTrigger : MonoBehaviour
                 break;
             case "Cultist":
                 image.GetComponent<Image>().sprite = Cultist;
+                break;
+            case "Harvey and Cecil":
+                image.GetComponent<Image>().sprite = TwoPeople;
                 break;
             case "The Note":
                 image.GetComponent<Image>().enabled = false;
