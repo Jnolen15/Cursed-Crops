@@ -15,17 +15,22 @@ public class LevelSelectManager : MonoBehaviour
 
     private void Start()
     {
-        // disabling buttons initially
-        foreach (Button B in LevelButtons)
+        // fetching devMode
+        DevMode = (PlayerPrefs.GetInt("DevMode") == 1 ? true : false);
+        if (!DevMode)
         {
-            B.interactable = false;
-        }
+            // disabling buttons initially
+            foreach (Button B in LevelButtons)
+            {
+                B.interactable = false;
+            }
 
-        // fetch levelsCleared and enable buttons
-        LevelsCleared = PlayerPrefs.GetInt("LevelsCleared");
-        for(int i = 0; i < LevelsCleared - 1; i++) // lvl 1 is not counted here, so -1
-        {
-            LevelButtons[i].interactable = true;
+            // fetch levelsCleared and enable buttons
+            LevelsCleared = PlayerPrefs.GetInt("LevelsCleared");
+            for (int i = 0; i < LevelsCleared - 1; i++) // lvl 1 is not counted here, so -1
+            {
+                LevelButtons[i].interactable = true;
+            }
         }
     }
 
