@@ -10,11 +10,11 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] private float rollSpeedFallofDelay = 0.3f;
     [SerializeField] private float rollCDTime = 0.3f;
     [SerializeField] private float rangeCDTime = 5f;
-    [SerializeField] private float faceAimTimer = 2f;
     [SerializeField] private float attackBufferMax = 2f;
     private float attackBufferTimer = 2.1f;
     private int attackChain = 0;
-    
+    private float faceAimTimer = 0.4f;
+
     private float rangeCoolDown;
     private float rollSpeed;
     private float rollSpeedDropMultiplier;
@@ -588,10 +588,11 @@ public class PlayerControler : MonoBehaviour
                                                     meleeAttack.transform.rotation, LayerMask.GetMask("Enemies"));
  
         var swipe = Instantiate(Resources.Load<GameObject>("Effects/Swipe"), this.transform.position, this.transform.rotation, this.transform).GetComponent<SwipeEffect>();
-        if (direction.x < 0)
+        swipe.AnimateSwipe(playerSprite.flipX);
+        /*if (direction.x < 0)
             swipe.AnimateSwipe(true);
         else if (direction.x > 0)
-            swipe.AnimateSwipe(false);
+            swipe.AnimateSwipe(false);*/
 
         attackBufferTimer = 0;
         attackChain++;
