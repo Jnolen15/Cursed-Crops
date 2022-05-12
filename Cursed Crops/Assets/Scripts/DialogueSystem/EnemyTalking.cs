@@ -40,7 +40,7 @@ public class EnemyTalking : MonoBehaviour
     private GameObject firstPlayer;
     private GameObject[] allPlayers;
     public GameObject dialogueBox;
-    public PlayerInputHandler pc;
+    //public PlayerInputHandler pc;
 
     private Queue<string> sentences;
     private Queue<string> characters;
@@ -141,7 +141,7 @@ public class EnemyTalking : MonoBehaviour
 
             if (Vector3.Distance(gameObject.transform.position, player.transform.position) < 5)
             {
-
+                
                 gameObject.GetComponent<EnemyToPlayer>().closestPlayer = player.transform;
                 if (allPlayers != null)
                 {
@@ -192,6 +192,7 @@ public class EnemyTalking : MonoBehaviour
                     //disable players controller for the meantime
                     foreach (GameObject player in players)
                     {
+                        player.GetComponent<PlayerControler>().animator.SetFloat("MovementMagnitude", 0);
                         player.GetComponent<PlayerControler>().forDialogue = true;
                         player.GetComponent<PlayerControler>().enabled = false;
                     }

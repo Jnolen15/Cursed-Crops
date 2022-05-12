@@ -67,7 +67,7 @@ public class PlayerControler : MonoBehaviour
     private Rigidbody rb;                  // The player's Rigidbody
     private CapsuleCollider cc;
     private SpriteRenderer playerSprite;
-    private Animator animator;
+    public Animator animator;
     private AmmoManager am;
     private Coroutine ap;               // Used to store and stop attack Coroutine
     private Pause_Manager pauseMenu;     // reference to pause menu
