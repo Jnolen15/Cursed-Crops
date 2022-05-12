@@ -210,11 +210,12 @@ public class PlayerControler : MonoBehaviour
             am.curBullets = curBullets;
         }
 
-        //if (forDialogue)
-        //{
-        //checkOnce = true;
-        forDialogue = false;
-        //}
+        if (forDialogue)
+        {
+            animator.SetFloat("MovementMagnitude", 0);
+            //checkOnce = true;
+            //forDialogue = false;
+        }
 
         UpdateAimIndicator();
     }
@@ -391,8 +392,9 @@ public class PlayerControler : MonoBehaviour
         rb.MovePosition(transform.position + movement * moveSpeed * Time.fixedDeltaTime);
         //daSound.PlayTheSetClip();
         //run animation management
+        
         animator.SetFloat("MovementMagnitude", movement.magnitude);
-
+        
         if (flipped)
         {
             if(moveInputVector.x < 0)
@@ -451,7 +453,7 @@ public class PlayerControler : MonoBehaviour
         if (context.performed)
         {
             
-            forDialogue = true;
+            //forDialogue = true;
             AttackChain();
         }
        

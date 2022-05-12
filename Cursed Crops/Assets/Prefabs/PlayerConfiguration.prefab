@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3791830995822693139}
   m_Layer: 0
   m_Name: PlayerConfiguration
-  m_TagString: Untagged
+  m_TagString: PlayerControlTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -92,3 +92,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  pc: {fileID: 0}
+  bs: {fileID: 0}
+  allowAttack: 1
+  allowBuild: 1
+  allowMove: 1
+  dialogueIsHappening: 0
+  forDialogue: 0

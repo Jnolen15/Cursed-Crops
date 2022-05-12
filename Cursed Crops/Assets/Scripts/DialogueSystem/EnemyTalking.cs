@@ -32,14 +32,15 @@ public class EnemyTalking : MonoBehaviour
     public bool interactOnce = false;
     public bool wakingScene = true;
     public bool endOfTutorial = false;
- 
+
     public bool textOver = false;
-    
+
     public DialogueClass[] dialogue;
     public GameObject[] players;
     private GameObject firstPlayer;
+    private GameObject[] allPlayers;
     public GameObject dialogueBox;
-    public PlayerControler pc;
+    public PlayerInputHandler pc;
 
     private Queue<string> sentences;
     private Queue<string> characters;
@@ -91,25 +92,49 @@ public class EnemyTalking : MonoBehaviour
         childOfSpawner = spawnerObject.transform.GetChild(0).gameObject;
         firstPlayer = GameObject.FindGameObjectWithTag("Player");
         players = GameObject.FindGameObjectsWithTag("Player");
+
+        allPlayers = GameObject.FindGameObjectsWithTag("PlayerControlTag");
         
-        
-        if (firstPlayer != null)
-        {
-            pc = firstPlayer.GetComponent<PlayerControler>();
-        }
+        //if (firstPlayer != null)
+        //{
+        //    pc = firstPlayer.GetComponent<PlayerControler>();
+        //}
         DisplayNextSentence();
         //dialogueBox.SetActive(true);
         dialogueBox.SetActive(true);
         talking = true;
         
+
     }
 
     public void Update()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
         firstPlayer = GameObject.FindGameObjectWithTag("Player");
+        allPlayers = GameObject.FindGameObjectsWithTag("PlayerControlTag");
+        /*
+        if (allPlayers != null)
+        {
+            foreach (GameObject control in allPlayers)
+            {
+                if (control.GetComponent<PlayerInputHandler>().forDialogue)
+                {
+                    pc = control.GetComponent<PlayerInputHandler>();
+                    
+                    Debug.Log(pc.dialogueIsHappening);
+                    
+                }
+                if (talking)
+                {
+                    control.GetComponent<PlayerInputHandler>().dialogueIsHappening = true;
+                }
+                
+
+            }
+
+        }
+        */
         
-        pc = firstPlayer.GetComponent<PlayerControler>();
         // if any player goes and talks it will start dialogue and disable player inputs
         foreach (GameObject player in players)
         {
@@ -118,122 +143,149 @@ public class EnemyTalking : MonoBehaviour
             {
 
                 gameObject.GetComponent<EnemyToPlayer>().closestPlayer = player.transform;
-
-                if (pc.forDialogue && !enemyAction && !trySomething && !endOfTutorial)
+                if (allPlayers != null)
                 {
-                    Debug.Log("hello");
-                    talking = true;
-                }
-                else if(pc.forDialogue && taskFinish)
-                {
-                    talking = true;
-                }
+                    foreach (GameObject control in allPlayers)
+                    {
+                        control.GetComponent<PlayerInputHandler>().dialogueIsHappening = true;
+                        if (control.GetComponent<PlayerInputHandler>().forDialogue && !enemyAction && !trySomething && !endOfTutorial)
+                        {
+                            Debug.Log("hello");
+                            //pc.dialogueIsHappening = true;
+                            talking = true;
 
+                        }
+                        else if (control.GetComponent<PlayerInputHandler>().forDialogue && taskFinish)
+                        {
+                            //pc.dialogueIsHappening = true;
+                            talking = true;
 
+                        }
+                    }
+
+                }
             }
+            /*
             else if (Vector3.Distance(gameObject.transform.position, player.transform.position) > 20 && !wakingScene)
             {
                 talking = false;
+                //pc.dialogueIsHappening = false;
+                foreach (GameObject control in allPlayers)
+                {
+                    control.GetComponent<PlayerInputHandler>().forDialogue = false;
+                    control.GetComponent<PlayerInputHandler>().dialogueIsHappening = false;
+                }
             }
+            */
 
         }
 
         // This will stay in update so that the text box can show and be turned off as well
-        if (pc != null) {
-            Debug.Log(pc.forDialogue);
-            if (talking)
+        if (allPlayers != null)
+        {
+            //Debug.Log(pc.forDialogue);
+            foreach (GameObject control in allPlayers)
             {
-                
-                //disable players controller for the meantime
-                foreach (GameObject player in players)
+                if (talking)
                 {
-                    player.GetComponent<PlayerControler>().enabled = false;
-                }
+                    control.GetComponent<PlayerInputHandler>().dialogueIsHappening = true;
+                    //disable players controller for the meantime
+                    foreach (GameObject player in players)
+                    {
+                        player.GetComponent<PlayerControler>().forDialogue = true;
+                        player.GetComponent<PlayerControler>().enabled = false;
+                    }
 
-                //Jared plz help me with getting the cotrols :(
-                //if (pc.state == PlayerControler.State.Attacking && !interactOnce && !enemyAction)
-                if (pc.forDialogue && !enemyAction && !trySomething)
+                    //Jared plz help me with getting the cotrols :(
+                    //if (pc.state == PlayerControler.State.Attacking && !interactOnce && !enemyAction)
+                    if (control.GetComponent<PlayerInputHandler>().forDialogue && !enemyAction && !trySomething)
+                    {
+
+                        dialogueBox.SetActive(true);
+                        control.GetComponent<PlayerInputHandler>().forDialogue = false;
+
+                        if (textOver)
+                        {
+
+
+                            if (!stopDialogue)
+                            {
+                                DisplayNextSentence();
+
+                            }
+                            else
+                            {
+                                talking = false;
+                            }
+
+                        }
+                        else
+                        {
+
+                            SkipAnimation();
+
+
+                        }
+
+
+                    }
+                    else if (control.GetComponent<PlayerInputHandler>().forDialogue && taskFinish)
+                    {
+                        dialogueBox.SetActive(true);
+                        control.GetComponent<PlayerInputHandler>().forDialogue = false;
+
+                        if (textOver)
+                        {
+
+
+                            if (!stopDialogue)
+                            {
+                                DisplayNextSentence();
+
+                            }
+                            else
+                            {
+                                talking = false;
+                            }
+
+                        }
+                        else
+                        {
+
+                            SkipAnimation();
+
+
+                        }
+                    }
+
+                }
+                else //Once a certain amount of dialogue is said we return player control again and disable the text box
                 {
+
+
+                    foreach (GameObject player in players)
+                    {
+                        if (!enemyAction)
+                        {
+                            player.GetComponent<PlayerControler>().enabled = true;
+                            player.GetComponent<PlayerControler>().forDialogue = false;
+                        }
+                    }
+                    stopDialogue = false;
                     
-                    dialogueBox.SetActive(true);
-                    pc.forDialogue = false;
-
-                    if (textOver)
-                    {
-                        
-
-                        if (!stopDialogue)
-                        {
-                            DisplayNextSentence();
-                            
-                        }
-                        else
-                        {
-                            talking = false;
-                        }
-
-                    }
-                    else
-                    {
-                        
-                        SkipAnimation();
-                        
-
-                    }
+                    control.GetComponent<PlayerInputHandler>().forDialogue = false;
+                    control.GetComponent<PlayerInputHandler>().dialogueIsHappening = false;
+                    
+                    dialogueBox.SetActive(false);
 
 
                 }
-                else if(pc.forDialogue && taskFinish)
-                {
-                    dialogueBox.SetActive(true);
-                    pc.forDialogue = false;
-
-                    if (textOver)
-                    {
-
-
-                        if (!stopDialogue)
-                        {
-                            DisplayNextSentence();
-
-                        }
-                        else
-                        {
-                            talking = false;
-                        }
-
-                    }
-                    else
-                    {
-
-                        SkipAnimation();
-
-
-                    }
-                }
-
             }
-            else //Once a certain amount of dialogue is said we return player control again and disable the text box
-            {
-
-                foreach (GameObject player in players)
-                {
-                    if (!enemyAction)
-                    {
-                        player.GetComponent<PlayerControler>().enabled = true;
-                    }
-                }
-
-                stopDialogue = false;
-                dialogueBox.SetActive(false);
-
-
-            }
-
             // This is just for the starting dialogue when entering the tutorial
             if (startingDial)
             {
                 wakingScene = false;
+                
             }
 
 
@@ -285,7 +337,7 @@ public class EnemyTalking : MonoBehaviour
                     {
                         trySomething = true;
                     }
-                    if (grm.getMoney() < 100)
+                    if (grm.getMoney() < 100 && placeble == null)
                     {
                         grm.addMoney(100);
                     }
@@ -375,19 +427,19 @@ public class EnemyTalking : MonoBehaviour
             if (drop == null && taskFinish && DaEvent == "Drop Items")
             {
                 waitingSentence = "Great! Why don't you exchange it for money at the farmhouse";
-                foreach (GameObject player in players)
+                trySomething = false;
+                taskFinish = false;
+                for (int i = 0; i < players.Length; ++i)
                 {
-                    if (player.GetComponent<PlayerResourceManager>().getCrops() != 0)
+                    if (players[i].GetComponent<PlayerResourceManager>().getCrops() != 0)
                     {
                         trySomething = true;
                         taskFinish = true;
                     }
-                    else
-                    {
-                        trySomething = false;
-                        taskFinish = false;
-                    }
+
                 }
+                
+              
             }
             if(placeble != null && placeble.tag == "Spawner" && taskFinish && DaEvent == "Plant Seed")
             {

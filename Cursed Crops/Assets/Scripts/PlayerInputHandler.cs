@@ -10,6 +10,14 @@ public class PlayerInputHandler : MonoBehaviour
     private PlayerInputActions controls;
     public PlayerControler pc;
     public BuildingSystem bs;
+    // Bools for the tutorial
+    public bool allowAttack = true;
+    public bool allowBuild = true;
+    public bool allowMove = true;
+    public bool dialogueIsHappening = false;
+    public bool forDialogue = false;
+    private int counter = 0;
+
 
     void Start()
     {
@@ -42,14 +50,19 @@ public class PlayerInputHandler : MonoBehaviour
         if (context.action.name == controls.Player.Aim.name)
         {
             //Debug.Log("Handler: Calling aim");
-            pc.Aim_performed(context);
+            if (!dialogueIsHappening)
+            {
+                pc.Aim_performed(context);
+            }
         }
 
         // Movement
         if (context.action.name == controls.Player.Movement.name)
         {
             //Debug.Log("Handler: Calling move");
-            pc.Move_performed(context);
+            
+             pc.Move_performed(context);
+            
         }
 
         // Roll
@@ -63,7 +76,19 @@ public class PlayerInputHandler : MonoBehaviour
         if (context.action.name == controls.Player.Attack.name)
         {
             //Debug.Log("Handler: Calling Attack");
-            pc.Attack_performed(context);
+            counter++;
+            if (counter == 2)
+            {
+                forDialogue = true;
+            }
+            else if(counter > 2)
+            {
+                counter = 0;
+            }
+            if (!dialogueIsHappening)
+            {
+                pc.Attack_performed(context);
+            }
         }
 
         // Ranged
