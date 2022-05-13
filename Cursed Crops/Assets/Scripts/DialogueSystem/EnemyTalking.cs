@@ -26,6 +26,14 @@ public class EnemyTalking : MonoBehaviour
     public GameObject ShootDone;
     public GameObject doDamage;
 
+    //Controls Screen Variables
+    public GameObject controls;
+    public GameObject combatControls;
+    public GameObject plantingControls;
+    public GameObject turretControls;
+    public GameObject upgradeControls;
+    public GameObject quotaStuff;
+
     //Getting Broc Sprite
     public Sprite Broc_Bro;
 
@@ -206,6 +214,7 @@ public class EnemyTalking : MonoBehaviour
                 {
                     QuestTracker.SetActive(false);
                     talkTo.SetActive(false);
+                    controls.SetActive(false);
                     control.GetComponent<PlayerInputHandler>().dialogueIsHappening = true;
                     //disable players controller for the meantime
                     foreach (GameObject player in players)
@@ -341,6 +350,8 @@ public class EnemyTalking : MonoBehaviour
                     {
                         QuestTracker.SetActive(true);
                         combatList.SetActive(true);
+                        controls.SetActive(true);
+                        combatControls.SetActive(true);
                         trySomething = true;
                         gameObject.GetComponent<CapsuleCollider>().enabled = true;
                         foreach (GameObject control in allPlayers)
@@ -365,6 +376,8 @@ public class EnemyTalking : MonoBehaviour
                             gameObject.GetComponent<CapsuleCollider>().enabled = false;
                             combatList.SetActive(false);
                             talkTo.SetActive(true);
+                            combatControls.SetActive(false);
+                            controls.SetActive(false);
                         }
                         if (control.GetComponent<PlayerInputHandler>().attackOnce)
                         {
@@ -385,6 +398,8 @@ public class EnemyTalking : MonoBehaviour
                     {
                         QuestTracker.SetActive(true);
                         combatList.SetActive(true);
+                        controls.SetActive(true);
+                        plantingControls.SetActive(true);
                         trySomething = true;
                     }
                     AttackDone.GetComponent<TextMeshProUGUI>().text = "Plant a Seed";
@@ -407,6 +422,8 @@ public class EnemyTalking : MonoBehaviour
                         trySomething = true;
                         QuestTracker.SetActive(true);
                         combatList.SetActive(true);
+                        controls.SetActive(true);
+                        turretControls.SetActive(true);
                     }
                     AttackDone.GetComponent<TextMeshProUGUI>().text = "Put a Turret Down";
                     AttackDone.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
@@ -424,6 +441,8 @@ public class EnemyTalking : MonoBehaviour
                     {
                         QuestTracker.SetActive(true);
                         combatList.SetActive(true);
+                        controls.SetActive(true);
+                        quotaStuff.SetActive(true);
                         trySomething = true;
                     }
                     AttackDone.GetComponent<TextMeshProUGUI>().text = "Reach The Quota";
@@ -445,6 +464,8 @@ public class EnemyTalking : MonoBehaviour
                     {
                         QuestTracker.SetActive(true);
                         combatList.SetActive(true);
+                        controls.SetActive(true);
+                        upgradeControls.SetActive(true);
                         trySomething = true;
                     }
                     AttackDone.GetComponent<TextMeshProUGUI>().text = "Get An Upgrade";
@@ -547,10 +568,6 @@ public class EnemyTalking : MonoBehaviour
                     talkTo.SetActive(true);
 
                 }
-                else
-                {
-                    
-                }
                 
 
             }
@@ -558,6 +575,8 @@ public class EnemyTalking : MonoBehaviour
             {
                 combatList.SetActive(false);
                 talkTo.SetActive(true);
+                plantingControls.SetActive(false);
+                controls.SetActive(false);
                 trySomething = false;
                 taskFinish = false;
             }
@@ -566,6 +585,8 @@ public class EnemyTalking : MonoBehaviour
             {
                 combatList.SetActive(false);
                 talkTo.SetActive(true);
+                turretControls.SetActive(false);
+                controls.SetActive(false);
                 trySomething = false;
                 taskFinish = false;
             }
@@ -576,6 +597,8 @@ public class EnemyTalking : MonoBehaviour
                 startingDial = false;
                 wakingScene = true;
                 talking = true;
+                quotaStuff.SetActive(false);
+                controls.SetActive(false);
                 dialogueBox.SetActive(true);
                 DisplayNextSentence();
 
@@ -584,6 +607,8 @@ public class EnemyTalking : MonoBehaviour
             {
                 combatList.SetActive(false);
                 talkTo.SetActive(true);
+                upgradeControls.SetActive(false);
+                controls.SetActive(false);
                 trySomething = false;
                 taskFinish = false;
                    
