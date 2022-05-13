@@ -80,6 +80,14 @@ public class PlayerConfigManager : MonoBehaviour
         if (playerConfigs.All(p => p.IsReady == true))
         {
             Debug.Log("ALL PLAYERS READY. GO TO NEXT SCENE");
+            // Destroy UI components of Player Configuration Objects
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                var child = transform.GetChild(i);
+                child.transform.GetChild(i).gameObject.SetActive(false);
+                Destroy(child.transform.GetChild(1).gameObject);
+                Destroy(child.transform.GetChild(0).gameObject);
+            }
             // Disable player joining so new player managers are not unintentionally created
             this.GetComponent<PlayerInputManager>().DisableJoining();
             // Load next scene

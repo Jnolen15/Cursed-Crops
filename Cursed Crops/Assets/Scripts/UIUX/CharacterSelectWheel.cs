@@ -47,7 +47,7 @@ public class CharacterSelectWheel : MonoBehaviour
 
     void Start()
     {
-        CharacterSelectManager = this.GetComponentInParent<CharacterSelectManager>();
+        CharacterSelectManager = GameObject.Find("MainLayout").GetComponentInParent<CharacterSelectManager>();
         character = 0;
         previousChar = DougImage;
     }
