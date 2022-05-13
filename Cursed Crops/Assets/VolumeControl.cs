@@ -53,7 +53,7 @@ public class VolumeControl : MonoBehaviour
     void Start()
     {
         _slider.value = PlayerPrefs.GetFloat(_volumeParameter, _slider.value);
-        SliderValueChanged(_slider.value);
+        // SliderValueChanged(_slider.value);
     }
 
     // Update is called once per frame

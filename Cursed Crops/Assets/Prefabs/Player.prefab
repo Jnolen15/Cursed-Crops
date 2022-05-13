@@ -268,7 +268,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f843b5fef81e90c4fb6942d38e40d6d6, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.501
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -864,7 +864,6 @@ MonoBehaviour:
   rollSpeedFallofDelay: 0.05
   rollCDTime: 1
   rangeCDTime: 5
-  faceAimTimer: 0.4
   attackBufferMax: 2
   rollSpeedMax: 23
   maxBullets: 3
@@ -880,6 +879,7 @@ MonoBehaviour:
   newAttackSystem: 1
   lungeAttacking: 1
   twoAttack: 0
+  rollDone: 0
   ready: 0
   flipped: 0
   useControler: 0
@@ -890,6 +890,7 @@ MonoBehaviour:
   groundLayermask:
     serializedVersion: 2
     m_Bits: 8
+  animator: {fileID: 0}
   meleeAttack: {fileID: 1938087064346271668}
   input: {fileID: 0}
   bullet: {fileID: 6242655706651345086, guid: dd76d198cb4f6304f93a7e3ef466c390, type: 3}
