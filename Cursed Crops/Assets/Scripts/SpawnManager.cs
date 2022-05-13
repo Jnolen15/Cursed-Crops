@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -136,7 +137,12 @@ public class SpawnManager : MonoBehaviour
                     StopAllCoroutines();
                     currentPhase = "Post";
                     DestroySpawners();
-                }
+
+                    // Level Ending Sequence
+                    // Unlocking levels is based on build index, very bad, but temporary
+                    PlayerPrefs.SetInt("LevelsCleared", SceneManager.GetActiveScene().buildIndex - 2);
+                    SceneManager.LoadScene("LevelComplete");
+                } 
             }
             else
             {

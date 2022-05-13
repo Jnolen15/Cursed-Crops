@@ -15,8 +15,9 @@ public class LevelSelectManager : MonoBehaviour
 
     private void Start()
     {
-        // fetching devMode
+        // fetching PlayerPrefs Variables
         DevMode = (PlayerPrefs.GetInt("DevMode") == 1 ? true : false);
+        LevelsCleared = PlayerPrefs.GetInt("LevelsCleared");
         if (!DevMode)
         {
             // disabling buttons initially
@@ -32,6 +33,8 @@ public class LevelSelectManager : MonoBehaviour
                 LevelButtons[i].interactable = true;
             }
         }
+
+        Debug.Log(LevelsCleared);
     }
 
     public void loadLevel(string level)
@@ -72,6 +75,11 @@ public class LevelSelectManager : MonoBehaviour
                 LevelButtons[i].interactable = true;
             }
         }
+    }
+
+    public void ResetLevels()
+    {
+        PlayerPrefs.SetInt("LevelsCleared", 1);
     }
 
 }
