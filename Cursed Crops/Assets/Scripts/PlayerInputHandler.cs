@@ -16,6 +16,9 @@ public class PlayerInputHandler : MonoBehaviour
     public bool allowMove = true;
     public bool dialogueIsHappening = false;
     public bool forDialogue = false;
+    public bool attackOnce = false;
+    public bool rollOnce = false;
+    public bool shootOnce = false;
     private int counter = 0;
 
 
@@ -69,7 +72,11 @@ public class PlayerInputHandler : MonoBehaviour
         if (context.action.name == controls.Player.Roll.name)
         {
             //Debug.Log("Handler: Calling roll");
-            pc.Roll_performed(context);
+            if (allowAttack)
+            {
+                rollOnce = true;
+                pc.Roll_performed(context);
+            }
         }
 
         // Attack
@@ -85,8 +92,9 @@ public class PlayerInputHandler : MonoBehaviour
             {
                 counter = 0;
             }
-            if (!dialogueIsHappening)
+            if (!dialogueIsHappening && allowAttack)
             {
+                attackOnce = true;
                 pc.Attack_performed(context);
             }
         }
@@ -95,7 +103,11 @@ public class PlayerInputHandler : MonoBehaviour
         if (context.action.name == controls.Player.Ranged.name)
         {
             //Debug.Log("Handler: Calling Ranged");
-            pc.Ranged_performed(context);
+            if (allowAttack)
+            {
+                shootOnce = true;
+                pc.Ranged_performed(context);
+            }
         }
 
         // Pause
@@ -110,7 +122,10 @@ public class PlayerInputHandler : MonoBehaviour
         if (context.action.name == controls.Player.Build.name)
         {
             //Debug.Log("Handler: Calling Build Mode");
-            bs.BuildMode_performed(context);
+            if (allowBuild)
+            {
+                bs.BuildMode_performed(context);
+            }
         }
 
         // Place

@@ -264,7 +264,7 @@ public class BuildingSystem : MonoBehaviour
                     }
 
                     // Used for the tutorial
-                    updgradeBought = true;
+                    
                 }
                 if (placeableHighlight != null && acceptablePos)
                 {

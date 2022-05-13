@@ -58,10 +58,12 @@ public class EnemyTalking : MonoBehaviour
     private GameObject childOfSpawner;
 
     private GameRuleManager grm;
+    private UpgradeManager grmupgrade;
 
     void Awake()
     {
         grm = GameObject.Find("GameRuleManager").GetComponent<GameRuleManager>();
+        grmupgrade = GameObject.Find("GameRuleManager").GetComponent<UpgradeManager>();
         sentences = new Queue<string>();
         characters = new Queue<string>();
         DaEvents = new Queue<string>();
@@ -95,10 +97,7 @@ public class EnemyTalking : MonoBehaviour
 
         allPlayers = GameObject.FindGameObjectsWithTag("PlayerControlTag");
         
-        //if (firstPlayer != null)
-        //{
-        //    pc = firstPlayer.GetComponent<PlayerControler>();
-        //}
+        
         DisplayNextSentence();
         //dialogueBox.SetActive(true);
         dialogueBox.SetActive(true);
@@ -186,6 +185,11 @@ public class EnemyTalking : MonoBehaviour
             //Debug.Log(pc.forDialogue);
             foreach (GameObject control in allPlayers)
             {
+                if (wakingScene)
+                {
+                    control.GetComponent<PlayerInputHandler>().allowBuild = false;
+                    control.GetComponent<PlayerInputHandler>().allowAttack = false;
+                }
                 if (talking)
                 {
                     control.GetComponent<PlayerInputHandler>().dialogueIsHappening = true;
@@ -321,12 +325,20 @@ public class EnemyTalking : MonoBehaviour
                         trySomething = true;
                         
                     }
+                    foreach (GameObject control in allPlayers)
+                    {
+                        control.GetComponent<PlayerInputHandler>().allowAttack = true;
+                    }
                     break;
 
                 case "Plant Seed":
                     if (!dialogueBox.activeSelf)
                     {
                         trySomething = true;
+                    }
+                    foreach (GameObject control in allPlayers)
+                    {
+                        control.GetComponent<PlayerInputHandler>().allowBuild = true;
                     }
                     taskFinish = true;
                     placeble = GameObject.FindGameObjectWithTag("Spawner");
@@ -363,6 +375,11 @@ public class EnemyTalking : MonoBehaviour
                     {
                         trySomething = true;
                     }
+                    
+                    if (grm.getMoney() < 100 && !grmupgrade.updgradeBought)
+                    {
+                        grm.addMoney(100);
+                    }
                     taskFinish = true;
                     waitingSentence = "Remember just do the same process to buy a turret on top of the tan ground";
                     break;
@@ -371,7 +388,7 @@ public class EnemyTalking : MonoBehaviour
                     if (!giveMoneyOnce)
                     {
                         giveMoneyOnce = true;
-                        grm.addMoney(100);
+                        //grm.addMoney(100);
                     }
                     
                     break;
@@ -418,13 +435,22 @@ public class EnemyTalking : MonoBehaviour
 
                  enemyAction = false;
              }
-             
-            if(gameObject.GetComponent<EnemyControler>().health <= 9980 && gameObject.GetComponent<CapsuleCollider>().enabled)
+
+            foreach (GameObject control in allPlayers)
+            {
+                if(control.GetComponent<PlayerInputHandler>().attackOnce && control.GetComponent<PlayerInputHandler>().shootOnce && control.GetComponent<PlayerInputHandler>().rollOnce && gameObject.GetComponent<EnemyControler>().health <= 9980 && gameObject.GetComponent<CapsuleCollider>().enabled)
+                {
+                    trySomething = false;
+                    gameObject.GetComponent<CapsuleCollider>().enabled = false;
+                }
+            }
+            /*
+            if (gameObject.GetComponent<EnemyControler>().health <= 9980 && gameObject.GetComponent<CapsuleCollider>().enabled)
             {
                 trySomething = false;
                 gameObject.GetComponent<CapsuleCollider>().enabled = false;
             }
-
+            */
             if (drop == null && taskFinish && DaEvent == "Drop Items")
             {
                 waitingSentence = "Great! Why don't you exchange it for money at the farmhouse";
@@ -464,16 +490,12 @@ public class EnemyTalking : MonoBehaviour
                 DisplayNextSentence();
 
             }
-            if(DaEvent == "Buy An Upgrade" && taskFinish)
+            if(DaEvent == "Buy An Upgrade" && taskFinish && grmupgrade.updgradeBought)
             {
-                foreach (GameObject player in players)
-                {
-                    if (player.GetComponent<BuildingSystem>().updgradeBought)
-                    {
-                        trySomething = false;
-                        taskFinish = false;
-                    }
-                }
+                
+                trySomething = false;
+                taskFinish = false;
+                   
             }
             if (endOfTutorial)
             {
@@ -481,12 +503,17 @@ public class EnemyTalking : MonoBehaviour
                 gameObject.GetComponent<CapsuleCollider>().enabled = true;
                 Vector3 endPosition = new Vector3(-18.51F, 1F, -9.27F);
                 transform.position = Vector3.MoveTowards(gameObject.transform.position, endPosition, 0.01F);
-                if(gameObject.transform.position == endPosition)
+                if (gameObject.transform.position == endPosition)
                 {
                     gameObject.SetActive(false);
                 }
-            }
+                foreach (GameObject control in allPlayers)
+                {
+                    control.GetComponent<PlayerInputHandler>().allowBuild = true;
+                    control.GetComponent<PlayerInputHandler>().allowAttack = true;
+                }
 
+            }
 
         }
 

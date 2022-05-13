@@ -31,6 +31,8 @@ public class UpgradeManager : MonoBehaviour
     public float speedUpgradeTier = 1;
     public float carryUpgradeTier = 1;
 
+    public bool updgradeBought = false;
+
     /* WRITEUP ON HOW NEW SYSTEM WORKS
      * In building system in Place_performed now all it does is call BuyUpgrade for the selected upgrade.
      * Then BuyUpgrade checks if the players can afford it. If so it calls ApplyUpgrade and UpdateShopUI.
@@ -127,7 +129,7 @@ public class UpgradeManager : MonoBehaviour
     private void ApplyUpgrade(string upgrade)
     {
         Debug.Log("Applying " + upgrade + " to all players.");
-
+        updgradeBought = true;
         for (int i = 0; i < pm.players.Count; i++)
         {
             GameObject player = pm.players[i];
