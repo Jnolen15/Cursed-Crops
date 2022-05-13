@@ -51,7 +51,7 @@ public class PlayerControler : MonoBehaviour
     public bool newAttackSystem = true;
     public bool lungeAttacking = true;
     public bool twoAttack = true;
-
+    public bool rollDone = false;
     public bool ready = false;
     public bool flipped = false;
     public bool useControler;               // If using controller changes aiming
@@ -258,6 +258,7 @@ public class PlayerControler : MonoBehaviour
             case State.Rolling:
                 //cc.enabled = false;
                 epd.invulnerable = true;
+                rollDone = true;
                 DodgeRoll();
                 // Roll speed is constant at the start, then falls off untill just below move speed
                 if (!startRollFallOff)

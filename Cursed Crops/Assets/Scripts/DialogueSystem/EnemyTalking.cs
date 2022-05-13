@@ -16,7 +16,19 @@ public class EnemyTalking : MonoBehaviour
     public GameObject daDialogue;
     public GameObject houseArrow;
     public GameObject playerHealthArrow;
+    
+    //Quest Tracker Variables
+    public GameObject QuestTracker;
+    public GameObject talkTo;
+    public GameObject combatList;
+    public GameObject AttackDone;
+    public GameObject RollDone;
+    public GameObject ShootDone;
+    public GameObject doDamage;
+
+    //Getting Broc Sprite
     public Sprite Broc_Bro;
+
 
     //Variables for calling the Dialogue Class
     public string sentence;
@@ -192,6 +204,8 @@ public class EnemyTalking : MonoBehaviour
                 }
                 if (talking)
                 {
+                    QuestTracker.SetActive(false);
+                    talkTo.SetActive(false);
                     control.GetComponent<PlayerInputHandler>().dialogueIsHappening = true;
                     //disable players controller for the meantime
                     foreach (GameObject player in players)
@@ -297,7 +311,15 @@ public class EnemyTalking : MonoBehaviour
              // This code will be use for the different interactions that need to be done
              switch (DaEvent)
              {
+                case "Talk":
+                    if (!dialogueBox.activeSelf)
+                    {
+                        QuestTracker.SetActive(true);
+                        talkTo.SetActive(true);
+                    }
+                    break;
                 case "Enemy Attack":
+                    
                     gameObject.tag = "Enemy";
                     gameObject.GetComponent<WindupWithStun>().enabled = true;
                     
@@ -317,25 +339,59 @@ public class EnemyTalking : MonoBehaviour
                 case "Try Attacking":
                     if (!dialogueBox.activeSelf)
                     {
+                        QuestTracker.SetActive(true);
+                        combatList.SetActive(true);
                         trySomething = true;
                         gameObject.GetComponent<CapsuleCollider>().enabled = true;
+                        foreach (GameObject control in allPlayers)
+                        {
+                            control.GetComponent<PlayerInputHandler>().allowAttack = true;
+                        }
                     }
-                    if (!dialogueBox.activeSelf)
+
+                    if(gameObject.GetComponent<EnemyControler>().health <= 9980)
                     {
-                        trySomething = true;
-                        
+                        doDamage.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Strikethrough;
+                    }
+                    if (checkPlayersDodge())
+                    {
+                        RollDone.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Strikethrough;
                     }
                     foreach (GameObject control in allPlayers)
                     {
-                        control.GetComponent<PlayerInputHandler>().allowAttack = true;
+                        if (control.GetComponent<PlayerInputHandler>().attackOnce && control.GetComponent<PlayerInputHandler>().shootOnce && checkPlayersDodge() && gameObject.GetComponent<EnemyControler>().health <= 9980 && gameObject.GetComponent<CapsuleCollider>().enabled)
+                        {
+                            trySomething = false;
+                            gameObject.GetComponent<CapsuleCollider>().enabled = false;
+                            combatList.SetActive(false);
+                            talkTo.SetActive(true);
+                        }
+                        if (control.GetComponent<PlayerInputHandler>().attackOnce)
+                        {
+                            AttackDone.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Strikethrough;
+                        }
+                        if (control.GetComponent<PlayerInputHandler>().shootOnce)
+                        {
+                            ShootDone.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Strikethrough;
+                        }
+                        
+
                     }
+
                     break;
 
                 case "Plant Seed":
                     if (!dialogueBox.activeSelf)
                     {
+                        QuestTracker.SetActive(true);
+                        combatList.SetActive(true);
                         trySomething = true;
                     }
+                    AttackDone.GetComponent<TextMeshProUGUI>().text = "Plant a Seed";
+                    AttackDone.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
+                    RollDone.GetComponent<TextMeshProUGUI>().text = "";
+                    ShootDone.GetComponent<TextMeshProUGUI>().text = "";
+                    doDamage.GetComponent<TextMeshProUGUI>().text = "";
                     foreach (GameObject control in allPlayers)
                     {
                         control.GetComponent<PlayerInputHandler>().allowBuild = true;
@@ -349,7 +405,11 @@ public class EnemyTalking : MonoBehaviour
                     if (!dialogueBox.activeSelf)
                     {
                         trySomething = true;
+                        QuestTracker.SetActive(true);
+                        combatList.SetActive(true);
                     }
+                    AttackDone.GetComponent<TextMeshProUGUI>().text = "Put a Turret Down";
+                    AttackDone.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
                     if (grm.getMoney() < 100 && placeble == null)
                     {
                         grm.addMoney(100);
@@ -362,20 +422,33 @@ public class EnemyTalking : MonoBehaviour
                 case "Waiting to Start Harvest":
                     if (!dialogueBox.activeSelf)
                     {
+                        QuestTracker.SetActive(true);
+                        combatList.SetActive(true);
                         trySomething = true;
                     }
+                    AttackDone.GetComponent<TextMeshProUGUI>().text = "Reach The Quota";
+                    AttackDone.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
+                    RollDone.GetComponent<TextMeshProUGUI>().text = "Stand On Flag To Start";
+                    RollDone.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
                     taskFinish = true;
                     spawnerObject.GetComponent<SpawnManager>().enabled = false;
                     childOfSpawner.GetComponent<SphereCollider>().enabled = true;
+                    if (grm.bountyMet(0.2f))
+                    {
+                        AttackDone.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Strikethrough;
+                    }
                     waitingSentence = "Hey farmer buddy, I know you like talking to me but you know you gotta start the harvest phase to finish the tutorial right?";
                     break;
 
                 case "Buy An Upgrade":
                     if (!dialogueBox.activeSelf)
                     {
+                        QuestTracker.SetActive(true);
+                        combatList.SetActive(true);
                         trySomething = true;
                     }
-                    
+                    AttackDone.GetComponent<TextMeshProUGUI>().text = "Get An Upgrade";
+                    AttackDone.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
                     if (grm.getMoney() < 100 && !grmupgrade.updgradeBought)
                     {
                         grm.addMoney(100);
@@ -393,6 +466,12 @@ public class EnemyTalking : MonoBehaviour
                     
                     break;
                 case "Drop Items":
+                    if (!dialogueBox.activeSelf)
+                    {
+                        QuestTracker.SetActive(true);
+                        
+
+                    }
                     if (!stopSpawning)
                     {
                         stopSpawning = true;
@@ -400,6 +479,13 @@ public class EnemyTalking : MonoBehaviour
                         {
                             trySomething = true;
                         }
+                        combatList.SetActive(true);
+                        AttackDone.GetComponent<TextMeshProUGUI>().text = "Pick Up Crop";
+                        AttackDone.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
+                        RollDone.GetComponent<TextMeshProUGUI>().text = "Take Crop to Farm";
+                        RollDone.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
+                        ShootDone.GetComponent<TextMeshProUGUI>().text = "";
+                        doDamage.GetComponent<TextMeshProUGUI>().text = "";
                         Vector3 position = new Vector3(gameObject.transform.position.x, 1, gameObject.transform.position.z - 2);
                         gameObject.GetComponent<ItemDropper>().DropItem(position);
                         drop = GameObject.FindGameObjectWithTag("DroppedItem");
@@ -413,6 +499,7 @@ public class EnemyTalking : MonoBehaviour
                         
 
                     }
+                    
                     break;
 
                 case "End of Tutorial":
@@ -436,14 +523,8 @@ public class EnemyTalking : MonoBehaviour
                  enemyAction = false;
              }
 
-            foreach (GameObject control in allPlayers)
-            {
-                if(control.GetComponent<PlayerInputHandler>().attackOnce && control.GetComponent<PlayerInputHandler>().shootOnce && control.GetComponent<PlayerInputHandler>().rollOnce && gameObject.GetComponent<EnemyControler>().health <= 9980 && gameObject.GetComponent<CapsuleCollider>().enabled)
-                {
-                    trySomething = false;
-                    gameObject.GetComponent<CapsuleCollider>().enabled = false;
-                }
-            }
+
+            
             /*
             if (gameObject.GetComponent<EnemyControler>().health <= 9980 && gameObject.GetComponent<CapsuleCollider>().enabled)
             {
@@ -453,29 +534,38 @@ public class EnemyTalking : MonoBehaviour
             */
             if (drop == null && taskFinish && DaEvent == "Drop Items")
             {
+                AttackDone.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Strikethrough;
                 waitingSentence = "Great! Why don't you exchange it for money at the farmhouse";
-                trySomething = false;
-                taskFinish = false;
-                for (int i = 0; i < players.Length; ++i)
+
+                trySomething = true;
+                taskFinish = true;
+                if (checkPlayersCropAmount())
                 {
-                    if (players[i].GetComponent<PlayerResourceManager>().getCrops() != 0)
-                    {
-                        trySomething = true;
-                        taskFinish = true;
-                    }
+                    trySomething = false;
+                    taskFinish = false;
+                    combatList.SetActive(false);
+                    talkTo.SetActive(true);
 
                 }
+                else
+                {
+                    
+                }
                 
-              
+
             }
             if(placeble != null && placeble.tag == "Spawner" && taskFinish && DaEvent == "Plant Seed")
             {
+                combatList.SetActive(false);
+                talkTo.SetActive(true);
                 trySomething = false;
                 taskFinish = false;
             }
 
             if (placeble != null && placeble.tag == "Turret" && taskFinish && DaEvent == "Place Turret")
             {
+                combatList.SetActive(false);
+                talkTo.SetActive(true);
                 trySomething = false;
                 taskFinish = false;
             }
@@ -492,7 +582,8 @@ public class EnemyTalking : MonoBehaviour
             }
             if(DaEvent == "Buy An Upgrade" && taskFinish && grmupgrade.updgradeBought)
             {
-                
+                combatList.SetActive(false);
+                talkTo.SetActive(true);
                 trySomething = false;
                 taskFinish = false;
                    
@@ -522,7 +613,35 @@ public class EnemyTalking : MonoBehaviour
 
     }
 
+    private bool checkPlayersCropAmount()
+    {
+        for (int i = 0; i < players.Length; ++i)
+        {
+            if (players[i].GetComponent<PlayerResourceManager>().getCrops() != 0)
+            {
+                return false;
+                
+                
+            }
 
+        }
+        return true;
+    }
+
+    private bool checkPlayersDodge()
+    {
+        for (int i = 0; i < players.Length; ++i)
+        {
+            if (players[i].GetComponent<PlayerControler>().rollDone)
+            {
+                return true;
+
+
+            }
+
+        }
+        return false;
+    }
     public void DisplayNextSentence()
     {
         if (!taskFinish)
