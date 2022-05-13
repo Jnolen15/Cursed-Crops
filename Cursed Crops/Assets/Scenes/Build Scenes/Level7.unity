@@ -1191,6 +1191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
   m_ActionsAsset: {fileID: -944628639613478452, guid: 843562213e4f8974a9f777a4503ac6a4,
     type: 3}
   m_PointAction: {fileID: 768501739096027507, guid: 843562213e4f8974a9f777a4503ac6a4,
@@ -1941,6 +1942,12 @@ PrefabInstance:
       propertyPath: ybounds
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 8000620513723299603, guid: 216b72ab09002be4ba8f72f1041b1df9,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -97219742630079278, guid: 1757b8449da7a9d4da33b5d237c13c7b,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 216b72ab09002be4ba8f72f1041b1df9, type: 3}
 --- !u!1 &939688467
@@ -2966,6 +2973,7 @@ MonoBehaviour:
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
+      m_Flags: 0
     m_Reference: {fileID: 9029697528104031885, guid: 843562213e4f8974a9f777a4503ac6a4,
       type: 3}
   m_PlayerPrefab: {fileID: 7937736029672694561, guid: 69f1f2538ac12e543931462cf1bbc863,
@@ -3185,7 +3193,7 @@ AudioSource:
   m_GameObject: {fileID: 1307252900}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 85bb334702fbbb940922519332a2723b,
+  OutputAudioMixerGroup: {fileID: 1152904721711577773, guid: 1757b8449da7a9d4da33b5d237c13c7b,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1

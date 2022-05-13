@@ -20003,7 +20003,8 @@ AudioSource:
   m_GameObject: {fileID: 966946519}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1152904721711577773, guid: 1757b8449da7a9d4da33b5d237c13c7b,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: ec5d3fe55540ddf4888c108d0cbec21f, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.3
@@ -23809,6 +23810,7 @@ MonoBehaviour:
   Harvey: {fileID: 21300000, guid: 9cec06fe0af965e4c9526a69ce21dd2c, type: 3}
   Narrator: {fileID: 0}
   Cultist: {fileID: 21300000, guid: 6be930b67b0ae8a48a2463bbc2f78410, type: 3}
+  TwoPeople: {fileID: 0}
   sentence: Ayy Lmao
   character: 
   stopDialogue: 0
@@ -25670,7 +25672,9 @@ MonoBehaviour:
   mainObjective: {fileID: 0}
   houseHealth: 500
   startingHouseHealth: 500
+  uiCavas: {fileID: 0}
   damageNotif: {fileID: 0}
+  healthNotif: {fileID: 0}
 --- !u!136 &1215388687
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -39894,7 +39898,9 @@ MonoBehaviour:
   mainObjective: {fileID: 0}
   houseHealth: 200
   startingHouseHealth: 200
+  uiCavas: {fileID: 0}
   damageNotif: {fileID: 0}
+  healthNotif: {fileID: 0}
 --- !u!136 &1974005576
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -41453,6 +41459,12 @@ MonoBehaviour:
   - {fileID: 22466241}
   - {fileID: 2051818542}
   - {fileID: 939476056}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
+  - {fileID: 2051818542}
+  - {fileID: 939476056}
+  - {fileID: 22466241}
   - {fileID: 2051818542}
   - {fileID: 939476056}
   - {fileID: 22466241}

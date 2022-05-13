@@ -153,7 +153,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1462349981}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -817,7 +817,9 @@ MonoBehaviour:
   numMediBerryPlanted: 0
   numScarrotPlanted: 0
   numSabatamatoPlanted: 0
+  difficulty: 0
   globalPoints: 0
+  players: 0
 --- !u!4 &53224000
 Transform:
   m_ObjectHideFlags: 0
@@ -6481,6 +6483,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   p1UImanager: {fileID: 223007609}
   p2UImanager: {fileID: 1462349982}
+  p3UImanager: {fileID: 0}
+  p4UImanager: {fileID: 0}
   HouseHealthBar: {fileID: 653790044}
   PhaseTimer: {fileID: 862058352}
   PhaseCounter: {fileID: 2114993779}
@@ -10390,7 +10394,8 @@ AudioSource:
   m_GameObject: {fileID: 765531818}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1152904721711577773, guid: 1757b8449da7a9d4da33b5d237c13c7b,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.3
@@ -16606,7 +16611,6 @@ MonoBehaviour:
   pauseDuration: 10
   wavesPerPhase: 4
   spawnersPerPhase: 4
-  scaleAmmount: 1
   elapsedTime: 0
   currentPhase: Pre
   currentWave: 0
@@ -16617,6 +16621,7 @@ MonoBehaviour:
     type: 3}
   rangeEnemy: {fileID: 5129678590246215480, guid: 46efc658a4c04294f88b33ec6c04d886,
     type: 3}
+  spawnAnimator: {fileID: 0}
   xbounds: 60
   ybounds: 60
   gridSize: 1
@@ -16627,10 +16632,6 @@ MonoBehaviour:
   plantingMusic: {fileID: 8300000, guid: 0e4ed5601f0044d46b88f853c1bdd6f1, type: 3}
   daMusic: {fileID: 765531819}
   currentPhaseEndTime: 0
-  specialSpawnInterval: 0
-  specialSpawnTime: 0
-  specialToSpawn: 0
-  gridChild: {fileID: 0}
   spawners: []
   state: 0
 --- !u!4 &1210439111
@@ -16682,6 +16683,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
   m_ActionsAsset: {fileID: -944628639613478452, guid: 843562213e4f8974a9f777a4503ac6a4,
     type: 3}
   m_PointAction: {fileID: 768501739096027507, guid: 843562213e4f8974a9f777a4503ac6a4,
@@ -18555,6 +18557,7 @@ MonoBehaviour:
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
+      m_Flags: 0
     m_Reference: {fileID: 9029697528104031885, guid: 843562213e4f8974a9f777a4503ac6a4,
       type: 3}
   m_PlayerPrefab: {fileID: 7937736029672694561, guid: 69f1f2538ac12e543931462cf1bbc863,
@@ -25604,7 +25607,9 @@ MonoBehaviour:
   mainObjective: {fileID: 0}
   houseHealth: 500
   startingHouseHealth: 500
+  uiCavas: {fileID: 0}
   damageNotif: {fileID: 0}
+  healthNotif: {fileID: 0}
 --- !u!136 &1909118008
 CapsuleCollider:
   m_ObjectHideFlags: 0
