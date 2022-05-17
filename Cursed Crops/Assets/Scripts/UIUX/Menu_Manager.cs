@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using TMPro;
 
+// only using this for a debug thing
+using UnityEngine.EventSystems;
+
 public class Menu_Manager : MonoBehaviour
 {
     public GameObject menu;
@@ -65,13 +68,19 @@ public class Menu_Manager : MonoBehaviour
         } 
         else if (credits.activeSelf)
         {
-            if (menuActive) menuActive = false;
-            credits.GetComponentInChildren<Button>().Select();
+            if (menuActive)
+            {
+                menuActive = false;
+                credits.GetComponentInChildren<Button>().Select();
+            }
         }
         else if (options.activeSelf)
         {
-            if (menuActive) menuActive = false;
+            if (menuActive)
+            {
+                menuActive = false;
             options.GetComponentInChildren<Button>().Select();
+            }
         }
     }
 
