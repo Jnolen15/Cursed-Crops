@@ -18,7 +18,7 @@ public class ItemDropper : MonoBehaviour
         {
             float x = pos.x + Random.Range(-randomOffsetX, randomOffsetX);
             float z = pos.z + Random.Range(-randomOffsetZ, randomOffsetZ);
-            float y = pos.y;
+            float y = 0.2f;
 
             Vector3 itemPos = new Vector3(x, y, z);
             ItemDrop droppedItem = Instantiate(dropItemPrefab, itemPos, Quaternion.identity).GetComponent<ItemDrop>();
