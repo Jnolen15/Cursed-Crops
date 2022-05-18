@@ -70,11 +70,6 @@ public class Menu_Manager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        
-    }
-
     public void startGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
