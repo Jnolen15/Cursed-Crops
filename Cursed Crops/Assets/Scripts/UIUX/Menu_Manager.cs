@@ -17,7 +17,7 @@ public class Menu_Manager : MonoBehaviour
 
     public Button primaryButton;
 
-    private bool menuActive = true;
+    public GameObject CurrentMenu;
 
     // Audio Components
     public AudioMixer audioMixer;
@@ -31,6 +31,17 @@ public class Menu_Manager : MonoBehaviour
     private void Start()
     {
         primaryButton.Select();
+        // setting current menu, just in case game starts with options instead of main menu open
+        if (menu.activeSelf)
+        {
+            CurrentMenu = menu;
+        } else if (options.activeSelf)
+        {
+            CurrentMenu = options;
+        } else if (credits.activeSelf)
+        {
+            CurrentMenu = credits;
+        }
 
         // aquiring resolutions list and assigning them to element
         if (ResolutionDropdown != null)
@@ -61,27 +72,7 @@ public class Menu_Manager : MonoBehaviour
 
     private void Update()
     {
-        if (menu.activeSelf && !menuActive)
-        {
-            menuActive = true;
-            primaryButton.Select();
-        } 
-        else if (credits.activeSelf)
-        {
-            if (menuActive)
-            {
-                menuActive = false;
-                credits.GetComponentInChildren<Button>().Select();
-            }
-        }
-        else if (options.activeSelf)
-        {
-            if (menuActive)
-            {
-                menuActive = false;
-            options.GetComponentInChildren<Button>().Select();
-            }
-        }
+        
     }
 
     public void startGame()
@@ -110,15 +101,22 @@ public class Menu_Manager : MonoBehaviour
         SceneManager.LoadScene(level);
     }
 
-
-    // Options Menu Functions
-
-
-    public void SetVolume(float decibles)
+    // Sets the starting selection
+    public void SetSelection(Button selectedButton)
     {
-        audioMixer.SetFloat("MasterVolume", decibles);
+        selectedButton.Select();
     }
 
+    // Disables current menu and enables the next one 
+    public void ChangeMenu(GameObject nextMenu)
+    {
+        CurrentMenu.SetActive(false);
+        nextMenu.SetActive(true);
+        CurrentMenu = nextMenu;
+    }
+
+
+    // Options Menu Functions
     public void SetFullscreen(bool fullScreenOn)
     {
         Screen.fullScreen = fullScreenOn;
