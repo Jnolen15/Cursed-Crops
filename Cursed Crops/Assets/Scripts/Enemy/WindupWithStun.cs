@@ -85,6 +85,26 @@ public class WindupWithStun : MonoBehaviour
 
                                 newPosition += enemyPosition;
                             }
+                            else
+                            {
+                                gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
+                                if (!attacking && !ec.stunned)
+                                {
+                                    sr.color = Color.yellow;
+                                    if (!gameObject.activeInHierarchy)
+                                    {
+                                        StopCoroutine("attack");
+                                    }
+                                    else
+                                    {
+                                        StartCoroutine("attack");
+                                    }
+                                    if (ec.takingDamage && ec.lastDamageType == "Melee")
+                                    {
+                                        StopCoroutine("attack");
+                                    }
+                                }
+                            }
                         }
                         //transform.position = Vector3.MoveTowards(transform.position, targetToAttack.position, 10f * Time.deltaTime);
                     }
@@ -101,23 +121,7 @@ public class WindupWithStun : MonoBehaviour
 
             if (windupStarting)
             {
-                gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
-                if (!attacking && !ec.stunned)
-                {
-                    sr.color = Color.yellow;
-                    if (!gameObject.activeInHierarchy)
-                    {
-                        StopCoroutine("attack");
-                    }
-                    else
-                    {
-                        StartCoroutine("attack");
-                    }
-                    if (ec.takingDamage && ec.lastDamageType == "Melee")
-                    {
-                        StopCoroutine("attack");
-                    }
-                }
+                
             }
             if (ec.takingDamage && ec.lastDamageType == "Melee" && !ec.stunned)
             {
@@ -145,9 +149,10 @@ public class WindupWithStun : MonoBehaviour
                 }
             }
         }
+        
         if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) > 6f && !windupStarting)
         {
-            //StopCoroutine("attack");
+            StopCoroutine("attack");
 
 
             sr.color = prev;
@@ -156,6 +161,7 @@ public class WindupWithStun : MonoBehaviour
 
 
         }
+        
 
     }
 
@@ -164,8 +170,8 @@ public class WindupWithStun : MonoBehaviour
 
         
         childRB.MovePosition(transform.position + direction.normalized);
-        //if (transform.position != newPosition)
-        //{
+        if (transform.position != newPosition)
+        {
             yield return new WaitForSeconds(0.75f);
 
 
@@ -175,7 +181,7 @@ public class WindupWithStun : MonoBehaviour
 
             attacking = true;
             //gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
-        //}
+        }
         if (transform.position == newPosition)
         {
             hurtBox.enabled = true;

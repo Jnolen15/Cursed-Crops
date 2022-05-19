@@ -126,7 +126,7 @@ public class EnemyControler : MonoBehaviour
                 }
                 gameObject.SetActive(false);
             }
-            if (!dying) StartCoroutine(DoDeath());
+            if (!dying && gameObject.activeInHierarchy) StartCoroutine(DoDeath());
         }
         else
         {

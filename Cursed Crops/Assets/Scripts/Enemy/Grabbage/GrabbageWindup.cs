@@ -7,7 +7,7 @@ public class GrabbageWindup : MonoBehaviour
     // Start is called before the first frame update
     Vector3 preAttackPosition;
     Vector3 attackPosition;
-    Vector3 enemyPosition;
+    public Vector3 enemyPosition;
     Vector3 newPosition;
     Vector3 direction;
     public bool attacking = false;
@@ -16,6 +16,7 @@ public class GrabbageWindup : MonoBehaviour
     private bool hitFence = false;
     private float attackTimer = 1;
     private float attackTickSpeed = 1;
+    private float actualSpeed = 0;
     Rigidbody childRB;
     private SpriteRenderer sr;
     Transform targetToAttack;
@@ -30,6 +31,7 @@ public class GrabbageWindup : MonoBehaviour
     void Start()
     {
         //hurtBox = this.gameObject.transform.GetChild(1).GetComponent<BoxCollider>();
+        actualSpeed = gameObject.GetComponent<GrabbageToPlayers>().originalSpeed;
         //daAttack = this.gameObject.transform.GetChild(1).GetComponent<MeshRenderer>();
         sr = this.transform.GetComponentInChildren<SpriteRenderer>();
         prev = sr.color;
@@ -54,6 +56,7 @@ public class GrabbageWindup : MonoBehaviour
                     if (!windupStarting)
                     {
                         //StopCoroutine("attack");
+                        sr.color = Color.yellow;
                         windupStarting = true;
 
                         //preAttackPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
@@ -70,10 +73,11 @@ public class GrabbageWindup : MonoBehaviour
 
         if (windupStarting)
         {
-            gameObject.GetComponent<GrabbageToPlayers>().enemySpeed = 0;
+            gameObject.GetComponent<GrabbageToPlayers>().originalSpeed = 0;
+            
             if (!attacking)
             {
-                sr.color = Color.yellow;
+                
                 if (!gameObject.activeInHierarchy)
                 {
                     StopCoroutine("attack");
@@ -104,6 +108,18 @@ public class GrabbageWindup : MonoBehaviour
             }
         }
 
+        if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) > 6f && !windupStarting)
+        {
+            StopCoroutine("attack");
+
+
+            sr.color = prev;
+            gameObject.GetComponent<GrabbageToPlayers>().originalSpeed = actualSpeed;
+
+
+
+        }
+
     }
 
     IEnumerator attack()
@@ -118,20 +134,20 @@ public class GrabbageWindup : MonoBehaviour
 
             //sr.color = Color.green;
             //1 0.92 0.016 1
-            transform.position = Vector3.MoveTowards(transform.position, newPosition, (gameObject.GetComponent<GrabbageToPlayers>().originalSpeed * 20) * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, newPosition, (actualSpeed * 10) * Time.deltaTime);
 
             attacking = true;
             //gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
         }
 
         yield return new WaitForSeconds(1f);
-        if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) > 6f)
+        if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) > 6f && !windupStarting)
         {
             //StopCoroutine("attack");
 
 
             sr.color = prev;
-            gameObject.GetComponent<GrabbageToPlayers>().enemySpeed = gameObject.GetComponent<GrabbageToPlayers>().originalSpeed;
+            gameObject.GetComponent<GrabbageToPlayers>().originalSpeed = actualSpeed;
 
 
 

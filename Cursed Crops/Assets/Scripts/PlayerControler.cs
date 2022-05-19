@@ -451,7 +451,7 @@ public class PlayerControler : MonoBehaviour
     {
         //Debug.Log(context);
         
-        if (context.performed)
+        if (context.performed && !trapped)
         {
             
             //forDialogue = true;
@@ -680,7 +680,7 @@ public class PlayerControler : MonoBehaviour
     public void Ranged_performed(InputAction.CallbackContext context)
     {
         //Debug.Log(context);
-        if (context.performed)
+        if (context.performed && !trapped)
         {
             if (state == State.Normal && curBullets > 0 && !shooting)
             {
