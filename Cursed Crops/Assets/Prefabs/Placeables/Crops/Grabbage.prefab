@@ -389,8 +389,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53e39136d6a346043a74eab9e17b7dfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 120
-  maxHealth: 120
+  health: 70
+  maxHealth: 70
   overalldamage: 0
   takingDamage: 0
   knockbackResist: 0
@@ -400,6 +400,7 @@ MonoBehaviour:
   hurtSound: {fileID: 8300000, guid: 41e3ba03caf38cd45a77a28f8080090e, type: 3}
   spawningSound: {fileID: 8300000, guid: a73ed29011d70c1448cf84058c9b8fd0, type: 3}
   healing: 0
+  invinsble: 0
 --- !u!114 &6204482254679519640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -414,6 +415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trappedPlayer: {fileID: 0}
   boostedHealthActivate: 0
+  lettingGo: 0
   alreadyGrabbing: 0
   spawnSound: {fileID: 8300000, guid: 1d57cfbd6c48aa840b741c8102ed2d6f, type: 3}
 --- !u!114 &1570388941770891586
@@ -428,6 +430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efa1aa2e059f2594a91d164dbef949b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyPosition: {x: 0, y: 0, z: 0}
   attacking: 0
   windupStarting: 0
   maskToIgnore:
