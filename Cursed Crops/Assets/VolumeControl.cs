@@ -13,11 +13,14 @@ public class VolumeControl : MonoBehaviour
     [SerializeField] float _multiplier = 30f;
     [SerializeField] Toggle _toggle;
     [SerializeField] bool _disableToggleEvent;
+    [SerializeField] float sliderValue = 1;
 
     private void Awake()
     {
         _slider.onValueChanged.AddListener(SliderValueChanged);
         _toggle.onValueChanged.AddListener(ToggleValueChanged);
+        sliderValue = PlayerPrefs.GetFloat(_volumeParameter, _slider.value);
+        _slider.value = sliderValue;
     }
 
     private void ToggleValueChanged(bool enableSound)
@@ -43,22 +46,15 @@ public class VolumeControl : MonoBehaviour
 
     private void SliderValueChanged(float value)
     {
-        _mixer.SetFloat(_volumeParameter, Mathf.Log10(value) *_multiplier);
+        _mixer.SetFloat(_volumeParameter, SliderToMixer(value));
         _disableToggleEvent = true;
         _toggle.isOn = _slider.value > _slider.minValue;
         _disableToggleEvent = false;
+        PlayerPrefs.SetFloat(_volumeParameter, _slider.value);
     }
 
-    //Start is called before the first frame update  
-    void Start()
+    private float SliderToMixer(float x)
     {
-        _slider.value = PlayerPrefs.GetFloat(_volumeParameter, _slider.value);
-        // SliderValueChanged(_slider.value);
+        return Mathf.Log10(x) * _multiplier;
     }
-
-    // Update is called once per frame
-    //void Update()
-  //  {
-        
-  //  }
 }
