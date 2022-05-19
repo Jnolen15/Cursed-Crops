@@ -42,6 +42,7 @@ public class EnemyControler : MonoBehaviour
     // Healing Buff Stuff
     private Coroutine healingCo;
     public bool healing = false;
+    public bool invinsble = false;
     private int healingAmmount = 1;
     private float healingTickSpeed = 1f;
     private float healingTimer = 1f;
@@ -108,30 +109,33 @@ public class EnemyControler : MonoBehaviour
     public void takeDamage(int dmg, string type)
     {
         // Subtract from health
-        health -= dmg;
-        overalldamage += dmg;
-        lastDamageType = type;
-        daAudio.PlaySound(hurtSound);
-        if (ps != null)
-            ps.Emit(4);
-        // If health is below or equal to 0 die
-        if (health <= 0)
+        if (!invinsble)
         {
-            if(gameObject.GetComponent<GrabbageAI>() != null)
+            health -= dmg;
+            overalldamage += dmg;
+            lastDamageType = type;
+            daAudio.PlaySound(hurtSound);
+            if (ps != null)
+                ps.Emit(4);
+            // If health is below or equal to 0 die
+            if (health <= 0)
             {
-                gameObject.GetComponent<GrabbageAI>().boostedHealthActivate = false;
-                if (gameObject.GetComponent<GrabbageAI>().trappedPlayer != null)
+                if (gameObject.GetComponent<GrabbageAI>() != null)
                 {
-                    gameObject.GetComponent<GrabbageAI>().trappedPlayer.GetComponent<PlayerControler>().trapped = false;
+                    gameObject.GetComponent<GrabbageAI>().boostedHealthActivate = false;
+                    if (gameObject.GetComponent<GrabbageAI>().trappedPlayer != null)
+                    {
+                        gameObject.GetComponent<GrabbageAI>().trappedPlayer.GetComponent<PlayerControler>().trapped = false;
+                    }
+                    gameObject.SetActive(false);
                 }
-                gameObject.SetActive(false);
+                if (!dying && gameObject.activeInHierarchy) StartCoroutine(DoDeath());
             }
-            if (!dying && gameObject.activeInHierarchy) StartCoroutine(DoDeath());
-        }
-        else
-        {
-            // In not dead flash red to show hit
-            StartCoroutine(hit(rend));
+            else
+            {
+                // In not dead flash red to show hit
+                StartCoroutine(hit(rend));
+            }
         }
     }
 
@@ -250,7 +254,10 @@ public class EnemyControler : MonoBehaviour
         if (other.gameObject.tag == "HealingAura")
         {
 
-
+            if (gameObject.GetComponent<GoToEnemy>() == null)
+            {
+                invinsble = true;
+            }
             healing = true;
         }
     }
@@ -267,8 +274,10 @@ public class EnemyControler : MonoBehaviour
     {
         if (other.gameObject.tag == "HealingAura")
         {
-
-
+            if (gameObject.GetComponent<GoToEnemy>() == null)
+            {
+                invinsble = false;
+            }
             healing = false;
         }
         if (other.gameObject.tag == "Border")

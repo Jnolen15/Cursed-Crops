@@ -107,6 +107,7 @@ public class CornnonAI : MonoBehaviour
     {
         GameObject bul = Instantiate(bullet, transform.position, transform.rotation);
         bul.GetComponent<Bullet>().movement = direction.normalized;
+        bul.GetComponent<EnemyControler>().health = this.gameObject.GetComponent<EnemyControler>().health;
         //shooting = false;
     }
 
