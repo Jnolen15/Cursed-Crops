@@ -16,6 +16,7 @@ public class BrocLiAnimation : MonoBehaviour
 
     private Vector3 prev;
     private Vector3 current;
+    private float timeSinceDirSwitch;
 
     // Start is called before the first frame update
     void Start()
@@ -33,18 +34,25 @@ public class BrocLiAnimation : MonoBehaviour
     void Update()
     {
         // Flip based on direction
-        current = this.transform.parent.position;
-        if(prev != current)
+        if (timeSinceDirSwitch < 0.2f) timeSinceDirSwitch += Time.deltaTime;
+        else 
         {
-            Vector3 temp = (current - prev).normalized;
-            if(temp.x > 0)
+            current = this.transform.parent.position;
+            if (prev != current)
             {
-                sr.flipX = false;
-            } else if (temp.x < 0)
-            {
-                sr.flipX = true;
+                Vector3 temp = (current - prev).normalized;
+                if (temp.x > 0)
+                {
+                    sr.flipX = false;
+                    timeSinceDirSwitch = 0;
+                }
+                else if (temp.x < 0)
+                {
+                    sr.flipX = true;
+                    timeSinceDirSwitch = 0;
+                }
+                prev = current;
             }
-            prev = current;
         }
 
         if (ec.stunned)

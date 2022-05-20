@@ -5,7 +5,7 @@ using UnityEngine;
 public class Trap : MonoBehaviour
 {
     // ================= Public variables =================
-    public bool singleUse = false;
+    public bool doesSomething = true;
     public bool sabotaged = false;
     public GameObject effect;
     public GameObject trapChild;
@@ -17,8 +17,8 @@ public class Trap : MonoBehaviour
     private delegate void Callback();
     private SpriteRenderer trapSprite;
     private bool playonce = false;
-    private Color prev;
     public bool onCooldown = false;
+    private GameObject vines;
 
     /* NOTE:
      * I'm trying to build this script to be useable for all
@@ -30,39 +30,40 @@ public class Trap : MonoBehaviour
     void Start()
     {
         trapSprite = this.transform.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>();
-        prev = trapSprite.color;
         gameObject.GetComponent<AudioPlayer>().SetAudioSource(soundClip);
         trapChild = this.transform.GetChild(1).gameObject;
     }
 
     void Update()
     {
-        if (!sabotaged)
+        if (doesSomething)
         {
-            trapSprite.color = prev;
-            if (singleUse)
+            if (!sabotaged)
             {
+                if (vines != null)
+                    Destroy(vines);
 
+                if (!onCooldown)
+                {
+                    spawnEffect();
+                    onCooldown = true;
+                    StartCoroutine(cooldown(() => { onCooldown = false; }, cdTime));
+                }
             }
-            else if (!onCooldown)
+            else
             {
-                spawnEffect();
-                onCooldown = true;
-                StartCoroutine(cooldown(() => { onCooldown = false; }, cdTime));
+                if (vines == null)
+                    vines = Instantiate(Resources.Load<GameObject>("Effects/Vines"), transform.position, transform.rotation, transform);
+                StopCoroutine(cooldown(() => { onCooldown = false; }, cdTime));
+                playonce = true;
+                gameObject.GetComponent<AudioPlayer>().StopSound();
             }
-        }
-        else
-        {
-            trapSprite.color = Color.red;
-            StopCoroutine(cooldown(() => { onCooldown = false; }, cdTime));
-            playonce = true;
-            gameObject.GetComponent<AudioPlayer>().StopSound();
-        }
 
-        if (trapChild.GetComponent<TurretSabotager>().theSabotager != null && !trapChild.GetComponent<TurretSabotager>().theSabotager.activeInHierarchy)
-        {
-            sabotaged = false;
-            playonce = false;
+            if (trapChild.GetComponent<TurretSabotager>().theSabotager != null && !trapChild.GetComponent<TurretSabotager>().theSabotager.activeInHierarchy)
+            {
+                sabotaged = false;
+                playonce = false;
+            }
         }
     }
 

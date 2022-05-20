@@ -53,7 +53,6 @@ public class Turret : MonoBehaviour
             if (vines != null)
                 Destroy(vines);
 
-            SpriteFlip();
             // Enemy targeting and shooting
             if (targetedEnemy != null && !onCooldown)
             {
@@ -177,12 +176,14 @@ public class Turret : MonoBehaviour
             {
                 flipped = false;
                 turretSprite.flipX = false;
+                firePosition.localPosition = new Vector3(firePosition.localPosition.x * -1, firePosition.localPosition.y, firePosition.localPosition.z);
 
             }
             else if(flipDirection.x <= 0 && !flipped)
             {
                 flipped = true;
                 turretSprite.flipX = true;
+                firePosition.localPosition = new Vector3(firePosition.localPosition.x * -1, firePosition.localPosition.y, firePosition.localPosition.z);
             }
         }
     }
@@ -209,7 +210,8 @@ public class Turret : MonoBehaviour
         {
             gameObject.GetComponent<AudioPlayer>().PlaySound(rifleSound);
         }
-        
+
+        SpriteFlip();
         tAnimator.playShoot();
         //MakeBullet();
         yield return new WaitForSeconds(cooldown);
