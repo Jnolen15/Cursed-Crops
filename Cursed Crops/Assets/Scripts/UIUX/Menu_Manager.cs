@@ -19,9 +19,6 @@ public class Menu_Manager : MonoBehaviour
 
     public GameObject CurrentMenu;
 
-    // Audio Components
-    public AudioMixer audioMixer;
-
     // Graphic Settings Variables
     Resolution[] resolutions;
     public TMP_Dropdown ResolutionDropdown;
