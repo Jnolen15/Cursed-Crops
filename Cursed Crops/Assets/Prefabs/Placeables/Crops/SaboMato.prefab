@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1361241702383186427}
   - component: {fileID: 1361241702383186426}
-  - component: {fileID: 9034472663571835039}
   - component: {fileID: 1837555550934620062}
+  - component: {fileID: 6676975331309240858}
+  - component: {fileID: 3289612995616147118}
   m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1361241702383186428}
   m_LocalRotation: {x: 0.38268346, y: -0, z: -0, w: 0.9238795}
   m_LocalPosition: {x: 0, y: -1, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children: []
   m_Father: {fileID: 5567646773155319050}
   m_RootOrder: 0
@@ -73,7 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 9
-  m_Sprite: {fileID: 21300000, guid: 70c3393bb4d216f4987f1cf97e8f5291, type: 3}
+  m_Sprite: {fileID: -6278526207310657842, guid: 78c07810ffa81c944862df92fe5690ae,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -84,25 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &9034472663571835039
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1361241702383186428}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f3a2d009408347245a7e111b116d3f42, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1837555550934620062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,6 +96,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc7a80e2f6eb782438832b241e87356e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &6676975331309240858
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361241702383186428}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f101356421fec2043b5b320aad36f262, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3289612995616147118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361241702383186428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c856552c3cf49049b763ad65374e762, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1912396367488105549
@@ -275,7 +289,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5567646773155319054}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1205.7828, y: 422.50198, z: 378.8891}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1361241702383186427}
@@ -385,6 +399,7 @@ MonoBehaviour:
   hurtSound: {fileID: 8300000, guid: 41e3ba03caf38cd45a77a28f8080090e, type: 3}
   spawningSound: {fileID: 8300000, guid: a73ed29011d70c1448cf84058c9b8fd0, type: 3}
   healing: 0
+  invinsble: 0
 --- !u!114 &7600592136357620512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -442,11 +457,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 384ea1e443f4cbc4682866c2d1fb9d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpeed: 1
-  originalSpeed: 1
+  enemySpeed: 4
+  originalSpeed: 4
   Player: {fileID: 0}
   mainTarget: {fileID: 0}
   listOfTurrets: []
   aPlayerIsStun: 1
   closestTurret: {fileID: 0}
   oldTarget: {fileID: 0}
+  sabotaging: 0

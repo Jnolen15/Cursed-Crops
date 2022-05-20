@@ -12,7 +12,7 @@ public class GameRuleManager : MonoBehaviour
     public int numGrabbagePlanted = 0;
     public int numMediBerryPlanted = 0;
     public int numScarrotPlanted = 0;
-    public int numSabatamatoPlanted = 0;
+    public int numSabomatoPlanted = 0;
 
     /* Difficulty increases by 1 for each successive phase.
      * It also increases by 1 for each player beyond the first.
@@ -83,8 +83,8 @@ public class GameRuleManager : MonoBehaviour
                 timesPlanted = numScarrotPlanted++;
                 Debug.Log("Scarrot bounty added");
                 break;
-            case "Sabatamato":
-                timesPlanted = numSabatamatoPlanted++;
+            case "Sabomato":
+                timesPlanted = numSabomatoPlanted++;
                 Debug.Log("Sabatamato bounty added");
                 break;
         }
@@ -135,8 +135,8 @@ public class GameRuleManager : MonoBehaviour
                 numScarrotPlanted--;
                 Debug.Log("Scarrot bounty added");
                 break;
-            case "Sabatamato":
-                numSabatamatoPlanted--;
+            case "Sabomato":
+                numSabomatoPlanted--;
                 Debug.Log("Sabatamato bounty added");
                 break;
         }

@@ -28,6 +28,7 @@ public class Turret : MonoBehaviour
     private int count = 0;
     private List<GameObject> enemies = new List<GameObject>();
     private Color prev;
+    private GameObject vines;
 
 
 
@@ -49,6 +50,9 @@ public class Turret : MonoBehaviour
     {
         if (!sabotaged)
         {
+            if (vines != null)
+                Destroy(vines);
+
             SpriteFlip();
             // Enemy targeting and shooting
             if (targetedEnemy != null && !onCooldown)
@@ -89,8 +93,10 @@ public class Turret : MonoBehaviour
         {
             StopCoroutine(shoot());
             onCooldown = true;
-            turretSprite.color = Color.red;
+            if(vines == null)
+                vines = Instantiate(Resources.Load<GameObject>("Effects/Vines"), transform.position, transform.rotation, transform);
         }
+
         // List cleanup
         foreach (GameObject enemy in enemies)
         {

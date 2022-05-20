@@ -22,6 +22,7 @@ public class SaboAI : MonoBehaviour
     public Transform closestTurret;
     public Transform oldTarget;
     private EnemyControler ec;
+    public bool sabotaging;
 
     // Start is called before the first frame update
     void Start()
@@ -128,18 +129,21 @@ public class SaboAI : MonoBehaviour
 
                 if (dSqrToTarget < closestDistanceSqr && (stopped != null && !stopped.sabotaged || trapStopped != null && !trapStopped.sabotaged))
                 {
-
                     closestDistanceSqr = dSqrToTarget;
                     bestTarget = potentialTarget;
                 }
             }
-
-
-
         }
-
-
         return bestTarget;
+    }
+
+    public IEnumerator Sabotage()
+    {
+        sabotaging = true;
+        enemySpeed = 0;
+        yield return new WaitForSeconds(2.5f);
+        enemySpeed = originalSpeed;
+        sabotaging = false;
     }
 
     private void OnTriggerStay(Collider other)
