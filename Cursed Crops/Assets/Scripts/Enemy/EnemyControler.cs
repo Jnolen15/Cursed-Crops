@@ -13,6 +13,7 @@ public class EnemyControler : MonoBehaviour
     public bool stunResist = true;
     public bool stunned = false;
     public string lastDamageType;
+    public GameObject theHealingAura;
     // Audio Variables
     
     public AudioClip hurtSound;
@@ -21,6 +22,7 @@ public class EnemyControler : MonoBehaviour
 
     // ================= Private variables =================
     private AudioPlayer daAudio;
+    private GameObject DaShield;
     private delegate void Callback();
     private Renderer rend;
     private SpriteRenderer sr;
@@ -42,10 +44,11 @@ public class EnemyControler : MonoBehaviour
     // Healing Buff Stuff
     private Coroutine healingCo;
     public bool healing = false;
-    public bool invinsble = false;
+    public bool invincible = false;
     private int healingAmmount = 1;
     private float healingTickSpeed = 1f;
     private float healingTimer = 1f;
+    private bool instantiateOnce = false;
 
     // Start is called before the first frame update
     void Start()
@@ -91,7 +94,24 @@ public class EnemyControler : MonoBehaviour
         {
             if(psBurn.isPlaying) psBurn.Stop();
         }
+        if(theHealingAura != null && !theHealingAura.activeInHierarchy)
+        {
+            invincible = false;
+            healing = false;
+        }
+        if (DaShield != null && !invincible)
+        {
+            instantiateOnce = false;
+            Destroy(DaShield);
+        }
+        if (invincible && !instantiateOnce)
+        {
 
+            instantiateOnce = true;
+            Vector3 shieldPlacement = new Vector3(transform.position.x, transform.position.y + 2, transform.position.z + 2);
+            DaShield = Instantiate(Resources.Load<GameObject>("Effects/Shield"), shieldPlacement, transform.rotation, transform);
+            
+        }
         // Healing effect. Heals damage every healingTickSpeed seconds
         if (healing)
         {
@@ -109,8 +129,9 @@ public class EnemyControler : MonoBehaviour
     public void takeDamage(int dmg, string type)
     {
         // Subtract from health
-        if (!invinsble)
+        if (!invincible)
         {
+            
             health -= dmg;
             overalldamage += dmg;
             lastDamageType = type;
@@ -123,12 +144,18 @@ public class EnemyControler : MonoBehaviour
                 if (gameObject.GetComponent<GrabbageAI>() != null)
                 {
                     gameObject.GetComponent<GrabbageAI>().boostedHealthActivate = false;
+                    
                     if (gameObject.GetComponent<GrabbageAI>().trappedPlayer != null)
                     {
                         gameObject.GetComponent<GrabbageAI>().trappedPlayer.GetComponent<PlayerControler>().trapped = false;
                     }
                     gameObject.SetActive(false);
                 }
+                if(gameObject.GetComponent<GoToEnemy>() != null)
+                {
+                    invincible = false;
+                }
+                invincible = false;
                 if (!dying && gameObject.activeInHierarchy) StartCoroutine(DoDeath());
             }
             else
@@ -137,6 +164,8 @@ public class EnemyControler : MonoBehaviour
                 StartCoroutine(hit(rend));
             }
         }
+        
+        
     }
 
     IEnumerator hit(Renderer renderer)
@@ -253,10 +282,10 @@ public class EnemyControler : MonoBehaviour
     {
         if (other.gameObject.tag == "HealingAura")
         {
-
+            theHealingAura = other.gameObject;
             if (gameObject.GetComponent<GoToEnemy>() == null)
             {
-                invinsble = true;
+                invincible = true;
             }
             healing = true;
         }
@@ -274,10 +303,10 @@ public class EnemyControler : MonoBehaviour
     {
         if (other.gameObject.tag == "HealingAura")
         {
-            if (gameObject.GetComponent<GoToEnemy>() == null)
-            {
-                invinsble = false;
-            }
+            //if (gameObject.GetComponent<GoToEnemy>() == null)
+            //{
+                invincible = false;
+            //}
             healing = false;
         }
         if (other.gameObject.tag == "Border")
