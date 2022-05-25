@@ -114,7 +114,7 @@ public class DialogueTrigger : MonoBehaviour
             case "Harvey":
                 image.GetComponent<Image>().sprite = Harvey;
                 break;
-            case "Cultist":
+            case "Mysterious Farmer":
                 image.GetComponent<Image>().sprite = Cultist;
                 break;
             case "Harvey and Cecil":
