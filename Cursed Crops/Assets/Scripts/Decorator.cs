@@ -56,7 +56,7 @@ public class Decorator : MonoBehaviour
                     Instantiate(Resources.Load<GameObject>(deco), pos, transform.rotation, transform);
                     break;
                 case "TileUnplaceable":
-                    Instantiate(Resources.Load<GameObject>("Decor/Rock1"), pos, transform.rotation, transform);
+                    //Instantiate(Resources.Load<GameObject>("Decor/Rock1"), pos, transform.rotation, transform);
                     break;
                 case "TileObjective":
                     Instantiate(Resources.Load<GameObject>("Decor/Rock1"), pos, transform.rotation, transform);
