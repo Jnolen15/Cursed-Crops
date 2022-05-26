@@ -1034,13 +1034,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 197614633}
-  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalRotation: {x: 0.38268346, y: 0, z: 0, w: 0.9238795}
   m_LocalPosition: {x: -27.8, y: 6.9, z: -6.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &197614638
 Animator:
   serializedVersion: 3
@@ -2069,6 +2069,742 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 535472836}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &571367391
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 571367397}
+  - component: {fileID: 571367396}
+  - component: {fileID: 571367395}
+  - component: {fileID: 571367394}
+  - component: {fileID: 571367393}
+  - component: {fileID: 571367392}
+  m_Layer: 0
+  m_Name: Dancing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &571367392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571367391}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efd0b4c93e8357a4b8968d2942c60d8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dt: {fileID: 0}
+  goToLevel: Level3
+--- !u!114 &571367393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571367391}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fabfa06596e6ef94fa2e0c01c2bde494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  director: {fileID: 571367396}
+  daName: {fileID: 0}
+  image: {fileID: 0}
+  daDialogue: {fileID: 0}
+  Doug: {fileID: 21300000, guid: 660c854ce12604c4ab3eceeadcfefb67, type: 3}
+  Cecil: {fileID: 21300000, guid: 2eba27d99c4e3fd49ae38bd02b59e864, type: 3}
+  Carlisle: {fileID: 21300000, guid: 59af51a8a036cce4ba82cf2b309102d8, type: 3}
+  Harvey: {fileID: 21300000, guid: 9cec06fe0af965e4c9526a69ce21dd2c, type: 3}
+  Narrator: {fileID: 0}
+  Cultist: {fileID: 21300000, guid: 6be930b67b0ae8a48a2463bbc2f78410, type: 3}
+  TwoPeople: {fileID: 21300000, guid: 2409daabaf509d149a9c4b0ee7ec3249, type: 3}
+  sentence: Ayy Lmao
+  character: 
+  stopDialogue: 0
+  dialogueHappening: 0
+  startOfDialogue: 1
+  textOver: 0
+  dialogue:
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: "Dead leaves fall off equally dead trees, forming a path of nature\u2019s
+      bones leading towards\u2026 the old farmhouse on the hill."
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: The group arrives in this cemetery, and look around for any sign of
+      life.
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: Carlisle in the meantime begins rushing around the farm, notebook
+      in hand like a scientist possessed.
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Cecil
+    eventWeWant: 
+    sentences: "Hmm\u2026 this place really is abandoned\u2026"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Carlisle
+    eventWeWant: 
+    sentences: "I hope we find more of those mediberries!  Their rosy little cheeks\u2026Their
+      adorable little faces\u2026"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Carlisle
+    eventWeWant: 
+    sentences: "Oh I can\u2019t wait to finish my dissection of them!  Where are
+      they?  WHERE ARE THEY!?"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Harvey
+    eventWeWant: 
+    sentences: "WE HAVEN\u2019T PLANTED ANYTHING YET!  QUIET DOWN OR THOSE ALIENS\u2019LL
+      FIND US!\r"
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Carlisle
+    eventWeWant: 
+    sentences: "Oh\u2026 Right\u2026"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: "Doug, still reeling from the sheer air pressure created by Carlisle\u2019s
+      mediberry induced science rampage, stumbles back into a strange symbol created
+      on the ground with strange black powder."
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: "Doug reels back up quickly, surprised at this discovery.  He thinks
+      about alerting the others, but first\u2026"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Doug
+    eventWeWant: 
+    sentences: '*munch*'
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: Doug spits out the gunpowder that was used to make the symbol.  After
+      determining it is not edible and therefore not something he wants, he leads
+      the group over to it.
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Cecil
+    eventWeWant: 
+    sentences: "Hm\u2026 Intriguing\u2026  Some witch ritual circles\u2026\r"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Harvey
+    eventWeWant: 
+    sentences: SEE!? I WAS RIGHT!  THIS IS A CROP CIRCLE!  THIS MEANS THERE ARE ALIENS
+      NEARBY WHO WOULD ABDUCT US IF THEY KNEW WE WERE HERE, SO EVERYBODY SHUT UP!
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Cecil
+    eventWeWant: 
+    sentences: "You\u2019re the one yelling\u2026"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Harvey
+    eventWeWant: 
+    sentences: Oh yeah, I forgot.
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Cecil
+    eventWeWant: 
+    sentences: "Anyways, this is clearly a witch ritual circle.  I\u2019ve seen them
+      multiple times and this looks exactly like them\u2026"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Cecil
+    eventWeWant: 
+    sentences: "Aside from the gunpowder\u2026 and the lack of candles\u2026 and
+      blood\u2026 and the shape of the circle\u2026  and there's no goat hea-"
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Carlisle
+    eventWeWant: 
+    sentences: "Don\u2019t be ridiculous.  Let me just add up the numbers here real
+      quick\u2026 and\u2026"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: Pages and pages of notes begin flying out of her notebook.  The absolute
+      power of the mathematics being calculated sends shockwaves every time one is
+      solved.
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: "Steam begins lifting from Carlisle\u2019s pen.  It\u2019s as if Carlilse
+      is battling against the concept of mathematics itself, and winning."
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: After a few seconds, the shockwaves stop, and Carlisle pushes up her
+      glasses.
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Carlisle
+    eventWeWant: 
+    sentences: "Done.  This is clearly\u2026"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Carlisle
+    eventWeWant: 
+    sentences: ...
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Carlisle
+    eventWeWant: 
+    sentences: " \u2026A science circle."
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: ' Carlilse closes her book with the confidence of one who has solved
+      God.'
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Harvey and Cecil
+    eventWeWant: 
+    sentences: "A what\u2026?"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Carlisle
+    eventWeWant: 
+    sentences: "Y\u2019know, a science circle!  You\u2019ve never heard of them? 
+      They\u2019re circles\u2026 but science-y"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Carlisle
+    eventWeWant: 
+    sentences: "And since I have no idea what that circle is, it\u2019s clearly science!"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Cecil
+    eventWeWant: 
+    sentences: ...
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Harvey
+    eventWeWant: 
+    sentences: ...
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: ...
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: Anyways, the ground starts to shake.  The group looks over to the
+      abandoned farmhouse.
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: "The stirring of multiple beings can be heard echoing out from everywhere.
+      The rumbling begins to grow louder\u2026 stronger\u2026 "
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: 'The ground splits and cracks, barely containing what is being held
+      within. '
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: With a deafening roar, countless swarms of crops .  come charging
+      at the gang.  Everyone prepares to defend themselves from this newly discovered
+      threat.
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: "Doug dashes forward, arms outstretched, to protect the \u201CDoug
+      circles\u201D he made on the ground."
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: "The final dawn\u2026"
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: " Isn\u2019t now.  Go kill those things."
+--- !u!114 &571367394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571367391}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 843562213e4f8974a9f777a4503ac6a4,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 571367392}
+        m_TargetAssemblyTypeName: CutsceneScripting, Assembly-CSharp
+        m_MethodName: Progress_performed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8bf8db31-ce2d-45f6-80f8-76cfc98af689
+    m_ActionName: Player/Attack[/DualShock4GamepadHID/rightTrigger,/DualShock4GamepadHID/buttonWest,/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 78ef1b08-176d-4b46-99eb-79f65b82c09c
+    m_ActionName: Player/Ranged[/DualShock4GamepadHID/leftTrigger,/DualShock4GamepadHID/buttonEast,/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 68cb8dc6-0c65-43ac-a1b2-e4767004a08f
+    m_ActionName: Player/Roll[/DualShock4GamepadHID/rightShoulder,/DualShock4GamepadHID/leftShoulder,/DualShock4GamepadHID/buttonSouth,/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5a2a9781-0d80-4845-b311-2137b4ce8ed8
+    m_ActionName: Player/Movement[/DualShock4GamepadHID/leftStick,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 063adcea-5308-4a76-9dbf-c0d3ffd4697e
+    m_ActionName: Player/Aim[/DualShock4GamepadHID/rightStick,/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: aebf6278-7f77-4e36-b212-c40d770a7dab
+    m_ActionName: Player/Build[/DualShock4GamepadHID/buttonNorth,/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 035c1447-4de8-4689-95bf-4240a09d8944
+    m_ActionName: Player/Rotate
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: db451421-19df-40d6-bb0d-29edad8b0be3
+    m_ActionName: Player/Place[/DualShock4GamepadHID/buttonSouth,/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b4d67f51-4e9c-47ee-b63e-c8a86bb6826a
+    m_ActionName: Player/SwitchLeft[/DualShock4GamepadHID/leftShoulder,/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f23ff558-5b6d-4126-9b47-a5854c8b1e53
+    m_ActionName: Player/Switchright[/DualShock4GamepadHID/rightShoulder,/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e4df2b50-bf09-4d37-98e4-c209761d7268
+    m_ActionName: Player/SelectNorth[/DualShock4GamepadHID/dpad/up,/Keyboard/i]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b4ccd6e9-ca2c-4888-8520-973aec198f54
+    m_ActionName: Player/SelectSouth[/DualShock4GamepadHID/dpad/down,/Keyboard/k]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 87081256-78cd-47e0-83e8-2d113025fc27
+    m_ActionName: Player/SelectEast[/DualShock4GamepadHID/dpad/right,/Keyboard/l]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 58bad2c5-7786-441f-97ac-97d90ff44d7c
+    m_ActionName: Player/SelectWest[/DualShock4GamepadHID/dpad/left,/Keyboard/j]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f7d28228-f4c5-46f8-b819-fe898b157e29
+    m_ActionName: Player/Destroy[/Keyboard/f,/DualShock4GamepadHID/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 79170d67-a8d9-4ec4-8614-d35f8c4b0621
+    m_ActionName: Player/Pause[/Keyboard/escape,/DualShock4GamepadHID/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4ba87804-13fb-46e1-9d25-05ff8d937e96
+    m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: aac8214e-ed4f-480f-8552-1e66549ce61f
+    m_ActionName: UI/Submit[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f6ee06c1-66d6-4705-959b-26617ff85f0a
+    m_ActionName: UI/Cancel[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f714d576-a778-4c25-8e6c-79b5d71701a4
+    m_ActionName: UI/Point[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d11262e5-ed5c-4a31-86ba-44c9bc985811
+    m_ActionName: UI/Click[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a47b5f79-36f6-445c-a269-8c2c3986f005
+    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 43936b09-6c54-4db7-bf98-5c82b9b4de3f
+    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 86c80f10-9bdf-44b9-8da5-71da6cdc2a63
+    m_ActionName: UI/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2d04452d-4c2b-4b9b-8176-bb954debed05
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ff1405c9-faa9-4ccc-9677-03b51fab100a
+    m_ActionName: UI/TrackedDeviceOrientation
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Keyboard
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &571367395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571367391}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 6482500f66d27724999e3d2f4eeabb72, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 571367393}
+          m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
+          m_MethodName: TriggerDialogue
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!320 &571367396
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571367391}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 6c499bd9938e77f4aa44d741f081167d, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 1
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: -6064040600219649169, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -6142196755984499169, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 923825873910786264, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 571367391}
+  - key: {fileID: 1009188810380416225, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -3395112166468210670, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 3723056026841969986, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 7238457090617319167, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4245445471165361712, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -7325089572990568842, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 658669161065968149, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4406169030604477480, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: -1443271449003817883, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -3721163147113388380, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4788492048806442223, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8741943351386276777, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 4780282415748838797, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -8772001695277784455, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 6716494082950366414, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -285792698844227016, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2332271248641763177, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8449763247298736015, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8756799628691249783, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 4689827545711633141, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 5393798627197550141, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 4967620105116317727, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2973636388290011267, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2889578537919956895, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -3689195205200964962, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 7085527611194237022, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 6603875845589727233, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 571367391}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 4594661414555254920, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -7151832980290756833, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 7141611414791697283, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8887180264782476552, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -6231028335564477425, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2328349025738266388, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 3917211721839886307, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2407513180371894712, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 977224413002308786, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -6768778630229644792, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 9105647985425267861, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -3716441962393991666, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 771336784075762108, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -9149341278163028550, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 3401735970137235480, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 9113437881646274493, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 6082130003121944249, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 571367391}
+  - key: {fileID: 3338003775845614468, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -5455753896228443013, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -5535917031381442834, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2678821534757387392, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -1719805922665256322, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 474743334322361464, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8092590314501130321, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 1456513657181667593, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 5411697127682035850, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 4018146173845353972, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -5279383287909214448, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 5383364383650860483, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8581531675482056194, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: -4418287418489664121, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 409902186116788392, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 571367391}
+  - key: {fileID: -4149225906672662032, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 1049830901804260916, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8449351158689935218, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 276114289631146363, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2775186769291308646, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 5552324351120334161, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 4107759886707750922, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 4930098185816037065, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -3196148342283085948, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4588173540966488338, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -8770541299036016007, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4858711007330724350, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -6165998204160093261, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -6990829051856967394, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 878310142283459576, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4922296483651198305, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -7354835429156888789, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 1487784149785383381, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -8783448998157797461, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -8123592168925859512, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 219060571963136520, guid: de08d89b220b60f498efe01bca2c06bd, type: 2}
+    value: {fileID: 514226107}
+  - key: {fileID: 7606263217396055905, guid: de08d89b220b60f498efe01bca2c06bd, type: 2}
+    value: {fileID: 1955187052}
+  - key: {fileID: 5486877798580568457, guid: de08d89b220b60f498efe01bca2c06bd, type: 2}
+    value: {fileID: 176903649}
+  - key: {fileID: 5631296541548990645, guid: de08d89b220b60f498efe01bca2c06bd, type: 2}
+    value: {fileID: 1608125156}
+  - key: {fileID: -3640546908023053187, guid: de08d89b220b60f498efe01bca2c06bd, type: 2}
+    value: {fileID: 1438759165}
+  - key: {fileID: -3837422564203573860, guid: 6c499bd9938e77f4aa44d741f081167d, type: 2}
+    value: {fileID: 1017256939}
+  m_ExposedReferences:
+    m_References: []
+--- !u!4 &571367397
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571367391}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: -20.28, y: 12.3, z: 12.17}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: -0.000005768936, y: 0, z: 0}
 --- !u!1 &592683523
 GameObject:
   m_ObjectHideFlags: 0
@@ -2863,6 +3599,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4679083987598565255, guid: e0c20c1d5ea62bb429e4f6ff7e6a7049,
         type: 3}
+    - target: {fileID: 958021309617550835, guid: ea94b27db935fd14698218c519a2522b,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea94b27db935fd14698218c519a2522b, type: 3}
 --- !u!1001 &850808248
@@ -4465,6 +5206,11 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 958021309617550835, guid: ea94b27db935fd14698218c519a2522b,
         type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 958021309617550835, guid: ea94b27db935fd14698218c519a2522b,
+        type: 3}
       propertyPath: m_SortingOrder
       value: -63
       objectReference: {fileID: 0}
@@ -5469,7 +6215,7 @@ PrefabInstance:
     - target: {fileID: 958021309617550835, guid: ea94b27db935fd14698218c519a2522b,
         type: 3}
       propertyPath: m_Color.a
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 958021309617550835, guid: ea94b27db935fd14698218c519a2522b,
         type: 3}
@@ -5742,7 +6488,7 @@ PrefabInstance:
     - target: {fileID: 958021309617550835, guid: ea94b27db935fd14698218c519a2522b,
         type: 3}
       propertyPath: m_Color.a
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea94b27db935fd14698218c519a2522b, type: 3}
@@ -5812,6 +6558,750 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &1653104493
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1653104499}
+  - component: {fileID: 1653104498}
+  - component: {fileID: 1653104497}
+  - component: {fileID: 1653104496}
+  - component: {fileID: 1653104495}
+  - component: {fileID: 1653104494}
+  m_Layer: 0
+  m_Name: Time Passes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1653104494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653104493}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efd0b4c93e8357a4b8968d2942c60d8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dt: {fileID: 0}
+  goToLevel: Level3
+--- !u!114 &1653104495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653104493}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fabfa06596e6ef94fa2e0c01c2bde494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  director: {fileID: 1653104498}
+  daName: {fileID: 0}
+  image: {fileID: 0}
+  daDialogue: {fileID: 0}
+  Doug: {fileID: 21300000, guid: 660c854ce12604c4ab3eceeadcfefb67, type: 3}
+  Cecil: {fileID: 21300000, guid: 2eba27d99c4e3fd49ae38bd02b59e864, type: 3}
+  Carlisle: {fileID: 21300000, guid: 59af51a8a036cce4ba82cf2b309102d8, type: 3}
+  Harvey: {fileID: 21300000, guid: 9cec06fe0af965e4c9526a69ce21dd2c, type: 3}
+  Narrator: {fileID: 0}
+  Cultist: {fileID: 21300000, guid: 6be930b67b0ae8a48a2463bbc2f78410, type: 3}
+  TwoPeople: {fileID: 21300000, guid: 2409daabaf509d149a9c4b0ee7ec3249, type: 3}
+  sentence: Ayy Lmao
+  character: 
+  stopDialogue: 0
+  dialogueHappening: 0
+  startOfDialogue: 1
+  textOver: 0
+  dialogue:
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: "Dead leaves fall off equally dead trees, forming a path of nature\u2019s
+      bones leading towards\u2026 the old farmhouse on the hill."
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: The group arrives in this cemetery, and look around for any sign of
+      life.
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: Carlisle in the meantime begins rushing around the farm, notebook
+      in hand like a scientist possessed.
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Cecil
+    eventWeWant: 
+    sentences: "Hmm\u2026 this place really is abandoned\u2026"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Carlisle
+    eventWeWant: 
+    sentences: "I hope we find more of those mediberries!  Their rosy little cheeks\u2026Their
+      adorable little faces\u2026"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Carlisle
+    eventWeWant: 
+    sentences: "Oh I can\u2019t wait to finish my dissection of them!  Where are
+      they?  WHERE ARE THEY!?"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Harvey
+    eventWeWant: 
+    sentences: "WE HAVEN\u2019T PLANTED ANYTHING YET!  QUIET DOWN OR THOSE ALIENS\u2019LL
+      FIND US!\r"
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Carlisle
+    eventWeWant: 
+    sentences: "Oh\u2026 Right\u2026"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: "Doug, still reeling from the sheer air pressure created by Carlisle\u2019s
+      mediberry induced science rampage, stumbles back into a strange symbol created
+      on the ground with strange black powder."
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: "Doug reels back up quickly, surprised at this discovery.  He thinks
+      about alerting the others, but first\u2026"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Doug
+    eventWeWant: 
+    sentences: '*munch*'
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: Doug spits out the gunpowder that was used to make the symbol.  After
+      determining it is not edible and therefore not something he wants, he leads
+      the group over to it.
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Cecil
+    eventWeWant: 
+    sentences: "Hm\u2026 Intriguing\u2026  Some witch ritual circles\u2026\r"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Harvey
+    eventWeWant: 
+    sentences: SEE!? I WAS RIGHT!  THIS IS A CROP CIRCLE!  THIS MEANS THERE ARE ALIENS
+      NEARBY WHO WOULD ABDUCT US IF THEY KNEW WE WERE HERE, SO EVERYBODY SHUT UP!
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Cecil
+    eventWeWant: 
+    sentences: "You\u2019re the one yelling\u2026"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Harvey
+    eventWeWant: 
+    sentences: Oh yeah, I forgot.
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Cecil
+    eventWeWant: 
+    sentences: "Anyways, this is clearly a witch ritual circle.  I\u2019ve seen them
+      multiple times and this looks exactly like them\u2026"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Cecil
+    eventWeWant: 
+    sentences: "Aside from the gunpowder\u2026 and the lack of candles\u2026 and
+      blood\u2026 and the shape of the circle\u2026  and there's no goat hea-"
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Carlisle
+    eventWeWant: 
+    sentences: "Don\u2019t be ridiculous.  Let me just add up the numbers here real
+      quick\u2026 and\u2026"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: Pages and pages of notes begin flying out of her notebook.  The absolute
+      power of the mathematics being calculated sends shockwaves every time one is
+      solved.
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: "Steam begins lifting from Carlisle\u2019s pen.  It\u2019s as if Carlilse
+      is battling against the concept of mathematics itself, and winning."
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: After a few seconds, the shockwaves stop, and Carlisle pushes up her
+      glasses.
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Carlisle
+    eventWeWant: 
+    sentences: "Done.  This is clearly\u2026"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Carlisle
+    eventWeWant: 
+    sentences: ...
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Carlisle
+    eventWeWant: 
+    sentences: " \u2026A science circle."
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: ' Carlilse closes her book with the confidence of one who has solved
+      God.'
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Harvey and Cecil
+    eventWeWant: 
+    sentences: "A what\u2026?"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Carlisle
+    eventWeWant: 
+    sentences: "Y\u2019know, a science circle!  You\u2019ve never heard of them? 
+      They\u2019re circles\u2026 but science-y"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Carlisle
+    eventWeWant: 
+    sentences: "And since I have no idea what that circle is, it\u2019s clearly science!"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Cecil
+    eventWeWant: 
+    sentences: ...
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Harvey
+    eventWeWant: 
+    sentences: ...
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: ...
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: Anyways, the ground starts to shake.  The group looks over to the
+      abandoned farmhouse.
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: "The stirring of multiple beings can be heard echoing out from everywhere.
+      The rumbling begins to grow louder\u2026 stronger\u2026 "
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: 'The ground splits and cracks, barely containing what is being held
+      within. '
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: With a deafening roar, countless swarms of crops .  come charging
+      at the gang.  Everyone prepares to defend themselves from this newly discovered
+      threat.
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: "Doug dashes forward, arms outstretched, to protect the \u201CDoug
+      circles\u201D he made on the ground."
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: "The final dawn\u2026"
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: " Isn\u2019t now.  Go kill those things."
+--- !u!114 &1653104496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653104493}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 843562213e4f8974a9f777a4503ac6a4,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1653104494}
+        m_TargetAssemblyTypeName: CutsceneScripting, Assembly-CSharp
+        m_MethodName: Progress_performed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8bf8db31-ce2d-45f6-80f8-76cfc98af689
+    m_ActionName: Player/Attack[/DualShock4GamepadHID/rightTrigger,/DualShock4GamepadHID/buttonWest,/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 78ef1b08-176d-4b46-99eb-79f65b82c09c
+    m_ActionName: Player/Ranged[/DualShock4GamepadHID/leftTrigger,/DualShock4GamepadHID/buttonEast,/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 68cb8dc6-0c65-43ac-a1b2-e4767004a08f
+    m_ActionName: Player/Roll[/DualShock4GamepadHID/rightShoulder,/DualShock4GamepadHID/leftShoulder,/DualShock4GamepadHID/buttonSouth,/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5a2a9781-0d80-4845-b311-2137b4ce8ed8
+    m_ActionName: Player/Movement[/DualShock4GamepadHID/leftStick,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 063adcea-5308-4a76-9dbf-c0d3ffd4697e
+    m_ActionName: Player/Aim[/DualShock4GamepadHID/rightStick,/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: aebf6278-7f77-4e36-b212-c40d770a7dab
+    m_ActionName: Player/Build[/DualShock4GamepadHID/buttonNorth,/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 035c1447-4de8-4689-95bf-4240a09d8944
+    m_ActionName: Player/Rotate
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: db451421-19df-40d6-bb0d-29edad8b0be3
+    m_ActionName: Player/Place[/DualShock4GamepadHID/buttonSouth,/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b4d67f51-4e9c-47ee-b63e-c8a86bb6826a
+    m_ActionName: Player/SwitchLeft[/DualShock4GamepadHID/leftShoulder,/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f23ff558-5b6d-4126-9b47-a5854c8b1e53
+    m_ActionName: Player/Switchright[/DualShock4GamepadHID/rightShoulder,/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e4df2b50-bf09-4d37-98e4-c209761d7268
+    m_ActionName: Player/SelectNorth[/DualShock4GamepadHID/dpad/up,/Keyboard/i]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b4ccd6e9-ca2c-4888-8520-973aec198f54
+    m_ActionName: Player/SelectSouth[/DualShock4GamepadHID/dpad/down,/Keyboard/k]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 87081256-78cd-47e0-83e8-2d113025fc27
+    m_ActionName: Player/SelectEast[/DualShock4GamepadHID/dpad/right,/Keyboard/l]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 58bad2c5-7786-441f-97ac-97d90ff44d7c
+    m_ActionName: Player/SelectWest[/DualShock4GamepadHID/dpad/left,/Keyboard/j]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f7d28228-f4c5-46f8-b819-fe898b157e29
+    m_ActionName: Player/Destroy[/Keyboard/f,/DualShock4GamepadHID/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 79170d67-a8d9-4ec4-8614-d35f8c4b0621
+    m_ActionName: Player/Pause[/Keyboard/escape,/DualShock4GamepadHID/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4ba87804-13fb-46e1-9d25-05ff8d937e96
+    m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: aac8214e-ed4f-480f-8552-1e66549ce61f
+    m_ActionName: UI/Submit[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f6ee06c1-66d6-4705-959b-26617ff85f0a
+    m_ActionName: UI/Cancel[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f714d576-a778-4c25-8e6c-79b5d71701a4
+    m_ActionName: UI/Point[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d11262e5-ed5c-4a31-86ba-44c9bc985811
+    m_ActionName: UI/Click[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a47b5f79-36f6-445c-a269-8c2c3986f005
+    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 43936b09-6c54-4db7-bf98-5c82b9b4de3f
+    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 86c80f10-9bdf-44b9-8da5-71da6cdc2a63
+    m_ActionName: UI/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2d04452d-4c2b-4b9b-8176-bb954debed05
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ff1405c9-faa9-4ccc-9677-03b51fab100a
+    m_ActionName: UI/TrackedDeviceOrientation
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Keyboard
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &1653104497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653104493}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 6482500f66d27724999e3d2f4eeabb72, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1653104495}
+          m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
+          m_MethodName: TriggerDialogue
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!320 &1653104498
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653104493}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: f2f7d9be26e24e441a009857e7829dba, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 0
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: -6064040600219649169, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -6142196755984499169, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 923825873910786264, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 1653104493}
+  - key: {fileID: 1009188810380416225, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -3395112166468210670, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 3723056026841969986, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 7238457090617319167, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4245445471165361712, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -7325089572990568842, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 658669161065968149, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4406169030604477480, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: -1443271449003817883, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -3721163147113388380, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4788492048806442223, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8741943351386276777, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 4780282415748838797, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -8772001695277784455, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 6716494082950366414, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -285792698844227016, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2332271248641763177, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8449763247298736015, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8756799628691249783, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 4689827545711633141, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 5393798627197550141, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 4967620105116317727, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2973636388290011267, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2889578537919956895, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -3689195205200964962, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 7085527611194237022, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 6603875845589727233, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 1653104493}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 4594661414555254920, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -7151832980290756833, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 7141611414791697283, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8887180264782476552, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -6231028335564477425, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2328349025738266388, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 3917211721839886307, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2407513180371894712, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 977224413002308786, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -6768778630229644792, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 9105647985425267861, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -3716441962393991666, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 771336784075762108, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -9149341278163028550, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 3401735970137235480, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 9113437881646274493, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 6082130003121944249, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 1653104493}
+  - key: {fileID: 3338003775845614468, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -5455753896228443013, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -5535917031381442834, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2678821534757387392, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -1719805922665256322, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 474743334322361464, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8092590314501130321, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 1456513657181667593, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 5411697127682035850, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 4018146173845353972, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -5279383287909214448, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 5383364383650860483, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8581531675482056194, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: -4418287418489664121, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 409902186116788392, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 1653104493}
+  - key: {fileID: -4149225906672662032, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 1049830901804260916, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8449351158689935218, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 276114289631146363, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2775186769291308646, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 5552324351120334161, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 4107759886707750922, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 4930098185816037065, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -3196148342283085948, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4588173540966488338, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -8770541299036016007, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4858711007330724350, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -6165998204160093261, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -6990829051856967394, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 878310142283459576, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4922296483651198305, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -7354835429156888789, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 1487784149785383381, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -8783448998157797461, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -8123592168925859512, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 219060571963136520, guid: de08d89b220b60f498efe01bca2c06bd, type: 2}
+    value: {fileID: 514226107}
+  - key: {fileID: 7606263217396055905, guid: de08d89b220b60f498efe01bca2c06bd, type: 2}
+    value: {fileID: 1955187052}
+  - key: {fileID: 5486877798580568457, guid: de08d89b220b60f498efe01bca2c06bd, type: 2}
+    value: {fileID: 176903649}
+  - key: {fileID: 5631296541548990645, guid: de08d89b220b60f498efe01bca2c06bd, type: 2}
+    value: {fileID: 1608125156}
+  - key: {fileID: -3640546908023053187, guid: de08d89b220b60f498efe01bca2c06bd, type: 2}
+    value: {fileID: 1438759165}
+  - key: {fileID: -7785771643372900681, guid: f2f7d9be26e24e441a009857e7829dba, type: 2}
+    value: {fileID: 1438759165}
+  - key: {fileID: 9114265468315139364, guid: f2f7d9be26e24e441a009857e7829dba, type: 2}
+    value: {fileID: 1438759165}
+  - key: {fileID: -3989635353087610357, guid: f2f7d9be26e24e441a009857e7829dba, type: 2}
+    value: {fileID: 1790678471}
+  - key: {fileID: -2583934290439976461, guid: f2f7d9be26e24e441a009857e7829dba, type: 2}
+    value: {fileID: 197614638}
+  - key: {fileID: -5816842439269126437, guid: f2f7d9be26e24e441a009857e7829dba, type: 2}
+    value: {fileID: 1017256939}
+  m_ExposedReferences:
+    m_References: []
+--- !u!4 &1653104499
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1653104493}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: -20.28, y: 12.3, z: 12.17}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: -0.000005768936, y: 0, z: 0}
 --- !u!1 &1661106558
 GameObject:
   m_ObjectHideFlags: 0
@@ -5978,6 +7468,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1790678470}
   - component: {fileID: 1790678469}
+  - component: {fileID: 1790678471}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -6061,6 +7552,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!95 &1790678471
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790678468}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1796869681
 GameObject:
   m_ObjectHideFlags: 0
@@ -6433,6 +7943,107 @@ MonoBehaviour:
     name: Mysterious Farmer
     eventWeWant: 
     sentences: And my hand shall bring that end to bear.
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Mysterious Farmer
+    eventWeWant: 
+    sentences: "Damneth it. It\u2019s all country."
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Mysterious Farmer
+    eventWeWant: 
+    sentences: No matter.  In the time I must spend waiting for them to arrive, I
+      shall find the classical station
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: Hours go by...
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: and the farmers have not arrived
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: Nor has the figure found anything but the country radio.
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Mysterious Farmer
+    eventWeWant: 
+    sentences: "Hmmm. The farmers have deigned not to appear. Dare I hope\u2026?\r"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Mysterious Farmer
+    eventWeWant: 
+    sentences: That they evacuated the land as I instructed them to?
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Mysterious Farmer
+    eventWeWant: 
+    sentences: "\u2026"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Mysterious Farmer
+    eventWeWant: 
+    sentences: Nay, they have proven too intelligent for that.
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Mysterious Farmer
+    eventWeWant: 
+    sentences: "Doth this mean they hath discovered our plot\u2026?\r"
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Mysterious Farmer
+    eventWeWant: 
+    sentences: "And are instead, rushing to the site of the final dawn\u2026?"
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Mysterious Farmer
+    eventWeWant: 
+    sentences: Curses!  I have been foiled again by thine brilliance, beings of the
+      farm!  I shall not yield until the final dawn hath broken!
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: A few minutes later, the farmers emerge from the forest to see the
+      empty farm, complete with a lonely radio.
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Harvey
+    eventWeWant: 
+    sentences: "This better not be the SAME DAMN FARMHOUSE we\u2019ve been circling
+      around these past few hours."
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Cecil
+    eventWeWant: 
+    sentences: "It could be\u2026 but\u2026"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Carlisle
+    eventWeWant: 
+    sentences: " Ooh!  This is a different farmhouse!  The last one didn\u2019t have
+      that radio!"
 --- !u!114 &1932243079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6863,6 +8474,10 @@ PlayableDirector:
     value: {fileID: 1932243076}
   - key: {fileID: 4185939815695952149, guid: e387e394b73d7f2468daac5bd5027390, type: 2}
     value: {fileID: 1017256939}
+  - key: {fileID: 6304833588762776269, guid: e387e394b73d7f2468daac5bd5027390, type: 2}
+    value: {fileID: 1653104493}
+  - key: {fileID: -3600989151258863557, guid: e387e394b73d7f2468daac5bd5027390, type: 2}
+    value: {fileID: 2076960296}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1932243082
@@ -8039,6 +9654,742 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2071446080}
   m_Mesh: {fileID: 6429325443460967488, guid: 93d9a348fa4f84d4cb7a18621382c8cc, type: 3}
+--- !u!1 &2076960296
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2076960302}
+  - component: {fileID: 2076960301}
+  - component: {fileID: 2076960300}
+  - component: {fileID: 2076960299}
+  - component: {fileID: 2076960298}
+  - component: {fileID: 2076960297}
+  m_Layer: 0
+  m_Name: CameraBack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &2076960297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2076960296}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efd0b4c93e8357a4b8968d2942c60d8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dt: {fileID: 0}
+  goToLevel: Level3
+--- !u!114 &2076960298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2076960296}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fabfa06596e6ef94fa2e0c01c2bde494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  director: {fileID: 2076960301}
+  daName: {fileID: 0}
+  image: {fileID: 0}
+  daDialogue: {fileID: 0}
+  Doug: {fileID: 21300000, guid: 660c854ce12604c4ab3eceeadcfefb67, type: 3}
+  Cecil: {fileID: 21300000, guid: 2eba27d99c4e3fd49ae38bd02b59e864, type: 3}
+  Carlisle: {fileID: 21300000, guid: 59af51a8a036cce4ba82cf2b309102d8, type: 3}
+  Harvey: {fileID: 21300000, guid: 9cec06fe0af965e4c9526a69ce21dd2c, type: 3}
+  Narrator: {fileID: 0}
+  Cultist: {fileID: 21300000, guid: 6be930b67b0ae8a48a2463bbc2f78410, type: 3}
+  TwoPeople: {fileID: 21300000, guid: 2409daabaf509d149a9c4b0ee7ec3249, type: 3}
+  sentence: Ayy Lmao
+  character: 
+  stopDialogue: 0
+  dialogueHappening: 0
+  startOfDialogue: 1
+  textOver: 0
+  dialogue:
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: "Dead leaves fall off equally dead trees, forming a path of nature\u2019s
+      bones leading towards\u2026 the old farmhouse on the hill."
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: The group arrives in this cemetery, and look around for any sign of
+      life.
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: Carlisle in the meantime begins rushing around the farm, notebook
+      in hand like a scientist possessed.
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Cecil
+    eventWeWant: 
+    sentences: "Hmm\u2026 this place really is abandoned\u2026"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Carlisle
+    eventWeWant: 
+    sentences: "I hope we find more of those mediberries!  Their rosy little cheeks\u2026Their
+      adorable little faces\u2026"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Carlisle
+    eventWeWant: 
+    sentences: "Oh I can\u2019t wait to finish my dissection of them!  Where are
+      they?  WHERE ARE THEY!?"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Harvey
+    eventWeWant: 
+    sentences: "WE HAVEN\u2019T PLANTED ANYTHING YET!  QUIET DOWN OR THOSE ALIENS\u2019LL
+      FIND US!\r"
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Carlisle
+    eventWeWant: 
+    sentences: "Oh\u2026 Right\u2026"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: "Doug, still reeling from the sheer air pressure created by Carlisle\u2019s
+      mediberry induced science rampage, stumbles back into a strange symbol created
+      on the ground with strange black powder."
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: "Doug reels back up quickly, surprised at this discovery.  He thinks
+      about alerting the others, but first\u2026"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Doug
+    eventWeWant: 
+    sentences: '*munch*'
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: Doug spits out the gunpowder that was used to make the symbol.  After
+      determining it is not edible and therefore not something he wants, he leads
+      the group over to it.
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Cecil
+    eventWeWant: 
+    sentences: "Hm\u2026 Intriguing\u2026  Some witch ritual circles\u2026\r"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Harvey
+    eventWeWant: 
+    sentences: SEE!? I WAS RIGHT!  THIS IS A CROP CIRCLE!  THIS MEANS THERE ARE ALIENS
+      NEARBY WHO WOULD ABDUCT US IF THEY KNEW WE WERE HERE, SO EVERYBODY SHUT UP!
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Cecil
+    eventWeWant: 
+    sentences: "You\u2019re the one yelling\u2026"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Harvey
+    eventWeWant: 
+    sentences: Oh yeah, I forgot.
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Cecil
+    eventWeWant: 
+    sentences: "Anyways, this is clearly a witch ritual circle.  I\u2019ve seen them
+      multiple times and this looks exactly like them\u2026"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Cecil
+    eventWeWant: 
+    sentences: "Aside from the gunpowder\u2026 and the lack of candles\u2026 and
+      blood\u2026 and the shape of the circle\u2026  and there's no goat hea-"
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Carlisle
+    eventWeWant: 
+    sentences: "Don\u2019t be ridiculous.  Let me just add up the numbers here real
+      quick\u2026 and\u2026"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: Pages and pages of notes begin flying out of her notebook.  The absolute
+      power of the mathematics being calculated sends shockwaves every time one is
+      solved.
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: "Steam begins lifting from Carlisle\u2019s pen.  It\u2019s as if Carlilse
+      is battling against the concept of mathematics itself, and winning."
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: After a few seconds, the shockwaves stop, and Carlisle pushes up her
+      glasses.
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Carlisle
+    eventWeWant: 
+    sentences: "Done.  This is clearly\u2026"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Carlisle
+    eventWeWant: 
+    sentences: ...
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Carlisle
+    eventWeWant: 
+    sentences: " \u2026A science circle."
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: ' Carlilse closes her book with the confidence of one who has solved
+      God.'
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Harvey and Cecil
+    eventWeWant: 
+    sentences: "A what\u2026?"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Carlisle
+    eventWeWant: 
+    sentences: "Y\u2019know, a science circle!  You\u2019ve never heard of them? 
+      They\u2019re circles\u2026 but science-y"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Carlisle
+    eventWeWant: 
+    sentences: "And since I have no idea what that circle is, it\u2019s clearly science!"
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Cecil
+    eventWeWant: 
+    sentences: ...
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Harvey
+    eventWeWant: 
+    sentences: ...
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: ...
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: Anyways, the ground starts to shake.  The group looks over to the
+      abandoned farmhouse.
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: "The stirring of multiple beings can be heard echoing out from everywhere.
+      The rumbling begins to grow louder\u2026 stronger\u2026 "
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: 'The ground splits and cracks, barely containing what is being held
+      within. '
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: With a deafening roar, countless swarms of crops .  come charging
+      at the gang.  Everyone prepares to defend themselves from this newly discovered
+      threat.
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: "Doug dashes forward, arms outstretched, to protect the \u201CDoug
+      circles\u201D he made on the ground."
+  - endOfDialogue: 0
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: "The final dawn\u2026"
+  - endOfDialogue: 1
+    enemyAttack: 0
+    endOfStartingDialogue: 0
+    name: Narrator
+    eventWeWant: 
+    sentences: " Isn\u2019t now.  Go kill those things."
+--- !u!114 &2076960299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2076960296}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 843562213e4f8974a9f777a4503ac6a4,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2076960297}
+        m_TargetAssemblyTypeName: CutsceneScripting, Assembly-CSharp
+        m_MethodName: Progress_performed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8bf8db31-ce2d-45f6-80f8-76cfc98af689
+    m_ActionName: Player/Attack[/DualShock4GamepadHID/rightTrigger,/DualShock4GamepadHID/buttonWest,/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 78ef1b08-176d-4b46-99eb-79f65b82c09c
+    m_ActionName: Player/Ranged[/DualShock4GamepadHID/leftTrigger,/DualShock4GamepadHID/buttonEast,/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 68cb8dc6-0c65-43ac-a1b2-e4767004a08f
+    m_ActionName: Player/Roll[/DualShock4GamepadHID/rightShoulder,/DualShock4GamepadHID/leftShoulder,/DualShock4GamepadHID/buttonSouth,/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5a2a9781-0d80-4845-b311-2137b4ce8ed8
+    m_ActionName: Player/Movement[/DualShock4GamepadHID/leftStick,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 063adcea-5308-4a76-9dbf-c0d3ffd4697e
+    m_ActionName: Player/Aim[/DualShock4GamepadHID/rightStick,/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: aebf6278-7f77-4e36-b212-c40d770a7dab
+    m_ActionName: Player/Build[/DualShock4GamepadHID/buttonNorth,/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 035c1447-4de8-4689-95bf-4240a09d8944
+    m_ActionName: Player/Rotate
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: db451421-19df-40d6-bb0d-29edad8b0be3
+    m_ActionName: Player/Place[/DualShock4GamepadHID/buttonSouth,/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b4d67f51-4e9c-47ee-b63e-c8a86bb6826a
+    m_ActionName: Player/SwitchLeft[/DualShock4GamepadHID/leftShoulder,/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f23ff558-5b6d-4126-9b47-a5854c8b1e53
+    m_ActionName: Player/Switchright[/DualShock4GamepadHID/rightShoulder,/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e4df2b50-bf09-4d37-98e4-c209761d7268
+    m_ActionName: Player/SelectNorth[/DualShock4GamepadHID/dpad/up,/Keyboard/i]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b4ccd6e9-ca2c-4888-8520-973aec198f54
+    m_ActionName: Player/SelectSouth[/DualShock4GamepadHID/dpad/down,/Keyboard/k]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 87081256-78cd-47e0-83e8-2d113025fc27
+    m_ActionName: Player/SelectEast[/DualShock4GamepadHID/dpad/right,/Keyboard/l]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 58bad2c5-7786-441f-97ac-97d90ff44d7c
+    m_ActionName: Player/SelectWest[/DualShock4GamepadHID/dpad/left,/Keyboard/j]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f7d28228-f4c5-46f8-b819-fe898b157e29
+    m_ActionName: Player/Destroy[/Keyboard/f,/DualShock4GamepadHID/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 79170d67-a8d9-4ec4-8614-d35f8c4b0621
+    m_ActionName: Player/Pause[/Keyboard/escape,/DualShock4GamepadHID/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4ba87804-13fb-46e1-9d25-05ff8d937e96
+    m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: aac8214e-ed4f-480f-8552-1e66549ce61f
+    m_ActionName: UI/Submit[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f6ee06c1-66d6-4705-959b-26617ff85f0a
+    m_ActionName: UI/Cancel[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f714d576-a778-4c25-8e6c-79b5d71701a4
+    m_ActionName: UI/Point[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d11262e5-ed5c-4a31-86ba-44c9bc985811
+    m_ActionName: UI/Click[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a47b5f79-36f6-445c-a269-8c2c3986f005
+    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 43936b09-6c54-4db7-bf98-5c82b9b4de3f
+    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 86c80f10-9bdf-44b9-8da5-71da6cdc2a63
+    m_ActionName: UI/RightClick[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2d04452d-4c2b-4b9b-8176-bb954debed05
+    m_ActionName: UI/TrackedDevicePosition
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ff1405c9-faa9-4ccc-9677-03b51fab100a
+    m_ActionName: UI/TrackedDeviceOrientation
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Keyboard
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &2076960300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2076960296}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 6482500f66d27724999e3d2f4eeabb72, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2076960298}
+          m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
+          m_MethodName: TriggerDialogue
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!320 &2076960301
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2076960296}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: f9a242992dacd1345b608f75e8cd3d16, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 0
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: -6064040600219649169, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -6142196755984499169, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 923825873910786264, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 2076960296}
+  - key: {fileID: 1009188810380416225, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -3395112166468210670, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 3723056026841969986, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 7238457090617319167, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4245445471165361712, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -7325089572990568842, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 658669161065968149, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4406169030604477480, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: -1443271449003817883, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -3721163147113388380, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4788492048806442223, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8741943351386276777, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 4780282415748838797, guid: 029e69454f4823f439baba4bd57fef22, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -8772001695277784455, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 6716494082950366414, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -285792698844227016, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2332271248641763177, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8449763247298736015, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8756799628691249783, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 4689827545711633141, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 5393798627197550141, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 4967620105116317727, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2973636388290011267, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2889578537919956895, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -3689195205200964962, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 7085527611194237022, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 6603875845589727233, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 2076960296}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 4594661414555254920, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -7151832980290756833, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 7141611414791697283, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8887180264782476552, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -6231028335564477425, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2328349025738266388, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 3917211721839886307, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2407513180371894712, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 977224413002308786, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -6768778630229644792, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 9105647985425267861, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -3716441962393991666, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 771336784075762108, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -9149341278163028550, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 3401735970137235480, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 9113437881646274493, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 6082130003121944249, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 2076960296}
+  - key: {fileID: 3338003775845614468, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -5455753896228443013, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -5535917031381442834, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2678821534757387392, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -1719805922665256322, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 474743334322361464, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8092590314501130321, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 1456513657181667593, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 5411697127682035850, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 4018146173845353972, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -5279383287909214448, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 5383364383650860483, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8581531675482056194, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: -4418287418489664121, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 409902186116788392, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 2076960296}
+  - key: {fileID: -4149225906672662032, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 1049830901804260916, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8449351158689935218, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 276114289631146363, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2775186769291308646, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 5552324351120334161, guid: 63cfbde2e59887649843ccfc4484b705, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 4107759886707750922, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 4930098185816037065, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -3196148342283085948, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4588173540966488338, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -8770541299036016007, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4858711007330724350, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -6165998204160093261, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -6990829051856967394, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 878310142283459576, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4922296483651198305, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -7354835429156888789, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 0}
+    value: {fileID: 0}
+  - key: {fileID: 1487784149785383381, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -8783448998157797461, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -8123592168925859512, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 219060571963136520, guid: de08d89b220b60f498efe01bca2c06bd, type: 2}
+    value: {fileID: 514226107}
+  - key: {fileID: 7606263217396055905, guid: de08d89b220b60f498efe01bca2c06bd, type: 2}
+    value: {fileID: 1955187052}
+  - key: {fileID: 5486877798580568457, guid: de08d89b220b60f498efe01bca2c06bd, type: 2}
+    value: {fileID: 176903649}
+  - key: {fileID: 5631296541548990645, guid: de08d89b220b60f498efe01bca2c06bd, type: 2}
+    value: {fileID: 1608125156}
+  - key: {fileID: -3640546908023053187, guid: de08d89b220b60f498efe01bca2c06bd, type: 2}
+    value: {fileID: 1438759165}
+  - key: {fileID: 5554096027021818362, guid: f9a242992dacd1345b608f75e8cd3d16, type: 2}
+    value: {fileID: 197614638}
+  m_ExposedReferences:
+    m_References: []
+--- !u!4 &2076960302
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2076960296}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: -20.28, y: 12.3, z: 12.17}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: -0.000005768936, y: 0, z: 0}
 --- !u!1001 &2108751942
 PrefabInstance:
   m_ObjectHideFlags: 0
