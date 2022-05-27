@@ -32,6 +32,8 @@ public class SpawnManager : MonoBehaviour
     public float gridOffsetX = 0.5f;
     public float gridOffsetZ = 0.5f;
 
+    public bool isTutorial = false;
+
     public AudioClip waveStartSound;
     public AudioClip harvestMusic;
     public AudioClip plantingMusic;
@@ -123,6 +125,9 @@ public class SpawnManager : MonoBehaviour
                     currentPhase = "Afternoon";
                     harvestFlag.SetActive(true);
                     DestroySpawners();
+
+                    if(isTutorial)
+                        SceneManager.LoadScene("LevelComplete");
                 }
                 else if (currentPhase == "Afternoon")
                 {

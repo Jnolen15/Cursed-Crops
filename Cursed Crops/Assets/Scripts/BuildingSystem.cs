@@ -167,7 +167,7 @@ public class BuildingSystem : MonoBehaviour
                     buildmodeActive = true;
                     if (placeableHighlight != null)
                     {
-                        if (mode == "Build")
+                        if (mode == "Build" || mode == "Unplaceable")
                         {
                             placeableHighlight.SetActive(true);
                             if (popUp != null)
@@ -584,9 +584,9 @@ public class BuildingSystem : MonoBehaviour
             }
             else if (mode == "Unplaceable")
             {
-                //popUp.SetActive(false);
+                popUp.SetActive(true);
                 statShop.SetActive(false);
-                //pHSpriteRenderer.enabled = false;
+                pHSpriteRenderer.enabled = true;
                 ps.Stop();
             } else if (mode == "StatShop")
             {
