@@ -33,6 +33,7 @@ public class EnemyTalking : MonoBehaviour
     public GameObject turretControls;
     public GameObject upgradeControls;
     public GameObject quotaStuff;
+    public GameObject Move_Interact;
 
     //Getting Broc Sprite
     public Sprite Broc_Bro;
@@ -215,6 +216,7 @@ public class EnemyTalking : MonoBehaviour
                     QuestTracker.SetActive(false);
                     talkTo.SetActive(false);
                     controls.SetActive(false);
+                    Move_Interact.SetActive(false);
                     control.GetComponent<PlayerInputHandler>().dialogueIsHappening = true;
                     //disable players controller for the meantime
                     foreach (GameObject player in players)
@@ -325,6 +327,8 @@ public class EnemyTalking : MonoBehaviour
                     {
                         QuestTracker.SetActive(true);
                         talkTo.SetActive(true);
+                        controls.SetActive(true);
+                        Move_Interact.SetActive(true);
                     }
                     break;
                 case "Enemy Attack":

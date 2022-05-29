@@ -5426,6 +5426,7 @@ MonoBehaviour:
   turretControls: {fileID: 768093050}
   upgradeControls: {fileID: 905986434}
   quotaStuff: {fileID: 725836116}
+  Move_Interact: {fileID: 1060595889}
   Broc_Bro: {fileID: 5055194273226982177, guid: 6b0be73939887684080c2bb3c2eafd02,
     type: 3}
   sentence: 
@@ -5448,9 +5449,8 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: Broc-Bro
     eventWeWant: 
-    sentences: "Howdy howdy!  I\u2019m you helpful Broc-Bro, here to guide you through
-      how to not die in this chaotic hellscape!  Whoopee! Press Left Click/ West
-      Button to Continue"
+    sentences: "Howdy howdy!  I\u2019m your helpful Broc-Bro, here to guide you through
+      how to not die in this chaotic hellscape! Whoopee!"
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
@@ -5458,14 +5458,13 @@ MonoBehaviour:
     eventWeWant: 
     sentences: " I\u2019ll teach you silly little farmers how to purify farms from
       these mean ol\u2019 crops, so you better say \u201Cthank you, you wonderful
-      little Broc-Bro!\u201D  at the end!\r"
+      little Broc-Bro!\u201D at the end!\r"
   - endOfDialogue: 1
     enemyAttack: 0
     endOfStartingDialogue: 0
     name: Broc-Bro
     eventWeWant: Talk
-    sentences: "Howzabout you use WASD/Left Joystick to chumble on over to me and
-      Left Click/West Button to start the teachin\u2019!"
+    sentences: "Howzabout you chumble on over to me and to start the teachin\u2019!"
   - endOfDialogue: 0
     enemyAttack: 1
     endOfStartingDialogue: 1
@@ -5478,8 +5477,7 @@ MonoBehaviour:
     name: Broc-Bro
     eventWeWant: 
     sentences: 'Oh shitake!  I don''t know what came over me, I swear I am not like
-      the others because they are lot more hungry!  Better defend yourself from them
-      before you die a horrible death!
+      the others because they are lot more hungry!
 
 '
   - endOfDialogue: 0
@@ -5487,7 +5485,7 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: Broc-Bro
     eventWeWant: 
-    sentences: Did you know?  If an evil crop hits you too much, you die!
+    sentences: Did you know? If an evil crop hits you too much, you die!
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
@@ -5501,14 +5499,14 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: Broc-Bro
     eventWeWant: No Arrow
-    sentences: "Oh, and don\u2019t worry!  You can be knocked down as much as you
+    sentences: "Oh, and don\u2019t worry! You can be knocked down as much as you
       want, but you won't lose until that little ol\u2019 house over there gets destroyed!"
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
     name: Broc-Bro
     eventWeWant: House Health
-    sentences: "You can see its health on your screen!  What screen, you ask?  Wouldn\u2019t
+    sentences: "You can see its health on your screen! What screen, you ask? Wouldn\u2019t
       you like to know, farmer boy?"
   - endOfDialogue: 0
     enemyAttack: 0
@@ -5522,15 +5520,15 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: Broc-Bro
     eventWeWant: 
-    sentences: 'Oh, silly me!  I almost forgot to teach ya how to kill these freaks
-      of nature!  The trick is:  Hit them a lot using (left click/west button)!'
+    sentences: 'Oh, silly me! I almost forgot to teach ya how to kill these freaks
+      of nature! The trick is: Hit them a lot using (left click/west button)!'
   - endOfDialogue: 1
     enemyAttack: 0
     endOfStartingDialogue: 0
     name: Broc-Bro
     eventWeWant: Try Attacking
     sentences: Or shoot them with a gun using (right click/east button), that also
-      works! Why don't you try it on me?
+      works! Why don't you try all that on me?
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
@@ -5543,7 +5541,7 @@ MonoBehaviour:
     name: Broc-Bro
     eventWeWant: Drop Items
     sentences: My kind drop this when they hit the haystack, You can sell that for
-      some good cash! Try picking it up and taking it to the farm.
+      some good cash! Try picking it up and taking it to the farmhouse.
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
@@ -5579,8 +5577,7 @@ MonoBehaviour:
     name: Broc-Bro
     eventWeWant: 
     sentences: "Hey I see you have some seeds! why don't you take them to that dirt
-      mound in front of us, and you\u2019ll literally \u201Creap\u201D your rewards
-      later!  Ha Ha!"
+      mound in front of us, and you\u2019ll \"reap\" your rewards later..."
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
@@ -5759,7 +5756,7 @@ MonoBehaviour:
     name: Broc-Bro
     eventWeWant: 
     sentences: "The house has its own health.  If the house\u2019s health ever reaches
-      0, you fail the level, and must retry it from the beginning of that level."
+      0, you lose."
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
@@ -8826,6 +8823,145 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1059631338}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1060595889
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1060595890}
+  - component: {fileID: 1060595892}
+  - component: {fileID: 1060595891}
+  m_Layer: 5
+  m_Name: Move_interacting
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1060595890
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060595889}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1819680882}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 13.2845}
+  m_SizeDelta: {x: 477.767, y: 124.8764}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1060595891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060595889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 'Move: WASD/Left Joystick
+
+    Interact: Left click/Face Button Left Near
+    Broc-Bro
+
+'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 20
+  m_fontSizeBase: 20
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1060595892
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060595889}
+  m_CullTransparentMesh: 1
 --- !u!1 &1084433874
 GameObject:
   m_ObjectHideFlags: 0
@@ -14162,6 +14298,7 @@ RectTransform:
   - {fileID: 768093051}
   - {fileID: 905986435}
   - {fileID: 725836117}
+  - {fileID: 1060595890}
   m_Father: {fileID: 374547762}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
