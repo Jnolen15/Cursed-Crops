@@ -2335,6 +2335,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 245531216}
   m_PrefabAsset: {fileID: 0}
+--- !u!108 &269458354 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 4846550480238820080, guid: 1f3d377172c07514dba5c202389309cc,
+    type: 3}
+  m_PrefabInstance: {fileID: 4846550479971131714}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &278331029
 GameObject:
   m_ObjectHideFlags: 0
@@ -18294,6 +18300,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Directional Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 6276255613089249961, guid: 1f3d377172c07514dba5c202389309cc,
+        type: 3}
+      propertyPath: LightSource
+      value: 
+      objectReference: {fileID: 269458354}
+    - target: {fileID: 6276255613089249961, guid: 1f3d377172c07514dba5c202389309cc,
+        type: 3}
+      propertyPath: NightLight.b
+      value: 0.4509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 6276255613089249961, guid: 1f3d377172c07514dba5c202389309cc,
+        type: 3}
+      propertyPath: NightLight.g
+      value: 0.27450982
+      objectReference: {fileID: 0}
+    - target: {fileID: 6276255613089249961, guid: 1f3d377172c07514dba5c202389309cc,
+        type: 3}
+      propertyPath: NightLight.r
+      value: 0.007843138
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f3d377172c07514dba5c202389309cc, type: 3}
