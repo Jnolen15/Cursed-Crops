@@ -9,9 +9,16 @@ public class LightingManager : MonoBehaviour
     public Color NightLight;
 
     private float time = 0;
+    private float AngleTimer = 0;
     private int LightPhase = 1;
+    private Quaternion StartRotation;
 
     public Light LightSource;
+
+    void Start()
+    {
+        this.StartRotation = this.gameObject.transform.rotation;
+    }
 
     // Update is called once per frame
     void Update()
@@ -24,10 +31,8 @@ public class LightingManager : MonoBehaviour
             case 2:
                 ColorFade(AfternoonLight, NightLight, 10);
                 break;
-            case 3:
-                ColorFade(NightLight, MorningLight, 10);
-                break;
         }
+        AngleFade(0, 90, 20); 
     }
 
     public void ResetTimer()
@@ -50,7 +55,12 @@ public class LightingManager : MonoBehaviour
 
     public void AngleFade(float startA, float endA, float t)
     {
-        // just gonna have this piggy back off of colorFade, will not work on its own
-        this.gameObject.transform.rotation *= Quaternion.Euler(0, Mathf.Lerp(startA, endA, time), 0);
+        if (AngleTimer < 1)
+        {
+            AngleTimer += Time.deltaTime / t;
+            this.gameObject.transform.rotation = StartRotation * Quaternion.Euler(0, Mathf.Lerp(startA, endA, AngleTimer), 0);
+            Debug.Log("Changing Agnle: " + AngleTimer);
+        }
+
     }
 }
