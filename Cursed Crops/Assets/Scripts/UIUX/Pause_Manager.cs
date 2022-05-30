@@ -11,6 +11,7 @@ public class Pause_Manager : MonoBehaviour
     public static bool gamePaused = false;
     public GameObject PauseMenu;
     public Button resume;
+    public Menu_Manager menu_Manager;
 
     /* obselete manual pause functions
     public void Pause()
@@ -34,13 +35,13 @@ public class Pause_Manager : MonoBehaviour
         gamePaused = !gamePaused;
         if (gamePaused)
         {
-            Time.timeScale = 0;
-            resume.Select();
+            Time.timeScale = 0;     
         } else
         {
             Time.timeScale = 1;
         }
         PauseMenu.SetActive(!PauseMenu.activeSelf);
+        if (gamePaused) menu_Manager.ResetPauseMenu();
     }
 
     public void ExitToMenu()

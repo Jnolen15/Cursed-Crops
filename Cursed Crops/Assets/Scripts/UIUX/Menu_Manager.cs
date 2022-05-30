@@ -13,6 +13,9 @@ public class Menu_Manager : MonoBehaviour
 {
     public GameObject menu;
     public GameObject options;
+    public GameObject gameplaySettings;
+    public GameObject soundSettings;
+    public GameObject graphicsSettings;
     public GameObject credits;
 
     public Button primaryButton;
@@ -24,6 +27,7 @@ public class Menu_Manager : MonoBehaviour
     public TMP_Dropdown ResolutionDropdown;
     public TMP_Dropdown QualityDropdown;
     public Toggle FullScreenToggle;
+    public Toggle DevMode;
 
     private void Start()
     {
@@ -65,6 +69,9 @@ public class Menu_Manager : MonoBehaviour
             ResolutionDropdown.value = currentResolutionIndex;
             ResolutionDropdown.RefreshShownValue();
         }
+
+        // Retreiving devMode bool
+        DevMode.isOn = (PlayerPrefs.GetInt("DevMode") == 1 ? true : false);
     }
 
     public void startGame()
@@ -126,5 +133,21 @@ public class Menu_Manager : MonoBehaviour
     public void SetQuality(int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex);
+    }
+
+    public void ResetPauseMenu()
+    {
+        graphicsSettings.SetActive(false);
+        gameplaySettings.SetActive(false);
+        soundSettings.SetActive(false);
+        options.SetActive(false);
+        menu.SetActive(true);
+        CurrentMenu = menu;
+        primaryButton.Select();
+    }
+
+    public void toggleDevMode(bool devMode)
+    {
+        PlayerPrefs.SetInt("DevMode", devMode == true ? 1 : 0);
     }
 }
