@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4453569, g: 0.48936516, b: 0.5436188, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -18241,6 +18241,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4846550480238820080, guid: 1f3d377172c07514dba5c202389309cc,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.39012104
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846550480238820080, guid: 1f3d377172c07514dba5c202389309cc,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.8745868
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846550480238820080, guid: 1f3d377172c07514dba5c202389309cc,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.9528302
+      objectReference: {fileID: 0}
+    - target: {fileID: 4846550480238820080, guid: 1f3d377172c07514dba5c202389309cc,
+        type: 3}
+      propertyPath: m_DrawHalo
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4846550480238820081, guid: 1f3d377172c07514dba5c202389309cc,
         type: 3}
       propertyPath: m_RootOrder
@@ -18254,7 +18274,7 @@ PrefabInstance:
     - target: {fileID: 4846550480238820081, guid: 1f3d377172c07514dba5c202389309cc,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4846550480238820081, guid: 1f3d377172c07514dba5c202389309cc,
         type: 3}
@@ -18264,32 +18284,32 @@ PrefabInstance:
     - target: {fileID: 4846550480238820081, guid: 1f3d377172c07514dba5c202389309cc,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8754261
+      value: 0.6372885
       objectReference: {fileID: 0}
     - target: {fileID: 4846550480238820081, guid: 1f3d377172c07514dba5c202389309cc,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.40821788
+      value: 0.0839006
       objectReference: {fileID: 0}
     - target: {fileID: 4846550480238820081, guid: 1f3d377172c07514dba5c202389309cc,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.23456968
+      value: 0.75949085
       objectReference: {fileID: 0}
     - target: {fileID: 4846550480238820081, guid: 1f3d377172c07514dba5c202389309cc,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.10938163
+      value: -0.09998883
       objectReference: {fileID: 0}
     - target: {fileID: 4846550480238820081, guid: 1f3d377172c07514dba5c202389309cc,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 50
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4846550480238820081, guid: 1f3d377172c07514dba5c202389309cc,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -30
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4846550480238820081, guid: 1f3d377172c07514dba5c202389309cc,
         type: 3}
@@ -18301,6 +18321,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Directional Light
       objectReference: {fileID: 0}
+    - target: {fileID: 4846550480238820083, guid: 1f3d377172c07514dba5c202389309cc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6276255613089249961, guid: 1f3d377172c07514dba5c202389309cc,
+        type: 3}
+      propertyPath: NightAngle
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6276255613089249961, guid: 1f3d377172c07514dba5c202389309cc,
         type: 3}
       propertyPath: LightSource
@@ -18308,18 +18338,73 @@ PrefabInstance:
       objectReference: {fileID: 269458354}
     - target: {fileID: 6276255613089249961, guid: 1f3d377172c07514dba5c202389309cc,
         type: 3}
+      propertyPath: NightOffset
+      value: 260
+      objectReference: {fileID: 0}
+    - target: {fileID: 6276255613089249961, guid: 1f3d377172c07514dba5c202389309cc,
+        type: 3}
+      propertyPath: MorningAngle
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6276255613089249961, guid: 1f3d377172c07514dba5c202389309cc,
+        type: 3}
+      propertyPath: NightLight.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6276255613089249961, guid: 1f3d377172c07514dba5c202389309cc,
+        type: 3}
       propertyPath: NightLight.b
-      value: 0.4509804
+      value: 0.3882353
       objectReference: {fileID: 0}
     - target: {fileID: 6276255613089249961, guid: 1f3d377172c07514dba5c202389309cc,
         type: 3}
       propertyPath: NightLight.g
-      value: 0.27450982
+      value: 0.8745098
       objectReference: {fileID: 0}
     - target: {fileID: 6276255613089249961, guid: 1f3d377172c07514dba5c202389309cc,
         type: 3}
       propertyPath: NightLight.r
-      value: 0.007843138
+      value: 0.9529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 6276255613089249961, guid: 1f3d377172c07514dba5c202389309cc,
+        type: 3}
+      propertyPath: MorningOffest
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6276255613089249961, guid: 1f3d377172c07514dba5c202389309cc,
+        type: 3}
+      propertyPath: AfternoonAngle
+      value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 6276255613089249961, guid: 1f3d377172c07514dba5c202389309cc,
+        type: 3}
+      propertyPath: MorningLight.b
+      value: 0.3882353
+      objectReference: {fileID: 0}
+    - target: {fileID: 6276255613089249961, guid: 1f3d377172c07514dba5c202389309cc,
+        type: 3}
+      propertyPath: MorningLight.g
+      value: 0.8745098
+      objectReference: {fileID: 0}
+    - target: {fileID: 6276255613089249961, guid: 1f3d377172c07514dba5c202389309cc,
+        type: 3}
+      propertyPath: MorningLight.r
+      value: 0.9529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 6276255613089249961, guid: 1f3d377172c07514dba5c202389309cc,
+        type: 3}
+      propertyPath: AfternoonLight.b
+      value: 0.3882353
+      objectReference: {fileID: 0}
+    - target: {fileID: 6276255613089249961, guid: 1f3d377172c07514dba5c202389309cc,
+        type: 3}
+      propertyPath: AfternoonLight.g
+      value: 0.8745098
+      objectReference: {fileID: 0}
+    - target: {fileID: 6276255613089249961, guid: 1f3d377172c07514dba5c202389309cc,
+        type: 3}
+      propertyPath: AfternoonLight.r
+      value: 0.9529412
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f3d377172c07514dba5c202389309cc, type: 3}
