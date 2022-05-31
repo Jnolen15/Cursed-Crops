@@ -56,12 +56,7 @@ public class Decorator : MonoBehaviour
                     Instantiate(Resources.Load<GameObject>(deco), pos, transform.rotation, transform);
                     break;
                 case "TileUnplaceable":
-                    rand = Random.Range(1, 10);
-                    if (rand < 3) deco = "Decor/Grass1";
-                    else if (rand > 3 && rand < 6) deco = "Decor/Grass2";
-                    else deco = "Decor/Grass3";
-                    Instantiate(Resources.Load<GameObject>(deco), pos, transform.rotation, transform);
-                    //Instantiate(Resources.Load<GameObject>("Decor/Rock1"), pos, transform.rotation, transform);
+                    Instantiate(Resources.Load<GameObject>("Decor/Rock1"), pos, transform.rotation, transform);
                     break;
                 case "TileObjective":
                     Instantiate(Resources.Load<GameObject>("Decor/Rock1"), pos, transform.rotation, transform);
