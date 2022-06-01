@@ -31,13 +31,8 @@ public class SaboAI : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         mainTarget = GameObject.FindGameObjectWithTag("MainObjective").GetComponent<Transform>();
-        //Transform closestPlayer = FindClosestPlayer(listOfPlayers);
-        //pathFinder.StartFindPath(transform.position, closestPlayer.position);
-        //PathRequestManager.RequestPath(transform.position, closestPlayer.position, OnPathFound);
         oldTarget = mainTarget;
-        StartCoroutine("UpdatePath");
-
-
+        //StartCoroutine("UpdatePath");
     }
 
     // Update is called once per frame
@@ -62,11 +57,11 @@ public class SaboAI : MonoBehaviour
                 targetPosOld = closestTurret.position;
             }
         }
+
     }
     void FixedUpdate()
     {
         // new multiplayer chase code
-
         GameObject[] turrets = GameObject.FindGameObjectsWithTag("Turret");
         listOfTurrets = new Transform[turrets.Length];
 
@@ -80,13 +75,14 @@ public class SaboAI : MonoBehaviour
         {
 
            oldTarget = closestTurret;
-           StartCoroutine("UpdatePath");
+            StopCoroutine("UpdatePath");
+            StartCoroutine("UpdatePath");
         }
+
+
         if (!gameObject.activeInHierarchy)
         {
-
             StopAllCoroutines();
-            //Destroy(gameObject);
         }
 
     }
@@ -98,37 +94,23 @@ public class SaboAI : MonoBehaviour
 
         float closestDistanceSqr = Mathf.Infinity;
         Vector3 currentPosition = transform.position;
-        //float higherDamage = 0;
-
-        //float damage = 0;
 
         foreach (Transform potentialTarget in turrets)
         {
-            Turret stopped = potentialTarget.GetComponent<Turret>();
-            Trap trapStopped = potentialTarget.GetComponent<Trap>();
-            //Debug.Log(potentialTarget + " did " + playerDamage.overAllPlayerDamage);
-            //damage += playerDamage.overAllPlayerDamage;
-            //higherDamage = playerDamage.overAllPlayerDamage;
+            TurretSabotager stopped = potentialTarget.GetComponentInChildren<TurretSabotager>();
 
+            //Turret stopped = potentialTarget.GetComponent<Turret>();
+            //Trap trapStopped = potentialTarget.GetComponent<Trap>();
             Vector3 directionToTarget = potentialTarget.position - currentPosition;
             Vector3 directionToMain = mainTarget.position - currentPosition;
             float distanceToMain = directionToMain.sqrMagnitude;
             float dSqrToTarget = directionToTarget.sqrMagnitude;
             if (distanceToMain > dSqrToTarget)
             {
-                /*
-                if (playerDamage.overAllPlayerDamage > higherDamage && !playerStun.playerIsStun)
+                //if (dSqrToTarget < closestDistanceSqr && (stopped != null && !stopped.sabotaged || trapStopped != null && !trapStopped.sabotaged))
+                if (dSqrToTarget < closestDistanceSqr && stopped != null && !stopped.isSabotaged)
                 {
-                    higherDamage = playerDamage.overAllPlayerDamage;
-                    bestTarget = potentialTarget;
-                    //Debug.Log(potentialTarget + "Has the highest amount of damage = " + higherDamage);
-                }
-                && higherDamage == 0
-                */
-
-
-                if (dSqrToTarget < closestDistanceSqr && (stopped != null && !stopped.sabotaged || trapStopped != null && !trapStopped.sabotaged))
-                {
+                    Debug.Log("New best target: " + stopped.gameObject.transform.parent.gameObject.name + " " + stopped.isSabotaged);
                     closestDistanceSqr = dSqrToTarget;
                     bestTarget = potentialTarget;
                 }
@@ -141,7 +123,7 @@ public class SaboAI : MonoBehaviour
     {
         sabotaging = true;
         enemySpeed = 0;
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(1f);
         enemySpeed = originalSpeed;
         sabotaging = false;
     }
@@ -178,9 +160,7 @@ public class SaboAI : MonoBehaviour
                         StopCoroutine("FollowPath");
                     }
                 }
-
             }
-
         }
     }
 

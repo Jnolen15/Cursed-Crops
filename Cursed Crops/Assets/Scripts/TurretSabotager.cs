@@ -5,21 +5,25 @@ using UnityEngine;
 public class TurretSabotager : MonoBehaviour
 {
     public GameObject theSabotager;
+    public bool isSabotaged = false;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.GetComponent<SaboAI>() && other.gameObject.tag == "Enemy")
+        if (other.gameObject.GetComponent<SaboAI>() && other.gameObject.tag == "Enemy" && !isSabotaged)
         {
             theSabotager = other.gameObject;
             var sAI = theSabotager.GetComponent<SaboAI>();
-            sAI.StartCoroutine(sAI.Sabotage());
-            if (gameObject.transform.parent.gameObject.GetComponent<Trap>() == null)
+            if (sAI.closestTurret == this.transform.parent)
             {
-                gameObject.transform.parent.gameObject.GetComponent<Turret>().sabotaged = true;
-            }
-            if (gameObject.transform.parent.gameObject.GetComponent<Turret>() == null)
-            {
-                gameObject.transform.parent.gameObject.GetComponent<Trap>().sabotaged = true;
+                sAI.StartCoroutine(sAI.Sabotage());
+                if (gameObject.transform.parent.gameObject.GetComponent<Trap>() == null)
+                {
+                    isSabotaged = gameObject.transform.parent.gameObject.GetComponent<Turret>().Sabotage();
+                }
+                else if (gameObject.transform.parent.gameObject.GetComponent<Turret>() == null)
+                {
+                    isSabotaged = gameObject.transform.parent.gameObject.GetComponent<Trap>().Sabotage();
+                }
             }
         }
     }

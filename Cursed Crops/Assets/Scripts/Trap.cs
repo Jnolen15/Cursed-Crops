@@ -40,9 +40,6 @@ public class Trap : MonoBehaviour
         {
             if (!sabotaged)
             {
-                if (vines != null)
-                    Destroy(vines);
-
                 if (!onCooldown)
                 {
                     spawnEffect();
@@ -50,19 +47,10 @@ public class Trap : MonoBehaviour
                     StartCoroutine(cooldown(() => { onCooldown = false; }, cdTime));
                 }
             }
-            else
-            {
-                if (vines == null)
-                    vines = Instantiate(Resources.Load<GameObject>("Effects/Vines"), transform.position, transform.rotation, transform);
-                StopCoroutine(cooldown(() => { onCooldown = false; }, cdTime));
-                playonce = true;
-                gameObject.GetComponent<AudioPlayer>().StopSound();
-            }
 
-            if (trapChild.GetComponent<TurretSabotager>().theSabotager != null && !trapChild.GetComponent<TurretSabotager>().theSabotager.activeInHierarchy)
+            if (sabotaged && trapChild.GetComponent<TurretSabotager>().theSabotager != null && !trapChild.GetComponent<TurretSabotager>().theSabotager.activeInHierarchy)
             {
-                sabotaged = false;
-                playonce = false;
+                Sabotage();
             }
         }
     }
@@ -103,5 +91,30 @@ public class Trap : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         callback?.Invoke();
+    }
+
+    public bool Sabotage()
+    {
+        // If already sabotaged
+        if (sabotaged)
+        {
+            if (vines != null)
+                Destroy(vines);
+
+            sabotaged = false;
+            onCooldown = false;
+        }
+        // If no longer sabotaged
+        else
+        {
+            sabotaged = true;
+            if (vines == null)
+                vines = Instantiate(Resources.Load<GameObject>("Effects/Vines"), transform.position, transform.rotation, transform);
+            StopCoroutine(cooldown(() => { onCooldown = false; }, cdTime));
+            playonce = true;
+            gameObject.GetComponent<AudioPlayer>().StopSound();
+        }
+
+        return sabotaged;
     }
 }

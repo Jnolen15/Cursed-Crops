@@ -27,7 +27,6 @@ public class Turret : MonoBehaviour
     private bool flipped = false;
     private int count = 0;
     private List<GameObject> enemies = new List<GameObject>();
-    private Color prev;
     private GameObject vines;
 
 
@@ -35,7 +34,6 @@ public class Turret : MonoBehaviour
     void Start()
     {
         turretSprite = this.transform.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>();
-        prev = turretSprite.color;
         tAnimator = this.GetComponentInChildren<TurretAnimator>();
         firePosition = this.transform.GetChild(2).transform;
         turretChild = this.transform.GetChild(1).gameObject;
@@ -50,9 +48,6 @@ public class Turret : MonoBehaviour
     {
         if (!sabotaged)
         {
-            if (vines != null)
-                Destroy(vines);
-
             // Enemy targeting and shooting
             if (targetedEnemy != null && !onCooldown)
             {
@@ -88,13 +83,6 @@ public class Turret : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            StopCoroutine(shoot());
-            onCooldown = true;
-            if(vines == null)
-                vines = Instantiate(Resources.Load<GameObject>("Effects/Vines"), transform.position, transform.rotation, transform);
-        }
 
         // List cleanup
         foreach (GameObject enemy in enemies)
@@ -120,11 +108,12 @@ public class Turret : MonoBehaviour
         {
             targetedEnemy = enemies[count];
         }
-        if (turretChild.GetComponent<TurretSabotager>().theSabotager != null && !turretChild.GetComponent<TurretSabotager>().theSabotager.activeInHierarchy)
+
+
+        // If the sabotager has been killed
+        if (sabotaged && turretChild.GetComponent<TurretSabotager>().theSabotager != null && !turretChild.GetComponent<TurretSabotager>().theSabotager.activeInHierarchy)
         {
-            sabotaged = false;
-            onCooldown = false;
-            turretSprite.color = prev;
+            Sabotage();
         }
     }
 
@@ -197,6 +186,8 @@ public class Turret : MonoBehaviour
 
     IEnumerator shoot()
     {
+        Debug.Log("IN SHOOT");
+        
         onCooldown = true;
         if(bullet != null && bullet.name == "FMCBullet")
         {
@@ -227,5 +218,29 @@ public class Turret : MonoBehaviour
         }
         // Send bullet in correct direction
         bul.GetComponent<Bullet>().movement = direction.normalized;
+    }
+
+    public bool Sabotage()
+    {
+        // If already sabotaged
+        if (sabotaged)
+        {
+            if (vines != null)
+                Destroy(vines);
+
+            sabotaged = false;
+            onCooldown = false;
+        } 
+        // If no longer sabotaged
+        else
+        {
+            sabotaged = true;
+            StopCoroutine(shoot());
+            onCooldown = true;
+            if (vines == null)
+                vines = Instantiate(Resources.Load<GameObject>("Effects/Vines"), transform.position, transform.rotation, transform);
+        }
+
+        return sabotaged;
     }
 }
