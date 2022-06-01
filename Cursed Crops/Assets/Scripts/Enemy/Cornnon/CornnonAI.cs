@@ -17,6 +17,7 @@ public class CornnonAI : MonoBehaviour
     public GameObject bullet;
     public bool spawning = false;
     public bool shooting = false;
+    public LayerMask maskToIgnore;
     public AudioClip spawnSound;
 
     // ================= Private variables =================
@@ -28,7 +29,6 @@ public class CornnonAI : MonoBehaviour
     int targetIndex = 0;
     Transform closestPlayer;
     Transform oldTarget;
-    Color prev;
     private Vector3 direction;
 
     void Start()
@@ -40,7 +40,6 @@ public class CornnonAI : MonoBehaviour
         for (int i = 0; i < listOfPlayers.Length; ++i)
             listOfPlayers[i] = players[i].transform;
 
-        prev = gameObject.GetComponent<Renderer>().material.color;
         gameObject.GetComponent<AudioPlayer>().PlaySound(spawnSound);
         mainTarget = GameObject.FindGameObjectWithTag("MainObjective").GetComponent<Transform>();
         //Transform closestPlayer = FindClosestPlayer(listOfPlayers);
@@ -85,20 +84,26 @@ public class CornnonAI : MonoBehaviour
             //Destroy(gameObject);
         }
 
-        if (Vector3.Distance(closestPlayer.position, transform.position) < rangeDistance)
+        direction = new Vector3(closestPlayer.position.x - transform.position.x, 0, closestPlayer.position.z - transform.position.z);
+        // Raycast to target to see if it can be hit
+        RaycastHit hit;
+        Debug.DrawRay(transform.position, direction, Color.red);
+
+        if (Vector3.Distance(closestPlayer.position, transform.position) < rangeDistance && Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity, ~maskToIgnore))
         {
-            enemySpeed = 0;
-            
-            if (!shooting)
+            if (hit.collider.gameObject.tag == "Player" || hit.collider.gameObject.tag == "MainObjective")
             {
-                shooting = true;
-                direction = new Vector3(closestPlayer.position.x - transform.position.x, 0, closestPlayer.position.z - transform.position.z);
-                //shoot();
+                enemySpeed = 0;
+
+                if (!shooting)
+                {
+                    shooting = true;
+                    //shoot();
+                }
             }
         }
         else
         {
-            gameObject.GetComponent<Renderer>().material.color = prev;
             enemySpeed = originalSpeed;
         }
     }
@@ -248,9 +253,7 @@ public class CornnonAI : MonoBehaviour
     IEnumerator stun()
     {
         Debug.Log("getting stun");
-        gameObject.GetComponent<Renderer>().material.color = Color.red;
         yield return new WaitForSeconds(2f);
-        gameObject.GetComponent<Renderer>().material.color = prev;
         gameObject.GetComponent<EnemyControler>().takingDamage = false;
         shooting = false;
     }

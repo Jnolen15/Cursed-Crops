@@ -154,7 +154,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5790628016919734087}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.32, y: 0, z: 14.9}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5793997569695224416}
@@ -288,7 +288,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5793997569695224421}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.32, y: 1, z: -14.9}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3741174512908333645}
@@ -395,9 +395,11 @@ MonoBehaviour:
   stunResist: 0
   stunned: 0
   lastDamageType: 
+  theHealingAura: {fileID: 0}
   hurtSound: {fileID: 8300000, guid: 41e3ba03caf38cd45a77a28f8080090e, type: 3}
   spawningSound: {fileID: 8300000, guid: a73ed29011d70c1448cf84058c9b8fd0, type: 3}
   healing: 0
+  invincible: 0
 --- !u!114 &3360188171948922563
 MonoBehaviour:
   m_ObjectHideFlags: 0
