@@ -16,22 +16,26 @@ public class CameraMover : MonoBehaviour
     public float xBuffer = 0f;
     public float yBuffer = 0f;
 
+    // The camera position showing complete level
+    public Vector3 finalCamPos;
+    public bool hasEnded = false;
+
     private PlayerManager PM;
     private float playerHeight = 1;
 
     // variables revealing inner worrkings of the camera, can be set to private or removed later
-    public float FovVertical;
-    public float FovHorizontal;
-    public float pmiX;
-    public float pmaX;
-    public float pmiY;
-    public float pmaY;
-    public float camAngMiX;
-    public float camAngMaX;
-    public float camAngMiY;
-    public float camAngMaY;
-    public float zoomBufferV = 4.5f;
-    public bool onScreen = true;
+    private float FovVertical;
+    private float FovHorizontal;
+    private float pmiX;
+    private float pmaX;
+    private float pmiY;
+    private float pmaY;
+    private float camAngMiX;
+    private float camAngMaX;
+    private float camAngMiY;
+    private float camAngMaY;
+    private float zoomBufferV = 4.5f;
+    private bool onScreen = true;
 
     // objects for making the edge of the camera capture area
     public GameObject cube1;
@@ -46,6 +50,18 @@ public class CameraMover : MonoBehaviour
     }
 
     private void FixedUpdate()
+    {
+        // Camera moves to show all players
+        if (!hasEnded)
+        {
+            CameraAdjust();
+        } else
+        {
+            LostLevel();
+        }
+    }
+
+    public void CameraAdjust()
     {
         // Store ther Cam's current position
         Vector3 currCamPos = transform.position;
@@ -114,7 +130,7 @@ public class CameraMover : MonoBehaviour
             float minPlayerZ = Vector3.SignedAngle(minPlayerPosZ - cameraPos, forward, Vector3.right);
             float maxPlayerZ = Vector3.SignedAngle(maxPlayerPosZ - cameraPos, forward, Vector3.right);
 
-  
+
             pmiX = minPlayerX;
             pmaX = maxPlayerX;
             pmiY = minPlayerZ;
@@ -129,8 +145,9 @@ public class CameraMover : MonoBehaviour
             {
                 onScreen = false;
                 camHeight += zoomSpeed;
-                camOffsetZ -= zoomSpeed;       
-            } else
+                camOffsetZ -= zoomSpeed;
+            }
+            else
             {
                 onScreen = true;
                 // variable for ensuring camera doesn't stutter when zooming in/out
@@ -143,15 +160,9 @@ public class CameraMover : MonoBehaviour
                 }
             }
 
-
-
-
-
             // Setting camera pos to 
             currCamTarget = new Vector3(targetX + camOffsetX, camHeight, targetZ + camOffsetZ);
         }
-
-        
 
         /* Calculate where Cam should move to
         Vector3 currCamTarget = playerTrans.position - new Vector3(0, 0, camOffset);
@@ -160,5 +171,14 @@ public class CameraMover : MonoBehaviour
 
         // Slerp Cam to the decided location
         transform.position = Vector3.Slerp(currCamPos, currCamTarget, followSpeed * Time.fixedDeltaTime);
+    }
+
+    public void LostLevel()
+    {
+        // Store ther Cam's current position
+        Vector3 currCamPos = transform.position;
+
+        // Slerp Cam to the decided location
+        transform.position = Vector3.Slerp(currCamPos, finalCamPos, 0.5f * Time.fixedDeltaTime);
     }
 }

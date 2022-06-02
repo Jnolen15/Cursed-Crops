@@ -14,6 +14,8 @@ public class EnemyDamageObjective : MonoBehaviour
     public GameObject uiCavas;
     public GameObject damageNotif;
     public GameObject healthNotif;
+    public GameObject barn;
+    public GameObject destroyedBarn;
 
     private float iframesTime = 0.2f;
     private float damageNotifCooldown = 6f;
@@ -22,6 +24,7 @@ public class EnemyDamageObjective : MonoBehaviour
     private bool isItHit = false;
     private bool shownHalfWarning = false;
     private bool shownQuarterWarning = false;
+    private bool lostLevel = false;
 
     void Start()
     {
@@ -31,14 +34,17 @@ public class EnemyDamageObjective : MonoBehaviour
         damageNotif = uiCavas.transform.Find("UI Overlay/General UI/AttackWarning").gameObject;
         healthNotif = uiCavas.transform.Find("UI Overlay/General UI/HealthWarning").gameObject;
         healthNotif.SetActive(false);
+
+        barn = this.transform.Find("FarmHouse").gameObject;
+        destroyedBarn = this.transform.Find("FarmHouseRuined").gameObject;
     }
 
     void Update()
     {
         //Once the objective's health reaches zero destroy it and change the scene to the game over
-        if(houseHealth <= 0)
+        if(houseHealth <= 0 && !lostLevel)
         {
-            SceneManager.LoadScene("GameOver");
+            StartCoroutine(FailLevel());
         }
 
         // Notification Cooldown
@@ -139,5 +145,18 @@ public class EnemyDamageObjective : MonoBehaviour
         yield return new WaitForSeconds(iframesTime);
         // process post-yield
         isItHit = false;
+    }
+
+    public IEnumerator FailLevel()
+    {
+        lostLevel = true;
+        barn.SetActive(false);
+        destroyedBarn.SetActive(true);
+        healthNotif.GetComponent<TextMeshProUGUI>().SetText("The Barn Has Been Destroyed!");
+        healthNotif.SetActive(true);
+        var cam = GameObject.FindGameObjectWithTag("MainCamera");
+        cam.GetComponent<CameraMover>().hasEnded = true;
+        yield return new WaitForSeconds(8);
+        SceneManager.LoadScene("GameOver");
     }
 }

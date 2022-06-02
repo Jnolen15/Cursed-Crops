@@ -143,10 +143,7 @@ public class SpawnManager : MonoBehaviour
                     currentPhase = "Post";
                     DestroySpawners();
 
-                    // Level Ending Sequence
-                    // Unlocking levels is based on build index, very bad, but temporary
-                    PlayerPrefs.SetInt("LevelsCleared", SceneManager.GetActiveScene().buildIndex - 2);
-                    SceneManager.LoadScene("LevelComplete");
+                    StartCoroutine(FinishLevel());
                 } 
             }
             else
@@ -353,6 +350,17 @@ public class SpawnManager : MonoBehaviour
 
 
     // ============ OTHER ============
+    private IEnumerator FinishLevel()
+    {
+        var cam = GameObject.FindGameObjectWithTag("MainCamera");
+        cam.GetComponent<CameraMover>().hasEnded = true;
+        yield return new WaitForSeconds(8);
+        // Level Ending Sequence
+        // Unlocking levels is based on build index, very bad, but temporary
+        PlayerPrefs.SetInt("LevelsCleared", SceneManager.GetActiveScene().buildIndex - 2);
+        SceneManager.LoadScene("LevelComplete");
+    }
+
     private void alignToGrid(Transform trans)
     {
         // Get player position
