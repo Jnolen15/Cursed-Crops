@@ -19,6 +19,7 @@ public class Trap : MonoBehaviour
     private bool playonce = false;
     public bool onCooldown = false;
     private GameObject vines;
+    private ParticleSystem ps;
 
     /* NOTE:
      * I'm trying to build this script to be useable for all
@@ -32,6 +33,9 @@ public class Trap : MonoBehaviour
         trapSprite = this.transform.GetChild(0).GetChild(0).gameObject.GetComponent<SpriteRenderer>();
         gameObject.GetComponent<AudioPlayer>().SetAudioSource(soundClip);
         trapChild = this.transform.GetChild(1).gameObject;
+
+        ps = this.transform.Find("Notes").gameObject.GetComponent<ParticleSystem>();
+        ps.Pause();
     }
 
     void Update()
@@ -84,6 +88,8 @@ public class Trap : MonoBehaviour
 
     private void spawnEffect()
     {
+        if (ps != null)
+            ps.Emit(8);
         GameObject eff = Instantiate(effect, transform.position, transform.rotation);
     }
 

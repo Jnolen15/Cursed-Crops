@@ -30,6 +30,7 @@ public class ScarrotAttack : MonoBehaviour
     private int chooseAttack;
     private float randomTimer = 0;
     private SpriteRenderer sr;
+    private ParticleSystem ps;
     Transform targetToAttack;
     GameObject AOE;
 
@@ -41,6 +42,9 @@ public class ScarrotAttack : MonoBehaviour
         prev = sr.color;
         AOE = gameObject.transform.Find("AOE").gameObject;
         gameObject.GetComponent<AudioPlayer>().PlaySound(spawnSound);
+
+        ps = this.transform.Find("Smash").gameObject.GetComponent<ParticleSystem>();
+        ps.Pause();
     }
 
     // Update is called once per frame
@@ -246,6 +250,8 @@ public class ScarrotAttack : MonoBehaviour
     IEnumerator AOEAttackCooldown()
     {
         attackAOE = false;
+        if (ps != null)
+            ps.Emit(80);
         yield return new WaitForSeconds(0.2f);
         AOE.SetActive(false);
         onCooldown = true;
