@@ -186,4 +186,10 @@ public class DialogueTrigger : MonoBehaviour
             SceneManager.LoadScene(level);
         }
     }
+
+    public void SkipCutscene(string level)
+    {
+        Debug.Log("Cutscene Skipped");
+        SceneManager.LoadScene(level);
+    }
 }

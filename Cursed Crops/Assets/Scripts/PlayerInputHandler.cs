@@ -9,6 +9,7 @@ public class PlayerInputHandler : MonoBehaviour
     public PlayerConfiguration pConfig;
     private PlayerInputActions controls;
     public PlayerControler pc;
+    public CutsceneScripting cs;
     public BuildingSystem bs;
     // Bools for the tutorial
     public bool allowAttack = true;
@@ -44,6 +45,20 @@ public class PlayerInputHandler : MonoBehaviour
         pConfig = null;
         pc = null;
         bs = null;
+    }
+
+    public void InitializeCutscenePlayer(PlayerConfiguration playerConfig)
+    {
+        pConfig = playerConfig;
+        cs = GameObject.Find("CutsceneManager").GetComponent<CutsceneScripting>();
+        pConfig.Input.onActionTriggered += Input_onCutsceneActionTriggered;
+    }
+
+    public void UninitializeCutscenePlayer()
+    {
+        pConfig.Input.onActionTriggered -= Input_onCutsceneActionTriggered;
+        pConfig = null;
+        cs = null;
     }
 
     private void Input_onActionTriggered(InputAction.CallbackContext context)
@@ -184,5 +199,22 @@ public class PlayerInputHandler : MonoBehaviour
             bs.SelectWest_performed(context);
         }
 
+    }
+
+    private void Input_onCutsceneActionTriggered(InputAction.CallbackContext context)
+    {
+        // Progress
+        if (context.action.name == controls.Player.Attack.name)
+        {
+            Debug.Log("Handler: Calling progress");
+            cs.Progress_performed(context);
+        }
+
+        // Skip cutscene
+        if (context.action.name == controls.Player.Pause.name)
+        {
+            Debug.Log("Handler: Calling skip cutscene");
+            cs.Skip_performed(context);
+        }
     }
 }

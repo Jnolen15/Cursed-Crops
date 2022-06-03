@@ -60,4 +60,13 @@ public class CutsceneScripting : MonoBehaviour
             }
         }
     }
+
+    public void Skip_performed(InputAction.CallbackContext context)
+    {
+        //Debug.Log(context);
+        if (context.performed)
+        {
+            dt.SkipCutscene(goToLevel);
+        }
+    }
 }

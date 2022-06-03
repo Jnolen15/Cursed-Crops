@@ -2316,6 +2316,7 @@ Transform:
   - {fileID: 1347459511}
   - {fileID: 1186905359}
   - {fileID: 1967734805}
+  - {fileID: 1810783833}
   m_Father: {fileID: 0}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -17008,18 +17009,8 @@ MonoBehaviour:
   spriteWidthOffest: 1
   xBuffer: 1.5
   yBuffer: 1
-  FovVertical: 0
-  FovHorizontal: 0
-  pmiX: 0
-  pmaX: 0
-  pmiY: 0
-  pmaY: 0
-  camAngMiX: 0
-  camAngMaX: 0
-  camAngMiY: 0
-  camAngMaY: 0
-  zoomBufferV: 4.5
-  onScreen: 1
+  finalCamPos: {x: 0, y: 0, z: 0}
+  hasEnded: 0
   cube1: {fileID: 0}
   cube2: {fileID: 0}
   cube3: {fileID: 0}
@@ -18384,7 +18375,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1154185994}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
@@ -27795,12 +27786,12 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 103173809}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 81e92cee9d459574783b824449975e98,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 81e92cee9d459574783b824449975e98,
         type: 3}
@@ -27840,17 +27831,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 81e92cee9d459574783b824449975e98,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 81e92cee9d459574783b824449975e98,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 81e92cee9d459574783b824449975e98,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 81e92cee9d459574783b824449975e98,
         type: 3}
@@ -27874,6 +27865,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81e92cee9d459574783b824449975e98, type: 3}
+--- !u!4 &1810783833 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 81e92cee9d459574783b824449975e98,
+    type: 3}
+  m_PrefabInstance: {fileID: 1810783832}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1814966545
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30858,619 +30855,6 @@ MonoBehaviour:
   leanAngle: 45
   manageSortLayer: 1
   leanedSprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 0}
-  - {fileID: 22466241}
-  - {fileID: 2051818542}
-  - {fileID: 22466241}
   - {fileID: 2051818542}
   - {fileID: 22466241}
   - {fileID: 2051818542}
@@ -33912,3 +33296,72 @@ PrefabInstance:
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea94b27db935fd14698218c519a2522b, type: 3}
+--- !u!1001 &7854728641558536966
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7854728641188134065, guid: 69f66fc074866044a884f60b50be5865,
+        type: 3}
+      propertyPath: m_Name
+      value: CutsceneInitializer
+      objectReference: {fileID: 0}
+    - target: {fileID: 7854728641188134078, guid: 69f66fc074866044a884f60b50be5865,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7854728641188134078, guid: 69f66fc074866044a884f60b50be5865,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7854728641188134078, guid: 69f66fc074866044a884f60b50be5865,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7854728641188134078, guid: 69f66fc074866044a884f60b50be5865,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7854728641188134078, guid: 69f66fc074866044a884f60b50be5865,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7854728641188134078, guid: 69f66fc074866044a884f60b50be5865,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7854728641188134078, guid: 69f66fc074866044a884f60b50be5865,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7854728641188134078, guid: 69f66fc074866044a884f60b50be5865,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7854728641188134078, guid: 69f66fc074866044a884f60b50be5865,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7854728641188134078, guid: 69f66fc074866044a884f60b50be5865,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7854728641188134078, guid: 69f66fc074866044a884f60b50be5865,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 69f66fc074866044a884f60b50be5865, type: 3}
