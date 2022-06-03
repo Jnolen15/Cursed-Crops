@@ -34,6 +34,8 @@ public class BuildingSystem : MonoBehaviour
     public GameObject statShop;
     public bool buildmodeActive = false;
     public bool updgradeBought = false;
+    public bool turretDestroy = false;
+    public bool seedDestroy = false;
     public string mode = "Build";
     public float gridSize = 1;
     public float gridOffsetX = 0.5f;
@@ -321,6 +323,7 @@ public class BuildingSystem : MonoBehaviour
                             else
                                 cost = bc.intersectedBuildable.GetComponent<Trap>().cost;
                             grm.addMoney(cost);
+                            turretDestroy = true;
                             string strNum = "+" + cost.ToString();
                             grm.SpawnText(placeableHighlight.transform.position, Color.green, strNum);
                             gameObject.GetComponent<AudioPlayer>().PlaySound(buildingSound);
@@ -342,6 +345,7 @@ public class BuildingSystem : MonoBehaviour
                             psDust.Emit(6);
                             animator.SetTrigger("Plant");
                             gameObject.GetComponent<AudioPlayer>().PlaySound(plantingSound);
+                            seedDestroy = true;
                             grm.subtractBountyPoints(bc.intersectedBuildable);
                             sm.RemoveSpawner(bc.intersectedBuildable);
                             Destroy(bc.intersectedBuildable);

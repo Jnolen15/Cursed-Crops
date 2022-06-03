@@ -16,6 +16,7 @@ public class EnemyTalking : MonoBehaviour
     public GameObject daDialogue;
     public GameObject houseArrow;
     public GameObject playerHealthArrow;
+    public GameObject QuotaArrow;
     
     //Quest Tracker Variables
     public GameObject QuestTracker;
@@ -30,7 +31,6 @@ public class EnemyTalking : MonoBehaviour
     public GameObject controls;
     public GameObject combatControls;
     public GameObject plantingControls;
-    public GameObject turretControls;
     public GameObject upgradeControls;
     public GameObject quotaStuff;
     public GameObject Move_Interact;
@@ -73,9 +73,14 @@ public class EnemyTalking : MonoBehaviour
     private bool talking = false;
     private bool stopSpawning = false;
     private bool giveMoneyOnce = false;
+    private bool showBox = false;
     private bool placeIsInWorld = false;
+    private bool aTurretIsDestroyed = false;
+    private bool aSeedIsDestroyed = false;
     private GameObject drop;
-    private GameObject placeble;
+    private GameObject seed;
+    private GameObject turret;
+
     private GameObject childOfSpawner;
 
     private GameRuleManager grm;
@@ -132,28 +137,6 @@ public class EnemyTalking : MonoBehaviour
         players = GameObject.FindGameObjectsWithTag("Player");
         firstPlayer = GameObject.FindGameObjectWithTag("Player");
         allPlayers = GameObject.FindGameObjectsWithTag("PlayerControlTag");
-        /*
-        if (allPlayers != null)
-        {
-            foreach (GameObject control in allPlayers)
-            {
-                if (control.GetComponent<PlayerInputHandler>().forDialogue)
-                {
-                    pc = control.GetComponent<PlayerInputHandler>();
-                    
-                    Debug.Log(pc.dialogueIsHappening);
-                    
-                }
-                if (talking)
-                {
-                    control.GetComponent<PlayerInputHandler>().dialogueIsHappening = true;
-                }
-                
-
-            }
-
-        }
-        */
         
         // if any player goes and talks it will start dialogue and disable player inputs
         foreach (GameObject player in players)
@@ -171,13 +154,11 @@ public class EnemyTalking : MonoBehaviour
                         if (control.GetComponent<PlayerInputHandler>().forDialogue && !enemyAction && !trySomething && !endOfTutorial)
                         {
                             Debug.Log("hello");
-                            //pc.dialogueIsHappening = true;
                             talking = true;
 
                         }
                         else if (control.GetComponent<PlayerInputHandler>().forDialogue && taskFinish)
                         {
-                            //pc.dialogueIsHappening = true;
                             talking = true;
 
                         }
@@ -215,7 +196,10 @@ public class EnemyTalking : MonoBehaviour
                 {
                     QuestTracker.SetActive(false);
                     talkTo.SetActive(false);
-                    controls.SetActive(false);
+                    if (!showBox)
+                    {
+                        controls.SetActive(false);
+                    }
                     Move_Interact.SetActive(false);
                     control.GetComponent<PlayerInputHandler>().dialogueIsHappening = true;
                     //disable players controller for the meantime
@@ -343,13 +327,28 @@ public class EnemyTalking : MonoBehaviour
                 case "Player Health":
                     playerHealthArrow.SetActive(true);
                     break;
+                case "Quota Arrow":
+                    QuotaArrow.SetActive(true);
+                    break;
                 case "No Arrow":
                     houseArrow.SetActive(false);
                     playerHealthArrow.SetActive(false);
+                    QuotaArrow.SetActive(false);
                     childOfSpawner.GetComponent<SphereCollider>().enabled = false;
                     
                     break;
+                case "Show Dodge":
+                    houseArrow.SetActive(false);
+                    showBox = true;
+                    controls.SetActive(true);
+                    combatControls.SetActive(true);
+                    combatControls.GetComponent<TextMeshProUGUI>().text = "Dodge: While moving press Shift/Right Bumper";
+                    break;
+                case "Show Attack":
+                    combatControls.GetComponent<TextMeshProUGUI>().text = "Attack: Press Left Click/Right Trigger Button.\nDodge: While moving press Shift/Right Bumper";
+                    break;
                 case "Try Attacking":
+                    combatControls.GetComponent<TextMeshProUGUI>().text = "Shoot: Press Right Click/Left Trigger.\nAttack: Press Left Click/Right Trigger Button.\nDodge: While moving press Shift/Right Bumper";
                     if (!dialogueBox.activeSelf)
                     {
                         QuestTracker.SetActive(true);
@@ -382,6 +381,7 @@ public class EnemyTalking : MonoBehaviour
                             talkTo.SetActive(true);
                             combatControls.SetActive(false);
                             controls.SetActive(false);
+                            showBox = false;
                         }
                         if (control.GetComponent<PlayerInputHandler>().attackOnce)
                         {
@@ -397,7 +397,7 @@ public class EnemyTalking : MonoBehaviour
 
                     break;
 
-                case "Plant Seed":
+                case "Do a Planting Phase":
                     if (!dialogueBox.activeSelf)
                     {
                         QuestTracker.SetActive(true);
@@ -406,38 +406,39 @@ public class EnemyTalking : MonoBehaviour
                         plantingControls.SetActive(true);
                         trySomething = true;
                     }
-                    AttackDone.GetComponent<TextMeshProUGUI>().text = "Plant a Seed";
+                    AttackDone.GetComponent<TextMeshProUGUI>().text = "Buy an upgrade at the house.";
                     AttackDone.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
-                    RollDone.GetComponent<TextMeshProUGUI>().text = "";
-                    ShootDone.GetComponent<TextMeshProUGUI>().text = "";
+                    RollDone.GetComponent<TextMeshProUGUI>().text = "Build a turret on the grass.";
+                    RollDone.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
+                    ShootDone.GetComponent<TextMeshProUGUI>().text = "Plant some crops in the field.";
+                    ShootDone.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
                     doDamage.GetComponent<TextMeshProUGUI>().text = "";
+
+                    if (grm.getMoney() < 100 && (!grmupgrade.updgradeBought || turret == null))
+                    {
+                        grm.addMoney(100);
+                    }
+
                     foreach (GameObject control in allPlayers)
                     {
                         control.GetComponent<PlayerInputHandler>().allowBuild = true;
                     }
                     taskFinish = true;
-                    placeble = GameObject.FindGameObjectWithTag("Spawner");
-                    waitingSentence = "Remember, you can plant the seed by pressing R / North Button to open the seed menu and look through the selections using Q and E / Left or Right bumpers, once you decide hit the good ol' Left Click/South Button to plant it";
-                    break;
-
-                case "Place Turret":
-                    if (!dialogueBox.activeSelf)
+                    seed = GameObject.FindGameObjectWithTag("Spawner");
+                    turret = GameObject.FindGameObjectWithTag("Turret");
+                    if(seed != null)
                     {
-                        trySomething = true;
-                        QuestTracker.SetActive(true);
-                        combatList.SetActive(true);
-                        controls.SetActive(true);
-                        turretControls.SetActive(true);
+                        ShootDone.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Strikethrough;
                     }
-                    AttackDone.GetComponent<TextMeshProUGUI>().text = "Put a Turret Down";
-                    AttackDone.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
-                    if (grm.getMoney() < 100 && placeble == null)
+                    if(turret != null)
                     {
-                        grm.addMoney(100);
+                        RollDone.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Strikethrough;
                     }
-                    taskFinish = true;
-                    placeble = GameObject.FindGameObjectWithTag("Turret");
-                    waitingSentence = "Remember, you can place a turret by pressing the R / North Button to open the shop menu and look through the selections using Q and E / Left or Right bumpers, once you decide hit the good ol' Left Click/South Button to place it";
+                    if (grmupgrade.updgradeBought)
+                    {
+                        AttackDone.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Strikethrough;
+                    }
+                    waitingSentence = "I saw you writing that all down. Crack that menu open and get to work!";
                     break;
 
                 case "Waiting to Start Harvest":
@@ -460,10 +461,10 @@ public class EnemyTalking : MonoBehaviour
                     {
                         AttackDone.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Strikethrough;
                     }
-                    waitingSentence = "Hey farmer buddy, I know you like talking to me but you know you gotta start the harvest phase to finish the tutorial right?";
+                    waitingSentence = "Start the harvest phase whenever you’re ready. Big red flag. By the farmhouse. Can’t miss it.";
                     break;
 
-                case "Buy An Upgrade":
+                case "Buyer Remorse":
                     if (!dialogueBox.activeSelf)
                     {
                         QuestTracker.SetActive(true);
@@ -472,24 +473,32 @@ public class EnemyTalking : MonoBehaviour
                         upgradeControls.SetActive(true);
                         trySomething = true;
                     }
-                    AttackDone.GetComponent<TextMeshProUGUI>().text = "Get An Upgrade";
+                    AttackDone.GetComponent<TextMeshProUGUI>().text = "Destroy a Turret";
                     AttackDone.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
-                    if (grm.getMoney() < 100 && !grmupgrade.updgradeBought)
+                    RollDone.GetComponent<TextMeshProUGUI>().text = "Un-Plant a Seed";
+                    RollDone.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
+                    ShootDone.GetComponent<TextMeshProUGUI>().text = "";
+                    doDamage.GetComponent<TextMeshProUGUI>().text = "";
+
+                    foreach (GameObject player in players)
                     {
-                        grm.addMoney(100);
+                        if (player.GetComponent<BuildingSystem>().turretDestroy)
+                        {
+                            aTurretIsDestroyed = true;
+                            AttackDone.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Strikethrough;
+
+                        }
+                        if (player.GetComponent<BuildingSystem>().seedDestroy)
+                        {
+                            aSeedIsDestroyed = true;
+                            RollDone.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Strikethrough;
+                        }
                     }
-                    taskFinish = true;
-                    waitingSentence = "Remember just do the same process to buy a turret on top of the tan ground";
+
+
+
                     break;
 
-                case "Give Money":
-                    if (!giveMoneyOnce)
-                    {
-                        giveMoneyOnce = true;
-                        //grm.addMoney(100);
-                    }
-                    
-                    break;
                 case "Drop Items":
                     if (!dialogueBox.activeSelf)
                     {
@@ -507,7 +516,7 @@ public class EnemyTalking : MonoBehaviour
                         combatList.SetActive(true);
                         AttackDone.GetComponent<TextMeshProUGUI>().text = "Pick Up Crop";
                         AttackDone.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
-                        RollDone.GetComponent<TextMeshProUGUI>().text = "Take Crop to Farm";
+                        RollDone.GetComponent<TextMeshProUGUI>().text = "Take Crop to Farmhouse";
                         RollDone.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Normal;
                         ShootDone.GetComponent<TextMeshProUGUI>().text = "";
                         doDamage.GetComponent<TextMeshProUGUI>().text = "";
@@ -550,13 +559,7 @@ public class EnemyTalking : MonoBehaviour
 
 
             
-            /*
-            if (gameObject.GetComponent<EnemyControler>().health <= 9980 && gameObject.GetComponent<CapsuleCollider>().enabled)
-            {
-                trySomething = false;
-                gameObject.GetComponent<CapsuleCollider>().enabled = false;
-            }
-            */
+             //Checking if player got the crops in their inventory and taking it to the farmhouse
             if (drop == null && taskFinish && DaEvent == "Drop Items")
             {
                 AttackDone.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Strikethrough;
@@ -575,7 +578,7 @@ public class EnemyTalking : MonoBehaviour
                 
 
             }
-            if(placeble != null && placeble.tag == "Spawner" && taskFinish && DaEvent == "Plant Seed")
+            if(seed != null && turret != null && grmupgrade.updgradeBought && taskFinish && DaEvent == "Do a Planting Phase")
             {
                 combatList.SetActive(false);
                 talkTo.SetActive(true);
@@ -584,7 +587,17 @@ public class EnemyTalking : MonoBehaviour
                 trySomething = false;
                 taskFinish = false;
             }
+            if(DaEvent == "Buyer Remorse" && aSeedIsDestroyed && aTurretIsDestroyed)
+            {
+                combatList.SetActive(false);
+                talkTo.SetActive(true);
+                upgradeControls.SetActive(false);
+                controls.SetActive(false);
+                trySomething = false;
+                taskFinish = false;
 
+            }
+/*
             if (placeble != null && placeble.tag == "Turret" && taskFinish && DaEvent == "Place Turret")
             {
                 combatList.SetActive(false);
@@ -593,6 +606,17 @@ public class EnemyTalking : MonoBehaviour
                 controls.SetActive(false);
                 trySomething = false;
                 taskFinish = false;
+            }
+*/
+            if (DaEvent == "Buy An Upgrade" && taskFinish && grmupgrade.updgradeBought)
+            {
+                combatList.SetActive(false);
+                talkTo.SetActive(true);
+                upgradeControls.SetActive(false);
+                controls.SetActive(false);
+                trySomething = false;
+                taskFinish = false;
+
             }
             if (!childOfSpawner.activeSelf && DaEvent == "Waiting to Start Harvest")
             {
@@ -607,16 +631,7 @@ public class EnemyTalking : MonoBehaviour
                 DisplayNextSentence();
 
             }
-            if(DaEvent == "Buy An Upgrade" && taskFinish && grmupgrade.updgradeBought)
-            {
-                combatList.SetActive(false);
-                talkTo.SetActive(true);
-                upgradeControls.SetActive(false);
-                controls.SetActive(false);
-                trySomething = false;
-                taskFinish = false;
-                   
-            }
+            
             if (endOfTutorial)
             {
                 spawnerObject.GetComponent<SpawnManager>().enabled = true;
@@ -656,6 +671,7 @@ public class EnemyTalking : MonoBehaviour
         }
         return true;
     }
+
 
     private bool checkPlayersDodge()
     {
