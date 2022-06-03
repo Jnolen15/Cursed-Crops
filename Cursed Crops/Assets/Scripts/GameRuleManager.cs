@@ -5,6 +5,8 @@ using UnityEngine;
 public class GameRuleManager : MonoBehaviour
 {
     // ================ Public ================
+    public popUpUISO popupUI;
+
     public int startingMoney = 100;
     public int totalPointBounty = 100;
 

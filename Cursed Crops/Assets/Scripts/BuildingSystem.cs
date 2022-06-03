@@ -56,16 +56,19 @@ public class BuildingSystem : MonoBehaviour
         animator = this.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Animator>();
         ps = placeableHighlight.transform.GetChild(1).gameObject.GetComponent<ParticleSystem>();
         ps.Pause();
-        popUp = Instantiate(popupUI.Prefab.gameObject,new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), 
-                            transform.rotation, transform);
-        statShop = Instantiate(statShopUI.Prefab.gameObject, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z),
-                            transform.rotation, transform);
 
-        statShopMan = statShop.GetComponent<StatShopUIManager>();
-        popUpMan = popUp.GetComponent<PlantingUIManager>();
-        //popUp.SetActive(false); MOVED TO IN POPUP
         grm = GameObject.Find("GameRuleManager").GetComponent<GameRuleManager>();
         um = grm.gameObject.GetComponent<UpgradeManager>();
+
+        popupUI = grm.popupUI;
+
+        popUp = Instantiate(popupUI.Prefab.gameObject,new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), 
+                            transform.rotation, transform);
+        popUpMan = popUp.GetComponent<PlantingUIManager>();
+
+        statShop = Instantiate(statShopUI.Prefab.gameObject, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z),
+                            transform.rotation, transform);
+        statShopMan = statShop.GetComponent<StatShopUIManager>();
 
         // Set default selected placeable
         if (popupUI.buildables.Length > 0 && popupUI.buildables.Length > 0)

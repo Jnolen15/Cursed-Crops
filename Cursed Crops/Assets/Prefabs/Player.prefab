@@ -914,7 +914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a5616066a6444148aed45f93d3ae3d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupUI: {fileID: 11400000, guid: 4d75e18a1c45f9743bdd70006cc8f3c5, type: 2}
+  popupUI: {fileID: 0}
   statShopUI: {fileID: 11400000, guid: 567915164d285cb42a879d1a3e019494, type: 2}
   activePlaceable: {fileID: 11400000, guid: 98585d46ce9140b419f481660a6a2314, type: 2}
   activeCrop: {fileID: 11400000, guid: a9eb14fb481f3ce4a879acd392f2979e, type: 2}
@@ -924,6 +924,8 @@ MonoBehaviour:
   statShop: {fileID: 0}
   buildmodeActive: 1
   updgradeBought: 0
+  turretDestroy: 0
+  seedDestroy: 0
   mode: Plant
   gridSize: 1
   gridOffsetX: 0.5
