@@ -12,13 +12,18 @@ public class LightingManager : MonoBehaviour
 
     public float MorningAngle = 10;
     public float AfternoonAngle = 70;
-    public float NightAngle = 10;
+    private float NightAngle = 10;
 
     public float MorningOffest = 100;
-    public float AfternoonOffset = 180;
-    public float NightOffset = 260;
+    private float AfternoonOffset = 180;
+    private float NightOffset = 260;
 
-    public float PhaseTime = 10;
+    // variables between 2/3 and 1, which dictates how quickly shadows change close to noon, 
+    public float ShadowLengthLerp = 0.85f;
+    public float ShadowAngleLerp = 0.75f;
+
+    public float PhaseTime = 10; // only for testing purposes, is automatically set in Game
+    public bool TestingMode = false;
 
     private float time = 0;
     private float AngleTimer = 0;
@@ -35,74 +40,18 @@ public class LightingManager : MonoBehaviour
         this.StartRotation = this.gameObject.transform.rotation;
 
         SpawnManager = GameObject.FindObjectOfType<SpawnManager>();
-        PhaseTime = SpawnManager.phaseDuration;
+        if (!TestingMode) PhaseTime = SpawnManager.phaseDuration;
+
+        NightAngle = MorningAngle; // still does nothing
+        NightOffset = AfternoonOffset - MorningOffest + AfternoonOffset;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // 2 phase cycle
-        /*switch (LightPhase)
-        {
-            case 1:
-                ColorFade(MorningLight, AfternoonLight, PhaseTime);
-                break;
-            case 2:
-                ColorFade(AfternoonLight, NightLight, PhaseTime);
-                break;
-        }
-
-        switch (AnglePhase)
-        {
-            case 1:
-                AngleFade(0, AfternoonAngle - MorningAngle,
-                    0, AfternoonOffset - MorningOffest,
-                    PhaseTime);
-                break;
-
-            case 2:
-                AngleFade(AfternoonAngle - MorningAngle, 0,
-                    AfternoonOffset - MorningOffest, NightOffset - MorningOffest,
-                    PhaseTime);
-                break;
-        }*/
-
-        /*switch (LightPhase)
-        {
-            case 1:
-                ColorFade(MorningLight, AfternoonLight, PhaseTime);
-                break;
-            case 2:
-                ColorFade(AfternoonLight, DuskLight, PhaseTime);
-                break;
-            case 3:
-                ColorFade(DuskLight, NightLight, PhaseTime);
-                break;
-        }
-
-        switch (AnglePhase)
-        {
-            case 1:
-                AngleFade(25, 55,
-                          40, 80,
-                          PhaseTime);
-                break;
-
-            case 2:
-                AngleFade(55, 25,
-                          80, 120,
-                          PhaseTime);
-                break;
-            case 3:
-                AngleFade(25, -5,
-                          120, 160,
-                          PhaseTime);
-                break;
-        }*/
-
         // checking to see if spawnManager is in a phase or not, the Break state 
         // means it is in between phases
-        if (SpawnManager.state != SpawnManager.State.Break)
+        if (SpawnManager.state != SpawnManager.State.Break || TestingMode)
         {
             switch (LightPhase)
             {
@@ -120,23 +69,23 @@ public class LightingManager : MonoBehaviour
             switch (AnglePhase)
             {
                 case 1:
-                    AngleFade(0, 42,
-                              -1, 53,
+                    AngleFade(0, (AfternoonAngle - MorningAngle) * ShadowLengthLerp,
+                              0, (AfternoonOffset - MorningOffest) * ShadowAngleLerp,
                               PhaseTime);
                     break;
 
                 case 2:
-                    ThreeAngleFade(42, 63, 42,
-                                   53, 80, 107,
+                    ThreeAngleFade((AfternoonAngle - MorningAngle) * ShadowLengthLerp, AfternoonAngle, (AfternoonAngle - MorningAngle) * ShadowLengthLerp,
+                                   (AfternoonOffset - MorningOffest) * ShadowAngleLerp, AfternoonOffset - MorningOffest, AfternoonOffset - MorningOffest + (AfternoonAngle - MorningAngle) * ShadowAngleLerp / 2,
                                    PhaseTime);
                     break;
                 case 3:
-                    AngleFade(42, 0,
-                              107, 161,
+                    AngleFade((AfternoonAngle - MorningAngle) * ShadowLengthLerp, 0,
+                              AfternoonOffset - MorningOffest + (AfternoonAngle - MorningAngle) * ShadowAngleLerp/2, NightOffset - MorningOffest,
                               PhaseTime);
                     break;
             }
-        }  
+        }
     }
 
     public void ColorFade(Color startC, Color endC, float t) {
