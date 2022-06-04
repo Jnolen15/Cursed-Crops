@@ -14,9 +14,9 @@ public class LightingManager : MonoBehaviour
     public float AfternoonAngle = 70;
     private float NightAngle = 10;
 
-    public float MorningOffest = 100;
-    private float AfternoonOffset = 180;
-    private float NightOffset = 260;
+    public float MorningOffset = -80;
+    private float AfternoonOffset = 0;
+    private float NightOffset = 80;
 
     // variables between 2/3 and 1, which dictates how quickly shadows change close to noon, 
     public float ShadowLengthLerp = 0.85f;
@@ -36,14 +36,14 @@ public class LightingManager : MonoBehaviour
 
     void Start()
     {
-        this.gameObject.transform.rotation = Quaternion.Euler(MorningAngle, MorningOffest, 0);
+        this.gameObject.transform.rotation = Quaternion.Euler(MorningAngle, MorningOffset, 0);
         this.StartRotation = this.gameObject.transform.rotation;
 
         SpawnManager = GameObject.FindObjectOfType<SpawnManager>();
         if (!TestingMode) PhaseTime = SpawnManager.phaseDuration;
 
         NightAngle = MorningAngle; // still does nothing
-        NightOffset = AfternoonOffset - MorningOffest + AfternoonOffset;
+        NightOffset = AfternoonOffset - MorningOffset + AfternoonOffset;
     }
 
     // Update is called once per frame
@@ -70,18 +70,18 @@ public class LightingManager : MonoBehaviour
             {
                 case 1:
                     AngleFade(0, (AfternoonAngle - MorningAngle) * ShadowLengthLerp,
-                              0, (AfternoonOffset - MorningOffest) * ShadowAngleLerp,
+                              0, (AfternoonOffset - MorningOffset) * ShadowAngleLerp,
                               PhaseTime);
                     break;
 
                 case 2:
                     ThreeAngleFade((AfternoonAngle - MorningAngle) * ShadowLengthLerp, AfternoonAngle, (AfternoonAngle - MorningAngle) * ShadowLengthLerp,
-                                   (AfternoonOffset - MorningOffest) * ShadowAngleLerp, AfternoonOffset - MorningOffest, AfternoonOffset - MorningOffest + (AfternoonAngle - MorningAngle) * ShadowAngleLerp / 2,
+                                   (AfternoonOffset - MorningOffset) * ShadowAngleLerp, AfternoonOffset - MorningOffset, AfternoonOffset - MorningOffset + (AfternoonOffset - MorningOffset) * ShadowAngleLerp / 2,
                                    PhaseTime);
                     break;
                 case 3:
                     AngleFade((AfternoonAngle - MorningAngle) * ShadowLengthLerp, 0,
-                              AfternoonOffset - MorningOffest + (AfternoonAngle - MorningAngle) * ShadowAngleLerp/2, NightOffset - MorningOffest,
+                              AfternoonOffset - MorningOffset + (AfternoonOffset - MorningOffset) * ShadowAngleLerp/2, NightOffset - MorningOffset,
                               PhaseTime);
                     break;
             }
@@ -108,7 +108,7 @@ public class LightingManager : MonoBehaviour
         {
             AngleTimer += Time.deltaTime / t;
             this.gameObject.transform.rotation = Quaternion.Euler(MorningAngle + Mathf.Lerp(startX, endX, AngleTimer),
-                                                                  MorningOffest + Mathf.Lerp(startY, endY, AngleTimer),
+                                                                  MorningOffset + Mathf.Lerp(startY, endY, AngleTimer),
                                                                   0);
 
             // Debug.Log("Changing X Angle: " + AngleTimer + " by " + Mathf.Lerp(startX, endX, AngleTimer) + " degrees; " + startX + ", " + endX);
@@ -147,7 +147,7 @@ public class LightingManager : MonoBehaviour
         {
             AngleTimer += Time.deltaTime / t;
             this.gameObject.transform.rotation = Quaternion.Euler(MorningAngle + Mathf.Lerp(startX, midX, AngleTimer*2),
-                                                                  MorningOffest + Mathf.Lerp(startY, midY, AngleTimer*2),
+                                                                  MorningOffset + Mathf.Lerp(startY, midY, AngleTimer*2),
                                                                   0);
 
             // Debug.Log("Changing X Angle: " + AngleTimer + " by " + Mathf.Lerp(startX, midX, AngleTimer*2) + " degrees; " + startX + ", " + midX);
@@ -157,7 +157,7 @@ public class LightingManager : MonoBehaviour
         {
             AngleTimer += Time.deltaTime / t;
             this.gameObject.transform.rotation = Quaternion.Euler(MorningAngle + Mathf.Lerp(midX, endX, (AngleTimer - 0.5f) * 2),
-                                                                  MorningOffest + Mathf.Lerp(midY, endY, (AngleTimer - 0.5f) * 2),            
+                                                                  MorningOffset + Mathf.Lerp(midY, endY, (AngleTimer - 0.5f) * 2),            
                                                                   0);
             // Debug.Log("Changing X Angle: " + AngleTimer + " by " + Mathf.Lerp(midX, endX, (AngleTimer - 0.5f) * 2) + " degrees; " + midX + ", " + endX);
             // Debug.Log("Changing Y Angle: " + AngleTimer + " by " + Mathf.Lerp(midX, endX, (AngleTimer - 0.5f) * 2) + " degrees; " + mid + ", " + endY);
