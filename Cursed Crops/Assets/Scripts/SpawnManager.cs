@@ -128,7 +128,7 @@ public class SpawnManager : MonoBehaviour
                     DestroySpawners();
 
                     if(isTutorial)
-                        SceneManager.LoadScene("LevelComplete");
+                        StartCoroutine(FinishLevel());
                 }
                 else if (currentPhase == "Afternoon")
                 {
