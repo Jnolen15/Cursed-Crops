@@ -53,7 +53,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 0df97c216d9de3b49be9bab9d76685a9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -343,9 +343,11 @@ MonoBehaviour:
   stunResist: 0
   stunned: 0
   lastDamageType: 
+  theHealingAura: {fileID: 0}
   hurtSound: {fileID: 8300000, guid: 41e3ba03caf38cd45a77a28f8080090e, type: 3}
   spawningSound: {fileID: 8300000, guid: a73ed29011d70c1448cf84058c9b8fd0, type: 3}
   healing: 0
+  invincible: 0
 --- !u!114 &3285358354191790591
 MonoBehaviour:
   m_ObjectHideFlags: 0

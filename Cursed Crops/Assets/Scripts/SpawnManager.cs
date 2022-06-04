@@ -33,6 +33,7 @@ public class SpawnManager : MonoBehaviour
     public float gridOffsetZ = 0.5f;
 
     public bool isTutorial = false;
+    public bool isEnding = false;
 
     public AudioClip waveStartSound;
     public AudioClip harvestMusic;
@@ -355,10 +356,19 @@ public class SpawnManager : MonoBehaviour
         var cam = GameObject.FindGameObjectWithTag("MainCamera");
         cam.GetComponent<CameraMover>().hasEnded = true;
         yield return new WaitForSeconds(8);
-        // Level Ending Sequence
-        // Unlocking levels is based on build index, very bad, but temporary
-        PlayerPrefs.SetInt("LevelsCleared", SceneManager.GetActiveScene().buildIndex - 2);
-        SceneManager.LoadScene("LevelComplete");
+        // This is a temp way to show the last cutscene after level 7. Replace it later
+        if (isEnding)
+        {
+            // Level Ending Sequence
+            // Unlocking levels is based on build index, very bad, but temporary
+            SceneManager.LoadScene("Epilogue");
+        } else
+        {
+            // Level Ending Sequence
+            // Unlocking levels is based on build index, very bad, but temporary
+            PlayerPrefs.SetInt("LevelsCleared", SceneManager.GetActiveScene().buildIndex - 2);
+            SceneManager.LoadScene("LevelComplete");
+        }
     }
 
     private void alignToGrid(Transform trans)
