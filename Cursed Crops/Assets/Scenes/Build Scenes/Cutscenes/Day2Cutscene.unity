@@ -2688,6 +2688,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 233130789}
+  - component: {fileID: 233130790}
   m_Layer: 0
   m_Name: Decorations
   m_TagString: Untagged
@@ -2798,6 +2799,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &233130790
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 233130788}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &239473457 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5243423793312817879, guid: 765af694d0bf8cd48a2cfa9979b2d5cf,
@@ -4992,7 +5012,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 1152904721711577773, guid: 1757b8449da7a9d4da33b5d237c13c7b,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: ec5d3fe55540ddf4888c108d0cbec21f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d5ba64ac63e3a30499ec6f1a9143f6f8, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.3
   m_Pitch: 1
@@ -5900,6 +5920,8 @@ PlayableDirector:
     value: {fileID: 984638906}
   - key: {fileID: 5538598911071714548, guid: d4bc754d0fea6644388b2ded1436a109, type: 2}
     value: {fileID: 984638906}
+  - key: {fileID: -7922586224556971922, guid: d4bc754d0fea6644388b2ded1436a109, type: 2}
+    value: {fileID: 1718349698}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &401181858
@@ -7569,8 +7591,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Doug
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bf42e0b406af48d40b3dd4053c6a47bb, type: 2}
+  m_sharedMaterial: {fileID: 8401932895083386305, guid: bf42e0b406af48d40b3dd4053c6a47bb,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7594,17 +7617,17 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12
-  m_fontSizeBase: 12
+  m_fontSize: 16
+  m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: -10
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -16984,8 +17007,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bf42e0b406af48d40b3dd4053c6a47bb, type: 2}
+  m_sharedMaterial: {fileID: 8401932895083386305, guid: bf42e0b406af48d40b3dd4053c6a47bb,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -17009,17 +17033,17 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12
-  m_fontSizeBase: 12
+  m_fontSize: 16
+  m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: -10
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -21617,7 +21641,7 @@ MonoBehaviour:
     name: Narrator
     eventWeWant: 
     sentences: 'We find the group now on another farmhouse, again seemingly devoid
-      of life.  The group looks around, worried that they may be the last farmers
+      of life. The group looks around, worried that they may be the last farmers
       alive in the area. '
   - endOfDialogue: 1
     enemyAttack: 0
@@ -21630,42 +21654,44 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: Cecil
     eventWeWant: 
-    sentences: "...No one's here.   Hmmm\u2026 those witches must've gotten here
-      first.  Damn them\u2026\r\n"
+    sentences: '...No one''s here. Hmmm... those witches must''ve gotten here first. 
+      Damn them...
+
+'
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
     name: Harvey
     eventWeWant: 
-    sentences: "You mean they DONE GOT ABDUCTED BY THEM ALIENS!  That's why there's
+    sentences: "You mean they DONE GOT ABDUCTED BY THEM ALIENS! That's why there's
       no tracks!\r"
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
     name: Cecil
     eventWeWant: 
-    sentences: That's what they *want* you to think, but they're a tricky bunch,
+    sentences: That's what they 'want' you to think, but they're a tricky bunch,
       those witches.
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
     name: Cecil
     eventWeWant: 
-    sentences: "They probably set this up to *look* like an alien abduction to throw
-      us off the trail\u2026"
+    sentences: They probably set this up to 'look' like an alien abduction to throw
+      us off the trail...
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
     name: Narrator
     eventWeWant: 
     sentences: Carlisle pushes her glasses up, and for some reason, light begins
-      to emanate from the lenses.  She chuckles knowingly.
+      to emanate from the lenses. She chuckles knowingly.
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
     name: Carlisle
     eventWeWant: 
-    sentences: "You fools!  That's what the scientists want you BOTH to think!  They
+    sentences: "You fools! That's what the scientists want you BOTH to think! They
       must've invented a new device to hide their tracks and make it LOOK like an
       alien abduction that LOOKS like a witch cover-up!\r"
   - endOfDialogue: 0
@@ -21679,14 +21705,14 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: Harvey
     eventWeWant: 
-    sentences: "BOTH OF YOU SHUT UP! I know those aliens that abducted me are still
-      out there.  I remember that day like it was yesterday\u2026"
+    sentences: BOTH OF YOU SHUT UP! I know those aliens that abducted me are still
+      out there. I remember that day like it was yesterday...
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
     name: Harvey
     eventWeWant: 
-    sentences: I had just so happened to fall asleep on the couch that night.  Little
+    sentences: I had just so happened to fall asleep on the couch that night. Little
       did I know that would let those DAMN ALIENS TRY AND TAKE ME.
   - endOfDialogue: 0
     enemyAttack: 0
@@ -21700,7 +21726,7 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: Harvey
     eventWeWant: 
-    sentences: "As my eyes adjusted, I saw a figure in the light.  AN ALIEN!\r"
+    sentences: "As my eyes adjusted, I saw a figure in the light. AN ALIEN!\r"
   - endOfDialogue: 1
     enemyAttack: 0
     endOfStartingDialogue: 0
@@ -21713,7 +21739,7 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: ???
     eventWeWant: 
-    sentences: "Careful, let's not wake him\u2026"
+    sentences: Careful, let's not wake him...
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
@@ -21753,20 +21779,22 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: Harvey
     eventWeWant: 
-    sentences: HEY, DON'T INTERRUPT ME!  I'M MONOLOGUING!
+    sentences: HEY, DON'T INTERRUPT ME! I'M MONOLOGUING!
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
     name: Cecil
     eventWeWant: 
-    sentences: "Wait\u2026 I've seen you before\u2026 Aren't you the farmer we just-\r\n"
+    sentences: 'Wait... I''ve seen you before... Aren''t you the farmer we just-
+
+'
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
     name: Carlisle
     eventWeWant: 
-    sentences: Hey!  Are you the one who created these wonderful little living crops? 
-      How did you do it?  Was it math?  Can I see!?
+    sentences: Hey! Are you the one who created these wonderful little living crops?
+      How did you do it? Was it math? Can I see!?
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
@@ -21787,7 +21815,7 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: Carlisle
     eventWeWant: 
-    sentences: "Aw man\u2026 I was looking forward to copying it\u2026."
+    sentences: Aw man... I was looking forward to copying it...
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
@@ -21799,14 +21827,14 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: Mysterious Farmer
     eventWeWant: 
-    sentences: Regardless, you should away from here anon.  T'will not do you good
+    sentences: Regardless, you should away from here anon. T'will not do you good
       to stay here when the final day dawns.
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
     name: Carlisle
     eventWeWant: 
-    sentences: Ooh!  I have a question!  When is that?
+    sentences: Ooh! I have a question! When is that?
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
@@ -21824,7 +21852,7 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: Narrator
     eventWeWant: 
-    sentences: Doug, too distracted by this beautiful piece of grass , ponders if
+    sentences: Doug, too distracted by this beautiful piece of grass, ponders if
       it can be use to make a nice hammock.
   - endOfDialogue: 0
     enemyAttack: 0
@@ -21837,7 +21865,7 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: Cecil
     eventWeWant: 
-    sentences: You're right, Doug! How could I forget!  Let's purify this farm before
+    sentences: You're right, Doug! How could I forget! Let's purify this farm before
       we leave as well.
   - endOfDialogue: 1
     enemyAttack: 0
@@ -21850,7 +21878,7 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: Mysterious Farmer
     eventWeWant: 
-    sentences: "-anger it like that\u2026"
+    sentences: -anger it like that...
 --- !u!114 &1589272363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22125,6 +22153,12 @@ PlayableDirector:
     value: {fileID: 255806361}
   - key: {fileID: 438877178359766838, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
     value: {fileID: 388191943}
+  - key: {fileID: -4961892490486428540, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 1718349698}
+  - key: {fileID: 1784831594075701207, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 1718349698}
+  - key: {fileID: 4780755924675823392, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
+    value: {fileID: 233130790}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1589272366
@@ -22935,7 +22969,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1675779844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23545,6 +23579,8 @@ PlayableDirector:
     value: {fileID: 109457901}
   - key: {fileID: 946958376530951240, guid: 6a04d7ca5068d6e48bfff677d118a27a, type: 2}
     value: {fileID: 984638906}
+  - key: {fileID: 6219047357734797772, guid: 6a04d7ca5068d6e48bfff677d118a27a, type: 2}
+    value: {fileID: 1718349698}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1675779849
@@ -23996,6 +24032,134 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f00940514b56a6d40b1cc9585b1939ee, type: 3}
+--- !u!1 &1718349697
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1718349699}
+  - component: {fileID: 1718349698}
+  m_Layer: 0
+  m_Name: SFX
+  m_TagString: musicPlayer
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1718349698
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718349697}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 1152904721711577773, guid: 1757b8449da7a9d4da33b5d237c13c7b,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1718349699
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718349697}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 315.0498, y: 165.57294, z: 0.129444}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1720654977 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4821808478349820204, guid: 2a047a10b81f438488fec24d65507520,

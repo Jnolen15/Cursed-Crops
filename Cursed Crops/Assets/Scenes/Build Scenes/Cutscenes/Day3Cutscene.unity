@@ -1430,8 +1430,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bf42e0b406af48d40b3dd4053c6a47bb, type: 2}
+  m_sharedMaterial: {fileID: 8401932895083386305, guid: bf42e0b406af48d40b3dd4053c6a47bb,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1455,17 +1456,17 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12
-  m_fontSizeBase: 12
+  m_fontSize: 16
+  m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: -10
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -2807,6 +2808,134 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 983479854}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &292403336
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 292403338}
+  - component: {fileID: 292403337}
+  m_Layer: 0
+  m_Name: SFX
+  m_TagString: musicPlayer
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &292403337
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292403336}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 1152904721711577773, guid: 1757b8449da7a9d4da33b5d237c13c7b,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &292403338
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292403336}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &294114092
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7563,6 +7692,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Objective
       objectReference: {fileID: 0}
+    - target: {fileID: 4242266269909799902, guid: cfe2246e5ad737b41859b27a1a7df5b5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfe2246e5ad737b41859b27a1a7df5b5, type: 3}
 --- !u!1001 &593343718
@@ -9435,8 +9569,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Doug
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bf42e0b406af48d40b3dd4053c6a47bb, type: 2}
+  m_sharedMaterial: {fileID: 8401932895083386305, guid: bf42e0b406af48d40b3dd4053c6a47bb,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9460,17 +9595,17 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12
-  m_fontSizeBase: 12
+  m_fontSize: 16
+  m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: -10
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -11450,9 +11585,9 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 1152904721711577773, guid: 1757b8449da7a9d4da33b5d237c13c7b,
     type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: d5ba64ac63e3a30499ec6f1a9143f6f8, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -12619,7 +12754,7 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: Narrator
     eventWeWant: 
-    sentences: Cecil knocks on the door.  The door opens immediately and a suspicious
+    sentences: Cecil knocks on the door. The door opens immediately and a suspicious
       looking farmer stands in the doorway, as if expecting them.
   - endOfDialogue: 0
     enemyAttack: 0
@@ -12632,11 +12767,11 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: Carlisle
     eventWeWant: 
-    sentences: "Hey, aren\u2019t you-"
+    sentences: Hey, aren't you-
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
-    name: Cultist
+    name: Mysterious Farmer
     eventWeWant: 
     sentences: ' I have no knowledge of this person of whom you speak.'
   - endOfDialogue: 0
@@ -12662,15 +12797,14 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: Cecil
     eventWeWant: 
-    sentences: "We don\u2019t mean to intrude, but we\u2019d like to ask you a few
-      questions\u2026\r"
+    sentences: "We don't mean to intrude, but we'd like to ask you a few questions...\r"
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
     name: Cecil
     eventWeWant: 
-    sentences: "Strange\u2026 His responses were similar to the last farmer we spoke
-      to\u2026"
+    sentences: Strange... His responses were similar to the last farmer we spoke
+      to...
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
@@ -12682,27 +12816,25 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: Harvey
     eventWeWant: 
-    sentences: "Damn farmers interruptin\u2019 my monologues\u2026"
+    sentences: Damn farmers interruptin' my monologues...
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
     name: Carlisle
     eventWeWant: 
-    sentences: Ooh! I love monologues!  Can I do one?  Please?
+    sentences: Ooh! I love monologues! Can I do one? Please?
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
     name: Cecil
     eventWeWant: 
-    sentences: "I wouldn\u2019t if I were you\u2026 Everyone knows witches hate second
-      monologues\u2026"
+    sentences: I wouldn't if I were you... Everyone knows witches hate second monologues...
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
     name: Carlisle
     eventWeWant: 
-    sentences: "But science doesn\u2019t!  Talking to yourself is the whole point
-      of science!"
+    sentences: But science doesn't! Talking to yourself is the whole point of science!
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
@@ -12726,19 +12858,19 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: Cecil
     eventWeWant: 
-    sentences: "What\u2019s that you found?..."
+    sentences: What's that you found?...
   - endOfDialogue: 1
     enemyAttack: 0
     endOfStartingDialogue: 0
     name: Cecil
     eventWeWant: 
-    sentences: "Hm\u2026 the words appear to be upside down\u2026 Let me see it."
+    sentences: Hm... the words appear to be upside down... Let me see it.
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
     name: The Note
     eventWeWant: 
-    sentences: This land is not truly yours. Leave now if you wish for your safety. 
+    sentences: This land is not truly yours. Leave now if you wish for your safety.
       If not, we await your attempt at resistance at the farmhouse atop the hill.
   - endOfDialogue: 0
     enemyAttack: 0
@@ -12751,13 +12883,13 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: The Note
     eventWeWant: 
-    sentences: With love, An inconspicuous farmer <3
+    sentences: With love, An inconspicuous farmer :)
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
     name: Cecil
     eventWeWant: 
-    sentences: "Hmm\u2026"
+    sentences: Hmm...
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
@@ -12775,15 +12907,15 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: Cecil
     eventWeWant: 
-    sentences: "We should investigate that old farmhouse\u2026 I bet those witches
-      left something behind\u2026"
+    sentences: We should investigate that old farmhouse... I bet those witches left
+      something behind...
   - endOfDialogue: 1
     enemyAttack: 0
     endOfStartingDialogue: 0
     name: Cecil
     eventWeWant: 
-    sentences: "But first, let\u2019s purify this place before we go.  I\u2019m sure
-      the owner won\u2019t mind."
+    sentences: But first, let's purify this place before we go. I'm sure the owner
+      won't mind.
   - endOfDialogue: 1
     enemyAttack: 0
     endOfStartingDialogue: 0
@@ -13059,7 +13191,7 @@ PlayableDirector:
   - key: {fileID: 8887180264782476552, guid: 0cd946a6cdd5af54cbe73991d3fff140, type: 2}
     value: {fileID: 0}
   - key: {fileID: -6231028335564477425, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 1009655111}
   - key: {fileID: 2328349025738266388, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
     value: {fileID: 1950123164}
   - key: {fileID: 3917211721839886307, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
@@ -13098,6 +13230,12 @@ PlayableDirector:
     value: {fileID: 589045779}
   - key: {fileID: -8338218668186594319, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
     value: {fileID: 1977495983}
+  - key: {fileID: -3248098142123621962, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 292403337}
+  - key: {fileID: 304994154219411193, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 292403337}
+  - key: {fileID: -6631207320768446747, guid: beb33fed77f2d924aa65966877ce41a4, type: 2}
+    value: {fileID: 292403337}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1113016704

@@ -12341,8 +12341,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bf42e0b406af48d40b3dd4053c6a47bb, type: 2}
+  m_sharedMaterial: {fileID: 8401932895083386305, guid: bf42e0b406af48d40b3dd4053c6a47bb,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -12366,17 +12367,17 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12
-  m_fontSizeBase: 12
+  m_fontSize: 16
+  m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: -10
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -12642,7 +12643,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 1152904721711577773, guid: 1757b8449da7a9d4da33b5d237c13c7b,
     type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: bdec3f50c8d9c294cb5e0028434fab4b, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.3
   m_Pitch: 1
@@ -30369,6 +30370,134 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1362341982}
   m_Mesh: {fileID: -2487731884408396349, guid: ad2632c0737d319498a28a287582290f, type: 3}
+--- !u!1 &1363925434
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1363925436}
+  - component: {fileID: 1363925435}
+  m_Layer: 0
+  m_Name: SFX
+  m_TagString: musicPlayer
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1363925435
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363925434}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 1152904721711577773, guid: 1757b8449da7a9d4da33b5d237c13c7b,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1363925436
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363925434}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 26
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1372276853
 GameObject:
   m_ObjectHideFlags: 0
@@ -35596,8 +35725,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Doug
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bf42e0b406af48d40b3dd4053c6a47bb, type: 2}
+  m_sharedMaterial: {fileID: 8401932895083386305, guid: bf42e0b406af48d40b3dd4053c6a47bb,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -35621,17 +35751,17 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12
-  m_fontSizeBase: 12
+  m_fontSize: 16
+  m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: -10
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -37138,8 +37268,8 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: Cecil
     eventWeWant: 
-    sentences: "Looks like we\u2019re done here. Bet the next farmhouse\u2019ll prove
-      me right \u2018bout them witches."
+    sentences: Looks like we're done here. Bet the next farmhouse'll prove me right
+      'bout them witches.
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
@@ -37159,15 +37289,15 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: Mysterious Farmer
     eventWeWant: 
-    sentences: 'No longer shall thy farming implements scar this land!  For the bait
+    sentences: 'No longer shall thy farming implements scar this land! For the bait
       hath been placed, and taken it they have.  '
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
     name: Mysterious Farmer
     eventWeWant: 
-    sentences: "Even now, you walk toward your doom! This next farm is\u2026 twice
-      as cursed!"
+    sentences: Even now, you walk toward your doom! This next farm is... twice as
+      cursed!
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
@@ -37187,23 +37317,22 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: Narrator
     eventWeWant: 
-    sentences: "but sad that they weren\u2019t able to use their evil laugh they
-      had been practicing."
+    sentences: but sad that they weren't able to use their evil laugh they had been
+      practicing.
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
     name: Cecil
     eventWeWant: 
-    sentences: "What was with that horde back at that farm\u2026? Can it really have
-      been a witch\u2026 It didn\u2019t have any spare goat heads\u2026  or blood\u2026
-      or\u2026"
+    sentences: What was with that horde back at that farm...? Can it really have
+      been a witch... It didn't have any spare goat heads...  or blood... or...
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
     name: Carlisle
     eventWeWant: 
-    sentences: "And it certainly wasn\u2019t science.  I mean, they destroyed the
-      science circle!"
+    sentences: And it certainly wasn't science. I mean, they destroyed the science
+      circle!
   - endOfDialogue: 1
     enemyAttack: 0
     endOfStartingDialogue: 0
@@ -37215,16 +37344,16 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: Narrator
     eventWeWant: 
-    sentences: "Doug lagged behind the group.  shedding a single, heroic tear for
-      the \u201CDoug Circles\u201D he left behind."
+    sentences: Doug lagged behind the group. Shedding a single, heroic tear for the
+      "Doug Circles" he left behind.
   - endOfDialogue: 1
     enemyAttack: 0
     endOfStartingDialogue: 0
     name: Narrator
     eventWeWant: 
-    sentences: "As the group continues on, a devious trap, set to end our hero's
-      journey, swiftly approaches\u2026 The farm at the base of this hill is like,
-      twice as cursed as your average cursed farm."
+    sentences: As the group continues on, a devious trap, set to end our hero's journey,
+      swiftly approaches... The farm at the base of this hill is like, twice as cursed
+      as your average cursed farm.
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
@@ -37236,7 +37365,7 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: Mysterious Farmer
     eventWeWant: 
-    sentences: '... '
+    sentences: ...
   - endOfDialogue: 1
     enemyAttack: 0
     endOfStartingDialogue: 0
@@ -37249,28 +37378,27 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: Carlisle
     eventWeWant: 
-    sentences: "Oh! Doug! Is that a piece of paper in your beard? I\u2019ll get it
-      out!"
+    sentences: Oh! Doug! Is that a piece of paper in your beard? I'll get it out!
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
     name: Narrator
     eventWeWant: 
-    sentences: "Despite the paper not even piercing through Doug\u2019s thick beard,
-      Doug lies on the floor, convinced of his own demise."
+    sentences: Despite the paper not even piercing through Doug's thick beard, Doug
+      lies on the floor, convinced of his own demise.
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
     name: Carlisle
     eventWeWant: 
-    sentences: "Ooh!  This paper has words on it!\r"
+    sentences: "Ooh! This paper has words on it!\r"
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
     name: Narrator
     eventWeWant: 
     sentences: Indeed it did. Scrawled upon the small piece of parchment paper is
-      a message
+      a message.
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
@@ -37283,8 +37411,8 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: The Note
     eventWeWant: 
-    sentences: "If you do not, I await our reunion at the farmhouse atop that other
-      hill over there\u2026 If you can make it there alive!"
+    sentences: If you do not, I await our reunion at the farmhouse atop that other
+      hill over there... If you can make it there alive!
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
@@ -37302,13 +37430,13 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: Carlisle
     eventWeWant: 
-    sentences: So cool!  The words formed sentences!
+    sentences: So cool! The words formed sentences!
   - endOfDialogue: 0
     enemyAttack: 0
     endOfStartingDialogue: 0
     name: Cecil
     eventWeWant: 
-    sentences: "Indeed\u2026 The witches seem to be giving us a dire warning."
+    sentences: Indeed... The witches seem to be giving us a dire warning.
   - endOfDialogue: 1
     enemyAttack: 0
     endOfStartingDialogue: 0
@@ -37321,8 +37449,8 @@ MonoBehaviour:
     endOfStartingDialogue: 0
     name: Narrator
     eventWeWant: 
-    sentences: "Doug lies on the ground, pretending to be dead while the group walks
-      away. This way, so he doesn\u2019t have to do any of the work. "
+    sentences: 'Doug lies on the ground, pretending to be dead while the group walks
+      away. This way, so he doesn''t have to do any of the work. '
 --- !u!114 &1692909592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37719,6 +37847,12 @@ PlayableDirector:
     value: {fileID: 829244570}
   - key: {fileID: -6563093790754848653, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
     value: {fileID: 707740660}
+  - key: {fileID: -3663861286746334769, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 1363925435}
+  - key: {fileID: 3472720832452373054, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 1363925435}
+  - key: {fileID: 8464448213560746379, guid: 9be31afae99a4ab4eb23d9b5dcba173b, type: 2}
+    value: {fileID: 1363925435}
   m_ExposedReferences:
     m_References: []
 --- !u!4 &1692909595
