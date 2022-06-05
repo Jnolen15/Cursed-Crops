@@ -34,6 +34,8 @@ public class EnemyPlayerDamage : MonoBehaviour
     private int healingAmmount = 1;
     private float healingTickSpeed = 2f;
     private float healingTimer = 2f;
+    // Damage Bugg
+    public bool damageBuffed = false;
 
     // Start is called before the first frame update
     void Start()
@@ -52,7 +54,7 @@ public class EnemyPlayerDamage : MonoBehaviour
     {
         // Passive health Regen Timer
         timeSinceLastHit += Time.deltaTime;
-        if (timeSinceLastHit > 5.0f)
+        if (timeSinceLastHit > 10.0f)
         {
             // Healing effect. Heals damage every healingTickSpeed seconds
             if (healingTimer <= 0)
@@ -186,11 +188,16 @@ public class EnemyPlayerDamage : MonoBehaviour
         switch (type)
         {
             case "DamageBoost":
-                Debug.Log("Applying DamageBoost");
-                pc.damageBoost += 0.5f;
-                if (damageBuffCo != null)
+                // End buff if its being re-applied
+                if (damageBuffCo != null && damageBuffed)
+                {
                     StopCoroutine(damageBuffCo);
-                damageBuffCo = StartCoroutine(cooldown(() => { Debug.Log("DamageBoost Over"); pc.damageBoost -= 0.5f; }, length));
+                    pc.damageBoost -= 0.5f;
+                }
+                // Apply buff
+                damageBuffed = true;
+                pc.damageBoost += 0.5f;
+                damageBuffCo = StartCoroutine(cooldown(() => { damageBuffed = false; pc.damageBoost -= 0.5f; }, length));
                 break;
             case "Healing":
                 Debug.Log("Applying Healing");

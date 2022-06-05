@@ -38,19 +38,19 @@ public class ItemDrop : MonoBehaviour
             Destroy(this.gameObject);
 
         // Change sprite depending on value
-        if (value == 1)
+        if (value == 1) // 1
         {
             itemSpriteRenderer.sprite = stage1CropSprite;
-        } else if (value > 1 && value < 10)
+        } else if (value > 1 && value <= 4) // 2-4
         {
             itemSpriteRenderer.sprite = stage2CropSprite;
-        } else if (value > 9 && value < 25)
+        } else if (value > 4 && value <= 15) // 5-15
         {
             itemSpriteRenderer.sprite = stage3CropSprite;
-        } else if (value > 24 && value < 50)
+        } else if (value > 15 && value <= 30) // 16-30
         {
             itemSpriteRenderer.sprite = stage4CropSprite;
-        } else if (value > 49)
+        } else if (value > 30) // 31 and above
         {
             itemSpriteRenderer.sprite = stage5CropSprite;
         }

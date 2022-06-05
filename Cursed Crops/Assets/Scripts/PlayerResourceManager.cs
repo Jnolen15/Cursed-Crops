@@ -126,7 +126,7 @@ public class PlayerResourceManager : MonoBehaviour
             }
         }
 
-        // if colliding with the farm house, bank items
+        // if colliding with the objective tile
         // RN this will send items to the middle of the tile. May want to get the objective transform instead
         if (other.gameObject.tag == "TileObjective")
         {
