@@ -133,6 +133,9 @@ public class PlayerControler : MonoBehaviour
         //meleeAttack = this.transform.GetChild(0).gameObject;
         meleeAttack.SetActive(false);
 
+        // Ignore collision with other players
+        Physics.IgnoreLayerCollision(7, 7);
+
         // Player Sprite
         playerSprite = this.transform.GetChild(1).GetChild(0).gameObject.GetComponent<SpriteRenderer>();
         animator = this.transform.GetComponentInChildren<Animator>();
