@@ -78,6 +78,7 @@ public class PlayerControler : MonoBehaviour
     private Vector3 rollDir;
     private Vector3 direction;
     private Vector3 aimDir;             // Used to Store the direction the player will shoot
+    private GameObject grandChild;
 
 
     public GameObject meleeAttack;
@@ -89,7 +90,11 @@ public class PlayerControler : MonoBehaviour
 
     // ====================== AUDIO COMPONENTS ======================
     public AudioPlayer daSound;
-    public AudioClip attackSound;
+    public AudioClip[] attackSound;
+    public AudioClip[] carlisleAttack;
+    public AudioClip[] cecilAttack;
+    public AudioClip[] harveyAttack;
+    public AudioClip[] dougAttack;
     public AudioClip gunSound;
     public AudioClip stepSound;
 
@@ -139,6 +144,25 @@ public class PlayerControler : MonoBehaviour
         // Player Sprite
         playerSprite = this.transform.GetChild(1).GetChild(0).gameObject.GetComponent<SpriteRenderer>();
         animator = this.transform.GetComponentInChildren<Animator>();
+
+        //who is the character we are playing
+        grandChild = this.gameObject.transform.GetChild(1).GetChild(0).gameObject;
+        if (grandChild.GetComponent<PlayerAnimOCManager>().selectedCharacter == PlayerAnimOCManager.character.Carlisle)
+        {
+            attackSound = carlisleAttack;
+        }
+        if (grandChild.GetComponent<PlayerAnimOCManager>().selectedCharacter == PlayerAnimOCManager.character.Cecil)
+        {
+            attackSound = cecilAttack;
+        }
+        if (grandChild.GetComponent<PlayerAnimOCManager>().selectedCharacter == PlayerAnimOCManager.character.Harvey)
+        {
+            attackSound = harveyAttack;
+        }
+        if (grandChild.GetComponent<PlayerAnimOCManager>().selectedCharacter == PlayerAnimOCManager.character.Doug)
+        {
+            attackSound = dougAttack;
+        }
 
         // Ammo Manager
         Vector3 ammoOffset = new Vector3(this.transform.position.x, this.transform.position.y + playerSprite.bounds.size.y, 
@@ -479,7 +503,8 @@ public class PlayerControler : MonoBehaviour
                         //attackcoolDown = 0;
                         //attackDuration = 0.4f;
                         isAttacking = true;
-                        daSound.PlaySound(attackSound);
+                        int randomDamage1 = Random.Range(0, attackSound.Length);
+                        daSound.PlaySound(attackSound[randomDamage1]);
                         animator.SetTrigger("Melee1");
                         state = State.Attacking;
                         if (lungeAttacking) AttackLunge();
@@ -490,7 +515,8 @@ public class PlayerControler : MonoBehaviour
                         //attackcoolDown = 0;
                         //attackDuration = 0.4f;
                         isAttacking = true;
-                        daSound.PlaySound(attackSound);
+                        int randomDamage2 = Random.Range(0, attackSound.Length);
+                        daSound.PlaySound(attackSound[randomDamage2]);
                         animator.SetTrigger("Melee2");
                         state = State.Attacking;
                         if (lungeAttacking) AttackLunge();
@@ -508,7 +534,8 @@ public class PlayerControler : MonoBehaviour
                             //attackcoolDown = 0;
                             //attackDuration = 0.7f;
                             isAttacking = true;
-                            daSound.PlaySound(attackSound);
+                            int randomDamage3 = Random.Range(0, attackSound.Length);
+                            daSound.PlaySound(attackSound[randomDamage3]);
                             animator.SetTrigger("Melee3");
                             state = State.Attacking;
                             if (lungeAttacking) AttackLunge();

@@ -15,8 +15,20 @@ public class EnemyPlayerDamage : MonoBehaviour
     public bool inIFrames = false;
     public bool playerIsStun = false;
     public bool invulnerable = false;
-    public AudioClip damageSound;
-    public AudioClip downSound;
+    //Hurt Sounds
+    public AudioClip[] damageSound;
+    public AudioClip[] carlisleHurt;
+    public AudioClip[] cecilHurt;
+    public AudioClip[] harveyHurt;
+    public AudioClip[] dougHurt;
+    //Down Sounds
+    public AudioClip[] downSound;
+    public AudioClip[] carlisleDown;
+    public AudioClip[] cecilDown;
+    public AudioClip[] harveyDown;
+    public AudioClip[] dougDown;
+
+    public AudioSource fortheDeath;
 
     // ================= Private variables =================
     private delegate void Callback();
@@ -28,12 +40,15 @@ public class EnemyPlayerDamage : MonoBehaviour
     private Animator animator;
     private Coroutine damageBuffCo;
     private float timeSinceLastHit;
+    private GameObject grandChild;
     // Healing Buff Stuff
     private Coroutine healingCo;
     public bool healing = false;
     private int healingAmmount = 1;
     private float healingTickSpeed = 2f;
     private float healingTimer = 2f;
+    private int randomDown = 0;
+    private bool playerDied = false;
     // Damage Bugg
     public bool damageBuffed = false;
 
@@ -44,9 +59,31 @@ public class EnemyPlayerDamage : MonoBehaviour
         prm = this.GetComponent<PlayerResourceManager>();
         playerSprite = this.transform.GetChild(1).GetChild(0).GetComponent<SpriteRenderer>();
         animator = this.transform.GetChild(1).GetChild(0).gameObject.GetComponent<Animator>();
-
+        grandChild = this.gameObject.transform.GetChild(1).GetChild(0).gameObject;
         psHeal = Instantiate(Resources.Load<GameObject>("Effects/HealParticle"), transform.position, transform.rotation, transform).GetComponent<ParticleSystem>();
         psHeal.Pause();
+
+        // Check the playeranimOCmanager to figure out which character has the script
+        if (grandChild.GetComponent<PlayerAnimOCManager>().selectedCharacter == PlayerAnimOCManager.character.Carlisle)
+        {
+            downSound = carlisleDown;
+            damageSound = carlisleHurt;
+        }
+        if (grandChild.GetComponent<PlayerAnimOCManager>().selectedCharacter == PlayerAnimOCManager.character.Cecil)
+        {
+            downSound = cecilDown;
+            damageSound = cecilHurt;
+        }
+        if (grandChild.GetComponent<PlayerAnimOCManager>().selectedCharacter == PlayerAnimOCManager.character.Harvey)
+        {
+            downSound = harveyDown;
+            damageSound = harveyHurt;
+        }
+        if (grandChild.GetComponent<PlayerAnimOCManager>().selectedCharacter == PlayerAnimOCManager.character.Doug)
+        {
+            downSound = dougDown;
+            damageSound = dougHurt;
+        }
     }
 
     // Update is called once per frame
@@ -64,18 +101,20 @@ public class EnemyPlayerDamage : MonoBehaviour
             }
             else healingTimer -= Time.deltaTime;
         }
-
+        
         // Player Getting Downed
         if (playerHealth <= 0 && !playerDown)
         {
             //alphaChekcer = true;
+            randomDown = Random.Range(0, downSound.Length);
+            fortheDeath.PlayOneShot(downSound[randomDown]);
             prm.setCrops(0);
             playerDown = true;
+            playerDied = true;
             StartCoroutine(downed());
             Debug.Log(playerHealth);
             //gameOver();
         }
-
         // Pulse if below 20% health
         if (playerHealth <= (reviveHealth * 0.2))
         {
@@ -89,6 +128,7 @@ public class EnemyPlayerDamage : MonoBehaviour
         // function for tracking reviveTime
         if (playerDown)
         {
+            
             reviveTimer += Time.deltaTime;
         }
     }
@@ -137,7 +177,8 @@ public class EnemyPlayerDamage : MonoBehaviour
         if (playerHealth > 0)
         {
             inIFrames = true;
-            gameObject.GetComponent<AudioPlayer>().PlaySound(damageSound);
+            int randomDamage = Random.Range(0, damageSound.Length);
+            gameObject.GetComponent<AudioPlayer>().PlaySound(damageSound[randomDamage]);
             playerHealth -= damages;
             timeSinceLastHit = 0;
 
@@ -169,13 +210,18 @@ public class EnemyPlayerDamage : MonoBehaviour
     {
         playerIsStun = true;
         invulnerable = true;
-        gameObject.GetComponent<AudioPlayer>().PlaySound(downSound);
+
+        // pick a random sound from the array of down sounds
+        
+        
         yield return new WaitForSeconds(reviveTime);
+        
         playerDown = false;
         reviveTimer = 0;
         playerHealth = reviveHealth;
         playerIsStun = false;
         invulnerable = false;
+        playerDied = false;
     }
 
     // Type of effects can be seen in the comment below. Length is an optional variable default to 0
