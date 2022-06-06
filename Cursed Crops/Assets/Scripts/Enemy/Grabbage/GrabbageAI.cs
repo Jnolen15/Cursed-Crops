@@ -91,7 +91,7 @@ public class GrabbageAI : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Player" && gameObject.GetComponent<EnemyControler>().health > 0 && other.gameObject.GetComponent<PlayerControler>().state != PlayerControler.State.Rolling)
+        if (other.gameObject.tag == "Player" && gameObject.GetComponent<EnemyControler>().health > 0 && other.gameObject.GetComponent<PlayerControler>().state != PlayerControler.State.Rolling && !alreadyGrabbing)
         {
             if (!lettingGo)
             {
@@ -100,9 +100,6 @@ public class GrabbageAI : MonoBehaviour
                 gameObject.transform.position = other.gameObject.transform.position + new Vector3(0, 0, -0.1f);
                 gameObject.GetComponent<GrabbageWindup>().enabled = false;
 
-                trappedPlayer = other.gameObject;
-
-                other.gameObject.GetComponent<PlayerControler>().trapped = true;
             }
             if (!alreadyGrabbing)
             {
@@ -114,7 +111,7 @@ public class GrabbageAI : MonoBehaviour
 
                 trappedPlayer = other.gameObject;
 
-                other.gameObject.GetComponent<PlayerControler>().trapped = true;
+                trappedPlayer.gameObject.GetComponent<PlayerControler>().trapped = true;
 
             }
             
