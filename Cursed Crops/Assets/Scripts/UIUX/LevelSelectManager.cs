@@ -9,12 +9,15 @@ public class LevelSelectManager : MonoBehaviour
     public GameObject Shop;
     public int LevelsCleared;
     public bool DevMode = false;
+    public Button InitialSelection;
 
     // array of selectable/unselectable levels beyond tutorial and lvl1
     public Button[] LevelButtons = new Button[6];
 
     private void Start()
     {
+        InitialSelection.Select();
+
         // fetching PlayerPrefs Variables
         DevMode = (PlayerPrefs.GetInt("DevMode") == 1 ? true : false);
         LevelsCleared = PlayerPrefs.GetInt("LevelsCleared");
