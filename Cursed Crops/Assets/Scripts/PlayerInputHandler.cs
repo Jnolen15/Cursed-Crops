@@ -11,6 +11,7 @@ public class PlayerInputHandler : MonoBehaviour
     public PlayerControler pc;
     public CutsceneScripting cs;
     public BuildingSystem bs;
+
     // Bools for the tutorial
     public bool allowAttack = true;
     public bool allowBuild = true;
@@ -22,6 +23,7 @@ public class PlayerInputHandler : MonoBehaviour
     public bool shootOnce = false;
     private int counter = 0;
 
+    private bool cutsceneSkipped = false;
 
     void Start()
     {
@@ -129,10 +131,17 @@ public class PlayerInputHandler : MonoBehaviour
         if (context.action.name == controls.Player.Pause.name)
         {
             //Debug.Log("Handler: Calling Ranged");
-            pc.togglePause();
+            // This if statement is a temp fix to make it so pause wont be called after skipping a cutscene
+            if (cutsceneSkipped)
+            {
+                cutsceneSkipped = false;
+            } else
+            {
+                pc.togglePause();
+            }
         }
 
-        // =============== Player Controller ===============
+        // =============== Player Controller (Build Mode) ===============
         // Build Mode
         if (context.action.name == controls.Player.Build.name)
         {
@@ -214,6 +223,7 @@ public class PlayerInputHandler : MonoBehaviour
         if (context.action.name == controls.Player.Pause.name)
         {
             Debug.Log("Handler: Calling skip cutscene");
+            cutsceneSkipped = true;
             cs.Skip_performed(context);
         }
     }
