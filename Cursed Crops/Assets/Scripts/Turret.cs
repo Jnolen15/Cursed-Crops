@@ -13,6 +13,7 @@ public class Turret : MonoBehaviour
     public AudioClip manureSound;
     public AudioClip pitchSound;
     public AudioClip rifleSound;
+    public AudioClip vineBoom;
     public LayerMask maskToIgnore;
 
     // ================= Private variables =================
@@ -237,6 +238,7 @@ public class Turret : MonoBehaviour
             sabotaged = true;
             StopCoroutine(shoot());
             onCooldown = true;
+            gameObject.GetComponent<AudioPlayer>().PlaySound(vineBoom);
             if (vines == null)
                 vines = Instantiate(Resources.Load<GameObject>("Effects/Vines"), transform.position, transform.rotation, transform);
         }

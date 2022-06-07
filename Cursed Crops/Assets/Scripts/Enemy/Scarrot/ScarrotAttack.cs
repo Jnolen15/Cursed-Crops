@@ -27,12 +27,19 @@ public class ScarrotAttack : MonoBehaviour
     private bool windupStarting = false;
     private bool hitFence = false;
     private bool attackMoving = false;
+    private bool playOnce = false;
     private int chooseAttack;
     private float randomTimer = 0;
     private SpriteRenderer sr;
     private ParticleSystem ps;
     Transform targetToAttack;
     GameObject AOE;
+
+    public AudioClip punchSound;
+    public AudioClip windupSound;
+    public AudioClip AOESound;
+    public AudioClip groundPound;
+    public AudioSource forTheGroundPound;
 
     Color prev;
     IEnumerator inst = null;
@@ -71,8 +78,9 @@ public class ScarrotAttack : MonoBehaviour
             {
                     if (!windupStarting)
                     {
+                        gameObject.GetComponent<AudioPlayer>().PlaySound(windupSound);
                         StopCoroutine("attack");
-
+                        
                         windupStarting = true;
                         //preAttackPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
                         chooseAttack = Random.Range(1, 3);
@@ -155,6 +163,11 @@ public class ScarrotAttack : MonoBehaviour
                attackTimer -= Time.deltaTime;
             }
         }
+        if (attackAOE && !playOnce)
+        {
+            playOnce = true;
+            gameObject.GetComponent<AudioPlayer>().PlaySound(AOESound);
+        }
 
     }
 
@@ -170,6 +183,7 @@ public class ScarrotAttack : MonoBehaviour
             yield return new WaitForSeconds(randomTimer);
             if (!getPosition)
             {
+                gameObject.GetComponent<AudioPlayer>().PlaySound(punchSound);
                 getPosition = true;
                 attackPosition = new Vector3(targetToAttack.transform.position.x, 1, targetToAttack.transform.position.z);
                 enemyPosition = new Vector3(transform.position.x, 1, transform.position.z);
@@ -194,12 +208,13 @@ public class ScarrotAttack : MonoBehaviour
         // AOE Attack
         if(chooseAttack == 2)
         {
+
             if (transform.position != newPosition)
             {
                 yield return new WaitForSeconds(0.45f);
                 Debug.Log("first wait");
 
-
+                
                 //sr.color = Color.green;
                 attackMoving = true;
                 //transform.position = Vector3.MoveTowards(transform.position, newPosition, (gameObject.GetComponent<EnemyToPlayer>().originalSpeed * 20) * Time.deltaTime);
@@ -207,6 +222,8 @@ public class ScarrotAttack : MonoBehaviour
             attackAOE = true;
             //AOE.SetActive(true);
             attacking = true;
+
+            yield return new WaitForSeconds(0.01f);
             //gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
             //yield return new WaitForSeconds(0.5f);
             //AOE.SetActive(false);
@@ -244,6 +261,7 @@ public class ScarrotAttack : MonoBehaviour
     public void AOEAttack()
     {
         AOE.SetActive(true);
+        forTheGroundPound.PlayOneShot(groundPound);
         StartCoroutine("AOEAttackCooldown");
     }
 
@@ -259,6 +277,7 @@ public class ScarrotAttack : MonoBehaviour
         windupStarting = false;
         attacking = false;
         onCooldown = false;
+        playOnce = false;
         chooseAttack = 0;
     }
 

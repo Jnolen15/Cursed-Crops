@@ -296,7 +296,8 @@ MonoBehaviour:
   cost: 100
   manureSound: {fileID: 8300000, guid: 8d904ff77e8376446a1e07841f8d6eb9, type: 3}
   pitchSound: {fileID: 8300000, guid: 8866657ceccfd404ea67ea921121cc20, type: 3}
-  rifleSound: {fileID: 8300000, guid: 9a78945936642ce42961800b3056f888, type: 3}
+  rifleSound: {fileID: 8300000, guid: ffedea94ff1e0ee4caa72e97b011ac59, type: 3}
+  vineBoom: {fileID: 8300000, guid: 1450e10de9f194a47b09750a0e1a1932, type: 3}
   maskToIgnore:
     serializedVersion: 2
     m_Bits: 129
@@ -413,10 +414,11 @@ AudioSource:
   m_GameObject: {fileID: 6093271824592174851}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -97219742630079278, guid: 1757b8449da7a9d4da33b5d237c13c7b,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0

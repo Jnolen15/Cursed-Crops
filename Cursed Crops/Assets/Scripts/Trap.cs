@@ -12,6 +12,8 @@ public class Trap : MonoBehaviour
     public float cdTime = 2f;
     public int cost = 0;
     public AudioClip soundClip;
+    public AudioClip vineBoom;
+    public AudioSource vinesSound;
 
     // ================= Private variables =================
     private delegate void Callback();
@@ -118,6 +120,7 @@ public class Trap : MonoBehaviour
                 vines = Instantiate(Resources.Load<GameObject>("Effects/Vines"), transform.position, transform.rotation, transform);
             StopCoroutine(cooldown(() => { onCooldown = false; }, cdTime));
             playonce = true;
+            vinesSound.PlayOneShot(vineBoom);
             gameObject.GetComponent<AudioPlayer>().StopSound();
         }
 

@@ -26,6 +26,7 @@ public class GrabbageWindup : MonoBehaviour
     Color prev;
 
     public LayerMask maskToIgnore;
+    public AudioClip grabSound;
 
     IEnumerator inst = null;
     void Start()
@@ -58,7 +59,7 @@ public class GrabbageWindup : MonoBehaviour
                         //StopCoroutine("attack");
                         sr.color = Color.yellow;
                         windupStarting = true;
-
+                        gameObject.GetComponent<AudioPlayer>().PlaySound(grabSound);
                         //preAttackPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
                         attackPosition = new Vector3(targetToAttack.transform.position.x, targetToAttack.transform.position.y, targetToAttack.transform.position.z);
                         enemyPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);

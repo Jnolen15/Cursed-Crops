@@ -40,10 +40,11 @@ AudioSource:
   m_GameObject: {fileID: 93131014024751608}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -97219742630079278, guid: 1757b8449da7a9d4da33b5d237c13c7b,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -356,6 +357,7 @@ MonoBehaviour:
   theHealingAura: {fileID: 0}
   hurtSound: {fileID: 8300000, guid: cd28865b322992943bf3c1bda66bbe09, type: 3}
   spawningSound: {fileID: 8300000, guid: c61b53c96d4dd1341bae64ca56a236ce, type: 3}
+  shieldHit: {fileID: 8300000, guid: b40bdc4b105d9624e99adfe25d9ea3c4, type: 3}
   healing: 0
   invincible: 0
 --- !u!114 &2195171091914415132
@@ -372,6 +374,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 6898980271085152378, guid: dc7513aa54b92bd49828fe28146b7c6c, type: 3}
   mainTarget: {fileID: 0}
+  kernerlSound: {fileID: 8300000, guid: 6ef492d074f08a2439acc02858ddda98, type: 3}
+  spawn: {fileID: 8300000, guid: c61b53c96d4dd1341bae64ca56a236ce, type: 3}
+  explode: {fileID: 8300000, guid: 9aacc9f8791399a4bb59f12ec4c6981c, type: 3}
 --- !u!114 &6870011550499739670
 MonoBehaviour:
   m_ObjectHideFlags: 0

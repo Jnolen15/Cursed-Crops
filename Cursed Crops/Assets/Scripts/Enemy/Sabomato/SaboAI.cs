@@ -23,6 +23,8 @@ public class SaboAI : MonoBehaviour
     public Transform oldTarget;
     private EnemyControler ec;
     public bool sabotaging;
+    public AudioClip spawn;
+    public AudioClip sabotagingSound;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +34,7 @@ public class SaboAI : MonoBehaviour
 
         mainTarget = GameObject.FindGameObjectWithTag("MainObjective").GetComponent<Transform>();
         oldTarget = mainTarget;
+        gameObject.GetComponent<AudioPlayer>().PlaySound(spawn);
         //StartCoroutine("UpdatePath");
     }
 

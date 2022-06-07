@@ -33,6 +33,8 @@ public class RangeEnemy : MonoBehaviour
     private bool targetChange = false;
     private float cooldownTimer = 0f;
 
+    public AudioClip shootSound;
+
 
     void Start()
     {
@@ -107,6 +109,7 @@ public class RangeEnemy : MonoBehaviour
 
                 if (!shooting && !onCooldown && !ec.stunned)
                 {
+                    gameObject.GetComponent<AudioPlayer>().PlaySound(shootSound);
                     shooting = true;
                     //StopCoroutine("shoot");
                     //StartCoroutine("shoot");

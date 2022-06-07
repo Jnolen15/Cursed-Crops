@@ -18,6 +18,7 @@ public class EnemyControler : MonoBehaviour
     
     public AudioClip hurtSound;
     public AudioClip spawningSound;
+    public AudioClip shieldHit;
 
 
     // ================= Private variables =================
@@ -163,6 +164,10 @@ public class EnemyControler : MonoBehaviour
                 // In not dead flash red to show hit
                 StartCoroutine(hit(rend));
             }
+        }
+        else
+        {
+            gameObject.GetComponent<AudioPlayer>().PlaySound(shieldHit);
         }
         
         

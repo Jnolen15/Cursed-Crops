@@ -19,6 +19,7 @@ public class CornnonAI : MonoBehaviour
     public bool shooting = false;
     public LayerMask maskToIgnore;
     public AudioClip spawnSound;
+    public AudioClip prepareShot;
 
     // ================= Private variables =================
     const float minPathupdateTime = .2f;
@@ -93,10 +94,11 @@ public class CornnonAI : MonoBehaviour
         {
             if (hit.collider.gameObject.tag == "Player" || hit.collider.gameObject.tag == "MainObjective")
             {
+                
                 enemySpeed = 0;
-
                 if (!shooting)
                 {
+                    gameObject.GetComponent<AudioPlayer>().PlaySound(prepareShot);
                     shooting = true;
                     //shoot();
                 }
