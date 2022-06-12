@@ -11,7 +11,7 @@ public class PlayerConfigManager : MonoBehaviour
     private List<PlayerConfiguration> playerConfigs;
 
     [SerializeField]
-    private int maxPlayers = 2;
+    private int maxPlayers = 4;
 
     [SerializeField]
     public static PlayerConfigManager Instance { get; private set; }
@@ -83,8 +83,9 @@ public class PlayerConfigManager : MonoBehaviour
             // Destroy UI components of Player Configuration Objects
             for (int i = 0; i < transform.childCount; i++)
             {
+                Debug.Log("removing UI component " + i + " out of " + transform.childCount);
                 var child = transform.GetChild(i);
-                child.transform.GetChild(i).gameObject.SetActive(false);
+                child.transform.GetChild(0).gameObject.SetActive(false);
                 Destroy(child.transform.GetChild(1).gameObject);
                 Destroy(child.transform.GetChild(0).gameObject);
             }
