@@ -38,6 +38,10 @@ public class Trap : MonoBehaviour
 
         ps = this.transform.Find("Notes").gameObject.GetComponent<ParticleSystem>();
         ps.Pause();
+
+        //Start on cooldown
+        onCooldown = true;
+        StartCoroutine(cooldown(() => { onCooldown = false; }, cdTime));
     }
 
     void Update()

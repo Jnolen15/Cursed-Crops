@@ -180,12 +180,12 @@ public class EnemyControler : MonoBehaviour
         {
             takingDamage = true;
             impact.SetActive(true);
-            Color prevColor = sr.color;
+            //Color prevColor = sr.color;
             sr.color = Color.red;
             //gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
             yield return new WaitForSeconds(0.2f);
             takingDamage = false;
-            sr.color = prevColor;
+            sr.color = Color.white;
             impact.SetActive(false);
             //gameObject.GetComponent<EnemyToPlayer>().enemySpeed = gameObject.GetComponent<EnemyToPlayer>().originalSpeed;
         }
