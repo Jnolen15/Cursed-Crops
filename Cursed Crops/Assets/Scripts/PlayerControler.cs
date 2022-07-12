@@ -773,7 +773,7 @@ public class PlayerControler : MonoBehaviour
     {
         if (other.gameObject.GetComponent<GrabbageAI>() != null)
         {
-            trapped = false;
+            //trapped = false;
         }
     }
 

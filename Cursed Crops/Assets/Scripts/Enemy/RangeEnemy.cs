@@ -35,6 +35,7 @@ public class RangeEnemy : MonoBehaviour
 
     public AudioClip shootSound;
 
+    private int chooseAPath = 0;
 
     void Start()
     {
@@ -48,6 +49,7 @@ public class RangeEnemy : MonoBehaviour
             listOfPlayers[i] = players[i].transform;
 
         mainTarget = GameObject.FindGameObjectWithTag("MainObjective").GetComponent<Transform>();
+        chooseAPath = Random.Range(0,2);
         //Transform closestPlayer = FindClosestPlayer(listOfPlayers);
         //pathFinder.StartFindPath(transform.position, closestPlayer.position);
         //PathRequestManager.RequestPath(transform.position, closestPlayer.position, OnPathFound);
@@ -62,7 +64,7 @@ public class RangeEnemy : MonoBehaviour
             yield return new WaitForSeconds(.3f);
         }
         closestPlayer = FindClosestPlayer(listOfPlayers);
-        PathRequestManager.RequestPath(new PathRequest(transform.position, closestPlayer.position, OnPathFound));
+        PathRequestManager.RequestPath(new PathRequest(transform.position, closestPlayer.position, OnPathFound), chooseAPath);
 
         float sqrMoveThreshhold = pathUpdateMoveThreshhold * pathUpdateMoveThreshhold;
         Vector3 targetPosOld = closestPlayer.position;
@@ -72,7 +74,7 @@ public class RangeEnemy : MonoBehaviour
             yield return new WaitForSeconds(minPathupdateTime);
             if ((closestPlayer.position - targetPosOld).sqrMagnitude > sqrMoveThreshhold)
             {
-                PathRequestManager.RequestPath(new PathRequest(transform.position, closestPlayer.position, OnPathFound));
+                PathRequestManager.RequestPath(new PathRequest(transform.position, closestPlayer.position, OnPathFound),chooseAPath);
                 targetPosOld = closestPlayer.position;
             }
         }

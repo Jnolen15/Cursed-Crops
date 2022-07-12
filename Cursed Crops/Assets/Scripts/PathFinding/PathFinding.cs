@@ -18,7 +18,7 @@ public class PathFinding : MonoBehaviour
     //{
         //StartCoroutine(FindPath(startPos, targetPos));
     //}
-    public void FindPath(PathRequest request, Action<PathResult> callback)
+    public void FindPath(PathRequest request, Action<PathResult> callback, int choosePath)
     {
         Vector3[] waypoints = new Vector3[0];
         bool pathSuccess = false;
@@ -46,11 +46,11 @@ public class PathFinding : MonoBehaviour
                     {
                         continue;
                     }
-                    int newMovementCost = currentNode.gCost + getDistance(currentNode, neighbour);
+                    int newMovementCost = currentNode.gCost + getDistance(currentNode, neighbour, choosePath);
                     if (newMovementCost < neighbour.gCost || !openSet.Contains(neighbour))
                     {
                         neighbour.gCost = newMovementCost;
-                        neighbour.hCost = getDistance(neighbour, targetNode);
+                        neighbour.hCost = getDistance(neighbour, targetNode, choosePath);
                         neighbour.parent = currentNode;
 
                         if (!openSet.Contains(neighbour))
@@ -112,12 +112,21 @@ public class PathFinding : MonoBehaviour
 
         return waypoints.ToArray();
     }
-    int getDistance(Node nodeA, Node nodeB)
+    int getDistance(Node nodeA, Node nodeB, int whatPath)
     {
-        int dstX = Mathf.Abs(nodeA.gridX - nodeB.gridX);
-        int dstY = Mathf.Abs(nodeA.gridY - nodeB.gridY);
-
-        if(dstX > dstY)
+        int dstX = Mathf.Abs(nodeA.gridX - nodeB.gridX) / 2;
+        int dstY = Mathf.Abs(nodeA.gridY - nodeB.gridY) / 2;
+        if (whatPath == 0)
+        {
+            int dstX2 = (Mathf.Abs(nodeA.gridX - nodeB.gridX)) ^ 2;
+            int dstY2 = (Mathf.Abs(nodeA.gridY - nodeB.gridY)) ^ 2;
+            if (dstX2 > dstY2)
+            {
+                return (10 * dstY2 + 14 * (dstX2 - dstY2)) / 2;
+            }
+            return (14 * dstX2 + 10 * (dstY2 - dstX2)) / 2;
+        }
+        if (dstX > dstY)
         {
             return 14 * dstY + 10 * (dstX - dstY);
         }

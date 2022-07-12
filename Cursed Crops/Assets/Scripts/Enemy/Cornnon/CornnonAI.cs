@@ -8,6 +8,7 @@ public class CornnonAI : MonoBehaviour
     //Setting up changable variables for enemies speeds
     public float enemySpeed = 1f;
     public float originalSpeed = 1f;
+    public int chooseAPath = 0;
     public float rangeDistance = 10f;
     public bool gotHit = false;
     public Transform Player;
@@ -43,6 +44,7 @@ public class CornnonAI : MonoBehaviour
 
         gameObject.GetComponent<AudioPlayer>().PlaySound(spawnSound);
         mainTarget = GameObject.FindGameObjectWithTag("MainObjective").GetComponent<Transform>();
+        chooseAPath = Random.Range(0, 2);
         //Transform closestPlayer = FindClosestPlayer(listOfPlayers);
         //pathFinder.StartFindPath(transform.position, closestPlayer.position);
         //PathRequestManager.RequestPath(transform.position, closestPlayer.position, OnPathFound);
@@ -60,7 +62,7 @@ public class CornnonAI : MonoBehaviour
             yield return new WaitForSeconds(.3f);
         }
         closestPlayer = mainTarget;
-        PathRequestManager.RequestPath(new PathRequest(transform.position, closestPlayer.position, OnPathFound));
+        PathRequestManager.RequestPath(new PathRequest(transform.position, closestPlayer.position, OnPathFound), chooseAPath);
 
         float sqrMoveThreshhold = pathUpdateMoveThreshhold * pathUpdateMoveThreshhold;
         Vector3 targetPosOld = closestPlayer.position;
@@ -70,7 +72,7 @@ public class CornnonAI : MonoBehaviour
             yield return new WaitForSeconds(minPathupdateTime);
             if ((closestPlayer.position - targetPosOld).sqrMagnitude > sqrMoveThreshhold)
             {
-                PathRequestManager.RequestPath(new PathRequest(transform.position, closestPlayer.position, OnPathFound));
+                PathRequestManager.RequestPath(new PathRequest(transform.position, closestPlayer.position, OnPathFound), chooseAPath);
                 targetPosOld = closestPlayer.position;
             }
         }

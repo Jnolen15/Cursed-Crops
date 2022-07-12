@@ -8,6 +8,7 @@ public class PathRequestManager : MonoBehaviour
 {
     //Queue<PathRequest> PathRequestQueue = new Queue<PathRequest>();
     //PathRequest currentPathRequest;
+    public int goodPathing = 0;
 
     Queue<PathResult> results = new Queue<PathResult>();
 
@@ -37,11 +38,11 @@ public class PathRequestManager : MonoBehaviour
         }
     }
     //public static void RequestPath(Vector3 pathStart, Vector3 pathEnd, Action<Vector3[], bool> callback)
-    public static void RequestPath(PathRequest request)
+    public static void RequestPath(PathRequest request, int goodPath)
     {
         ThreadStart threadStart = delegate
         {
-            instance.pathFinding.FindPath (request, instance.FinishedProcessingPath);
+            instance.pathFinding.FindPath (request, instance.FinishedProcessingPath, goodPath);
         };
         threadStart.Invoke();
         //PathRequest newRequest = new PathRequest(pathStart, pathEnd, callback);

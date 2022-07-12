@@ -18,6 +18,7 @@ public class GoToEnemy : MonoBehaviour
     //Setting up changable variables for enemies speeds
     public float enemySpeed = 1f;
     public float originalSpeed = 1f;
+    public int chooseAPath = 0;
     public Transform Player;
     public Transform mainTarget;
     Rigidbody rb;
@@ -44,6 +45,7 @@ public class GoToEnemy : MonoBehaviour
 
         mainTarget = GameObject.FindGameObjectWithTag("MainObjective").GetComponent<Transform>();
         gameObject.GetComponent<AudioPlayer>().PlaySound(spawnsound);
+        chooseAPath = Random.Range(0, 2);
         //Transform closestPlayer = FindClosestPlayer(listOfPlayers);
         //pathFinder.StartFindPath(transform.position, closestPlayer.position);
         //PathRequestManager.RequestPath(transform.position, closestPlayer.position, OnPathFound);
@@ -62,7 +64,7 @@ public class GoToEnemy : MonoBehaviour
             yield return new WaitForSeconds(.3f);
         }
         closestPlayer = FindLowHealthEnemy(listOfEnemies);
-        PathRequestManager.RequestPath(new PathRequest(transform.position, closestPlayer.position, OnPathFound));
+        PathRequestManager.RequestPath(new PathRequest(transform.position, closestPlayer.position, OnPathFound), chooseAPath);
 
         float sqrMoveThreshhold = pathUpdateMoveThreshhold * pathUpdateMoveThreshhold;
         Vector3 targetPosOld = closestPlayer.position;
@@ -72,7 +74,7 @@ public class GoToEnemy : MonoBehaviour
             yield return new WaitForSeconds(minPathupdateTime);
             if ((closestPlayer.position - targetPosOld).sqrMagnitude > sqrMoveThreshhold)
             {
-                PathRequestManager.RequestPath(new PathRequest(transform.position, closestPlayer.position, OnPathFound));
+                PathRequestManager.RequestPath(new PathRequest(transform.position, closestPlayer.position, OnPathFound), chooseAPath);
                 targetPosOld = closestPlayer.position;
             }
         }

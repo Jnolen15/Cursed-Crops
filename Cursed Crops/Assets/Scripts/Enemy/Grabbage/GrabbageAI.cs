@@ -91,32 +91,44 @@ public class GrabbageAI : MonoBehaviour
 
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Player")
+        {
+
+        }
+    }
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Player" && gameObject.GetComponent<EnemyControler>().health > 0 && other.gameObject.GetComponent<PlayerControler>().state != PlayerControler.State.Rolling)
+        if (other.gameObject.tag == "Player" && (gameObject.GetComponent<EnemyControler>().health > 0) && other.gameObject.GetComponent<PlayerControler>().state != PlayerControler.State.Rolling)
         {
-            if (!lettingGo)
+            
+            if (!other.gameObject.GetComponent<PlayerControler>().trapped && !alreadyGrabbing)
             {
-                gameObject.GetComponent<GrabbageToPlayers>().enemySpeed = 0;
-                gameObject.GetComponent<GrabbageToPlayers>().originalSpeed = 0;
-                gameObject.transform.position = other.gameObject.transform.position + new Vector3(0, 0, -0.1f);
-                gameObject.GetComponent<GrabbageWindup>().enabled = false;
-
-            }
-            if (!alreadyGrabbing)
-            {
+                trappedPlayer = other.gameObject;
 
                 StopCoroutine("takeRest");
                 alreadyGrabbing = true;
                 isItHit = false;
                 gameObject.GetComponent<GrabbageWindup>().enabled = false;
 
-                trappedPlayer = other.gameObject;
+
                 trappedPlayer.GetComponent<PlayerControler>().moveSpeed = 0;
+                //trappedPlayer.transform.position = gameObject.transform.position;
                 trappedPlayer.gameObject.GetComponent<PlayerControler>().trapped = true;
+                
+            }
+            if (!lettingGo && trappedPlayer != null)
+            {
+                gameObject.GetComponent<GrabbageToPlayers>().enemySpeed = 0;
+                gameObject.GetComponent<GrabbageToPlayers>().originalSpeed = 0;
+                gameObject.transform.position = trappedPlayer.gameObject.transform.position + new Vector3(0, 0, -0.1f);
+                gameObject.GetComponent<GrabbageWindup>().enabled = false;
 
             }
-            
+
+
+
 
 
 

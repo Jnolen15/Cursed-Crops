@@ -25,7 +25,7 @@ public class SaboAI : MonoBehaviour
     public bool sabotaging;
     public AudioClip spawn;
     public AudioClip sabotagingSound;
-
+    private int chooseAPath = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +35,7 @@ public class SaboAI : MonoBehaviour
         mainTarget = GameObject.FindGameObjectWithTag("MainObjective").GetComponent<Transform>();
         oldTarget = mainTarget;
         gameObject.GetComponent<AudioPlayer>().PlaySound(spawn);
+        chooseAPath = Random.Range(0,2);
         //StartCoroutine("UpdatePath");
     }
 
@@ -46,7 +47,7 @@ public class SaboAI : MonoBehaviour
             yield return new WaitForSeconds(.3f);
         }
 
-        PathRequestManager.RequestPath(new PathRequest(transform.position, closestTurret.position, OnPathFound));
+        PathRequestManager.RequestPath(new PathRequest(transform.position, closestTurret.position, OnPathFound),chooseAPath);
 
         float sqrMoveThreshhold = pathUpdateMoveThreshhold * pathUpdateMoveThreshhold;
         Vector3 targetPosOld = closestTurret.position;
@@ -56,7 +57,7 @@ public class SaboAI : MonoBehaviour
             yield return new WaitForSeconds(minPathupdateTime);
             if ((closestTurret.position - targetPosOld).sqrMagnitude > sqrMoveThreshhold)
             {
-                PathRequestManager.RequestPath(new PathRequest(transform.position, closestTurret.position, OnPathFound));
+                PathRequestManager.RequestPath(new PathRequest(transform.position, closestTurret.position, OnPathFound),chooseAPath);
                 targetPosOld = closestTurret.position;
             }
         }

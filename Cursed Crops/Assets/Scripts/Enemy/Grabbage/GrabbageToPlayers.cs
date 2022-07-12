@@ -24,6 +24,7 @@ public class GrabbageToPlayers : MonoBehaviour
     private float healingTickSpeed = 1f;
     private float healingTimer = 5f;
     public bool angered = false;
+    public int chooseAPath = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +38,7 @@ public class GrabbageToPlayers : MonoBehaviour
             listOfPlayers[i] = players[i].transform;
 
         mainTarget = GameObject.FindGameObjectWithTag("MainObjective").GetComponent<Transform>();
+        chooseAPath = Random.Range(0,2);
         //Transform closestPlayer = FindClosestPlayer(listOfPlayers);
         //pathFinder.StartFindPath(transform.position, closestPlayer.position);
         //PathRequestManager.RequestPath(transform.position, closestPlayer.position, OnPathFound);
@@ -55,7 +57,7 @@ public class GrabbageToPlayers : MonoBehaviour
             yield return new WaitForSeconds(.3f);
         }
 
-        PathRequestManager.RequestPath(new PathRequest(transform.position, closestPlayer.position, OnPathFound));
+        PathRequestManager.RequestPath(new PathRequest(transform.position, closestPlayer.position, OnPathFound), chooseAPath);
 
         float sqrMoveThreshhold = pathUpdateMoveThreshhold * pathUpdateMoveThreshhold;
         Vector3 targetPosOld = closestPlayer.position;
@@ -65,7 +67,7 @@ public class GrabbageToPlayers : MonoBehaviour
             yield return new WaitForSeconds(minPathupdateTime);
             if ((closestPlayer.position - targetPosOld).sqrMagnitude > sqrMoveThreshhold)
             {
-                PathRequestManager.RequestPath(new PathRequest(transform.position, closestPlayer.position, OnPathFound));
+                PathRequestManager.RequestPath(new PathRequest(transform.position, closestPlayer.position, OnPathFound), chooseAPath);
                 targetPosOld = closestPlayer.position;
             }
         }

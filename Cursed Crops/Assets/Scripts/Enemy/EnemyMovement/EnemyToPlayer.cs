@@ -11,6 +11,7 @@ public class EnemyToPlayer : MonoBehaviour
     //Setting up changable variables for enemies speeds
     public float enemySpeed = 1f;
     public float originalSpeed = 1f;
+    public int chooseAPath = 0;
     public Transform Player;
     public Transform mainTarget;
     Rigidbody rb;
@@ -27,6 +28,7 @@ public class EnemyToPlayer : MonoBehaviour
     private float healingTimer = 5f;
     public bool angered = false;
     private EnemyControler ec;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +43,8 @@ public class EnemyToPlayer : MonoBehaviour
             listOfPlayers[i] = players[i].transform;
         
         mainTarget = GameObject.FindGameObjectWithTag("MainObjective").GetComponent<Transform>();
+        chooseAPath = Random.Range(0, 2);
+        //chooseAPath = 0;
         //Transform closestPlayer = FindClosestPlayer(listOfPlayers);
         //pathFinder.StartFindPath(transform.position, closestPlayer.position);
         //PathRequestManager.RequestPath(transform.position, closestPlayer.position, OnPathFound);
@@ -59,7 +63,7 @@ public class EnemyToPlayer : MonoBehaviour
             yield return new WaitForSeconds(.3f);
         }
         
-        PathRequestManager.RequestPath(new PathRequest(transform.position, closestPlayer.position, OnPathFound));
+        PathRequestManager.RequestPath(new PathRequest(transform.position, closestPlayer.position, OnPathFound), chooseAPath);
 
         float sqrMoveThreshhold = pathUpdateMoveThreshhold * pathUpdateMoveThreshhold;
         Vector3 targetPosOld = closestPlayer.position;
@@ -69,7 +73,7 @@ public class EnemyToPlayer : MonoBehaviour
             yield return new WaitForSeconds(minPathupdateTime);
             if((closestPlayer.position - targetPosOld).sqrMagnitude > sqrMoveThreshhold)
             {
-                PathRequestManager.RequestPath(new PathRequest(transform.position, closestPlayer.position, OnPathFound));
+                PathRequestManager.RequestPath(new PathRequest(transform.position, closestPlayer.position, OnPathFound), chooseAPath);
                 targetPosOld = closestPlayer.position;
             }
         }
