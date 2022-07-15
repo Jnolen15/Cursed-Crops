@@ -34,7 +34,6 @@ public class SpawnMediBerries : MonoBehaviour
         if ((mediberries[0].GetComponent<EnemyControler>().health <= 0 || mediberries[1].GetComponent<EnemyControler>().health <= 0) && !oneHasFallen)
         {
             oneHasFallen = true;
-            Debug.Log("too far");
             mediberries[0].GetComponent<GoToEnemy>().gettingBack = false;
             mediberries[1].GetComponent<GoToEnemy>().gettingBack = false;
             mediberries[0].GetComponent<GoToEnemy>().closestPlayer = mainTarget;

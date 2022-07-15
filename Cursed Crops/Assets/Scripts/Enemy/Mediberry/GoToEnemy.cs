@@ -6,7 +6,7 @@ public class GoToEnemy : MonoBehaviour
 {
     public Transform plane;
     public Transform randomObject;
-    public bool gettingBack;
+    public bool gettingBack = false;
     float minx;
     float minz;
     private float TickSpeed = 10f;
@@ -124,6 +124,7 @@ public class GoToEnemy : MonoBehaviour
                     }
                 }
 
+                /*
                 if (Vector3.Distance(c.transform.position, closestPlayer.transform.position) <= 1)
                 {
                     enemySpeed = 0;
@@ -132,6 +133,7 @@ public class GoToEnemy : MonoBehaviour
                 {
                     enemySpeed = originalSpeed;
                 }
+                */
 
                 
             }  
@@ -180,7 +182,7 @@ public class GoToEnemy : MonoBehaviour
 
     }
 
-    Transform FindLowHealthEnemy(Transform[] enemies)
+    public Transform FindLowHealthEnemy(Transform[] enemies)
     {
         Transform bestTarget = mainTarget.transform;
 
@@ -197,7 +199,7 @@ public class GoToEnemy : MonoBehaviour
             //higherDamage = playerDamage.overAllPlayerDamage;
 
 
-            if ((potentialTarget.GetComponent<EnemyControler>().health < potentialTarget.GetComponent<EnemyControler>().maxHealth) && potentialTarget.GetComponent<EnemyControler>().health > 0)
+            if ((potentialTarget.GetComponent<EnemyControler>().health < potentialTarget.GetComponent<EnemyControler>().maxHealth) && potentialTarget.GetComponent<EnemyControler>().health > 0 && (potentialTarget.gameObject != this.gameObject))
             {
 
                 Vector3 directionToTarget = potentialTarget.position - currentPosition;
