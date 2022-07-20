@@ -9,12 +9,19 @@ public class InitializeLevel : MonoBehaviour
     public GameObject playerConfig;
     public PlayerManager playerManager;
     public GameObject playerController;
+    public GameObject[] allPlayers;
 
     void Start()
     {
         var playerConfigs = PlayerConfigManager.Instance.GetPlayerConfigs().ToArray();
         playerConfig = GameObject.Find("Player Config Manager");
         playerManager = GameObject.Find("Player Manager").GetComponent<PlayerManager>();
+        allPlayers = GameObject.FindGameObjectsWithTag("PlayerControlTag");
+        foreach (GameObject control in allPlayers)
+        {
+            control.GetComponent<PlayerInputHandler>().allowBuild = true;
+            control.GetComponent<PlayerInputHandler>().allowAttack = true;
+        }
         for (int i = 0; i < playerConfigs.Length; i++)
         {
             playerController = playerConfig.transform.GetChild(i).gameObject;
