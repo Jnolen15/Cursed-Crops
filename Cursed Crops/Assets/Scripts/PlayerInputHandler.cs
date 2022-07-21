@@ -97,7 +97,7 @@ public class PlayerInputHandler : MonoBehaviour
         }
 
         // Attack
-        if (context.action.name == controls.Player.Attack.name)
+        if (context.action.name == controls.Player.Attack.name && Time.timeScale == 1)
         {
             //Debug.Log("Handler: Calling Attack");
             counter++;
@@ -117,7 +117,7 @@ public class PlayerInputHandler : MonoBehaviour
         }
 
         // Ranged
-        if (context.action.name == controls.Player.Ranged.name)
+        if (context.action.name == controls.Player.Ranged.name && Time.timeScale == 1)
         {
             //Debug.Log("Handler: Calling Ranged");
             if (allowAttack)
