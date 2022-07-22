@@ -22,6 +22,7 @@ public class EnemyControler : MonoBehaviour
 
 
     // ================= Private variables =================
+    private GameRuleManager grm;
     private AudioPlayer daAudio;
     private GameObject DaShield;
     private delegate void Callback();
@@ -57,6 +58,19 @@ public class EnemyControler : MonoBehaviour
         rend = gameObject.GetComponent<Renderer>();
         sr = this.transform.GetComponentInChildren<SpriteRenderer>();
         itemDropper = GetComponent<ItemDropper>();
+
+        // Health increase by difficulty
+        grm = GameObject.Find("GameRuleManager").GetComponent<GameRuleManager>();
+
+        float hpBuff = (5 * grm.difficulty);
+        //Debug.Log("5 * " + grm.difficulty + " = " + hpBuff);
+        hpBuff = (hpBuff / 100);
+        //Debug.Log("prev/100 = " + hpBuff);
+        hpBuff = (maxHealth * hpBuff);
+        //Debug.Log(maxHealth + "*prev = " + hpBuff);
+        maxHealth += (int)hpBuff;
+        health += (int)hpBuff;
+        //Debug.Log("Difficulty: " + grm.difficulty + " Health buff: " + hpBuff + " Max Health: " + maxHealth);
 
         //Audio set up
         daAudio = gameObject.GetComponent<AudioPlayer>();

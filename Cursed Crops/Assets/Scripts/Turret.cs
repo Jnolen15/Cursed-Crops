@@ -187,7 +187,7 @@ public class Turret : MonoBehaviour
 
     IEnumerator shoot()
     {
-        Debug.Log("IN SHOOT");
+        //Debug.Log("IN SHOOT");
         
         onCooldown = true;
         if(bullet != null && bullet.name == "FMCBullet")

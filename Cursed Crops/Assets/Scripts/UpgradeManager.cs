@@ -20,11 +20,13 @@ public class UpgradeManager : MonoBehaviour
     public float maxSpeedUpgrade = 4;
     public float maxCarryUpgrade = 4;
 
+    private bool firstOpened = false;
+
     // ======== Public variables ========
-    public int healthUpgradeCost = 100;
-    public int damageUpgradeCost = 100;
-    public int speedUpgradeCost = 100;
-    public int carryUpgradeCost = 100;
+    public int healthUpgradeCost = 50;
+    public int damageUpgradeCost = 50;
+    public int speedUpgradeCost = 50;
+    public int carryUpgradeCost = 50;
 
     public float healthUpgradeTier = 1;
     public float damageUpgradeTier = 1;
@@ -55,6 +57,23 @@ public class UpgradeManager : MonoBehaviour
         psUpgrade = Resources.Load<GameObject>("Effects/UpgradeParticle");
     }
 
+    public void updateShop()
+    {
+        if (firstOpened == false)
+        {
+            firstOpened = true;
+            healthUpgradeCost += (upgradeCostIncremet * pm.players.Count);
+            damageUpgradeCost += (upgradeCostIncremet * pm.players.Count);
+            speedUpgradeCost += (upgradeCostIncremet * pm.players.Count);
+            carryUpgradeCost += (upgradeCostIncremet * pm.players.Count);
+        }
+
+        UpdateShopUI("Health");
+        UpdateShopUI("Damage");
+        UpdateShopUI("Speed");
+        UpdateShopUI("Carry");
+    }
+
     public void BuyUpgrade(string upgrade, Transform pos)
     {
         switch (upgrade)
@@ -66,7 +85,7 @@ public class UpgradeManager : MonoBehaviour
                     string strNum = "-" + healthUpgradeCost.ToString();
                     grm.SpawnText(pos.position, Color.red, strNum);
                     healthUpgradeTier++;
-                    healthUpgradeCost += upgradeCostIncremet;
+                    healthUpgradeCost += upgradeCostIncremet * pm.players.Count;
                     ApplyUpgrade("Health");
                     UpdateShopUI("Health");
                 }
@@ -82,7 +101,7 @@ public class UpgradeManager : MonoBehaviour
                     string strNum = "-" + damageUpgradeCost.ToString();
                     grm.SpawnText(pos.position, Color.red, strNum);
                     damageUpgradeTier++;
-                    damageUpgradeCost += upgradeCostIncremet;
+                    damageUpgradeCost += upgradeCostIncremet * pm.players.Count;
                     ApplyUpgrade("Damage");
                     UpdateShopUI("Damage");
                 }
@@ -98,7 +117,7 @@ public class UpgradeManager : MonoBehaviour
                     string strNum = "-" + speedUpgradeCost.ToString();
                     grm.SpawnText(pos.position, Color.red, strNum);
                     speedUpgradeTier++;
-                    speedUpgradeCost += upgradeCostIncremet;
+                    speedUpgradeCost += upgradeCostIncremet * pm.players.Count;
                     ApplyUpgrade("Speed");
                     UpdateShopUI("Speed");
                 }
@@ -114,7 +133,7 @@ public class UpgradeManager : MonoBehaviour
                     string strNum = "-" + carryUpgradeCost.ToString();
                     grm.SpawnText(pos.position, Color.red, strNum);
                     carryUpgradeTier++;
-                    carryUpgradeCost += upgradeCostIncremet;
+                    carryUpgradeCost += upgradeCostIncremet * pm.players.Count;
                     ApplyUpgrade("Carry");
                     UpdateShopUI("Carry");
                 }

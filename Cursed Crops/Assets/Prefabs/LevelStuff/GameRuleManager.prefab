@@ -44,13 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d609620fe08519d41a41ea818c21c864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingMoney: 100
+  popupUI: {fileID: 0}
+  startingMoney: 200
   totalPointBounty: 100
   numCornonPlanted: 0
   numGrabbagePlanted: 0
   numMediBerryPlanted: 0
   numScarrotPlanted: 0
-  numSabatamatoPlanted: 0
+  numSabomatoPlanted: 0
   difficulty: 0
   globalPoints: 0
   players: 0
@@ -66,11 +67,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 079881b13732f1f479fbe6f264b695f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthUpgradeCost: 100
-  damageUpgradeCost: 100
-  speedUpgradeCost: 100
-  carryUpgradeCost: 100
+  maxHealthUpgrade: 4
+  maxDamageUpgrade: 4
+  maxSpeedUpgrade: 4
+  maxCarryUpgrade: 4
+  healthUpgradeCost: 50
+  damageUpgradeCost: 50
+  speedUpgradeCost: 50
+  carryUpgradeCost: 50
   healthUpgradeTier: 1
   damageUpgradeTier: 1
   speedUpgradeTier: 1
   carryUpgradeTier: 1
+  updgradeBought: 0

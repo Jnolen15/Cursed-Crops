@@ -63,6 +63,10 @@ public class Cheater : MonoBehaviour
             // The objective House health takes 50 damage
             if (Keyboard.current[Key.L].wasPressedThisFrame)
                 edo.houseHealth -= 50;
+
+            // The difficulty increases by 1
+            if (Keyboard.current[Key.O].wasPressedThisFrame)
+                grm.difficulty += 1;
         }
     }
 }

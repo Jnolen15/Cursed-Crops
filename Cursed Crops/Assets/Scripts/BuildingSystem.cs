@@ -137,6 +137,7 @@ public class BuildingSystem : MonoBehaviour
                 } else if (bc.mode == "StatShop")
                 {
                     SwapTo("StatShop");
+                    um.updateShop();
                 }
             }
         }
@@ -201,6 +202,7 @@ public class BuildingSystem : MonoBehaviour
                             ps.Stop();
                             if (statShop != null)
                                 statShop.SetActive(true);
+                            um.updateShop();
                         }
 
                         bc.mode = mode;
