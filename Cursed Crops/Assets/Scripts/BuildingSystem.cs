@@ -278,7 +278,12 @@ public class BuildingSystem : MonoBehaviour
                     if (mode == "Build")
                     {
                         // Make sure the player can afford a turret before placing it. If they can, they pay the cost
-                        var cost = activePlaceable.cost;
+                        int cost = activePlaceable.cost;
+                        float costBonus = (10 * grm.difficulty);
+                        costBonus = (costBonus / 100);
+                        costBonus = (activePlaceable.cost * costBonus);
+                        cost += (int)costBonus;
+                        cost -= (cost % 5);
                         if (grm.getMoney() >= cost)
                         {
                             psDust.Emit(6);
