@@ -49,6 +49,7 @@ public class Turret : MonoBehaviour
     {
         if (!sabotaged)
         {
+            turretChild.GetComponent<TurretSabotager>().isSabotaged = false;
             // Enemy targeting and shooting
             if (targetedEnemy != null && !onCooldown)
             {

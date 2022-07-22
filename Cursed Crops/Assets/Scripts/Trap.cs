@@ -50,6 +50,7 @@ public class Trap : MonoBehaviour
         {
             if (!sabotaged)
             {
+                trapChild.GetComponent<TurretSabotager>().isSabotaged = false;
                 if (!onCooldown)
                 {
                     spawnEffect();

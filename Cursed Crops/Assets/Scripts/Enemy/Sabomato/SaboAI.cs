@@ -11,6 +11,7 @@ public class SaboAI : MonoBehaviour
     public float originalSpeed = 1f;
     public Transform Player;
     public Transform mainTarget;
+    public Vector3 originalSpawn;
     Rigidbody rb;
     private bool targetChange = false;
     public Transform[] listOfTurrets;
@@ -34,31 +35,65 @@ public class SaboAI : MonoBehaviour
 
         mainTarget = GameObject.FindGameObjectWithTag("MainObjective").GetComponent<Transform>();
         oldTarget = mainTarget;
+        originalSpawn = gameObject.transform.position;
         gameObject.GetComponent<AudioPlayer>().PlaySound(spawn);
         chooseAPath = Random.Range(0,2);
-        //StartCoroutine("UpdatePath");
+        GameObject[] turrets = GameObject.FindGameObjectsWithTag("Turret");
+        listOfTurrets = new Transform[turrets.Length];
+
+        for (int i = 0; i < listOfTurrets.Length; ++i)
+        {
+            listOfTurrets[i] = turrets[i].transform;
+        }
+        closestTurret = FindClosestTurret(listOfTurrets);
+        StartCoroutine("UpdatePath");
     }
 
     // Update is called once per frame
     IEnumerator UpdatePath()
     {
-        if (Time.timeSinceLevelLoad < .3f)
+        if (closestTurret == mainTarget)
         {
-            yield return new WaitForSeconds(.3f);
-        }
-
-        PathRequestManager.RequestPath(new PathRequest(transform.position, closestTurret.position, OnPathFound),chooseAPath);
-
-        float sqrMoveThreshhold = pathUpdateMoveThreshhold * pathUpdateMoveThreshhold;
-        Vector3 targetPosOld = closestTurret.position;
-
-        while (true)
-        {
-            yield return new WaitForSeconds(minPathupdateTime);
-            if ((closestTurret.position - targetPosOld).sqrMagnitude > sqrMoveThreshhold)
+            if (Time.timeSinceLevelLoad < .3f)
             {
-                PathRequestManager.RequestPath(new PathRequest(transform.position, closestTurret.position, OnPathFound),chooseAPath);
-                targetPosOld = closestTurret.position;
+                yield return new WaitForSeconds(.3f);
+            }
+
+            PathRequestManager.RequestPath(new PathRequest(transform.position, originalSpawn, OnPathFound), chooseAPath);
+
+            float sqrMoveThreshhold = pathUpdateMoveThreshhold * pathUpdateMoveThreshhold;
+            Vector3 targetPosOld = originalSpawn;
+
+            while (true)
+            {
+                yield return new WaitForSeconds(minPathupdateTime);
+                if ((originalSpawn - targetPosOld).sqrMagnitude > sqrMoveThreshhold)
+                {
+                    PathRequestManager.RequestPath(new PathRequest(transform.position, originalSpawn, OnPathFound), chooseAPath);
+                    targetPosOld = originalSpawn;
+                }
+            }
+        }
+        else
+        {
+            if (Time.timeSinceLevelLoad < .3f)
+            {
+                yield return new WaitForSeconds(.3f);
+            }
+
+            PathRequestManager.RequestPath(new PathRequest(transform.position, closestTurret.position, OnPathFound), chooseAPath);
+
+            float sqrMoveThreshhold = pathUpdateMoveThreshhold * pathUpdateMoveThreshhold;
+            Vector3 targetPosOld = closestTurret.position;
+
+            while (true)
+            {
+                yield return new WaitForSeconds(minPathupdateTime);
+                if ((closestTurret.position - targetPosOld).sqrMagnitude > sqrMoveThreshhold)
+                {
+                    PathRequestManager.RequestPath(new PathRequest(transform.position, closestTurret.position, OnPathFound), chooseAPath);
+                    targetPosOld = closestTurret.position;
+                }
             }
         }
 
@@ -79,6 +114,11 @@ public class SaboAI : MonoBehaviour
         {
 
            oldTarget = closestTurret;
+            StopCoroutine("UpdatePath");
+            StartCoroutine("UpdatePath");
+        }
+        else if(closestTurret == mainTarget)
+        {
             StopCoroutine("UpdatePath");
             StartCoroutine("UpdatePath");
         }
