@@ -16,6 +16,7 @@ public class EnemyDamageObjective : MonoBehaviour
     public GameObject healthNotif;
     public GameObject barn;
     public GameObject destroyedBarn;
+    public GameObject dustCloudAnimation;
 
     private float iframesTime = 0.2f;
     private float damageNotifCooldown = 6f;
@@ -37,6 +38,7 @@ public class EnemyDamageObjective : MonoBehaviour
 
         barn = this.transform.Find("FarmHouse").gameObject;
         destroyedBarn = this.transform.Find("FarmHouseRuined").gameObject;
+        dustCloudAnimation = this.transform.Find("DustClouds").gameObject;
     }
 
     void Update()
@@ -150,12 +152,15 @@ public class EnemyDamageObjective : MonoBehaviour
     public IEnumerator FailLevel()
     {
         lostLevel = true;
-        barn.SetActive(false);
-        destroyedBarn.SetActive(true);
+        dustCloudAnimation.SetActive(true);
+        
         healthNotif.GetComponent<TextMeshProUGUI>().SetText("The Barn Has Been Destroyed!");
         healthNotif.SetActive(true);
         var cam = GameObject.FindGameObjectWithTag("MainCamera");
         cam.GetComponent<CameraMover>().hasEnded = true;
+        yield return new WaitForSeconds(2);
+        barn.SetActive(false);
+        destroyedBarn.SetActive(true);
         yield return new WaitForSeconds(8);
         SceneManager.LoadScene("GameOver");
     }
