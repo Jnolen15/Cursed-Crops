@@ -8468,6 +8468,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UnplaceableTile (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 3259097284497081018, guid: d811dcd695d76d44cbd8c25cb169062f,
+        type: 3}
+      propertyPath: m_TagString
+      value: TileObjective
+      objectReference: {fileID: 0}
     - target: {fileID: 6677676528271082361, guid: d811dcd695d76d44cbd8c25cb169062f,
         type: 3}
       propertyPath: m_RootOrder
@@ -10750,6 +10755,7 @@ MonoBehaviour:
   playerConfig: {fileID: 0}
   playerManager: {fileID: 0}
   playerController: {fileID: 0}
+  allPlayers: []
 --- !u!4 &1169771468
 Transform:
   m_ObjectHideFlags: 0
@@ -10880,6 +10886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db60e58aafd6acf48a5c8a3108c896d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  goodPathing: 0
 --- !u!114 &1183748203
 MonoBehaviour:
   m_ObjectHideFlags: 0

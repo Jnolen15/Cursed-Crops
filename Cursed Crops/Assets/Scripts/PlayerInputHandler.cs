@@ -213,7 +213,10 @@ public class PlayerInputHandler : MonoBehaviour
     private void Input_onCutsceneActionTriggered(InputAction.CallbackContext context)
     {
         // Progress
-        if (context.action.name == controls.Player.Attack.name)
+        if (context.action.name == controls.Player.Attack.name || 
+            context.action.name == controls.Player.Roll.name ||
+            context.action.name == controls.Player.Ranged.name ||
+            context.action.name == controls.Player.Build.name)
         {
             Debug.Log("Handler: Calling progress");
             cs.Progress_performed(context);

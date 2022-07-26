@@ -703,7 +703,7 @@ public class BuildingSystem : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (buildmodeActive)
+        if (buildmodeActive && bc != null)
         {
             if (other.gameObject.tag == "TileObjective")
             {
@@ -715,7 +715,7 @@ public class BuildingSystem : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (buildmodeActive)
+        if (buildmodeActive && bc != null)
         {
             if (other.gameObject.tag == "TileObjective")
             {
