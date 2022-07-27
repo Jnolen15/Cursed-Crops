@@ -4945,6 +4945,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7157936935710320282}
   - component: {fileID: 8487209471582459433}
+  - component: {fileID: 2144520964670552067}
   m_Layer: 0
   m_Name: EnemySound
   m_TagString: Untagged
@@ -4975,7 +4976,8 @@ AudioSource:
   m_GameObject: {fileID: 7209431874417706449}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -97219742630079278, guid: 1757b8449da7a9d4da33b5d237c13c7b,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.2
@@ -5062,6 +5064,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2144520964670552067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7209431874417706449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ab271ec15b8bc046945f13456b65147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7565537249408550181
 GameObject:
   m_ObjectHideFlags: 0
@@ -5205,6 +5219,7 @@ MonoBehaviour:
   theHealingAura: {fileID: 0}
   hurtSound: {fileID: 8300000, guid: cd28865b322992943bf3c1bda66bbe09, type: 3}
   spawningSound: {fileID: 8300000, guid: c19e5a83e9a24954f9ba4bafd42250f1, type: 3}
+  shieldHit: {fileID: 0}
   healing: 0
   invincible: 0
 --- !u!114 &281055285401495230
@@ -5237,6 +5252,7 @@ MonoBehaviour:
   gettingBack: 0
   enemySpeed: 3
   originalSpeed: 3
+  chooseAPath: 0
   Player: {fileID: 0}
   mainTarget: {fileID: 0}
   listOfEnemies: []

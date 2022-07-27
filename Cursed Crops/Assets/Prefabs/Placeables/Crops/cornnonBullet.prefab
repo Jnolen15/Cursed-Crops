@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3169717294812631468}
   - component: {fileID: 2617755098302665919}
+  - component: {fileID: 5927406106604462676}
   m_Layer: 0
   m_Name: EnemySound
   m_TagString: Untagged
@@ -128,6 +129,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5927406106604462676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93131014024751608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ab271ec15b8bc046945f13456b65147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5347511057813422929
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,6 +387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 6898980271085152378, guid: dc7513aa54b92bd49828fe28146b7c6c, type: 3}
   mainTarget: {fileID: 0}
+  mainTargetAudioSource: {fileID: 0}
   kernerlSound: {fileID: 8300000, guid: 6ef492d074f08a2439acc02858ddda98, type: 3}
   spawn: {fileID: 8300000, guid: c61b53c96d4dd1341bae64ca56a236ce, type: 3}
   explode: {fileID: 8300000, guid: 9aacc9f8791399a4bb59f12ec4c6981c, type: 3}

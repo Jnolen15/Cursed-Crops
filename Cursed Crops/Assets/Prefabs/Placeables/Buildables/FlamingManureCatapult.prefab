@@ -284,6 +284,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2649778373755645097}
   - component: {fileID: 1045695754283826534}
+  - component: {fileID: 1297703947443888303}
   m_Layer: 0
   m_Name: TurretAudio
   m_TagString: Untagged
@@ -318,7 +319,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.3
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -402,6 +403,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1297703947443888303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4760371793704302215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ab271ec15b8bc046945f13456b65147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5861940745745516346
 GameObject:
   m_ObjectHideFlags: 0

@@ -137,6 +137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpeed: 3
   originalSpeed: 3
+  chooseAPath: 0
   Player: {fileID: 0}
   mainTarget: {fileID: 0}
   listOfPlayers: []
@@ -258,6 +259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1331445453277433182}
   - component: {fileID: 5374360801071649016}
+  - component: {fileID: 7201588819044806952}
   m_Layer: 8
   m_Name: EnemySound
   m_TagString: Untagged
@@ -288,7 +290,8 @@ AudioSource:
   m_GameObject: {fileID: 8244709555869332514}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -97219742630079278, guid: 1757b8449da7a9d4da33b5d237c13c7b,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.2
@@ -375,6 +378,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7201588819044806952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8244709555869332514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ab271ec15b8bc046945f13456b65147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8792504114044172691
 GameObject:
   m_ObjectHideFlags: 0

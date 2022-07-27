@@ -163,6 +163,8 @@ MonoBehaviour:
   cdTime: 2
   cost: 50
   soundClip: {fileID: 0}
+  vineBoom: {fileID: 0}
+  vinesSound: {fileID: 0}
   onCooldown: 0
 --- !u!114 &2105342482782917407
 MonoBehaviour:
@@ -378,6 +380,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6351050916691536143}
   - component: {fileID: 1508274272007357218}
+  - component: {fileID: 5481732436323490178}
   m_Layer: 0
   m_Name: TurretSound
   m_TagString: Untagged
@@ -408,7 +411,8 @@ AudioSource:
   m_GameObject: {fileID: 4514165324767651326}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -97219742630079278, guid: 1757b8449da7a9d4da33b5d237c13c7b,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -495,6 +499,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5481732436323490178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4514165324767651326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ab271ec15b8bc046945f13456b65147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6908534528239149030
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,3 +602,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theSabotager: {fileID: 0}
+  isSabotaged: 0

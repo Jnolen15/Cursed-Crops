@@ -139,6 +139,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8834685194898572593}
   - component: {fileID: 2482808688488011927}
+  - component: {fileID: 7765731633910534379}
   m_Layer: 8
   m_Name: EnemySound
   m_TagString: Untagged
@@ -169,7 +170,8 @@ AudioSource:
   m_GameObject: {fileID: 1912396367488105549}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -97219742630079278, guid: 1757b8449da7a9d4da33b5d237c13c7b,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.2
@@ -256,6 +258,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7765731633910534379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912396367488105549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ab271ec15b8bc046945f13456b65147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5567646773155319054
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,6 +477,7 @@ MonoBehaviour:
   originalSpeed: 4
   Player: {fileID: 0}
   mainTarget: {fileID: 0}
+  originalSpawn: {x: 0, y: 0, z: 0}
   listOfTurrets: []
   aPlayerIsStun: 1
   closestTurret: {fileID: 0}
