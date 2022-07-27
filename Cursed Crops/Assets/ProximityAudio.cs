@@ -9,7 +9,7 @@ public class ProximityAudio : MonoBehaviour
     private float InitialVolume;
 
     // where sound falls off completely
-    private float MaxDistance = 50;
+    private float MaxDistance = 40;
     // distance where sound starts falling off
     private float MinDistance = 5;
 
@@ -56,6 +56,6 @@ public class ProximityAudio : MonoBehaviour
         {
             ASource.volume = 0;
         }
-        Debug.Log("Setting Volume to: " + (1 - ((playerDistance - MinDistance) / (MaxDistance - MinDistance))) + "%");
+        // Debug.Log("Setting Volume to: " + (1 - ((playerDistance - MinDistance) / (MaxDistance - MinDistance))) + "%");
     }
 }
