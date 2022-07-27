@@ -29,24 +29,25 @@ public class SpriteLeaner : MonoBehaviour
             if (spriteObj == null)
             {
                 Debug.Log("ERROR in leaned sprite list");
-            }
-
-            // lean the current sprite by the desired angle
-            spriteObj.transform.SetPositionAndRotation(
-                spriteObj.transform.position,
-                Quaternion.Euler(new Vector3(leanAngle, spriteObj.transform.rotation.eulerAngles.y, spriteObj.transform.rotation.eulerAngles.z))
-            );
-
-            // I don't know what this does - Keenan
-            // manage sort layer
-            if (manageSortLayer)
+            } else
             {
-                // get access to the current sprite renderer & sprite transform
-                SpriteRenderer spRend = spriteObj.GetComponentInChildren<SpriteRenderer>();
-                Transform spTrans = spriteObj.GetComponent<Transform>();
+                // lean the current sprite by the desired angle
+                spriteObj.transform.SetPositionAndRotation(
+                    spriteObj.transform.position,
+                    Quaternion.Euler(new Vector3(leanAngle, spriteObj.transform.rotation.eulerAngles.y, spriteObj.transform.rotation.eulerAngles.z))
+                );
 
-                // change sprite renderer's sorting order based on z position
-                spRend.sortingOrder = -(int)(spTrans.position.z * 10);
+                // I don't know what this does - Keenan
+                // manage sort layer
+                if (manageSortLayer)
+                {
+                    // get access to the current sprite renderer & sprite transform
+                    SpriteRenderer spRend = spriteObj.GetComponentInChildren<SpriteRenderer>();
+                    Transform spTrans = spriteObj.GetComponent<Transform>();
+
+                    // change sprite renderer's sorting order based on z position
+                    spRend.sortingOrder = -(int)(spTrans.position.z * 10);
+                }
             }
         }
     }
