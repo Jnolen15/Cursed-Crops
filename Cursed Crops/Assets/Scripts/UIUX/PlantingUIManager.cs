@@ -202,6 +202,17 @@ public class PlantingUIManager : MonoBehaviour
         stats.text = c;
     }
 
+    public void EditCost(bool isCrop, int cost)
+    {
+        if (isCrop)
+        {
+            stats.text = "Quota value: " + cost;
+        } else
+        {
+            stats.text = "Cost: " + cost;
+        }
+    }
+
     // closes the window display (which is right of the buttons)
     public void closeDisplay()
     {

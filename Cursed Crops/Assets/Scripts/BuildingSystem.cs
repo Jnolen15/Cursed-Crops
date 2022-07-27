@@ -113,11 +113,13 @@ public class BuildingSystem : MonoBehaviour
                 pHSpriteRenderer.sprite = activePlaceable.preview;
                 phSprite.transform.localScale = activePlaceable.prefab.GetChild(0).GetChild(0).transform.localScale;
                 ps.Play();
+                popUpMan.EditCost(false, CalculateNewCost());
             } else if (mode == "Plant" && pHSpriteRenderer.sprite != activePlaceable.preview)
             {
                 pHSpriteRenderer.sprite = activeCrop.preview;
                 phSprite.transform.localScale = activeCrop.prefab.GetChild(0).GetChild(0).transform.localScale;
                 ps.Stop();
+                //popUpMan.EditCost(false, CalculateNewCost());
             }
 
             // Contextual menu switching
@@ -182,6 +184,7 @@ public class BuildingSystem : MonoBehaviour
                             pHSpriteRenderer.sprite = activePlaceable.preview;
                             phSprite.transform.localScale = activePlaceable.prefab.GetChild(0).GetChild(0).transform.localScale;
                             popUpMan.switchMode("Build", count);
+                            popUpMan.EditCost(false, CalculateNewCost());
                             // Set hitbox to match the prefab
                             //bc.boxCol.size = activePlaceable.prefab.GetComponent<BoxCollider>().size;
                         }
@@ -278,12 +281,7 @@ public class BuildingSystem : MonoBehaviour
                     if (mode == "Build")
                     {
                         // Make sure the player can afford a turret before placing it. If they can, they pay the cost
-                        int cost = activePlaceable.cost;
-                        float costBonus = (10 * grm.difficulty);
-                        costBonus = (costBonus / 100);
-                        costBonus = (activePlaceable.cost * costBonus);
-                        cost += (int)costBonus;
-                        cost -= (cost % 5);
+                        int cost = CalculateNewCost();
                         if (grm.getMoney() >= cost)
                         {
                             psDust.Emit(6);
@@ -763,4 +761,15 @@ public class BuildingSystem : MonoBehaviour
             if (DestroyIndicator.activeSelf) DestroyIndicator.SetActive(false);
         }
     } 
+
+    private int CalculateNewCost()
+    {
+        int cost = activePlaceable.cost;
+        float costBonus = (10 * grm.difficulty);
+        costBonus = (costBonus / 100);
+        costBonus = (activePlaceable.cost * costBonus);
+        cost += (int)costBonus;
+        cost -= (cost % 5);
+        return cost;
+    }
 }
