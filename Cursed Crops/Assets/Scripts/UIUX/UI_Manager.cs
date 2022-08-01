@@ -23,6 +23,11 @@ public class UI_Manager : MonoBehaviour
     private GameObject house;
     private EnemyDamageObjective EDO;
 
+    public Sprite morningIcon;
+    public Sprite afternoonIcon;
+    public Sprite nightIcon;
+
+    public Image PhaseIcon;
     public Slider PhaseTimer;
     public TextMeshProUGUI PhaseCounter;
     public TextMeshProUGUI moneyText;
@@ -121,6 +126,9 @@ public class UI_Manager : MonoBehaviour
     {
         // phase counter
         PhaseCounter.text = SM.currentPhase;
+        if (PhaseCounter.text == "Morning") PhaseIcon.sprite = morningIcon;
+        else if (PhaseCounter.text == "Afternoon") PhaseIcon.sprite = afternoonIcon;
+        else if (PhaseCounter.text == "Night") PhaseIcon.sprite = nightIcon;
 
         if (SM.state != SpawnManager.State.Break)
         {
