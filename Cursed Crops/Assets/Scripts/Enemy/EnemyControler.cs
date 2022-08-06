@@ -8,6 +8,7 @@ public class EnemyControler : MonoBehaviour
     public int health = 10;
     public int maxHealth = 10;
     public float overalldamage = 0;
+    public bool isBasic = false;
     public bool takingDamage = false;
     public bool knockbackResist = false;
     public bool stunResist = true;
@@ -62,15 +63,19 @@ public class EnemyControler : MonoBehaviour
         // Health increase by difficulty
         grm = GameObject.Find("GameRuleManager").GetComponent<GameRuleManager>();
 
-        float hpBuff = (5 * grm.difficulty);
-        //Debug.Log("5 * " + grm.difficulty + " = " + hpBuff);
-        hpBuff = (hpBuff / 100);
-        //Debug.Log("prev/100 = " + hpBuff);
-        hpBuff = (maxHealth * hpBuff);
-        //Debug.Log(maxHealth + "*prev = " + hpBuff);
-        maxHealth += (int)hpBuff;
-        health += (int)hpBuff;
-        //Debug.Log("Difficulty: " + grm.difficulty + " Health buff: " + hpBuff + " Max Health: " + maxHealth);
+        // Health scaling with difficulty
+        if (!isBasic)
+        {
+            float hpBuff = (5 * grm.difficulty);
+            //Debug.Log("5 * " + grm.difficulty + " = " + hpBuff);
+            hpBuff = (hpBuff / 100);
+            //Debug.Log("prev/100 = " + hpBuff);
+            hpBuff = (maxHealth * hpBuff);
+            //Debug.Log(maxHealth + "*prev = " + hpBuff);
+            maxHealth += (int)hpBuff;
+            health += (int)hpBuff;
+            //Debug.Log("Difficulty: " + grm.difficulty + " Health buff: " + hpBuff + " Max Health: " + maxHealth);
+        }
 
         //Audio set up
         daAudio = gameObject.GetComponent<AudioPlayer>();

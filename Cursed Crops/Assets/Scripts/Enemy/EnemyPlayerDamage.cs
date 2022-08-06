@@ -190,7 +190,7 @@ public class EnemyPlayerDamage : MonoBehaviour
 
             Color alpha = playerSprite.color;
             // Player flash
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 2; i++)
             {
                 alpha.a = 0.4f;
                 playerSprite.color = alpha;
