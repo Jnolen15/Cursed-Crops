@@ -678,21 +678,21 @@ public class PlayerControler : MonoBehaviour
                 {
                     if (attackChain == 1)
                     {
-                        if (newAttackSystem) enemyControler.Knockback(transform);
+                        if (newAttackSystem) enemyControler.Knockback(transform, 2.5f);
                         int damageAmmount = (int)(3 * damageBoost);
                         enemyControler.takeDamage(damageAmmount, "Melee");
                         overAllPlayerDamage += damageAmmount;
                     }
                     else if (attackChain == 2)
                     {
-                        if (newAttackSystem) enemyControler.Knockback(transform);
+                        if (newAttackSystem) enemyControler.Knockback(transform, 2.5f);
                         int damageAmmount = (int)(5 * damageBoost);
                         enemyControler.takeDamage(damageAmmount, "Melee");
                         overAllPlayerDamage += damageAmmount;
                     }
                     else if (attackChain == 3)
                     {
-                        enemyControler.Knockback(transform);
+                        enemyControler.Knockback(transform, 1.5f);
                         int damageAmmount = (int)(8 * damageBoost);
                         enemyControler.takeDamage(damageAmmount, "Melee");
                         overAllPlayerDamage += damageAmmount;
