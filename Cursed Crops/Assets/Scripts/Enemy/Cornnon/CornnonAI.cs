@@ -16,11 +16,14 @@ public class CornnonAI : MonoBehaviour
     public Transform[] listOfPlayers;
     public bool aPlayerIsStun = true;
     public GameObject bullet;
+    public GameObject littleBullets;
     public bool spawning = false;
     public bool shooting = false;
+    public bool doingLittleShots = false;
     public LayerMask maskToIgnore;
     public AudioClip spawnSound;
     public AudioClip prepareShot;
+    public AudioClip littleShots;
 
     // ================= Private variables =================
     const float minPathupdateTime = .2f;
@@ -30,8 +33,10 @@ public class CornnonAI : MonoBehaviour
     Vector3[] path;
     int targetIndex = 0;
     Transform closestPlayer;
+    private Transform targetToShoot;
     Transform oldTarget;
     private Vector3 direction;
+    private Vector3 kernelDirections;
 
     void Start()
     {
@@ -45,10 +50,6 @@ public class CornnonAI : MonoBehaviour
         gameObject.GetComponent<AudioPlayer>().PlaySound(spawnSound);
         mainTarget = GameObject.FindGameObjectWithTag("MainObjective").GetComponent<Transform>();
         chooseAPath = Random.Range(0, 2);
-        //Transform closestPlayer = FindClosestPlayer(listOfPlayers);
-        //pathFinder.StartFindPath(transform.position, closestPlayer.position);
-        //PathRequestManager.RequestPath(transform.position, closestPlayer.position, OnPathFound);
-        //oldTarget = mainTarget;
         closestPlayer = mainTarget;
         StartCoroutine("UpdatePath");
 
@@ -80,13 +81,13 @@ public class CornnonAI : MonoBehaviour
 
     void FixedUpdate()
     {
-        // new multiplayer chase code
+        // Check if the cornnon is active if not turn off all couritines to not cause errors
         if (!gameObject.activeInHierarchy)
         {
             StopAllCoroutines();
             //Destroy(gameObject);
         }
-
+        //targetToShoot = FindClosestPlayer(listOfPlayers);
         direction = new Vector3(closestPlayer.position.x - transform.position.x, 0, closestPlayer.position.z - transform.position.z);
         // Raycast to target to see if it can be hit
         RaycastHit hit;
@@ -109,6 +110,16 @@ public class CornnonAI : MonoBehaviour
         else
         {
             enemySpeed = originalSpeed;
+            //While the cornnon is not close to the house shoot little kernels around it
+            if (!doingLittleShots)
+            {
+                doingLittleShots = true;
+                gameObject.GetComponent<AudioPlayer>().PlaySound(littleShots);
+                kernelDirections = new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10));
+                StopCoroutine("shootLittleKernels");
+                StartCoroutine("shootLittleKernels");
+            }
+
         }
     }
 
@@ -125,45 +136,43 @@ public class CornnonAI : MonoBehaviour
         this.gameObject.SetActive(false);
     }
     
-    /*IEnumerator shoot()
+    IEnumerator shootLittleKernels()
     {
-        gameObject.GetComponent<Renderer>().material.color = Color.yellow;
         yield return new WaitForSeconds(0.65f);
-        gameObject.GetComponent<Renderer>().material.color = Color.green;
-        GameObject bul = Instantiate(bullet, transform.position, transform.rotation);
+        GameObject lilBul = Instantiate(littleBullets, transform.position, transform.rotation);
         // Send bullet in correct direction
         //Debug.Log(direction);
-        bul.GetComponent<Bullet>().movement = direction.normalized;
+        lilBul.GetComponent<Bullet>().movement = kernelDirections.normalized;
         //enemySpeed = 0f;
-        yield return new WaitForSeconds(7.5f);
-        //enemySpeed = originalSpeed;
-        gameObject.GetComponent<Renderer>().material.color = prev;
-        shooting = false;
+        yield return new WaitForSeconds(0.00000001f);
+        doingLittleShots = false;
 
-    }*/
+    }
 
     Transform FindClosestPlayer(Transform[] players)
     {
         Transform bestTarget = mainTarget.transform;
         float closestDistanceSqr = Mathf.Infinity;
         Vector3 currentPosition = transform.position;
-        float higherDamage = 0;
+        //float higherDamage = 0;
         //float damage = 0;
 
         foreach (Transform potentialTarget in players)
         {
             EnemyPlayerDamage playerStun = potentialTarget.GetComponent<EnemyPlayerDamage>();
-            PlayerControler playerDamage = potentialTarget.GetComponent<PlayerControler>();
-
+            //PlayerControler playerDamage = potentialTarget.GetComponent<PlayerControler>();
+            /*
             if (playerDamage.overAllPlayerDamage > higherDamage && !playerStun.playerIsStun)
             {
                 higherDamage = playerDamage.overAllPlayerDamage;
                 bestTarget = potentialTarget;
                 Debug.Log(potentialTarget + "Has the highest amount of damage = " + higherDamage);
             }
+            */
             Vector3 directionToTarget = potentialTarget.position - currentPosition;
             float dSqrToTarget = directionToTarget.sqrMagnitude;
-            if (dSqrToTarget < closestDistanceSqr && !playerStun.playerIsStun && higherDamage == 0)
+            //if (dSqrToTarget < closestDistanceSqr && !playerStun.playerIsStun && higherDamage == 0) Keeping this in the off chance we wan to revert it back
+            if (dSqrToTarget < closestDistanceSqr && !playerStun.playerIsStun)
             {
 
                 closestDistanceSqr = dSqrToTarget;
@@ -241,18 +250,6 @@ public class CornnonAI : MonoBehaviour
 
         }
     }
-
-    /* private void OnTriggerEnter(Collider melee)
-     {
-         if(melee.gameObject.name == "MeleeAttackLeft" || melee.gameObject.name == "MeleeAttackRight")
-         {
-             Debug.Log("We hit the range enemy");
-             gotHit = true;
-             StopCoroutine("shoot");
-             StartCoroutine("stun");
-         }
-     }
-    */
 
     IEnumerator stun()
     {

@@ -18,7 +18,7 @@ public class CornnonBullet : MonoBehaviour
     void Start()
     {
         mainTarget = GameObject.FindGameObjectWithTag("MainObjective").GetComponent<Transform>();
-        mainTargetAudioSource = GameObject.FindGameObjectWithTag("MainObjective").transform.GetChild(2).gameObject.GetComponent<AudioSource>();
+        mainTargetAudioSource = GameObject.FindGameObjectWithTag("MainObjective").transform.GetChild(3).gameObject.GetComponent<AudioSource>();
         gameObject.GetComponent<AudioPlayer>().PlaySound(spawn);
     }
 

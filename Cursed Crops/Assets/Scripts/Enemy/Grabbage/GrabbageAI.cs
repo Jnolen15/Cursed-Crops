@@ -13,6 +13,7 @@ public class GrabbageAI : MonoBehaviour
     public bool lettingGo = false;
     public bool alreadyGrabbing = false;
     public bool aPlayerIsAlready = false;
+    public bool noMoreGrabs = true;
     private GrabbageToPlayers gTP;
     public AudioClip spawnSound;
     private Animator animator;
@@ -27,48 +28,39 @@ public class GrabbageAI : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        /*
-        if(trappedPlayer != null && gameObject.GetComponent<EnemyControler>().health <= 0)
-        {
-            Debug.Log("do we check if the cabbage dies");
-            boostedHealthActivate = false;
-            StopAllCoroutines();
-            trappedPlayer.GetComponent<PlayerControler>().trapped = false;
-            gameObject.SetActive(false);
-        }
-        if(gameObject.GetComponent<EnemyControler>().health <= 0)
-        {
-            boostedHealthActivate = false;
-            StopAllCoroutines();
-            gameObject.SetActive(false);
-        }*/
         if (!gameObject.activeInHierarchy)
         {
             StopAllCoroutines();
         }
         if (trappedPlayer != null)
         {
+
             if (!lettingGo && alreadyGrabbing)
             {
+                
+                    gameObject.GetComponent<GrabbageToPlayers>().enemySpeed = 0;
+                    gameObject.GetComponent<GrabbageToPlayers>().originalSpeed = 0;
+                    gameObject.transform.position = trappedPlayer.gameObject.transform.position + new Vector3(0, 0, -0.1f);
+                    gameObject.GetComponent<GrabbageWindup>().enabled = false;
 
+
+                
                 StartCoroutine("LetGo");
             }
             if (lettingGo && alreadyGrabbing)
             {
-
+                
                 StartCoroutine("takeRest");
             }
             if (lettingGo)
             {
 
-
+                StopCoroutine("LetGo");
+                alreadyGrabbing = false;
+                StopCoroutine("cheapDamage");
                 trappedPlayer.GetComponent<PlayerControler>().trapped = false;
                 aPlayerIsAlready = false;
                 trappedPlayer.transform.position = Vector3.MoveTowards(trappedPlayer.transform.position, gameObject.GetComponent<GrabbageWindup>().enemyPosition + new Vector3(0, 0, -0.1f), 0.4f);
-
-
-                StopCoroutine("cheapDamage");
-
 
             }
 
@@ -76,7 +68,7 @@ public class GrabbageAI : MonoBehaviour
             {
 
                 isItHit = true;
-                if (trappedPlayer.gameObject.GetComponent<EnemyPlayerDamage>().playerHealth > 0 && gameObject.activeInHierarchy)
+                if (trappedPlayer.gameObject.GetComponent<EnemyPlayerDamage>().playerHealth > 1 && gameObject.activeInHierarchy)
                 {
                     StartCoroutine("cheapDamage");
                 }
@@ -86,62 +78,55 @@ public class GrabbageAI : MonoBehaviour
                     StopCoroutine("cheapDamage");
                 }
             }
+            if(trappedPlayer.gameObject.GetComponent<PlayerControler>().state == PlayerControler.State.Downed)
+            {
+                StopAllCoroutines();
+            }
         }
         Debug.Log(lettingGo);
-
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.tag == "Player")
-        {
-
-        }
-    }
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Player" && (gameObject.GetComponent<EnemyControler>().health > 0) && other.gameObject.GetComponent<PlayerControler>().state != PlayerControler.State.Rolling)
+        if (noMoreGrabs)
         {
-            
-            if (!other.gameObject.GetComponent<PlayerControler>().trapped && !alreadyGrabbing)
+            if (other.gameObject.tag == "Player" && (gameObject.GetComponent<EnemyControler>().health > 0) && other.gameObject.GetComponent<PlayerControler>().state != PlayerControler.State.Rolling)
             {
-                trappedPlayer = other.gameObject;
 
-                StopCoroutine("takeRest");
-                alreadyGrabbing = true;
-                isItHit = false;
-                gameObject.GetComponent<GrabbageWindup>().enabled = false;
+                if (!other.gameObject.GetComponent<PlayerControler>().trapped && !alreadyGrabbing)
+                {
+                    trappedPlayer = other.gameObject;
+
+                    StopCoroutine("takeRest");
+                    alreadyGrabbing = true;
+                    isItHit = false;
+                    gameObject.GetComponent<GrabbageWindup>().enabled = false;
 
 
-                trappedPlayer.GetComponent<PlayerControler>().moveSpeed = 0;
-                //trappedPlayer.transform.position = gameObject.transform.position;
-                trappedPlayer.gameObject.GetComponent<PlayerControler>().trapped = true;
+                    trappedPlayer.GetComponent<PlayerControler>().moveSpeed = 0;
+                    //trappedPlayer.transform.position = gameObject.transform.position;
+                    trappedPlayer.gameObject.GetComponent<PlayerControler>().trapped = true;
+
+                }
                 
-            }
-            if (!lettingGo && trappedPlayer != null)
-            {
-                gameObject.GetComponent<GrabbageToPlayers>().enemySpeed = 0;
-                gameObject.GetComponent<GrabbageToPlayers>().originalSpeed = 0;
-                gameObject.transform.position = trappedPlayer.gameObject.transform.position + new Vector3(0, 0, -0.1f);
-                gameObject.GetComponent<GrabbageWindup>().enabled = false;
+
+
+
+
+
 
             }
-
-
-
-
-
-
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (trappedPlayer!= null && other.gameObject == trappedPlayer)
         {
             //alreadyGrabbing = false;
-            
-            StopCoroutine("LetGo");
+            StopCoroutine("cheapDamage");
+            //StopCoroutine("LetGo");
+
         }
     }
 
@@ -149,7 +134,7 @@ public class GrabbageAI : MonoBehaviour
 
     IEnumerator cheapDamage()
     {
-        if (trappedPlayer.GetComponent<EnemyPlayerDamage>().playerHealth > 0)
+        if (trappedPlayer.GetComponent<EnemyPlayerDamage>().playerHealth > 1)
         {
             trappedPlayer.GetComponent<EnemyPlayerDamage>().Damage(1);
             yield return new WaitForSeconds(2f);
@@ -162,8 +147,9 @@ public class GrabbageAI : MonoBehaviour
     {
 
         yield return new WaitForSeconds(6f);
-        
+        noMoreGrabs = false;
         lettingGo = true;
+        //alreadyGrabbing = false;
         
 
     }
@@ -174,9 +160,11 @@ public class GrabbageAI : MonoBehaviour
         lettingGo = false;
         animator.SetFloat("Speed", gTP.enemySpeed);
         yield return new WaitForSeconds(1.5f);
-        gameObject.GetComponent<GrabbageToPlayers>().enemySpeed = actualSpeed;
-        gameObject.GetComponent<GrabbageToPlayers>().originalSpeed = actualSpeed;
+        //gameObject.GetComponent<GrabbageToPlayers>().enemySpeed = actualSpeed;
+        //gameObject.GetComponent<GrabbageToPlayers>().originalSpeed = actualSpeed;
         gameObject.GetComponent<GrabbageWindup>().enabled = true;
+        yield return new WaitForSeconds(2f);
+        noMoreGrabs = true;
 
 
 

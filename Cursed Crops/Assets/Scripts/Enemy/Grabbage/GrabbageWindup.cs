@@ -13,6 +13,7 @@ public class GrabbageWindup : MonoBehaviour
     public bool attacking = false;
     bool getPosition = false;
     public bool windupStarting = false;
+    public bool startWalking = false;
     private bool hitFence = false;
     private float attackTimer = 1;
     private float attackTickSpeed = 1;
@@ -54,12 +55,13 @@ public class GrabbageWindup : MonoBehaviour
                 if (Vector3.Distance(gameObject.transform.position, targetToAttack.transform.position) <= 6f && !hitFence)
                 {
                     //StopCoroutine("stun");
-                    if (!windupStarting)
+                    if (!windupStarting && gameObject.GetComponent<GrabbageAI>().noMoreGrabs)
                     {
                         //StopCoroutine("attack");
                         sr.color = Color.yellow;
                         windupStarting = true;
                         gameObject.GetComponent<AudioPlayer>().PlaySound(grabSound);
+                        startWalking = true;
                         //preAttackPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
                         attackPosition = new Vector3(targetToAttack.transform.position.x, targetToAttack.transform.position.y, targetToAttack.transform.position.z);
                         enemyPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
@@ -71,10 +73,18 @@ public class GrabbageWindup : MonoBehaviour
                 }
             }
         }
-
-        if (windupStarting)
+        if (startWalking)
         {
             gameObject.GetComponent<GrabbageToPlayers>().originalSpeed = 0;
+        }
+        else
+        {
+            sr.color = prev;
+            gameObject.GetComponent<GrabbageToPlayers>().originalSpeed = actualSpeed;
+        }
+        if (windupStarting)
+        {
+            
             
             if (!attacking)
             {
@@ -153,8 +163,10 @@ public class GrabbageWindup : MonoBehaviour
 
 
         }
+        startWalking = false;
         //hurtBox.enabled = false;
         //daAttack.enabled = false;
+        yield return new WaitForSeconds(1f);
         windupStarting = false;
         attacking = false;
     }
