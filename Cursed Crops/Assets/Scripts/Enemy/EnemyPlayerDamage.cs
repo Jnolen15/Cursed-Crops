@@ -36,6 +36,7 @@ public class EnemyPlayerDamage : MonoBehaviour
     private PlayerResourceManager prm;
     private SpriteRenderer playerSprite;
     private ParticleSystem psHeal;
+    private ParticleSystem psMusic;
     private GameObject mainObjective;
     private Animator animator;
     private Coroutine damageBuffCo;
@@ -62,6 +63,8 @@ public class EnemyPlayerDamage : MonoBehaviour
         grandChild = this.gameObject.transform.GetChild(1).GetChild(0).gameObject;
         psHeal = Instantiate(Resources.Load<GameObject>("Effects/HealParticle"), transform.position, transform.rotation, transform).GetComponent<ParticleSystem>();
         psHeal.Pause();
+        psMusic = Instantiate(Resources.Load<GameObject>("Effects/MusicParticle"), transform.position, transform.rotation, transform).GetComponent<ParticleSystem>();
+        psMusic.Stop();
 
         // Check the playeranimOCmanager to figure out which character has the script
         if (grandChild.GetComponent<PlayerAnimOCManager>().selectedCharacter == PlayerAnimOCManager.character.Carlisle)
@@ -130,6 +133,15 @@ public class EnemyPlayerDamage : MonoBehaviour
         {
             
             reviveTimer += Time.deltaTime;
+        }
+
+        // Playing the music particle if damage buffed
+        if (damageBuffed)
+        {
+            psMusic.Play();
+        } else
+        {
+            if (psMusic.isPlaying) psMusic.Stop();
         }
     }
 

@@ -680,6 +680,7 @@ public class PlayerControler : MonoBehaviour
                     {
                         if (newAttackSystem) enemyControler.Knockback(transform, 2.5f);
                         int damageAmmount = (int)(3 * damageBoost);
+                        Debug.Log("Damage delt: " + 3 * damageBoost + " Boost: " + damageBoost);
                         enemyControler.takeDamage(damageAmmount, "Melee");
                         overAllPlayerDamage += damageAmmount;
                     }
@@ -687,6 +688,7 @@ public class PlayerControler : MonoBehaviour
                     {
                         if (newAttackSystem) enemyControler.Knockback(transform, 2.5f);
                         int damageAmmount = (int)(5 * damageBoost);
+                        Debug.Log("Damage delt: " + 5 * damageBoost + " Boost: " + damageBoost);
                         enemyControler.takeDamage(damageAmmount, "Melee");
                         overAllPlayerDamage += damageAmmount;
                     }
@@ -694,6 +696,7 @@ public class PlayerControler : MonoBehaviour
                     {
                         enemyControler.Knockback(transform, 1.5f);
                         int damageAmmount = (int)(8 * damageBoost);
+                        Debug.Log("Damage delt: " + 8 * damageBoost + " Boost: " + damageBoost);
                         enemyControler.takeDamage(damageAmmount, "Melee");
                         overAllPlayerDamage += damageAmmount;
                     }

@@ -94,7 +94,7 @@ public class EnemyControler : MonoBehaviour
         psBurn = Instantiate(Resources.Load<GameObject>("Effects/BurnParticle"), transform.position, transform.rotation, transform).GetComponent<ParticleSystem>();
         psHeal = Instantiate(Resources.Load<GameObject>("Effects/HealParticle"), transform.position, transform.rotation, transform).GetComponent<ParticleSystem>();
         ps.Pause();
-        psBurn.Pause();
+        psBurn.Stop();
         psHeal.Pause();
     }
 

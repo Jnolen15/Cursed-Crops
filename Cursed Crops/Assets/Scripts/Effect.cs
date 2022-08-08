@@ -43,9 +43,12 @@ public class Effect : MonoBehaviour
             other.GetComponent<EnemyControler>().ApplyEffect(appliedEffect, effectduration);
         } else if (other.gameObject.tag == "Player" && targetPlayer)
         {
-            other.gameObject.GetComponent<EnemyPlayerDamage>().Heal(damageAmmount);
-            other.gameObject.GetComponent<EnemyPlayerDamage>().ApplyEffect(appliedEffect, effectduration);
-            
+            if (!other.gameObject.GetComponent<EnemyPlayerDamage>().damageBuffed)
+            {
+                Debug.Log("Applied Buff");
+                other.gameObject.GetComponent<EnemyPlayerDamage>().Heal(damageAmmount);
+                other.gameObject.GetComponent<EnemyPlayerDamage>().ApplyEffect(appliedEffect, effectduration);
+            }
         }
     }
 }
