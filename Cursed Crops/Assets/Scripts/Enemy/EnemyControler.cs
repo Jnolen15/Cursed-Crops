@@ -5,8 +5,8 @@ using UnityEngine;
 public class EnemyControler : MonoBehaviour
 {
     // ================= Public variables =================
-    public int health = 10;
-    public int maxHealth = 10;
+    public float health = 10;
+    public float maxHealth = 10;
     public float overalldamage = 0;
     public bool isBasic = false;
     public bool takingDamage = false;
@@ -72,8 +72,8 @@ public class EnemyControler : MonoBehaviour
             //Debug.Log("prev/100 = " + hpBuff);
             hpBuff = (maxHealth * hpBuff);
             //Debug.Log(maxHealth + "*prev = " + hpBuff);
-            maxHealth += (int)hpBuff;
-            health += (int)hpBuff;
+            maxHealth += hpBuff;
+            health += hpBuff;
             //Debug.Log("Difficulty: " + grm.difficulty + " Health buff: " + hpBuff + " Max Health: " + maxHealth);
         }
 
@@ -146,7 +146,7 @@ public class EnemyControler : MonoBehaviour
         }
     }
 
-    public void takeDamage(int dmg, string type)
+    public void takeDamage(float dmg, string type)
     {
         // Subtract from health
         if (!invincible)

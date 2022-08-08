@@ -25,7 +25,7 @@ public class PlayerControler : MonoBehaviour
     public float rollSpeedMax = 24;
     public int maxBullets = 3;
     public int curBullets = 3;
-    public int overAllPlayerDamage = 0;
+    public float overAllPlayerDamage = 0;
     public float moveSpeed;
     public float maxMoveSpeed;
     public int money = 0;
@@ -679,7 +679,7 @@ public class PlayerControler : MonoBehaviour
                     if (attackChain == 1)
                     {
                         if (newAttackSystem) enemyControler.Knockback(transform, 2.5f);
-                        int damageAmmount = (int)(3 * damageBoost);
+                        float damageAmmount = (3 * damageBoost);
                         Debug.Log("Damage delt: " + 3 * damageBoost + " Boost: " + damageBoost);
                         enemyControler.takeDamage(damageAmmount, "Melee");
                         overAllPlayerDamage += damageAmmount;
@@ -687,7 +687,7 @@ public class PlayerControler : MonoBehaviour
                     else if (attackChain == 2)
                     {
                         if (newAttackSystem) enemyControler.Knockback(transform, 2.5f);
-                        int damageAmmount = (int)(5 * damageBoost);
+                        float damageAmmount = (5 * damageBoost);
                         Debug.Log("Damage delt: " + 5 * damageBoost + " Boost: " + damageBoost);
                         enemyControler.takeDamage(damageAmmount, "Melee");
                         overAllPlayerDamage += damageAmmount;
@@ -695,7 +695,7 @@ public class PlayerControler : MonoBehaviour
                     else if (attackChain == 3)
                     {
                         enemyControler.Knockback(transform, 1.5f);
-                        int damageAmmount = (int)(8 * damageBoost);
+                        float damageAmmount = (8 * damageBoost);
                         Debug.Log("Damage delt: " + 8 * damageBoost + " Boost: " + damageBoost);
                         enemyControler.takeDamage(damageAmmount, "Melee");
                         overAllPlayerDamage += damageAmmount;

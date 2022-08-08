@@ -149,7 +149,7 @@ public class SpawnManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Found " + GameObject.FindGameObjectsWithTag("Enemy").Length + " enemies");
+                //Debug.Log("Found " + GameObject.FindGameObjectsWithTag("Enemy").Length + " enemies");
             }
         }
 
