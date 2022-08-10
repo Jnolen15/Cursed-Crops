@@ -291,7 +291,7 @@ Transform:
   m_GameObject: {fileID: 5567646773155319054}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 1361241702383186427}
   - {fileID: 8834685194898572593}
@@ -392,6 +392,7 @@ MonoBehaviour:
   health: 12
   maxHealth: 12
   overalldamage: 0
+  isBasic: 0
   takingDamage: 0
   knockbackResist: 0
   stunResist: 0
@@ -460,8 +461,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 384ea1e443f4cbc4682866c2d1fb9d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpeed: 4
-  originalSpeed: 4
+  enemySpeed: 8
+  originalSpeed: 8
   Player: {fileID: 0}
   mainTarget: {fileID: 0}
   originalSpawn: {x: 0, y: 0, z: 0}
