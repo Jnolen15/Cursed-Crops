@@ -290,6 +290,8 @@ public class BuildingSystem : MonoBehaviour
                             grm.SpawnText(placeableHighlight.transform.position, Color.red, strNum);
                             gameObject.GetComponent<AudioPlayer>().PlaySound(buildingSound);
                             animator.SetTrigger("Plant");
+                            var dustCloud = Instantiate(Resources.Load<GameObject>("Effects/DustCloud"), placeableHighlight.transform.position, placeableHighlight.transform.rotation);
+                            Destroy(dustCloud, 0.6f);
                             Instantiate(activePlaceable.prefab, placeableHighlight.transform.position, placeableHighlight.transform.rotation);
                         } else
                         {
@@ -301,6 +303,8 @@ public class BuildingSystem : MonoBehaviour
                         psDust.Emit(6);
                         animator.SetTrigger("Plant");
                         gameObject.GetComponent<AudioPlayer>().PlaySound(plantingSound);
+                        var dustCloud = Instantiate(Resources.Load<GameObject>("Effects/DustCloud"), placeableHighlight.transform.position, placeableHighlight.transform.rotation);
+                        Destroy(dustCloud, 0.6f);
                         GameObject newSpawner = Instantiate(activeCrop.prefab.gameObject, placeableHighlight.transform.position, placeableHighlight.transform.rotation);
                         sm.AddSpawner(newSpawner);
                         grm.addBountyPoints(activeCrop, newSpawner);
