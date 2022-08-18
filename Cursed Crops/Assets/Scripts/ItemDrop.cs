@@ -31,6 +31,9 @@ public class ItemDrop : MonoBehaviour
         if (timeAlive >= (destroyTime * 0.7))
         {
             itemSpriteRenderer.color = new Color(1, 1, 1, Mathf.PingPong(Time.time, 0.5f));
+        } else
+        {
+            itemSpriteRenderer.color = new Color(1, 1, 1, 1);
         }
 
         // Destroy item if its been alive longer than destroy time

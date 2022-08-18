@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerResourceManager : MonoBehaviour
 {
+    // ====================== Components ======================
     public int cropsValue = 5;
     public int maxCrops = 10;
     private int crops = 0;
@@ -18,6 +19,10 @@ public class PlayerResourceManager : MonoBehaviour
     private float inventoryWarningTimerMax = 10;
     private float inventoryWarningTimer = 0;
 
+    // ====================== AUDIO COMPONENTS ======================
+    public AudioPlayer daSound;
+    public AudioClip[] coinSounds;
+
     public void setCrops(int newAmount) { crops = newAmount; }
     public int getCrops() { return crops; }
     public void addCrops(int amount) { crops += amount; }
@@ -30,6 +35,8 @@ public class PlayerResourceManager : MonoBehaviour
         pickupPS = Resources.Load<GameObject>("Effects/PickupParticle");
         ps = Instantiate(pickupPS, transform.position, transform.rotation, transform).GetComponent<ParticleSystem>();
         ps.Pause();
+
+        daSound = gameObject.GetComponent<AudioPlayer>();
     }
 
     private void Update()
@@ -73,6 +80,13 @@ public class PlayerResourceManager : MonoBehaviour
                 time += Time.deltaTime;
                 yield return null;
             }
+
+            if (i%2 == 0)
+            {
+                int randomSound = Random.Range(0, coinSounds.Length);
+                daSound.PlaySound(coinSounds[randomSound]);
+            }
+
             BankOneItem();
             Destroy(item);
         }

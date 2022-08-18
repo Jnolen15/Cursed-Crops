@@ -91,6 +91,7 @@ public class HarvestFlag : MonoBehaviour
             yield return null;
         }
         flag.transform.localPosition = flagEndPos;
+        playersIn.Clear();
         spawnManager.StartHarvest();
     }
 
