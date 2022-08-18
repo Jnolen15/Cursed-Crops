@@ -42,14 +42,15 @@ public class SpawnManager : MonoBehaviour
 
     // ================ Private ================
     public float currentPhaseEndTime = 0f;   // The time the current phase should end
-    private float currentWaveEndTime = 0f;   // The time the current wave should end
-    private float currentPauseEndTime = 0f;  // The time the current pause should end
+    public float currentWaveEndTime = 0f;   // The time the current wave should end
+    public float currentPauseEndTime = 0f;  // The time the current pause should end
     private float basicSpawnInterval = 0f;     // Used to spawn basic enemies at certain intervals
     private float specialSpawnInterval = 0f; // USed to spawn special enemies at specific intervals
     private float specialSpawnTime = 0f;
     private int specialToSpawn = 0;
     private bool timerStarted = false;
     private bool gridUpdated = false;
+    public bool pauseTimer = false;
     private delegate void Callback();
     private GameObject gridChild;
     private GameRuleManager grm;
@@ -84,7 +85,7 @@ public class SpawnManager : MonoBehaviour
 
     void Update()
     {
-        if(state != State.Break)
+        if(state != State.Break && !pauseTimer)
             elapsedTime += Time.deltaTime;
 
         if (!gridUpdated && gridChild.transform.GetChild(0).GetComponent<GridPlacementChecker>().colChecked)
@@ -111,6 +112,7 @@ public class SpawnManager : MonoBehaviour
             if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
             {
                 currentPhaseEndTime = elapsedTime + phaseDuration;
+                timerStarted = false;
                 daMusic.clip = plantingMusic;
                 daMusic.Play();
                 if (currentPhase == "Pre")
@@ -169,11 +171,17 @@ public class SpawnManager : MonoBehaviour
             }
             else if (state == State.Pause)
             {
-                timerStarted = true;
-                StartCoroutine(timer(() => { state = State.Wave; timerStarted = false; }, pauseDuration));
-                if (currentPauseEndTime < elapsedTime)
+                pauseTimer = true;
+                // Phase is over but wait for all enemies to die
+                if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
                 {
-                    currentPauseEndTime = elapsedTime + pauseDuration;
+                    pauseTimer = false;
+                    timerStarted = true;
+                    StartCoroutine(timer(() => { state = State.Wave; timerStarted = false; }, pauseDuration));
+                    if (currentPauseEndTime < elapsedTime)
+                    {
+                        currentPauseEndTime = elapsedTime + pauseDuration;
+                    }
                 }
             }
         }
