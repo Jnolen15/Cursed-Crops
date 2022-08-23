@@ -144,6 +144,42 @@ public class GameRuleManager : MonoBehaviour
         }
     }
 
+    public int GetBountyWorth(CropSO activeCrop)
+    {
+        int timesPlanted = 0;
+        switch (activeCrop.cropName)
+        {
+            case "Cornon":
+                timesPlanted = numCornonPlanted;
+                break;
+            case "Grabbage":
+                timesPlanted = numGrabbagePlanted;
+                break;
+            case "MediBerry":
+                timesPlanted = numMediBerryPlanted;
+                break;
+            case "Scarrot":
+                timesPlanted = numScarrotPlanted;
+                break;
+            case "Sabomato":
+                timesPlanted = numSabomatoPlanted;
+                break;
+        }
+
+        // If falloff is reached
+        if (timesPlanted > activeCrop.numBeforeFallOff)
+        {
+            int falloff = activeCrop.bountyFallOffAmmount * (timesPlanted - activeCrop.numBeforeFallOff);
+            if (falloff >= activeCrop.bountyWorth) falloff = activeCrop.bountyWorth - 2;
+            return (activeCrop.bountyWorth - falloff);
+        }
+        // If fallof isn't reached
+        else
+        {
+            return(activeCrop.bountyWorth);
+        }
+    }
+
     // Returns true if current bounty score is greater than or equal to given percentage of total bounty
     // Float given should be (0, 1]
     public bool bountyMet(float percentage)

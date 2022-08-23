@@ -107,6 +107,12 @@ public class BuildingSystem : MonoBehaviour
             AlignToGrid(psDust.transform);
             TestPlacementAvailable();
 
+            // Update plant quota text
+            if (mode == "Plant")
+            {
+                popUpMan.EditCost(true, grm.GetBountyWorth(activeCrop));
+            }
+
             // update preview
             if (mode == "Build" && pHSpriteRenderer.sprite != activePlaceable.preview)
             {
