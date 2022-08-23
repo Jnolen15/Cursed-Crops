@@ -24,15 +24,23 @@ public class SaboAI : MonoBehaviour
     public Transform oldTarget;
     private EnemyControler ec;
     public bool sabotaging;
+    public bool invisible;
     public AudioClip spawn;
     public AudioClip sabotagingSound;
     private int chooseAPath = 0;
+    private bool DoItOnce = false;
+    public SpriteRenderer sr;
+    public GameObject dustCloud; 
     // Start is called before the first frame update
     void Start()
     {
         ec = this.gameObject.GetComponent<EnemyControler>();
         rb = GetComponent<Rigidbody>();
-
+        sr = this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
+        Color normalAlpha = sr.color;
+        normalAlpha.a = 1;
+        sr.color = normalAlpha;
+        dustCloud = this.transform.GetChild(2).gameObject;
         mainTarget = GameObject.FindGameObjectWithTag("MainObjective").GetComponent<Transform>();
         oldTarget = mainTarget;
         originalSpawn = gameObject.transform.position;
@@ -47,6 +55,7 @@ public class SaboAI : MonoBehaviour
         }
         closestTurret = FindClosestTurret(listOfTurrets);
         StartCoroutine("UpdatePath");
+        StartCoroutine("turnInvisible");
     }
 
     // Update is called once per frame
@@ -165,11 +174,43 @@ public class SaboAI : MonoBehaviour
 
     public IEnumerator Sabotage()
     {
+        //Omly do this one time
+        Color tmp = sr.color;
+        tmp.a = 1f;
+        if (!DoItOnce && sr.color != tmp)
+        {
+            DoItOnce = true;
+            
+            dustCloud.SetActive(true);
+            sr.color = tmp;
+        }
+        
         sabotaging = true;
         enemySpeed = 0;
         yield return new WaitForSeconds(1f);
+        dustCloud.SetActive(false);
         enemySpeed = originalSpeed;
         sabotaging = false;
+    }
+
+    //IENumerator to make Sabo invisible after one second
+    public IEnumerator turnInvisible()
+    {
+        Color tmp = sr.color;
+        tmp.a = 0f;
+        
+        enemySpeed = 0;
+        sabotaging = true;
+        yield return new WaitForSeconds(0.8f);
+        dustCloud.SetActive(true);
+        
+        yield return new WaitForSeconds(1.2f);
+        sr.color = tmp;
+        sabotaging = false;
+        
+        yield return new WaitForSeconds(1f);
+        dustCloud.SetActive(false);
+        enemySpeed = originalSpeed;
     }
 
     private void OnTriggerStay(Collider other)
