@@ -65,6 +65,7 @@ public class BuildingSystem : MonoBehaviour
         popUp = Instantiate(popupUI.Prefab.gameObject,new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), 
                             transform.rotation, transform);
         popUpMan = popUp.GetComponent<PlantingUIManager>();
+        popUpMan.InitializeSO(popupUI);
 
         statShop = Instantiate(statShopUI.Prefab.gameObject, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z),
                             transform.rotation, transform);

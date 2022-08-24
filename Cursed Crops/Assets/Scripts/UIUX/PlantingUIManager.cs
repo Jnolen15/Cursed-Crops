@@ -8,12 +8,6 @@ public class PlantingUIManager : MonoBehaviour
 {
 
     // textBoxes
-    public TMP_Text topNum;
-    public TMP_Text botNum;
-    public TMP_Text rightNum;
-    public TMP_Text leftNum;
-
-
     public GameObject Window;
     public TMP_Text title;
     public TMP_Text description;
@@ -43,6 +37,14 @@ public class PlantingUIManager : MonoBehaviour
     {
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 
+        // SO setup was here but changed it to its own function called by Building System.
+        // This way we only need 1 UI prefab instead of one for each level
+    }
+
+    public void InitializeSO(popUpUISO so)
+    {
+        SO = so;
+
         if (SO != null)
         {
             string[] textA = new string[] { SO.buildables[0].placeableName, SO.buildables[0].desc, SO.buildables[0].stats, SO.buildables[0].price };
@@ -51,42 +53,11 @@ public class PlantingUIManager : MonoBehaviour
             string[] textD = new string[] { SO.buildables[3].placeableName, SO.buildables[3].desc, SO.buildables[3].stats, SO.buildables[3].price };
             setUp(textA, textB, textC, textD);
             this.gameObject.SetActive(false);
-        } else
+        }
+        else
         {
             Debug.LogError("UI scriptable object ref is null");
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-        
-        /*// testing internal functions
-        closeDisplay();
-        if (Input.GetKey(KeyCode.I))
-        {
-            selectTop();
-        } 
-        if (Input.GetKey(KeyCode.K))
-        {
-            selectBot();
-        } 
-        if (Input.GetKey(KeyCode.L))
-        {
-            selectRight();
-        } 
-        if (Input.GetKey(KeyCode.J))
-        {
-            selectLeft();
-        }*/
-        
-
-        // pointing towards camera (but only x-axis rotation)
-        /*this.transform.LookAt(mainCamera.transform, Vector3.up);
-        this.transform.rotation *= Quaternion.Euler(0, 180, 0);
-        this.transform.rotation = Quaternion.Euler(this.transform.rotation.eulerAngles.x, 0, 0);*/
-        // why is this two statements instead of one? I tried it, it broke. tldr: I have no clue how quarternions work
     }
 
     // method for setting up the box, takes the title, description, stats, and price strings for each textbox and stores them in their
@@ -98,12 +69,6 @@ public class PlantingUIManager : MonoBehaviour
         B = newB;
         C = newC;
         D = newD;
-
-
-        rightNum.text = A[3];
-        botNum.text = B[3];
-        topNum.text = C[3];
-        leftNum.text = D[3];
 
         //Debug.Log("setUp");
     }
