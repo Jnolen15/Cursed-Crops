@@ -184,7 +184,7 @@ public class SaboAI : MonoBehaviour
             dustCloud.SetActive(true);
             sr.color = tmp;
         }
-        
+        gameObject.GetComponent<AudioPlayer>().PlaySound(sabotagingSound);
         sabotaging = true;
         enemySpeed = 0;
         yield return new WaitForSeconds(1f);

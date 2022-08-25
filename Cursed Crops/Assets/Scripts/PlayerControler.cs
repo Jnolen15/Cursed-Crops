@@ -90,11 +90,13 @@ public class PlayerControler : MonoBehaviour
 
     // ====================== AUDIO COMPONENTS ======================
     public AudioPlayer daSound;
+    public AudioPlayer forWooshSound;
     public AudioClip[] attackSound;
     public AudioClip[] carlisleAttack;
     public AudioClip[] cecilAttack;
     public AudioClip[] harveyAttack;
     public AudioClip[] dougAttack;
+    public AudioClip attackWoosh;
     public AudioClip gunSound;
     public AudioClip stepSound;
 
@@ -176,6 +178,7 @@ public class PlayerControler : MonoBehaviour
         // hello - keenan
         pauseMenu = GameObject.Find("UI Canvas").GetComponent<Pause_Manager>();
         daSound = gameObject.GetComponent<AudioPlayer>();
+        forWooshSound = gameObject.GetComponent<AudioPlayer>();
         AimIndicator = Instantiate(Resources.Load<GameObject>("Effects/AimingIndicator"));
     }
 
@@ -505,6 +508,7 @@ public class PlayerControler : MonoBehaviour
                         isAttacking = true;
                         int randomDamage1 = Random.Range(0, attackSound.Length);
                         daSound.PlaySound(attackSound[randomDamage1]);
+                        forWooshSound.PlaySound(attackWoosh);
                         animator.SetTrigger("Melee1");
                         state = State.Attacking;
                         if (lungeAttacking) AttackLunge();
@@ -517,6 +521,7 @@ public class PlayerControler : MonoBehaviour
                         isAttacking = true;
                         int randomDamage2 = Random.Range(0, attackSound.Length);
                         daSound.PlaySound(attackSound[randomDamage2]);
+                        forWooshSound.PlaySound(attackWoosh);
                         animator.SetTrigger("Melee2");
                         state = State.Attacking;
                         if (lungeAttacking) AttackLunge();
@@ -536,6 +541,7 @@ public class PlayerControler : MonoBehaviour
                             isAttacking = true;
                             int randomDamage3 = Random.Range(0, attackSound.Length);
                             daSound.PlaySound(attackSound[randomDamage3]);
+                            forWooshSound.PlaySound(attackWoosh);
                             animator.SetTrigger("Melee3");
                             state = State.Attacking;
                             if (lungeAttacking) AttackLunge();

@@ -35,7 +35,9 @@ public class SpawnManager : MonoBehaviour
     public bool isTutorial = false;
     public bool isEnding = false;
 
-    public AudioClip waveStartSound;
+    public AudioClip morningHorn;
+    public AudioClip afternoonHorn;
+    public AudioClip nightHorn;
     public AudioClip harvestMusic;
     public AudioClip plantingMusic;
     public AudioSource daMusic;             //Will get the music object from the scene (Music makes you lose control)
@@ -54,6 +56,7 @@ public class SpawnManager : MonoBehaviour
     private delegate void Callback();
     private GameObject gridChild;
     private GameRuleManager grm;
+    private AudioClip waveStartSound;
     public List<GameObject> spawners = new List<GameObject>();  // List of active enemy spawners
     public Dictionary<Vector3, string> spawnerGridPositions = new Dictionary<Vector3, string>(); // Dictionary of grid positions on plantable tiles
     private Vector3[] positions;    // array version of Dictionary keys, used to get a random position in the dictionary
@@ -119,6 +122,7 @@ public class SpawnManager : MonoBehaviour
                 {
                     grm.incrementDifficulty();
                     currentPhase = "Morning";
+                    waveStartSound = morningHorn;
                     harvestFlag.SetActive(true);
                 }
                 else if (currentPhase == "Morning")
@@ -126,6 +130,7 @@ public class SpawnManager : MonoBehaviour
                     StopAllCoroutines();
                     grm.incrementDifficulty();
                     currentPhase = "Afternoon";
+                    waveStartSound = afternoonHorn;
                     harvestFlag.SetActive(true);
                     DestroySpawners();
 
@@ -137,6 +142,7 @@ public class SpawnManager : MonoBehaviour
                     StopAllCoroutines();
                     grm.incrementDifficulty();
                     currentPhase = "Night";
+                    waveStartSound = nightHorn;
                     harvestFlag.SetActive(true);
                     DestroySpawners();
                 }

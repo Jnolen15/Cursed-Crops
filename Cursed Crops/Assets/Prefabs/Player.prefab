@@ -82,6 +82,134 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &135294292275048624
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5807275883990946913}
+  - component: {fileID: 8455086149584329380}
+  m_Layer: 7
+  m_Name: Audio Source
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5807275883990946913
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135294292275048624}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7937736029672694574}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &8455086149584329380
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 135294292275048624}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -2796851758449705714, guid: 1757b8449da7a9d4da33b5d237c13c7b,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &895553189616658552
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,6 +650,7 @@ Transform:
   - {fileID: 64243564763032820}
   - {fileID: 3664774142295836259}
   - {fileID: 7535009457305186805}
+  - {fileID: 5807275883990946913}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -944,6 +1073,7 @@ MonoBehaviour:
   ammoManager: {fileID: 3550555863387099239, guid: c45b274deb480454ab44824b41333d5a,
     type: 3}
   daSound: {fileID: 0}
+  forWooshSound: {fileID: 0}
   attackSound: []
   carlisleAttack:
   - {fileID: 8300000, guid: e47d50f51ae526d4cbd414183ea8ca40, type: 3}
@@ -960,11 +1090,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 18ddce820393575469de73271e079f17, type: 3}
   - {fileID: 8300000, guid: 660efb3d6b514d648ad1c831869acc04, type: 3}
   - {fileID: 8300000, guid: ce29df51e51ca4748b81e36a70858592, type: 3}
-  - {fileID: 8300000, guid: 222ff2640e9a94b40933a7e491284d79, type: 3}
+  - {fileID: 8300000, guid: be72522ebe90003469ac702b669d4c51, type: 3}
   dougAttack:
   - {fileID: 8300000, guid: 45b2fb2e1c9ac0c44998d8ac1dde38da, type: 3}
   - {fileID: 8300000, guid: 45e4ebb657b1cd040a7a8e8cacddedab, type: 3}
   - {fileID: 8300000, guid: 07084df7a5e06fa42a4b19960a7d93fe, type: 3}
+  attackWoosh: {fileID: 8300000, guid: 479953e686b74e74b90ebefa4df4ac73, type: 3}
   gunSound: {fileID: 8300000, guid: ffedea94ff1e0ee4caa72e97b011ac59, type: 3}
   stepSound: {fileID: 8300000, guid: f843b5fef81e90c4fb6942d38e40d6d6, type: 3}
   state: 0
@@ -1022,48 +1153,48 @@ MonoBehaviour:
   invulnerable: 0
   damageSound: []
   carlisleHurt:
-  - {fileID: 8300000, guid: 463c6506be62e4944a8599798268b1ee, type: 3}
-  - {fileID: 8300000, guid: 7be619a942f63c740a17ec7cd4e101f7, type: 3}
-  - {fileID: 8300000, guid: 8b9f3e03eb013b0499f96648f2b491b4, type: 3}
-  - {fileID: 8300000, guid: d7e5faa10dac11b489fa943802a65bff, type: 3}
+  - {fileID: 8300000, guid: a611418aff5c0294eae572120c3be543, type: 3}
+  - {fileID: 8300000, guid: 925a39911ec589549a1ec538d7cab039, type: 3}
+  - {fileID: 8300000, guid: 4ac9f4e100c73a94783359c3ea787ca7, type: 3}
+  - {fileID: 8300000, guid: bf0a56a5e4fdef943b5ba273302103ec, type: 3}
   cecilHurt:
-  - {fileID: 8300000, guid: db7a11481e05922489b13c0051a0870e, type: 3}
-  - {fileID: 8300000, guid: 22e16e224757005439c7af67326c4236, type: 3}
-  - {fileID: 8300000, guid: 720a7b80d45d5ab4cb034af7547a7983, type: 3}
+  - {fileID: 8300000, guid: eaa48185246cb3549a5146d680bb3b19, type: 3}
+  - {fileID: 8300000, guid: 151c7ed88178eb14eb54905c01e8734c, type: 3}
+  - {fileID: 8300000, guid: dbc275750dcf5ff47acdea6be2374d5c, type: 3}
   harveyHurt:
-  - {fileID: 8300000, guid: 754206fe8e846e742a10340981549870, type: 3}
-  - {fileID: 8300000, guid: 222d4825f3a3c654ba8e33bb28283b6f, type: 3}
-  - {fileID: 8300000, guid: aa0ea59e65a71fb4aaed3cfc6feab775, type: 3}
+  - {fileID: 8300000, guid: 85d8cb301cce13749b2e2b2521f4d59d, type: 3}
+  - {fileID: 8300000, guid: ff312f904163d4a4f8e693368ce31077, type: 3}
+  - {fileID: 8300000, guid: 1a39123ccdbf397449e77099e1a90bdb, type: 3}
   dougHurt:
-  - {fileID: 8300000, guid: d3ddecfcb2fa3b048a2b8383d2f44274, type: 3}
-  - {fileID: 8300000, guid: 02410feaa6c1bc6439a1232cfe595e8d, type: 3}
-  - {fileID: 8300000, guid: 18c4dac03719c1a44a3949b643289d47, type: 3}
+  - {fileID: 8300000, guid: b25e8d09b78624d46bfb3f0c1064455f, type: 3}
+  - {fileID: 8300000, guid: 4323a95774aad0b4481bbee91312d193, type: 3}
+  - {fileID: 8300000, guid: 4072e20f6fdb2af4a95efac0fb0718fa, type: 3}
   downSound: []
   carlisleDown:
-  - {fileID: 8300000, guid: 07f4a5b97645e434cb2c1d9a57f156a8, type: 3}
-  - {fileID: 8300000, guid: 78b574bb28830d44c8ba32e636e66296, type: 3}
-  - {fileID: 8300000, guid: b14786e1eca594043852067ae05c4660, type: 3}
-  - {fileID: 8300000, guid: eacf7d70d6960814f9963ac1755e5005, type: 3}
-  - {fileID: 8300000, guid: 1e742378e2a6d984bac8a49b1bb3a3bf, type: 3}
+  - {fileID: 8300000, guid: ad48abf6ad49032478123b9aad7647db, type: 3}
+  - {fileID: 8300000, guid: e6931d552a47d9847ae447b23ff9a744, type: 3}
+  - {fileID: 8300000, guid: 25a025e55d68b0a4ca3e66d69bfb86c1, type: 3}
+  - {fileID: 8300000, guid: 559f32715aa119a40b6dd91d68587c2e, type: 3}
+  - {fileID: 8300000, guid: ba6c50fae7b94a74e91160d4beeab94a, type: 3}
   cecilDown:
-  - {fileID: 8300000, guid: 756c58732467ba34aa82f4b55b55e29c, type: 3}
-  - {fileID: 8300000, guid: 32da4fe803b03de45b15831e686df8e7, type: 3}
-  - {fileID: 8300000, guid: 83d46e0c292acfa43b487b5b3a2ce1c5, type: 3}
-  - {fileID: 8300000, guid: 8509da8180fcd8341a2046d30d8373bc, type: 3}
-  - {fileID: 8300000, guid: adeaf482d439c1e4e82f5674f0deeaf0, type: 3}
-  - {fileID: 8300000, guid: f7bb6e7e5d4d17e44b797350bc24da3c, type: 3}
-  - {fileID: 8300000, guid: 470c2b83755a6804580e60f64c801907, type: 3}
+  - {fileID: 8300000, guid: e3ce1e46867d19e498f92460f4fc8aff, type: 3}
+  - {fileID: 8300000, guid: c1f909156e7e6834ea15aa39e40a1b77, type: 3}
+  - {fileID: 8300000, guid: 60a16dc5f5699f643a940a61818c0039, type: 3}
+  - {fileID: 8300000, guid: 3e6087a5ecaa9854497bed76c1405a0e, type: 3}
+  - {fileID: 8300000, guid: cb4cd64ddfeb91b4e88236754fc2d42c, type: 3}
+  - {fileID: 8300000, guid: d3d5878d3f58daf438220eba97f79cb0, type: 3}
+  - {fileID: 8300000, guid: 5b12f36331e671e48981a0950f295974, type: 3}
   harveyDown:
-  - {fileID: 8300000, guid: 94ee0b546eb686f47883110e2f596ba9, type: 3}
-  - {fileID: 8300000, guid: 07e413b39c0d8ed438e6b58e3fd7c727, type: 3}
-  - {fileID: 8300000, guid: df6e98caeaa548b4d9ea31389d97d546, type: 3}
-  - {fileID: 8300000, guid: e1b683ec09c2e0f40ab31fe756ee4b05, type: 3}
-  - {fileID: 8300000, guid: 7f92bd7f8f7d6eb439751da8da35bd19, type: 3}
+  - {fileID: 8300000, guid: 1de59426ad29e64478cb425a4b561558, type: 3}
+  - {fileID: 8300000, guid: ee9ea270c374e7f45b3359c06a007ef2, type: 3}
+  - {fileID: 8300000, guid: ba2d9a53628551c46bc80a944ae626a5, type: 3}
+  - {fileID: 8300000, guid: f0e255a58034efb4cac4a21f4a386492, type: 3}
+  - {fileID: 8300000, guid: f7fe1f728d2c1554390f69d8827433b9, type: 3}
   dougDown:
-  - {fileID: 8300000, guid: 36da1c63f51572848a023b46fe0fe3af, type: 3}
-  - {fileID: 8300000, guid: b74c14e6a20f1604f9ec37222d709654, type: 3}
-  - {fileID: 8300000, guid: afb801257333d9444b5774b4ad23797c, type: 3}
-  - {fileID: 8300000, guid: 9b5a75a999e6abc44a63ad96c59ce45c, type: 3}
+  - {fileID: 8300000, guid: 2a87c9010a4e86a449f2eb80c14d5f49, type: 3}
+  - {fileID: 8300000, guid: cbeedc1a144b43c45b2195d1a39a035c, type: 3}
+  - {fileID: 8300000, guid: ec04d599db8e63048b66098b9a94d408, type: 3}
+  - {fileID: 8300000, guid: dff8fa1dd08d1694bbddc14f4274ed68, type: 3}
   fortheDeath: {fileID: 56729872005210509}
   healing: 0
   damageBuffed: 0
