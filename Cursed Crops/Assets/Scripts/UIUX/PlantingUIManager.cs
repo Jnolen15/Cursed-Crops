@@ -171,7 +171,7 @@ public class PlantingUIManager : MonoBehaviour
     {
         if (isCrop)
         {
-            stats.text = "Quota value: " + cost;
+            stats.text = "Quota +" + cost;
         } else
         {
             stats.text = "Cost: " + cost;

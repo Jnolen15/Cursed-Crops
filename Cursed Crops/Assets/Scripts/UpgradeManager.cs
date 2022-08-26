@@ -189,7 +189,7 @@ public class UpgradeManager : MonoBehaviour
                 case "Health":
                     shopUI.A[0] = "Health " + healthUpgradeTier;
                     if(healthUpgradeTier >= maxHealthUpgrade)
-                        shopUI.A[2] = "Upgrade at Maximum";
+                        shopUI.A[2] = "Maxed";
                     else
                         shopUI.A[2] = "Cost: " + healthUpgradeCost;
                     shopUI.refreshDisplay('A');
@@ -197,7 +197,7 @@ public class UpgradeManager : MonoBehaviour
                 case "Damage":
                     shopUI.B[0] = "Damage " + damageUpgradeTier;
                     if (damageUpgradeTier >= maxDamageUpgrade)
-                        shopUI.B[2] = "Upgrade at Maximum";
+                        shopUI.B[2] = "Maxed";
                     else
                         shopUI.B[2] = "Cost: " + damageUpgradeCost;
                     shopUI.refreshDisplay('B');
@@ -205,7 +205,7 @@ public class UpgradeManager : MonoBehaviour
                 case "Speed":
                     shopUI.C[0] = "Speed " + speedUpgradeTier;
                     if (speedUpgradeTier >= maxSpeedUpgrade)
-                        shopUI.C[2] = "Upgrade at Maximum";
+                        shopUI.C[2] = "Maxed";
                     else
                         shopUI.C[2] = "Cost: " + speedUpgradeCost;
                     shopUI.refreshDisplay('C');
@@ -213,7 +213,7 @@ public class UpgradeManager : MonoBehaviour
                 case "Carry":
                     shopUI.D[0] = "Carry Capacity " + carryUpgradeTier;
                     if (carryUpgradeTier >= maxCarryUpgrade)
-                        shopUI.D[2] = "Upgrade at Maximum";
+                        shopUI.D[2] = "Maxed";
                     else
                         shopUI.D[2] = "Cost: " + carryUpgradeCost;
                     shopUI.refreshDisplay('D');
