@@ -8,11 +8,6 @@ public class StatShopUIManager : MonoBehaviour
 {
 
     // textBoxes
-    public TMP_Text topNum;
-    public TMP_Text botNum;
-    public TMP_Text rightNum;
-    public TMP_Text leftNum;
-
     public GameObject Window;
     public TMP_Text title;
     public TMP_Text description;
@@ -101,12 +96,6 @@ public class StatShopUIManager : MonoBehaviour
         //B = newB;
         //C = newC;
         //D = newD;
-
-
-        rightNum.text = A[3];
-        botNum.text = B[3];
-        topNum.text = C[3];
-        leftNum.text = D[3];
 
         Debug.Log("setUp");
     }
