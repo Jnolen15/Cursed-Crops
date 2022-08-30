@@ -108,7 +108,7 @@ public class EnemyDamageObjective : MonoBehaviour
         {
             Sabotage();
         }
-        Debug.Log(doubleDamage);
+        //Debug.Log(doubleDamage);
     }
 
     public IEnumerator ShowHalfWarning()

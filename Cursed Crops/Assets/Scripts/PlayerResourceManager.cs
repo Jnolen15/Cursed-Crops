@@ -139,13 +139,20 @@ public class PlayerResourceManager : MonoBehaviour
                 inventoryWarningTimer = 0;
             }
         }
+    }
 
-        // if colliding with the objective tile
-        // RN this will send items to the middle of the tile. May want to get the objective transform instead
-        if (other.gameObject.tag == "TileObjective")
+    private void OnTriggerStay(Collider other)
+    {
+        // If colliding with the objective tile, Bank crops
+        if (other.gameObject.tag == "TileObjective" && getCrops() > 0)
         {
-            if(!isBanking) StartCoroutine(MoveItems(getCrops(), other.transform));
-            //BankItems();
+            // This will send the crops to the objective transform.
+            // Unless the objective cannot be found then it will send it to tile
+            Transform objective = GameObject.FindGameObjectWithTag("MainObjective").GetComponent<Transform>();
+            if(objective != null)
+                if (!isBanking) StartCoroutine(MoveItems(getCrops(), objective));
+            else
+                if (!isBanking) StartCoroutine(MoveItems(getCrops(), other.transform));
         }
     }
 
