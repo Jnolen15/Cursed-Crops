@@ -16,13 +16,17 @@ public class TurretSabotager : MonoBehaviour
             if (sAI.closestTurret == this.transform.parent)
             {
                 sAI.StartCoroutine(sAI.Sabotage());
-                if (gameObject.transform.parent.gameObject.GetComponent<Trap>() == null)
+                if (gameObject.transform.parent.gameObject.GetComponent<Trap>() == null && gameObject.transform.parent.gameObject.GetComponent<EnemyDamageObjective>() == null)
                 {
                     isSabotaged = gameObject.transform.parent.gameObject.GetComponent<Turret>().Sabotage();
                 }
-                else if (gameObject.transform.parent.gameObject.GetComponent<Turret>() == null)
+                else if (gameObject.transform.parent.gameObject.GetComponent<Turret>() == null && gameObject.transform.parent.gameObject.GetComponent<EnemyDamageObjective>() == null)
                 {
                     isSabotaged = gameObject.transform.parent.gameObject.GetComponent<Trap>().Sabotage();
+                }
+                else if(gameObject.transform.parent.gameObject.GetComponent<Turret>() == null && gameObject.transform.parent.gameObject.GetComponent<Trap>() == null)
+                {
+                    isSabotaged = gameObject.transform.parent.gameObject.GetComponent<EnemyDamageObjective>().Sabotage();
                 }
             }
         }

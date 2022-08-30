@@ -8,8 +8,11 @@ public class EnemyDamageObjective : MonoBehaviour
 {
     public GameObject enemies;
     public GameObject mainObjective;
+    public GameObject vines;
+    public GameObject UIVines;
     public int houseHealth = 500;
     public int startingHouseHealth = 500;
+    public bool sabotage = false;
 
     public GameObject uiCavas;
     public GameObject damageNotif;
@@ -17,10 +20,12 @@ public class EnemyDamageObjective : MonoBehaviour
     public GameObject barn;
     public GameObject destroyedBarn;
     public GameObject dustCloudAnimation;
+    public GameObject SaboSabotage;
 
     private float iframesTime = 0.2f;
     private float damageNotifCooldown = 6f;
     private float damageNotifTimer = 6f;
+    private int doubleDamage = 1;
     private bool showingNotif = false;
     private bool isItHit = false;
     private bool shownHalfWarning = false;
@@ -34,11 +39,14 @@ public class EnemyDamageObjective : MonoBehaviour
         uiCavas = GameObject.Find("UI Canvas");
         damageNotif = uiCavas.transform.Find("UI Overlay/General UI/AttackWarning").gameObject;
         healthNotif = uiCavas.transform.Find("UI Overlay/General UI/HealthWarning").gameObject;
+        UIVines = uiCavas.transform.Find("UI Overlay/General UI/Main Sign/House Icon/Vines").gameObject;
         healthNotif.SetActive(false);
 
         barn = this.transform.Find("FarmHouse").gameObject;
         destroyedBarn = this.transform.Find("FarmHouseRuined").gameObject;
         dustCloudAnimation = this.transform.Find("DustClouds").gameObject;
+        SaboSabotage = this.transform.Find("SaboHitBox").gameObject;
+        vines = this.transform.Find("Vines").gameObject;
     }
 
     void Update()
@@ -81,6 +89,26 @@ public class EnemyDamageObjective : MonoBehaviour
             healthNotif.GetComponent<TextMeshProUGUI>().SetText("Barn at One Quarter Health");
             StartCoroutine(ShowQuarterWarning());
         }
+
+        if (!sabotage)
+        {
+            SaboSabotage.GetComponent<TurretSabotager>().isSabotaged = false;
+            vines.SetActive(false);
+            doubleDamage = 1;
+            UIVines.SetActive(false);
+        }
+        else
+        {
+            vines.SetActive(true);
+            UIVines.SetActive(true);
+            doubleDamage = 2;
+        }
+        // If the sabotager has been killed
+        if (sabotage && SaboSabotage.GetComponent<TurretSabotager>().theSabotager != null && !SaboSabotage.GetComponent<TurretSabotager>().theSabotager.activeInHierarchy)
+        {
+            Sabotage();
+        }
+        Debug.Log(doubleDamage);
     }
 
     public IEnumerator ShowHalfWarning()
@@ -121,12 +149,33 @@ public class EnemyDamageObjective : MonoBehaviour
     }
     */
 
+    //Function for the house when sabotage
+    public bool Sabotage()
+    {
+        // If already sabotaged
+        if (sabotage)
+        {
+
+            sabotage = false;
+            
+        }
+        // If no longer sabotaged
+        else
+        {
+            
+            sabotage = true;
+            //gameObject.GetComponent<AudioPlayer>().PlaySound(vineBoom);
+        }
+
+        return sabotage;
+    }
+
     //Function for the house to take damage
     public void takeDamage(int damage)
     {
         if (!isItHit)
         {
-            houseHealth -= damage;
+            houseHealth -= damage * doubleDamage;
             StartCoroutine(iframes());
             damageNotifTimer = 0f;
         }
@@ -134,7 +183,7 @@ public class EnemyDamageObjective : MonoBehaviour
 
     public void takeDamageIgnoreIFrames(int damage)
     {
-        houseHealth -= damage;
+        houseHealth -= damage * doubleDamage;
         damageNotifTimer = 0f;
     }
 

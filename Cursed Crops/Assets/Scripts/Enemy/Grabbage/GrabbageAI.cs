@@ -90,7 +90,7 @@ public class GrabbageAI : MonoBehaviour
     {
         if (noMoreGrabs)
         {
-            if (other.gameObject.tag == "Player" && (gameObject.GetComponent<EnemyControler>().health > 0) && other.gameObject.GetComponent<PlayerControler>().state != PlayerControler.State.Rolling)
+            if (other.gameObject.tag == "Player" && (gameObject.GetComponent<EnemyControler>().health > 0) && other.gameObject.GetComponent<PlayerControler>().state != PlayerControler.State.Rolling && gameObject.GetComponent<GrabbageWindup>().attacking)
             {
 
                 if (!other.gameObject.GetComponent<PlayerControler>().trapped && !alreadyGrabbing)

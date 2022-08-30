@@ -11,6 +11,7 @@ public class SaboAI : MonoBehaviour
     public float originalSpeed = 1f;
     public Transform Player;
     public Transform mainTarget;
+    public TurretSabotager mainTargetSabotage;
     public Vector3 originalSpawn;
     Rigidbody rb;
     private bool targetChange = false;
@@ -42,6 +43,7 @@ public class SaboAI : MonoBehaviour
         sr.color = normalAlpha;
         dustCloud = this.transform.GetChild(2).gameObject;
         mainTarget = GameObject.FindGameObjectWithTag("MainObjective").GetComponent<Transform>();
+        mainTargetSabotage = GameObject.FindGameObjectWithTag("MainObjective").transform.Find("SaboHitBox").gameObject.GetComponent<TurretSabotager>();
         oldTarget = mainTarget;
         originalSpawn = gameObject.transform.position;
         gameObject.GetComponent<AudioPlayer>().PlaySound(spawn);
@@ -61,7 +63,7 @@ public class SaboAI : MonoBehaviour
     // Update is called once per frame
     IEnumerator UpdatePath()
     {
-        if (closestTurret == mainTarget)
+        if (closestTurret == mainTarget && mainTargetSabotage.isSabotaged)
         {
             if (Time.timeSinceLevelLoad < .3f)
             {
