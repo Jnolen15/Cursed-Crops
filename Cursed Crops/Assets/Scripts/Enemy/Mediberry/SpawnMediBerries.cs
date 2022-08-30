@@ -13,16 +13,6 @@ public class SpawnMediBerries : MonoBehaviour
     void Start()
     {
         mainTarget = GameObject.FindGameObjectWithTag("MainObjective").GetComponent<Transform>();
-        /*
-        for (int i = 0; i < 2; i++)
-        {
-            Vector3 newPos = new Vector3(Random.Range(-5, 5), 0f, Random.Range(-5, 5));
-            newPos = newPos + transform.position;
-            GameObject child = Instantiate(mediberry, newPos, transform.rotation);
-            child.transform.parent = gameObject.transform;
-            mediberries.Add(child);
-        }
-        */
         mediberries.Add(this.gameObject.transform.GetChild(0).gameObject);
         mediberries.Add(this.gameObject.transform.GetChild(1).gameObject);
         //Debug.Log(mediberries.Count);
@@ -53,26 +43,6 @@ public class SpawnMediBerries : MonoBehaviour
             mediberries[0].GetComponent<GoToEnemy>().gettingBack = false;
             mediberries[1].GetComponent<GoToEnemy>().gettingBack = false;
         }
-
-        
-        /*
-        if (c != this.gameObject)
-        {
-            gettingBack = false;
-
-        }
-    }
-    else
-    {
-        if (c != this.gameObject)
-        {
-            gettingBack = true;
-            closestPlayer = c.transform;
-
-            //c.gameObject.GetComponent<GoToEnemy>().closestPlayer = this.gameObject.transform;
-        }
-        */
-
 
     }
 }

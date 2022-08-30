@@ -350,7 +350,7 @@ public class BuildingSystem : MonoBehaviour
                             Destroy(bc.intersectedBuildable);
                             bc.intersectedBuildable = null;
                             bc.intersectingBuildable = false;
-                            Debug.Log("Demolished");
+                            //Debug.Log("Demolished");
                         }
                         else
                         {

@@ -701,7 +701,7 @@ public class EnemyTalking : MonoBehaviour
                 }
                 dialogueBox.SetActive(false);
                 talking = false;
-                Debug.Log("reach the end of the dialoge m8");
+                //Debug.Log("reach the end of the dialoge m8");
                 return;
             }
             sentence = sentences.Dequeue();

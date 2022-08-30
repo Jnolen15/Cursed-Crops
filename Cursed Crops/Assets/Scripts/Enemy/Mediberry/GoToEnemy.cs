@@ -298,7 +298,6 @@ public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
 
     IEnumerator stun()
     {
-        Debug.Log("getting stun");
         //gameObject.GetComponent<Renderer>().material.color = Color.red;
         yield return new WaitForSeconds(0.5f);
         //gameObject.GetComponent<Renderer>().material.color = prev;

@@ -165,7 +165,7 @@ public class SaboAI : MonoBehaviour
                 //if (dSqrToTarget < closestDistanceSqr && (stopped != null && !stopped.sabotaged || trapStopped != null && !trapStopped.sabotaged))
                 if (dSqrToTarget < closestDistanceSqr && stopped != null && !stopped.isSabotaged)
                 {
-                    Debug.Log("New best target: " + stopped.gameObject.transform.parent.gameObject.name + " " + stopped.isSabotaged);
+                    //Debug.Log("New best target: " + stopped.gameObject.transform.parent.gameObject.name + " " + stopped.isSabotaged);
                     closestDistanceSqr = dSqrToTarget;
                     bestTarget = potentialTarget;
                 }

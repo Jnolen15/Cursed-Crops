@@ -218,14 +218,14 @@ public class PlayerInputHandler : MonoBehaviour
             context.action.name == controls.Player.Ranged.name ||
             context.action.name == controls.Player.Build.name)
         {
-            Debug.Log("Handler: Calling progress");
+            //Debug.Log("Handler: Calling progress");
             cs.Progress_performed(context);
         }
 
         // Skip cutscene
         if (context.action.name == controls.Player.Pause.name)
         {
-            Debug.Log("Handler: Calling skip cutscene");
+            //Debug.Log("Handler: Calling skip cutscene");
             cutsceneSkipped = true;
             cs.Skip_performed(context);
         }

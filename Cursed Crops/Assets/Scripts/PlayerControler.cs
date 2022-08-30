@@ -120,12 +120,12 @@ public class PlayerControler : MonoBehaviour
         // Assign controller if using one
         if (input.currentControlScheme == "Gamepad")
         {
-            Debug.Log("Player using Controller");
+            //Debug.Log("Player using Controller");
             useControler = true;
         }
         else if (input.currentControlScheme == "Keyboard")
         {
-            Debug.Log("Player using Keyboard / mouse");
+            //Debug.Log("Player using Keyboard / mouse");
             useControler = false;
         }
 
@@ -686,7 +686,7 @@ public class PlayerControler : MonoBehaviour
                     {
                         if (newAttackSystem) enemyControler.Knockback(transform, 2.5f);
                         float damageAmmount = (3 * damageBoost);
-                        Debug.Log("Damage delt: " + 3 * damageBoost + " Boost: " + damageBoost);
+                        //Debug.Log("Damage delt: " + 3 * damageBoost + " Boost: " + damageBoost);
                         enemyControler.takeDamage(damageAmmount, "Melee");
                         overAllPlayerDamage += damageAmmount;
                     }
@@ -694,7 +694,7 @@ public class PlayerControler : MonoBehaviour
                     {
                         if (newAttackSystem) enemyControler.Knockback(transform, 2.5f);
                         float damageAmmount = (5 * damageBoost);
-                        Debug.Log("Damage delt: " + 5 * damageBoost + " Boost: " + damageBoost);
+                        //Debug.Log("Damage delt: " + 5 * damageBoost + " Boost: " + damageBoost);
                         enemyControler.takeDamage(damageAmmount, "Melee");
                         overAllPlayerDamage += damageAmmount;
                     }
@@ -702,7 +702,7 @@ public class PlayerControler : MonoBehaviour
                     {
                         enemyControler.Knockback(transform, 1.5f);
                         float damageAmmount = (8 * damageBoost);
-                        Debug.Log("Damage delt: " + 8 * damageBoost + " Boost: " + damageBoost);
+                        //Debug.Log("Damage delt: " + 8 * damageBoost + " Boost: " + damageBoost);
                         enemyControler.takeDamage(damageAmmount, "Melee");
                         overAllPlayerDamage += damageAmmount;
                     }

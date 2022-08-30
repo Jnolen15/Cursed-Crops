@@ -25,7 +25,6 @@ public class CornnonBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(mainTargetAudioSource);
         if(gameObject.GetComponent<EnemyControler>().health > 0)
         {
             if (!shooting)

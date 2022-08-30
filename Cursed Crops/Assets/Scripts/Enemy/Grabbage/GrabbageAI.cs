@@ -83,7 +83,6 @@ public class GrabbageAI : MonoBehaviour
                 StopAllCoroutines();
             }
         }
-        Debug.Log(lettingGo);
     }
 
     private void OnTriggerStay(Collider other)

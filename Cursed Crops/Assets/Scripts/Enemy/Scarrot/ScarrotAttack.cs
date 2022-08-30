@@ -212,7 +212,7 @@ public class ScarrotAttack : MonoBehaviour
             if (transform.position != newPosition)
             {
                 yield return new WaitForSeconds(0.45f);
-                Debug.Log("first wait");
+                //Debug.Log("first wait");
 
                 
                 //sr.color = Color.green;

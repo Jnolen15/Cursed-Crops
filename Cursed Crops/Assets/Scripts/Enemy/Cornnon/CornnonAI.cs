@@ -253,7 +253,6 @@ public class CornnonAI : MonoBehaviour
 
     IEnumerator stun()
     {
-        Debug.Log("getting stun");
         yield return new WaitForSeconds(2f);
         gameObject.GetComponent<EnemyControler>().takingDamage = false;
         shooting = false;

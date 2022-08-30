@@ -218,7 +218,7 @@ public class SpawnManager : MonoBehaviour
         specialSpawnInterval = (phaseDuration - pauseDuration) / spawners.Count;
         specialSpawnTime = specialSpawnInterval + elapsedTime;
         specialToSpawn = 0;
-        Debug.Log("Will spawn special every " + specialSpawnInterval + " seconds.");
+        //Debug.Log("Will spawn special every " + specialSpawnInterval + " seconds.");
     }
 
 
@@ -290,7 +290,7 @@ public class SpawnManager : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("Position Taken");
+                        //Debug.Log("Position Taken");
                         i--;
                     }
                 }
