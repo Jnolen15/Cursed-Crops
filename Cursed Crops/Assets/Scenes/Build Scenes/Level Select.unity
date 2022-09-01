@@ -211,6 +211,7 @@ GameObject:
   - component: {fileID: 13892756}
   - component: {fileID: 13892755}
   - component: {fileID: 13892757}
+  - component: {fileID: 13892760}
   m_Layer: 0
   m_Name: Level 3 select
   m_TagString: Untagged
@@ -322,14 +323,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1572554155}
-          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-          m_MethodName: PlayOneShot
-          m_Mode: 2
+        - m_Target: {fileID: 13892760}
+          m_TargetAssemblyTypeName: LevelSelectSoundDelay, Assembly-CSharp
+          m_MethodName: pointerOnLevelButton
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: 2013fb40b89773745be816c5d11a4285,
-              type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -339,14 +339,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1572554155}
-          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-          m_MethodName: PlayOneShot
-          m_Mode: 2
+        - m_Target: {fileID: 13892760}
+          m_TargetAssemblyTypeName: LevelSelectSoundDelay, Assembly-CSharp
+          m_MethodName: pointerOffLevelButton
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: cc2c75753bf1ae54da827a2099183f22,
-              type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -397,6 +396,21 @@ RectTransform:
   m_AnchoredPosition: {x: -55.5, y: 55.925}
   m_SizeDelta: {x: 88.4801, y: 111.85}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &13892760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13892754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70a43c0597fd7c546a5e870cba6c9ee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointerOnSound: {fileID: 8300000, guid: 2013fb40b89773745be816c5d11a4285, type: 3}
+  pointerOffSound: {fileID: 8300000, guid: cc2c75753bf1ae54da827a2099183f22, type: 3}
+  buttonAudio: {fileID: 1100732504}
 --- !u!1 &66248275
 GameObject:
   m_ObjectHideFlags: 0
@@ -847,6 +861,7 @@ GameObject:
   - component: {fileID: 203686066}
   - component: {fileID: 203686065}
   - component: {fileID: 203686067}
+  - component: {fileID: 203686070}
   m_Layer: 0
   m_Name: Level 7 select
   m_TagString: Untagged
@@ -958,14 +973,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 440362868}
-          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-          m_MethodName: PlayOneShot
-          m_Mode: 2
+        - m_Target: {fileID: 203686070}
+          m_TargetAssemblyTypeName: LevelSelectSoundDelay, Assembly-CSharp
+          m_MethodName: pointerOnLevelButton
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: 2013fb40b89773745be816c5d11a4285,
-              type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -975,14 +989,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 440362868}
-          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-          m_MethodName: PlayOneShot
-          m_Mode: 2
+        - m_Target: {fileID: 203686070}
+          m_TargetAssemblyTypeName: LevelSelectSoundDelay, Assembly-CSharp
+          m_MethodName: pointerOffLevelButton
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: cc2c75753bf1ae54da827a2099183f22,
-              type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -1033,6 +1046,21 @@ RectTransform:
   m_AnchoredPosition: {x: 90.6001, y: 110.6}
   m_SizeDelta: {x: 61.5462, y: 77.8037}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &203686070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203686064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70a43c0597fd7c546a5e870cba6c9ee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointerOnSound: {fileID: 8300000, guid: 2013fb40b89773745be816c5d11a4285, type: 3}
+  pointerOffSound: {fileID: 8300000, guid: cc2c75753bf1ae54da827a2099183f22, type: 3}
+  buttonAudio: {fileID: 440362868}
 --- !u!1 &230506935
 GameObject:
   m_ObjectHideFlags: 0
@@ -2041,6 +2069,7 @@ GameObject:
   - component: {fileID: 335389608}
   - component: {fileID: 335389607}
   - component: {fileID: 335389609}
+  - component: {fileID: 335389612}
   m_Layer: 0
   m_Name: Level 2 select
   m_TagString: Untagged
@@ -2152,14 +2181,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1572554155}
-          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-          m_MethodName: PlayOneShot
-          m_Mode: 2
+        - m_Target: {fileID: 335389612}
+          m_TargetAssemblyTypeName: LevelSelectSoundDelay, Assembly-CSharp
+          m_MethodName: pointerOnLevelButton
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: 2013fb40b89773745be816c5d11a4285,
-              type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -2169,14 +2197,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1572554155}
-          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-          m_MethodName: PlayOneShot
-          m_Mode: 2
+        - m_Target: {fileID: 335389612}
+          m_TargetAssemblyTypeName: LevelSelectSoundDelay, Assembly-CSharp
+          m_MethodName: pointerOffLevelButton
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: cc2c75753bf1ae54da827a2099183f22,
-              type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -2227,6 +2254,21 @@ RectTransform:
   m_AnchoredPosition: {x: 114.82, y: -5.3328}
   m_SizeDelta: {x: 109.9926, y: 139.0472}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &335389612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335389606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70a43c0597fd7c546a5e870cba6c9ee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointerOnSound: {fileID: 8300000, guid: 2013fb40b89773745be816c5d11a4285, type: 3}
+  pointerOffSound: {fileID: 8300000, guid: cc2c75753bf1ae54da827a2099183f22, type: 3}
+  buttonAudio: {fileID: 2121022820}
 --- !u!1 &364282634
 GameObject:
   m_ObjectHideFlags: 0
@@ -2732,6 +2774,7 @@ GameObject:
   - component: {fileID: 529524034}
   - component: {fileID: 529524033}
   - component: {fileID: 529524035}
+  - component: {fileID: 529524038}
   m_Layer: 0
   m_Name: Level 5 select
   m_TagString: Untagged
@@ -2843,14 +2886,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1307617710}
-          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-          m_MethodName: PlayOneShot
-          m_Mode: 2
+        - m_Target: {fileID: 529524038}
+          m_TargetAssemblyTypeName: LevelSelectSoundDelay, Assembly-CSharp
+          m_MethodName: pointerOnLevelButton
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: 2013fb40b89773745be816c5d11a4285,
-              type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -2860,14 +2902,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1307617710}
-          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-          m_MethodName: PlayOneShot
-          m_Mode: 2
+        - m_Target: {fileID: 529524038}
+          m_TargetAssemblyTypeName: LevelSelectSoundDelay, Assembly-CSharp
+          m_MethodName: pointerOffLevelButton
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: cc2c75753bf1ae54da827a2099183f22,
-              type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -2918,6 +2959,21 @@ RectTransform:
   m_AnchoredPosition: {x: -101.1, y: 110.6}
   m_SizeDelta: {x: 61.5462, y: 77.8037}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &529524038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529524032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70a43c0597fd7c546a5e870cba6c9ee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointerOnSound: {fileID: 8300000, guid: 2013fb40b89773745be816c5d11a4285, type: 3}
+  pointerOffSound: {fileID: 8300000, guid: cc2c75753bf1ae54da827a2099183f22, type: 3}
+  buttonAudio: {fileID: 1307617710}
 --- !u!1 &563776141
 GameObject:
   m_ObjectHideFlags: 0
@@ -3553,6 +3609,7 @@ GameObject:
   - component: {fileID: 791138613}
   - component: {fileID: 791138612}
   - component: {fileID: 791138614}
+  - component: {fileID: 791138617}
   m_Layer: 0
   m_Name: Level 4 select
   m_TagString: Untagged
@@ -3664,14 +3721,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 82825423}
-          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-          m_MethodName: PlayOneShot
-          m_Mode: 2
+        - m_Target: {fileID: 791138617}
+          m_TargetAssemblyTypeName: LevelSelectSoundDelay, Assembly-CSharp
+          m_MethodName: pointerOnLevelButton
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: 2013fb40b89773745be816c5d11a4285,
-              type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -3681,14 +3737,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 82825423}
-          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-          m_MethodName: PlayOneShot
-          m_Mode: 2
+        - m_Target: {fileID: 791138617}
+          m_TargetAssemblyTypeName: LevelSelectSoundDelay, Assembly-CSharp
+          m_MethodName: pointerOffLevelButton
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: cc2c75753bf1ae54da827a2099183f22,
-              type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -3739,6 +3794,21 @@ RectTransform:
   m_AnchoredPosition: {x: 50.6, y: 55.925}
   m_SizeDelta: {x: 88.4801, y: 111.85}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &791138617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791138611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70a43c0597fd7c546a5e870cba6c9ee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointerOnSound: {fileID: 8300000, guid: 2013fb40b89773745be816c5d11a4285, type: 3}
+  pointerOffSound: {fileID: 8300000, guid: cc2c75753bf1ae54da827a2099183f22, type: 3}
+  buttonAudio: {fileID: 82825423}
 --- !u!1 &801545539
 GameObject:
   m_ObjectHideFlags: 0
@@ -5420,6 +5490,7 @@ GameObject:
   - component: {fileID: 1323682552}
   - component: {fileID: 1323682551}
   - component: {fileID: 1323682553}
+  - component: {fileID: 1323682556}
   m_Layer: 0
   m_Name: Return Button
   m_TagString: Untagged
@@ -5530,14 +5601,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1572554155}
-          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-          m_MethodName: PlayOneShot
-          m_Mode: 2
+        - m_Target: {fileID: 1323682556}
+          m_TargetAssemblyTypeName: LevelSelectSoundDelay, Assembly-CSharp
+          m_MethodName: pointerOnLevelButton
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: 22124b8ebb8df4a408d4ee000d2cea71,
-              type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -5547,14 +5617,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1572554155}
-          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-          m_MethodName: PlayOneShot
-          m_Mode: 2
+        - m_Target: {fileID: 1323682556}
+          m_TargetAssemblyTypeName: LevelSelectSoundDelay, Assembly-CSharp
+          m_MethodName: pointerOffLevelButton
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: c352e418786544745b57538c60078f27,
-              type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -5608,6 +5677,21 @@ RectTransform:
   m_AnchoredPosition: {x: 25.900024, y: 306.86}
   m_SizeDelta: {x: 136.2766, y: 42.4931}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1323682556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323682550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70a43c0597fd7c546a5e870cba6c9ee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointerOnSound: {fileID: 8300000, guid: 22124b8ebb8df4a408d4ee000d2cea71, type: 3}
+  pointerOffSound: {fileID: 8300000, guid: c352e418786544745b57538c60078f27, type: 3}
+  buttonAudio: {fileID: 1133768312}
 --- !u!1 &1347555848
 GameObject:
   m_ObjectHideFlags: 0
@@ -5954,6 +6038,7 @@ GameObject:
   - component: {fileID: 1367955390}
   - component: {fileID: 1367955389}
   - component: {fileID: 1367955391}
+  - component: {fileID: 1367955394}
   m_Layer: 0
   m_Name: Level 1 select
   m_TagString: Untagged
@@ -6065,14 +6150,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1572554155}
-          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-          m_MethodName: PlayOneShot
-          m_Mode: 2
+        - m_Target: {fileID: 1367955394}
+          m_TargetAssemblyTypeName: LevelSelectSoundDelay, Assembly-CSharp
+          m_MethodName: pointerOnLevelButton
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: 2013fb40b89773745be816c5d11a4285,
-              type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -6082,14 +6166,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1572554155}
-          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-          m_MethodName: PlayOneShot
-          m_Mode: 2
+        - m_Target: {fileID: 1367955394}
+          m_TargetAssemblyTypeName: LevelSelectSoundDelay, Assembly-CSharp
+          m_MethodName: pointerOffLevelButton
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: cc2c75753bf1ae54da827a2099183f22,
-              type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -6140,6 +6223,21 @@ RectTransform:
   m_AnchoredPosition: {x: 4.8274, y: -5.3155}
   m_SizeDelta: {x: 109.9926, y: 139.0472}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1367955394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367955388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70a43c0597fd7c546a5e870cba6c9ee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointerOnSound: {fileID: 8300000, guid: 2013fb40b89773745be816c5d11a4285, type: 3}
+  pointerOffSound: {fileID: 8300000, guid: cc2c75753bf1ae54da827a2099183f22, type: 3}
+  buttonAudio: {fileID: 1572554155}
 --- !u!1 &1378750849
 GameObject:
   m_ObjectHideFlags: 0
@@ -7800,6 +7898,7 @@ GameObject:
   - component: {fileID: 1733624119}
   - component: {fileID: 1733624118}
   - component: {fileID: 1733624120}
+  - component: {fileID: 1733624123}
   m_Layer: 0
   m_Name: Tutorial select
   m_TagString: Untagged
@@ -7911,14 +8010,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 767545295}
-          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-          m_MethodName: PlayOneShot
-          m_Mode: 2
+        - m_Target: {fileID: 1733624123}
+          m_TargetAssemblyTypeName: LevelSelectSoundDelay, Assembly-CSharp
+          m_MethodName: pointerOnLevelButton
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: 2013fb40b89773745be816c5d11a4285,
-              type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -7928,14 +8026,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 767545295}
-          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-          m_MethodName: PlayOneShot
-          m_Mode: 2
+        - m_Target: {fileID: 1733624123}
+          m_TargetAssemblyTypeName: LevelSelectSoundDelay, Assembly-CSharp
+          m_MethodName: pointerOffLevelButton
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: cc2c75753bf1ae54da827a2099183f22,
-              type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -7986,6 +8083,21 @@ RectTransform:
   m_AnchoredPosition: {x: -121.3, y: -5.3155}
   m_SizeDelta: {x: 109.9926, y: 139.0472}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1733624123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733624117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70a43c0597fd7c546a5e870cba6c9ee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointerOnSound: {fileID: 8300000, guid: 2013fb40b89773745be816c5d11a4285, type: 3}
+  pointerOffSound: {fileID: 8300000, guid: cc2c75753bf1ae54da827a2099183f22, type: 3}
+  buttonAudio: {fileID: 767545295}
 --- !u!1 &1799885121
 GameObject:
   m_ObjectHideFlags: 0
@@ -8855,6 +8967,7 @@ GameObject:
   - component: {fileID: 1928118547}
   - component: {fileID: 1928118546}
   - component: {fileID: 1928118545}
+  - component: {fileID: 1928118549}
   m_Layer: 0
   m_Name: Settings
   m_TagString: Untagged
@@ -8902,14 +9015,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1572554155}
-          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-          m_MethodName: PlayOneShot
-          m_Mode: 2
+        - m_Target: {fileID: 1928118549}
+          m_TargetAssemblyTypeName: LevelSelectSoundDelay, Assembly-CSharp
+          m_MethodName: pointerOnLevelButton
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: 22124b8ebb8df4a408d4ee000d2cea71,
-              type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -8919,14 +9031,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1572554155}
-          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-          m_MethodName: PlayOneShot
-          m_Mode: 2
+        - m_Target: {fileID: 1928118549}
+          m_TargetAssemblyTypeName: LevelSelectSoundDelay, Assembly-CSharp
+          m_MethodName: pointerOffLevelButton
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: c352e418786544745b57538c60078f27,
-              type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -9055,6 +9166,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1928118543}
   m_CullTransparentMesh: 1
+--- !u!114 &1928118549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928118543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70a43c0597fd7c546a5e870cba6c9ee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointerOnSound: {fileID: 8300000, guid: 22124b8ebb8df4a408d4ee000d2cea71, type: 3}
+  pointerOffSound: {fileID: 8300000, guid: c352e418786544745b57538c60078f27, type: 3}
+  buttonAudio: {fileID: 953542053}
 --- !u!1 &1939073111
 GameObject:
   m_ObjectHideFlags: 0
@@ -9486,6 +9612,7 @@ GameObject:
   - component: {fileID: 1959316171}
   - component: {fileID: 1959316170}
   - component: {fileID: 1959316172}
+  - component: {fileID: 1959316175}
   m_Layer: 0
   m_Name: Level 6 select
   m_TagString: Untagged
@@ -9597,14 +9724,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 269774617}
-          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-          m_MethodName: PlayOneShot
-          m_Mode: 2
+        - m_Target: {fileID: 1959316175}
+          m_TargetAssemblyTypeName: LevelSelectSoundDelay, Assembly-CSharp
+          m_MethodName: pointerOnLevelButton
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: 2013fb40b89773745be816c5d11a4285,
-              type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -9614,14 +9740,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 269774617}
-          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-          m_MethodName: PlayOneShot
-          m_Mode: 2
+        - m_Target: {fileID: 1959316175}
+          m_TargetAssemblyTypeName: LevelSelectSoundDelay, Assembly-CSharp
+          m_MethodName: pointerOffLevelButton
+          m_Mode: 1
           m_Arguments:
-            m_ObjectArgument: {fileID: 8300000, guid: cc2c75753bf1ae54da827a2099183f22,
-              type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -9672,6 +9797,21 @@ RectTransform:
   m_AnchoredPosition: {x: -0.00001049, y: 110.59998}
   m_SizeDelta: {x: 61.5462, y: 77.8037}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1959316175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959316169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70a43c0597fd7c546a5e870cba6c9ee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointerOnSound: {fileID: 8300000, guid: 2013fb40b89773745be816c5d11a4285, type: 3}
+  pointerOffSound: {fileID: 8300000, guid: cc2c75753bf1ae54da827a2099183f22, type: 3}
+  buttonAudio: {fileID: 269774617}
 --- !u!1 &1966692547
 GameObject:
   m_ObjectHideFlags: 0
