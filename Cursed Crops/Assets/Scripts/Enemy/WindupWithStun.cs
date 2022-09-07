@@ -25,6 +25,7 @@ public class WindupWithStun : MonoBehaviour
     private BoxCollider hurtBox;
     private MeshRenderer daAttack;
     private EnemyControler ec;
+    private attackBoxDamage attackBoxBools;
     public Color prev;
     IEnumerator inst = null;
     private float attackTimer = 1;
@@ -37,6 +38,7 @@ public class WindupWithStun : MonoBehaviour
         childRB = this.gameObject.transform.GetChild(1).GetComponent<Rigidbody>();
         rb = gameObject.GetComponent<Rigidbody>();
         hurtBox = this.gameObject.transform.GetChild(1).GetComponent<BoxCollider>();
+        attackBoxBools = this.gameObject.transform.GetChild(1).GetComponent<attackBoxDamage>();
         Debug.Log(hurtBox);
         daAttack = this.gameObject.transform.GetChild(1).GetComponent<MeshRenderer>();
         sr = this.transform.GetComponentInChildren<SpriteRenderer>();
@@ -54,6 +56,7 @@ public class WindupWithStun : MonoBehaviour
             hurtBox.enabled = false;
             attacking = false;
         }
+        
         
         targetToAttack = gameObject.GetComponent<EnemyToPlayer>().closestPlayer;
         if (targetToAttack != null)
@@ -78,7 +81,7 @@ public class WindupWithStun : MonoBehaviour
                                 //StopCoroutine("attack");
                                 sr.color = Color.yellow;
                                 windupStarting = true;
-
+                                attackBoxBools.playOnce = false;
                                 attackPosition = new Vector3(targetToAttack.transform.position.x, targetToAttack.transform.position.y, targetToAttack.transform.position.z);
                                 enemyPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
                                 newPosition = (attackPosition - enemyPosition) - (attackPosition - enemyPosition).normalized * 1.5f;
@@ -119,10 +122,6 @@ public class WindupWithStun : MonoBehaviour
                 //Debug.Log("Raycast hit nothing");
             }
 
-            if (windupStarting)
-            {
-                
-            }
             if (ec.takingDamage && ec.lastDamageType == "Melee" && !ec.stunned)
             {
                 attacking = false;
@@ -161,6 +160,7 @@ public class WindupWithStun : MonoBehaviour
 
 
         }
+
         
 
     }
@@ -170,8 +170,8 @@ public class WindupWithStun : MonoBehaviour
 
         
         childRB.MovePosition(transform.position + direction.normalized);
-        if (transform.position != newPosition)
-        {
+        //if (transform.position != newPosition)
+        //{
             yield return new WaitForSeconds(0.75f);
 
 
@@ -180,8 +180,9 @@ public class WindupWithStun : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, newPosition, (gameObject.GetComponent<EnemyToPlayer>().originalSpeed * 20) * Time.deltaTime);
 
             attacking = true;
+            
             //gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
-        }
+        //}
         if (transform.position == newPosition)
         {
             hurtBox.enabled = true;
@@ -197,6 +198,7 @@ public class WindupWithStun : MonoBehaviour
         windupStarting = false;
         windupFinish = true;
         attacking = false;
+        
     }
 
     private void OnTriggerEnter(Collider other)

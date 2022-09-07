@@ -393,13 +393,14 @@ MonoBehaviour:
   health: 70
   maxHealth: 70
   overalldamage: 0
+  isBasic: 0
   takingDamage: 0
   knockbackResist: 1
   stunResist: 1
   stunned: 0
   lastDamageType: 
   theHealingAura: {fileID: 0}
-  hurtSound: {fileID: 8300000, guid: cd28865b322992943bf3c1bda66bbe09, type: 3}
+  hurtSound: {fileID: 8300000, guid: 9f7bad43b41ce2b4a96dd413c4a7546a, type: 3}
   spawningSound: {fileID: 8300000, guid: c19e5a83e9a24954f9ba4bafd42250f1, type: 3}
   shieldHit: {fileID: 8300000, guid: b40bdc4b105d9624e99adfe25d9ea3c4, type: 3}
   healing: 0
@@ -421,6 +422,7 @@ MonoBehaviour:
   lettingGo: 0
   alreadyGrabbing: 0
   aPlayerIsAlready: 0
+  noMoreGrabs: 1
   spawnSound: {fileID: 8300000, guid: c8baa318bc49b4a4e915e762c7dde30c, type: 3}
 --- !u!114 &1570388941770891586
 MonoBehaviour:
@@ -437,6 +439,7 @@ MonoBehaviour:
   enemyPosition: {x: 0, y: 0, z: 0}
   attacking: 0
   windupStarting: 0
+  startWalking: 0
   maskToIgnore:
     serializedVersion: 2
     m_Bits: 257

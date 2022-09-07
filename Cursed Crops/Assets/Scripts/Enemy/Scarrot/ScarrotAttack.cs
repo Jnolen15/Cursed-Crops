@@ -15,6 +15,7 @@ public class ScarrotAttack : MonoBehaviour
     public bool onCooldown = false;
     public AudioClip spawnSound;
     public LayerMask maskToIgnore;
+    public AudioClip hittingPlayer;
 
     // ================= Private variables =================
     Vector3 preAttackPosition;
@@ -291,6 +292,8 @@ public class ScarrotAttack : MonoBehaviour
         if (other.gameObject.tag == "Player" && attacking)
         {
             other.gameObject.GetComponent<EnemyPlayerDamage>().Damage(playerdamage);
+            gameObject.GetComponent<AudioPlayer>().PlaySound(hittingPlayer);
+
         }
         if (other.gameObject.tag == "MainObjective" && attacking)
         {

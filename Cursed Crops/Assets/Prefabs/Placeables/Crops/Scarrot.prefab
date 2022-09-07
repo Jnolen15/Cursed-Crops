@@ -229,6 +229,7 @@ MonoBehaviour:
   maskToIgnore:
     serializedVersion: 2
     m_Bits: 257
+  hittingPlayer: {fileID: 8300000, guid: a3e1c56b456e66f4dafe33f137865397, type: 3}
   punchSound: {fileID: 8300000, guid: e6523024677b2b74fa74c633305ad307, type: 3}
   windupSound: {fileID: 8300000, guid: c28ab6378f1df6443b101d2a357421f1, type: 3}
   AOESound: {fileID: 8300000, guid: f7d1b0e08fc2c3c4fb1c42dfe16cb7f8, type: 3}
@@ -249,13 +250,14 @@ MonoBehaviour:
   health: 155
   maxHealth: 155
   overalldamage: 0
+  isBasic: 0
   takingDamage: 0
   knockbackResist: 1
   stunResist: 1
   stunned: 0
   lastDamageType: 
   theHealingAura: {fileID: 0}
-  hurtSound: {fileID: 8300000, guid: cd28865b322992943bf3c1bda66bbe09, type: 3}
+  hurtSound: {fileID: 8300000, guid: 9f7bad43b41ce2b4a96dd413c4a7546a, type: 3}
   spawningSound: {fileID: 8300000, guid: c19e5a83e9a24954f9ba4bafd42250f1, type: 3}
   shieldHit: {fileID: 8300000, guid: b40bdc4b105d9624e99adfe25d9ea3c4, type: 3}
   healing: 0

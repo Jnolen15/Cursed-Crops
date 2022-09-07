@@ -7,6 +7,10 @@ public class attackBoxDamage : MonoBehaviour
     // Start is called before the first frame update
     public int playerdamage = 1;
     public int houseDamage = 5;
+    public AudioClip hittingPlayer;
+    public AudioSource BrocAudio;
+
+    public bool playOnce = false;
     void Start()
     {
 
@@ -15,7 +19,7 @@ public class attackBoxDamage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -24,6 +28,12 @@ public class attackBoxDamage : MonoBehaviour
         {
 
             other.gameObject.GetComponent<EnemyPlayerDamage>().Damage(playerdamage);
+            if (!playOnce)
+            {
+                //playOnce = true;
+                BrocAudio.PlayOneShot(hittingPlayer);
+            }
+            
         }
         else if (other.gameObject.tag == "MainObjective")
         {
