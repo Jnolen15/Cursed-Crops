@@ -9,6 +9,7 @@ using TMPro;
 // only using this for a debug thing
 using UnityEngine.EventSystems;
 
+
 public class Menu_Manager : MonoBehaviour
 {
     public GameObject menu;
@@ -18,9 +19,11 @@ public class Menu_Manager : MonoBehaviour
     public GameObject graphicsSettings;
     public GameObject credits;
 
+
     public Button primaryButton;
 
     public GameObject CurrentMenu;
+    // public List<GameObject> = new List<GameObject>();
 
     // Graphic Settings Variables
     Resolution[] resolutions;
@@ -112,6 +115,17 @@ public class Menu_Manager : MonoBehaviour
         CurrentMenu.SetActive(false);
         nextMenu.SetActive(true);
         CurrentMenu = nextMenu;
+    }
+
+    public void GoBack()
+    {
+        if (true)
+        {
+            // close menu
+        } else
+        {
+            // cycle back
+        }
     }
 
 

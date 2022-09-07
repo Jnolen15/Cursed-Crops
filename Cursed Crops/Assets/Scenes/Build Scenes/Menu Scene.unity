@@ -49408,6 +49408,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5308800613981433115}
   - component: {fileID: 7172438160804198039}
+  - component: {fileID: 5308800613981433116}
   m_Layer: 0
   m_Name: Menus
   m_TagString: Untagged
@@ -49442,6 +49443,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5308800613981433116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5308800613981433114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ed275e700f53d04890a33acfde93e1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitialVolume: 0.5
+  Main: {fileID: 24100000, guid: 1757b8449da7a9d4da33b5d237c13c7b, type: 2}
 --- !u!114 &5332676019903463525
 MonoBehaviour:
   m_ObjectHideFlags: 0
