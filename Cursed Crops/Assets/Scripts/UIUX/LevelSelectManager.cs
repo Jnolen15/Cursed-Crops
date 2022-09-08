@@ -53,7 +53,12 @@ public class LevelSelectManager : MonoBehaviour
     public void toggleShop()
     {
         Shop.SetActive(!Shop.activeSelf);
-    }    
+    }
+
+    public void SetSelection(Button selectedButton)
+    {
+        selectedButton.Select();
+    }
 
     public void ToggleDevMode()
     {
