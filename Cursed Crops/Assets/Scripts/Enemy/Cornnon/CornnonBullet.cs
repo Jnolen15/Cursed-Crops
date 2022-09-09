@@ -48,6 +48,7 @@ public class CornnonBullet : MonoBehaviour
         if (other.gameObject.tag == "MainObjective")
         {
             mainTargetAudioSource.PlayOneShot(explode);
+            Instantiate(Resources.Load("Effects/CornonBoom"), this.transform.position, this.transform.rotation);
             StopAllCoroutines();
             Destroy(gameObject);
         }
