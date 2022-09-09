@@ -19,10 +19,13 @@ public class Menu_Manager : MonoBehaviour
     public GameObject graphicsSettings;
     public GameObject credits;
 
+    private List<GameObject> MenuHistory = new List<GameObject>();
+    private List<Button> ButtonHistory = new List<Button>();
 
     public Button primaryButton;
 
-    public GameObject CurrentMenu;
+    private GameObject CurrentMenu;
+    private Button CurrentButton;
     // public List<GameObject> = new List<GameObject>();
 
     // Graphic Settings Variables
@@ -46,6 +49,7 @@ public class Menu_Manager : MonoBehaviour
         {
             CurrentMenu = credits;
         }
+        CurrentButton = primaryButton;
 
         // aquiring resolutions list and assigning them to element
         if (ResolutionDropdown != null)
@@ -107,25 +111,44 @@ public class Menu_Manager : MonoBehaviour
     public void SetSelection(Button selectedButton)
     {
         selectedButton.Select();
+        CurrentButton = selectedButton;
     }
+
 
     // Disables current menu and enables the next one 
     public void ChangeMenu(GameObject nextMenu)
     {
         CurrentMenu.SetActive(false);
         nextMenu.SetActive(true);
+
+        if (MenuHistory.Count > 0) // check to see if list is emtpy (at main menu)
+        {
+            if (MenuHistory[MenuHistory.Count - 1] == nextMenu) // check if you're going back to the previous menu
+            {
+                MenuHistory.RemoveAt(MenuHistory.Count - 1);
+                ButtonHistory.RemoveAt(ButtonHistory.Count - 1); // also doing the same for buttons
+            } else
+            {
+                MenuHistory.Add(CurrentMenu); // add menu to history
+                ButtonHistory.Add(CurrentButton);
+            }
+        } else
+        {
+            MenuHistory.Add(CurrentMenu); // add menu to history
+            ButtonHistory.Add(CurrentButton);
+        }
         CurrentMenu = nextMenu;
     }
 
     public void GoBack()
     {
-        if (true)
+        // can we go back?
+        if (MenuHistory.Count > 0)
         {
-            // close menu
-        } else
-        {
-            // cycle back
-        }
+            Button temp = ButtonHistory[ButtonHistory.Count - 1];
+            ChangeMenu(MenuHistory[MenuHistory.Count - 1]);
+            SetSelection(temp);
+        } 
     }
 
 
@@ -158,6 +181,8 @@ public class Menu_Manager : MonoBehaviour
         menu.SetActive(true);
         CurrentMenu = menu;
         primaryButton.Select();
+        MenuHistory.Clear();
+        ButtonHistory.Clear();
     }
 
     public void toggleDevMode(bool devMode)
