@@ -15,11 +15,13 @@ public class EnemyControler : MonoBehaviour
     public bool stunned = false;
     public string lastDamageType;
     public GameObject theHealingAura;
+    public AudioSource deathAudio;
     // Audio Variables
     
     public AudioClip hurtSound;
     public AudioClip spawningSound;
     public AudioClip shieldHit;
+    public AudioClip deathSound;
 
 
     // ================= Private variables =================
@@ -269,10 +271,14 @@ public class EnemyControler : MonoBehaviour
         ps.Emit(4);
         impact.SetActive(true);
         sr.color = Color.red;
+        
         if (itemDropper != null)
             itemDropper.DropItem(transform.position);
         //StopAllCoroutines();
         yield return new WaitForSeconds(0.1f);
+        deathAudio = Instantiate(deathAudio, transform.position, transform.rotation);
+        deathAudio.clip = deathSound;
+        deathAudio.Play();
         gameObject.SetActive(false);
     }
 
