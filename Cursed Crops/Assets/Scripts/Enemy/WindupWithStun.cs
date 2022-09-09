@@ -78,7 +78,7 @@ public class WindupWithStun : MonoBehaviour
                         {
                             if (!windupStarting)
                             {
-                                //StopCoroutine("attack");
+                                StopCoroutine("attack");
                                 sr.color = Color.yellow;
                                 windupStarting = true;
                                 attackBoxBools.playOnce = false;
@@ -170,8 +170,8 @@ public class WindupWithStun : MonoBehaviour
 
         
         childRB.MovePosition(transform.position + direction.normalized);
-        //if (transform.position != newPosition)
-        //{
+        if (transform.position != newPosition)
+        {
             yield return new WaitForSeconds(0.75f);
 
 
@@ -182,7 +182,7 @@ public class WindupWithStun : MonoBehaviour
             attacking = true;
             
             //gameObject.GetComponent<EnemyToPlayer>().enemySpeed = 0;
-        //}
+        }
         if (transform.position == newPosition)
         {
             hurtBox.enabled = true;
@@ -190,7 +190,7 @@ public class WindupWithStun : MonoBehaviour
             //daAttack.enabled = true;
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         
         
         hurtBox.enabled = false;

@@ -413,7 +413,7 @@ public class EnemyTalking : MonoBehaviour
                     doDamage.GetComponent<TextMeshProUGUI>().text = "";
                     checkBox4.SetActive(false);
                     checkedBox4.SetActive(false);
-                    if (grm.getMoney() < 100 && (!grmupgrade.updgradeBought || turret == null))
+                    if (grm.getMoney() < grmupgrade.damageUpgradeCost && (!grmupgrade.updgradeBought || turret == null))
                     {
                         grm.addMoney(100);
                     }

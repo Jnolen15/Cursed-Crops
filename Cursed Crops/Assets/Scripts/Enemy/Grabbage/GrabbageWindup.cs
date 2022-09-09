@@ -24,6 +24,7 @@ public class GrabbageWindup : MonoBehaviour
     GameObject theTarget;
     private BoxCollider hurtBox;
     private MeshRenderer daAttack;
+    private bool playOnece = false;
     Color prev;
 
     public LayerMask maskToIgnore;
@@ -57,10 +58,14 @@ public class GrabbageWindup : MonoBehaviour
                     //StopCoroutine("stun");
                     if (!windupStarting && gameObject.GetComponent<GrabbageAI>().noMoreGrabs)
                     {
-                        //StopCoroutine("attack");
+                        StopCoroutine("attack");
                         sr.color = Color.yellow;
                         windupStarting = true;
-                        gameObject.GetComponent<AudioPlayer>().PlaySound(grabSound);
+                        if (!playOnece)
+                        {
+                            playOnece = false;
+                            gameObject.GetComponent<AudioPlayer>().PlaySound(grabSound);
+                        }
                         startWalking = true;
                         //preAttackPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
                         attackPosition = new Vector3(targetToAttack.transform.position.x, targetToAttack.transform.position.y, targetToAttack.transform.position.z);
@@ -169,6 +174,7 @@ public class GrabbageWindup : MonoBehaviour
         yield return new WaitForSeconds(1f);
         windupStarting = false;
         attacking = false;
+        playOnece = false;
     }
     private void OnTriggerEnter(Collider other)
     {

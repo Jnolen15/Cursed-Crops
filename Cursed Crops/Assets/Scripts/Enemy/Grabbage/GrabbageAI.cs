@@ -61,6 +61,7 @@ public class GrabbageAI : MonoBehaviour
                 trappedPlayer.GetComponent<PlayerControler>().trapped = false;
                 aPlayerIsAlready = false;
                 trappedPlayer.transform.position = Vector3.MoveTowards(trappedPlayer.transform.position, gameObject.GetComponent<GrabbageWindup>().enemyPosition + new Vector3(0, 0, -0.1f), 0.4f);
+                gameObject.GetComponent<GrabbageWindup>().attacking = false;
 
             }
 
@@ -89,7 +90,7 @@ public class GrabbageAI : MonoBehaviour
     {
         if (noMoreGrabs)
         {
-            if (other.gameObject.tag == "Player" && (gameObject.GetComponent<EnemyControler>().health > 0) && other.gameObject.GetComponent<PlayerControler>().state != PlayerControler.State.Rolling && gameObject.GetComponent<GrabbageWindup>().attacking)
+            if (other.gameObject.tag == "Player" && (gameObject.GetComponent<EnemyControler>().health > 0) && other.gameObject.GetComponent<PlayerControler>().state != PlayerControler.State.Rolling && gameObject.GetComponent<GrabbageWindup>().attacking && gameObject.GetComponent<GrabbageWindup>().startWalking)
             {
 
                 if (!other.gameObject.GetComponent<PlayerControler>().trapped && !alreadyGrabbing)
