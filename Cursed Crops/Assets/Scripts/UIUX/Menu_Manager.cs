@@ -78,7 +78,7 @@ public class Menu_Manager : MonoBehaviour
         }
 
         // Retreiving devMode bool
-        DevMode.isOn = (PlayerPrefs.GetInt("DevMode") == 1 ? true : false);
+        //DevMode.isOn = (PlayerPrefs.GetInt("DevMode") == 1 ? true : false);
     }
 
     public void startGame()
@@ -187,6 +187,6 @@ public class Menu_Manager : MonoBehaviour
 
     public void toggleDevMode(bool devMode)
     {
-        PlayerPrefs.SetInt("DevMode", devMode == true ? 1 : 0);
+        //PlayerPrefs.SetInt("DevMode", devMode == true ? 1 : 0);
     }
 }

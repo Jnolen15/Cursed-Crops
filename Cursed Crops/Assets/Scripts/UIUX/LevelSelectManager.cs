@@ -19,7 +19,7 @@ public class LevelSelectManager : MonoBehaviour
         InitialSelection.Select();
 
         // fetching PlayerPrefs Variables
-        DevMode = (PlayerPrefs.GetInt("DevMode") == 1 ? true : false);
+        //DevMode = (PlayerPrefs.GetInt("DevMode") == 1 ? true : false);
         LevelsCleared = PlayerPrefs.GetInt("LevelsCleared");
         if (!DevMode)
         {
@@ -63,7 +63,7 @@ public class LevelSelectManager : MonoBehaviour
     public void ToggleDevMode()
     {
         DevMode = !DevMode;
-        PlayerPrefs.SetInt("DevMode", DevMode == true ? 1 : 0);
+        //PlayerPrefs.SetInt("DevMode", DevMode == true ? 1 : 0);
         if (DevMode)
         {
             foreach (Button B in LevelButtons)
