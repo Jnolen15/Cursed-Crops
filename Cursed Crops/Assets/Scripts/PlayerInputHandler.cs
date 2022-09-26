@@ -38,11 +38,15 @@ public class PlayerInputHandler : MonoBehaviour
         bs = player.GetComponent<BuildingSystem>();
         pc.input = pConfig.Input;
         pConfig.Input.onActionTriggered += Input_onActionTriggered;
+        pConfig.Input.onDeviceLost += Input_onDeviceLost;
+        pConfig.Input.onDeviceRegained += Input_onDeviceRegained;
     }
 
     public void UninitializePlayer()
     {
         pConfig.Input.onActionTriggered -= Input_onActionTriggered;
+        pConfig.Input.onDeviceLost -= Input_onDeviceLost;
+        pConfig.Input.onDeviceRegained -= Input_onDeviceRegained;
         player = null;
         pConfig = null;
         pc = null;
@@ -61,6 +65,17 @@ public class PlayerInputHandler : MonoBehaviour
         pConfig.Input.onActionTriggered -= Input_onCutsceneActionTriggered;
         pConfig = null;
         cs = null;
+    }
+
+    private void Input_onDeviceLost(PlayerInput input)
+    {
+        Debug.Log("DEVICE LOST");
+        pc.togglePause();
+    }
+    private void Input_onDeviceRegained(PlayerInput input)
+    {
+        Debug.Log("DEVICE REGAINED");
+        pc.togglePause();
     }
 
     private void Input_onActionTriggered(InputAction.CallbackContext context)
